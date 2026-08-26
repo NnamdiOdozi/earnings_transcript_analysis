@@ -1,0 +1,165 @@
+"""Central place for tunables: env var names, base URLs, size limits, paths.
+
+User-tunable knobs (timeouts, segmentation markers, validation tolerances, SEC
+concepts) are loaded from `config.toml` at the repo root via stdlib `tomllib`, with
+the built-in defaults below used for any key that is absent. Structural values that
+would break the skills if changed (env-var names, endpoint URLs, output layout) stay
+hardcoded here on purpose. No secrets live here -- only names of env vars.
+"""
+from __future__ import annotations
+
+import os
+import tomllib
+from pathlib import Path
+from typing import Any
+
+# config.toml sits at the repo root (this file is src/earnings/config.py).
+_CONFIG_PATH = Path(__file__).resolve().parents[2] / "config.toml"
+
+
+def _load_toml() -> dict[str, Any]:
+    if _CONFIG_PATH.is_file():
+        with _CONFIG_PATH.open("rb") as fh:
+            return tomllib.load(fh)
+    return {}
+
+
+_CFG = _load_toml()
+
+
+def _get(section: str, key: str, default: Any) -> Any:
+    """Fetch config.toml[section][key], falling back to the built-in default."""
+    return _CFG.get(section, {}).get(key, default)
+
+
+# --- Env var names (values loaded via python-dotenv / os.environ at call sites) ---
+TAVILY_API_KEY_ENV = "TAVILY_API_KEY"
+EXA_API_KEY_ENV = "EXA_API_KEY"
+SEC_USER_AGENT_ENV = "SEC_USER_AGENT"
+
+# --- Output layout (structural: changing these breaks the skills) ---
+RUNS_DIR = Path("runs")
+RAW_SUBDIR = "raw"
+NORMALIZED_SUBDIR = "normalized"
+EVIDENCE_SUBDIR = "evidence"
+ARCHIVE_SUBDIR = "_archive"  # a prior run's files, moved here (timestamped) instead of overwritten
+MANIFEST_FILENAME = "manifest.json"
+TRANSCRIPT_FILENAME = "transcript.jsonl"
+FINANCIALS_FILENAME = "financials.json"
+CLAIMS_FILENAME = "claims.json"
+METRICS_FILENAME = "metrics.json"  # optional: agent-authored, discovered per company (see models.Metric)
+WEB_SUBDIR = "web"  # under evidence/: extracted Tavily content, one .md per WebEvidence
+WEB_EVIDENCE_FILENAME = "web-evidence.jsonl"  # under evidence/
+VALIDATION_FILENAME = "validation.json"
+SIGNAL_CARD_FILENAME = "signal-card.md"
+OUTLOOK_BRIEF_FILENAME = "outlook-brief.md"
+REVIEW_REPORT_JSON_FILENAME = "review-report.json"  # agent-authored (Outlook_Reviewer subagent)
+REVIEW_REPORT_MD_FILENAME = "review-report.md"  # Python-rendered from the JSON above
+
+# --- SEC endpoints (data.sec.gov requires a compliant identifying User-Agent) ---
+SEC_SUBMISSIONS_URL = "https://data.sec.gov/submissions/CIK{cik:010d}.json"
+SEC_COMPANY_FACTS_URL = "https://data.sec.gov/api/xbrl/companyfacts/CIK{cik:010d}.json"
+SEC_TICKER_MAP_URL = "https://www.sec.gov/files/company_tickers.json"
+
+# --- Tavily endpoints ---
+TAVILY_SEARCH_URL = "https://api.tavily.com/search"
+TAVILY_EXTRACT_URL = "https://api.tavily.com/extract"
+
+# --- Exa endpoints ---
+EXA_SEARCH_URL = "https://api.exa.ai/search"
+EXA_CONTENTS_URL = "https://api.exa.ai/contents"
+
+# --- Size / safety limits (config.toml [http]) ---
+HTTP_TIMEOUT_SECONDS = float(_get("http", "timeout_seconds", 20.0))
+MAX_FETCH_BYTES = int(_get("http", "max_fetch_mb", 10)) * 1024 * 1024
+
+# --- Segmentation heuristics (config.toml [segmentation]) ---
+QA_BOUNDARY_MARKERS = tuple(
+    _get(
+        "segmentation",
+        "qa_boundary_markers",
+        [
+            "questions and answers",
+            "question-and-answer",
+            "q&a",
+            "we will now begin the question-and-answer session",
+            "operator instructions",
+        ],
+    )
+)
+SEGMENT_ID_PREFIX = "seg"
+SEGMENT_ID_WIDTH = 4
+
+# --- Validation tolerances (config.toml [validation]) ---
+CALC_RELATIVE_TOLERANCE = float(_get("validation", "calc_relative_tolerance", 0.01))
+CALC_ABSOLUTE_TOLERANCE = float(_get("validation", "calc_absolute_tolerance", 0.005))
+NUMERIC_MATCH_TOLERANCE = float(_get("validation", "numeric_match_tolerance", 1e-6))
+
+# --- SEC data pull (config.toml [sec]) ---
+SEC_CONCEPTS = list(_get("sec", "concepts", ["Revenues", "NetIncomeLoss", "EarningsPerShareDiluted"]))
+SEC_DEFAULT_USER_AGENT = str(_get("sec", "default_user_agent", "earnings-poc unset@example.com"))
+SEC_RESOLVE_CIK_FROM_TICKER = bool(_get("sec", "resolve_cik_from_ticker", True))
+SEC_REQUIRE_PERIOD_MATCH = bool(_get("sec", "require_period_match", True))
+SEC_FORMS = list(_get("sec", "forms", ["8-K", "10-Q", "10-K", "20-F", "6-K"]))
+
+# --- Research toggles (config.toml [research]) ---
+RESEARCH_SEC_ENABLED = bool(_get("research", "sec_enabled", True))
+RESEARCH_WEB_SEARCH_ENABLED = bool(_get("research", "web_search_enabled", True))
+RESEARCH_WEB_SEARCH_PROVIDER = str(_get("research", "provider", "exa"))  # "exa" | "tavily"
+RESEARCH_OFFICIAL_SOURCES_ONLY = bool(_get("research", "official_sources_only", True))
+RESEARCH_ARCHIVE_ALL_SOURCES = bool(_get("research", "archive_all_sources", True))
+RESEARCH_INCLUDE_PREVIOUS_PERIOD = bool(_get("research", "include_previous_period", True))
+
+# --- Tavily defaults (config.toml [tavily]), used when research.provider == "tavily" ---
+TAVILY_SEARCH_DEPTH = str(_get("tavily", "search_depth", "basic"))
+TAVILY_MAX_RESULTS = int(_get("tavily", "max_results", 5))
+TAVILY_INCLUDE_EXTERNAL_COMMENTARY = bool(_get("tavily", "include_external_commentary", False))
+TAVILY_INCLUDE_ANSWER = bool(_get("tavily", "include_answer", False))
+TAVILY_INCLUDE_RAW_CONTENT = bool(_get("tavily", "include_raw_content", False))
+TAVILY_EXTRACT_SELECTED_RESULTS = bool(_get("tavily", "extract_selected_results", True))
+TAVILY_EXTRACT_DEPTH = str(_get("tavily", "extract_depth", "basic"))
+TAVILY_MAX_EXTRACTED_SOURCES = int(_get("tavily", "max_extracted_sources", 10))
+
+# --- Exa defaults (config.toml [exa]), used when research.provider == "exa" (default) ---
+EXA_TYPE = str(_get("exa", "type", "auto"))
+EXA_NUM_RESULTS = int(_get("exa", "num_results", 5))
+EXA_MAX_EXTRACTED_SOURCES = int(_get("exa", "max_extracted_sources", 10))
+
+# --- Analysis requirements (config.toml [analysis]) ---
+ANALYSIS_REQUIRE_PREVIOUS_PERIOD_COMPARISON = bool(_get("analysis", "require_previous_period_comparison", True))
+ANALYSIS_REQUIRE_GUIDANCE_ANALYSIS = bool(_get("analysis", "require_guidance_analysis", True))
+ANALYSIS_REQUIRE_SCENARIOS = bool(_get("analysis", "require_scenarios", True))
+ANALYSIS_REQUIRE_MONITORING_INDICATORS = bool(_get("analysis", "require_monitoring_indicators", True))
+
+# --- Output toggles (config.toml [output]) ---
+OUTPUT_WRITE_SIGNAL_CARD = bool(_get("output", "write_signal_card", True))
+OUTPUT_WRITE_OUTLOOK_BRIEF = bool(_get("output", "write_outlook_brief", True))
+OUTPUT_INCLUDE_EVIDENCE_APPENDIX = bool(_get("output", "include_evidence_appendix", True))
+
+# --- Invisible / zero-width unicode code points stripped during sanitisation ---
+ZERO_WIDTH_CHARS = (
+    "​",  # zero width space
+    "‌",  # zero width non-joiner
+    "‍",  # zero width joiner
+    "﻿",  # BOM / zero width no-break space
+    "‎",  # left-to-right mark
+    "‏",  # right-to-left mark
+    "­",  # soft hyphen
+)
+
+
+def sec_user_agent() -> str:
+    """Return the SEC-compliant User-Agent from env, or the configured placeholder."""
+    return os.environ.get(SEC_USER_AGENT_ENV, SEC_DEFAULT_USER_AGENT)
+
+
+def tavily_api_key() -> str | None:
+    return os.environ.get(TAVILY_API_KEY_ENV)
+
+
+def exa_api_key() -> str | None:
+    return os.environ.get(EXA_API_KEY_ENV)
+
+
+def run_dir(ticker: str, event_id: str) -> Path:
+    return RUNS_DIR / ticker.upper() / event_id

@@ -1,0 +1,23 @@
+{
+  "cik": 320193,
+  "entityName": "ACME CORP",
+  "facts": {
+    "us-gaap": {
+      "Revenues": {
+        "units": {
+          "USD": [
+            {"end": "2025-06-30", "val": 100000000, "form": "10-Q", "fy": 2025},
+            {"end": "2026-06-30", "val": 110000000, "form": "10-Q", "fy": 2026}
+          ]
+        }
+      },
+      "NetIncomeLoss": {
+        "units": {
+          "USD": [
+            {"end": "2026-06-30", "val": 20000000, "form": "10-Q", "fy": 2026}
+          ]
+        }
+      }
+    }
+  }
+}

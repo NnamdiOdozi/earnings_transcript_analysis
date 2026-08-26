@@ -1,0 +1,572 @@
+"""argparse CLI: `earnings prepare` and `earnings analyze`.
+
+`prepare` builds a source pack (raw archive, normalized transcript, manifest,
+financials evidence, web-search official-source evidence) for one ticker/event.
+`analyze` reads an existing claims.json from that pack, validates it, and -- only
+if validation passes -- writes signal-card.md. SEC and web-search lookups are both
+**on by default** (config.toml [research] sec_enabled/web_search_enabled) -- set
+either to false to disable it. Web search provider is config.toml [research]
+provider ("exa" default, or "tavily"). Tests monkeypatch these flags to false so
+they never touch the network.
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import shutil
+import sys
+from datetime import datetime, timezone
+from pathlib import Path
+
+from dotenv import load_dotenv
+from pydantic import ValidationError
+
+from . import config
+from .ingest import load_transcript
+from .models import (
+    Claim,
+    Manifest,
+    Metric,
+    ReviewReport,
+    SourceRecord,
+    ValidationIssue,
+    ValidationResult,
+    WebEvidence,
+)
+from .process import sanitize, segment_transcript, sha256_hex
+from .validate import (
+    check_outlook_brief_citations,
+    validate_claims,
+    validate_metrics,
+    validate_review_report,
+)
+
+
+def _now_iso() -> str:
+    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def _write_json(path: Path, data) -> None:
+    path.write_text(json.dumps(data, indent=2, default=str), encoding="utf-8")
+
+
+def _archive_existing_run(run_dir: Path) -> None:
+    """If run_dir already holds a manifest.json (a prior `prepare` ran here), move its
+    entire contents under run_dir/_archive/<timestamp>/ before writing fresh output --
+    a rerun for the same ticker/event must never silently overwrite prior evidence.
+    """
+    if not (run_dir / config.MANIFEST_FILENAME).exists():
+        return
+    stamp = _now_iso().replace(":", "").rstrip("Z")
+    dest = run_dir / config.ARCHIVE_SUBDIR / stamp
+    dest.mkdir(parents=True, exist_ok=True)
+    for item in run_dir.iterdir():
+        if item.name == config.ARCHIVE_SUBDIR:
+            continue
+        shutil.move(str(item), str(dest / item.name))
+
+
+def cmd_prepare(args: argparse.Namespace) -> int:
+    run_dir = config.run_dir(args.ticker, args.event_id)
+    _archive_existing_run(run_dir)
+    raw_dir = run_dir / config.RAW_SUBDIR
+    normalized_dir = run_dir / config.NORMALIZED_SUBDIR
+    evidence_dir = run_dir / config.EVIDENCE_SUBDIR
+    for d in (raw_dir, normalized_dir, evidence_dir):
+        d.mkdir(parents=True, exist_ok=True)
+
+    loaded = load_transcript(args.transcript)
+    raw_bytes = loaded.raw_text.encode("utf-8")
+    raw_filename = "transcript.html" if loaded.is_html else "transcript.txt"
+    raw_path = raw_dir / raw_filename
+    raw_path.write_text(loaded.raw_text, encoding="utf-8")  # archive raw, verbatim, before sanitisation
+
+    sanitized = sanitize(loaded.raw_text, is_html=loaded.is_html)
+    segments = segment_transcript(sanitized)
+    transcript_path = normalized_dir / config.TRANSCRIPT_FILENAME
+    with transcript_path.open("w", encoding="utf-8") as fh:
+        for seg in segments:
+            fh.write(seg.model_dump_json() + "\n")
+
+    financials: dict = {}
+    sec_status = "disabled"
+    cik = args.sec_cik
+    if config.RESEARCH_SEC_ENABLED:
+        if not cik and config.SEC_RESOLVE_CIK_FROM_TICKER:
+            from .sources import resolve_cik
+
+            cik = resolve_cik(args.ticker)
+        if cik:
+            from .sources import extract_financials_from_company_facts, get_company_facts
+
+            facts = get_company_facts(int(cik))
+            financials = extract_financials_from_company_facts(
+                facts, concepts=config.SEC_CONCEPTS, period_end=args.sec_period_end
+            )
+            sec_status = "ok"
+        else:
+            # Not every registrant is discoverable by ticker (e.g. non-SEC-registered
+            # foreign private issuers); this is a normal, expected outcome, not an
+            # error -- the pipeline continues with whatever other evidence exists.
+            sec_status = "not_applicable"
+    financials_path = evidence_dir / config.FINANCIALS_FILENAME
+    _write_json(financials_path, financials)
+
+    provider = config.RESEARCH_WEB_SEARCH_PROVIDER  # "exa" (default) | "tavily"
+    web_search_sources: list[SourceRecord] = []
+    web_search_status = "disabled"
+    web_evidence: list[WebEvidence] = []
+    web_evidence_sources: list[SourceRecord] = []
+    web_evidence_notes: list[str] = []
+    if config.RESEARCH_WEB_SEARCH_ENABLED:
+        from .sources import build_official_source_queries, web_extract, web_search
+
+        max_results = config.EXA_NUM_RESULTS if provider == "exa" else config.TAVILY_MAX_RESULTS
+        max_extracted = config.EXA_MAX_EXTRACTED_SOURCES if provider == "exa" else config.TAVILY_MAX_EXTRACTED_SOURCES
+
+        web_search_raw_dir = raw_dir / "web"
+        web_search_raw_dir.mkdir(parents=True, exist_ok=True)
+        company_name = args.company_name or args.ticker
+        event_date = args.event_date or args.event_id
+        queries = build_official_source_queries(company_name, args.ticker, event_date)
+
+        # Causality guard, attempted server-side: pass event_date to the active
+        # provider's own publish-date filter. DOCUMENTED LIMITATION, confirmed by
+        # live testing on 2026-08-26 for both Tavily and Exa: not reliably enforced
+        # in practice -- see sources.web_search's callees' docstrings. Sent anyway
+        # (harmless); the real guard is the client-side filter below. Only set when
+        # --event-date parses as a real calendar date (it defaults to event_id,
+        # e.g. "2026-q2", which isn't one).
+        event_cutoff = None
+        try:
+            event_cutoff = datetime.strptime(event_date[:10], "%Y-%m-%d").date()
+        except ValueError:
+            pass
+        provider_end_date = event_cutoff.isoformat() if event_cutoff else None
+
+        all_hits: list[dict] = []  # every normalized hit seen, for the extract-selection step below
+        for qi, query in enumerate(queries, start=1):
+            hits = web_search(query, provider=provider, max_results=max_results, end_date=provider_end_date)
+            all_hits.extend(hits)
+            # archive_all_sources controls how many hits per query we keep -- the
+            # config default (true) matches "narrow queries, but don't discard what
+            # the provider returns for them" rather than us silently dropping evidence.
+            kept = hits if config.RESEARCH_ARCHIVE_ALL_SOURCES else hits[:1]
+            for hi, hit in enumerate(kept, start=1):
+                hit_bytes = json.dumps(hit, indent=2).encode("utf-8")
+                hit_filename = f"query-{qi:02d}-hit-{hi:02d}.json"
+                (web_search_raw_dir / hit_filename).write_bytes(hit_bytes)
+                web_search_sources.append(
+                    SourceRecord(
+                        path=str((web_search_raw_dir / hit_filename).relative_to(run_dir)),
+                        origin=hit.get("url", query),
+                        retrieved_at=_now_iso(),
+                        content_type="application/json",
+                        sha256=sha256_hex(hit_bytes),
+                        byte_length=len(hit_bytes),
+                    )
+                )
+        web_search_status = (
+            f"ok ({len(web_search_sources)} hit(s) from {len(queries)} queries)" if web_search_sources else "no_results"
+        )
+
+        # Search hits are short snippets, not quote-checkable evidence -- a claim
+        # can't cite one. Extract full content for the best few so they become real,
+        # citable WebEvidence (see models.WebEvidence, validate.check_evidence_reference).
+        if all_hits:
+            web_dir = evidence_dir / config.WEB_SUBDIR
+            web_dir.mkdir(parents=True, exist_ok=True)
+
+            # Causality guard, actual enforcement: provider_end_date above is not
+            # reliably honored (confirmed by live testing on both providers), so this
+            # client-side check on published_date is the real guard, not a backstop.
+            # It only catches hits that carry a published_date at all -- confirmed by
+            # the same testing that most hits do not, so this guard's real-world
+            # coverage is narrower than it looks. Hits with no published_date can't
+            # be checked and are kept, not dropped.
+            causal_hits = all_hits
+            excluded_future = 0
+            if event_cutoff:
+                causal_hits = []
+                for hit in all_hits:
+                    published = hit.get("published_date")
+                    if published:
+                        try:
+                            published_date = datetime.strptime(published[:10], "%Y-%m-%d").date()
+                        except ValueError:
+                            published_date = None
+                        if published_date and published_date > event_cutoff:
+                            excluded_future += 1
+                            continue
+                    causal_hits.append(hit)
+                if excluded_future:
+                    web_evidence_notes.append(
+                        f"Excluded {excluded_future} {provider} hit(s) published after the event "
+                        f"date ({event_date}) from citable evidence (causality guard)."
+                    )
+
+            seen_urls: set[str] = set()
+            selected: list[dict] = []
+            for hit in sorted(causal_hits, key=lambda h: h.get("score", 0), reverse=True):
+                url = hit.get("url")
+                if not url or url in seen_urls:
+                    continue
+                seen_urls.add(url)
+                selected.append(hit)
+                if len(selected) >= max_extracted:
+                    break
+            for wi, hit in enumerate(selected, start=1):
+                url = hit["url"]
+                try:
+                    raw_content = web_extract(url, provider=provider)
+                except Exception as exc:  # noqa: BLE001 -- record and continue, never fabricate content
+                    raw_content = None
+                    web_evidence_notes.append(f"web evidence extraction failed for {url}: {exc}")
+                    continue
+                if not raw_content:
+                    web_evidence_notes.append(f"web evidence extraction returned no content for {url}")
+                    continue
+                web_id = f"web-{wi:03d}"
+                content_bytes = raw_content.encode("utf-8")
+                content_filename = f"{web_id}.md"
+                content_path = web_dir / content_filename
+                content_path.write_text(raw_content, encoding="utf-8")
+                web_evidence.append(
+                    WebEvidence(
+                        id=web_id,
+                        url=url,
+                        title=hit.get("title"),
+                        publisher=None,
+                        published_at=hit.get("published_date"),
+                        retrieved_at=_now_iso(),
+                        content_path=str(content_path.relative_to(run_dir)),
+                        content_sha256=sha256_hex(content_bytes),
+                    )
+                )
+                web_evidence_sources.append(
+                    SourceRecord(
+                        path=str(content_path.relative_to(run_dir)),
+                        origin=url,
+                        retrieved_at=_now_iso(),
+                        content_type="text/markdown",
+                        sha256=sha256_hex(content_bytes),
+                        byte_length=len(content_bytes),
+                    )
+                )
+            if web_evidence:
+                web_evidence_path = evidence_dir / config.WEB_EVIDENCE_FILENAME
+                with web_evidence_path.open("w", encoding="utf-8") as fh:
+                    for we in web_evidence:
+                        fh.write(we.model_dump_json() + "\n")
+
+    manifest = Manifest(
+        ticker=args.ticker.upper(),
+        event_id=args.event_id,
+        created_at=_now_iso(),
+        sources=[
+            SourceRecord(
+                path=str(raw_path.relative_to(run_dir)),
+                origin=loaded.origin,
+                retrieved_at=_now_iso(),
+                content_type=loaded.content_type,
+                sha256=sha256_hex(raw_bytes),
+                byte_length=len(raw_bytes),
+            )
+        ]
+        + web_search_sources
+        + web_evidence_sources,
+        notes=[
+            "Raw source archived verbatim before sanitisation.",
+            f"SEC evidence: {sec_status}" + (f" (CIK {cik})" if sec_status == "ok" else ""),
+            f"Web search evidence ({provider}): {web_search_status}",
+            f"Web evidence (extracted, citable): {len(web_evidence)} source(s)",
+        ]
+        + web_evidence_notes,
+    )
+    _write_json(run_dir / config.MANIFEST_FILENAME, manifest.model_dump())
+
+    print(f"Prepared source pack at {run_dir} ({len(segments)} segments).")
+    return 0
+
+
+def cmd_analyze(args: argparse.Namespace) -> int:
+    run_dir = config.run_dir(args.ticker, args.event_id)
+    claims_path = run_dir / config.CLAIMS_FILENAME
+    transcript_path = run_dir / config.NORMALIZED_SUBDIR / config.TRANSCRIPT_FILENAME
+    financials_path = run_dir / config.EVIDENCE_SUBDIR / config.FINANCIALS_FILENAME
+
+    card_path = run_dir / config.SIGNAL_CARD_FILENAME
+    card_path.unlink(missing_ok=True)  # clear any stale card from a prior passing run before (re)validating
+
+    if not claims_path.exists():
+        print(f"error: {claims_path} not found. Write claims.json first (see skill).", file=sys.stderr)
+        return 2
+
+    from .models import Segment
+
+    segments_by_id: dict[str, Segment] = {}
+    with transcript_path.open(encoding="utf-8") as fh:
+        for line in fh:
+            seg = Segment.model_validate_json(line)
+            segments_by_id[seg.id] = seg
+
+    financials = json.loads(financials_path.read_text(encoding="utf-8")) if financials_path.exists() else {}
+
+    web_evidence_path = run_dir / config.EVIDENCE_SUBDIR / config.WEB_EVIDENCE_FILENAME
+    web_evidence_texts: dict[str, str] = {}
+    if web_evidence_path.exists():
+        with web_evidence_path.open(encoding="utf-8") as fh:
+            for line in fh:
+                we = WebEvidence.model_validate_json(line)
+                web_evidence_texts[we.id] = (run_dir / we.content_path).read_text(encoding="utf-8")
+
+    try:
+        raw_claims = json.loads(claims_path.read_text(encoding="utf-8"))
+        claims = [Claim.model_validate(c) for c in raw_claims]
+    except (json.JSONDecodeError, ValidationError) as exc:
+        result = ValidationResult(
+            ok=False,
+            checked_claims=0,
+            issues=[ValidationIssue(claim_index=-1, check="schema", message=f"Could not parse {config.CLAIMS_FILENAME}: {exc}")],
+        )
+        _write_json(run_dir / config.VALIDATION_FILENAME, result.model_dump())
+        print(f"Validation FAILED: could not parse {config.CLAIMS_FILENAME}: {exc}")
+        return 1
+
+    result = validate_claims(claims, segments_by_id, financials, web_evidence_texts)
+
+    metrics_path = run_dir / config.METRICS_FILENAME
+    if metrics_path.exists():
+        claim_ids = {c.id for c in claims if c.id}
+        raw_metrics = json.loads(metrics_path.read_text(encoding="utf-8"))
+        metrics = [Metric.model_validate(m) for m in raw_metrics]
+        metric_issues = validate_metrics(metrics, claim_ids)
+        if metric_issues:
+            result = ValidationResult(
+                ok=False, checked_claims=result.checked_claims, issues=result.issues + metric_issues
+            )
+
+    _write_json(run_dir / config.VALIDATION_FILENAME, result.model_dump())
+
+    if not result.ok:
+        print(f"Validation FAILED: {len(result.issues)} issue(s). See {config.VALIDATION_FILENAME}.")
+        for issue in result.issues:
+            print(f"  claim[{issue.claim_index}] {issue.check}: {issue.message}")
+        return 1
+
+    card = _render_signal_card(args.ticker, args.event_id, claims, segments_by_id)
+    (run_dir / config.SIGNAL_CARD_FILENAME).write_text(card, encoding="utf-8")
+    print(f"Validation passed ({result.checked_claims} claims). Wrote {config.SIGNAL_CARD_FILENAME}.")
+    return 0
+
+
+def cmd_validate_outlook(args: argparse.Namespace) -> int:
+    """Gate outlook-brief.md (agent-authored Stage 2 synthesis, not Python-generated --
+    scenarios/base-case judgment aren't deterministic) on two things: the underlying
+    claims already passed `analyze`, and every claim id the brief cites is real.
+    """
+    run_dir = config.run_dir(args.ticker, args.event_id)
+    validation_path = run_dir / config.VALIDATION_FILENAME
+    outlook_path = run_dir / config.OUTLOOK_BRIEF_FILENAME
+    claims_path = run_dir / config.CLAIMS_FILENAME
+
+    if not validation_path.exists():
+        print(f"error: {validation_path} not found. Run `earnings analyze` first.", file=sys.stderr)
+        return 2
+    validation = json.loads(validation_path.read_text(encoding="utf-8"))
+    if not validation.get("ok"):
+        print("Outlook brief blocked: underlying claims have not passed validation.")
+        return 1
+
+    if not outlook_path.exists():
+        print(f"error: {outlook_path} not found. Write {config.OUTLOOK_BRIEF_FILENAME} first (see skill).", file=sys.stderr)
+        return 2
+
+    raw_claims = json.loads(claims_path.read_text(encoding="utf-8"))
+    claim_ids = {c.get("id") for c in raw_claims if c.get("id")}
+    errors = check_outlook_brief_citations(outlook_path.read_text(encoding="utf-8"), claim_ids)
+    if errors:
+        print(f"Outlook brief validation FAILED: {len(errors)} issue(s).")
+        for error in errors:
+            print(f"  {error}")
+        return 1
+
+    print(f"Outlook brief validated: all cited claim ids resolve. ({config.OUTLOOK_BRIEF_FILENAME})")
+    return 0
+
+
+def cmd_check_review(args: argparse.Namespace) -> int:
+    """Gate the Outlook_Reviewer subagent's review-report.json: it must exist
+    (written by the subagent, never by this command -- semantic judgment isn't
+    deterministic Python's job, same principle as outlook-brief.md), its own claim-id
+    citations must resolve, and the underlying evidence must have already passed
+    `analyze`. On success, renders review-report.md deterministically from the
+    validated JSON (never trusts agent-authored markdown to match its own JSON).
+    """
+    run_dir = config.run_dir(args.ticker, args.event_id)
+    validation_path = run_dir / config.VALIDATION_FILENAME
+    outlook_path = run_dir / config.OUTLOOK_BRIEF_FILENAME
+    claims_path = run_dir / config.CLAIMS_FILENAME
+    report_path = run_dir / config.REVIEW_REPORT_JSON_FILENAME
+
+    if not validation_path.exists():
+        print(f"error: {validation_path} not found. Run `earnings analyze` first.", file=sys.stderr)
+        return 2
+    validation = json.loads(validation_path.read_text(encoding="utf-8"))
+    if not validation.get("ok"):
+        print("Review blocked: underlying claims have not passed validation.")
+        return 2
+
+    if not outlook_path.exists():
+        print(f"error: {outlook_path} not found. Run `earnings validate-outlook` first.", file=sys.stderr)
+        return 2
+
+    if not report_path.exists():
+        print(
+            f"error: {report_path} not found. Dispatch the outlook-reviewer subagent first "
+            "(see .agents/skills/review-earnings-run).",
+            file=sys.stderr,
+        )
+        return 2
+
+    try:
+        report = ReviewReport.model_validate_json(report_path.read_text(encoding="utf-8"))
+    except ValidationError as exc:
+        print(f"Review validation FAILED: could not parse {config.REVIEW_REPORT_JSON_FILENAME}: {exc}")
+        return 2
+
+    raw_claims = json.loads(claims_path.read_text(encoding="utf-8"))
+    claim_ids = {c.get("id") for c in raw_claims if c.get("id")}
+    issues = validate_review_report(report, claim_ids)
+    if issues:
+        print(f"Review validation FAILED: {len(issues)} citation issue(s).")
+        for issue in issues:
+            print(f"  {issue.check}: {issue.message}")
+        return 2
+
+    md = _render_review_report(args.ticker, args.event_id, report)
+    (run_dir / config.REVIEW_REPORT_MD_FILENAME).write_text(md, encoding="utf-8")
+    print(f"Review verdict: {report.verdict}. Wrote {config.REVIEW_REPORT_MD_FILENAME}.")
+    if report.verdict == "fail":
+        return 2
+    if report.verdict == "pass_with_warnings":
+        return 1
+    return 0
+
+
+def _render_review_report(ticker: str, event_id: str, report: ReviewReport) -> str:
+    lines = [
+        f"# Review Report: {ticker.upper()} — {event_id}",
+        "",
+        f"**Verdict:** {report.verdict}",
+        f"**Reviewed at:** {report.reviewed_at} (model: {report.model})",
+        "",
+        "## Summary",
+        report.summary,
+        "",
+    ]
+    sections = [
+        ("Source checks", report.source_checks),
+        ("Claim findings", report.claim_findings),
+        ("Outlook findings", report.outlook_findings),
+        ("Process findings", report.process_findings),
+    ]
+    for title, findings in sections:
+        lines.append(f"## {title}")
+        if not findings:
+            lines.append("_None._")
+        for f in findings:
+            lines.append(f"- **[{f.severity}]** {f.artifact}: {f.passage!r}")
+            lines.append(f"  - Evidence: {f.evidence}")
+            lines.append(f"  - Recommendation: {f.recommendation}")
+        lines.append("")
+    lines.append("## Unverified items")
+    if report.unverified_items:
+        for item in report.unverified_items:
+            lines.append(f"- {item}")
+    else:
+        lines.append("_None._")
+    return "\n".join(lines)
+
+
+def _render_signal_card(ticker: str, event_id: str, claims: list[Claim], segments_by_id: dict) -> str:
+    lines = [f"# Signal Card: {ticker.upper()} — {event_id}", ""]
+    by_category: dict[str, list[Claim]] = {}
+    for claim in claims:
+        by_category.setdefault(claim.category, []).append(claim)
+    for category, group in by_category.items():
+        lines.append(f"## {category.replace('_', ' ').title()}")
+        for claim in group:
+            speaker = f" ({claim.speaker})" if claim.speaker else ""
+            lines.append(f"- **{claim.status}**{speaker}: {claim.claim_text}")
+            location = claim.segment_id or claim.web_evidence_id
+            lines.append(f'  > "{claim.quote}" — {location}')
+        lines.append("")
+    return "\n".join(lines)
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(prog="earnings", description="Earnings transcript analysis POC")
+    sub = parser.add_subparsers(dest="command", required=True)
+
+    prep = sub.add_parser("prepare", help="Build a source pack from a transcript")
+    prep.add_argument("--ticker", required=True)
+    prep.add_argument("--event-id", required=True)
+    prep.add_argument("--transcript", required=True, help="Local file path or URL")
+    prep.add_argument(
+        "--sec-cik",
+        default=None,
+        help="Numeric SEC CIK, e.g. 320193 (optional -- if omitted, the CIK is "
+        "auto-resolved from --ticker via SEC's ticker map unless config.toml disables it)",
+    )
+    prep.add_argument(
+        "--sec-period-end",
+        default=None,
+        help="XBRL period end date to pin SEC facts to, e.g. 2026-06-30 "
+        "(recommended with --sec-cik; without it, the latest-by-end fact is used)",
+    )
+    prep.add_argument(
+        "--company-name",
+        default=None,
+        help="Full company name for web-search queries, e.g. 'Microsoft' (defaults to --ticker if omitted)",
+    )
+    prep.add_argument(
+        "--event-date",
+        default=None,
+        help="Calendar date of the earnings event, e.g. 2026-01-28, used to build web-search "
+        "queries (defaults to --event-id if omitted, which is usually less precise)",
+    )
+    prep.set_defaults(func=cmd_prepare)
+
+    analyze = sub.add_parser("analyze", help="Validate claims.json and produce signal-card.md")
+    analyze.add_argument("--ticker", required=True)
+    analyze.add_argument("--event-id", required=True)
+    analyze.set_defaults(func=cmd_analyze)
+
+    validate_outlook = sub.add_parser(
+        "validate-outlook", help="Check outlook-brief.md's claim-id citations against validated claims.json"
+    )
+    validate_outlook.add_argument("--ticker", required=True)
+    validate_outlook.add_argument("--event-id", required=True)
+    validate_outlook.set_defaults(func=cmd_validate_outlook)
+
+    check_review = sub.add_parser(
+        "check-review",
+        help="Validate the outlook-reviewer subagent's review-report.json and render review-report.md",
+    )
+    check_review.add_argument("--ticker", required=True)
+    check_review.add_argument("--event-id", required=True)
+    check_review.set_defaults(func=cmd_check_review)
+
+    return parser
+
+
+def main(argv: list[str] | None = None) -> int:
+    load_dotenv()
+    parser = build_parser()
+    args = parser.parse_args(argv)
+    return args.func(args)
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

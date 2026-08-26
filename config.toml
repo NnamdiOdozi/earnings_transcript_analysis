@@ -1,0 +1,71 @@
+# Application configuration for the earnings-transcript-analysis POC.
+#
+# Only genuinely tunable knobs live here. Secrets live in .env (never here); env-var
+# NAMES, endpoint URLs and the output-directory layout stay in config.py because
+# changing them would break the repo-scoped skills, not just tune behaviour.
+#
+# config.py loads this file at import via stdlib tomllib and falls back to built-in
+# defaults for any key that is absent, so deleting this file is harmless.
+
+[http]
+timeout_seconds = 20.0
+max_fetch_mb = 10            # hard cap on any single fetched resource
+
+[segmentation]
+# A line containing any of these (case-insensitive) marks the prepared -> Q&A boundary.
+qa_boundary_markers = [
+    "questions and answers",
+    "question-and-answer",
+    "q&a",
+    "we will now begin the question-and-answer session",
+    "operator instructions",
+]
+
+[validation]
+calc_relative_tolerance = 0.01     # 1% relative tolerance for recomputed derived metrics
+calc_absolute_tolerance = 0.005
+numeric_match_tolerance = 1e-6     # how close a claimed number must be to a source number
+
+[sec]
+# us-gaap XBRL concepts pulled from SEC company-facts when a CIK is available.
+concepts = ["Revenues", "RevenueFromContractWithCustomerExcludingAssessedTax", "NetIncomeLoss", "EarningsPerShareDiluted"]
+# Fallback User-Agent if SEC_USER_AGENT is unset in the environment. SEC requires a
+# real identifying UA ("Name email"); set the real one in .env, not here.
+default_user_agent = "earnings-poc unset@example.com"
+resolve_cik_from_ticker = true   # auto-resolve --ticker -> CIK via SEC's ticker map if --sec-cik not given
+require_period_match = true      # a fact whose XBRL "end" doesn't match --sec-period-end is dropped, not guessed
+forms = ["8-K", "10-Q", "10-K", "20-F", "6-K"]  # informational: filing types this POC expects, not yet enforced
+
+[research]
+sec_enabled = true
+web_search_enabled = true
+provider = "exa"                  # "exa" | "tavily" -- which provider cmd_prepare calls
+official_sources_only = false  # not actually enforced as a domain filter yet -- see README known limitations
+archive_all_sources = true
+include_previous_period = true
+
+[tavily]
+search_depth = "basic"
+max_results = 5
+include_external_commentary = false
+include_answer = false            # no generated-answer synthesis -- primary sources only
+include_raw_content = false       # full content comes from the separate extract step, not search
+extract_selected_results = true   # run Tavily /extract on top hits so they become citable evidence
+extract_depth = "basic"
+max_extracted_sources = 10        # cap across all queries combined, selected by Tavily's own score
+
+[exa]
+type = "auto"                     # Exa /search "type": auto | neural | keyword
+num_results = 5
+max_extracted_sources = 10        # cap across all queries combined, selected by Exa's own score
+
+[analysis]
+require_previous_period_comparison = true
+require_guidance_analysis = true
+require_scenarios = true
+require_monitoring_indicators = true
+
+[output]
+write_signal_card = true
+write_outlook_brief = true
+include_evidence_appendix = true

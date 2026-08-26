@@ -1,0 +1,38 @@
+{
+  "Revenues": {
+    "value": 36148000000,
+    "end": "2010-12-31",
+    "unit": "USD",
+    "form": "10-Q",
+    "fy": 2011,
+    "filed": "2011-01-27",
+    "accn": "0001193125-11-015947"
+  },
+  "RevenueFromContractWithCustomerExcludingAssessedTax": {
+    "value": 331839000000,
+    "end": "2026-06-30",
+    "unit": "USD",
+    "form": "10-K",
+    "fy": 2026,
+    "filed": "2026-07-29",
+    "accn": "0001193125-26-323660"
+  },
+  "NetIncomeLoss": {
+    "value": 133749000000,
+    "end": "2026-06-30",
+    "unit": "USD",
+    "form": "10-K",
+    "fy": 2026,
+    "filed": "2026-07-29",
+    "accn": "0001193125-26-323660"
+  },
+  "EarningsPerShareDiluted": {
+    "value": 17.95,
+    "end": "2026-06-30",
+    "unit": "USD/shares",
+    "form": "10-K",
+    "fy": 2026,
+    "filed": "2026-07-29",
+    "accn": "0001193125-26-323660"
+  }
+}

@@ -200,5 +200,5 @@ embedding_logs
 output/
 
 # earnings pipeline run artifacts
-runs/
+
 .claude/commands/d0a288d918e98dcbcb2363c1808dcf97/

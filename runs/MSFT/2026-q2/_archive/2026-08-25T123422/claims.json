@@ -1,0 +1,86 @@
+[
+  {
+    "category": "financial_result",
+    "claim_text": "Microsoft Cloud revenue surpassed $50 billion for the first time and grew 26% year over year.",
+    "quote": "This quarter, the Microsoft Cloud surpassed $50 billion in revenue for the first time, up 26% year-over-year, reflecting the strength of our platform and accelerating demand.",
+    "segment_id": "seg-0003",
+    "speaker": "SATYA NADELLA",
+    "status": "reported",
+    "values": {
+      "cloud_revenue_billions": 50,
+      "yoy_growth_pct": 26
+    },
+    "confidence": 0.98
+  },
+  {
+    "category": "financial_result",
+    "claim_text": "Second-quarter revenue was $81.3 billion, up 17% year over year and 15% in constant currency.",
+    "quote": "This quarter, revenue was $81.3 billion, up 17% and 15% in constant currency.",
+    "segment_id": "seg-0004",
+    "speaker": "AMY HOOD",
+    "status": "reported",
+    "values": {
+      "revenue_billions": 81.3,
+      "yoy_growth_pct": 17,
+      "constant_currency_growth_pct": 15
+    },
+    "confidence": 0.99
+  },
+  {
+    "category": "financial_result",
+    "claim_text": "Company gross margin percentage was 68% and operating margin was 47%.",
+    "quote": "Company gross margin percentage was 68%, down slightly year-over-year primarily driven by continued investments in AI infrastructure and growing AI product usage that was partially offset by ongoing efficiency gains, particularly in Azure and M365 Commercial cloud, as well as sales mix shift to higher margin businesses. Operating expenses increased 5% and 4% in constant currency driven by R&D investments in compute capacity and AI talent, as well as impairment charges in our gaming business. Operating margins increased year-over-year to 47%, ahead of expectations.",
+    "segment_id": "seg-0004",
+    "speaker": "AMY HOOD",
+    "status": "reported",
+    "values": {
+      "gross_margin_pct": 68,
+      "operating_expenses_growth_pct": 5,
+      "constant_currency_operating_expenses_growth_pct": 4,
+      "operating_margin_pct": 47
+    },
+    "confidence": 0.97
+  },
+  {
+    "category": "explanation",
+    "claim_text": "Management attributed the slight year-over-year gross-margin decline primarily to AI infrastructure investment and growing AI product usage, partly offset by efficiency gains and mix shift.",
+    "quote": "Company gross margin percentage was 68%, down slightly year-over-year primarily driven by continued investments in AI infrastructure and growing AI product usage that was partially offset by ongoing efficiency gains, particularly in Azure and M365 Commercial cloud, as well as sales mix shift to higher margin businesses.",
+    "segment_id": "seg-0004",
+    "speaker": "AMY HOOD",
+    "status": "reported",
+    "values": {
+      "gross_margin_pct": 68
+    },
+    "confidence": 0.96
+  },
+  {
+    "category": "qa_insight",
+    "claim_text": "Management said GPU capacity is being allocated across Azure, first-party Copilot products, and R&D to optimize the long-term value of the overall portfolio rather than maximize one business alone.",
+    "quote": "We want to be able to allocate capacity while we’re supply constrained in a way that allows us to essentially build the best LTV portfolio.",
+    "segment_id": "seg-0007",
+    "speaker": "SATYA NADELLA",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.91
+  },
+  {
+    "category": "qa_insight",
+    "claim_text": "Management said much of the capital being spent and many GPUs being purchased are already contracted for most of their useful lives.",
+    "quote": "the majority of the capital that we’re spending today, and a lot of the GPUs that we’re buying are already contracted for most of their useful life.",
+    "segment_id": "seg-0010",
+    "speaker": "AMY HOOD",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.93
+  },
+  {
+    "category": "guidance",
+    "claim_text": "Microsoft expects to continue adding AI capacity globally as quickly as possible to meet customer demand and increased usage.",
+    "quote": "We’re working as hard as we can to add capacity as quickly as we can.",
+    "segment_id": "seg-0017",
+    "speaker": "AMY HOOD",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.94
+  }
+]

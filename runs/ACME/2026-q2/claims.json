@@ -1,0 +1,59 @@
+[
+  {
+    "category": "financial_result",
+    "claim_text": "Revenue was $110 million for the quarter, up 10% year over year.",
+    "quote": "Revenue for the quarter was $110 million, up from $100 million a year ago.",
+    "segment_id": "seg-0003",
+    "speaker": "Jane Smith",
+    "status": "reported",
+    "values": {
+      "revenue_millions": 110,
+      "calculation": {
+        "name": "yoy_growth",
+        "inputs": {"current": 110, "prior": 100},
+        "result": 0.10
+      }
+    },
+    "confidence": 0.95
+  },
+  {
+    "category": "financial_result",
+    "claim_text": "Gross margin was 45% for the quarter.",
+    "quote": "gross margin came in at 45%",
+    "segment_id": "seg-0004",
+    "speaker": "Bob Lee",
+    "status": "reported",
+    "values": {"gross_margin_pct": 45},
+    "confidence": 0.9
+  },
+  {
+    "category": "guidance",
+    "claim_text": "Full-year revenue guidance is approximately $460 million.",
+    "quote": "we are guiding full-year revenue to approximately $460 million",
+    "segment_id": "seg-0004",
+    "speaker": "Bob Lee",
+    "status": "forward_looking",
+    "values": {"guidance_revenue_millions": 460},
+    "confidence": 0.9
+  },
+  {
+    "category": "risk",
+    "claim_text": "Management flagged FX headwinds and softness in discretionary enterprise spending as key risks for the back half of the year.",
+    "quote": "We are watching foreign exchange headwinds and potential softness in discretionary enterprise spending as the main risks.",
+    "segment_id": "seg-0008",
+    "speaker": "Bob Lee",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.85
+  },
+  {
+    "category": "qa_insight",
+    "claim_text": "Revenue growth was driven by strong enterprise demand and expansion into three new regional markets.",
+    "quote": "Growth was primarily driven by strong demand in our core enterprise segment, along with the expansion into three new regional markets.",
+    "segment_id": "seg-0006",
+    "speaker": "Jane Smith",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.85
+  }
+]

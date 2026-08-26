@@ -1,0 +1,8 @@
+{"id":"seg-0001","section":"prepared","speaker":null,"text":"Acme Corp Q2 2026 Earnings Call"}
+{"id":"seg-0002","section":"prepared","speaker":"Operator","text":"Good morning and welcome to the Acme Corp second quarter 2026 earnings call."}
+{"id":"seg-0003","section":"prepared","speaker":"Jane Smith","text":"Thank you all for joining. Revenue for the quarter was $110 million, up from $100 million a year ago. Net income was $20 million. We are pleased with these results and expect continued momentum into the second half of the year."}
+{"id":"seg-0004","section":"prepared","speaker":"Bob Lee","text":"To add some detail, gross margin came in at 45%, and we are guiding full-year revenue to approximately $460 million."}
+{"id":"seg-0005","section":"qa","speaker":"Analyst One","text":"Can you comment on the drivers of revenue growth this quarter?"}
+{"id":"seg-0006","section":"qa","speaker":"Jane Smith","text":"Sure. Growth was primarily driven by strong demand in our core enterprise segment, along with the expansion into three new regional markets."}
+{"id":"seg-0007","section":"qa","speaker":"Analyst Two","text":"What are the key risks you are watching for the back half of the year?"}
+{"id":"seg-0008","section":"qa","speaker":"Bob Lee","text":"We are watching foreign exchange headwinds and potential softness in discretionary enterprise spending as the main risks."}

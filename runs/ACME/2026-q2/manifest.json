@@ -1,0 +1,18 @@
+{
+  "ticker": "ACME",
+  "event_id": "2026-q2",
+  "created_at": "2026-08-25T09:40:43Z",
+  "sources": [
+    {
+      "path": "raw/transcript.txt",
+      "origin": "tests/fixtures/normal_transcript.txt",
+      "retrieved_at": "2026-08-25T09:40:43Z",
+      "content_type": "text/plain",
+      "sha256": "262650c3042601ed0c8e8264612898b0b2b5ee05e27426f70f514d2234e5fd7e",
+      "byte_length": 1054
+    }
+  ],
+  "notes": [
+    "Raw source archived verbatim before sanitisation."
+  ]
+}

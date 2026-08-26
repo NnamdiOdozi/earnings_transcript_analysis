@@ -1,0 +1,18 @@
+{
+  "ticker": "MSFT",
+  "event_id": "2026-q2",
+  "created_at": "2026-08-25T11:55:55Z",
+  "sources": [
+    {
+      "path": "raw/transcript.html",
+      "origin": "https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q2",
+      "retrieved_at": "2026-08-25T11:55:55Z",
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "00ee957426e5ddd417e55dda3b6c3579756b0ebdae79b577e3efe96d609b3f60",
+      "byte_length": 343261
+    }
+  ],
+  "notes": [
+    "Raw source archived verbatim before sanitisation."
+  ]
+}

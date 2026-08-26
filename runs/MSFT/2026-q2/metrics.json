@@ -1,0 +1,29 @@
+[
+  {
+    "name": "Microsoft Cloud revenue",
+    "value": 51.5,
+    "unit": "USD billions",
+    "period": "Q2 FY2026",
+    "definition": "Revenue from Azure, Microsoft 365, and other cloud offerings, as reported by CFO Amy Hood.",
+    "source_claim_ids": ["claim-005"],
+    "source": "agent_derived_from_transcript"
+  },
+  {
+    "name": "Microsoft 365 Copilot paid seats",
+    "value": 15.0,
+    "unit": "millions of seats",
+    "period": "Q2 FY2026",
+    "definition": "Paid seat count for Microsoft 365 Copilot as disclosed by management.",
+    "source_claim_ids": ["claim-006"],
+    "source": "agent_derived_from_transcript"
+  },
+  {
+    "name": "Commercial remaining performance obligation (RPO)",
+    "value": 625.0,
+    "unit": "USD billions",
+    "period": "Q2 FY2026",
+    "definition": "Contracted but not yet recognized revenue, net of reserves, as disclosed by CFO Amy Hood.",
+    "source_claim_ids": ["claim-013"],
+    "source": "agent_derived_from_transcript"
+  }
+]

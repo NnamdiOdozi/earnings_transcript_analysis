@@ -156,6 +156,7 @@ def cmd_prepare(args: argparse.Namespace) -> int:
     web_evidence: list[WebEvidence] = []
     web_evidence_sources: list[SourceRecord] = []
     web_evidence_notes: list[str] = []
+    queries: list[str] = []
     if config.RESEARCH_WEB_SEARCH_ENABLED:
         from .sources import build_official_source_queries, web_extract, web_search
 
@@ -195,7 +196,17 @@ def cmd_prepare(args: argparse.Namespace) -> int:
                 # per-source retrieved_at) so the fetch time is visible without
                 # cross-referencing the manifest.
                 hit_retrieved_at = _now_iso()
-                hit_bytes = json.dumps({**hit, "_retrieved_at": hit_retrieved_at}, indent=2).encode("utf-8")
+                # "_query" records the exact search string that produced this hit --
+                # previously only recoverable by re-reading build_official_source_queries()
+                # and assuming its fixed template never changed. "_provider" records
+                # which search API (exa/tavily) produced it -- previously not recorded
+                # ANYWHERE per-hit: the archive directory is always literally named
+                # "web" regardless of provider (see web_search_raw_dir above), not
+                # "exa"/"tavily", so only manifest.json's free-text notes said which
+                # provider ran, and only once for the whole run, not per file.
+                hit_bytes = json.dumps(
+                    {**hit, "_provider": provider, "_query": query, "_retrieved_at": hit_retrieved_at}, indent=2
+                ).encode("utf-8")
                 hit_filename = f"query-{qi:02d}-hit-{hi:02d}.json"
                 (web_search_raw_dir / hit_filename).write_bytes(hit_bytes)
                 web_search_sources.append(
@@ -247,9 +258,14 @@ def cmd_prepare(args: argparse.Namespace) -> int:
                         f"date ({event_date}) from citable evidence (causality guard)."
                     )
 
+            # score is None, not a real number, for a provider/mode that doesn't supply
+            # one (see sources._normalize_hits -- e.g. Exa's configured "auto" type).
+            # Python's sort is stable, so giving every None the same fallback preserves
+            # the provider's own result order among them, rather than an arbitrary one;
+            # a hit that DOES carry a real score still sorts above an unscored one.
             seen_urls: set[str] = set()
             selected: list[dict] = []
-            for hit in sorted(causal_hits, key=lambda h: h.get("score", 0), reverse=True):
+            for hit in sorted(causal_hits, key=lambda h: h.get("score") if h.get("score") is not None else -1, reverse=True):
                 url = hit.get("url")
                 if not url or url in seen_urls:
                     continue
@@ -317,6 +333,7 @@ def cmd_prepare(args: argparse.Namespace) -> int:
         ]
         + web_search_sources
         + web_evidence_sources,
+        queries=queries,
         notes=[
             "Raw source archived verbatim before sanitisation.",
             f"SEC evidence: {sec_status}" + (f" (CIK {cik})" if sec_status == "ok" else ""),

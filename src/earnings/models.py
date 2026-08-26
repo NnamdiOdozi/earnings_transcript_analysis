@@ -76,6 +76,11 @@ class Manifest(BaseModel):
     created_at: str  # ISO 8601 UTC timestamp
     sources: list[SourceRecord] = Field(default_factory=list)
     notes: list[str] = Field(default_factory=list)
+    # The exact web-search queries sent (see sources.build_official_source_queries),
+    # in order -- "query-NN" in a raw hit's filename indexes into this list. Recorded
+    # here too (not just each hit's own "_query" field) so the full query set is
+    # visible in one place even for a query that returned zero hits.
+    queries: list[str] = Field(default_factory=list)
 
 
 class Claim(BaseModel):

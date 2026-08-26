@@ -55,9 +55,12 @@ extract_depth = "basic"
 max_extracted_sources = 10        # cap across all queries combined, selected by Tavily's own score
 
 [exa]
-type = "auto"                     # Exa /search "type": auto | neural | keyword
+type = "auto"                     # Exa /search "type": auto | neural | keyword -- "auto" never
+                                   # returns a relevance "score" (live-confirmed); "neural" does.
+                                   # See sources._normalize_hits for what this means downstream.
 num_results = 5
-max_extracted_sources = 10        # cap across all queries combined, selected by Exa's own score
+max_extracted_sources = 10        # cap across all queries combined; selected by score when the
+                                   # provider gives one, otherwise by the provider's own result order
 
 [analysis]
 require_previous_period_comparison = true

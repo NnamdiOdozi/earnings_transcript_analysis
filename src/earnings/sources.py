@@ -154,13 +154,26 @@ def exa_contents(url: str) -> dict[str, Any]:
 def _normalize_hits(raw_results: list[dict[str, Any]], provider: str) -> list[dict[str, Any]]:
     """Map either provider's raw search-hit shape to one canonical shape so
     cli.cmd_prepare never branches on provider: {url, title, score, published_date}.
+
+    `score` is `None`, not a faked `0`, when the provider's response genuinely
+    carries none -- live-confirmed (2026-08-26) that Exa's `type="auto"` (this
+    project's configured default, config.toml [exa] type) never returns a "score"
+    field at all, while Tavily and Exa's `type="neural"` both reliably do. This
+    isn't a quirk to work around: "auto" picks per-query between keyword search
+    and neural/embedding search, and a keyword match score and a neural
+    similarity score aren't on a comparable scale -- Exa has nothing single and
+    meaningful to report back for a blended-mode result, so it reports nothing.
+    A silent `0` default made every `auto`-mode Exa hit tie, silently turning
+    cmd_prepare's "extract the best-scoring hits" selection into a no-op -- see
+    cmd_prepare's extraction-selection sort, which now treats `None` as "no score
+    available, preserve the provider's own result order" rather than "worst".
     """
     if provider == "exa":
         return [
             {
                 "url": r.get("url"),
                 "title": r.get("title"),
-                "score": r.get("score", 0),
+                "score": r.get("score"),
                 "published_date": r.get("publishedDate"),
             }
             for r in raw_results
@@ -169,7 +182,7 @@ def _normalize_hits(raw_results: list[dict[str, Any]], provider: str) -> list[di
         {
             "url": r.get("url"),
             "title": r.get("title"),
-            "score": r.get("score", 0),
+            "score": r.get("score"),
             "published_date": r.get("published_date"),
         }
         for r in raw_results

@@ -174,7 +174,7 @@ back and revise, don't silently patch the brief.
 
 ```text
 runs/<ticker>/<event-id>/
-  manifest.json               # source URLs/paths, timestamps, sha256 hashes, SEC/Tavily status
+  manifest.json               # source URLs/paths, timestamps, sha256 hashes, SEC/Tavily status, queries sent
   raw/                        # verbatim archived source, before sanitisation
   normalized/transcript.jsonl # sanitised, segmented, speaker-labelled transcript
   evidence/financials.json    # SEC/XBRL evidence, if a CIK was resolved

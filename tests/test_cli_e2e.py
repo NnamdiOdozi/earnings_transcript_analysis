@@ -39,6 +39,11 @@ def test_prepare_then_analyze_empty_transcript_yields_zero_segments_and_passes(i
     segment_lines = (run_dir / config.NORMALIZED_SUBDIR / config.TRANSCRIPT_FILENAME).read_text().splitlines()
     assert segment_lines == []
 
+    # Web search is disabled by this fixture -- queries must be an empty list, not
+    # crash on an undefined variable (it's only assigned inside the enabled branch).
+    manifest = json.loads((run_dir / config.MANIFEST_FILENAME).read_text())
+    assert manifest["queries"] == []
+
     (run_dir / config.CLAIMS_FILENAME).write_text("[]")
     rc = main(["analyze", "--ticker", "ACME", "--event-id", "2026-empty"])
     assert rc == 0
@@ -259,10 +264,20 @@ def test_prepare_calls_web_search_by_default_and_archives_hits(isolated_runs_dir
     assert len(archived) == 7  # one hit archived per query, per the fake
     # Fetch time embedded in the file itself, not just cross-referenced via manifest.
     assert all(json.loads(f.read_text())["_retrieved_at"] for f in archived)
+    # Which provider produced this hit -- the archive directory is always literally
+    # named "web" regardless of provider, so this was previously unrecorded per-hit.
+    assert all(json.loads(f.read_text())["_provider"] == provider for f in archived)
+    # The exact query string that produced each hit is also embedded in the file --
+    # previously only recoverable by re-reading build_official_source_queries().
+    archived_queries = [json.loads(f.read_text())["_query"] for f in archived]
+    assert all("Acme Corp" in q and "ACME" in q and "2026-07-15" in q for q in archived_queries)
 
     manifest = json.loads((run_dir / config.MANIFEST_FILENAME).read_text())
     assert any(f"Web search evidence ({provider}): ok" in note for note in manifest["notes"])
     assert any("Web evidence (extracted, citable): 7 source(s)" in note for note in manifest["notes"])
+    # The full query set is also recorded once at the manifest level, in order --
+    # "query-NN" in a hit's filename indexes into this list.
+    assert manifest["queries"] == calls
 
     # 7 search hits (one per query, distinct URLs) all get extracted -- capped by
     # max_extracted_sources (10, default), so all 7 are selected here.
@@ -336,6 +351,36 @@ def test_prepare_excludes_web_evidence_published_after_event_date(isolated_runs_
     assert len(list((run_dir / config.RAW_SUBDIR / "web").glob("*.json"))) == 14
 
 
+def test_prepare_extraction_selection_preserves_order_when_score_is_none(isolated_runs_dir, monkeypatch):
+    # Regression: when score is None for every hit (e.g. Exa "auto" mode, which never
+    # returns one), extraction selection must not crash on the None/float comparison,
+    # and must preserve the provider's own result order rather than picking arbitrarily.
+    monkeypatch.setattr(config, "RESEARCH_WEB_SEARCH_ENABLED", True)
+    monkeypatch.setattr(config, "RESEARCH_WEB_SEARCH_PROVIDER", "exa")
+
+    def fake_web_search(query, provider, max_results, end_date=None):
+        # Every query returns the same 2 hits, in this fixed order, all score=None.
+        return [
+            {"url": "https://example.com/first", "title": None, "score": None, "published_date": None},
+            {"url": "https://example.com/second", "title": None, "score": None, "published_date": None},
+        ]
+
+    def fake_web_extract(url, provider):
+        return f"# Content for {url}"
+
+    monkeypatch.setattr(sources, "web_search", fake_web_search)
+    monkeypatch.setattr(sources, "web_extract", fake_web_extract)
+
+    transcript = str(FIXTURES / "normal_transcript.txt")
+    rc = main(["prepare", "--ticker", "ACME", "--event-id", "2026-q2", "--transcript", transcript])
+    assert rc == 0
+
+    run_dir = isolated_runs_dir / "ACME" / "2026-q2"
+    web_evidence_lines = (run_dir / config.EVIDENCE_SUBDIR / config.WEB_EVIDENCE_FILENAME).read_text().strip().splitlines()
+    first_two = [json.loads(line)["url"] for line in web_evidence_lines[:2]]
+    assert first_two == ["https://example.com/first", "https://example.com/second"]
+
+
 def test_normalize_hits_maps_both_provider_shapes_to_one_canonical_shape():
     tavily_hit = {"url": "https://x.com", "title": "T", "score": 0.5, "published_date": "2026-07-10"}
     exa_hit = {"url": "https://y.com", "title": "Y", "score": 0.7, "publishedDate": "2026-07-11"}
@@ -345,6 +390,15 @@ def test_normalize_hits_maps_both_provider_shapes_to_one_canonical_shape():
     assert sources._normalize_hits([exa_hit], "exa") == [
         {"url": "https://y.com", "title": "Y", "score": 0.7, "published_date": "2026-07-11"}
     ]
+
+
+def test_normalize_hits_score_is_none_not_a_fake_zero_when_absent():
+    # Regression: Exa's "auto" type (config.toml [exa] type default) never returns a
+    # "score" field at all -- live-confirmed 2026-08-26. A silent 0 default made every
+    # such hit tie, turning cmd_prepare's "extract the best-scoring hits" selection
+    # into a no-op. score must be None (distinguishable from a real score of 0.0), not 0.
+    scoreless_hit = {"url": "https://y.com", "title": "Y", "publishedDate": "2026-07-11"}
+    assert sources._normalize_hits([scoreless_hit], "exa")[0]["score"] is None
 
 
 def test_prepare_archives_prior_run_instead_of_overwriting(isolated_runs_dir):

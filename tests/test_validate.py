@@ -15,6 +15,8 @@ from earnings.validate import (
     check_exact_quote,
     check_numeric,
     check_outlook_brief_citations,
+    check_outlook_brief_dollar_escaping,
+    extract_numbers,
     validate_claims,
     validate_review_report,
 )
@@ -40,6 +42,66 @@ def financials() -> dict:
 
     company_facts = json.loads((FIXTURES / "sec_company_facts.json").read_text(encoding="utf-8"))
     return extract_financials_from_company_facts(company_facts, concepts=["Revenues", "NetIncomeLoss"])
+
+
+@pytest.mark.parametrize(
+    "text,expected",
+    [
+        # A hyphen directly between two numbers is a RANGE separator, not a minus sign
+        # -- regression for the bug where "37%-38%" parsed as {37.0, -38.0}.
+        ("guidance of 37%-38% for next quarter", {37.0, 38.0}),
+        ("revenue of $80.65-81.75 billion", {80.65, 81.75}),
+        ("revenue of $80.65-$81.75 billion", {80.65, 81.75}),
+        ("growth of 10-15% is expected", {10.0, 15.0}),
+        # A genuine negative figure must keep its sign, not silently become positive
+        # -- this was a real latent bug (a net loss would ground against a positive).
+        ("a net loss of -$50 million this quarter", {-50.0}),
+        ("revenue declined -5% year over year", {-5.0}),
+        # No hyphen at all involved -- must not regress under a left-context guard.
+        ("growth of 15% to %17", {15.0, 17.0}),
+        ("commercial bookings increased 230% and 228% in constant currency", {230.0, 228.0}),
+    ],
+)
+def test_extract_numbers_distinguishes_range_hyphen_from_minus_sign(text, expected):
+    assert extract_numbers(text) == expected
+
+
+def test_claim_text_numbers_accepts_hyphenated_range_grounded_in_evidence(financials):
+    # The exact scenario hit while extracting real MSFT claims: prose phrases a range
+    # with a hyphen, and both bounds are genuinely grounded in the cited segment.
+    segment_text = normalize_whitespace(
+        "In Azure, we expect Q3 revenue growth to be between 37% and 38% in constant currency."
+    )
+    claim = Claim(
+        category="current_guidance",
+        classification="management_guidance",
+        claim_text="Azure guidance of 37%-38% for Q3.",
+        quote="In Azure, we expect Q3 revenue growth to be between 37% and 38% in constant currency.",
+        segment_id="seg-0004",
+        status="forward_looking",
+        values={"low_pct": 37, "high_pct": 38},
+        confidence=0.9,
+    )
+    assert check_claim_text_numbers(claim, segment_text, "seg-0004", financials) is None
+
+
+def test_claim_text_numbers_still_catches_fabricated_range_bound(financials):
+    # Confirms the range fix didn't blunt fabrication detection: only 80 is grounded,
+    # 90 is invented and must still fail.
+    segment_text = normalize_whitespace("We expect revenue of approximately $80 billion.")
+    claim = Claim(
+        category="current_guidance",
+        classification="management_guidance",
+        claim_text="Guidance of $80-90 billion.",
+        quote="We expect revenue of approximately $80 billion.",
+        segment_id="seg-0004",
+        status="forward_looking",
+        values={},
+        confidence=0.9,
+    )
+    error = check_claim_text_numbers(claim, segment_text, "seg-0004", financials)
+    assert error is not None
+    assert "90" in error
 
 
 def test_exact_quote_passes_for_verbatim_substring(revenue_segment):
@@ -231,6 +293,25 @@ def test_claim_text_numbers_ignores_fiscal_year_and_quarter_tokens(revenue_segme
         segment_id="seg-0001",
         status="reported",
         confidence=0.9,
+    )
+    assert check_claim_text_numbers(claim, revenue_segment.text, revenue_segment.id, financials) is None
+
+
+def test_claim_text_numbers_ignores_claim_id_citations_in_reasoning_prose(revenue_segment, financials):
+    # Regression: an analytical_inference's claim_text legitimately cites other claim
+    # ids in its reasoning prose (e.g. "per claim-011"). The digits inside "claim-011"
+    # must not be misread as the number -11 or 11 and demanded to ground -- they're an
+    # id, not a financial figure.
+    claim = Claim(
+        category="management_explanation",
+        classification="analytical_inference",
+        claim_text="Revenue was $110 million, consistent with the demand signal noted in claim-011 and claim-015.",
+        quote="Revenue for the quarter was $110 million, up from $100 million a year ago.",
+        segment_id="seg-0001",
+        status="reported",
+        values={},
+        confidence=0.7,
+        inferred_from=["claim-011", "claim-015"],
     )
     assert check_claim_text_numbers(claim, revenue_segment.text, revenue_segment.id, financials) is None
 
@@ -585,6 +666,98 @@ def test_sources_extract_financials_drops_concept_absent_at_pinned_period():
     assert "Revenues" not in out
 
 
+def test_sources_extract_financials_derives_period_type_and_duration():
+    from earnings.sources import extract_financials_from_company_facts
+
+    company_facts = json.loads((FIXTURES / "sec_company_facts.json").read_text(encoding="utf-8"))
+    out = extract_financials_from_company_facts(company_facts, concepts=["Revenues"])
+    assert out["Revenues"]["start"] == "2026-04-01"
+    assert out["Revenues"]["period_type"] == "quarter"
+    assert out["Revenues"]["duration_days"] == 90
+
+
+def test_sources_extract_financials_period_type_resolves_end_date_ambiguity():
+    # Regression for the real MSFT bug: three facts share end=2026-06-30 (quarter,
+    # half-year YTD, full-year) -- period_end alone can't tell them apart, but
+    # period_type (derived from each fact's own start/end) can.
+    from earnings.sources import extract_financials_from_company_facts
+
+    company_facts = json.loads((FIXTURES / "sec_company_facts.json").read_text(encoding="utf-8"))
+    concept = "RevenueFromContractWithCustomerExcludingAssessedTax"
+
+    quarterly = extract_financials_from_company_facts(
+        company_facts, concepts=[concept], period_end="2026-06-30", period_type="quarter"
+    )
+    assert quarterly[concept]["value"] == 30000000
+    assert quarterly[concept]["start"] == "2026-04-01"
+
+    half_year = extract_financials_from_company_facts(
+        company_facts, concepts=[concept], period_end="2026-06-30", period_type="half_year"
+    )
+    assert half_year[concept]["value"] == 55000000
+
+    full_year = extract_financials_from_company_facts(
+        company_facts, concepts=[concept], period_end="2026-06-30", period_type="full_year"
+    )
+    assert full_year[concept]["value"] == 115000000
+
+    # Without period_type, the ambiguity is real: "latest by end" ties on end date and
+    # falls back to whichever fact happens to be max()'d first among ties -- exactly
+    # the silent-wrong-duration risk period_type exists to close.
+    ambiguous = extract_financials_from_company_facts(
+        company_facts, concepts=[concept], period_end="2026-06-30"
+    )
+    assert ambiguous[concept]["end"] == "2026-06-30"  # end alone doesn't disambiguate value
+
+
+def test_sources_extract_financials_drops_concept_when_period_type_unmatched_and_required():
+    from earnings.sources import extract_financials_from_company_facts
+
+    company_facts = json.loads((FIXTURES / "sec_company_facts.json").read_text(encoding="utf-8"))
+    # No 9-month fact exists for this concept -- fail closed (drop it), don't silently
+    # substitute a different-duration fact, matching the existing period_end convention.
+    out = extract_financials_from_company_facts(
+        company_facts,
+        concepts=["RevenueFromContractWithCustomerExcludingAssessedTax"],
+        period_end="2026-06-30",
+        period_type="nine_months",
+        require_period_type_match=True,
+    )
+    assert "RevenueFromContractWithCustomerExcludingAssessedTax" not in out
+
+
+def test_sources_extract_financials_falls_back_when_period_type_match_not_required():
+    from earnings.sources import extract_financials_from_company_facts
+
+    company_facts = json.loads((FIXTURES / "sec_company_facts.json").read_text(encoding="utf-8"))
+    out = extract_financials_from_company_facts(
+        company_facts,
+        concepts=["RevenueFromContractWithCustomerExcludingAssessedTax"],
+        period_end="2026-06-30",
+        period_type="nine_months",
+        require_period_type_match=False,
+    )
+    assert "RevenueFromContractWithCustomerExcludingAssessedTax" in out
+
+
+def test_sources_extract_financials_instant_fact_has_no_period_type():
+    # A balance-sheet/instant concept (no "start" at all) must not crash or be
+    # misclassified -- period_type/duration_days are simply None.
+    from earnings.sources import extract_financials_from_company_facts
+
+    company_facts = {
+        "facts": {
+            "us-gaap": {
+                "Assets": {"units": {"USD": [{"end": "2026-06-30", "val": 500000000, "form": "10-Q", "fy": 2026}]}}
+            }
+        }
+    }
+    out = extract_financials_from_company_facts(company_facts, concepts=["Assets"])
+    assert out["Assets"]["start"] is None
+    assert out["Assets"]["period_type"] is None
+    assert out["Assets"]["duration_days"] is None
+
+
 def _finding(artifact: str, passage: str = "n/a") -> ReviewFinding:
     return ReviewFinding(
         severity="info", artifact=artifact, passage=passage, evidence="e", recommendation="r"
@@ -638,6 +811,32 @@ def test_outlook_brief_citations_still_catches_fabricated_id():
     errors = check_outlook_brief_citations("a claim-based outlook citing claim-999", claim_ids={"claim-007"})
     assert len(errors) == 1
     assert "claim-999" in errors[0]
+
+
+def test_dollar_escaping_passes_when_all_escaped():
+    text = "Revenue was \\$81.3B and Microsoft Cloud was \\$51.5B [claim-001][claim-003]."
+    assert check_outlook_brief_dollar_escaping(text) == []
+
+
+def test_dollar_escaping_fails_on_two_unescaped_dollars():
+    # Two unescaped '$' is an EVEN count -- the common, corrupting case (citing two
+    # currency amounts) -- so this must fail, not pass under an odd-count heuristic.
+    text = "Revenue was $81.3B and Microsoft Cloud was $51.5B."
+    errors = check_outlook_brief_dollar_escaping(text)
+    assert len(errors) == 1
+    assert "2 unescaped" in errors[0]
+
+
+def test_dollar_escaping_fails_on_single_unescaped_dollar():
+    errors = check_outlook_brief_dollar_escaping("Revenue was $81.3B.")
+    assert len(errors) == 1
+    assert "1 unescaped" in errors[0]
+
+
+def test_dollar_escaping_reports_line_numbers():
+    text = "line one is fine\nline two has $81.3B\nline three is fine\nline four has $51.5B"
+    errors = check_outlook_brief_dollar_escaping(text)
+    assert "[2, 4]" in errors[0]
 
 
 def test_validate_review_report_ignores_hyphenated_prose_in_finding_text():

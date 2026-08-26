@@ -17,6 +17,7 @@ FIXTURES = Path(__file__).parent / "fixtures"
 @pytest.fixture
 def isolated_runs_dir(tmp_path, monkeypatch):
     monkeypatch.setattr(config, "RUNS_DIR", tmp_path / "runs")
+    monkeypatch.setattr(config, "LOGS_DIR", tmp_path / "logs")
     monkeypatch.setattr(config, "RESEARCH_SEC_ENABLED", False)  # no network in tests
     monkeypatch.setattr(config, "RESEARCH_WEB_SEARCH_ENABLED", False)
     yield tmp_path / "runs"

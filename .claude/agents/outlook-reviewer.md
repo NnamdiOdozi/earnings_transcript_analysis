@@ -58,6 +58,19 @@ Things structurally outside what a deterministic check can evaluate:
    (sequential vs. year-over-year) -- mismatches that are numerically "grounded"
    (the number appears somewhere) but semantically wrong in context.
 
+   Also check period-labeling correctness specifically, since Python cannot judge
+   this (a spoken transcript sentence has no structured period tag): where a claim
+   sets `period`, is it actually unambiguous ("N months to DD Mon YYYY" or "as of
+   DD Mon YYYY" -- not "Q2 FY2026" or "FY2026" alone, which fix an end date but not
+   a start date or incremental-vs-cumulative)? Is incremental vs. cumulative
+   correctly determined from the transcript's own cues ("this quarter" vs.
+   "year-to-date"/"first half")? Where the same concept also appears in
+   `evidence/financials.json`, does the claim's stated period agree with that
+   fact's `period_type`/`start`/`end` (SEC-derived, unambiguous by construction) --
+   a mismatch here (e.g. a claim labeled "3 months" grounding against a fact whose
+   `period_type` is `half_year`) is exactly the quarter-vs-YTD confusion this field
+   exists to catch.
+
 5. **Provenance spot-check.** For evidence with a URL/date (web evidence, SEC
    filings), confirm the source, retrieval date, and (where available) publication
    date in the artifact make sense together -- not a re-hash, just a sanity read.

@@ -97,6 +97,17 @@ class Claim(BaseModel):
     # Required (non-empty) when classification == "analytical_inference": the claim ids
     # this inference was derived from. See validate.check_inference_citations.
     inferred_from: list[str] = Field(default_factory=list)
+    # Unambiguous reporting period for this claim's figure(s), agent-set from the
+    # transcript's own cues (e.g. "this quarter", "year-to-date", "first half",
+    # "annual") -- deliberately free-text, not Python-derived: unlike SEC/XBRL facts
+    # (which carry machine-readable start/end), a spoken transcript sentence has no
+    # structured period tag, so determining it is inherently a reading-comprehension
+    # task, not a regex/date-arithmetic one. Required format: "N months to DD Mon
+    # YYYY" for a flow figure (revenue, income, growth) or "as of DD Mon YYYY" for a
+    # balance/stock figure (RPO, cash balance). Optional -- omit rather than guess
+    # when the transcript genuinely doesn't make the period clear; a missing period
+    # is honest, a wrong one is not. See extraction-instructions.md.
+    period: Optional[str] = None
 
 
 class Metric(BaseModel):
@@ -127,6 +138,21 @@ class ValidationResult(BaseModel):
     ok: bool
     checked_claims: int
     issues: list[ValidationIssue] = Field(default_factory=list)
+    # Real-clock stamp, set by cli._write_validation at write time -- not passed by
+    # validate_claims() itself, so that function stays pure/args-only and testable
+    # without touching the clock (see module docstring in validate.py).
+    validated_at: Optional[str] = None
+
+
+class OutlookValidation(BaseModel):
+    """Python-owned record of when `earnings validate-outlook` last checked
+    outlook-brief.md (agent-authored, never Python-rewritten). Exists only so there's
+    a real-clock timestamp for that stage -- outlook-brief.md itself carries none.
+    """
+
+    ok: bool
+    validated_at: str  # ISO 8601 UTC timestamp
+    errors: list[str] = Field(default_factory=list)
 
 
 # Final semantic-audit stage (Outlook_Reviewer subagent, Opus). Judges what

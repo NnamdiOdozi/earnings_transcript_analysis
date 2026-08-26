@@ -1,0 +1,29 @@
+{
+  "RevenueFromContractWithCustomerExcludingAssessedTax": {
+    "value": 158946000000,
+    "end": "2025-12-31",
+    "unit": "USD",
+    "form": "10-Q",
+    "fy": 2026,
+    "filed": "2026-01-28",
+    "accn": "0001193125-26-027207"
+  },
+  "NetIncomeLoss": {
+    "value": 66205000000,
+    "end": "2025-12-31",
+    "unit": "USD",
+    "form": "10-Q",
+    "fy": 2026,
+    "filed": "2026-01-28",
+    "accn": "0001193125-26-027207"
+  },
+  "EarningsPerShareDiluted": {
+    "value": 8.87,
+    "end": "2025-12-31",
+    "unit": "USD/shares",
+    "form": "10-Q",
+    "fy": 2026,
+    "filed": "2026-01-28",
+    "accn": "0001193125-26-027207"
+  }
+}

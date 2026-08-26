@@ -61,7 +61,11 @@ that `validation.json.ok == true`, not redo the arithmetic behind it.
       match what its cited claims actually establish?
    4. **Numerical correctness (direction/units/periods)** -- right sign, right
       unit, right period; things that are numerically "grounded" but semantically
-      wrong in context.
+      wrong in context. Also: is `period` (where set) unambiguous ("N months to DD
+      Mon YYYY" / "as of DD Mon YYYY", not "Q2 FY2026"), incremental vs. cumulative
+      correctly read from the transcript's own cues, and consistent with
+      `evidence/financials.json`'s `period_type`/`start`/`end` where the same
+      concept appears there?
    5. **Provenance spot-check** -- do source, retrieval date, and publication date
       make sense together for web/SEC evidence?
    6. **Temporal integrity** -- nothing dated after the earnings event snuck into

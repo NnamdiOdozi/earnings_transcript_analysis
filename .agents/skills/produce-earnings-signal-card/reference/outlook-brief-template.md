@@ -12,11 +12,16 @@ true`) — an outlook built on unvalidated claims is not auditable.
 ## Structure
 
 ```markdown
-# Outlook Brief: <TICKER> — <EVENT_ID>
+# Outlook Brief: <TICKER> — <EVENT_ID> (<REPORTING END DATE, e.g. 30 June 2026>)
 
 ## 1. Outlook in brief
-A concise synthesis of the likely direction over the next reported period and,
-where evidence permits, the financial year.
+State the reporting period covered by this run's headline figures unambiguously
+in the first sentence -- "N months to DD Mon YYYY" (e.g. "3 months to 31 Dec
+2025"), not "Q2 FY2026" or "FY2026" alone, which fix an end date but leave the
+start date and incremental-vs-cumulative question open. Use the `period` value
+already stated on the relevant claims (see extraction-instructions.md) rather
+than re-deriving it. Then give a concise synthesis of the likely direction over
+the next reported period and, where evidence permits, the financial year.
 
 ## 2. What changed
 Compare current statements with previous guidance, expectations or management
@@ -57,6 +62,9 @@ A table or list linking every conclusion above back to a claim id, e.g.:
 
 ## Rules
 
+- The title line must state the reporting end date in brackets (e.g. "MSFT —
+  2026-q4 (30 June 2026)") — `<EVENT_ID>` alone (e.g. "2026-q4") does not tell a
+  reader which calendar date the run's headline figures are anchored to.
 - Every claim id you write (in any section, in the form `claim-###`) must exist in
   `claims.json` — `earnings validate-outlook` fails the whole brief on the first
   unknown id.
@@ -65,6 +73,19 @@ A table or list linking every conclusion above back to a claim id, e.g.:
 - Do not introduce a metric or driver here that isn't backed by a claim already in
   `claims.json` — if you notice something worth flagging that you didn't capture as
   a claim, go back and add the claim first, then cite it.
+- Escape **every** literal `$` in this file, with no exception, including inside
+  the evidence appendix's `"..."` quotes (write `\$81.3B`, not `$81.3B`). Many
+  Markdown renderers (KaTeX/MathJax-enabled previews, including some IDE viewers)
+  treat a pair of unescaped `$` as inline-math delimiters and scan the *whole
+  document*, not per-section -- two dollar amounts anywhere in the file, even in
+  different sections, can pair up and silently swallow everything between them
+  (spaces and punctuation vanish). Confirmed on this project's own first MSFT run
+  (2026-08-26). An earlier version of this rule exempted the evidence appendix
+  "to preserve verbatim fidelity" -- that was wrong: nothing in this pipeline
+  machine-checks the appendix's quoted text against the source (only claim-id
+  citations are validated), so escaping there costs nothing and closes the same
+  hazard. `earnings validate-outlook` will fail the gate if any unescaped `$`
+  remains anywhere in the file.
 
 ## Validating
 

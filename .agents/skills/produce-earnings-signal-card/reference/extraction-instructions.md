@@ -57,7 +57,8 @@ the exact-quote requirement.
   "status": "reported",
   "values": {},
   "confidence": 0.9,
-  "inferred_from": []
+  "inferred_from": [],
+  "period": "3 months to 31 Dec 2025"
 }
 ```
 
@@ -73,6 +74,32 @@ the exact-quote requirement.
   supports this specific claim.
 - `inferred_from` is only populated (and only meaningful) when
   `classification == "analytical_inference"`.
+
+### Stating an unambiguous `period`
+
+For any `reported_financial_performance`, `operational_performance`, or
+`current_guidance` claim, set `period` so a reader never has to guess the start
+date, end date, or whether the figure is incremental or cumulative — "Q2 FY2026"
+and "FY2026" are both ambiguous (they fix an end date but not a start date, and
+say nothing about whether the number covers just that period or everything since
+the fiscal year began). Use:
+
+- **Flow figures** (revenue, income, growth, bookings) — `"N months to DD Mon
+  YYYY"`, e.g. `"3 months to 31 Dec 2025"` for a single quarter, `"6 months to 31
+  Dec 2025"` for a half-year/YTD figure, `"12 months to 31 Dec 2025"` for a
+  trailing-twelve-month or full-year figure.
+- **Balance/stock figures** (RPO, cash balance, headcount) — `"as of DD Mon
+  YYYY"`, since these are a snapshot, not a period.
+
+Determine which from the transcript's own language, not assumption: "this
+quarter" / "in Q2" → incremental (3 months); "year-to-date" / "first half" / "H1"
+→ cumulative since the fiscal year started; "trailing twelve months" / "full
+year" → 12 months. This is a reading-comprehension judgment Python cannot make —
+if the transcript's wording genuinely doesn't make it clear, **omit `period`**
+rather than guess; a missing period is honest, a wrong one is not. Cross-check
+against `evidence/financials.json` when the same concept appears there — its
+`period_type`/`start`/`end` fields are SEC-derived and unambiguous by
+construction, and should agree with what you determined from the transcript.
 
 ## Exact quotes — read this carefully
 

@@ -53,8 +53,13 @@ WEB_EVIDENCE_FILENAME = "web-evidence.jsonl"  # under evidence/
 VALIDATION_FILENAME = "validation.json"
 SIGNAL_CARD_FILENAME = "signal-card.md"
 OUTLOOK_BRIEF_FILENAME = "outlook-brief.md"
+OUTLOOK_VALIDATION_FILENAME = "outlook-validation.json"  # Python-owned: real-clock stamp for validate-outlook
 REVIEW_REPORT_JSON_FILENAME = "review-report.json"  # agent-authored (Outlook_Reviewer subagent)
 REVIEW_REPORT_MD_FILENAME = "review-report.md"  # Python-rendered from the JSON above
+
+# --- Cross-run processing log (repo root, not per-run -- see cli._append_processing_log) ---
+LOGS_DIR = Path("logs")
+PROCESSING_LOG_FILENAME = "processing_log.jsonl"
 
 # --- SEC endpoints (data.sec.gov requires a compliant identifying User-Agent) ---
 SEC_SUBMISSIONS_URL = "https://data.sec.gov/submissions/CIK{cik:010d}.json"

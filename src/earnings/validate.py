@@ -18,7 +18,28 @@ from .process import normalize_whitespace
 _CLAIM_ID_RE = re.compile(r"\bclaim-\d[a-zA-Z0-9_-]*\b")
 
 # Matches numbers with optional $, thousands separators, decimals, % or unit suffix.
-_NUMBER_RE = re.compile(r"[$€£]?\s*-?\d[\d,]*(?:\.\d+)?\s*%?")
+# The leading `-?` (before AND after the currency symbol) exists to preserve a genuine
+# negative figure's sign ("-$50 million net loss" -> -50, not +50 with the sign
+# silently dropped) -- this only works because _find_number_tokens() below first
+# neutralizes any hyphen that is actually a RANGE separator (e.g. "37%-38%"), so any
+# "-" still present when this regex runs is a real minus sign, never a range dash.
+_NUMBER_RE = re.compile(r"-?[$€£]?\s*-?\d[\d,]*(?:\.\d+)?\s*%?")
+
+# A hyphen directly between the tail of one number and the start of another is a range
+# separator ("37%-38%", "$80.65-81.75 billion", "10-15%"), not a minus sign -- replaced
+# with a space before _NUMBER_RE ever runs, so it can't be mistaken for a negative sign
+# on the second number. Deliberately narrow: only fires when a number-tail character
+# ($/%/digit) sits on both sides of the hyphen, so it never touches an isolated negative
+# like "-$50 million" (nothing precedes that hyphen) or a hyphenated word.
+_RANGE_HYPHEN_RE = re.compile(r"(?<=[\d%])-(?=[\d$€£])")
+
+
+def _find_number_tokens(text: str) -> list[str]:
+    """Range-hyphen-neutralized _NUMBER_RE.findall -- the single place both
+    extract_numbers() and check_claim_text_numbers() get raw number tokens from, so a
+    range vs. negative-sign fix only has to live in one spot.
+    """
+    return _NUMBER_RE.findall(_RANGE_HYPHEN_RE.sub(" ", text))
 
 # Calendar/period tokens are not financial figures; strip them before grounding
 # claim_text prose so "fiscal 2027" / "Q2 2026" don't demand grounding. HARDENED so a
@@ -37,18 +58,32 @@ _PERIOD_TOKEN_RE = re.compile(
 
 
 def _clean_number_token(token: str) -> float | None:
-    """Strip currency symbols/commas/% and parse to float, or None if not numeric."""
-    stripped = token.strip().lstrip("$€£").replace(",", "").rstrip("%").strip()
+    """Strip currency symbols/commas/%/sign and parse to float, or None if not numeric.
+
+    A leading '-' may sit before the currency symbol ("-$50") or, rarely, after it
+    ("$-50") -- both are checked and stripped explicitly, since a plain
+    .lstrip("$...") first would silently discard a "-$50" sign along with the "$".
+    """
+    t = token.strip()
+    negative = t.startswith("-")
+    if negative:
+        t = t[1:]
+    t = t.lstrip("$€£")
+    if t.startswith("-"):
+        negative = True
+        t = t[1:]
+    t = t.replace(",", "").rstrip("%").strip()
     try:
-        return float(stripped)
+        value = float(t)
     except ValueError:
         return None
+    return -value if negative else value
 
 
 def extract_numbers(text: str) -> set[float]:
-    """Extract all numeric values mentioned in free text, tolerant of $/%/commas."""
+    """Extract all numeric values mentioned in free text, tolerant of $/%/commas/signs."""
     numbers = set()
-    for match in _NUMBER_RE.findall(text):
+    for match in _find_number_tokens(text):
         value = _clean_number_token(match)
         if value is not None:
             numbers.add(value)
@@ -138,14 +173,18 @@ def check_claim_text_numbers(claim: Claim, text: str, location: str, financials:
     claim can't state a fabricated figure in prose while values/quote stay clean.
     """
     known = known_numbers(text, financials) | _claim_declared_numbers(claim)
-    claim_text_no_periods = _PERIOD_TOKEN_RE.sub(" ", claim.claim_text)
+    # Strip claim-id citations (e.g. "claim-011", legitimate in an analytical_inference's
+    # reasoning prose -- see inferred_from) before period tokens, then before number
+    # extraction: "claim-011" would otherwise be misread as the number -11 or 11 (the
+    # id's own digits), demanding grounding for a figure that was never a financial claim.
+    claim_text_no_periods = _PERIOD_TOKEN_RE.sub(" ", _CLAIM_ID_RE.sub(" ", claim.claim_text))
     # Iterate the raw regex matches (not the deduped float set) so each number keeps its
     # written form, letting us tell "10%" from "$10 million". Calculation results are
     # stored as fractions (0.10) while prose writes the percent form ("10%"), so the
     # value/100 leniency is applied ONLY to numbers actually written with a percent sign
     # -- otherwise it silently grounds a fabricated magnitude (e.g. "$2500 million"
     # "matches" a stored 25) and lets an invented figure through the check.
-    for match in _NUMBER_RE.findall(claim_text_no_periods):
+    for match in _find_number_tokens(claim_text_no_periods):
         value = _clean_number_token(match)
         if value is None:
             continue
@@ -289,6 +328,34 @@ def check_outlook_brief_citations(outlook_text: str, claim_ids: set[str]) -> lis
     cited = set(_CLAIM_ID_RE.findall(outlook_text))
     missing = sorted(cited - claim_ids)
     return [f"outlook-brief.md cites unknown claim id {cid!r}" for cid in missing]
+
+
+# A '$' not already preceded by a backslash. Zero-tolerance (not odd-count): two
+# unescaped '$' -- the common case of citing two currency amounts -- is an EVEN count
+# and is exactly the shape that corrupts under KaTeX/MathJax preview rendering (the
+# pair becomes one math span), so parity is the wrong heuristic; every '$' must be
+# escaped, no exceptions.
+_UNESCAPED_DOLLAR_RE = re.compile(r"(?<!\\)\$")
+
+
+def check_outlook_brief_dollar_escaping(outlook_text: str) -> list[str]:
+    """outlook-brief.md is agent-authored and never rewritten by Python (see
+    check_outlook_brief_citations) -- so an unescaped '$' can only be caught, not
+    silently fixed. A bare '$' pairs with the next one under KaTeX/MathJax-enabled
+    Markdown previews and swallows everything between them (see
+    reference/outlook-brief-template.md's escaping rule and its cited 2026-08-26
+    incident). Detection-only: never mutates the file, just fails the gate with
+    line numbers so the agent can fix it.
+    """
+    positions = [m.start() for m in _UNESCAPED_DOLLAR_RE.finditer(outlook_text)]
+    if not positions:
+        return []
+    lines = sorted({outlook_text.count("\n", 0, p) + 1 for p in positions})
+    return [
+        f"outlook-brief.md has {len(positions)} unescaped '$' on line(s) {lines} -- "
+        "write '\\$' for every currency amount (including inside quoted passages) so "
+        "Markdown/KaTeX previews cannot mangle the text between two '$' signs."
+    ]
 
 
 def validate_claims(

@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import shutil
 import sys
 from datetime import datetime, timezone
@@ -27,6 +28,7 @@ from .models import (
     Claim,
     Manifest,
     Metric,
+    OutlookValidation,
     ReviewReport,
     SourceRecord,
     ValidationIssue,
@@ -36,6 +38,7 @@ from .models import (
 from .process import sanitize, segment_transcript, sha256_hex
 from .validate import (
     check_outlook_brief_citations,
+    check_outlook_brief_dollar_escaping,
     validate_claims,
     validate_metrics,
     validate_review_report,
@@ -48,6 +51,36 @@ def _now_iso() -> str:
 
 def _write_json(path: Path, data) -> None:
     path.write_text(json.dumps(data, indent=2, default=str), encoding="utf-8")
+
+
+def _append_processing_log(ticker: str, event_id: str, loaded, raw_bytes: bytes, run_dir: Path) -> None:
+    """Append one line to logs/processing_log.jsonl -- a cross-run audit trail of
+    every transcript source (URL or local path) `prepare` has ever ingested and
+    when, independent of any single run's manifest.json (which only covers that one
+    run and gets moved under _archive/ on a rerun, whereas this log accumulates).
+    """
+    config.LOGS_DIR.mkdir(parents=True, exist_ok=True)
+    entry = {
+        "timestamp": _now_iso(),
+        "ticker": ticker.upper(),
+        "event_id": event_id,
+        "source": loaded.origin,
+        "source_type": "url" if loaded.origin.startswith(("http://", "https://")) else "file",
+        "sha256": sha256_hex(raw_bytes),
+        "byte_length": len(raw_bytes),
+        "run_dir": str(run_dir),
+    }
+    with (config.LOGS_DIR / config.PROCESSING_LOG_FILENAME).open("a", encoding="utf-8") as fh:
+        fh.write(json.dumps(entry) + "\n")
+
+
+def _write_validation(run_dir: Path, result: ValidationResult) -> None:
+    """Stamp result.validated_at with the real clock at write time (validate_claims()
+    itself stays pure/timestamp-free, see ValidationResult.validated_at) and write
+    validation.json. Single call site so every cmd_analyze exit path is stamped alike.
+    """
+    result.validated_at = _now_iso()
+    _write_json(run_dir / config.VALIDATION_FILENAME, result.model_dump())
 
 
 def _archive_existing_run(run_dir: Path) -> None:
@@ -80,6 +113,7 @@ def cmd_prepare(args: argparse.Namespace) -> int:
     raw_filename = "transcript.html" if loaded.is_html else "transcript.txt"
     raw_path = raw_dir / raw_filename
     raw_path.write_text(loaded.raw_text, encoding="utf-8")  # archive raw, verbatim, before sanitisation
+    _append_processing_log(args.ticker, args.event_id, loaded, raw_bytes, run_dir)
 
     sanitized = sanitize(loaded.raw_text, is_html=loaded.is_html)
     segments = segment_transcript(sanitized)
@@ -101,7 +135,11 @@ def cmd_prepare(args: argparse.Namespace) -> int:
 
             facts = get_company_facts(int(cik))
             financials = extract_financials_from_company_facts(
-                facts, concepts=config.SEC_CONCEPTS, period_end=args.sec_period_end
+                facts,
+                concepts=config.SEC_CONCEPTS,
+                period_end=args.sec_period_end,
+                period_type=args.sec_period_type,
+                require_period_type_match=config.SEC_REQUIRE_PERIOD_MATCH,
             )
             sec_status = "ok"
         else:
@@ -153,14 +191,18 @@ def cmd_prepare(args: argparse.Namespace) -> int:
             # the provider returns for them" rather than us silently dropping evidence.
             kept = hits if config.RESEARCH_ARCHIVE_ALL_SOURCES else hits[:1]
             for hi, hit in enumerate(kept, start=1):
-                hit_bytes = json.dumps(hit, indent=2).encode("utf-8")
+                # Stamped into the archived file itself (not just manifest.json's
+                # per-source retrieved_at) so the fetch time is visible without
+                # cross-referencing the manifest.
+                hit_retrieved_at = _now_iso()
+                hit_bytes = json.dumps({**hit, "_retrieved_at": hit_retrieved_at}, indent=2).encode("utf-8")
                 hit_filename = f"query-{qi:02d}-hit-{hi:02d}.json"
                 (web_search_raw_dir / hit_filename).write_bytes(hit_bytes)
                 web_search_sources.append(
                     SourceRecord(
                         path=str((web_search_raw_dir / hit_filename).relative_to(run_dir)),
                         origin=hit.get("url", query),
-                        retrieved_at=_now_iso(),
+                        retrieved_at=hit_retrieved_at,
                         content_type="application/json",
                         sha256=sha256_hex(hit_bytes),
                         byte_length=len(hit_bytes),
@@ -329,7 +371,7 @@ def cmd_analyze(args: argparse.Namespace) -> int:
             checked_claims=0,
             issues=[ValidationIssue(claim_index=-1, check="schema", message=f"Could not parse {config.CLAIMS_FILENAME}: {exc}")],
         )
-        _write_json(run_dir / config.VALIDATION_FILENAME, result.model_dump())
+        _write_validation(run_dir, result)
         print(f"Validation FAILED: could not parse {config.CLAIMS_FILENAME}: {exc}")
         return 1
 
@@ -346,7 +388,7 @@ def cmd_analyze(args: argparse.Namespace) -> int:
                 ok=False, checked_claims=result.checked_claims, issues=result.issues + metric_issues
             )
 
-    _write_json(run_dir / config.VALIDATION_FILENAME, result.model_dump())
+    _write_validation(run_dir, result)
 
     if not result.ok:
         print(f"Validation FAILED: {len(result.issues)} issue(s). See {config.VALIDATION_FILENAME}.")
@@ -384,7 +426,11 @@ def cmd_validate_outlook(args: argparse.Namespace) -> int:
 
     raw_claims = json.loads(claims_path.read_text(encoding="utf-8"))
     claim_ids = {c.get("id") for c in raw_claims if c.get("id")}
-    errors = check_outlook_brief_citations(outlook_path.read_text(encoding="utf-8"), claim_ids)
+    outlook_text = outlook_path.read_text(encoding="utf-8")
+    errors = check_outlook_brief_citations(outlook_text, claim_ids)
+    errors += check_outlook_brief_dollar_escaping(outlook_text)
+    outlook_validation = OutlookValidation(ok=not errors, validated_at=_now_iso(), errors=errors)
+    _write_json(run_dir / config.OUTLOOK_VALIDATION_FILENAME, outlook_validation.model_dump())
     if errors:
         print(f"Outlook brief validation FAILED: {len(errors)} issue(s).")
         for error in errors:
@@ -454,15 +500,40 @@ def cmd_check_review(args: argparse.Namespace) -> int:
     return 0
 
 
+_BARE_DOLLAR_RE = re.compile(r"(?<!\\)\$")
+
+
+def _escape_currency(text: str) -> str:
+    """Escape bare '$' so Markdown renderers with LaTeX math support (KaTeX/MathJax --
+    common in IDE previews) don't pair up two unrelated dollar amounts as one inline
+    math span, mangling everything between them. Render-time only: never applied to
+    claim.quote's underlying value used for exact-quote validation, only to the copy
+    written into the .md file.
+
+    Idempotent by construction (only matches a '$' NOT already preceded by '\\') --
+    matters because outlook-brief.md's authoring template now tells the agent to
+    write '\\$' directly; if agent-authored text carrying an existing '\\$' were ever
+    escaped again with a naive .replace("$", "\\$"), it would become '\\\\$', which
+    renders as a literal backslash followed by an unescaped '$' -- reopening the exact
+    math-mode hazard this function exists to close.
+    """
+    return _BARE_DOLLAR_RE.sub(r"\\$", text)
+
+
 def _render_review_report(ticker: str, event_id: str, report: ReviewReport) -> str:
+    # report.reviewed_at is agent-self-reported (the subagent has no real clock) --
+    # shown alongside, never in place of, checked_at (Python's actual clock at the
+    # moment `check-review` validated this report), so a fabricated/rounded
+    # agent timestamp is visibly distinguishable rather than silently trusted.
     lines = [
         f"# Review Report: {ticker.upper()} — {event_id}",
         "",
         f"**Verdict:** {report.verdict}",
-        f"**Reviewed at:** {report.reviewed_at} (model: {report.model})",
+        f"**Reviewed at (agent-reported):** {report.reviewed_at} (model: {report.model})",
+        f"**Checked at (system clock):** {_now_iso()}",
         "",
         "## Summary",
-        report.summary,
+        _escape_currency(report.summary),
         "",
     ]
     sections = [
@@ -476,9 +547,9 @@ def _render_review_report(ticker: str, event_id: str, report: ReviewReport) -> s
         if not findings:
             lines.append("_None._")
         for f in findings:
-            lines.append(f"- **[{f.severity}]** {f.artifact}: {f.passage!r}")
-            lines.append(f"  - Evidence: {f.evidence}")
-            lines.append(f"  - Recommendation: {f.recommendation}")
+            lines.append(f"- **[{f.severity}]** {f.artifact}: {_escape_currency(f.passage)!r}")
+            lines.append(f"  - Evidence: {_escape_currency(f.evidence)}")
+            lines.append(f"  - Recommendation: {_escape_currency(f.recommendation)}")
         lines.append("")
     lines.append("## Unverified items")
     if report.unverified_items:
@@ -490,7 +561,7 @@ def _render_review_report(ticker: str, event_id: str, report: ReviewReport) -> s
 
 
 def _render_signal_card(ticker: str, event_id: str, claims: list[Claim], segments_by_id: dict) -> str:
-    lines = [f"# Signal Card: {ticker.upper()} — {event_id}", ""]
+    lines = [f"# Signal Card: {ticker.upper()} — {event_id}", "", f"_Generated: {_now_iso()}_", ""]
     by_category: dict[str, list[Claim]] = {}
     for claim in claims:
         by_category.setdefault(claim.category, []).append(claim)
@@ -498,9 +569,9 @@ def _render_signal_card(ticker: str, event_id: str, claims: list[Claim], segment
         lines.append(f"## {category.replace('_', ' ').title()}")
         for claim in group:
             speaker = f" ({claim.speaker})" if claim.speaker else ""
-            lines.append(f"- **{claim.status}**{speaker}: {claim.claim_text}")
+            lines.append(f"- **{claim.status}**{speaker}: {_escape_currency(claim.claim_text)}")
             location = claim.segment_id or claim.web_evidence_id
-            lines.append(f'  > "{claim.quote}" — {location}')
+            lines.append(f'  > "{_escape_currency(claim.quote)}" — {location}')
         lines.append("")
     return "\n".join(lines)
 
@@ -524,6 +595,15 @@ def build_parser() -> argparse.ArgumentParser:
         default=None,
         help="XBRL period end date to pin SEC facts to, e.g. 2026-06-30 "
         "(recommended with --sec-cik; without it, the latest-by-end fact is used)",
+    )
+    prep.add_argument(
+        "--sec-period-type",
+        default=None,
+        choices=["quarter", "half_year", "nine_months", "full_year"],
+        help="Duration bucket (derived from each XBRL fact's own start/end dates) to "
+        "pin SEC facts to, e.g. 'quarter' -- resolves the case where a 10-Q's 3-month "
+        "and 6-month (YTD) facts share the same --sec-period-end. Recommended "
+        "alongside --sec-period-end for quarterly figures.",
     )
     prep.add_argument(
         "--company-name",

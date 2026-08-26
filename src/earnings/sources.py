@@ -8,6 +8,7 @@ directly, so no network guard flag is needed inside the functions themselves.
 """
 from __future__ import annotations
 
+from datetime import date
 from typing import Any
 
 import httpx
@@ -245,8 +246,40 @@ def get_company_facts(cik: int) -> dict[str, Any]:
         return resp.json()
 
 
+# Duration buckets in days, tolerant of month-length variation (28-31 day months) --
+# a "quarter" fact can genuinely span 89-92 days depending on which months it covers.
+# Live-confirmed against real SEC data (MSFT CIK 789019, 2026-08-26): a duration
+# concept's "start"/"end" pair unambiguously distinguishes a 3-month figure from a
+# 6-month YTD figure sharing the same "end" -- this is the deterministic fix for the
+# quarter-vs-YTD ambiguity documented in README's former "known limitations" entry.
+_PERIOD_TYPE_BUCKETS: tuple[tuple[str, int, int], ...] = (
+    ("quarter", 80, 100),
+    ("half_year", 170, 190),
+    ("nine_months", 260, 280),
+    ("full_year", 355, 375),
+)
+
+
+def _period_type(start: str | None, end: str | None) -> tuple[int, str] | tuple[None, None]:
+    """(duration_days, period_type) from XBRL "start"/"end" dates, or (None, None) if
+    either is missing (an instant/balance-sheet fact, e.g. Assets, has no "start") --
+    those are point-in-time and have no duration to classify.
+    """
+    if not start or not end:
+        return None, None
+    duration_days = (date.fromisoformat(end) - date.fromisoformat(start)).days
+    for label, low, high in _PERIOD_TYPE_BUCKETS:
+        if low <= duration_days <= high:
+            return duration_days, label
+    return duration_days, "other"
+
+
 def extract_financials_from_company_facts(
-    company_facts: dict[str, Any], concepts: list[str], period_end: str | None = None
+    company_facts: dict[str, Any],
+    concepts: list[str],
+    period_end: str | None = None,
+    period_type: str | None = None,
+    require_period_type_match: bool = True,
 ) -> dict[str, Any]:
     """Pull one value per requested us-gaap concept.
 
@@ -261,8 +294,19 @@ def extract_financials_from_company_facts(
     quarter, an annual figure, or a restatement. Without it, the latest-by-end fact is
     used (documented limitation, not a default to rely on for a real pilot).
 
-    Returns {concept: {"value", "end", "unit", "form", "fy", "filed", "accn"}} so the
-    selected fact's provenance is preserved for audit, not just its value.
+    `period_end` alone is NOT enough to disambiguate a quarterly figure from a
+    year-to-date one: a 10-Q's 3-month and 6-month facts share the same "end" date.
+    `period_type` ("quarter" | "half_year" | "nine_months" | "full_year"), derived
+    from each fact's own "start"/"end" via _period_type(), resolves this
+    deterministically. When `period_type` is given and `require_period_type_match` is
+    True (config.toml [sec] require_period_match, default True), a concept with no
+    fact matching that period_type is dropped entirely rather than silently falling
+    back to a different-duration fact -- matching this project's existing
+    fail-closed convention for period_end.
+
+    Returns {concept: {"value", "start", "end", "duration_days", "period_type",
+    "unit", "form", "fy", "filed", "accn"}} so the selected fact's full period
+    provenance is preserved for audit, not just its value.
     """
     facts = company_facts.get("facts", {}).get("us-gaap", {})
     out: dict[str, Any] = {}
@@ -273,12 +317,24 @@ def extract_financials_from_company_facts(
         ]
         if period_end:
             candidates = [(u, e) for u, e in candidates if e.get("end") == period_end]
+        if period_type:
+            matching = [
+                (u, e) for u, e in candidates if _period_type(e.get("start"), e.get("end"))[1] == period_type
+            ]
+            if matching:
+                candidates = matching
+            elif require_period_type_match:
+                candidates = []
         if not candidates:
             continue
         unit_type, latest = max(candidates, key=lambda ue: ue[1].get("end", ""))
+        duration_days, resolved_period_type = _period_type(latest.get("start"), latest.get("end"))
         out[concept] = {
             "value": latest.get("val"),
+            "start": latest.get("start"),
             "end": latest.get("end"),
+            "duration_days": duration_days,
+            "period_type": resolved_period_type,
             "unit": unit_type,
             "form": latest.get("form"),
             "fy": latest.get("fy"),

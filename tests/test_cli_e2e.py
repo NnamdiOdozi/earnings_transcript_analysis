@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 
 from earnings import config, sources
-from earnings.cli import main
+from earnings.cli import _escape_currency, main
 
 FIXTURES = Path(__file__).parent / "fixtures"
 
@@ -19,6 +19,7 @@ def isolated_runs_dir(tmp_path, monkeypatch):
     never touches the network in tests.
     """
     monkeypatch.setattr(config, "RUNS_DIR", tmp_path / "runs")
+    monkeypatch.setattr(config, "LOGS_DIR", tmp_path / "logs")
     monkeypatch.setattr(config, "RESEARCH_SEC_ENABLED", False)
     monkeypatch.setattr(config, "RESEARCH_WEB_SEARCH_ENABLED", False)
     yield tmp_path / "runs"
@@ -45,6 +46,27 @@ def test_prepare_then_analyze_empty_transcript_yields_zero_segments_and_passes(i
     validation = json.loads((run_dir / config.VALIDATION_FILENAME).read_text())
     assert validation["ok"] is True
     assert validation["checked_claims"] == 0
+    assert validation["validated_at"]  # real-clock stamp, not agent-authored
+
+
+def test_prepare_appends_to_cross_run_processing_log(isolated_runs_dir, tmp_path):
+    transcript = str(FIXTURES / "normal_transcript.txt")
+    assert main(["prepare", "--ticker", "ACME", "--event-id", "2026-q1", "--transcript", transcript]) == 0
+    assert main(["prepare", "--ticker", "ACME", "--event-id", "2026-q2", "--transcript", transcript]) == 0
+
+    log_path = tmp_path / "logs" / config.PROCESSING_LOG_FILENAME
+    lines = log_path.read_text().strip().splitlines()
+    assert len(lines) == 2  # one prepare -> one line; a rerun for the same event_id also appends, never overwrites
+
+    first, second = (json.loads(line) for line in lines)
+    assert first["event_id"] == "2026-q1"
+    assert second["event_id"] == "2026-q2"
+    for entry in (first, second):
+        assert entry["ticker"] == "ACME"
+        assert entry["source"] == transcript
+        assert entry["source_type"] == "file"
+        assert len(entry["sha256"]) == 64
+        assert entry["timestamp"]
 
 
 def test_prepare_then_analyze_valid_claims_produces_signal_card(isolated_runs_dir):
@@ -95,6 +117,7 @@ def test_prepare_then_analyze_valid_claims_produces_signal_card(isolated_runs_di
     card = (run_dir / config.SIGNAL_CARD_FILENAME).read_text()
     assert "ACME" in card
     assert "110 million" in card
+    assert "_Generated:" in card
 
 
 def test_analyze_blocks_signal_card_when_claim_has_paraphrased_quote(isolated_runs_dir):
@@ -234,6 +257,8 @@ def test_prepare_calls_web_search_by_default_and_archives_hits(isolated_runs_dir
     run_dir = isolated_runs_dir / "ACME" / "2026-q2"
     archived = sorted((run_dir / config.RAW_SUBDIR / "web").glob("*.json"))
     assert len(archived) == 7  # one hit archived per query, per the fake
+    # Fetch time embedded in the file itself, not just cross-referenced via manifest.
+    assert all(json.loads(f.read_text())["_retrieved_at"] for f in archived)
 
     manifest = json.loads((run_dir / config.MANIFEST_FILENAME).read_text())
     assert any(f"Web search evidence ({provider}): ok" in note for note in manifest["notes"])
@@ -372,6 +397,11 @@ def test_validate_outlook_fails_on_unknown_claim_id(isolated_runs_dir):
     )
     assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 1
 
+    outlook_validation = json.loads((run_dir / config.OUTLOOK_VALIDATION_FILENAME).read_text())
+    assert outlook_validation["ok"] is False
+    assert outlook_validation["validated_at"]
+    assert outlook_validation["errors"]
+
 
 def test_validate_outlook_passes_with_real_citation(isolated_runs_dir):
     transcript = str(FIXTURES / "normal_transcript.txt")
@@ -402,3 +432,54 @@ def test_validate_outlook_passes_with_real_citation(isolated_runs_dir):
         "# Outlook Brief\n\nRevenue growth looks strong [claim-001].\n"
     )
     assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
+
+    outlook_validation = json.loads((run_dir / config.OUTLOOK_VALIDATION_FILENAME).read_text())
+    assert outlook_validation["ok"] is True
+    assert outlook_validation["validated_at"]
+    assert outlook_validation["errors"] == []
+
+
+def test_validate_outlook_fails_on_unescaped_dollar_signs(isolated_runs_dir):
+    transcript = str(FIXTURES / "normal_transcript.txt")
+    main(["prepare", "--ticker", "ACME", "--event-id", "2026-q2", "--transcript", transcript])
+
+    run_dir = isolated_runs_dir / "ACME" / "2026-q2"
+    segment_lines = (run_dir / config.NORMALIZED_SUBDIR / config.TRANSCRIPT_FILENAME).read_text().splitlines()
+    segments = [json.loads(line) for line in segment_lines]
+    revenue_segment = next(s for s in segments if "110 million" in s["text"])
+
+    claims = [
+        {
+            "id": "claim-001",
+            "category": "reported_financial_performance",
+            "classification": "reported_fact",
+            "claim_text": "Revenue was $110 million.",
+            "quote": "Revenue for the quarter was $110 million, up from $100 million a year ago.",
+            "segment_id": revenue_segment["id"],
+            "status": "reported",
+            "values": {"revenue_millions": 110},
+            "confidence": 0.9,
+        }
+    ]
+    (run_dir / config.CLAIMS_FILENAME).write_text(json.dumps(claims))
+    assert main(["analyze", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
+
+    # Two unescaped '$' -- exactly the shape that corrupts under KaTeX/MathJax preview
+    # rendering -- must fail the gate even though claim-001's citation resolves fine.
+    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text(
+        "# Outlook Brief\n\nRevenue was $110 million, ahead of the prior $100 million [claim-001].\n"
+    )
+    assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 1
+
+    outlook_validation = json.loads((run_dir / config.OUTLOOK_VALIDATION_FILENAME).read_text())
+    assert outlook_validation["ok"] is False
+    assert "unescaped" in outlook_validation["errors"][0]
+
+
+def test_escape_currency_is_idempotent():
+    # Regression: a naive .replace("$", "\\$") would turn an already-escaped '\$'
+    # (the outlook-brief template now tells agents to write this by hand) into '\\$',
+    # which renders as a literal backslash followed by a bare, re-exposed '$'.
+    once = _escape_currency("Revenue was $81.3B.")
+    twice = _escape_currency(once)
+    assert once == twice == "Revenue was \\$81.3B."

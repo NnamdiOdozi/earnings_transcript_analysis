@@ -1,0 +1,381 @@
+{
+  "ticker": "MSFT",
+  "event_id": "2026-q2-tavily",
+  "created_at": "2026-08-26T14:26:35Z",
+  "sources": [
+    {
+      "path": "raw/transcript.html",
+      "origin": "/tmp/claude-1000/-home-nodozi-projects-paaiia-wp-earnings-transcript-analysis/6feb8c75-e52a-4e56-a8eb-00a169422a86/scratchpad/msft-2026-q2-transcript.html",
+      "retrieved_at": "2026-08-26T14:26:35Z",
+      "content_type": "text/html",
+      "sha256": "578c0397280e0636cd2193580d97e8ffd88ea9022af077b37654faacac364ad6",
+      "byte_length": 343941
+    },
+    {
+      "path": "raw/web/query-01-hit-01.json",
+      "origin": "https://microsoft.gcs-web.com/static-files/3870467c-5877-477c-ac71-167d20612da7",
+      "retrieved_at": "2026-08-26T14:26:22Z",
+      "content_type": "application/json",
+      "sha256": "4fb70c2236befccc178f14013df4d53649bb2ce6ad334031b48296addcc3da37",
+      "byte_length": 251
+    },
+    {
+      "path": "raw/web/query-01-hit-02.json",
+      "origin": "https://www.cnbc.com/2026/01/28/microsoft-msft-q2-earnings-report-2026.html",
+      "retrieved_at": "2026-08-26T14:26:22Z",
+      "content_type": "application/json",
+      "sha256": "d7988ceca551067dc2c71619dedb105074d632dc7018efd4274a2c63848e368a",
+      "byte_length": 243
+    },
+    {
+      "path": "raw/web/query-01-hit-03.json",
+      "origin": "https://www.facebook.com/schwabnetwork/videos/microsoft-msft-is-set-to-report-earnings-after-the-bellmarley-kayden-shares-the-/1448301353319751",
+      "retrieved_at": "2026-08-26T14:26:22Z",
+      "content_type": "application/json",
+      "sha256": "a961f3f0bdae631e9eb1d2341736782eab29c28f22e8347e583ed4de134c1933",
+      "byte_length": 625
+    },
+    {
+      "path": "raw/web/query-01-hit-04.json",
+      "origin": "https://public.com/stocks/msft/earnings",
+      "retrieved_at": "2026-08-26T14:26:22Z",
+      "content_type": "application/json",
+      "sha256": "cb57d201711aea7fcb95b953d197d6fe232edd34c1fb67e89dae8d2a49f7bac2",
+      "byte_length": 229
+    },
+    {
+      "path": "raw/web/query-01-hit-05.json",
+      "origin": "https://www.microsoft.com/en-us/investor/earnings/fy-2026-q2/press-release-webcast",
+      "retrieved_at": "2026-08-26T14:26:22Z",
+      "content_type": "application/json",
+      "sha256": "1f9c2c7f53c6951258921a0edfb5c35105594c92dd70ffcd5c23aa37c08e52b9",
+      "byte_length": 249
+    },
+    {
+      "path": "raw/web/query-02-hit-01.json",
+      "origin": "https://www.fool.com/earnings/call-transcripts/2026/01/28/microsoft-msft-q2-2026-earnings-call-transcript",
+      "retrieved_at": "2026-08-26T14:26:24Z",
+      "content_type": "application/json",
+      "sha256": "c4410968885dccac3b46da682517eaf02f621a5e0ea7079cd16af06f687c5f54",
+      "byte_length": 294
+    },
+    {
+      "path": "raw/web/query-02-hit-02.json",
+      "origin": "https://www.cnbc.com/2026/01/28/microsoft-msft-q2-earnings-report-2026.html",
+      "retrieved_at": "2026-08-26T14:26:24Z",
+      "content_type": "application/json",
+      "sha256": "476d468785ceb9d9a5e9ffd2ab2c0c7f79e94d8da18c9cbd81e451ec4d041dc1",
+      "byte_length": 244
+    },
+    {
+      "path": "raw/web/query-02-hit-03.json",
+      "origin": "https://public.com/stocks/msft/earnings",
+      "retrieved_at": "2026-08-26T14:26:24Z",
+      "content_type": "application/json",
+      "sha256": "cde414849b072539ecb54d779afba1bede0a2d1c032046b5a9d0d9de428ee448",
+      "byte_length": 229
+    },
+    {
+      "path": "raw/web/query-02-hit-04.json",
+      "origin": "https://finance.yahoo.com/quote/MSFT/earnings/MSFT-Q4-2026-earnings_call-647770.html",
+      "retrieved_at": "2026-08-26T14:26:24Z",
+      "content_type": "application/json",
+      "sha256": "111e91ddfe7a938f9bc468caad9b003c50616eb33761f27977df6b9b12409cb0",
+      "byte_length": 260
+    },
+    {
+      "path": "raw/web/query-02-hit-05.json",
+      "origin": "https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q3",
+      "retrieved_at": "2026-08-26T14:26:24Z",
+      "content_type": "application/json",
+      "sha256": "1dea928d5c8cd46616e6ec1eec74de54d22b7b5258134d1d4cfdf199d0bbf48c",
+      "byte_length": 250
+    },
+    {
+      "path": "raw/web/query-03-hit-01.json",
+      "origin": "https://www.youtube.com/watch?v=84ytWWppMEk",
+      "retrieved_at": "2026-08-26T14:26:25Z",
+      "content_type": "application/json",
+      "sha256": "cf0a3577dd42c9b91e7c8bf2bc715eaa175d864c3eefabfa249382ac80e9f3b0",
+      "byte_length": 226
+    },
+    {
+      "path": "raw/web/query-03-hit-02.json",
+      "origin": "https://www.prnewswire.com/news-releases/microsoft-earnings-press-release-available-on-investor-relations-website-302673166.html",
+      "retrieved_at": "2026-08-26T14:26:25Z",
+      "content_type": "application/json",
+      "sha256": "f3e25db80352439eebdb664accbc3cb5a16e394797039866d866cfe76731c447",
+      "byte_length": 321
+    },
+    {
+      "path": "raw/web/query-03-hit-03.json",
+      "origin": "https://www.facebook.com/schwabnetwork/videos/microsoft-msft-is-set-to-report-earnings-after-the-bellmarley-kayden-shares-the-/1448301353319751",
+      "retrieved_at": "2026-08-26T14:26:25Z",
+      "content_type": "application/json",
+      "sha256": "f9e34e6a09726cd45a8e728b003baf5be9aeb7adcb2ad0d43f1f873aec26ee67",
+      "byte_length": 333
+    },
+    {
+      "path": "raw/web/query-03-hit-04.json",
+      "origin": "https://www.cnbc.com/2026/01/28/microsoft-msft-q2-earnings-report-2026.html",
+      "retrieved_at": "2026-08-26T14:26:25Z",
+      "content_type": "application/json",
+      "sha256": "8b8fd23643759705cbc337a218246a7c5036f5b87cdc872ac8a7b595c3888dfe",
+      "byte_length": 243
+    },
+    {
+      "path": "raw/web/query-03-hit-05.json",
+      "origin": "https://www.microsoft.com/en-us/investor/earnings/fy-2026-q2/press-release-webcast",
+      "retrieved_at": "2026-08-26T14:26:25Z",
+      "content_type": "application/json",
+      "sha256": "f244f3fb3f462e93f00e1b981dbfaaa01e1987df2b2dce0daeae14c2884c75fe",
+      "byte_length": 249
+    },
+    {
+      "path": "raw/web/query-04-hit-01.json",
+      "origin": "https://microsoft.gcs-web.com/static-files/3870467c-5877-477c-ac71-167d20612da7",
+      "retrieved_at": "2026-08-26T14:26:26Z",
+      "content_type": "application/json",
+      "sha256": "a2295ff32b349cb69ddefd2e33da1f38352e444ce0cbb2cb29b02c34f005a60a",
+      "byte_length": 251
+    },
+    {
+      "path": "raw/web/query-04-hit-02.json",
+      "origin": "https://capital.com/en-int/market-updates/microsoft-stock-forecast-11-03-2026",
+      "retrieved_at": "2026-08-26T14:26:26Z",
+      "content_type": "application/json",
+      "sha256": "a556e1568020f05c9ed82d9c7bc4e3bf8c0b1d5cd8e29ac8afed1d0f2d23ee7e",
+      "byte_length": 273
+    },
+    {
+      "path": "raw/web/query-04-hit-03.json",
+      "origin": "https://www.cnbc.com/2026/01/28/microsoft-msft-q2-earnings-report-2026.html",
+      "retrieved_at": "2026-08-26T14:26:26Z",
+      "content_type": "application/json",
+      "sha256": "749bb8501d3522bfcf8db45556da7d91457779d27883089b288d17a680cf4045",
+      "byte_length": 243
+    },
+    {
+      "path": "raw/web/query-04-hit-04.json",
+      "origin": "https://www.microsoft.com/en-us/investor/earnings/fy-2026-q2/press-release-webcast",
+      "retrieved_at": "2026-08-26T14:26:26Z",
+      "content_type": "application/json",
+      "sha256": "f9fd01d2aca76df80e539aaa4f40acb4115b0a5699a7657a616f2abbf9355c8a",
+      "byte_length": 249
+    },
+    {
+      "path": "raw/web/query-04-hit-05.json",
+      "origin": "https://247wallst.com/investing/2026/01/28/live-will-microsoft-soar-after-earnings-tonight",
+      "retrieved_at": "2026-08-26T14:26:26Z",
+      "content_type": "application/json",
+      "sha256": "e520e173d74c1e237517af070ea679202447f89434f5fff5706b2cc31df5d99b",
+      "byte_length": 277
+    },
+    {
+      "path": "raw/web/query-05-hit-01.json",
+      "origin": "https://microsoft.gcs-web.com/static-files/3870467c-5877-477c-ac71-167d20612da7",
+      "retrieved_at": "2026-08-26T14:26:28Z",
+      "content_type": "application/json",
+      "sha256": "d1d910b7aa30a5980634e703d610a47dede780c09af8a7fa86a33a8825d14aec",
+      "byte_length": 251
+    },
+    {
+      "path": "raw/web/query-05-hit-02.json",
+      "origin": "https://www.stocktitan.net/sec-filings/MSFT",
+      "retrieved_at": "2026-08-26T14:26:28Z",
+      "content_type": "application/json",
+      "sha256": "47249cd028216eb1f6346209a6a5682562dcfb4c000dd91d0bcdbbd1917ffeb8",
+      "byte_length": 216
+    },
+    {
+      "path": "raw/web/query-05-hit-03.json",
+      "origin": "https://www.linkedin.com/pulse/microsoft-q2-fiscal-year-2026-analysis-january-28-0530-faisal-amjad-0klgc",
+      "retrieved_at": "2026-08-26T14:26:28Z",
+      "content_type": "application/json",
+      "sha256": "3b3c65c10875ec7fe44697688bc12a13bfca37cb242a01044dc1a5e1c622a515",
+      "byte_length": 340
+    },
+    {
+      "path": "raw/web/query-05-hit-04.json",
+      "origin": "https://www.sec.gov/Archives/edgar/data/789019/000119312526191507/msft-20260331.htm",
+      "retrieved_at": "2026-08-26T14:26:28Z",
+      "content_type": "application/json",
+      "sha256": "c3c044b5da12913c5d7f03e9b72e934b50fd35f4821fb2559cda52ebfff75acf",
+      "byte_length": 219
+    },
+    {
+      "path": "raw/web/query-05-hit-05.json",
+      "origin": "https://www.microsoft.com/en-us/investor/earnings/fy-2026-q2/press-release-webcast",
+      "retrieved_at": "2026-08-26T14:26:28Z",
+      "content_type": "application/json",
+      "sha256": "d9e44339fbb538d09cf8df06c76277c18de63a1f9f4c509c1be2d9b0bff500f7",
+      "byte_length": 249
+    },
+    {
+      "path": "raw/web/query-06-hit-01.json",
+      "origin": "https://microsoft.gcs-web.com/static-files/3870467c-5877-477c-ac71-167d20612da7",
+      "retrieved_at": "2026-08-26T14:26:30Z",
+      "content_type": "application/json",
+      "sha256": "abbdd4090fc2b2869ab600560dd1ebaf2402a9afd23a74d62637ec37c5d5b9ac",
+      "byte_length": 250
+    },
+    {
+      "path": "raw/web/query-06-hit-02.json",
+      "origin": "https://www.cnbc.com/2026/01/28/microsoft-msft-q2-earnings-report-2026.html",
+      "retrieved_at": "2026-08-26T14:26:30Z",
+      "content_type": "application/json",
+      "sha256": "008559d679e478d6ea1f076577d5abe47672157bfd1e4c4cf2653cc905c0b496",
+      "byte_length": 243
+    },
+    {
+      "path": "raw/web/query-06-hit-03.json",
+      "origin": "https://public.com/stocks/msft/earnings",
+      "retrieved_at": "2026-08-26T14:26:30Z",
+      "content_type": "application/json",
+      "sha256": "436bef19a328043ebd3e7121d3c00d5051a8f557319b52d16acf1d1b6bd4f33e",
+      "byte_length": 228
+    },
+    {
+      "path": "raw/web/query-06-hit-04.json",
+      "origin": "https://www.microsoft.com/en-us/investor/earnings/fy-2026-q2/press-release-webcast",
+      "retrieved_at": "2026-08-26T14:26:30Z",
+      "content_type": "application/json",
+      "sha256": "c3df878376822f4bbffe4d00aa62f23d81d8bf10718d40ee08c2246d1a88e057",
+      "byte_length": 248
+    },
+    {
+      "path": "raw/web/query-06-hit-05.json",
+      "origin": "https://www.facebook.com/schwabnetwork/videos/microsoft-msft-is-set-to-report-earnings-after-the-bellmarley-kayden-shares-the-/1448301353319751",
+      "retrieved_at": "2026-08-26T14:26:30Z",
+      "content_type": "application/json",
+      "sha256": "0a6c5b11881e01a618b9cd5f297b560c43eab38f2850c303bef895b93a7cb964",
+      "byte_length": 334
+    },
+    {
+      "path": "raw/web/query-07-hit-01.json",
+      "origin": "https://microsoft.gcs-web.com/static-files/3870467c-5877-477c-ac71-167d20612da7",
+      "retrieved_at": "2026-08-26T14:26:31Z",
+      "content_type": "application/json",
+      "sha256": "6b6f932c4ea49d65054cef920d7e39558843a3078e842bb5d9347fe17d1c497a",
+      "byte_length": 250
+    },
+    {
+      "path": "raw/web/query-07-hit-02.json",
+      "origin": "https://www.cnbc.com/2026/01/28/microsoft-msft-q2-earnings-report-2026.html",
+      "retrieved_at": "2026-08-26T14:26:31Z",
+      "content_type": "application/json",
+      "sha256": "80fb9dde8108471779c2b2bcaa0d8827368cbf70249575d28fcc59363ad009c5",
+      "byte_length": 243
+    },
+    {
+      "path": "raw/web/query-07-hit-03.json",
+      "origin": "https://www.microsoft.com/en-us/investor/earnings/fy-2026-q2/press-release-webcast",
+      "retrieved_at": "2026-08-26T14:26:31Z",
+      "content_type": "application/json",
+      "sha256": "160553a64382969fee914876e4110c61c880a467c2bc31ddeeedadf6b7ef3bf0",
+      "byte_length": 248
+    },
+    {
+      "path": "raw/web/query-07-hit-04.json",
+      "origin": "https://www.facebook.com/schwabnetwork/videos/microsoft-msft-is-set-to-report-earnings-after-the-bellmarley-kayden-shares-the-/1448301353319751",
+      "retrieved_at": "2026-08-26T14:26:31Z",
+      "content_type": "application/json",
+      "sha256": "392621bfc59f9457c874ee6a407562c3659cecf1649630409a72a6cdd1e7f59d",
+      "byte_length": 333
+    },
+    {
+      "path": "raw/web/query-07-hit-05.json",
+      "origin": "https://247wallst.com/investing/2026/01/28/live-will-microsoft-soar-after-earnings-tonight",
+      "retrieved_at": "2026-08-26T14:26:31Z",
+      "content_type": "application/json",
+      "sha256": "4d92743d273738742fcd33724637915b9ac2297cfea52f872ee51b848cf467d6",
+      "byte_length": 261
+    },
+    {
+      "path": "evidence/web/web-001.md",
+      "origin": "https://www.fool.com/earnings/call-transcripts/2026/01/28/microsoft-msft-q2-2026-earnings-call-transcript",
+      "retrieved_at": "2026-08-26T14:26:31Z",
+      "content_type": "text/markdown",
+      "sha256": "30c7734d1e9a6729dfa92fc29e854e167bc731d5977855839a7f8393ca29671c",
+      "byte_length": 66272
+    },
+    {
+      "path": "evidence/web/web-002.md",
+      "origin": "https://microsoft.gcs-web.com/static-files/3870467c-5877-477c-ac71-167d20612da7",
+      "retrieved_at": "2026-08-26T14:26:32Z",
+      "content_type": "text/markdown",
+      "sha256": "927894a0688f6db2aef19ef4f23de93a044c9c9b6d9173c500a307333a6359e5",
+      "byte_length": 23407
+    },
+    {
+      "path": "evidence/web/web-003.md",
+      "origin": "https://www.cnbc.com/2026/01/28/microsoft-msft-q2-earnings-report-2026.html",
+      "retrieved_at": "2026-08-26T14:26:32Z",
+      "content_type": "text/markdown",
+      "sha256": "38a0aea75742b27f1c508344fc9e2c06eb8f4f047d69155c765bcaeab8ceb482",
+      "byte_length": 13471
+    },
+    {
+      "path": "evidence/web/web-004.md",
+      "origin": "https://public.com/stocks/msft/earnings",
+      "retrieved_at": "2026-08-26T14:26:33Z",
+      "content_type": "text/markdown",
+      "sha256": "1e17ea9d12189847f6f76025d6c7ef1c617c9111e87fdda074d1158effdad233",
+      "byte_length": 3874
+    },
+    {
+      "path": "evidence/web/web-005.md",
+      "origin": "https://www.facebook.com/schwabnetwork/videos/microsoft-msft-is-set-to-report-earnings-after-the-bellmarley-kayden-shares-the-/1448301353319751",
+      "retrieved_at": "2026-08-26T14:26:33Z",
+      "content_type": "text/markdown",
+      "sha256": "d7e6fe5eaba9be64b5d914206ac3630aea0cf4c43e75c3f53a848cc52c969b06",
+      "byte_length": 22328
+    },
+    {
+      "path": "evidence/web/web-006.md",
+      "origin": "https://www.youtube.com/watch?v=84ytWWppMEk",
+      "retrieved_at": "2026-08-26T14:26:33Z",
+      "content_type": "text/markdown",
+      "sha256": "9af40206a11fefe4c3404596a59579303957c20eb63089508e895fe1cc67f233",
+      "byte_length": 56277
+    },
+    {
+      "path": "evidence/web/web-007.md",
+      "origin": "https://capital.com/en-int/market-updates/microsoft-stock-forecast-11-03-2026",
+      "retrieved_at": "2026-08-26T14:26:34Z",
+      "content_type": "text/markdown",
+      "sha256": "807c310fc05a636479eac1007b01901443a2fa2c3e2d2654188cd24aaa4a6139",
+      "byte_length": 18640
+    },
+    {
+      "path": "evidence/web/web-008.md",
+      "origin": "https://www.prnewswire.com/news-releases/microsoft-earnings-press-release-available-on-investor-relations-website-302673166.html",
+      "retrieved_at": "2026-08-26T14:26:34Z",
+      "content_type": "text/markdown",
+      "sha256": "05a805050268ddfb2ef7b002913ca7a7516588e2bfe33b7c9ce252a45e625f3f",
+      "byte_length": 7865
+    },
+    {
+      "path": "evidence/web/web-009.md",
+      "origin": "https://finance.yahoo.com/quote/MSFT/earnings/MSFT-Q4-2026-earnings_call-647770.html",
+      "retrieved_at": "2026-08-26T14:26:35Z",
+      "content_type": "text/markdown",
+      "sha256": "44f1cf33b37717a00758bc9b934e44be99748ee81bdb2ebebefd7f16f994552a",
+      "byte_length": 74616
+    },
+    {
+      "path": "evidence/web/web-010.md",
+      "origin": "https://www.stocktitan.net/sec-filings/MSFT",
+      "retrieved_at": "2026-08-26T14:26:35Z",
+      "content_type": "text/markdown",
+      "sha256": "a1738a02006a9f01edfc7f4dea71657f8b3453803de6aa7c533164c6ec183f76",
+      "byte_length": 10089
+    }
+  ],
+  "notes": [
+    "Raw source archived verbatim before sanitisation.",
+    "SEC evidence: ok (CIK 0000789019)",
+    "Web search evidence (tavily): ok (35 hit(s) from 7 queries)",
+    "Web evidence (extracted, citable): 10 source(s)"
+  ]
+}

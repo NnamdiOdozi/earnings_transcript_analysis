@@ -51,6 +51,7 @@ METRICS_FILENAME = "metrics.json"  # optional: agent-authored, discovered per co
 WEB_SUBDIR = "web"  # under evidence/: extracted Tavily content, one .md per WebEvidence
 WEB_EVIDENCE_FILENAME = "web-evidence.jsonl"  # under evidence/
 VALIDATION_FILENAME = "validation.json"
+INJECTION_SCAN_FILENAME = "injection-scan.json"  # advisory prompt-injection flag results (see process.scan_for_injection)
 SIGNAL_CARD_FILENAME = "signal-card.md"
 OUTLOOK_BRIEF_FILENAME = "outlook-brief.md"
 OUTLOOK_VALIDATION_FILENAME = "outlook-validation.json"  # Python-owned: real-clock stamp for validate-outlook
@@ -95,6 +96,12 @@ QA_BOUNDARY_MARKERS = tuple(
 SEGMENT_ID_PREFIX = "seg"
 SEGMENT_ID_WIDTH = 4
 
+# --- Prompt-injection flag (config.toml [sanitisation]) ---
+# Best-effort regex FLAG over the sanitised transcript -- not a classifier, not a gate.
+# Toggle off if noisy; patterns live in config so the list can grow without code changes.
+SANITISATION_INJECTION_SCAN_ENABLED = bool(_get("sanitisation", "injection_scan_enabled", True))
+SANITISATION_INJECTION_PATTERNS = list(_get("sanitisation", "injection_patterns", []))
+
 # --- Validation tolerances (config.toml [validation]) ---
 CALC_RELATIVE_TOLERANCE = float(_get("validation", "calc_relative_tolerance", 0.01))
 CALC_ABSOLUTE_TOLERANCE = float(_get("validation", "calc_absolute_tolerance", 0.005))
@@ -114,6 +121,45 @@ RESEARCH_WEB_SEARCH_PROVIDER = str(_get("research", "provider", "exa"))  # "exa"
 RESEARCH_OFFICIAL_SOURCES_ONLY = bool(_get("research", "official_sources_only", True))
 RESEARCH_ARCHIVE_ALL_SOURCES = bool(_get("research", "archive_all_sources", True))
 RESEARCH_INCLUDE_PREVIOUS_PERIOD = bool(_get("research", "include_previous_period", True))
+# Repurposed web search: query templates for info NOT already in the transcript --
+# analyst consensus/expectations and peer-group results. {company}/{ticker}/{event_id}
+# are filled per run; peer templates also fill {peer} (peers come from --peers). Empty
+# a list to disable that class. See sources.build_consensus_queries/build_peer_queries.
+RESEARCH_CONSENSUS_QUERIES = list(
+    _get(
+        "research",
+        "consensus_queries",
+        [
+            "{company} {ticker} {event_id} analyst consensus estimate revenue EPS",
+            "{company} {ticker} {event_id} earnings preview expectations forecast",
+            "{company} {ticker} Wall Street consensus estimates ahead of earnings",
+        ],
+    )
+)
+RESEARCH_PEER_QUERIES = list(
+    _get(
+        "research",
+        "peer_queries",
+        [
+            "{peer} {event_id} earnings results revenue growth",
+            "{peer} quarterly results versus {company} {ticker}",
+        ],
+    )
+)
+# Peer-group DISCOVERY templates (earnings discover-peers, run before prepare) -- find
+# the company's analyst-recognised comparables to select ~4 peers from. See
+# sources.build_peer_group_queries.
+RESEARCH_PEER_GROUP_QUERIES = list(
+    _get(
+        "research",
+        "peer_group_queries",
+        [
+            "{company} {ticker} peer group comparable companies",
+            "{company} {ticker} closest competitors comparable stocks analysts",
+            "stocks most similar to {ticker} {company}",
+        ],
+    )
+)
 
 # --- Tavily defaults (config.toml [tavily]), used when research.provider == "tavily" ---
 TAVILY_SEARCH_DEPTH = str(_get("tavily", "search_depth", "basic"))

@@ -1,7 +1,11 @@
 {
-  "url": "https://finance.yahoo.com/markets/stocks/articles/microsoft-msft-q4-2026-earnings-235847729.html",
-  "title": "Microsoft (MSFT) Q4 2026 Earnings Call Transcript",
-  "score": 0,
-  "published_date": null,
-  "_retrieved_at": "2026-08-26T18:21:53Z"
+  "url": "https://www.aboutamazon.com/news/company-news/amazon-earnings-q4-2025-report",
+  "title": "Amazon Q4 2025 earnings report: Read the release",
+  "score": null,
+  "published_date": "2026-01-22T00:00:00.000Z",
+  "_class": "peer",
+  "_select_key": "peer:Amazon",
+  "_provider": "exa",
+  "_query": "Amazon 2026-q4 earnings results revenue growth",
+  "_retrieved_at": "2026-08-27T13:13:32Z"
 }

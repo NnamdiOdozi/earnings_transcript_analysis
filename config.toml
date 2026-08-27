@@ -21,6 +21,44 @@ qa_boundary_markers = [
     "operator instructions",
 ]
 
+[sanitisation]
+# Best-effort prompt-injection FLAG (not a classifier, not a gate). After the
+# transcript is sanitised (invisible/zero-width chars already stripped), each pattern
+# below is matched case-insensitively; any hit is recorded in manifest.json and a
+# per-run injection-scan.json -- the run is never blocked and nothing is removed
+# (suspicious text stays quotable data). Applies to the fetched/loaded TRANSCRIPT only,
+# not Exa/Tavily results (those providers run their own defences). Set enabled = false
+# if it becomes noisy. Patterns are anchored to avoid ordinary prose (e.g. "ignore
+# macro headwinds" must not trip "ignore ... instructions"). Extend the list freely.
+injection_scan_enabled = true
+injection_patterns = [
+    "ignore (all |the |any |your )*(previous|prior|above|preceding|earlier) (instructions|prompts|context|messages)",
+    "disregard (all |the |any |your )*(previous|prior|above|preceding|earlier)",
+    "forget (all |everything |the )*(previous|prior|above|earlier|you were told)",
+    "override (all |the |your )*(previous|prior|above|system) (instructions|prompt|rules)",
+    "new instructions?:",
+    "updated instructions?:",
+    "system prompt",
+    "reveal (your |the )*(system )?(prompt|instructions)",
+    "print (your |the )*(system )?(prompt|instructions)",
+    "repeat (your |the )*(system )?(prompt|instructions)",
+    "you are now (in )?(developer|dev|debug|admin|god|dan) mode",
+    "developer mode enabled",
+    "enable (developer|dev|debug|jailbreak) mode",
+    "jailbreak",
+    "do anything now",
+    "\\bdan\\b prompt",
+    "act as (an? )?(unrestricted|uncensored|unfiltered)",
+    "pretend (you are|to be) (an? )?(unrestricted|different|jailbroken)",
+    "you must (now )?(obey|comply|follow) ",
+    "from now on,? you",
+    "bypass (your |the )*(safety|content|security) (filter|policy|guidelines|guardrails)",
+    "ignore (your |the )*(safety|content|security) (filter|policy|guidelines|guardrails)",
+    "\\b(system|assistant|user)\\s*:\\s*you",
+    "<\\|?(system|im_start|endoftext)\\|?>",
+    "end of (transcript|document)\\.? (now|then) (ignore|disregard|follow)",
+]
+
 [validation]
 calc_relative_tolerance = 0.01     # 1% relative tolerance for recomputed derived metrics
 calc_absolute_tolerance = 0.005
@@ -43,6 +81,32 @@ provider = "exa"                  # "exa" | "tavily" -- which provider cmd_prepa
 official_sources_only = false  # not actually enforced as a domain filter yet -- see README known limitations
 archive_all_sources = true
 include_previous_period = true
+# Web search is repurposed toward info NOT already in the transcript: analyst
+# consensus/expectations and peer-group results (the "surprise" = actual vs consensus,
+# and the competitive backdrop, are absent from the call by construction). Placeholders
+# {company} {ticker} {event_id} fill per run; peer_queries also fill {peer} (peers come
+# from the --peers CLI flag, kept out of config because peers are per-company). Empty a
+# list to disable that class. These replace the old official-document queries, which
+# merely restated the call -- keeping per-run search spend flat.
+consensus_queries = [
+    "{company} {ticker} {event_id} analyst consensus estimate revenue EPS",
+    "{company} {ticker} {event_id} earnings preview expectations forecast",
+    "{company} {ticker} Wall Street consensus estimates ahead of earnings",
+]
+peer_queries = [
+    "{peer} {event_id} earnings results revenue growth",
+    "{peer} quarterly results versus {company} {ticker}",
+]
+# Peer-group DISCOVERY (run via `earnings discover-peers` BEFORE prepare): find the
+# company's analyst-recognised comparables so the agent can pick ~4 to pass as --peers.
+# The transcript usually names no competitors, so the peer group must be searched, not
+# read off the call. Not event-relative (a company's peers don't change by quarter), so
+# no date cutoff is applied. {company} {ticker} fill per run.
+peer_group_queries = [
+    "{company} {ticker} peer group comparable companies",
+    "{company} {ticker} closest competitors comparable stocks analysts",
+    "stocks most similar to {ticker} {company}",
+]
 
 [tavily]
 search_depth = "basic"

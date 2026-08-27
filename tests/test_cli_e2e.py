@@ -256,43 +256,233 @@ def test_prepare_calls_web_search_by_default_and_archives_hits(isolated_runs_dir
         ]
     )
     assert rc == 0
-    assert len(calls) == 7  # one per _OFFICIAL_DOC_TYPES entry
-    assert all("Acme Corp" in q and "ACME" in q and "2026-07-15" in q for q in calls)
+    assert len(calls) == 3  # one per config [research] consensus_queries template (no --peers)
+    assert all("Acme Corp" in q and "ACME" in q for q in calls)
+    assert any("2026-q2" in q for q in calls)  # event_id fills the period placeholder
 
     run_dir = isolated_runs_dir / "ACME" / "2026-q2"
     archived = sorted((run_dir / config.RAW_SUBDIR / "web").glob("*.json"))
-    assert len(archived) == 7  # one hit archived per query, per the fake
+    assert len(archived) == 3  # one hit archived per query, per the fake
     # Fetch time embedded in the file itself, not just cross-referenced via manifest.
     assert all(json.loads(f.read_text())["_retrieved_at"] for f in archived)
     # Which provider produced this hit -- the archive directory is always literally
     # named "web" regardless of provider, so this was previously unrecorded per-hit.
     assert all(json.loads(f.read_text())["_provider"] == provider for f in archived)
-    # The exact query string that produced each hit is also embedded in the file --
-    # previously only recoverable by re-reading build_official_source_queries().
+    # Each hit also records the query CLASS it came from -- all "consensus" here (no --peers).
+    assert all(json.loads(f.read_text())["_class"] == "consensus" for f in archived)
+    # The exact query string that produced each hit is also embedded in the file.
     archived_queries = [json.loads(f.read_text())["_query"] for f in archived]
-    assert all("Acme Corp" in q and "ACME" in q and "2026-07-15" in q for q in archived_queries)
+    assert all("Acme Corp" in q and "ACME" in q for q in archived_queries)
 
     manifest = json.loads((run_dir / config.MANIFEST_FILENAME).read_text())
     assert any(f"Web search evidence ({provider}): ok" in note for note in manifest["notes"])
-    assert any("Web evidence (extracted, citable): 7 source(s)" in note for note in manifest["notes"])
+    assert any("Web evidence (extracted, citable): 3 source(s)" in note for note in manifest["notes"])
     # The full query set is also recorded once at the manifest level, in order --
     # "query-NN" in a hit's filename indexes into this list.
     assert manifest["queries"] == calls
 
-    # 7 search hits (one per query, distinct URLs) all get extracted -- capped by
-    # max_extracted_sources (10, default), so all 7 are selected here.
-    assert len(extract_calls) == 7
+    # 3 search hits (one per query, distinct URLs) all get extracted -- capped by
+    # max_extracted_sources (10, default), so all 3 are selected here.
+    assert len(extract_calls) == 3
 
     extracted_files = sorted((run_dir / config.EVIDENCE_SUBDIR / config.WEB_SUBDIR).glob("*.md"))
-    assert len(extracted_files) == 7
+    assert len(extracted_files) == 3
     assert "Full extracted content" in extracted_files[0].read_text()
 
     web_evidence_lines = (run_dir / config.EVIDENCE_SUBDIR / config.WEB_EVIDENCE_FILENAME).read_text().strip().splitlines()
-    assert len(web_evidence_lines) == 7
+    assert len(web_evidence_lines) == 3
 
-    # transcript source + 7 search-hit sources + 7 extracted web-evidence sources
-    assert len(manifest["sources"]) == 15
+    # transcript source + 3 search-hit sources + 3 extracted web-evidence sources
+    assert len(manifest["sources"]) == 7
     assert all(len(s["sha256"]) == 64 for s in manifest["sources"])
+
+
+@pytest.mark.parametrize("provider", ["exa", "tavily"])
+def test_prepare_peer_queries_run_and_are_class_tagged(isolated_runs_dir, monkeypatch, provider):
+    """--peers turns each peer into peer-group web queries (one per config [research]
+    peer_queries template), tagged _class="peer" in the raw archive, alongside the
+    consensus queries. Peers are supplied per run (agent-discovered from the transcript),
+    never hardcoded -- keeping the code industry-agnostic.
+    """
+    monkeypatch.setattr(config, "RESEARCH_WEB_SEARCH_ENABLED", True)
+    monkeypatch.setattr(config, "RESEARCH_WEB_SEARCH_PROVIDER", provider)
+    calls = []
+
+    def fake_web_search(query, provider, max_results, end_date=None):
+        calls.append(query)
+        return [{"url": f"https://example.com/{len(calls)}", "title": None, "score": None, "published_date": None}]
+
+    monkeypatch.setattr(sources, "web_search", fake_web_search)
+    monkeypatch.setattr(sources, "web_extract", lambda url, provider: f"# Content for {url}")
+
+    transcript = str(FIXTURES / "normal_transcript.txt")
+    rc = main(
+        [
+            "prepare", "--ticker", "ACME", "--event-id", "2026-q2", "--transcript", transcript,
+            "--company-name", "Acme Corp", "--peers", "Amazon", "Google",
+        ]
+    )
+    assert rc == 0
+    # 3 consensus + (2 peers x 2 peer_queries templates) = 7 queries
+    assert len(calls) == 7
+    assert any("Amazon" in q for q in calls) and any("Google" in q for q in calls)
+
+    run_dir = isolated_runs_dir / "ACME" / "2026-q2"
+    archived = [json.loads(f.read_text()) for f in sorted((run_dir / config.RAW_SUBDIR / "web").glob("*.json"))]
+    classes = [a["_class"] for a in archived]
+    assert classes.count("consensus") == 3
+    assert classes.count("peer") == 4
+    # every peer query names a peer -- provenance traceable per hit
+    peer_queries = [a["_query"] for a in archived if a["_class"] == "peer"]
+    assert all(("Amazon" in q or "Google" in q) for q in peer_queries)
+
+
+def test_prepare_flags_prompt_injection_in_manifest_and_scan_file(isolated_runs_dir, monkeypatch):
+    """The injection fixture embeds "IGNORE PREVIOUS INSTRUCTIONS ... developer mode".
+    prepare flags it (advisory, non-blocking): a manifest note plus injection-scan.json.
+    The run still completes normally -- the suspicious text is data, never a gate.
+    """
+    monkeypatch.setattr(config, "SANITISATION_INJECTION_SCAN_ENABLED", True)
+    transcript = str(FIXTURES / "injection_transcript.txt")
+    rc = main(["prepare", "--ticker", "WIDG", "--event-id", "2026-q1", "--transcript", transcript])
+    assert rc == 0  # never blocks
+
+    run_dir = isolated_runs_dir / "WIDG" / "2026-q1"
+    scan = json.loads((run_dir / config.INJECTION_SCAN_FILENAME).read_text())
+    assert scan["finding_count"] >= 1
+    manifest = json.loads((run_dir / config.MANIFEST_FILENAME).read_text())
+    assert any("Prompt-injection scan" in n and "flagged" in n for n in manifest["notes"])
+
+
+def test_prepare_injection_scan_can_be_disabled(isolated_runs_dir, monkeypatch):
+    """The scan is a config toggle -- off means no scan file and a 'disabled' note."""
+    monkeypatch.setattr(config, "SANITISATION_INJECTION_SCAN_ENABLED", False)
+    transcript = str(FIXTURES / "injection_transcript.txt")
+    rc = main(["prepare", "--ticker", "WIDG", "--event-id", "2026-q1", "--transcript", transcript])
+    assert rc == 0
+    run_dir = isolated_runs_dir / "WIDG" / "2026-q1"
+    assert not (run_dir / config.INJECTION_SCAN_FILENAME).exists()
+    manifest = json.loads((run_dir / config.MANIFEST_FILENAME).read_text())
+    assert any("Prompt-injection scan: disabled" in n for n in manifest["notes"])
+
+
+def test_prepare_extraction_round_robins_so_consensus_never_starves_peers(isolated_runs_dir, monkeypatch):
+    """The live bug: consensus queries (run first, more hits, higher scores) filled all
+    10 extraction slots, so 0 peer results ever became citable. Extraction now interleaves
+    by _class, so peer hits get extracted even when every consensus hit outscores them.
+    """
+    monkeypatch.setattr(config, "RESEARCH_WEB_SEARCH_ENABLED", True)
+    monkeypatch.setattr(config, "RESEARCH_WEB_SEARCH_PROVIDER", "exa")
+    monkeypatch.setattr(config, "EXA_MAX_EXTRACTED_SOURCES", 10)
+
+    seq = {"n": 0}
+
+    def fake_web_search(query, provider, max_results, end_date=None):
+        # Consensus queries name the company; peer queries name a peer. Give consensus
+        # MANY high-score hits and peers FEW low-score ones -- under the old score-only
+        # sort the peers would never be reached.
+        is_peer = "Amazon" in query or "Google" in query
+        count, score = (1, 0.1) if is_peer else (6, 0.9)
+        hits = []
+        for _ in range(count):
+            seq["n"] += 1
+            hits.append({"url": f"https://ex.com/{seq['n']}", "title": None, "score": score, "published_date": None})
+        return hits
+
+    monkeypatch.setattr(sources, "web_search", fake_web_search)
+    extracted = []
+    monkeypatch.setattr(sources, "web_extract", lambda url, provider: extracted.append(url) or f"# {url}")
+
+    transcript = str(FIXTURES / "normal_transcript.txt")
+    rc = main(
+        [
+            "prepare", "--ticker", "ACME", "--event-id", "2026-q2", "--transcript", transcript,
+            "--company-name", "Acme Corp", "--peers", "Amazon", "Google",
+        ]
+    )
+    assert rc == 0
+    # 3 consensus x6 = 18 consensus hits; 4 peer queries x1 = 4 peer hits (2 Amazon,
+    # 2 Google). Round-robin into 10 slots -> both classes represented (old code: 10
+    # consensus, 0 peer) AND both peers represented (the sub-class-by-peer fix).
+    run_dir = isolated_runs_dir / "ACME" / "2026-q2"
+    archived = {a["url"]: a for f in (run_dir / config.RAW_SUBDIR / "web").glob("*.json")
+                for a in [json.loads(f.read_text())]}
+    extracted_classes = [archived[url]["_class"] for url in extracted]
+    extracted_keys = [archived[url]["_select_key"] for url in extracted]
+    assert len(extracted) == 10
+    assert extracted_classes.count("peer") == 4  # all 4 peer hits survived
+    assert extracted_classes.count("consensus") == 6
+    # neither peer starved: each of the two peers contributes to citable evidence
+    assert extracted_keys.count("peer:Amazon") == 2
+    assert extracted_keys.count("peer:Google") == 2
+
+
+@pytest.mark.parametrize("provider", ["exa", "tavily"])
+def test_discover_peers_searches_and_archives_candidates(isolated_runs_dir, monkeypatch, provider):
+    """`discover-peers` runs the peer-group queries, archives each hit (class-tagged
+    peer_group, hashed) and extracts candidate pages to runs/<TICKER>/peer-discovery/
+    for the agent to read and pick ~4 peers -- the SEARCH is deterministic/auditable,
+    the SELECTION is the agent's, made afterward.
+    """
+    monkeypatch.setattr(config, "RESEARCH_WEB_SEARCH_ENABLED", True)
+    monkeypatch.setattr(config, "RESEARCH_WEB_SEARCH_PROVIDER", provider)
+    calls = []
+
+    def fake_web_search(query, provider, max_results, end_date=None):
+        calls.append(query)
+        assert end_date is None  # peer group is not event-relative -- no causality cutoff
+        return [{"url": f"https://example.com/{len(calls)}", "title": "Peers", "score": None, "published_date": None}]
+
+    monkeypatch.setattr(sources, "web_search", fake_web_search)
+    monkeypatch.setattr(sources, "web_extract", lambda url, provider: f"# Comparable companies\n\nPeers listed for {url}.")
+
+    rc = main(["discover-peers", "--ticker", "MSFT", "--company-name", "Microsoft"])
+    assert rc == 0
+    assert len(calls) == 3  # one per config [research] peer_group_queries template
+    assert all("Microsoft" in q and "MSFT" in q for q in calls)
+
+    disc_dir = isolated_runs_dir / "MSFT" / "peer-discovery"
+    archived = [json.loads(f.read_text()) for f in sorted((disc_dir / "raw").glob("*.json"))]
+    assert archived and all(a["_class"] == "peer_group" for a in archived)
+    candidates = sorted(disc_dir.glob("candidate-*.md"))
+    assert candidates and "Comparable companies" in candidates[0].read_text()
+
+    manifest = json.loads((disc_dir / config.MANIFEST_FILENAME).read_text())
+    assert manifest["event_id"] == "peer-discovery"
+    assert all(len(s["sha256"]) == 64 for s in manifest["sources"])
+
+
+def test_discover_peers_applies_optional_event_date_cutoff(isolated_runs_dir, monkeypatch):
+    """--event-date on discover-peers is an optional safety net: a dated hit published
+    after it is dropped from extraction (undated ones still pass through), same guard as
+    prepare. Without --event-date, no cutoff applies (covered by the test above).
+    """
+    monkeypatch.setattr(config, "RESEARCH_WEB_SEARCH_ENABLED", True)
+    monkeypatch.setattr(config, "RESEARCH_WEB_SEARCH_PROVIDER", "exa")
+    end_dates = []
+
+    def fake_web_search(query, provider, max_results, end_date=None):
+        end_dates.append(end_date)
+        return [
+            {"url": "https://ex.com/before", "title": None, "score": 0.9, "published_date": "2026-07-10"},
+            {"url": "https://ex.com/after", "title": None, "score": 0.8, "published_date": "2026-08-20"},
+            {"url": "https://ex.com/undated", "title": None, "score": 0.7, "published_date": None},
+        ]
+
+    extracted = []
+    monkeypatch.setattr(sources, "web_search", fake_web_search)
+    monkeypatch.setattr(sources, "web_extract", lambda url, provider: extracted.append(url) or f"# {url}")
+
+    rc = main(["discover-peers", "--ticker", "MSFT", "--company-name", "Microsoft", "--event-date", "2026-07-30"])
+    assert rc == 0
+    assert all(d == "2026-07-30" for d in end_dates)  # cutoff forwarded to provider too
+    # "after" (2026-08-20) dropped; "before" and undated kept.
+    assert "https://ex.com/after" not in extracted
+    assert "https://ex.com/before" in extracted and "https://ex.com/undated" in extracted
+
+    disc_dir = isolated_runs_dir / "MSFT" / "peer-discovery"
+    manifest = json.loads((disc_dir / config.MANIFEST_FILENAME).read_text())
+    assert any("causality guard" in note for note in manifest["notes"])
 
 
 @pytest.mark.parametrize("provider", ["exa", "tavily"])
@@ -346,9 +536,9 @@ def test_prepare_excludes_web_evidence_published_after_event_date(isolated_runs_
     assert len(web_evidence_lines) == 1
     assert "before" in web_evidence_lines[0]
 
-    # still archived under raw/web/ for audit (both hits, all 7 queries -> 14 files),
-    # just never extracted as citable evidence.
-    assert len(list((run_dir / config.RAW_SUBDIR / "web").glob("*.json"))) == 14
+    # still archived under raw/web/ for audit (both hits, all 3 consensus queries -> 6
+    # files), just never extracted as citable evidence.
+    assert len(list((run_dir / config.RAW_SUBDIR / "web").glob("*.json"))) == 6
 
 
 def test_prepare_extraction_selection_preserves_order_when_score_is_none(isolated_runs_dir, monkeypatch):

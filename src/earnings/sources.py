@@ -96,6 +96,41 @@ def build_official_source_queries(company_name: str, ticker: str, event_date: st
     return [f"{company_name} {ticker} {event_date} {doc_type}" for doc_type in _OFFICIAL_DOC_TYPES]
 
 
+def build_consensus_queries(
+    company_name: str, ticker: str, event_id: str, templates: list[str]
+) -> list[str]:
+    """Fill the config.toml [research] consensus_queries templates for this run.
+    Targets analyst expectations/estimates -- info that is NOT in the transcript (the
+    market's prior view, and thus the beat/miss "surprise"). Industry-agnostic: no
+    sector vocabulary, only the company's own identifiers and the period.
+    """
+    return [t.format(company=company_name, ticker=ticker, event_id=event_id) for t in templates]
+
+
+def build_peer_queries(
+    company_name: str, ticker: str, event_id: str, peers: list[str], templates: list[str]
+) -> list[str]:
+    """Fill the config.toml [research] peer_queries templates once per peer. `peers`
+    are competitor names the agent noticed management name in the transcript (passed
+    via --peers) -- kept out of config so no company/sector is ever hardcoded. Returns
+    one query per (peer x template); an empty `peers` yields no peer queries at all.
+    """
+    queries: list[str] = []
+    for peer in peers:
+        for template in templates:
+            queries.append(template.format(company=company_name, ticker=ticker, event_id=event_id, peer=peer))
+    return queries
+
+
+def build_peer_group_queries(company_name: str, ticker: str, templates: list[str]) -> list[str]:
+    """Fill config.toml [research] peer_group_queries, used by `earnings discover-peers`
+    to find the company's analyst-recognised comparables. The SEARCH is here
+    (deterministic, archived); the SELECTION of ~4 peers from the results is the agent's
+    judgment. Industry-agnostic: only the company's own identifiers, no sector terms.
+    """
+    return [t.format(company=company_name, ticker=ticker) for t in templates]
+
+
 def tavily_extract(url: str, extract_depth: str = "basic") -> dict[str, Any]:
     """Call Tavily's /extract endpoint for a known URL -- returns full page content
     (markdown/text), unlike a search hit's short snippet. This is what makes a

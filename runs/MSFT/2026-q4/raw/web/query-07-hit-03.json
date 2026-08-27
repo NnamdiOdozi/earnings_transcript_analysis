@@ -1,7 +1,11 @@
 {
-  "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323632/msft-ex99_1.htm",
-  "title": "EX-99.1",
-  "score": 0,
-  "published_date": null,
-  "_retrieved_at": "2026-08-26T18:21:54Z"
+  "url": "https://www.fool.com/investing/2026/07/23/amazon-vs-microsoft-which-cloud-empire-is-the-bett/",
+  "title": "Amazon vs. Microsoft: Which Cloud Empire Is the Better Buy Now? | The Motley Fool",
+  "score": null,
+  "published_date": "2026-07-23T00:00:00.000Z",
+  "_class": "peer",
+  "_select_key": "peer:Amazon",
+  "_provider": "exa",
+  "_query": "Amazon quarterly results versus Microsoft MSFT",
+  "_retrieved_at": "2026-08-27T13:13:32Z"
 }

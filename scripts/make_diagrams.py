@@ -13,6 +13,7 @@ COLORS = {
     "evid": ("#f7ddc8", "#e0b48f"),
     "out": ("#d6ecd2", "#a9d29c"),
     "stop": ("#f3c9c9", "#dd9999"),
+    "gate": ("#f7edc8", "#d9b96a"),  # gold -- a GATE: the run stops here unless the check passes
 }
 
 BOX_W, BOX_H = 210, 96
@@ -126,14 +127,15 @@ def render(boxes: list[dict], cols: int = COLS, extra=None) -> str:
 
 
 DIAG1 = [
-    {"num": 1, "title": "You", "sub": "ticker + event|+ transcript", "kind": "inp"},
-    {"num": 2, "title": "Codex agent", "sub": "holds full|context", "kind": "inp"},
+    {"num": 1, "title": "You", "sub": "ticker + event id|+ transcript location", "kind": "inp"},
+    {"num": 2, "title": "Codex/Claude Code", "sub": "agent · holds|full context", "kind": "inp"},
     {"num": 3, "title": "Skill 1", "sub": "build source|pack", "kind": "skill"},
-    {"num": 4, "title": "Python", "sub": "ingest · sanitise|SEC · Tavily", "kind": "evid"},
-    {"num": 5, "title": "Source pack", "sub": "hashed +|timestamped", "kind": "evid"},
-    {"num": 6, "title": "Agent writes claims", "sub": "each claim +|exact quote", "kind": "evid"},
-    {"num": 7, "title": "Skill 2", "sub": "produce signal card|+ validators", "kind": "skill"},
-    {"num": 8, "title": "Signal card", "sub": "only if|validation passes", "kind": "out"},
+    {"num": 4, "title": "Discover peers", "sub": "search &#8594; agent|picks ~4", "kind": "evid"},
+    {"num": 5, "title": "Python", "sub": "ingest · sanitise|SEC · consensus/peers", "kind": "evid"},
+    {"num": 6, "title": "Source pack", "sub": "hashed +|timestamped", "kind": "evid"},
+    {"num": 7, "title": "Agent writes claims", "sub": "each claim +|exact quote", "kind": "evid"},
+    {"num": 8, "title": "Skill 2", "sub": "produce signal card|+ validators", "kind": "skill"},
+    {"num": 9, "title": "Signal card", "sub": "only if|validation passes", "kind": "out"},
 ]
 
 DIAG2 = [
@@ -153,6 +155,26 @@ DIAG2_EXTRA = {
     "box": {"title": "No card", "sub": "exit 1", "kind": "stop"},
 }
 
+# Audit-focused view for docs/AUDITABILITY.md: same pipeline, annotated with the CHECK
+# performed at each step. Gold boxes (kind "gate") are gates -- the run stops unless the
+# check passes. sub carries the check in <=2 short lines (split on '|').
+DIAG_AUDIT = [
+    {"num": 1, "title": "Ingest source", "sub": "archive raw|+ SHA-256 hash", "kind": "inp"},
+    {"num": 2, "title": "Sanitise", "sub": "strip invisible chars|· injection flag", "kind": "evid"},
+    {"num": 3, "title": "Segment", "sub": "speaker-labelled|transcript", "kind": "evid"},
+    {"num": 4, "title": "Agent writes claims", "sub": "each: exact quote|+ grounded number", "kind": "skill"},
+    {"num": 5, "title": "Validate", "sub": "GATE &#8212; quote ·|number · calc recompute", "kind": "gate"},
+    {"num": 6, "title": "Signal card", "sub": "only if all|checks pass", "kind": "out"},
+    {"num": 7, "title": "Outlook brief", "sub": "GATE &#8212; cites|real claim ids", "kind": "gate"},
+    {"num": 8, "title": "Reviewer", "sub": "GATE &#8212; fairness|· check-review", "kind": "gate"},
+]
+
+DIAG_AUDIT_EXTRA = {
+    "after_index": 4,  # box 5 "Validate"
+    "label": "any fail",
+    "box": {"title": "No card", "sub": "run halts", "kind": "stop"},
+}
+
 if __name__ == "__main__":
     import pathlib
 
@@ -161,4 +183,5 @@ if __name__ == "__main__":
     out.mkdir(exist_ok=True)
     (out / "flow_overall.svg").write_text(render(DIAG1))
     (out / "flow_pipeline.svg").write_text(render(DIAG2, extra=DIAG2_EXTRA))
-    print(f"wrote {out}/flow_overall.svg, {out}/flow_pipeline.svg")
+    (out / "flow_audit.svg").write_text(render(DIAG_AUDIT, extra=DIAG_AUDIT_EXTRA))
+    print(f"wrote {out}/flow_overall.svg, {out}/flow_pipeline.svg, {out}/flow_audit.svg")

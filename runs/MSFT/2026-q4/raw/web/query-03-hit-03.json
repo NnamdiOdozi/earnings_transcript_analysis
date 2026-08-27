@@ -1,7 +1,11 @@
 {
-  "url": "https://news.microsoft.com/source/2026/07/29/microsoft-cloud-and-ai-strength-fuels-fourth-quarter-results-4/",
-  "title": "Microsoft Cloud and AI strength fuels fourth quarter results",
-  "score": 0,
-  "published_date": "2026-07-29T00:00:00.000Z",
-  "_retrieved_at": "2026-08-26T18:21:49Z"
+  "url": "https://www.barchart.com/story/news/3505511/ahead-of-microsoft-earnings-here-s-what-barchart-data-says-comes-next-for-msft-stock",
+  "title": "Ahead of Microsoft Earnings, Here's What Barchart Data Says Comes Next for MSFT Stock",
+  "score": null,
+  "published_date": "2026-07-28T00:00:00.000Z",
+  "_class": "consensus",
+  "_select_key": "consensus",
+  "_provider": "exa",
+  "_query": "Microsoft MSFT Wall Street consensus estimates ahead of earnings",
+  "_retrieved_at": "2026-08-27T13:13:31Z"
 }

@@ -1,7 +1,11 @@
 {
-  "url": "https://news.microsoft.com/source/2026/07/29/microsoft-cloud-and-ai-strength-fuels-fourth-quarter-results-4/",
-  "title": "Microsoft Cloud and AI strength fuels fourth quarter results",
-  "score": 0,
-  "published_date": "2026-07-29T00:00:00.000Z",
-  "_retrieved_at": "2026-08-26T18:21:54Z"
+  "url": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Second-Quarter-Results/",
+  "title": "Amazon.com, Inc. - Amazon.com Announces Second Quarter Results",
+  "score": null,
+  "published_date": null,
+  "_class": "peer",
+  "_select_key": "peer:Amazon",
+  "_provider": "exa",
+  "_query": "Amazon quarterly results versus Microsoft MSFT",
+  "_retrieved_at": "2026-08-27T13:13:32Z"
 }

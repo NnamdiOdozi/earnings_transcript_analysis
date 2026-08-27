@@ -1,7 +1,11 @@
 {
-  "url": "https://finance.yahoo.com/quote/MSFT/earnings/MSFT-Q4-2026-earnings_call-647770.html/",
-  "title": "Microsoft Corporation (MSFT) Q4 FY2026 earnings call ...",
-  "score": 0,
-  "published_date": "2026-07-29T00:00:00.000Z",
-  "_retrieved_at": "2026-08-26T18:21:49Z"
+  "url": "https://tickerleague.com/companies/MSFT/estimates",
+  "title": "Estimates for Microsoft (MSFT)",
+  "score": null,
+  "published_date": null,
+  "_class": "consensus",
+  "_select_key": "consensus",
+  "_provider": "exa",
+  "_query": "Microsoft MSFT Wall Street consensus estimates ahead of earnings",
+  "_retrieved_at": "2026-08-27T13:13:31Z"
 }

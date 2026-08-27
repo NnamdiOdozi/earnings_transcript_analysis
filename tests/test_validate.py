@@ -612,6 +612,33 @@ def test_validate_claims_grounds_web_evidence_citation():
     web_evidence_texts = {"web-001": "Analysts noted strong demand for the new product line this quarter."}
     result = validate_claims(claims, segments_by_id={}, financials={}, web_evidence_texts=web_evidence_texts)
     assert result.ok is True
+    # Web evidence WAS consumed (a claim cites web-001), so no "unconsumed" advisory.
+    assert result.warnings == []
+
+
+def test_warns_when_web_evidence_fetched_but_uncited(revenue_segment, financials):
+    # The "downloaded but unconsumed" guard: web evidence exists for the run but every
+    # claim anchors to a transcript segment, so the web search added nothing to the
+    # claims. Non-failing -- ok stays True (the card is valid), the advisory is surfaced.
+    segments_by_id = {"seg-0001": revenue_segment}
+    claims = [
+        Claim(
+            category="reported_financial_performance",
+            classification="reported_fact",
+            claim_text="Revenue was $110 million.",
+            quote="Revenue for the quarter was $110 million, up from $100 million a year ago.",
+            segment_id="seg-0001",
+            status="reported",
+            values={"revenue_millions": 110},
+            confidence=0.9,
+        ),
+    ]
+    web_evidence_texts = {"web-001": "Analyst consensus was $105 million ahead of the print."}
+    result = validate_claims(claims, segments_by_id, financials, web_evidence_texts=web_evidence_texts)
+    assert result.ok is True
+    assert result.issues == []
+    assert result.warnings and "no claim cites any" in result.warnings[0]
+    assert result.warnings[0].startswith("1 web evidence source(s)")
 
 
 def test_validate_claims_fails_for_unknown_web_evidence_id():

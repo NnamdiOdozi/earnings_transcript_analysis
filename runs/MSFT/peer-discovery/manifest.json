@@ -1,0 +1,216 @@
+{
+  "ticker": "MSFT",
+  "event_id": "peer-discovery",
+  "created_at": "2026-08-27T08:41:40Z",
+  "sources": [
+    {
+      "path": "raw/query-01-hit-01.json",
+      "origin": "https://www.trefis.com/stock/msft/articles/610939/msft-vs-its-peers-the-return-does-not-match-the-rank/2026-08-11",
+      "retrieved_at": "2026-08-27T08:41:35Z",
+      "content_type": "application/json",
+      "sha256": "b707a1c2978ca5f37fa19f476873d990e5786b91c42d35285b8306419d1fd6b0",
+      "byte_length": 414
+    },
+    {
+      "path": "raw/query-01-hit-02.json",
+      "origin": "https://seekingalpha.com/symbol/MSFT/peers/comparison",
+      "retrieved_at": "2026-08-27T08:41:35Z",
+      "content_type": "application/json",
+      "sha256": "2f3abc6bbde2c8b33f95981ef3deed1cf8a6ceb5fb80f615839ba8aa0f50beb0",
+      "byte_length": 339
+    },
+    {
+      "path": "raw/query-01-hit-03.json",
+      "origin": "https://www.trefis.com/stock/msft/articles/588301/how-does-microsoft-stock-stack-up-against-its-peers-3/2026-01-22",
+      "retrieved_at": "2026-08-27T08:41:35Z",
+      "content_type": "application/json",
+      "sha256": "7ec3ea8c71f2a313184929a935b564a4043547eda64a26a501ca38fda0464fc6",
+      "byte_length": 423
+    },
+    {
+      "path": "raw/query-01-hit-04.json",
+      "origin": "https://www.techi.com/quote/MSFT/peers/",
+      "retrieved_at": "2026-08-27T08:41:35Z",
+      "content_type": "application/json",
+      "sha256": "991b914f95162a8e5b4f9a45e6d52c4920213e3b72eb3694eb1cea76ededbedf",
+      "byte_length": 338
+    },
+    {
+      "path": "raw/query-01-hit-05.json",
+      "origin": "https://www.macroaxis.com/competition/MSFT",
+      "retrieved_at": "2026-08-27T08:41:35Z",
+      "content_type": "application/json",
+      "sha256": "150ad16c33f33e9a91a1b2c18c204827198807c3737d851b29536f6c555b5941",
+      "byte_length": 341
+    },
+    {
+      "path": "raw/query-02-hit-01.json",
+      "origin": "https://www.marketbeat.com/stocks/NASDAQ/MSFT/competitors-and-alternatives/",
+      "retrieved_at": "2026-08-27T08:41:36Z",
+      "content_type": "application/json",
+      "sha256": "befa2100211e1a6a106b23fe45d63f2e9ea1342a129eed1ef022f66cda97c054",
+      "byte_length": 353
+    },
+    {
+      "path": "raw/query-02-hit-02.json",
+      "origin": "https://www.trefis.com/stock/msft/articles/610939/msft-vs-its-peers-the-return-does-not-match-the-rank/2026-08-11",
+      "retrieved_at": "2026-08-27T08:41:36Z",
+      "content_type": "application/json",
+      "sha256": "cbb436ad7c0742bc2f5556b4fc4fcdd7368e1bc154c1799b50fcd9f721c88512",
+      "byte_length": 438
+    },
+    {
+      "path": "raw/query-02-hit-03.json",
+      "origin": "https://www.tipranks.com/stocks/msft/similar-stocks",
+      "retrieved_at": "2026-08-27T08:41:36Z",
+      "content_type": "application/json",
+      "sha256": "3469fae40c1219a1369c895b50c210762de6b0537a8248e660216e8b1a19ba5e",
+      "byte_length": 316
+    },
+    {
+      "path": "raw/query-02-hit-04.json",
+      "origin": "https://altindex.com/similar-stocks/msft",
+      "retrieved_at": "2026-08-27T08:41:36Z",
+      "content_type": "application/json",
+      "sha256": "f565fbb26a6ae78154071cd7b4a6c2f66e964f0cfcdddc0950c74edddf395930",
+      "byte_length": 387
+    },
+    {
+      "path": "raw/query-02-hit-05.json",
+      "origin": "https://www.investopedia.com/ask/answers/120314/who-are-microsofts-msft-main-competitors.asp",
+      "retrieved_at": "2026-08-27T08:41:36Z",
+      "content_type": "application/json",
+      "sha256": "34c487768af9b093e511fb849f16791b08e273f0185200695906d11d6aa7e726",
+      "byte_length": 377
+    },
+    {
+      "path": "raw/query-03-hit-01.json",
+      "origin": "https://altindex.com/similar-stocks/msft",
+      "retrieved_at": "2026-08-27T08:41:38Z",
+      "content_type": "application/json",
+      "sha256": "ee20ac6d40e3e0c2c558c41c1a27cd31397027323636ea25f94dec36de31dfbb",
+      "byte_length": 363
+    },
+    {
+      "path": "raw/query-03-hit-02.json",
+      "origin": "https://www.tipranks.com/stocks/msft/similar-stocks",
+      "retrieved_at": "2026-08-27T08:41:38Z",
+      "content_type": "application/json",
+      "sha256": "e62b956675975cfd81d5e2606c937f3399c3da3c4b40204063e6dfd530610cd7",
+      "byte_length": 292
+    },
+    {
+      "path": "raw/query-03-hit-03.json",
+      "origin": "https://www.marketbeat.com/stocks/NASDAQ/MSFT/competitors-and-alternatives/",
+      "retrieved_at": "2026-08-27T08:41:38Z",
+      "content_type": "application/json",
+      "sha256": "92cade8fd5d754d1947ce24889e55a7a651147a62c21f7c5ca22749c0f276b19",
+      "byte_length": 329
+    },
+    {
+      "path": "raw/query-03-hit-04.json",
+      "origin": "https://marketchameleon.com/Overview/MSFT/Similar/",
+      "retrieved_at": "2026-08-27T08:41:38Z",
+      "content_type": "application/json",
+      "sha256": "5792bfd4fe8e4fb1b441918fbec50615fd08d8091fdd2c26e1c826aa6293919c",
+      "byte_length": 296
+    },
+    {
+      "path": "raw/query-03-hit-05.json",
+      "origin": "https://www.obermatt.com/en-us/stocks/microsoft-msft/similar-stocks.html",
+      "retrieved_at": "2026-08-27T08:41:38Z",
+      "content_type": "application/json",
+      "sha256": "b151491560feb44a29a97390601887135d5aae8d57505408957034693977bcef",
+      "byte_length": 345
+    },
+    {
+      "path": "candidate-01.md",
+      "origin": "https://www.trefis.com/stock/msft/articles/610939/msft-vs-its-peers-the-return-does-not-match-the-rank/2026-08-11",
+      "retrieved_at": "2026-08-27T08:41:38Z",
+      "content_type": "text/markdown",
+      "sha256": "ba6d269ec4ee066b2cce5daf37211d72da711d9fc28c0aefd11c4852b8f0d943",
+      "byte_length": 5336
+    },
+    {
+      "path": "candidate-02.md",
+      "origin": "https://seekingalpha.com/symbol/MSFT/peers/comparison",
+      "retrieved_at": "2026-08-27T08:41:38Z",
+      "content_type": "text/markdown",
+      "sha256": "1814319a0ec5a2cb79896790b38dfda158e8445205c58b5e9405ae7176788bc3",
+      "byte_length": 671
+    },
+    {
+      "path": "candidate-03.md",
+      "origin": "https://www.trefis.com/stock/msft/articles/588301/how-does-microsoft-stock-stack-up-against-its-peers-3/2026-01-22",
+      "retrieved_at": "2026-08-27T08:41:38Z",
+      "content_type": "text/markdown",
+      "sha256": "1520f93cb8ef85c62decb469dbf5001b14e317faaad1938e8669150827343d5c",
+      "byte_length": 3920
+    },
+    {
+      "path": "candidate-04.md",
+      "origin": "https://www.techi.com/quote/MSFT/peers/",
+      "retrieved_at": "2026-08-27T08:41:39Z",
+      "content_type": "text/markdown",
+      "sha256": "a1d5209f395652a70a8ae4e88c8a651d295a5566fa0b8ef65866e32aa5db32d6",
+      "byte_length": 1687
+    },
+    {
+      "path": "candidate-05.md",
+      "origin": "https://www.macroaxis.com/competition/MSFT",
+      "retrieved_at": "2026-08-27T08:41:39Z",
+      "content_type": "text/markdown",
+      "sha256": "42f3356f525431a607b3da2dc18a23c0ad721fabb3732aa143cd96cbbc3ef963",
+      "byte_length": 12081
+    },
+    {
+      "path": "candidate-06.md",
+      "origin": "https://www.marketbeat.com/stocks/NASDAQ/MSFT/competitors-and-alternatives/",
+      "retrieved_at": "2026-08-27T08:41:39Z",
+      "content_type": "text/markdown",
+      "sha256": "32be66f05c8c4ee85f24f8ce43dc30369e946dba632915187b608deff48eaa39",
+      "byte_length": 59281
+    },
+    {
+      "path": "candidate-07.md",
+      "origin": "https://www.tipranks.com/stocks/msft/similar-stocks",
+      "retrieved_at": "2026-08-27T08:41:39Z",
+      "content_type": "text/markdown",
+      "sha256": "13d17445e8d53ef4aadec0574bae4656c97dad714a594957db1ec98691982ae1",
+      "byte_length": 6278
+    },
+    {
+      "path": "candidate-08.md",
+      "origin": "https://altindex.com/similar-stocks/msft",
+      "retrieved_at": "2026-08-27T08:41:40Z",
+      "content_type": "text/markdown",
+      "sha256": "d299a1dbfe12b2be9f6f64280a0505f0d7d5714ace5b0d42bc964b07374089bd",
+      "byte_length": 3908
+    },
+    {
+      "path": "candidate-09.md",
+      "origin": "https://www.investopedia.com/ask/answers/120314/who-are-microsofts-msft-main-competitors.asp",
+      "retrieved_at": "2026-08-27T08:41:40Z",
+      "content_type": "text/markdown",
+      "sha256": "94a85a8f92831d761402954aa140fb92555037fbc80da5592082c1398e13bb0b",
+      "byte_length": 5308
+    },
+    {
+      "path": "candidate-10.md",
+      "origin": "https://marketchameleon.com/Overview/MSFT/Similar/",
+      "retrieved_at": "2026-08-27T08:41:40Z",
+      "content_type": "text/markdown",
+      "sha256": "cb2956785c4c5ebba4533f955cd90ca3b4d0bc805ded870089fd5e040f0ce23c",
+      "byte_length": 1606
+    }
+  ],
+  "notes": [
+    "Peer-group discovery via exa: 15 hit(s) from 3 queries.",
+    "Extracted 10 candidate page(s) for the agent to read and pick ~4 peers."
+  ],
+  "queries": [
+    "Microsoft MSFT peer group comparable companies",
+    "Microsoft MSFT closest competitors comparable stocks analysts",
+    "stocks most similar to MSFT Microsoft"
+  ]
+}

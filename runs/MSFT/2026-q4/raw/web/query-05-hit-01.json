@@ -1,7 +1,11 @@
 {
-  "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323632/msft-20260729.htm",
-  "title": "8-K",
-  "score": 0,
+  "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
+  "title": "Document",
+  "score": null,
   "published_date": null,
-  "_retrieved_at": "2026-08-26T18:21:52Z"
+  "_class": "peer",
+  "_select_key": "peer:Alphabet",
+  "_provider": "exa",
+  "_query": "Alphabet quarterly results versus Microsoft MSFT",
+  "_retrieved_at": "2026-08-27T13:13:32Z"
 }

@@ -16,34 +16,38 @@ with.
 
 **Overall: one agent, three skills, in order.**
 
-![Overall flow: one agent, two skills](docs/flow_overall.svg)
+![Overall flow: one agent, three skills](docs/flow_overall.svg)
 
 1. **You** tell the agent a ticker, an event id (e.g. `2026-q2`), and where the
    transcript lives — a local file path or URL. You never paste transcript text
    into chat; the Python CLI reads the file itself.
 2. **The agent** runs one continuous session across all three skills below, so it
    remembers which run (ticker/event-id) it's working on throughout.
-3. **Skill 1 — build source pack.** `earnings prepare` ingests and sanitises the
-   transcript, then pulls two independent evidence sources on by default: **SEC**
-   filed financials (for cross-checking the call) and **Tavily** web search for
-   official documents, guarded by a **causality check** that drops anything
-   published after the event date — see command 1 below.
+3. **Skill 1 — build source pack.** First `earnings discover-peers` searches for the
+   company's analyst-recognised comparables and the agent reads the results to pick
+   ~4 (the transcript itself usually names no competitors, so the peer group is
+   *searched*, not read off the call). Then `earnings prepare` ingests and sanitises
+   the transcript and pulls two independent evidence sources on by default: **SEC**
+   filed financials (for cross-checking the call) and **Exa/Tavily** web search for
+   what the call itself does *not* contain — analyst **consensus estimates** and, for
+   those chosen peers, **peer-group results** — guarded by a **causality check** that
+   drops anything published after the event date — see commands 1–2 below.
 4. **Skill 2 — produce signal card.** The agent writes `claims.json`, one
    quote-anchored entry per reportable fact, then `earnings analyze` validates
    every quote/number/calculation before writing `signal-card.md`. It then writes
    the interpretive `outlook-brief.md`, gated by `earnings validate-outlook` — see
-   commands 2–3 below.
+   commands 3–4 below.
 5. **Skill 3 — review.** A final, fresh read of the whole bundle judging what
    Python can't: fair reading of quotes, narrative balance, material omissions. In
    Claude Code this is the dedicated `outlook-reviewer` subagent; elsewhere
-   (Codex) the same agent runs it as a deliberate final pass — see command 4 below.
+   (Codex) the same agent runs it as a deliberate final pass — see command 5 below.
 
 **Inside `prepare` and `analyze`, one level more detailed:**
 
 ![Inside one analysis: prepare then analyze, with validation gating the card](docs/flow_pipeline.svg)
 
 This is the same three skills as above, one level more detailed: 1–4 are what
-`earnings prepare` does (choose the event, load the transcript/SEC/Tavily
+`earnings prepare` does (choose the event, load the transcript/SEC/Exa-Tavily
 sources, sanitise + split into speaker-labelled segments, hash + timestamp
 everything into the manifest); 5–8 are what `earnings analyze` does (the agent
 extracts claims, Python verifies each one — quote, number, calculation-input,
@@ -60,17 +64,16 @@ Two different kinds of correctness are checked here, and it matters which is whi
 
 **Python (`prepare`, `analyze`, `validate-outlook`, `check-review`) checks mechanical
 correctness only — never quality, never meaning.** Is a claim's `quote` an *exact*
-substring of the segment it cites, not a paraphrase? Does every number in a claim
-actually appear in the cited evidence or in `evidence/financials.json`? Does a
-derived figure (YoY growth, margin, EPS growth) match Python's own recomputation
-from the claim's own stated inputs? Does every claim id cited in `outlook-brief.md`
-or `review-report.json` actually exist in this run's validated `claims.json`? If
-any of these fail, the run stops before `signal-card.md` is written — nothing
-partial or unverified is ever produced. But Python cannot judge whether a claim was
-*worth* extracting, whether an outlook brief's base case is a *fair* reading of the
-evidence, or whether a cited claim id is being used *correctly* next to the
-sentence it sits beside (only that the id *exists*). That's a structural limit —
-mechanical checks can prove existence and arithmetic, not judgment.
+substring of the segment it cites, not a paraphrase? Does every number actually appear
+in the cited evidence or in `evidence/financials.json`? Does a derived figure (YoY
+growth, margin, EPS growth) match Python's own recomputation from the claim's stated
+inputs? Does every claim id cited in `outlook-brief.md` or `review-report.json` exist
+in this run's validated `claims.json`? If any of these fail, the run stops before
+`signal-card.md` is written — nothing partial or unverified is ever produced. But
+Python cannot judge whether a claim was *worth* extracting, whether an outlook brief's
+base case is a *fair* reading of the evidence, or whether a cited claim id sits
+*correctly* beside its sentence (only that the id *exists*) — mechanical checks prove
+existence and arithmetic, not judgment.
 
 **The agent does the interpretive work Python structurally can't**, in two
 distinct passes with two different jobs:
@@ -100,14 +103,31 @@ cp .env.example .env   # fill in EXA_API_KEY / TAVILY_API_KEY / SEC_USER_AGENT -
                         # in config.toml picks "exa" (default) or "tavily"
 ```
 
-## The four CLI commands
+## The five CLI commands
 
 Deliberately industry-agnostic: nothing in the code names a company, sector, or
 KPI. What "matters" (ARR/churn for SaaS, comparable sales for a retailer, combined
 ratio for an insurer) is discovered per run from that company's own disclosures —
 see `.agents/skills/produce-earnings-signal-card/reference/extraction-instructions.md`.
 
-### 1. `earnings prepare` — build a source pack
+### 1. `earnings discover-peers` — find the analyst peer group
+
+```bash
+uv run earnings discover-peers --ticker MSFT --company-name "Microsoft" \
+  [--event-date 2026-07-29]
+```
+
+Run this *before* `prepare`. It searches for the company's analyst-recognised
+comparables and extracts a few candidate pages to
+`runs/<TICKER>/peer-discovery/candidate-*.md` (hashed and logged in that dir's
+`manifest.json`, so the choice is auditable). The **agent reads those pages and picks
+the ~4** companies that recur as agreed comparables — that selection is judgment, not
+the command's — and passes them to `prepare` as `--peers`. Output is company-level,
+not per-event (a company's peers don't shift by the quarter), so re-preparing a
+quarter never disturbs it. `--event-date` is an optional safety net: when given, a
+peer page dated after it is dropped from extraction (undated ones still pass through).
+
+### 2. `earnings prepare` — build a source pack
 
 ```bash
 uv run earnings prepare \
@@ -118,7 +138,14 @@ uv run earnings prepare \
 
 `--transcript` also accepts a URL — it's fetched, then archived and sanitised the
 same way as a local file. Always pass a real `--event-date` on a live run — it
-sharpens web-search queries and is what the causality guard checks against.
+sharpens web-search queries and is what the causality guard checks against. Web
+search is aimed at what the call omits: analyst **consensus estimates** (always) and,
+when you pass `--peers "Alphabet" "Amazon" "Oracle" "Apple"` (the ~4 comparables you
+chose from `discover-peers`, command 1), **peer-group results**. Peers are per-run,
+never hardcoded. Extraction into citable evidence is **round-robined across those
+classes** — consensus, and each peer separately — so no single class (or one loud
+peer) fills every slot and starves the rest; the result is balanced competitive
+breadth rather than ten near-duplicate consensus pages.
 
 SEC evidence is opt-in per company, not universal: pass `--sec-cik <numeric CIK>`
 to pull revenue / net income / diluted EPS from SEC's company-facts XBRL API
@@ -134,7 +161,7 @@ later quarter, an annual figure, or a restatement.
 A rerun for the same ticker/event archives the prior run to `_archive/<timestamp>/`
 first, rather than overwriting it.
 
-### 2. `earnings analyze` — validate claims and produce the signal card
+### 3. `earnings analyze` — validate claims and produce the signal card
 
 ```bash
 uv run earnings analyze --ticker ACME --event-id 2026-q2
@@ -147,7 +174,7 @@ passes — writes `signal-card.md`. A failing claim (paraphrased quote, fabricat
 number, wrong derived calculation, an `analytical_inference` with no cited source
 claim, a `Metric` with no `source_claim_ids`) blocks the card and exits non-zero.
 
-### 3. `earnings validate-outlook` — gate the forward-looking brief
+### 4. `earnings validate-outlook` — gate the forward-looking brief
 
 ```bash
 uv run earnings validate-outlook --ticker ACME --event-id 2026-q2
@@ -159,7 +186,7 @@ passed `analyze`, or if the brief cites any claim id (`claim-###`) that doesn't
 exist in this run's `claims.json` — every conclusion in the brief must trace back
 to real, validated evidence.
 
-### 4. `earnings check-review` — gate the final semantic review
+### 5. `earnings check-review` — gate the final semantic review
 
 ```bash
 uv run earnings check-review --ticker ACME --event-id 2026-q2
@@ -174,11 +201,11 @@ back and revise, don't silently patch the brief.
 
 ```text
 runs/<ticker>/<event-id>/
-  manifest.json               # source URLs/paths, timestamps, sha256 hashes, SEC/Tavily status, queries sent
+  manifest.json               # source URLs/paths, timestamps, sha256 hashes, SEC/Exa-Tavily status, queries sent
   raw/                        # verbatim archived source, before sanitisation
   normalized/transcript.jsonl # sanitised, segmented, speaker-labelled transcript
   evidence/financials.json    # SEC/XBRL evidence, if a CIK was resolved
-  evidence/web-evidence.jsonl # extracted, citable Tavily evidence (+ evidence/web/*.md)
+  evidence/web-evidence.jsonl # extracted, citable Exa/Tavily evidence (+ evidence/web/*.md)
   claims.json                 # quote-anchored claims (agent-written)
   metrics.json                # optional: company-defined metrics (agent-written)
   validation.json             # per-claim / per-metric pass/fail detail + real-clock validated_at
@@ -190,6 +217,10 @@ runs/<ticker>/<event-id>/
   _archive/<timestamp>/       # a prior run's files, if this ticker/event was prepared before
 ```
 
+`discover-peers` writes separately to `runs/<ticker>/peer-discovery/`
+(`candidate-*.md` + its own hashed `manifest.json`) — company-level, shared across
+that company's quarters, so it sits outside any single event directory.
+
 ### Where each file's content actually comes from
 
 Two very different origins live in this one directory, and it matters which is
@@ -199,7 +230,7 @@ which when you're deciding how much to trust a number:
 |---|---|---|
 | `manifest.json`, `raw/`, `normalized/transcript.jsonl` | Python | Mechanical fetch/transform of the source — no interpretation. |
 | `evidence/financials.json` | Python (SEC XBRL API) | Self-documenting — carries its own filing accession number, so any figure traces to the exact filing it came from. |
-| `evidence/web-evidence.jsonl` | Python (Tavily extract API) | Full extracted content, so it's quote-checkable — not just a search snippet. |
+| `evidence/web-evidence.jsonl` | Python (Exa/Tavily extract API) | Full extracted content, so it's quote-checkable — not just a search snippet. |
 | `claims.json`, `metrics.json` | **Agent** | Interpretive — the agent decides what's worth reporting. `Metric` carries a `source` field so provenance isn't only implied by the file living next to `claims.json` rather than under `evidence/`. Python only checks it, never writes it. |
 | `validation.json`, `signal-card.md` | Python | Deterministic check results, then a mechanical re-format of already-validated claims — not interpretive. |
 | `outlook-brief.md` | **Agent** | Fully interpretive synthesis (base/upside/downside cases). Python only validates the claim ids it cites resolve — it does not grade the reasoning. |
@@ -222,10 +253,11 @@ doesn't require walking every `runs/<ticker>/<event>/` directory.
 
 Three repo-scoped skills live under `.agents/skills/`, used in order:
 
-- **`build-earnings-source-pack`** — walks the agent through collecting inputs and
-  running `earnings prepare`, which automatically pulls SEC and Tavily evidence
-  (both on by default, `config.toml [research]`) — Tavily is not something the
-  agent decides to invoke per run — then verifying the resulting pack.
+- **`build-earnings-source-pack`** — walks the agent through collecting inputs,
+  running `earnings discover-peers` and choosing the ~4 peers, then running `earnings
+  prepare`, which automatically pulls SEC and Exa/Tavily evidence (both on by default,
+  `config.toml [research]`) — the web search is not something the agent decides to
+  invoke per run — then verifying the resulting pack.
 - **`produce-earnings-signal-card`** — Stage 1: walks the agent through reading a
   prepared pack, writing `claims.json` (and optionally `metrics.json`) with exact
   quotes and calculation blocks, running `earnings analyze`, and iterating until
@@ -246,11 +278,12 @@ Point your agent at this repo; it discovers each skill under
 uv run --extra dev python -m pytest tests/ -q
 ```
 
-Fixtures under `tests/fixtures/` are synthetic, need no network access, and cover:
-a transcript with embedded suspicious instructions (must stay inert data, never
-followed), claims that must fail validation (paraphrased quote, fabricated number,
-wrong calculation), and three differently-shaped businesses (SaaS, retailer,
-insurer) proving no cross-industry contamination (`tests/test_industry_fixtures.py`).
+Synthetic fixtures under `tests/fixtures/`, no network access. They cover prompt-
+injection safety (embedded instructions stay inert data), the validators' failure
+cases (paraphrased quote, fabricated number, wrong calculation), the consensus/peer
+web path (queries run, class-tagged, round-robined so peers aren't starved, causality
+guard), and three differently-shaped businesses (SaaS, retailer, insurer) proving no
+cross-industry contamination.
 
 ## Known limitations
 
@@ -258,9 +291,9 @@ insurer) proving no cross-industry contamination (`tests/test_industry_fixtures.
   formatting may leave `speaker` as `null`.
 - Q&A boundary detection relies on marker phrases (e.g. "question-and-answer
   session"); transcripts without such a marker are treated as entirely "prepared."
-- SEC and Tavily access are thin — no retry/backoff or pagination handling (POC,
+- SEC and Exa/Tavily access are thin — no retry/backoff or pagination handling (POC,
   not a production integration).
-- Tavily's `official_sources_only` config flag is not domain-filtered — `prepare`
+- Exa/Tavily's `official_sources_only` config flag is not domain-filtered — `prepare`
   archives whatever the search API returns for the narrow generic queries; it does
   not verify each hit's URL is actually the company's own domain or a regulator.
 - `config.toml [sec].forms` is informational (documents the filing types this POC
@@ -268,36 +301,32 @@ insurer) proving no cross-industry contamination (`tests/test_industry_fixtures.
 - Cross-period metric comparison relies on the agent noticing a definition/unit
   change and flagging it as an `analytical_inference`; Python does not itself
   detect a silently redefined metric.
-- **Resolved (2026-08-26):** `extract_financials_from_company_facts` used to match
-  SEC facts by `end` date only, not `start` — a 10-Q's 3-month and 6-month (YTD)
-  facts share the same `end`, so a pinned period could silently return the YTD
-  figure instead of the quarter (confirmed on MSFT Q2 FY2026: revenue read $158.9B
-  YTD vs. management's stated $81.3B quarterly figure). Fixed by reading each
-  fact's own `start` too (live-confirmed present in SEC's real API response) and
-  deriving `duration_days`/`period_type` (`quarter`/`half_year`/`nine_months`/
-  `full_year`) from it — pass `--sec-period-type quarter` alongside
-  `--sec-period-end` to pin to the exact duration, not just the exact end date.
-  `financials.json` now carries `start`/`duration_days`/`period_type` for every
-  concept. This only disambiguates SEC/XBRL figures, which carry structured
-  start/end metadata — a transcript's own spoken figures have no such tag, so
-  `Claim.period` (agent-set from context cues, e.g. "this quarter" vs.
-  "year-to-date") remains a reading-comprehension judgment, not something Python
-  can derive; see extraction-instructions.md.
-- The causality guard's server-side layer (Tavily's `end_date` / Exa's
-  `endPublishedDate`, per both providers' documented API contracts) is **not
-  reliably enforced in practice** — confirmed by live testing on 2026-08-26 on
-  both providers (identical results with and without the date param set,
-  including hits published years past the cutoff). The client-side layer
+- A transcript's own spoken figures carry no structured period metadata (unlike
+  SEC/XBRL facts, which have explicit `start`/`end` dates), so `Claim.period` —
+  whether a figure is quarterly, year-to-date, etc. — remains an agent
+  reading-comprehension judgment from context cues ("this quarter" vs.
+  "year-to-date"), not something Python can derive; see extraction-instructions.md.
+- The causality guard's **server-side** layer (Tavily's `end_date` / Exa's
+  `endPublishedDate`) is **not reliably enforced in practice** — live testing on
+  2026-08-26 returned identical results with and without the date param on both
+  providers, including hits published years past the cutoff. The **client-side** layer
   (dropping any hit whose `published_date` is after `--event-date`) is real
-  enforcement, but most hits carry no `published_date` at all, so they pass
-  through unchecked either way. Net: a dated post-event source is reliably
-  excluded; an undated one is not. See `web-search-usage.md` for detail. Web search
-  provider is `config.toml [research] provider` (`"exa"` default, or `"tavily"`).
+  enforcement, but most hits carry no `published_date`, so they pass through unchecked.
+  Net: a *dated* post-event source is reliably excluded; an *undated* one is not. This
+  matters more now that web search targets **consensus** and **peer** results — a
+  consensus page is often undated *and* living (the same URL shows the pre-event
+  estimate before the call and the reported beat/miss after), so an undated consensus
+  hit fetched long after the event can be post-event-contaminated and slip through. The
+  `outlook-reviewer`'s temporal-integrity check is the backstop, and the extraction
+  skill tells the agent to judge undated content and ignore any peer that reported
+  *after* the event. Dropping undated hits outright was rejected — too much real
+  material carries no date. See `web-search-usage.md` for detail; provider is
+  `config.toml [research] provider` (`"exa"` default, or `"tavily"`).
 - `extract_numbers`'s number regex (`validate.py`) does not recognize the
-  parenthetical-negative accounting convention (`(50) million` meaning -$50M) —
+  parenthetical-negative accounting convention (`(50) million` meaning -\$50M) —
   it would be read as positive 50. Deliberately not implemented: earnings-call
   *spoken* prose rarely uses this notation (it's a tabular-filing convention), and
   auto-converting `(...)` risks misreading an ordinary parenthetical aside as a
   negative number. Add a conditional pre-pass if this notation is ever confirmed
   to appear in evidence text. Hyphenated ranges ("37%-38%") and genuine negatives
-  ("-$50 million") are both handled correctly as of 2026-08-26.
+  ("-\$50 million") are both handled correctly.

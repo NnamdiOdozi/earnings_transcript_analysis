@@ -1,7 +1,11 @@
 {
-  "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323632/0001193125-26-323632.txt",
-  "title": "",
-  "score": 0,
-  "published_date": null,
-  "_retrieved_at": "2026-08-26T18:21:52Z"
+  "url": "https://www.cnbc.com/2026/07/29/microsoft-msft-q4-earnings-report-2026.html",
+  "title": "Microsoft (MSFT) Q4 earnings report 2026",
+  "score": null,
+  "published_date": "2026-07-29T00:00:00.000Z",
+  "_class": "peer",
+  "_select_key": "peer:Alphabet",
+  "_provider": "exa",
+  "_query": "Alphabet quarterly results versus Microsoft MSFT",
+  "_retrieved_at": "2026-08-27T13:13:32Z"
 }

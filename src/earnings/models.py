@@ -143,6 +143,10 @@ class ValidationResult(BaseModel):
     ok: bool
     checked_claims: int
     issues: list[ValidationIssue] = Field(default_factory=list)
+    # Non-failing advisories: things worth surfacing that do NOT block the signal
+    # card (ok stays True). Example: web evidence was fetched but no claim cited any
+    # -- the exact "downloaded but unconsumed" gap this pipeline hit before.
+    warnings: list[str] = Field(default_factory=list)
     # Real-clock stamp, set by cli._write_validation at write time -- not passed by
     # validate_claims() itself, so that function stays pure/args-only and testable
     # without touching the clock (see module docstring in validate.py).

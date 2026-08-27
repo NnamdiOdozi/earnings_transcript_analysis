@@ -431,7 +431,19 @@ def validate_claims(
         if calc_input_error:
             issues.append(ValidationIssue(claim_index=idx, check="calculation_inputs", message=calc_input_error))
 
-    return ValidationResult(ok=not issues, checked_claims=len(claims), issues=issues)
+    # Non-failing advisory: web evidence was fetched but no claim cited any. This is
+    # the exact "downloaded but unconsumed" gap this pipeline hit before (all claims
+    # anchored to transcript segments, the Exa/Tavily download went to waste). Surfaced
+    # as a warning, not a failure -- a run with nothing worth citing from the web is
+    # legitimate; a run that silently ignored available web evidence should be visible.
+    warnings: list[str] = []
+    if web_evidence_texts and not any(claim.web_evidence_id for claim in claims):
+        warnings.append(
+            f"{len(web_evidence_texts)} web evidence source(s) were fetched but no claim cites any "
+            "(web_evidence_id); the web search contributed nothing to this run's claims."
+        )
+
+    return ValidationResult(ok=not issues, checked_claims=len(claims), issues=issues, warnings=warnings)
 
 
 def validate_review_report(report: ReviewReport, claim_ids: set[str]) -> list[ValidationIssue]:

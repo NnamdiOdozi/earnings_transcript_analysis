@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Microsoft Cloud revenue",
+    "value": 59.3,
+    "unit": "USD billions",
+    "period": "Q4 FY2026",
+    "definition": "Microsoft's aggregate commercial cloud revenue (Azure plus first-party AI applications and services) as the company reports it",
+    "source_claim_ids": ["claim-014"]
+  },
+  {
+    "name": "Azure and other cloud services growth",
+    "value": 43.0,
+    "unit": "% YoY",
+    "period": "Q4 FY2026",
+    "definition": "Year-over-year revenue growth of Azure and other cloud services",
+    "source_claim_ids": ["claim-017"]
+  },
+  {
+    "name": "Paid Microsoft 365 Copilot seats",
+    "value": 30.0,
+    "unit": "million seats",
+    "period": "as of Q4 FY2026",
+    "definition": "Cumulative paid Microsoft 365 Copilot seats sold, as disclosed by management",
+    "source_claim_ids": ["claim-020"]
+  },
+  {
+    "name": "Commercial remaining performance obligation (RPO)",
+    "value": 678.0,
+    "unit": "USD billions",
+    "period": "as of Q4 FY2026",
+    "definition": "Contracted commercial revenue not yet recognized (backlog), as the company defines commercial RPO",
+    "source_claim_ids": ["claim-013"]
+  },
+  {
+    "name": "GitHub users",
+    "value": 225.0,
+    "unit": "million users",
+    "period": "as of Q4 FY2026",
+    "definition": "Total registered GitHub users across the platform",
+    "source_claim_ids": ["claim-021"]
+  }
+]

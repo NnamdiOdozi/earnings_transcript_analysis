@@ -18,10 +18,23 @@ bytes.
 - Invisible/zero-width Unicode: zero-width space/joiners, BOM, LTR/RTL marks, soft
   hyphen, and any other Unicode "format" (Cf) category character
 
-It does **not** attempt to detect or remove prompt-injection style text. That is a
-content-classification problem, not a sanitisation problem, and this project
-deliberately does not build a classifier for it (see BRIEFING.md: "Do not
-implement... Prompt-injection classifiers").
+Sanitisation does **not** remove or rewrite prompt-injection style text — suspicious
+content stays intact as quotable data. It is never stripped, because deciding what is
+"malicious" is a content-classification problem, and this project deliberately does not
+build a classifier.
+
+## Optional prompt-injection flag (detect, don't remove, don't block)
+
+Separately from sanitisation, `earnings prepare` runs a **best-effort regex flag** over
+the sanitised transcript: `process.scan_for_injection()` matches a config-driven list of
+~25 common injection phrasings (`config.toml [sanitisation] injection_patterns`, toggled
+by `injection_scan_enabled`). Any hit is recorded in `manifest.json` and a per-run
+`injection-scan.json` (the matched phrase plus a short context window). It is explicitly
+**not a classifier and not a gate** — it never blocks the run and never removes text; it
+is an awareness signal so the reviewer knows to look. It runs *after* sanitisation, so
+invisible-character evasions are already normalised away. It covers the fetched/loaded
+transcript only, not Exa/Tavily results (see `web-search-usage.md` — those providers run
+their own defences). Turn it off in config if it becomes noisy.
 
 ## How to treat suspicious content once segmented
 

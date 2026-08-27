@@ -1,10 +1,16 @@
 """Sanitisation, segmentation, hashing and archiving.
 
 Fetched/loaded text is treated as untrusted DATA, never as instructions. We do not
-attempt to classify or strip "prompt injection" content -- we only remove structural
-HTML noise, control characters and invisible Unicode so the text is clean to read and
-quote. Anything else (e.g. "IGNORE PREVIOUS INSTRUCTIONS...") is left intact as plain
-text and only ever flows into segment .text, never executed or treated specially.
+classify or STRIP "prompt injection" content -- we only remove structural HTML noise,
+control characters and invisible Unicode so the text is clean to read and quote.
+Anything else (e.g. "IGNORE PREVIOUS INSTRUCTIONS...") is left intact as plain text and
+only ever flows into segment .text, never executed or treated specially.
+
+We do, optionally, FLAG it: `scan_for_injection` runs a config-driven list of regex
+patterns over the sanitised transcript and records any hit (in manifest.json and a
+per-run injection-scan.json) as an awareness signal for the reviewer. This is a
+best-effort flag, NOT a classifier and NOT a gate -- it never blocks the run or removes
+text. See `reference/sanitisation-notes.md`.
 """
 from __future__ import annotations
 
@@ -71,6 +77,34 @@ def sanitize(raw_text: str, is_html: bool) -> str:
     """
     text = html_to_text(raw_text) if is_html else raw_text
     return strip_invisible_and_control_chars(text)
+
+
+def scan_for_injection(text: str, patterns: list[str]) -> list[dict]:
+    """Best-effort prompt-injection FLAG: match each regex in `patterns` (case-
+    insensitive) against `text` and return one record per hit -- NOT a classifier, NOT
+    a gate. Callers record the result as an advisory note; they never block the run or
+    remove the text (suspicious content stays quotable data). Each record carries the
+    pattern that fired, the exact matched substring, and a short surrounding context
+    window so a reviewer can judge it. Run this AFTER sanitize() so invisible-character
+    evasions (e.g. a zero-width space inside "ig<zwsp>nore") are already normalised away.
+    """
+    findings: list[dict] = []
+    for pattern in patterns:
+        try:
+            regex = re.compile(pattern, re.IGNORECASE)
+        except re.error:
+            continue  # a malformed config pattern must never crash a run
+        for m in regex.finditer(text):
+            start = max(0, m.start() - 40)
+            end = min(len(text), m.end() + 40)
+            findings.append(
+                {
+                    "pattern": pattern,
+                    "match": m.group(0),
+                    "context": normalize_whitespace(text[start:end]),
+                }
+            )
+    return findings
 
 
 def sha256_hex(data: bytes) -> str:

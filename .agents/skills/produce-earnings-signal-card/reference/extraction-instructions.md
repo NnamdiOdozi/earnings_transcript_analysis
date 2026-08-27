@@ -114,16 +114,32 @@ punctuation mark must match.
 ## Citing web evidence
 
 If `earnings prepare` extracted web evidence (check for
-`evidence/web-evidence.jsonl` in the run directory — it exists only when Tavily was
-enabled and at least one search hit was successfully extracted), a claim can cite
-one of those sources instead of a transcript segment: set `web_evidence_id` (e.g.
-`"web-003"`) instead of `segment_id`, and leave `segment_id` unset. Everything else
-about the claim works identically — `quote` must be an exact substring of that
-source's extracted content (read the file at the entry's `content_path`, the same
-way you'd read a transcript segment's `text`), and numeric grounding checks the same
-content. A raw hit under `raw/tavily/query-*-hit-*.json` is **not** citable — it's
-an unextracted search snippet, not full content; only entries in
-`evidence/web-evidence.jsonl` can be cited.
+`evidence/web-evidence.jsonl` in the run directory — it exists only when web search
+(Exa/Tavily) was enabled and at least one hit was successfully extracted), a claim
+can cite one of those sources instead of a transcript segment: set `web_evidence_id`
+(e.g. `"web-003"`) instead of `segment_id`, and leave `segment_id` unset. Everything
+else works identically — `quote` must be an exact substring of that source's
+extracted content (read the file at the entry's `content_path`, the same way you'd
+read a transcript segment's `text`), and numeric grounding checks the same content. A
+raw hit under `raw/web/query-*-hit-*.json` is **not** citable — it's an unextracted
+search snippet, not full content; only entries in `evidence/web-evidence.jsonl` can
+be cited.
+
+**Use it — web search is repurposed to fetch what the transcript does NOT contain.**
+The queries target two classes (each raw hit records its `_class`): **consensus** —
+analyst estimates/expectations for this event, and **peer** — competitors' results
+for the period (`--peers`, agent-supplied). This is the point of the web search:
+- Make a claim for the **surprise** — reported actual vs. consensus (a `reported_fact`
+  citing the consensus source, or an `analytical_inference` whose `inferred_from`
+  links the reported claim and the consensus claim).
+- Use consensus and peer claims to ground the forward-looking `outlook-brief.md`
+  base/upside/downside cases — the brief cites these claim ids like any other.
+Two causality cautions: only trust a consensus/peer source dated **before** the event
+(the run drops dated post-event hits, but undated ones slip through — judge the
+content); and a peer that reported **after** this event was not knowable at the call,
+so don't treat its numbers as context management had. If `analyze` warns that web
+evidence was fetched but no claim cited any, that means these sources went unused —
+revisit whether a consensus/peer/surprise claim was missed.
 
 ## Numeric claims
 

@@ -19,11 +19,15 @@ Use this skill on a source pack already built by `build-earnings-source-pack`. D
    (industry-agnostic) categories, classification taxonomy, and how to write exact
    quotes and calculation blocks. Write the result as
    `runs/<TICKER>/<EVENT_ID>/claims.json`, an array of claim objects matching
-   `earnings.models.Claim`, each with a unique `id`. Every claim must cite a real
-   `segment_id` and a `quote` that is an exact substring of that segment's `text`
-   field (copy it, do not retype it). Do not use sector-specific vocabulary that
-   isn't the company's own — discover what matters from its disclosures, not from a
-   fixed KPI list.
+   `earnings.models.Claim`, each with a unique `id`. Every claim cites exactly one
+   evidence source and a `quote` that is an exact substring of it: normally a
+   transcript `segment_id`, but **when the run has web evidence
+   (`evidence/web-evidence.jsonl`), use it** — cite `web_evidence_id` for facts the
+   call itself does not contain, above all the **analyst consensus/expectations** (so
+   the beat-or-miss "surprise" can be a claim) and **peer-group results** (see
+   `reference/extraction-instructions.md` "Citing web evidence"). Copy every quote,
+   do not retype it. Do not use sector-specific vocabulary that isn't the company's
+   own — discover what matters from its disclosures, not from a fixed KPI list.
 
 3. **Optionally discover company-defined metrics.** If the transcript supports it,
    also write `runs/<TICKER>/<EVENT_ID>/metrics.json` per

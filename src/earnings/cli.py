@@ -35,7 +35,7 @@ from .models import (
     ValidationResult,
     WebEvidence,
 )
-from .process import sanitize, segment_transcript, sha256_hex
+from .process import sanitize, scan_for_injection, segment_transcript, sha256_hex
 from .validate import (
     check_outlook_brief_citations,
     check_outlook_brief_dollar_escaping,
@@ -99,6 +99,200 @@ def _archive_existing_run(run_dir: Path) -> None:
         shutil.move(str(item), str(dest / item.name))
 
 
+def _parse_event_cutoff(event_date: str | None):
+    """Parse a --event-date string into a datetime.date, or None if it isn't a real
+    calendar date (event_id like "2026-q2" is the common non-date default). Shared by
+    prepare and discover-peers so both apply the causality guard identically."""
+    if not event_date:
+        return None
+    try:
+        return datetime.strptime(event_date[:10], "%Y-%m-%d").date()
+    except (ValueError, TypeError):
+        return None
+
+
+def _filter_post_event(hits: list[dict], event_cutoff) -> tuple[list[dict], int]:
+    """Drop hits whose published_date is AFTER event_cutoff -- a source that appeared
+    after the call could not have informed it, so it must never become citable evidence.
+    Hits with no parseable published_date are KEPT, not dropped (undated post-event
+    slippage is a consciously-accepted residual risk -- see README known limitations).
+    Returns (kept_hits, excluded_count). With no cutoff, keeps everything."""
+    if not event_cutoff:
+        return list(hits), 0
+    kept: list[dict] = []
+    excluded = 0
+    for hit in hits:
+        published = hit.get("published_date")
+        if published:
+            try:
+                published_date = datetime.strptime(published[:10], "%Y-%m-%d").date()
+            except ValueError:
+                published_date = None
+            if published_date and published_date > event_cutoff:
+                excluded += 1
+                continue
+        kept.append(hit)
+    return kept, excluded
+
+
+def _select_round_robin(hits: list[dict], max_extracted: int) -> list[dict]:
+    """Pick up to max_extracted unique-URL hits, INTERLEAVED across their bucket so no
+    single bucket fills every extraction slot. This fixes the live bug where consensus
+    queries (run first, more hits) crowded out every peer result -- 0 of 10 extracted
+    pages were peer-related -- AND the narrower one where one peer crowded out the other
+    three. The bucket is `_select_key` (consensus is one bucket; each peer is its own,
+    peer:<name>), falling back to the coarse `_class` when no finer key is set (e.g.
+    discover-peers, where everything is one class). Within a bucket the provider's own
+    relevance order is kept (score desc; unscored providers like Exa "auto" fall back to
+    result order via a stable sort). URLs are deduped globally across buckets."""
+    ordered = sorted(
+        hits, key=lambda h: h.get("score") if h.get("score") is not None else -1, reverse=True
+    )
+    by_class: dict[str, list[dict]] = {}
+    for hit in ordered:
+        by_class.setdefault(hit.get("_select_key") or hit.get("_class", ""), []).append(hit)
+
+    queues = list(by_class.values())
+    idxs = [0] * len(queues)
+    seen_urls: set[str] = set()
+    selected: list[dict] = []
+    while len(selected) < max_extracted:
+        progressed = False
+        for i, queue in enumerate(queues):
+            if idxs[i] >= len(queue):
+                continue
+            hit = queue[idxs[i]]
+            idxs[i] += 1
+            progressed = True
+            url = hit.get("url")
+            if not url or url in seen_urls:
+                continue
+            seen_urls.add(url)
+            selected.append(hit)
+            if len(selected) >= max_extracted:
+                break
+        if not progressed:  # every class queue exhausted
+            break
+    return selected
+
+
+def cmd_discover_peers(args: argparse.Namespace) -> int:
+    """Discover the company's analyst-recognised peer group by web search, so the agent
+    can pick ~4 comparables to pass to `prepare --peers`. The SEARCH is deterministic
+    and archived (hashed) here; the SELECTION of which 4 are the agreed peers is the
+    agent's judgment, made by reading the extracted candidate pages. Output lives under
+    runs/<TICKER>/peer-discovery/ -- company-level, not per-event (a company's peers
+    don't change between quarters), so `prepare`'s per-event archiving never touches it.
+    """
+    if not config.RESEARCH_WEB_SEARCH_ENABLED:
+        print("Web search is disabled (config.toml [research] web_search_enabled); cannot discover peers.")
+        return 1
+    from .sources import build_peer_group_queries, web_extract, web_search
+
+    provider = config.RESEARCH_WEB_SEARCH_PROVIDER
+    company_name = args.company_name or args.ticker
+    out_dir = config.RUNS_DIR / args.ticker.upper() / "peer-discovery"
+    raw_dir = out_dir / "raw"
+    raw_dir.mkdir(parents=True, exist_ok=True)
+
+    max_results = config.EXA_NUM_RESULTS if provider == "exa" else config.TAVILY_MAX_RESULTS
+    max_extracted = config.EXA_MAX_EXTRACTED_SOURCES if provider == "exa" else config.TAVILY_MAX_EXTRACTED_SOURCES
+
+    # Peer-group membership is not event-relative, but the user still wants an optional
+    # cutoff as a safety net (a peer list published after the event can't have informed
+    # the call). --event-date is optional here; when given, dated post-event hits are
+    # dropped from extraction and undated ones pass through, same as prepare.
+    event_cutoff = _parse_event_cutoff(getattr(args, "event_date", None))
+    provider_end_date = event_cutoff.isoformat() if event_cutoff else None
+
+    queries = build_peer_group_queries(company_name, args.ticker, config.RESEARCH_PEER_GROUP_QUERIES)
+    sources: list[SourceRecord] = []
+    all_hits: list[dict] = []
+    for qi, query in enumerate(queries, start=1):
+        hits = web_search(query, provider=provider, max_results=max_results, end_date=provider_end_date)
+        for hit in hits:
+            hit["_class"] = "peer_group"  # tag for the shared selection helper below
+        all_hits.extend(hits)
+        for hi, hit in enumerate(hits, start=1):
+            retrieved_at = _now_iso()
+            hit_bytes = json.dumps(
+                {**hit, "_provider": provider, "_query": query, "_class": "peer_group", "_retrieved_at": retrieved_at},
+                indent=2,
+            ).encode("utf-8")
+            hit_path = raw_dir / f"query-{qi:02d}-hit-{hi:02d}.json"
+            hit_path.write_bytes(hit_bytes)
+            sources.append(
+                SourceRecord(
+                    path=str(hit_path.relative_to(out_dir)),
+                    origin=hit.get("url", query),
+                    retrieved_at=retrieved_at,
+                    content_type="application/json",
+                    sha256=sha256_hex(hit_bytes),
+                    byte_length=len(hit_bytes),
+                )
+            )
+
+    # Apply the causality guard (drops dated post-event hits, keeps undated) then extract
+    # the top few unique pages so the agent reads the actual peer lists, not snippets.
+    causal_hits, excluded_future = _filter_post_event(all_hits, event_cutoff)
+    selected = _select_round_robin(causal_hits, max_extracted)
+
+    candidate_paths: list[str] = []
+    for ci, hit in enumerate(selected, start=1):
+        url = hit["url"]
+        try:
+            content = web_extract(url, provider=provider)
+        except Exception:  # noqa: BLE001 -- skip a failed page, never fabricate content
+            content = None
+        if not content:
+            continue
+        content_bytes = content.encode("utf-8")
+        cand_path = out_dir / f"candidate-{ci:02d}.md"
+        cand_path.write_text(content, encoding="utf-8")
+        candidate_paths.append(str(cand_path))
+        sources.append(
+            SourceRecord(
+                path=str(cand_path.relative_to(out_dir)),
+                origin=url,
+                retrieved_at=_now_iso(),
+                content_type="text/markdown",
+                sha256=sha256_hex(content_bytes),
+                byte_length=len(content_bytes),
+            )
+        )
+
+    manifest = Manifest(
+        ticker=args.ticker.upper(),
+        event_id="peer-discovery",
+        created_at=_now_iso(),
+        sources=sources,
+        queries=queries,
+        notes=[
+            f"Peer-group discovery via {provider}: {len(all_hits)} hit(s) from {len(queries)} queries.",
+            f"Extracted {len(candidate_paths)} candidate page(s) for the agent to read and pick ~4 peers.",
+        ]
+        + (
+            [
+                f"Excluded {excluded_future} {provider} hit(s) published after the event "
+                f"date ({args.event_date}) from extraction (causality guard)."
+            ]
+            if excluded_future
+            else []
+        ),
+    )
+    _write_json(out_dir / config.MANIFEST_FILENAME, manifest.model_dump())
+
+    print(f"Peer-group discovery for {args.ticker.upper()} -> {out_dir}")
+    print(f"  {len(queries)} queries, {len(all_hits)} hits, {len(candidate_paths)} extracted page(s).")
+    if candidate_paths:
+        print("  Read these, pick ~4 analyst-agreed comparables, then run `prepare --peers ...`:")
+        for path in candidate_paths:
+            print(f"    - {path}")
+    else:
+        print("  No pages extracted -- widen config [research] peer_group_queries or check the provider.")
+    return 0
+
+
 def cmd_prepare(args: argparse.Namespace) -> int:
     run_dir = config.run_dir(args.ticker, args.event_id)
     _archive_existing_run(run_dir)
@@ -121,6 +315,32 @@ def cmd_prepare(args: argparse.Namespace) -> int:
     with transcript_path.open("w", encoding="utf-8") as fh:
         for seg in segments:
             fh.write(seg.model_dump_json() + "\n")
+
+    # Best-effort prompt-injection FLAG over the sanitised transcript (config-gated).
+    # Advisory only -- it records matches, never blocks the run or removes text. Runs
+    # AFTER sanitize so invisible-char evasions are already normalised away. Transcript
+    # only, not Exa/Tavily results (those providers run their own defences).
+    injection_findings: list[dict] = []
+    if config.SANITISATION_INJECTION_SCAN_ENABLED:
+        injection_findings = scan_for_injection(sanitized, config.SANITISATION_INJECTION_PATTERNS)
+        _write_json(
+            run_dir / config.INJECTION_SCAN_FILENAME,
+            {
+                "scanned_at": _now_iso(),
+                "pattern_count": len(config.SANITISATION_INJECTION_PATTERNS),
+                "finding_count": len(injection_findings),
+                "findings": injection_findings,
+            },
+        )
+    if not config.SANITISATION_INJECTION_SCAN_ENABLED:
+        injection_note = "Prompt-injection scan: disabled (config.toml [sanitisation])."
+    elif injection_findings:
+        injection_note = (
+            f"Prompt-injection scan: {len(injection_findings)} suspicious phrase(s) flagged in "
+            f"transcript -- advisory only, run not blocked. See injection-scan.json."
+        )
+    else:
+        injection_note = "Prompt-injection scan: clean (no configured patterns matched)."
 
     financials: dict = {}
     sec_status = "disabled"
@@ -158,7 +378,7 @@ def cmd_prepare(args: argparse.Namespace) -> int:
     web_evidence_notes: list[str] = []
     queries: list[str] = []
     if config.RESEARCH_WEB_SEARCH_ENABLED:
-        from .sources import build_official_source_queries, web_extract, web_search
+        from .sources import build_consensus_queries, build_peer_queries, web_extract, web_search
 
         max_results = config.EXA_NUM_RESULTS if provider == "exa" else config.TAVILY_MAX_RESULTS
         max_extracted = config.EXA_MAX_EXTRACTED_SOURCES if provider == "exa" else config.TAVILY_MAX_EXTRACTED_SOURCES
@@ -167,7 +387,29 @@ def cmd_prepare(args: argparse.Namespace) -> int:
         web_search_raw_dir.mkdir(parents=True, exist_ok=True)
         company_name = args.company_name or args.ticker
         event_date = args.event_date or args.event_id
-        queries = build_official_source_queries(company_name, args.ticker, event_date)
+        # Repurposed queries: consensus/expectations + peer-group results (info NOT in
+        # the transcript), replacing the old official-document queries that restated the
+        # call. Each query is tagged with its class so the raw archive records what a hit
+        # was looking for. Peers come from --peers (agent-supplied from the transcript);
+        # with none, only the consensus queries run.
+        # Each tuple is (archive_class, query, select_key). archive_class is the coarse
+        # "consensus"/"peer" label stamped into the raw hit for provenance. select_key is
+        # the FINER bucket the extraction round-robin interleaves on: consensus is one
+        # bucket, but each peer is its own (peer:<name>) so one high-scoring peer can't
+        # fill every peer slot and starve the other three -- the peer group's whole point
+        # is 4-way competitive breadth.
+        classified_queries = [
+            ("consensus", q, "consensus")
+            for q in build_consensus_queries(company_name, args.ticker, args.event_id, config.RESEARCH_CONSENSUS_QUERIES)
+        ]
+        for peer in args.peers:
+            classified_queries += [
+                ("peer", q, f"peer:{peer}")
+                for q in build_peer_queries(
+                    company_name, args.ticker, args.event_id, [peer], config.RESEARCH_PEER_QUERIES
+                )
+            ]
+        queries = [q for _, q, _ in classified_queries]
 
         # Causality guard, attempted server-side: pass event_date to the active
         # provider's own publish-date filter. DOCUMENTED LIMITATION, confirmed by
@@ -176,16 +418,15 @@ def cmd_prepare(args: argparse.Namespace) -> int:
         # (harmless); the real guard is the client-side filter below. Only set when
         # --event-date parses as a real calendar date (it defaults to event_id,
         # e.g. "2026-q2", which isn't one).
-        event_cutoff = None
-        try:
-            event_cutoff = datetime.strptime(event_date[:10], "%Y-%m-%d").date()
-        except ValueError:
-            pass
+        event_cutoff = _parse_event_cutoff(event_date)
         provider_end_date = event_cutoff.isoformat() if event_cutoff else None
 
         all_hits: list[dict] = []  # every normalized hit seen, for the extract-selection step below
-        for qi, query in enumerate(queries, start=1):
+        for qi, (qclass, query, select_key) in enumerate(classified_queries, start=1):
             hits = web_search(query, provider=provider, max_results=max_results, end_date=provider_end_date)
+            for hit in hits:
+                hit["_class"] = qclass  # coarse label written to the raw archive (provenance)
+                hit["_select_key"] = select_key  # finer bucket the round-robin interleaves on
             all_hits.extend(hits)
             # archive_all_sources controls how many hits per query we keep -- the
             # config default (true) matches "narrow queries, but don't discard what
@@ -205,7 +446,14 @@ def cmd_prepare(args: argparse.Namespace) -> int:
                 # "exa"/"tavily", so only manifest.json's free-text notes said which
                 # provider ran, and only once for the whole run, not per file.
                 hit_bytes = json.dumps(
-                    {**hit, "_provider": provider, "_query": query, "_retrieved_at": hit_retrieved_at}, indent=2
+                    {
+                        **hit,
+                        "_provider": provider,
+                        "_query": query,
+                        "_class": qclass,  # "consensus" | "peer" -- what this query was looking for
+                        "_retrieved_at": hit_retrieved_at,
+                    },
+                    indent=2,
                 ).encode("utf-8")
                 hit_filename = f"query-{qi:02d}-hit-{hi:02d}.json"
                 (web_search_raw_dir / hit_filename).write_bytes(hit_bytes)
@@ -235,44 +483,18 @@ def cmd_prepare(args: argparse.Namespace) -> int:
             # client-side check on published_date is the real guard, not a backstop.
             # It only catches hits that carry a published_date at all -- confirmed by
             # the same testing that most hits do not, so this guard's real-world
-            # coverage is narrower than it looks. Hits with no published_date can't
-            # be checked and are kept, not dropped.
-            causal_hits = all_hits
-            excluded_future = 0
-            if event_cutoff:
-                causal_hits = []
-                for hit in all_hits:
-                    published = hit.get("published_date")
-                    if published:
-                        try:
-                            published_date = datetime.strptime(published[:10], "%Y-%m-%d").date()
-                        except ValueError:
-                            published_date = None
-                        if published_date and published_date > event_cutoff:
-                            excluded_future += 1
-                            continue
-                    causal_hits.append(hit)
-                if excluded_future:
-                    web_evidence_notes.append(
-                        f"Excluded {excluded_future} {provider} hit(s) published after the event "
-                        f"date ({event_date}) from citable evidence (causality guard)."
-                    )
+            # coverage is narrower than it looks. Undated hits are kept, not dropped.
+            causal_hits, excluded_future = _filter_post_event(all_hits, event_cutoff)
+            if excluded_future:
+                web_evidence_notes.append(
+                    f"Excluded {excluded_future} {provider} hit(s) published after the event "
+                    f"date ({event_date}) from citable evidence (causality guard)."
+                )
 
-            # score is None, not a real number, for a provider/mode that doesn't supply
-            # one (see sources._normalize_hits -- e.g. Exa's configured "auto" type).
-            # Python's sort is stable, so giving every None the same fallback preserves
-            # the provider's own result order among them, rather than an arbitrary one;
-            # a hit that DOES carry a real score still sorts above an unscored one.
-            seen_urls: set[str] = set()
-            selected: list[dict] = []
-            for hit in sorted(causal_hits, key=lambda h: h.get("score") if h.get("score") is not None else -1, reverse=True):
-                url = hit.get("url")
-                if not url or url in seen_urls:
-                    continue
-                seen_urls.add(url)
-                selected.append(hit)
-                if len(selected) >= max_extracted:
-                    break
+            # Round-robin across query classes so consensus (run first, more hits) can't
+            # fill every extraction slot and starve peer results -- the live bug this
+            # fixes. Within a class, provider relevance order is preserved (see helper).
+            selected = _select_round_robin(causal_hits, max_extracted)
             for wi, hit in enumerate(selected, start=1):
                 url = hit["url"]
                 try:
@@ -336,6 +558,7 @@ def cmd_prepare(args: argparse.Namespace) -> int:
         queries=queries,
         notes=[
             "Raw source archived verbatim before sanitisation.",
+            injection_note,
             f"SEC evidence: {sec_status}" + (f" (CIK {cik})" if sec_status == "ok" else ""),
             f"Web search evidence ({provider}): {web_search_status}",
             f"Web evidence (extracted, citable): {len(web_evidence)} source(s)",
@@ -402,10 +625,18 @@ def cmd_analyze(args: argparse.Namespace) -> int:
         metric_issues = validate_metrics(metrics, claim_ids)
         if metric_issues:
             result = ValidationResult(
-                ok=False, checked_claims=result.checked_claims, issues=result.issues + metric_issues
+                ok=False,
+                checked_claims=result.checked_claims,
+                issues=result.issues + metric_issues,
+                warnings=result.warnings,
             )
 
     _write_validation(run_dir, result)
+
+    # Advisories print regardless of pass/fail -- they never block the card, but the
+    # human should see them (e.g. web evidence fetched but no claim used it).
+    for warning in result.warnings:
+        print(f"  WARNING: {warning}")
 
     if not result.ok:
         print(f"Validation FAILED: {len(result.issues)} issue(s). See {config.VALIDATION_FILENAME}.")
@@ -597,6 +828,25 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="earnings", description="Earnings transcript analysis POC")
     sub = parser.add_subparsers(dest="command", required=True)
 
+    discover = sub.add_parser(
+        "discover-peers",
+        help="Search for the company's analyst peer group (run before prepare; agent picks ~4 --peers)",
+    )
+    discover.add_argument("--ticker", required=True)
+    discover.add_argument(
+        "--company-name",
+        default=None,
+        help="Full company name to sharpen peer-group queries, e.g. 'Microsoft' (defaults to --ticker)",
+    )
+    discover.add_argument(
+        "--event-date",
+        default=None,
+        help="Optional calendar date, e.g. 2026-07-30. When given, applies the causality "
+        "guard as a safety net: dated hits published after it are dropped from extraction; "
+        "undated hits still pass through. Omit and no cutoff is applied.",
+    )
+    discover.set_defaults(func=cmd_discover_peers)
+
     prep = sub.add_parser("prepare", help="Build a source pack from a transcript")
     prep.add_argument("--ticker", required=True)
     prep.add_argument("--event-id", required=True)
@@ -632,6 +882,15 @@ def build_parser() -> argparse.ArgumentParser:
         default=None,
         help="Calendar date of the earnings event, e.g. 2026-01-28, used to build web-search "
         "queries (defaults to --event-id if omitted, which is usually less precise)",
+    )
+    prep.add_argument(
+        "--peers",
+        nargs="*",
+        default=[],
+        help="The ~4 analyst-recognised peer companies to fetch results for, e.g. --peers "
+        "'Amazon AWS' 'Alphabet'. Obtain these by running `earnings discover-peers` first and "
+        "reading its candidate pages -- the transcript usually names no competitors. Kept out of "
+        "config.toml on purpose: peers are per-company. With none given, only consensus queries run.",
     )
     prep.set_defaults(func=cmd_prepare)
 

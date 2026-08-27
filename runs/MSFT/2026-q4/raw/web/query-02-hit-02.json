@@ -1,7 +1,11 @@
 {
-  "url": "https://finance.yahoo.com/markets/stocks/articles/microsoft-msft-q4-2026-earnings-235847729.html",
-  "title": "Microsoft (MSFT) Q4 2026 Earnings Call Transcript",
-  "score": 0,
+  "url": "https://finance.yahoo.com/markets/stocks/articles/microsoft-q4-earnings-preview-expect-124253456.html",
+  "title": "Microsoft Q4 Earnings Preview: What To Expect From Upcoming Report",
+  "score": null,
   "published_date": null,
-  "_retrieved_at": "2026-08-26T18:21:48Z"
+  "_class": "consensus",
+  "_select_key": "consensus",
+  "_provider": "exa",
+  "_query": "Microsoft MSFT 2026-q4 earnings preview expectations forecast",
+  "_retrieved_at": "2026-08-27T13:13:31Z"
 }

@@ -1,144 +1,153 @@
 # Outlook Brief: MSFT — 2026-q4 (30 June 2026)
 
 ## 1. Outlook in brief
-This brief covers two distinct reporting periods, both disclosed on the same call
-and kept explicitly separate throughout: the fourth quarter (**3 months to 30 Jun
-2026**) and the full fiscal year (**12 months to 30 Jun 2026**). For the quarter,
-revenue was \$90B (+18% YoY) [claim-003], non-GAAP EPS \$4.74 (+23%) / GAAP EPS
-\$4.81 (+32%) [claim-004][claim-023], and Microsoft Cloud revenue \$59.3B (+27%)
-[claim-009]. For the full year, revenue was
-over \$331B (+18%) [claim-001], operating income over \$155B (+21%) [claim-002],
-and Microsoft Cloud revenue surpassed \$214B [claim-009]. Azure grew 43% this
-quarter [claim-010], with management guiding further acceleration to ~45% cc for
-Q1 FY2027 (**3 months to 30 Sep 2026**) [claim-013] — evidence points to this being
-driven by capacity-delivery efficiency gains rather than the underlying
-demand/supply imbalance narrowing, since management states demand still exceeds
-supply in the same breath [claim-011][claim-015][claim-018].
+
+This run's headline figures cover the **3 months to 30 Jun 2026** (fiscal Q4 FY2026),
+with full-year context for the **12 months to 30 Jun 2026**. Microsoft closed a record
+year: FY revenue over \$331B up 18% [claim-001], operating income over \$155B up 21%
+[claim-006], and a Q4 that came in above analyst consensus on both the top and bottom
+line [claim-043]. The near-term direction (into Q1 FY27, the 3 months to 30 Sep 2026)
+is continued double-digit company growth led by Intelligent Cloud, with Azure guided to
+~45% constant-currency growth [claim-028], partially offset by a declining More Personal
+Computing segment [claim-018]. The binding constraint remains capacity, not demand
+[claim-017].
 
 ## 2. What changed
-Azure grew 43% this quarter [claim-010], and guidance for Q1 FY2027 (3 months to
-30 Sep 2026) steps up further to ~45% cc [claim-013] — an acceleration. (Note:
-this run's `claims.json` only covers this transcript; the prior quarter's figures
-are not independently re-verified here and are not cited, to avoid attaching a
-number from a different run's evidence to this run's claim ids.) Commercial RPO
-grew to \$678B (+84% YoY) [claim-008].
+
+- Reporting came in **ahead of the market's prior expectations**: Q4 revenue of \$90B
+  [claim-004] and EPS of \$4.74 [claim-005] exceeded the \$87.67B / \$4.24 consensus
+  [claim-038], a positive surprise [claim-043].
+- A structural accounting change was announced: datacenter and office-building useful
+  lives are extended from 15 to 25 years, effective the start of FY27 [claim-033].
+- Chiefly because of a related finance-to-operating lease shift, the calendar-year 2026
+  capex expectation was **adjusted to approximately \$175B** [claim-031] — a change in
+  how spend is classified, not (management stated) in the underlying investment level.
 
 ## 3. Management guidance
-For Q1 FY2027 (3 months to 30 Sep 2026), management guided total company revenue
-of \$89.85B-\$90.95B (16%-17% growth) [claim-012] and Azure revenue growth of
-approximately 45% in constant currency [claim-013]. Separately, management guided
-calendar-year 2026 capital expenditures of approximately \$175B (a useful-life
-accounting change, not a change in underlying investment plans) [claim-014].
 
-For the full FY2027 fiscal year (12 months to 30 Jun 2027), management guided
-another year of double-digit revenue and operating-income growth at the company
-level [claim-019], with operating margins down less than a point year-over-year
-despite continued investment [claim-020]. Segment-level guidance is not uniformly
-positive: Windows OEM and Devices revenue is guided to decline in the high-teens
-[claim-021], and both M365 Commercial products and Server products revenue are
-guided to decline in the mid-single digits [claim-022].
+Management gave detailed quantitative Q1 FY27 guidance (3 months to 30 Sep 2026):
+
+- Total company revenue \$89.85–90.95B, growth 16–17% [claim-026].
+- Intelligent Cloud \$40.95–41.25B, growth 33–34% [claim-027]; Azure ~45% cc [claim-028].
+- Productivity and Business Processes \$36.7–37B, growth 11–12% [claim-029].
+- Q1 capex over \$50B, including the lease reclassification [claim-030].
+
+For the full fiscal year FY27, management continues to expect double-digit revenue and
+operating income growth [claim-032], and expects to return the XBOX business to growth
+in fiscal 2027 [claim-034].
 
 ## 4. Business drivers
-- **Demand still exceeds supply.** Management explicitly and repeatedly states
-  this remains true "for a number of quarters" [claim-011][claim-015] — Azure's
-  acceleration this quarter is attributed to efficiency gains and faster
-  capacity-delivery lead times being "quickly monetized" [claim-015], not to
-  demand easing.
-- **Two periods, one sentence — real ambiguity in the source material.**
-  Multiple statements on this call state a quarterly and an annual figure in the
-  same sentence (e.g. "\$10.2 billion to shareholders... bringing our total cash
-  returned to shareholders to over \$43 billion for the full fiscal year"
-  [claim-007]; "Microsoft Cloud revenue was \$59.3 billion... And for the full
-  year, our cloud revenue surpassed \$214 billion" [claim-009]). Every claim in
-  this run states an explicit `period` field to keep these separated — see the
-  evidence appendix.
-- **CapEx flexibility as a stated risk mitigant.** Asked directly about
-  overcapacity risk, Amy Hood said most incremental capex is short-lived assets
-  (CPU/GPU, short lead times) that can be throttled if demand slows, while
-  land/datacenter build timing is separately flexible [claim-017] — a direct
-  response to analyst concern about AI infrastructure overbuilding [claim-016].
+
+- **Cloud/AI demand exceeding supply.** Azure grew 43% with demand continuing to exceed
+  available capacity [claim-017]; efficiency gains are quickly monetised in-quarter
+  given that imbalance [claim-035].
+- **Commercial backlog.** Commercial RPO grew 84% to \$678B [claim-013], a large
+  contracted-revenue cushion.
+- **Copilot / agent adoption.** Over 30M paid M365 Copilot seats [claim-020], 50M GitHub
+  Copilot users [claim-022], 225M GitHub users [claim-021], and 100,000 Foundry customers
+  with revenue more than doubling [claim-023].
+- **Data-layer pull-through.** PostgreSQL revenue up 55% [claim-024], consistent with
+  agents driving database consumption.
+- **Capacity build-out.** 88 datacenters this year [claim-025] supporting the growth,
+  the cost of which pressures gross margin [claim-007].
 
 ## 5. Base case
-Continued double-digit revenue and operating-income growth into FY2027, per
-management's own full-year guidance [claim-019], with operating margins down
-less than a point [claim-020] as investment continues. Near-term (Q1 FY2027),
-Azure growth holds in the mid-40s% (constant currency) [claim-013] — most likely
-reflecting continued capacity-delivery efficiency gains rather than a resolution
-of the demand/supply imbalance, which management states persists [claim-011]
-[claim-015][claim-018]. This is not uniform growth across every segment: Windows
-OEM/Devices and M365 Commercial/Server products are separately guided to decline
-for the full year [claim-021][claim-022] (see "Downside case").
+
+Continued double-digit company growth into FY27 [claim-032], led by Intelligent Cloud
+[claim-027] and Azure ~45% cc [claim-028], with the \$678B commercial backlog [claim-013]
+and demand-exceeds-supply dynamic [claim-017] underpinning cloud revenue. Margins stay
+pressured near-term by Azure mix and AI-infrastructure investment [claim-007][claim-008],
+partly offset by ongoing efficiency gains [claim-035]. More Personal Computing remains a
+drag [claim-018] until the XBOX reset delivers in FY27 [claim-034]. This is broadly in
+line with, or modestly ahead of, the pre-print consensus posture [claim-038], given the
+Q4 beat [claim-043].
 
 ## 6. Upside case
-If capacity-delivery efficiency gains (claim-015's "quickly monetized" dynamic)
-continue or accelerate further, Azure growth could land above the ~45% cc Q1
-FY2027 guidance [claim-013], consistent with this quarter's better-than-guided
-43% [claim-010]. Continued RPO growth (+84% YoY, \$678B) [claim-008] supports a
-large multi-year demand pipeline.
+
+Azure and Intelligent Cloud exceed the guided ranges if capacity comes online faster and
+is monetised in-quarter, as happened in Q4 [claim-017][claim-035]. Faster Copilot seat
+and consumption monetisation [claim-020][claim-022] and continued Foundry expansion
+[claim-023] lift Productivity and Business Processes above the 11–12% guide [claim-029].
+Observable evidence to watch: Azure printing above ~45% cc [claim-028], and RPO growth
+sustaining well above revenue growth [claim-013]. Peer cloud strength (Google Cloud +48%
+[claim-041], Oracle cloud +47% [claim-040], AWS +24% [claim-039]) suggests the
+enterprise-AI demand backdrop is broad, not Microsoft-specific.
 
 ## 7. Downside case
-Management's own FY2027 guidance is not uniformly positive, and this is guidance,
-not risk speculation: full fiscal year operating margins are guided down less
-than a point [claim-020]; Windows OEM and Devices revenue is guided to decline
-in the high-teens, driven by lower PC market demand, higher component costs, a
-tough prior-year comparable, and elevated inventory [claim-021]; and both M365
-Commercial products and Server products revenue are guided to decline in the
-mid-single digits as the prior year's elevated transactional purchasing laps
-[claim-022]. Separately, rising component pricing is a stated, near-term
-margin/CapEx risk — management acknowledged it directly in Q&A without a
-specific mitigation beyond efficiency work and pricing pass-through flexibility
-[claim-016][claim-017]. Analyst-flagged overcapacity risk (claim-016) is a
-longer-horizon risk management addressed structurally (short-lived-asset
-flexibility, claim-017) rather than dismissing — worth monitoring rather than
-treating as resolved.
+
+The clearest downside is that capacity constraints [claim-017] cap cloud revenue below
+guidance while AI-infrastructure spend continues to weigh on gross margin
+[claim-007][claim-044]. Component-price pressure raised Q4 capex [claim-009] and, via
+device pricing, is already depressing More Personal Computing [claim-018]. A demand
+slowdown is the tail risk; management's mitigation is the ability to slow short-lived
+asset (CPU/GPU) spend, the largest COGS driver, if demand changes [claim-036]. Warning
+signs: Azure decelerating despite added capacity, or RPO growth [claim-013] rolling over.
 
 ## 8. What to monitor
-- Azure's constant-currency growth relative to the ~45% Q1 FY2027 guidance
-  [claim-013], and whether commentary continues to attribute movement to
-  capacity-efficiency execution (per claim-015's framing) rather than demand.
-- Commercial RPO growth rate (84% YoY this quarter [claim-008]) as a
-  secondary demand-pipeline signal in subsequent quarters.
-- Component-pricing impact on gross margin and CapEx guidance in subsequent
-  quarters, given management flagged it as a live risk without full mitigation
-  [claim-016][claim-017].
+
+- Azure constant-currency growth vs the ~45% guide [claim-028] and capacity commentary
+  [claim-017].
+- Commercial RPO trajectory [claim-013] as a forward-demand signal.
+- Microsoft Cloud gross margin [claim-044] and company gross margin [claim-007] against
+  continued AI capex [claim-009][claim-030].
+- Copilot monetisation: seat growth [claim-020] plus the new usage-based consumption on
+  GitHub Copilot [claim-022].
+- FY27 capex classification and level after the useful-life change [claim-031][claim-033].
+- XBOX return-to-growth progress in FY27 [claim-034].
 
 ## 9. Uncertainties and missing evidence
-- This transcript states several full-year and quarterly figures in the same
-  sentence (see "Business drivers" above) — every claim here carries an explicit
-  `period` field (e.g. "3 months to 30 Jun 2026" vs. "12 months to 30 Jun 2026")
-  specifically to avoid conflating the two; readers citing a figure from this
-  brief should always check the associated claim's `period`, not just its
-  headline label ("Q4 FY2026" alone would not disambiguate quarterly vs. annual).
-- `evidence/financials.json`'s SEC/XBRL figures for this event are full-year
-  (12-month) only — Microsoft's 10-K does not separately tag a discrete Q4-only
-  duration fact in XBRL, so no independent SEC cross-check exists for this run's
-  quarterly figures specifically (only the annual ones, e.g. claim-001's \$331B
-  revenue against financials.json's \$331.839B).
-- claim-018's capacity-vs-demand interpretation is this run's own inference, not
-  a statement management made directly; treat it as a plausible reading of the
-  evidence, not a confirmed explanation.
+
+- The Q4 EPS figure is stated "adjusted for the impact from our investment in OpenAI"
+  [claim-005]; the unadjusted GAAP quarterly EPS is not isolated in this transcript, so
+  the beat-vs-consensus inference [claim-043] compares an adjusted actual to a consensus
+  whose basis is not fully specified in the cited source [claim-038].
+- Peer figures cover the peers' own reported quarters, not an identical calendar window:
+  Amazon [claim-039] and Alphabet [claim-041] are the 3 months to 31 Dec 2025, and Oracle
+  [claim-040] the 3 months to 31 May 2026. All three reported before Microsoft's 29 Jul
+  2026 call, so they are valid competitive backdrop. A fourth discovered peer, Apple, was
+  deliberately excluded: its quarter reported on 30 Jul 2026, one day after the call, so
+  its results were not knowable at the call and are not cited here.
+- No explicit full-year FY27 revenue range or margin percentage was given beyond
+  "double-digit" growth [claim-032] and operating margins "down less than a point"
+  [claim-045]; precise FY27 modelling is therefore under-determined by this run's
+  evidence.
+- The \$175B CY2026 capex figure [claim-031] mixes a classification change with the
+  underlying investment; the two are not separately quantified in the cited quote.
 
 ## 10. Evidence appendix
-- [claim-001] "This fiscal year, we delivered over \$331 billion in revenue, with growth accelerating to 18%..." — segment seg-0004
-- [claim-002] "Operating income growth outpaced revenue growth, increasing 21% to more than \$155 billion..." — segment seg-0004
-- [claim-003] "This quarter, revenue was \$90 billion, up 18% and 17% in constant currency." — segment seg-0004
-- [claim-004] "Earnings per share was \$4.74, an increase of 23%, when adjusted for the impact from our investment in OpenAI." — segment seg-0004
-- [claim-005] "Capital expenditures were \$41 billion including the impact from higher component pricing..." — segment seg-0004
-- [claim-006] "Cash flow from operations was \$55.4 billion, up 30%..." — segment seg-0004
-- [claim-007] "...we returned \$10.2 billion to shareholders... bringing our total cash returned to shareholders to over \$43 billion for the full fiscal year." — segment seg-0004
-- [claim-008] "Commercial remaining performance obligation grew 84% to \$678 billion." — segment seg-0004
-- [claim-009] "Microsoft Cloud revenue was \$59.3 billion and grew 27%... And for the full year, our cloud revenue surpassed \$214 billion..." — segment seg-0004
-- [claim-010] "Revenue was \$39.3 billion and grew 32% and 31% in constant currency. In Azure and other cloud services, revenue grew 43%..." — segment seg-0004
-- [claim-011] "Customer demand continues to exceed available capacity." — segment seg-0004
-- [claim-012] "...revenue should be between \$89.85 and \$90.95 billion or growth of 16% to 17%..." — segment seg-0004
-- [claim-013] "In Azure, we expect revenue growth of approximately 45% in constant currency..." — segment seg-0004
-- [claim-014] "...the shift from finance to operating leases adjusts our expectation to approximately \$175 billion." — segment seg-0004
-- [claim-015] "First, there are still constraints in the system... demand continues to exceed available supply, and that certainly remains true." — segment seg-0012
-- [claim-016] "How does Microsoft protect itself if there really is overcapacity and overbuilding of data centers..." — segment seg-0014
-- [claim-017] "The investment into land and data center builds is actually quite flexible..." — segment seg-0015
-- [claim-018] (analytical inference, derived from claim-010, claim-011, claim-013, claim-015) — segment seg-0004
-- [claim-019] "At the company level, with strong commercial momentum, we continue to expect another fiscal year of double-digit revenue and operating income growth." — segment seg-0004
-- [claim-020] "Even as we invest to meet growing demand, full fiscal year operating margins should be down less than a point." — segment seg-0004
-- [claim-021] "As a result, we expect revenue to decline in the high-teens for the fiscal year." — segment seg-0004
-- [claim-022] "...we are lapping higher transactional purchasing from the timing of product launches and expect revenue from both to decline in the mid-single digits for the full fiscal year." — segment seg-0004
-- [claim-023] "Diluted earnings per share was \$4.81 and increased 32% on a GAAP basis, and was \$4.74 and increased 23% on a non-GAAP basis" — web evidence web-003 (Microsoft press release, news.microsoft.com, 29 Jul 2026)
+
+- [claim-001] "we delivered over \$331 billion in revenue, with growth accelerating to 18%" — seg-0004
+- [claim-004] "This quarter, revenue was \$90 billion, up 18% and 17% in constant currency." — seg-0004
+- [claim-005] "Earnings per share was \$4.74, an increase of 23%, when adjusted for the impact from our investment in OpenAI." — seg-0004
+- [claim-006] "Operating income growth outpaced revenue growth, increasing 21% to more than \$155 billion" — seg-0004
+- [claim-007] "Company gross margin percentage was 67%, down year-over-year" — seg-0004
+- [claim-008] "Operating margins increased slightly year-over-year to 45%." — seg-0004
+- [claim-009] "Capital expenditures were \$41 billion including the impact from higher component pricing as noted in our guide." — seg-0004
+- [claim-013] "Commercial remaining performance obligation grew 84% to \$678 billion." — seg-0004
+- [claim-014] "Microsoft Cloud revenue was \$59.3 billion and grew 27%" — seg-0004
+- [claim-044] "Microsoft Cloud gross margin percentage was better than expected at 65%" — seg-0004
+- [claim-017] "revenue grew 43%, against a prior year that included accelerating growth. Customer demand continues to exceed available capacity." — seg-0004
+- [claim-018] "Revenue was \$12.9 billion and declined 4% and 5% in constant currency." — seg-0004
+- [claim-020] "we now have over 30 million paid Microsoft 365 Copilot seats, with net seat adds more than doubling quarter-over-quarter." — seg-0003
+- [claim-021] "GitHub now has 225 million users" — seg-0003
+- [claim-022] "GitHub Copilot now has 50 million users." — seg-0003
+- [claim-023] "We now have 100,000 Foundry customers, and revenue more than doubled year-over-year." — seg-0003
+- [claim-024] "PostgreSQL revenue was up 55%, accelerating for the third consecutive quarter." — seg-0003
+- [claim-025] "We added 31 new datacenters across 5 continents this quarter, bringing the total to 88 this year" — seg-0003
+- [claim-026] "revenue should be between \$89.85 and \$90.95 billion or growth of 16% to 17%" — seg-0004
+- [claim-027] "For Intelligent Cloud, we expect revenue of \$40.95 to \$41.25 billion, or growth of 33% to 34%." — seg-0004
+- [claim-028] "In Azure, we expect revenue growth of approximately 45% in constant currency" — seg-0004
+- [claim-029] "In Productivity and Business Processes we expect revenue of \$36.7 to \$37 billion, or growth of 11% to 12%." — seg-0004
+- [claim-030] "We expect CapEx spend will be over \$50 billion including the lease reclassification impact from the useful life update." — seg-0004
+- [claim-031] "the shift from finance to operating leases adjusts our expectation to approximately \$175 billion." — seg-0004
+- [claim-032] "we continue to expect another fiscal year of double-digit revenue and operating income growth." — seg-0004
+- [claim-045] "full fiscal year operating margins should be down less than a point." — seg-0004
+- [claim-033] "we are extending the estimated useful lives of our datacenters and office buildings, from 15 to 25 years, reflecting our operating history and expected use of these assets." — seg-0004
+- [claim-034] "expect to return the business to growth in fiscal 2027." — seg-0003
+- [claim-035] "when we can make efficiency gains, they are quickly monetized in quarter." — seg-0012
+- [claim-036] "if the demand environment changes, you just slow down what is, in fact, the largest component and the driver of COGS." — seg-0015
+- [claim-038] "Wall Street expects Microsoft Corporation to report earnings of \$4.24 per share on revenue of \$87.67B" — web-006
+- [claim-039] "AWS segment sales increased 24% year-over-year to \$35.6 billion." — web-003
+- [claim-040] "Record Q4 Total Cloud Revenues \$9.9 billion, up 47% USD" — web-004
+- [claim-041] "revenues increased 48% to \$17.7 billion" — web-002
+- [claim-043] "Wall Street expects Microsoft Corporation to report earnings of \$4.24 per share on revenue of \$87.67B" — web-006

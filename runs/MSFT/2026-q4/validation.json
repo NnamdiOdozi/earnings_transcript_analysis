@@ -1,6 +1,7 @@
 {
   "ok": true,
-  "checked_claims": 23,
+  "checked_claims": 44,
   "issues": [],
-  "validated_at": "2026-08-26T18:57:58Z"
+  "warnings": [],
+  "validated_at": "2026-08-27T14:56:22Z"
 }

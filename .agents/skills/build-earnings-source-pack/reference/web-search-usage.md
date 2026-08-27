@@ -16,18 +16,29 @@ you decide per run.
 
 ## What happens automatically
 
-`cmd_prepare` (`cli.py`) builds queries via `build_official_source_queries(company_name,
-ticker, event_date)` — one query per generic official-document type (earnings
-release, transcript, investor presentation, outlook/guidance, regulatory filing,
-previous call, previous guidance; no sector vocabulary injected) — and calls
-`tavily_search()` on each. Every hit returned is archived under `raw/web/` (shared
-across providers) as a hashed, timestamped `SourceRecord` in the manifest, exactly
-like the transcript and SEC evidence. `manifest.json`'s notes record `"Web search
-evidence (tavily): ok (N hit(s) from M queries)"` or `"no_results"`.
+`cmd_prepare` (`cli.py`) builds queries from two config-driven, industry-agnostic
+classes — targeting information the transcript does **not** already contain (the old
+official-document queries merely restated the call and were dropped):
+- **consensus** — `build_consensus_queries(...)` from `config.toml [research]
+  consensus_queries`: analyst estimates/expectations for this event (so the
+  beat-or-miss surprise becomes citable). Always run.
+- **peer** — `build_peer_queries(...)` from `config.toml [research] peer_queries`, one
+  query per name passed to `--peers` (the ~4 analyst-recognised comparables). Get these
+  by running `earnings discover-peers` first (it searches the peer group and extracts
+  candidate pages to `runs/<TICKER>/peer-discovery/`); the agent reads them and picks
+  the 4. The transcript usually names no competitors, so the peer group is searched, not
+  read off the call. With no `--peers`, no peer result queries run.
 
-Pass `--company-name` and `--event-date` to `earnings prepare` to sharpen these
-queries — without them, the queries fall back to `--ticker` and `--event-id`, which
-are less precise (an id like `2026-q2` isn't a real calendar date).
+Each query goes through the provider-agnostic `web_search()` (Exa or Tavily per
+`config.toml [research] provider`). Every hit is archived under `raw/web/` (shared
+across providers) as a hashed, timestamped `SourceRecord`, and the archived hit
+records its `_class` (`"consensus"`/`"peer"`), `_query` and `_provider`.
+`manifest.json`'s notes record `"Web search evidence (<provider>): ok (N hit(s) from
+M queries)"` or `"no_results"`.
+
+Pass `--company-name` to fill the `{company}` placeholder (falls back to `--ticker`).
+`--event-date` still feeds the causality guard; the query templates use `{event_id}`
+for the period.
 
 Config defaults (`config.toml [tavily]`): `search_depth = "basic"`, `max_results =
 5`, `include_external_commentary = false` — official company/regulatory sources
@@ -72,9 +83,14 @@ A search hit alone is a short snippet — not something a claim can quote-check
 against. So after the search loop, `cmd_prepare` (gated by `config.toml [tavily]
 extract_selected_results`, default `true`) automatically:
 
-1. Pools every hit across all 7 queries, applies the causality guard above, then
-   dedupes by URL and keeps the top `max_extracted_sources` (default 10) by
-   Tavily's own relevance `score`.
+1. Pools every hit across all queries, applies the causality guard above, dedupes
+   by URL, then selects up to `max_extracted_sources` (default 10) by **round-robin
+   across buckets**, not a flat score sort. The bucket is consensus (one) and each
+   peer separately (`peer:<name>`), so one bucket that returned more/higher-scored
+   hits can't fill every slot and starve the others — consensus was crowding out all
+   peers, and one peer was crowding out the other three. Within a bucket the
+   provider's own relevance order is kept (score desc, or result order when the
+   provider gives none, e.g. Exa `auto` mode).
 2. Calls `tavily_extract()` on each selected URL to get full page content.
 3. On success: writes the content to `evidence/web/web-{NNN}.md`, hashes it, and
    appends a `WebEvidence` entry to `evidence/web-evidence.jsonl` — this is what a
@@ -110,8 +126,9 @@ inside search results or extracted pages.
   concept with a narrow, deliberate scope.
 - Do not use Tavily as a fallback when a transcript URL fails to load normally;
   report the failure to the user instead.
-- Do not pull in general news coverage or analyst commentary — only official
-  company/regulatory sources — unless the user explicitly widens the scope.
+- Analyst consensus/estimates and peer results are exactly what the `consensus`/`peer`
+  queries are *for* — pull those. What to still avoid is undirected general-news
+  browsing beyond the configured query classes plus any one specific user-named fetch.
 - Do not disable Tavily for a run yourself because it seems slow or noisy; if it
   should be off, that's a `config.toml` change the user makes, not a silent skip.
 - Do not omit `--event-date` on a real run — without a real calendar date, the

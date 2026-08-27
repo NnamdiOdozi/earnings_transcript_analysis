@@ -160,7 +160,7 @@ DIAG2_EXTRA = {
 # check passes. sub carries the check in <=2 short lines (split on '|').
 DIAG_AUDIT = [
     {"num": 1, "title": "Ingest source", "sub": "archive raw|+ SHA-256 hash", "kind": "inp"},
-    {"num": 2, "title": "Sanitise", "sub": "strip invisible chars|· injection flag", "kind": "evid"},
+    {"num": 2, "title": "Sanitise", "sub": "strip invisible chars|· prompt-injection flag", "kind": "evid"},
     {"num": 3, "title": "Segment", "sub": "speaker-labelled|transcript", "kind": "evid"},
     {"num": 4, "title": "Agent writes claims", "sub": "each: exact quote|+ grounded number", "kind": "skill"},
     {"num": 5, "title": "Validate", "sub": "GATE &#8212; quote ·|number · calc recompute", "kind": "gate"},

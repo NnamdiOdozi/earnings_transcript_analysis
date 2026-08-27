@@ -74,12 +74,36 @@ def _append_processing_log(ticker: str, event_id: str, loaded, raw_bytes: bytes,
         fh.write(json.dumps(entry) + "\n")
 
 
+def _input_hashes(run_dir: Path) -> dict[str, str]:
+    """SHA-256 of each validation input file that exists, keyed by filename. Binds a
+    validation record to the exact bytes it was computed from so staleness is detectable
+    downstream (see ValidationResult.input_hashes / _stale)."""
+    candidates = {
+        config.CLAIMS_FILENAME: run_dir / config.CLAIMS_FILENAME,
+        config.TRANSCRIPT_FILENAME: run_dir / config.NORMALIZED_SUBDIR / config.TRANSCRIPT_FILENAME,
+        config.FINANCIALS_FILENAME: run_dir / config.EVIDENCE_SUBDIR / config.FINANCIALS_FILENAME,
+        config.METRICS_FILENAME: run_dir / config.METRICS_FILENAME,
+    }
+    return {name: sha256_hex(path.read_bytes()) for name, path in candidates.items() if path.exists()}
+
+
+def _stale(recorded_hash: str | None, path: Path) -> bool:
+    """True if `path`'s current bytes don't match `recorded_hash`. A missing recorded
+    hash (older run written before hashes existed) or missing file is treated as NOT
+    stale -- we only fail on a positive mismatch, never on absence of evidence."""
+    if not recorded_hash or not path.exists():
+        return False
+    return sha256_hex(path.read_bytes()) != recorded_hash
+
+
 def _write_validation(run_dir: Path, result: ValidationResult) -> None:
     """Stamp result.validated_at with the real clock at write time (validate_claims()
-    itself stays pure/timestamp-free, see ValidationResult.validated_at) and write
-    validation.json. Single call site so every cmd_analyze exit path is stamped alike.
+    itself stays pure/timestamp-free, see ValidationResult.validated_at), bind it to the
+    input bytes via input_hashes, and write validation.json. Single call site so every
+    cmd_analyze exit path is stamped and hash-bound alike.
     """
     result.validated_at = _now_iso()
+    result.input_hashes = _input_hashes(run_dir)
     _write_json(run_dir / config.VALIDATION_FILENAME, result.model_dump())
 
 
@@ -192,6 +216,10 @@ def cmd_discover_peers(args: argparse.Namespace) -> int:
     provider = config.RESEARCH_WEB_SEARCH_PROVIDER
     company_name = args.company_name or args.ticker
     out_dir = config.RUNS_DIR / args.ticker.upper() / "peer-discovery"
+    # Archive any prior discovery FIRST. Without this a shorter rerun (fewer candidates)
+    # leaves stale candidate-NN.md from the old run on disk, and the agent globs
+    # candidate-*.md -- so it could read a superseded candidate as a current one.
+    _archive_existing_run(out_dir)
     raw_dir = out_dir / "raw"
     raw_dir.mkdir(parents=True, exist_ok=True)
 
@@ -668,6 +696,13 @@ def cmd_validate_outlook(args: argparse.Namespace) -> int:
         print("Outlook brief blocked: underlying claims have not passed validation.")
         return 1
 
+    # Staleness guard: validation.json must belong to the CURRENT claims.json. If claims
+    # were edited after `analyze`, the recorded input hash no longer matches and the "ok"
+    # is stale -- re-run analyze rather than validate a brief against unvalidated claims.
+    if _stale(validation.get("input_hashes", {}).get(config.CLAIMS_FILENAME), claims_path):
+        print(f"Outlook brief blocked: {config.CLAIMS_FILENAME} changed since `analyze`. Re-run `earnings analyze`.")
+        return 1
+
     if not outlook_path.exists():
         print(f"error: {outlook_path} not found. Write {config.OUTLOOK_BRIEF_FILENAME} first (see skill).", file=sys.stderr)
         return 2
@@ -677,7 +712,15 @@ def cmd_validate_outlook(args: argparse.Namespace) -> int:
     outlook_text = outlook_path.read_text(encoding="utf-8")
     errors = check_outlook_brief_citations(outlook_text, claim_ids)
     errors += check_outlook_brief_dollar_escaping(outlook_text)
-    outlook_validation = OutlookValidation(ok=not errors, validated_at=_now_iso(), errors=errors)
+    # Bind this record to the exact brief + claims bytes so `check-review` can prove the
+    # brief it reviews is still the one that passed here.
+    outlook_validation = OutlookValidation(
+        ok=not errors,
+        validated_at=_now_iso(),
+        errors=errors,
+        outlook_brief_sha256=sha256_hex(outlook_path.read_bytes()),
+        claims_sha256=sha256_hex(claims_path.read_bytes()),
+    )
     _write_json(run_dir / config.OUTLOOK_VALIDATION_FILENAME, outlook_validation.model_dump())
     if errors:
         print(f"Outlook brief validation FAILED: {len(errors)} issue(s).")
@@ -713,6 +756,22 @@ def cmd_check_review(args: argparse.Namespace) -> int:
 
     if not outlook_path.exists():
         print(f"error: {outlook_path} not found. Run `earnings validate-outlook` first.", file=sys.stderr)
+        return 2
+
+    # Gate on validate-outlook having actually passed for the CURRENT brief. Previously
+    # this command only checked that outlook-brief.md existed, so the whole
+    # validate-outlook stage could be skipped (or its brief edited afterwards) and review
+    # would still proceed. Require a passing outlook-validation.json bound to these bytes.
+    outlook_validation_path = run_dir / config.OUTLOOK_VALIDATION_FILENAME
+    if not outlook_validation_path.exists():
+        print(f"error: {outlook_validation_path} not found. Run `earnings validate-outlook` first.", file=sys.stderr)
+        return 2
+    outlook_validation = json.loads(outlook_validation_path.read_text(encoding="utf-8"))
+    if not outlook_validation.get("ok"):
+        print("Review blocked: outlook brief has not passed `earnings validate-outlook`.")
+        return 2
+    if _stale(outlook_validation.get("outlook_brief_sha256"), outlook_path):
+        print(f"Review blocked: {config.OUTLOOK_BRIEF_FILENAME} changed since `validate-outlook`. Re-run it.")
         return 2
 
     if not report_path.exists():

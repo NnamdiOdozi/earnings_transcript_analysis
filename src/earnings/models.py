@@ -151,6 +151,12 @@ class ValidationResult(BaseModel):
     # validate_claims() itself, so that function stays pure/args-only and testable
     # without touching the clock (see module docstring in validate.py).
     validated_at: Optional[str] = None
+    # SHA-256 of the exact input bytes this result was computed from (filename -> hash:
+    # claims.json, transcript.jsonl, financials.json, metrics.json when present). Set by
+    # cli._write_validation. Lets a downstream stage prove the validation still belongs to
+    # the CURRENT files -- an edited claims.json no longer matches, so a stale "ok" can be
+    # detected instead of silently trusted.
+    input_hashes: dict[str, str] = Field(default_factory=dict)
 
 
 class OutlookValidation(BaseModel):
@@ -162,6 +168,11 @@ class OutlookValidation(BaseModel):
     ok: bool
     validated_at: str  # ISO 8601 UTC timestamp
     errors: list[str] = Field(default_factory=list)
+    # SHA-256 of the exact bytes validated, so `check-review` can prove the brief it is
+    # about to review is still the one that passed here (not edited since). claims_sha256
+    # pins the claims the brief was validated against.
+    outlook_brief_sha256: Optional[str] = None
+    claims_sha256: Optional[str] = None
 
 
 # Final semantic-audit stage (Outlook_Reviewer subagent, Opus). Judges what

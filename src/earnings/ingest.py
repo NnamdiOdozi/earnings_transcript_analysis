@@ -1,8 +1,9 @@
 """Load a transcript from a local file or a simple URL.
 
-Local files: .txt, .md, .html/.htm. URLs: fetched via httpx, capped at
-MAX_FETCH_BYTES. Network calls are isolated here so tests can monkeypatch
-`fetch_url` and never touch the network.
+Local files: .txt, .md, .html/.htm. URLs: fetched via httpx and REJECTED if larger
+than MAX_FETCH_BYTES -- never silently truncated, because a truncated transcript
+analysed as if whole is worse than a clean failure for an auditable pipeline. Network
+calls are isolated here so tests can monkeypatch `fetch_url` and never touch the network.
 """
 from __future__ import annotations
 
@@ -43,7 +44,14 @@ def fetch_url(url: str) -> LoadedTranscript:
     with httpx.Client(timeout=HTTP_TIMEOUT_SECONDS, follow_redirects=True) as client:
         resp = client.get(url)
         resp.raise_for_status()
-        content = resp.content[:MAX_FETCH_BYTES]
+        content = resp.content
+        if len(content) > MAX_FETCH_BYTES:
+            # Fail loudly rather than truncate: an incomplete transcript treated as
+            # whole would silently corrupt every downstream claim/quote check.
+            raise ValueError(
+                f"Transcript at {url} is {len(content)} bytes, over the {MAX_FETCH_BYTES}-byte "
+                f"cap (config.toml [http] max_fetch_mb). Refusing to analyse a truncated transcript."
+            )
         content_type = resp.headers.get("content-type", "text/plain")
         is_html = "html" in content_type.lower()
         text = content.decode(resp.encoding or "utf-8", errors="replace")

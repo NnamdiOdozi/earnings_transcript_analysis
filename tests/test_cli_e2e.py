@@ -727,3 +727,90 @@ def test_escape_currency_is_idempotent():
     once = _escape_currency("Revenue was $81.3B.")
     twice = _escape_currency(once)
     assert once == twice == "Revenue was \\$81.3B."
+
+
+# --- P0 correctness: input-hash binding + gate chain (validate-outlook / check-review) ---
+
+def _seed_validated_run(isolated_runs_dir, ticker="ACME", event="2026-q2"):
+    """prepare + a single valid claim + passing analyze. Returns the run dir."""
+    transcript = str(FIXTURES / "normal_transcript.txt")
+    main(["prepare", "--ticker", ticker, "--event-id", event, "--transcript", transcript])
+    run_dir = isolated_runs_dir / ticker / event
+    segments = [json.loads(l) for l in (run_dir / config.NORMALIZED_SUBDIR / config.TRANSCRIPT_FILENAME).read_text().splitlines()]
+    rev = next(s for s in segments if "110 million" in s["text"])
+    claims = [{
+        "id": "claim-001", "category": "reported_financial_performance", "classification": "reported_fact",
+        "claim_text": "Revenue was $110 million.",
+        "quote": "Revenue for the quarter was $110 million, up from $100 million a year ago.",
+        "segment_id": rev["id"], "status": "reported", "values": {"revenue_millions": 110}, "confidence": 0.9,
+    }]
+    (run_dir / config.CLAIMS_FILENAME).write_text(json.dumps(claims))
+    assert main(["analyze", "--ticker", ticker, "--event-id", event]) == 0
+    return run_dir
+
+
+def test_validation_json_records_input_hashes(isolated_runs_dir):
+    """analyze binds validation.json to the exact bytes it validated, so staleness is
+    later detectable (claims.json + transcript.jsonl at minimum)."""
+    run_dir = _seed_validated_run(isolated_runs_dir)
+    v = json.loads((run_dir / config.VALIDATION_FILENAME).read_text())
+    assert config.CLAIMS_FILENAME in v["input_hashes"]
+    assert config.TRANSCRIPT_FILENAME in v["input_hashes"]
+    assert all(len(h) == 64 for h in v["input_hashes"].values())
+
+
+def test_validate_outlook_blocks_when_claims_changed_since_analyze(isolated_runs_dir):
+    """If claims.json is edited after analyze, its recorded hash no longer matches, so the
+    'ok' is stale -- validate-outlook must refuse rather than validate against unvalidated claims."""
+    run_dir = _seed_validated_run(isolated_runs_dir)
+    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text("# Outlook\n\nStrong [claim-001].\n")
+    # edit claims.json bytes WITHOUT re-running analyze (claim-001 still present -> not a citation failure)
+    claims = json.loads((run_dir / config.CLAIMS_FILENAME).read_text())
+    claims[0]["confidence"] = 0.8
+    (run_dir / config.CLAIMS_FILENAME).write_text(json.dumps(claims))
+    assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 1
+
+
+def test_check_review_requires_passing_outlook_validation(isolated_runs_dir):
+    """The review gate must require validate-outlook to have actually passed. Previously it
+    only checked outlook-brief.md existed, so the stage could be skipped entirely."""
+    run_dir = _seed_validated_run(isolated_runs_dir)
+    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text("# Outlook\n\nStrong [claim-001].\n")
+    # deliberately do NOT run validate-outlook -> no outlook-validation.json
+    assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 2
+
+
+def test_check_review_blocks_when_outlook_edited_after_validation(isolated_runs_dir):
+    """Even after a passing validate-outlook, editing the brief must invalidate the review
+    gate -- the reviewed bytes must be the validated bytes."""
+    run_dir = _seed_validated_run(isolated_runs_dir)
+    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text("# Outlook\n\nStrong [claim-001].\n")
+    assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
+    # tamper with the brief after it passed
+    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text("# Outlook\n\nStrong [claim-001]. Edited afterwards.\n")
+    assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 2
+
+
+@pytest.mark.parametrize("provider", ["exa", "tavily"])
+def test_discover_peers_archives_prior_output_on_rerun(isolated_runs_dir, monkeypatch, provider):
+    """A rerun must not leave stale candidate-*.md from a previous discovery on disk (the
+    agent globs candidate-*.md). The prior discovery is archived under _archive/ first."""
+    monkeypatch.setattr(config, "RESEARCH_WEB_SEARCH_ENABLED", True)
+    monkeypatch.setattr(config, "RESEARCH_WEB_SEARCH_PROVIDER", provider)
+    calls = {"n": 0}
+
+    def fake_web_search(query, provider, max_results, end_date=None):
+        calls["n"] += 1
+        return [{"url": f"https://ex.com/{calls['n']}", "title": "Peers", "score": None, "published_date": None}]
+
+    monkeypatch.setattr(sources, "web_search", fake_web_search)
+    monkeypatch.setattr(sources, "web_extract", lambda url, provider: f"# Comparable companies for {url}")
+
+    assert main(["discover-peers", "--ticker", "MSFT", "--company-name", "Microsoft"]) == 0
+    assert main(["discover-peers", "--ticker", "MSFT", "--company-name", "Microsoft"]) == 0  # rerun
+
+    disc_dir = isolated_runs_dir / "MSFT" / "peer-discovery"
+    archive_root = disc_dir / config.ARCHIVE_SUBDIR
+    assert archive_root.exists(), "prior peer-discovery should have been archived on rerun"
+    archived_manifests = list(archive_root.glob("*/manifest.json"))
+    assert archived_manifests, "the archived prior discovery should include its manifest.json"

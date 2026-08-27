@@ -126,13 +126,3 @@ num_results = 5
 max_extracted_sources = 10        # cap across all queries combined; selected by score when the
                                    # provider gives one, otherwise by the provider's own result order
 
-[analysis]
-require_previous_period_comparison = true
-require_guidance_analysis = true
-require_scenarios = true
-require_monitoring_indicators = true
-
-[output]
-write_signal_card = true
-write_outlook_brief = true
-include_evidence_appendix = true

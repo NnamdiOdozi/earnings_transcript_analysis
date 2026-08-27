@@ -648,8 +648,18 @@ def cmd_analyze(args: argparse.Namespace) -> int:
     metrics_path = run_dir / config.METRICS_FILENAME
     if metrics_path.exists():
         claim_ids = {c.id for c in claims if c.id}
-        raw_metrics = json.loads(metrics_path.read_text(encoding="utf-8"))
-        metrics = [Metric.model_validate(m) for m in raw_metrics]
+        try:
+            raw_metrics = json.loads(metrics_path.read_text(encoding="utf-8"))
+            metrics = [Metric.model_validate(m) for m in raw_metrics]
+        except (json.JSONDecodeError, ValidationError) as exc:
+            result = ValidationResult(
+                ok=False,
+                checked_claims=0,
+                issues=[ValidationIssue(claim_index=-1, check="schema", message=f"Could not parse {config.METRICS_FILENAME}: {exc}")],
+            )
+            _write_validation(run_dir, result)
+            print(f"Validation FAILED: could not parse {config.METRICS_FILENAME}: {exc}")
+            return 1
         metric_issues = validate_metrics(metrics, claim_ids)
         if metric_issues:
             result = ValidationResult(

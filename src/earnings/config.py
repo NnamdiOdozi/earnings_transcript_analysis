@@ -32,6 +32,13 @@ def _get(section: str, key: str, default: Any) -> Any:
     return _CFG.get(section, {}).get(key, default)
 
 
+def _validate_provider(name: str) -> str:
+    """Fail fast on a typo'd provider name instead of silently falling through to Tavily."""
+    if name not in ("exa", "tavily"):
+        raise ValueError(f"Unknown research provider {name!r}; expected 'exa' or 'tavily'")
+    return name
+
+
 # --- Env var names (values loaded via python-dotenv / os.environ at call sites) ---
 TAVILY_API_KEY_ENV = "TAVILY_API_KEY"
 EXA_API_KEY_ENV = "EXA_API_KEY"
@@ -117,7 +124,7 @@ SEC_FORMS = list(_get("sec", "forms", ["8-K", "10-Q", "10-K", "20-F", "6-K"]))
 # --- Research toggles (config.toml [research]) ---
 RESEARCH_SEC_ENABLED = bool(_get("research", "sec_enabled", True))
 RESEARCH_WEB_SEARCH_ENABLED = bool(_get("research", "web_search_enabled", True))
-RESEARCH_WEB_SEARCH_PROVIDER = str(_get("research", "provider", "exa"))  # "exa" | "tavily"
+RESEARCH_WEB_SEARCH_PROVIDER = _validate_provider(str(_get("research", "provider", "exa")))  # "exa" | "tavily"
 RESEARCH_OFFICIAL_SOURCES_ONLY = bool(_get("research", "official_sources_only", True))
 RESEARCH_ARCHIVE_ALL_SOURCES = bool(_get("research", "archive_all_sources", True))
 RESEARCH_INCLUDE_PREVIOUS_PERIOD = bool(_get("research", "include_previous_period", True))
@@ -175,17 +182,6 @@ TAVILY_MAX_EXTRACTED_SOURCES = int(_get("tavily", "max_extracted_sources", 10))
 EXA_TYPE = str(_get("exa", "type", "auto"))
 EXA_NUM_RESULTS = int(_get("exa", "num_results", 5))
 EXA_MAX_EXTRACTED_SOURCES = int(_get("exa", "max_extracted_sources", 10))
-
-# --- Analysis requirements (config.toml [analysis]) ---
-ANALYSIS_REQUIRE_PREVIOUS_PERIOD_COMPARISON = bool(_get("analysis", "require_previous_period_comparison", True))
-ANALYSIS_REQUIRE_GUIDANCE_ANALYSIS = bool(_get("analysis", "require_guidance_analysis", True))
-ANALYSIS_REQUIRE_SCENARIOS = bool(_get("analysis", "require_scenarios", True))
-ANALYSIS_REQUIRE_MONITORING_INDICATORS = bool(_get("analysis", "require_monitoring_indicators", True))
-
-# --- Output toggles (config.toml [output]) ---
-OUTPUT_WRITE_SIGNAL_CARD = bool(_get("output", "write_signal_card", True))
-OUTPUT_WRITE_OUTLOOK_BRIEF = bool(_get("output", "write_outlook_brief", True))
-OUTPUT_INCLUDE_EVIDENCE_APPENDIX = bool(_get("output", "include_evidence_appendix", True))
 
 # --- Invisible / zero-width unicode code points stripped during sanitisation ---
 ZERO_WIDTH_CHARS = (

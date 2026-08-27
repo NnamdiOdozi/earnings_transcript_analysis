@@ -172,6 +172,39 @@ def test_analyze_handles_malformed_claims_json_without_traceback(isolated_runs_d
     assert validation["issues"][0]["check"] == "schema"
 
 
+def test_analyze_handles_malformed_metrics_json_without_traceback(isolated_runs_dir):
+    transcript = str(FIXTURES / "normal_transcript.txt")
+    main(["prepare", "--ticker", "ACME", "--event-id", "2026-q2", "--transcript", transcript])
+
+    run_dir = isolated_runs_dir / "ACME" / "2026-q2"
+    segment_lines = (run_dir / config.NORMALIZED_SUBDIR / config.TRANSCRIPT_FILENAME).read_text().splitlines()
+    segments = [json.loads(line) for line in segment_lines]
+    revenue_segment = next(s for s in segments if "110 million" in s["text"])
+
+    claims = [
+        {
+            "id": "claim-001",
+            "category": "reported_financial_performance",
+            "classification": "reported_fact",
+            "claim_text": "Revenue was $110 million.",
+            "quote": "Revenue for the quarter was $110 million, up from $100 million a year ago.",
+            "segment_id": revenue_segment["id"],
+            "status": "reported",
+            "values": {"revenue_millions": 110},
+            "confidence": 0.9,
+        }
+    ]
+    (run_dir / config.CLAIMS_FILENAME).write_text(json.dumps(claims))
+    (run_dir / config.METRICS_FILENAME).write_text("{not valid json")
+
+    rc = main(["analyze", "--ticker", "ACME", "--event-id", "2026-q2"])
+    assert rc == 1
+
+    validation = json.loads((run_dir / config.VALIDATION_FILENAME).read_text())
+    assert validation["ok"] is False
+    assert validation["issues"][0]["check"] == "schema"
+
+
 def test_analyze_removes_stale_signal_card_after_later_failing_run(isolated_runs_dir):
     transcript = str(FIXTURES / "normal_transcript.txt")
     main(["prepare", "--ticker", "ACME", "--event-id", "2026-q2", "--transcript", transcript])

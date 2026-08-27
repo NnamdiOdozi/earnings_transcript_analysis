@@ -1,0 +1,59 @@
+# Review Report: JPM — 2026-q2
+
+**Verdict:** pass_with_warnings
+**Reviewed at (agent-reported):** 2026-08-27T21:00:00Z (model: opus)
+**Checked at (system clock):** 2026-08-27T20:34:40Z
+
+## Summary
+The run is well-supported, numerically consistent, and industry-appropriate. All four peer sources (BofA, Wells Fargo, Citigroup, Goldman Sachs) were opened and verified as genuine same-day 2Q26 results matching their claims; transcript-anchored claims fairly characterise seg-0003 and the cited Q&A segments; period labels are unambiguous and agree with financials.json. The material adjusted-vs-GAAP gap (\$6.14/\$16.9B ex-items vs \$7.70 GAAP EPS) and the same-day peer vintage are both disclosed honestly in Section 9. No high/critical issues. Warnings are minor: the base case leans on a backward-looking reported quarter to project 'continued' revenue strength without citing management's own equities-sustainability caution; the upside case's 'industry-wide implies persistence' step is logically thin (both mitigated by the brief's own downside case); Section 9 gives GAAP EPS but not GAAP net income; and claim-022's category label ('current_guidance') is a slight misfit for analyst consensus. Verdict: pass_with_warnings.
+
+## Source checks
+- **[info]** evidence/web/web-004.md: "net income for the second quarter 2026 of \\$5.8 billion, or \\$3.15 per diluted share, on revenues of \\$24.8 billion ... With net income up 45%, this was Citi's best quarterly revenue in a decade"
+  - Evidence: Content is a genuine Citigroup 2Q26 press release (July 14, 2026), matching the manifest origin (citigroup.com). It supports both claim-025 (net income \$5.8B / EPS \$3.15 / revenue \$24.8B) and claim-028 (net income up 45%, best quarterly revenue in a decade -- both verbatim in Jane Fraser's quote). Archived evidence represents what it claims to.
+  - Recommendation: None.
+- **[info]** evidence/web/web-007.md: 'Net income \\$9.1B +27% YoY'
+  - Evidence: Content is a genuine Bank of America 2Q26 financial-results deck (SEC ex99.2, July 14 2026), matching manifest origin. Supports claim-023 exactly. web-003 (Wells Fargo) and web-005 (Goldman Sachs) likewise match claims 024 and 026 verbatim. All five peer sources are the correct companies, not mislabeled or 404 content.
+  - Recommendation: None.
+- **[info]** evidence/web/web-001.md: 'The consensus among 14 analysts calls for earnings of \\$5.67 per share on revenue of \\$50.54 billion'
+  - Evidence: Alphastreet JPM Q2 2026 preview, a pre-event (July 14 preview) consensus source used for claim-022. Temporal integrity: it is a pre-print expectations article, correctly used as the pre-results consensus baseline, not a post-hoc result.
+  - Recommendation: None.
+- **[info]** evidence/web-evidence.jsonl: 'peer Q2 2026 results (BofA, WFC, Citi, GS) all dated 14 Jul 2026'
+  - Evidence: All peer results carry publication/event date 14 Jul 2026 -- the same day as JPMorgan's call, not after it. Dimon states on the call he had already read Goldman's numbers that morning, so these were same-day competitive backdrop knowable at the time. No post-event contamination; brief Section 9 discloses the vintage explicitly.
+  - Recommendation: None.
+
+## Claim findings
+- **[info]** claims.json#claim-001: 'Excluding significant items, JPMorgan reported net income of \\$16.9 billion, EPS of \\$6.14 and an ROTCE of 23%.'
+  - Evidence: Fairly characterizes seg-0003. The transcript reads 'Including (sic) [Excluding] the significant items ... the Firm delivered net income of \$16.9 billion' -- the speaker misspoke and the official transcript corrects it to 'Excluding'. The \$16.9B/\$6.14 basis is below the SEC 10-Q GAAP figures (net income \$21.155B, EPS \$7.70), consistent with a positive significant item being excluded. Period 'quarter' agrees with financials.json period_type. Correctly labelled as ex-significant-items.
+  - Recommendation: None.
+- **[low]** claims.json#claim-022: 'category: current_guidance'
+  - Evidence: claim-022 is analyst consensus (a market expectation), not company-issued guidance, yet is filed under category 'current_guidance'. The claim_text and quote are accurate and it is correctly classified as reported_fact; only the category label is a slight misfit. No downstream effect on the brief, which uses it correctly as the pre-print consensus baseline.
+  - Recommendation: Consider recategorising claim-022 as an external/consensus expectation rather than company guidance; low priority as it does not affect the narrative.
+- **[info]** claims.json#claim-027: "JPMorgan's reported quarterly EPS came in well above the analyst consensus of \\$5.67 -- a clear earnings beat."
+  - Evidence: Analytical inference from claim-001 (\$6.14 adjusted EPS) and claim-022 (\$5.67 consensus). The beat holds on both the (lower) adjusted basis (\$6.14) and the GAAP basis (\$7.70), so the conclusion is robust and, using the lower adjusted figure, conservative. Section 9 honestly flags that the consensus basis is not fully specified in the cited source.
+  - Recommendation: None.
+
+## Outlook findings
+- **[low]** outlook-brief.md: 'Continued double-digit revenue strength near-term, led by CIB [claim-008], with consumer [claim-007] and AWM [claim-012] steady.'
+  - Evidence: The base case projects 'continued' double-digit revenue strength citing backward-looking Q2 reported facts (claim-008 CIB revenue +27%). Management's own Q&A (seg-0008, Barnum) cautioned the equities driver is 'a little bit hard to imagine that being repeated' and that IB had 'some pull forward' from large deals. The forward projection is only partially supported by the cited evidence. Mitigating: the brief foregrounds the sustainability question in Section 1, dedicates the downside case to exactly this risk, and the NII/expense guides plus 'pipeline remains quite robust' commentary give the base case some genuine support.
+  - Recommendation: Consider citing management's sustainability commentary (the equities-hard-to-repeat / IB pull-forward caution) directly in the base case, so the forward projection is anchored to forward-looking evidence rather than a backward-looking reported quarter.
+- **[low]** outlook-brief.md: 'the SEC 10-Q records \\$7.70'
+  - Evidence: Section 9 discloses the GAAP diluted EPS (\$7.70) against adjusted \$6.14, which is the material adjusted-vs-GAAP caveat. It does not also note the GAAP net income (\$21.155B in financials.json) versus the \$16.9B ex-significant-items figure the brief headlines. The ~\$4.25B gap (the excluded significant item) is left implicit.
+  - Recommendation: Add the GAAP net income figure (\$21.155B) alongside the GAAP EPS in Section 9 for symmetry, so the size of the excluded significant item is explicit.
+- **[low]** outlook-brief.md: 'Broad big-bank strength this quarter ... suggests the capital-markets tailwind is industry-wide, not JPMorgan-specific, supporting persistence.'
+  - Evidence: The inference that industry-wide strength 'supports persistence' is logically thin -- industry-wide strength shows the driver is not JPM-specific, but an industry-wide peak is still a peak and does not by itself imply durability. Mitigating: this sits in the clearly-labelled upside case and the downside case explicitly argues the opposite (a shared peak), so uncertainty is communicated honestly overall.
+  - Recommendation: Soften the 'supporting persistence' link, or reframe as 'confirms the driver is sector-wide' without implying durability.
+
+## Process findings
+- **[info]** validation.json: 'n/a'
+  - Evidence: validation.json.ok == true, 29 claims checked, 0 issues and 0 warnings -- confirmed present, not re-derived. All 29 claims in claims.json carry non-empty ids (claim-001..claim-029) and resolve. Numeric grounding, exact-quote and citation-resolution were the deterministic stages' job and are taken as passed.
+  - Recommendation: None.
+- **[info]** manifest.json: 'n/a'
+  - Evidence: manifest.json present with all sources hashed (transcript, 55 raw web hits, 10 citable web-evidence files, financials). signal-card.md and outlook-brief.md both exist and are internally consistent (every signal-card claim maps to a claims.json entry). Process artifacts for each mandatory stage are present.
+  - Recommendation: None.
+- **[info]** signal-card.md: 'Balance Sheet Solvency / Demand Activity / Current Guidance sections'
+  - Evidence: Cross-sector appropriateness confirmed: the card and brief use bank-appropriate metrics (NII, CET1, credit costs, net charge-offs, reserve build, AUM, net new checking accounts, IB fees) with no subscription/churn/ARR-style template language imported from another industry.
+  - Recommendation: None.
+
+## Unverified items
+- The basis of the $5.67 analyst consensus (claim-022) -- adjusted vs GAAP -- is not specified in web-001; the beat conclusion (claim-027) holds under either basis, but the exact comparability is not fully verifiable. Section 9 already flags this.
+- The exact composition of the excluded 'significant items' bridging $16.9B adjusted to $21.155B GAAP net income is not disclosed in the archived evidence (referenced only as 'the significant items noted on the page'); the magnitude is inferable but the components are not.

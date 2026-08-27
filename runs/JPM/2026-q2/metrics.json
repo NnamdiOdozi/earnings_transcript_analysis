@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Adjusted EPS (ex-significant items)",
+    "value": 6.14,
+    "unit": "USD per share",
+    "period": "Q2 2026",
+    "definition": "Diluted EPS excluding the significant items management flagged, as presented on the call",
+    "source_claim_ids": ["claim-001"]
+  },
+  {
+    "name": "ROTCE",
+    "value": 23.0,
+    "unit": "%",
+    "period": "Q2 2026",
+    "definition": "Return on tangible common equity, the firm's headline profitability measure",
+    "source_claim_ids": ["claim-001"]
+  },
+  {
+    "name": "Standardized CET1 ratio",
+    "value": 14.1,
+    "unit": "%",
+    "period": "as of 30 Jun 2026",
+    "definition": "Common Equity Tier 1 capital ratio under the standardized approach",
+    "source_claim_ids": ["claim-005"]
+  },
+  {
+    "name": "CIB net income",
+    "value": 9.7,
+    "unit": "USD billions",
+    "period": "Q2 2026",
+    "definition": "Net income of the Commercial & Investment Bank segment",
+    "source_claim_ids": ["claim-008"]
+  },
+  {
+    "name": "AWM assets under management",
+    "value": 5.1,
+    "unit": "USD trillions",
+    "period": "as of 30 Jun 2026",
+    "definition": "Assets under management in Asset & Wealth Management",
+    "source_claim_ids": ["claim-013"]
+  }
+]

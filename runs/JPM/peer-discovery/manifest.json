@@ -1,0 +1,216 @@
+{
+  "ticker": "JPM",
+  "event_id": "peer-discovery",
+  "created_at": "2026-08-27T20:08:09Z",
+  "sources": [
+    {
+      "path": "raw/query-01-hit-01.json",
+      "origin": "https://assetnext.app/peers/jpmorgan-chase-co",
+      "retrieved_at": "2026-08-27T20:08:04Z",
+      "content_type": "application/json",
+      "sha256": "f98470f3dbb3239fdb8d6666fd2c28ec2e996cca922375766225319041a827ae",
+      "byte_length": 357
+    },
+    {
+      "path": "raw/query-01-hit-02.json",
+      "origin": "https://sharesgrow.com/peers/JPM/",
+      "retrieved_at": "2026-08-27T20:08:04Z",
+      "content_type": "application/json",
+      "sha256": "79ab8f0c85470a8ddd4cf69b5ba4b0547270fc381ec81f1d68d19d01bcc88c79",
+      "byte_length": 362
+    },
+    {
+      "path": "raw/query-01-hit-03.json",
+      "origin": "https://vcpscanner.com/valuation/jpm/relative",
+      "retrieved_at": "2026-08-27T20:08:04Z",
+      "content_type": "application/json",
+      "sha256": "80fd02084fb2d5e274cdc779f2d46cb54e40936a413761ee991e8959e31886e0",
+      "byte_length": 354
+    },
+    {
+      "path": "raw/query-01-hit-04.json",
+      "origin": "https://assetnext.app/compare/jpmorgan-chase-co",
+      "retrieved_at": "2026-08-27T20:08:04Z",
+      "content_type": "application/json",
+      "sha256": "00fcce63b1de1008abd6de5437c958ff19a3913709d42755106487fa5495f443",
+      "byte_length": 349
+    },
+    {
+      "path": "raw/query-01-hit-05.json",
+      "origin": "https://stockti.com/stock/JPM/peers",
+      "retrieved_at": "2026-08-27T20:08:04Z",
+      "content_type": "application/json",
+      "sha256": "10a67cccfdfd5d3e757e334cfe034b31eb6986b03bf8a3eb657dff05bf8dd1ed",
+      "byte_length": 310
+    },
+    {
+      "path": "raw/query-02-hit-01.json",
+      "origin": "https://www.hudson-labs.com/research/jpmorgan-chase-competitors-jpm-top-peers-2026",
+      "retrieved_at": "2026-08-27T20:08:05Z",
+      "content_type": "application/json",
+      "sha256": "41c9e2bf713640c906f90abbada1526f8c42d1d6bdb25f283c65fe955a9458ca",
+      "byte_length": 395
+    },
+    {
+      "path": "raw/query-02-hit-02.json",
+      "origin": "https://www.marketbeat.com/stocks/NYSE/JPM/competitors-and-alternatives/",
+      "retrieved_at": "2026-08-27T20:08:05Z",
+      "content_type": "application/json",
+      "sha256": "ea5f6e60bca400371978af61173f87eb6fcafcae61453eed5954518f4bcdbdbc",
+      "byte_length": 317
+    },
+    {
+      "path": "raw/query-02-hit-03.json",
+      "origin": "https://www.tipranks.com/stocks/jpm/similar-stocks",
+      "retrieved_at": "2026-08-27T20:08:05Z",
+      "content_type": "application/json",
+      "sha256": "b5dfff4083ea7924c31a0cad40ecc032cf7124ef4a036a19fd4314cc0d746b25",
+      "byte_length": 387
+    },
+    {
+      "path": "raw/query-02-hit-04.json",
+      "origin": "https://www.macroaxis.com/competition/JPM",
+      "retrieved_at": "2026-08-27T20:08:05Z",
+      "content_type": "application/json",
+      "sha256": "0d853a282b6aac9fa54301c65a6bf535e395a7bd701f11c4efeadb04d774f859",
+      "byte_length": 353
+    },
+    {
+      "path": "raw/query-02-hit-05.json",
+      "origin": "https://www.morningstar.com/stocks/one-wall-streets-highest-quality-stocks-is-becoming-more-interesting",
+      "retrieved_at": "2026-08-27T20:08:05Z",
+      "content_type": "application/json",
+      "sha256": "14124cb461c93681fe4bc5f07b2bfccdc59b403a8bccba12d197e014e29eb5cd",
+      "byte_length": 429
+    },
+    {
+      "path": "raw/query-03-hit-01.json",
+      "origin": "https://assetnext.app/similar-companies/jpmorgan-chase-co",
+      "retrieved_at": "2026-08-27T20:08:07Z",
+      "content_type": "application/json",
+      "sha256": "d82232e044106e625ef7a90d0e8b359520ede0027088b2398534cebd8e8e125e",
+      "byte_length": 358
+    },
+    {
+      "path": "raw/query-03-hit-02.json",
+      "origin": "https://marketchameleon.com/Overview/JPM/Similar/",
+      "retrieved_at": "2026-08-27T20:08:07Z",
+      "content_type": "application/json",
+      "sha256": "5d69134a3d464ecffd2b6a5b66eb29d1c54342345ae179cd01c12e41101ae3b0",
+      "byte_length": 325
+    },
+    {
+      "path": "raw/query-03-hit-03.json",
+      "origin": "https://www.obermatt.com/en/stocks/jpmorgan-chase-jpm/similar-stocks.html",
+      "retrieved_at": "2026-08-27T20:08:07Z",
+      "content_type": "application/json",
+      "sha256": "f8dae54e14943fdfbbc6d51f6a835eb59b820786a251d1fb2efc69505888f050",
+      "byte_length": 377
+    },
+    {
+      "path": "raw/query-03-hit-04.json",
+      "origin": "https://sharesgrow.com/es/peers/JPM/",
+      "retrieved_at": "2026-08-27T20:08:07Z",
+      "content_type": "application/json",
+      "sha256": "c84be20f27ed3793f83c3108e82332555551fe8d0072797d69c1d286fb29ed0b",
+      "byte_length": 362
+    },
+    {
+      "path": "raw/query-03-hit-05.json",
+      "origin": "https://walnutinvest.com/stocks/compare/bac-vs-jpm",
+      "retrieved_at": "2026-08-27T20:08:07Z",
+      "content_type": "application/json",
+      "sha256": "ffd252bb31fc5de66cc2acdc549e48f0454c4e5fecc38ec4d4c262a474625a0b",
+      "byte_length": 366
+    },
+    {
+      "path": "candidate-01.md",
+      "origin": "https://assetnext.app/peers/jpmorgan-chase-co",
+      "retrieved_at": "2026-08-27T20:08:07Z",
+      "content_type": "text/markdown",
+      "sha256": "ae2276c614e84ffc415701c263e083ddc00744ca49d32bcf5c90071164001aa2",
+      "byte_length": 3870
+    },
+    {
+      "path": "candidate-02.md",
+      "origin": "https://sharesgrow.com/peers/JPM/",
+      "retrieved_at": "2026-08-27T20:08:07Z",
+      "content_type": "text/markdown",
+      "sha256": "d01ac05cfae56f4eaf9496d84d9a477f8b6a739971fde0db530aa5a65bfc3d1f",
+      "byte_length": 844
+    },
+    {
+      "path": "candidate-03.md",
+      "origin": "https://vcpscanner.com/valuation/jpm/relative",
+      "retrieved_at": "2026-08-27T20:08:07Z",
+      "content_type": "text/markdown",
+      "sha256": "b8e53c689d1967128ff8f31cf5e41dd5c7933c6308f0e56340a2df786046108b",
+      "byte_length": 6751
+    },
+    {
+      "path": "candidate-04.md",
+      "origin": "https://assetnext.app/compare/jpmorgan-chase-co",
+      "retrieved_at": "2026-08-27T20:08:07Z",
+      "content_type": "text/markdown",
+      "sha256": "823ae236c672f1d5615667cf7a7feb00d803081f2607b6b795e7b62c0bd02b1f",
+      "byte_length": 2871
+    },
+    {
+      "path": "candidate-05.md",
+      "origin": "https://stockti.com/stock/JPM/peers",
+      "retrieved_at": "2026-08-27T20:08:08Z",
+      "content_type": "text/markdown",
+      "sha256": "97a04cf18b1179f3cf8d19369026a60662310dac63263ddbeff5e59cf1e32da5",
+      "byte_length": 2821
+    },
+    {
+      "path": "candidate-06.md",
+      "origin": "https://www.hudson-labs.com/research/jpmorgan-chase-competitors-jpm-top-peers-2026",
+      "retrieved_at": "2026-08-27T20:08:08Z",
+      "content_type": "text/markdown",
+      "sha256": "fe081f857f7d4c415604c01eedc388f8b2f4afbe53d2d5e10041e7413ff1dc1f",
+      "byte_length": 4849
+    },
+    {
+      "path": "candidate-07.md",
+      "origin": "https://www.marketbeat.com/stocks/NYSE/JPM/competitors-and-alternatives/",
+      "retrieved_at": "2026-08-27T20:08:08Z",
+      "content_type": "text/markdown",
+      "sha256": "e94677906a9e92910ca38d9b0abec7177933929a5ce3562d2c20abb7737bef70",
+      "byte_length": 63056
+    },
+    {
+      "path": "candidate-08.md",
+      "origin": "https://www.tipranks.com/stocks/jpm/similar-stocks",
+      "retrieved_at": "2026-08-27T20:08:08Z",
+      "content_type": "text/markdown",
+      "sha256": "ce0075f268705b267fce24fcffeecde77840f88390fa8d9bed20881f3dc248f6",
+      "byte_length": 9947
+    },
+    {
+      "path": "candidate-09.md",
+      "origin": "https://www.macroaxis.com/competition/JPM",
+      "retrieved_at": "2026-08-27T20:08:09Z",
+      "content_type": "text/markdown",
+      "sha256": "b6d9caa56e305ae5fc019eae40b29bd8312d922542914d23f5091be3b9778fc4",
+      "byte_length": 15766
+    },
+    {
+      "path": "candidate-10.md",
+      "origin": "https://www.morningstar.com/stocks/one-wall-streets-highest-quality-stocks-is-becoming-more-interesting",
+      "retrieved_at": "2026-08-27T20:08:09Z",
+      "content_type": "text/markdown",
+      "sha256": "5b9d7bdade7882da475bffa54dda7a1f3a234f3527c52e91eddcbe81b47e310a",
+      "byte_length": 8128
+    }
+  ],
+  "notes": [
+    "Peer-group discovery via exa: 15 hit(s) from 3 queries.",
+    "Extracted 10 candidate page(s) for the agent to read and pick ~4 peers."
+  ],
+  "queries": [
+    "JPMorgan Chase JPM peer group comparable companies",
+    "JPMorgan Chase JPM closest competitors comparable stocks analysts",
+    "stocks most similar to JPM JPMorgan Chase"
+  ]
+}

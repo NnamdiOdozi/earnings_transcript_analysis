@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "checked_claims": 29,
+  "issues": [],
+  "warnings": [],
+  "validated_at": "2026-08-27T20:30:08Z",
+  "input_hashes": {
+    "claims.json": "0172199645444d464ea265eb45bae7d18ee81d6c9664f7d9a5c73743eb1c8674",
+    "transcript.jsonl": "71c334dda2535cbe75a5473c1df07825ce18a236cd7e0c8a2ef8ab116f924027",
+    "financials.json": "d0c74ad516263119332a50c5f6db53696e7d3dbc4c91f6b349809da79d56752e",
+    "metrics.json": "55482ea89e81395af9537ea87e8f1203bffa392625106ca8e43debec7d06ec0a"
+  }
+}

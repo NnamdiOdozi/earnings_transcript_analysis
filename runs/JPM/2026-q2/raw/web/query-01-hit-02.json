@@ -1,0 +1,11 @@
+{
+  "url": "https://ca.finance.yahoo.com/quote/JPM/analysis/",
+  "title": "JPMorgan Chase & Co. (JPM) Analyst Ratings, Estimates & Forecasts - Yahoo Finance",
+  "score": null,
+  "published_date": null,
+  "_class": "consensus",
+  "_select_key": "consensus",
+  "_provider": "exa",
+  "_query": "JPMorgan Chase JPM 2026-q2 analyst consensus estimate revenue EPS",
+  "_retrieved_at": "2026-08-27T20:08:40Z"
+}

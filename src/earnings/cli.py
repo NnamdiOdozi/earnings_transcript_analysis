@@ -466,8 +466,8 @@ def cmd_prepare(args: argparse.Namespace) -> int:
                 # cross-referencing the manifest.
                 hit_retrieved_at = _now_iso()
                 # "_query" records the exact search string that produced this hit --
-                # previously only recoverable by re-reading build_official_source_queries()
-                # and assuming its fixed template never changed. "_provider" records
+                # previously only recoverable by re-reading the query builder in
+                # sources.py and assuming its fixed template never changed. "_provider" records
                 # which search API (exa/tavily) produced it -- previously not recorded
                 # ANYWHERE per-hit: the archive directory is always literally named
                 # "web" regardless of provider (see web_search_raw_dir above), not

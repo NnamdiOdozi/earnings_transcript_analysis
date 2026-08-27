@@ -789,6 +789,49 @@ def test_sources_extract_financials_from_company_facts_flattens_latest_value():
     assert out["NetIncomeLoss"]["value"] == 20000000
 
 
+def test_sources_extract_financials_prefers_original_filing_over_restatement():
+    from earnings.sources import extract_financials_from_company_facts
+
+    # Two facts share the same period "end" (same quarter) but differ in "filed" date
+    # and "val" -- the earlier-filed one is the original 10-Q, the later-filed one is
+    # a restatement (10-Q/A) for the same period. Only the original was knowable at
+    # the earnings event, so it must be the one selected, never the restatement.
+    company_facts = {
+        "facts": {
+            "us-gaap": {
+                "Revenues": {
+                    "units": {
+                        "USD": [
+                            {
+                                "end": "2026-06-30",
+                                "start": "2026-04-01",
+                                "val": 110000000,
+                                "filed": "2026-07-25",
+                                "form": "10-Q",
+                                "fy": 2026,
+                                "accn": "0000000000-26-000001",
+                            },
+                            {
+                                "end": "2026-06-30",
+                                "start": "2026-04-01",
+                                "val": 999000000,
+                                "filed": "2026-09-15",
+                                "form": "10-Q/A",
+                                "fy": 2026,
+                                "accn": "0000000000-26-000002",
+                            },
+                        ]
+                    }
+                }
+            }
+        }
+    }
+    out = extract_financials_from_company_facts(company_facts, concepts=["Revenues"])
+    assert out["Revenues"]["value"] == 110000000
+    assert out["Revenues"]["filed"] == "2026-07-25"
+    assert out["Revenues"]["form"] == "10-Q"
+
+
 def test_sources_extract_financials_pins_to_explicit_period_end():
     from earnings.sources import extract_financials_from_company_facts
 

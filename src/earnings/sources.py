@@ -1,10 +1,10 @@
 """Provider-agnostic (Exa/Tavily) web search/extraction and limited SEC filing/XBRL retrieval.
 
 Both are thin wrappers around httpx calls. Callers (cli.py) decide whether to invoke
-them at all -- Tavily is only called when external web evidence is explicitly
-requested, and SEC lookups are opt-in per the `--sec-ticker`/`--sec-cik` CLI flags.
-Tests never call these functions; they build evidence/financials.json from fixtures
-directly, so no network guard flag is needed inside the functions themselves.
+them at all -- web search (consensus/peer queries) runs by default as part of
+`earnings prepare`, and SEC lookups are opt-in per the `--sec-ticker`/`--sec-cik` CLI
+flags. Tests never call these functions; they build evidence/financials.json from
+fixtures directly, so no network guard flag is needed inside the functions themselves.
 """
 from __future__ import annotations
 
@@ -18,7 +18,6 @@ from .config import (
     EXA_SEARCH_URL,
     HTTP_TIMEOUT_SECONDS,
     SEC_COMPANY_FACTS_URL,
-    SEC_SUBMISSIONS_URL,
     SEC_TICKER_MAP_URL,
     TAVILY_EXTRACT_URL,
     TAVILY_SEARCH_URL,
@@ -46,8 +45,7 @@ def tavily_search(
     publish-date filter -- per Tavily's own API reference, results published after
     it should never be returned. DOCUMENTED LIMITATION, confirmed by live testing on
     2026-08-26: this is NOT reliably enforced in practice on this account, for
-    either topic="general" (what build_official_source_queries uses) or
-    topic="news" -- identical result sets were returned with and without end_date
+    either topic="general" or topic="news" -- identical result sets were returned with and without end_date
     set, including hits with published_date years past the cutoff. Most
     "general"-topic hits also carry no published_date at all, so the client-side
     post-filter in cli.cmd_prepare (the actual causality backstop) can't check them
@@ -71,29 +69,6 @@ def tavily_search(
         resp = client.post(TAVILY_SEARCH_URL, json=payload)
         resp.raise_for_status()
         return resp.json()
-
-
-# Generic official-document types to search for. No industry terms -- if a company's
-# own materials name a sector-specific document, the agent adds that separately; this
-# function never guesses sector vocabulary.
-_OFFICIAL_DOC_TYPES = (
-    "earnings release",
-    "earnings call transcript",
-    "investor presentation",
-    "outlook guidance",
-    "regulatory filing",
-    "previous earnings call",
-    "previous guidance",
-)
-
-
-def build_official_source_queries(company_name: str, ticker: str, event_date: str) -> list[str]:
-    """Build narrow, official-source-only Tavily queries from the company name,
-    ticker, event date and the generic document types above. No sector keywords are
-    injected -- the caller (agent) may extend this list with terms it discovered in
-    the company's own disclosures, but this function itself stays domain-agnostic.
-    """
-    return [f"{company_name} {ticker} {event_date} {doc_type}" for doc_type in _OFFICIAL_DOC_TYPES]
 
 
 def build_consensus_queries(
@@ -278,14 +253,6 @@ def resolve_cik(ticker: str) -> str | None:
     return None
 
 
-def get_submissions(cik: int) -> dict[str, Any]:
-    url = SEC_SUBMISSIONS_URL.format(cik=cik)
-    with httpx.Client(timeout=HTTP_TIMEOUT_SECONDS, headers=_sec_headers()) as client:
-        resp = client.get(url)
-        resp.raise_for_status()
-        return resp.json()
-
-
 def get_company_facts(cik: int) -> dict[str, Any]:
     url = SEC_COMPANY_FACTS_URL.format(cik=cik)
     with httpx.Client(timeout=HTTP_TIMEOUT_SECONDS, headers=_sec_headers()) as client:
@@ -339,8 +306,12 @@ def extract_financials_from_company_facts(
     If `period_end` (an XBRL "end" date, e.g. "2026-06-30") is given, only facts for
     that exact period are considered -- this pins the fact to the earnings event
     instead of picking whatever period happens to be latest, which could be a later
-    quarter, an annual figure, or a restatement. Without it, the latest-by-end fact is
-    used (documented limitation, not a default to rely on for a real pilot).
+    quarter or an annual figure. Without it, the latest-by-end fact is used
+    (documented limitation, not a default to rely on for a real pilot). Among facts
+    sharing the same period "end", the earliest-filed (original) fact is chosen, so a
+    later restatement (same period, later "filed", possibly different "val") cannot
+    silently replace it -- that would be look-ahead leakage, since the restatement was
+    not knowable at the earnings event.
 
     `period_end` alone is NOT enough to disambiguate a quarterly figure from a
     year-to-date one: a 10-Q's 3-month and 6-month facts share the same "end" date.
@@ -375,7 +346,12 @@ def extract_financials_from_company_facts(
                 candidates = []
         if not candidates:
             continue
-        unit_type, latest = max(candidates, key=lambda ue: ue[1].get("end", ""))
+        # Latest PERIOD (max end), but the ORIGINAL filing within it (earliest "filed"):
+        # a later 10-Q/A restatement shares the period end yet was not knowable at the
+        # event, so it must never silently replace the original.
+        target_end = max(e.get("end", "") for _, e in candidates)
+        same_period = [(u, e) for u, e in candidates if e.get("end", "") == target_end]
+        unit_type, latest = min(same_period, key=lambda ue: ue[1].get("filed", ""))
         duration_days, resolved_period_type = _period_type(latest.get("start"), latest.get("end"))
         out[concept] = {
             "value": latest.get("val"),

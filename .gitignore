@@ -202,3 +202,7 @@ output/
 # earnings pipeline run artifacts
 
 .claude/commands/d0a288d918e98dcbcb2363c1808dcf97/
+
+# Archived pipeline runs (superseded copies moved aside on re-prepare) -- not tracked;
+# the prior states already live in git history.
+runs/**/_archive/

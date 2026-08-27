@@ -94,6 +94,7 @@ def test_prepare_then_analyze_valid_claims_produces_signal_card(isolated_runs_di
 
     claims = [
         {
+            "id": "claim-001",
             "category": "reported_financial_performance",
             "classification": "reported_fact",
             "claim_text": "Revenue was $110 million, up 10% YoY.",
@@ -136,6 +137,7 @@ def test_analyze_blocks_signal_card_when_claim_has_paraphrased_quote(isolated_ru
 
     claims = [
         {
+            "id": "claim-001",
             "category": "reported_financial_performance",
             "classification": "reported_fact",
             "claim_text": "Revenue rose sharply.",
@@ -181,6 +183,7 @@ def test_analyze_removes_stale_signal_card_after_later_failing_run(isolated_runs
 
     passing_claims = [
         {
+            "id": "claim-001",
             "category": "reported_financial_performance",
             "classification": "reported_fact",
             "claim_text": "Revenue was $110 million.",
@@ -199,6 +202,7 @@ def test_analyze_removes_stale_signal_card_after_later_failing_run(isolated_runs
     # prior passing run must not survive being mistaken for the current result.
     failing_claims = [
         {
+            "id": "claim-001",
             "category": "reported_financial_performance",
             "classification": "reported_fact",
             "claim_text": "Revenue was $999 million.",

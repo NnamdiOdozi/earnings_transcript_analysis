@@ -73,6 +73,7 @@ def test_claim_text_numbers_accepts_hyphenated_range_grounded_in_evidence(financ
         "In Azure, we expect Q3 revenue growth to be between 37% and 38% in constant currency."
     )
     claim = Claim(
+        id="claim-test-100",
         category="current_guidance",
         classification="management_guidance",
         claim_text="Azure guidance of 37%-38% for Q3.",
@@ -90,6 +91,7 @@ def test_claim_text_numbers_still_catches_fabricated_range_bound(financials):
     # 90 is invented and must still fail.
     segment_text = normalize_whitespace("We expect revenue of approximately $80 billion.")
     claim = Claim(
+        id="claim-test-101",
         category="current_guidance",
         classification="management_guidance",
         claim_text="Guidance of $80-90 billion.",
@@ -106,6 +108,7 @@ def test_claim_text_numbers_still_catches_fabricated_range_bound(financials):
 
 def test_exact_quote_passes_for_verbatim_substring(revenue_segment):
     claim = Claim(
+        id="claim-test-102",
         category="reported_financial_performance",
         classification="reported_fact",
         claim_text="Revenue grew year over year.",
@@ -119,6 +122,7 @@ def test_exact_quote_passes_for_verbatim_substring(revenue_segment):
 
 def test_exact_quote_fails_for_paraphrase(revenue_segment):
     claim = Claim(
+        id="claim-test-103",
         category="reported_financial_performance",
         classification="reported_fact",
         claim_text="Revenue grew year over year.",
@@ -134,6 +138,7 @@ def test_exact_quote_fails_for_paraphrase(revenue_segment):
 
 def test_exact_quote_tolerant_of_whitespace_differences(revenue_segment):
     claim = Claim(
+        id="claim-test-104",
         category="reported_financial_performance",
         classification="reported_fact",
         claim_text="Revenue grew year over year.",
@@ -147,6 +152,7 @@ def test_exact_quote_tolerant_of_whitespace_differences(revenue_segment):
 
 def test_numeric_check_passes_when_number_in_segment(revenue_segment, financials):
     claim = Claim(
+        id="claim-test-105",
         category="reported_financial_performance",
         classification="reported_fact",
         claim_text="Revenue was $110 million.",
@@ -161,6 +167,7 @@ def test_numeric_check_passes_when_number_in_segment(revenue_segment, financials
 
 def test_numeric_check_fails_for_fabricated_number(revenue_segment, financials):
     claim = Claim(
+        id="claim-test-106",
         category="reported_financial_performance",
         classification="reported_fact",
         claim_text="Revenue was $999 million.",
@@ -187,6 +194,7 @@ def test_numeric_check_is_unit_blind_cross_unit_false_accept(revenue_segment, fi
         text=normalize_whitespace("Gross margin rose 12% in the quarter."),
     )
     claim = Claim(
+        id="claim-test-107",
         category="reported_financial_performance",
         classification="reported_fact",
         claim_text="Revenue was $12 million.",
@@ -204,6 +212,7 @@ def test_numeric_check_passes_using_financials_evidence(revenue_segment, financi
     # in this segment's text (which says "$110 million", i.e. the number 110, not
     # 110000000) -- proving the numeric check falls back to financials evidence.
     claim = Claim(
+        id="claim-test-108",
         category="reported_financial_performance",
         classification="reported_fact",
         claim_text="Revenue per SEC filing was $110,000,000.",
@@ -218,6 +227,7 @@ def test_numeric_check_passes_using_financials_evidence(revenue_segment, financi
 
 def test_calculation_check_passes_for_correct_recomputation():
     claim = Claim(
+        id="claim-test-109",
         category="reported_financial_performance",
         classification="reported_fact",
         claim_text="Revenue grew 10% YoY.",
@@ -232,6 +242,7 @@ def test_calculation_check_passes_for_correct_recomputation():
 
 def test_calculation_check_fails_for_wrong_derived_value():
     claim = Claim(
+        id="claim-test-110",
         category="reported_financial_performance",
         classification="reported_fact",
         claim_text="Revenue grew 50% YoY.",  # wrong: actual is 10%
@@ -249,6 +260,7 @@ def test_calculation_check_fails_for_wrong_derived_value():
 def test_calculation_inputs_pass_when_grounded_in_segment(revenue_segment, financials):
     # inputs 110 and 100 both appear in the cited segment text.
     claim = Claim(
+        id="claim-test-111",
         category="reported_financial_performance",
         classification="reported_fact",
         claim_text="Revenue grew 10% YoY.",
@@ -265,6 +277,7 @@ def test_calculation_inputs_fail_when_fabricated(revenue_segment, financials):
     # Formula is arithmetically correct (770/700 -> 0.10) but 770/700 appear nowhere
     # in the segment or SEC evidence: a hallucinated base fed to a correct formula.
     claim = Claim(
+        id="claim-test-112",
         category="reported_financial_performance",
         classification="reported_fact",
         claim_text="Revenue grew 10% YoY.",
@@ -286,6 +299,7 @@ def test_claim_text_numbers_ignores_fiscal_year_and_quarter_tokens(revenue_segme
     # appears in the evidence, but they must not be forced to ground (regression for
     # the false-reject bug where extract_numbers treated years/quarters as figures).
     claim = Claim(
+        id="claim-test-113",
         category="reported_financial_performance",
         classification="reported_fact",
         claim_text="Revenue for fiscal 2027 and Q2 2026 was $110 million, matching the quote.",
@@ -303,6 +317,7 @@ def test_claim_text_numbers_ignores_claim_id_citations_in_reasoning_prose(revenu
     # must not be misread as the number -11 or 11 and demanded to ground -- they're an
     # id, not a financial figure.
     claim = Claim(
+        id="claim-test-114",
         category="management_explanation",
         classification="analytical_inference",
         claim_text="Revenue was $110 million, consistent with the demand signal noted in claim-011 and claim-015.",
@@ -324,6 +339,7 @@ def test_claim_text_numbers_percent_leniency_only_applies_to_percent_written_num
     # fixture's "$20 million" would otherwise ground -- letting an invented figure pass.
     # Regression for the percent-form false-accept hole (only "%"-written numbers get /100).
     fabricated = Claim(
+        id="claim-test-115",
         category="reported_financial_performance",
         classification="reported_fact",
         claim_text="Revenue was $2000 million.",  # 2000/100 == 20 == fixture net income, but no "%"
@@ -337,6 +353,7 @@ def test_claim_text_numbers_percent_leniency_only_applies_to_percent_written_num
 
     # A genuinely percent-written number whose fraction IS grounded still passes.
     legit_percent = Claim(
+        id="claim-test-116",
         category="costs_margins_efficiency",
         classification="reported_fact",
         claim_text="Net margin was 20%.",  # 20/100 == 0.20; 20 itself is grounded ($20m), also fine
@@ -353,6 +370,7 @@ def test_claim_text_numbers_still_fails_for_fabricated_magnitude_despite_period_
 ):
     # Period-token stripping must not accidentally swallow a genuinely fabricated number.
     claim = Claim(
+        id="claim-test-117",
         category="reported_financial_performance",
         classification="reported_fact",
         claim_text="Fiscal 2027 revenue was $999 million.",
@@ -377,6 +395,7 @@ def test_claim_text_numbers_still_grounds_round_thousand_magnitude_with_money_cu
     # which the fixture's "$20 million" would coincidentally ground via the percent path).
     for fabricated_text in ("Revenue was $2500 million.", "Margin widened 2600 bps."):
         claim = Claim(
+            id="claim-test-118",
             category="reported_financial_performance",
             classification="reported_fact",
             claim_text=fabricated_text,
@@ -393,6 +412,7 @@ def test_claim_text_numbers_still_grounds_round_thousand_magnitude_with_money_cu
 def test_claim_text_numbers_fails_for_fabricated_prose_number(revenue_segment, financials):
     # values is empty and quote is genuine -- only claim_text carries the fabrication.
     claim = Claim(
+        id="claim-test-119",
         category="reported_financial_performance",
         classification="reported_fact",
         claim_text="Revenue was $999 million.",
@@ -409,6 +429,7 @@ def test_claim_text_numbers_fails_for_fabricated_prose_number(revenue_segment, f
 def test_claim_text_numbers_accepts_percent_form_of_calculation_result(revenue_segment, financials):
     # calc result is stored as a fraction (0.10); prose naturally says "10%".
     claim = Claim(
+        id="claim-test-120",
         category="reported_financial_performance",
         classification="reported_fact",
         claim_text="Revenue was $110 million, up 10% YoY.",
@@ -425,6 +446,7 @@ def test_validate_claims_end_to_end_mixed_pass_fail(revenue_segment, financials)
     segments_by_id = {"seg-0001": revenue_segment}
     claims = [
         Claim(  # 0: valid
+            id="claim-test-001",
             category="reported_financial_performance",
             classification="reported_fact",
             claim_text="Revenue was $110 million, up 10% YoY.",
@@ -435,6 +457,7 @@ def test_validate_claims_end_to_end_mixed_pass_fail(revenue_segment, financials)
             confidence=0.9,
         ),
         Claim(  # 1: paraphrased quote -> fails
+            id="claim-test-002",
             category="reported_financial_performance",
             classification="reported_fact",
             claim_text="Revenue rose.",
@@ -444,6 +467,7 @@ def test_validate_claims_end_to_end_mixed_pass_fail(revenue_segment, financials)
             confidence=0.8,
         ),
         Claim(  # 2: fabricated number -> fails
+            id="claim-test-003",
             category="reported_financial_performance",
             classification="reported_fact",
             claim_text="Revenue was $999 million.",
@@ -454,6 +478,7 @@ def test_validate_claims_end_to_end_mixed_pass_fail(revenue_segment, financials)
             confidence=0.5,
         ),
         Claim(  # 3: no source segment -> fails
+            id="claim-test-004",
             category="risk",
             classification="reported_fact",
             claim_text="Some risk.",
@@ -474,6 +499,7 @@ def test_validate_claims_all_pass_is_ok(revenue_segment, financials):
     segments_by_id = {"seg-0001": revenue_segment}
     claims = [
         Claim(
+            id="claim-test-005",
             category="reported_financial_performance",
             classification="reported_fact",
             claim_text="Revenue was $110 million.",
@@ -550,8 +576,97 @@ def test_inference_claim_passes_with_valid_citation(revenue_segment, financials)
     assert result.ok is True
 
 
+def test_inference_claim_fails_when_citing_itself(revenue_segment, financials):
+    # Self-reference guard (#13): an analytical_inference claim naming its own id in
+    # inferred_from must fail -- it can't be evidence for itself.
+    segments_by_id = {"seg-0001": revenue_segment}
+    claims = [
+        Claim(
+            id="claim-001",
+            category="management_explanation",
+            classification="analytical_inference",
+            claim_text="Momentum appears to be building.",
+            quote="Revenue for the quarter was $110 million, up from $100 million a year ago.",
+            segment_id="seg-0001",
+            status="reported",
+            confidence=0.6,
+            inferred_from=["claim-001"],
+        ),
+    ]
+    result = validate_claims(claims, segments_by_id, financials)
+    assert result.ok is False
+    issue = next(i for i in result.issues if i.claim_index == 0)
+    assert issue.check == "inference_citation"
+    assert "cites itself" in issue.message
+
+
+def test_validate_claims_fails_for_duplicate_ids(revenue_segment, financials):
+    segments_by_id = {"seg-0001": revenue_segment}
+    claims = [
+        Claim(
+            id="claim-001",
+            category="reported_financial_performance",
+            classification="reported_fact",
+            claim_text="Revenue was $110 million.",
+            quote="Revenue for the quarter was $110 million, up from $100 million a year ago.",
+            segment_id="seg-0001",
+            status="reported",
+            values={"revenue_millions": 110},
+            confidence=0.9,
+        ),
+        Claim(
+            id="claim-001",  # duplicate of the claim above
+            category="reported_financial_performance",
+            classification="reported_fact",
+            claim_text="Net income was $20 million.",
+            quote="Net income was $20 million.",
+            segment_id="seg-0001",
+            status="reported",
+            values={"net_income_millions": 20},
+            confidence=0.9,
+        ),
+    ]
+    result = validate_claims(claims, segments_by_id, financials)
+    assert result.ok is False
+    issue = next(i for i in result.issues if i.claim_index == 1)
+    assert issue.check == "claim_id"
+    assert "Duplicate" in issue.message
+
+
+def test_validate_claims_passes_with_unique_ids(revenue_segment, financials):
+    segments_by_id = {"seg-0001": revenue_segment}
+    claims = [
+        Claim(
+            id="claim-001",
+            category="reported_financial_performance",
+            classification="reported_fact",
+            claim_text="Revenue was $110 million.",
+            quote="Revenue for the quarter was $110 million, up from $100 million a year ago.",
+            segment_id="seg-0001",
+            status="reported",
+            values={"revenue_millions": 110},
+            confidence=0.9,
+        ),
+        Claim(
+            id="claim-002",
+            category="reported_financial_performance",
+            classification="reported_fact",
+            claim_text="Net income was $20 million.",
+            quote="Net income was $20 million.",
+            segment_id="seg-0001",
+            status="reported",
+            values={"net_income_millions": 20},
+            confidence=0.9,
+        ),
+    ]
+    result = validate_claims(claims, segments_by_id, financials)
+    assert result.ok is True
+    assert result.issues == []
+
+
 def test_evidence_reference_fails_when_neither_set():
     claim = Claim(
+        id="claim-test-121",
         category="reported_financial_performance",
         classification="reported_fact",
         claim_text="Revenue was $110 million.",
@@ -566,6 +681,7 @@ def test_evidence_reference_fails_when_neither_set():
 
 def test_evidence_reference_fails_when_both_set():
     claim = Claim(
+        id="claim-test-122",
         category="reported_financial_performance",
         classification="reported_fact",
         claim_text="Revenue was $110 million.",
@@ -582,6 +698,7 @@ def test_evidence_reference_fails_when_both_set():
 
 def test_evidence_reference_passes_for_web_evidence_only():
     claim = Claim(
+        id="claim-test-123",
         category="reported_financial_performance",
         classification="reported_fact",
         claim_text="Analysts noted strong demand.",
@@ -600,6 +717,7 @@ def test_validate_claims_grounds_web_evidence_citation():
     # quote-checkable evidence, not just archival.
     claims = [
         Claim(
+            id="claim-test-006",
             category="demand_activity",
             classification="reported_fact",
             claim_text="Analysts noted strong demand for the new product line.",
@@ -623,6 +741,7 @@ def test_warns_when_web_evidence_fetched_but_uncited(revenue_segment, financials
     segments_by_id = {"seg-0001": revenue_segment}
     claims = [
         Claim(
+            id="claim-test-007",
             category="reported_financial_performance",
             classification="reported_fact",
             claim_text="Revenue was $110 million.",
@@ -644,6 +763,7 @@ def test_warns_when_web_evidence_fetched_but_uncited(revenue_segment, financials
 def test_validate_claims_fails_for_unknown_web_evidence_id():
     claims = [
         Claim(
+            id="claim-test-008",
             category="demand_activity",
             classification="reported_fact",
             claim_text="Analysts noted strong demand.",
@@ -840,6 +960,14 @@ def test_outlook_brief_citations_still_catches_fabricated_id():
     assert "claim-999" in errors[0]
 
 
+def test_outlook_brief_citations_fails_when_no_ids_cited_at_all():
+    # (#14) A brief that cites zero claim ids is ungrounded outright -- every
+    # conclusion must trace to a validated claim, even if no id is wrong/unknown.
+    errors = check_outlook_brief_citations("a purely narrative outlook with no citations", claim_ids={"claim-007"})
+    assert len(errors) == 1
+    assert "cites no claim ids" in errors[0]
+
+
 def test_dollar_escaping_passes_when_all_escaped():
     text = "Revenue was \\$81.3B and Microsoft Cloud was \\$51.5B [claim-001][claim-003]."
     assert check_outlook_brief_dollar_escaping(text) == []
@@ -875,3 +1003,27 @@ def test_validate_review_report_ignores_hyphenated_prose_in_finding_text():
     )
     issues = validate_review_report(report, claim_ids={"claim-001"})
     assert issues == []
+
+
+def test_validate_review_report_catches_fabricated_id_in_evidence_and_recommendation():
+    # (#15) The citation scan must cover all four ReviewFinding text fields, not just
+    # artifact/passage -- a fabricated claim id hidden in evidence or recommendation
+    # must still be caught.
+    report = ReviewReport(
+        verdict="pass",
+        reviewed_at="2026-08-25T12:00:00Z",
+        claim_findings=[
+            ReviewFinding(
+                severity="info",
+                artifact="claims.json#claim-001",
+                passage="n/a",
+                evidence="corroborated by claim-999",  # fabricated, only in evidence
+                recommendation="cross-check against claim-998",  # fabricated, only in recommendation
+            )
+        ],
+        summary="Clean.",
+    )
+    issues = validate_review_report(report, claim_ids={"claim-001"})
+    assert len(issues) == 1
+    assert "claim-999" in issues[0].message
+    assert "claim-998" in issues[0].message

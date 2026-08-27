@@ -84,7 +84,8 @@ class Manifest(BaseModel):
 
 
 class Claim(BaseModel):
-    id: Optional[str] = None  # e.g. "claim-012"; set by the agent so Metric/outlook-brief can cite it
+    id: str  # e.g. "claim-012"; set by the agent so Metric/outlook-brief can cite it. Required and must be
+    # globally unique across a claims.json -- see validate.validate_claims's claim_id check.
     category: ClaimCategory
     classification: ClaimClassification
     claim_text: str

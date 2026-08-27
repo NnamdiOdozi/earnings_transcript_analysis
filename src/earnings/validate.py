@@ -290,6 +290,8 @@ def check_inference_citations(claim: Claim, claim_ids: set[str]) -> str | None:
     missing = [cid for cid in claim.inferred_from if cid not in claim_ids]
     if missing:
         return f"inferred_from cites unknown claim id(s): {missing!r}"
+    if claim.id in claim.inferred_from:
+        return "analytical_inference claim cites itself in inferred_from"
     return None
 
 
@@ -326,6 +328,8 @@ def check_outlook_brief_citations(outlook_text: str, claim_ids: set[str]) -> lis
     validation. Returns a list of error messages (empty if all citations resolve).
     """
     cited = set(_CLAIM_ID_RE.findall(outlook_text))
+    if not cited:
+        return ["outlook-brief.md cites no claim ids; every conclusion must trace to a validated claim"]
     missing = sorted(cited - claim_ids)
     return [f"outlook-brief.md cites unknown claim id {cid!r}" for cid in missing]
 
@@ -375,6 +379,27 @@ def validate_claims(
     issues: list[ValidationIssue] = []
     claim_ids = {claim.id for claim in claims if claim.id}
     web_evidence_texts = web_evidence_texts or {}
+
+    # Every claim.id must be non-empty and globally unique across this claims.json --
+    # a missing id already fails pydantic parsing at load time (see models.Claim), so
+    # this check exists specifically to catch DUPLICATE ids (parse succeeds, ids
+    # collide). No rigid "claim-NNN" pattern is enforced; agents may use any non-empty
+    # id scheme, so long as it's unique within the run.
+    seen_ids: dict[str, int] = {}
+    for idx, claim in enumerate(claims):
+        if not claim.id:
+            issues.append(ValidationIssue(claim_index=idx, check="claim_id", message="Claim id is empty"))
+            continue
+        if claim.id in seen_ids:
+            issues.append(
+                ValidationIssue(
+                    claim_index=idx,
+                    check="claim_id",
+                    message=f"Duplicate claim id {claim.id!r} (also used by claim at index {seen_ids[claim.id]})",
+                )
+            )
+        else:
+            seen_ids[claim.id] = idx
 
     for idx, claim in enumerate(claims):
         inference_error = check_inference_citations(claim, claim_ids)
@@ -458,7 +483,11 @@ def validate_review_report(report: ReviewReport, claim_ids: set[str]) -> list[Va
         report.source_checks + report.claim_findings + report.outlook_findings + report.process_findings
     )
     for idx, finding in enumerate(all_findings):
-        cited = set(_CLAIM_ID_RE.findall(finding.artifact + " " + finding.passage))
+        cited = set(
+            _CLAIM_ID_RE.findall(
+                finding.artifact + " " + finding.passage + " " + finding.evidence + " " + finding.recommendation
+            )
+        )
         missing = sorted(cited - claim_ids)
         if missing:
             issues.append(

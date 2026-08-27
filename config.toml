@@ -114,7 +114,6 @@ max_results = 5
 include_external_commentary = false
 include_answer = false            # no generated-answer synthesis -- primary sources only
 include_raw_content = false       # full content comes from the separate extract step, not search
-extract_selected_results = true   # run Tavily /extract on top hits so they become citable evidence
 extract_depth = "basic"
 max_extracted_sources = 10        # cap across all queries combined, selected by Tavily's own score
 

@@ -44,6 +44,12 @@ A hash is like a wax seal: change a single character in the file and the fingerp
 completely. So anyone can later prove the transcript we analysed is byte-for-byte the one we
 started with — nothing was quietly edited afterwards.
 
+The same fingerprints also **bind each check to the exact files it ran on**. When the claims
+pass validation, the fingerprints of those claims are recorded alongside the result; if someone
+edits the claims afterwards, the later stages see the fingerprint no longer matches and refuse
+to continue. A "pass" therefore belongs to *these specific bytes*, not merely to this folder —
+you cannot quietly change the evidence after it was approved.
+
 ## 2. Every run is logged
 
 Separately, one line is written to a running log for *every* transcript ever processed — when
@@ -153,10 +159,13 @@ before the run was accepted.
 
 ## 8. Gates: the line stops if a check fails
 
-Finally, several checks are **gates**, not mere warnings:
+Finally, several checks are **gates**, not mere warnings, and each one is chained to the last:
 
 - The signal card is written **only if** every quote and number validates.
-- The forward-looking brief is accepted **only if** every claim it cites really exists.
+- The forward-looking brief is accepted **only if** the claims it cites still exist, still match
+  the bytes that were validated (an edited claims file is rejected), and it cites at least one.
+- The final review can run **only if** the brief actually passed that check and has not been
+  changed since (its fingerprint must still match).
 - The run is marked complete **only if** the reviewer passes it.
 
 A failure at any gate halts the process. That is what "governance" means here in practice: not

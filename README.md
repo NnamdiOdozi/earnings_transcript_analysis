@@ -126,6 +126,8 @@ the command's — and passes them to `prepare` as `--peers`. Output is company-l
 not per-event (a company's peers don't shift by the quarter), so re-preparing a
 quarter never disturbs it. `--event-date` is an optional safety net: when given, a
 peer page dated after it is dropped from extraction (undated ones still pass through).
+A rerun archives the prior discovery under `_archive/` first, so stale candidate
+files from an earlier run are never left for the agent to read.
 
 ### 2. `earnings prepare` — build a source pack
 
@@ -137,7 +139,9 @@ uv run earnings prepare \
 ```
 
 `--transcript` also accepts a URL — it's fetched, then archived and sanitised the
-same way as a local file. Always pass a real `--event-date` on a live run — it
+same way as a local file. A URL transcript larger than the `max_fetch_mb` cap is
+**rejected** (fail-closed), never silently truncated. Always pass a real
+`--event-date` on a live run — it
 sharpens web-search queries and is what the causality guard checks against. Web
 search is aimed at what the call omits: analyst **consensus estimates** (always) and,
 when you pass `--peers "Alphabet" "Amazon" "Oracle" "Apple"` (the ~4 comparables you
@@ -156,7 +160,9 @@ records `"SEC evidence: not_applicable"` and the run continues — this is expec
 for non-US-listed companies, not a failure. Add `--sec-period-end <YYYY-MM-DD>`
 (the XBRL period-end date matching the earnings event) to pin the pulled facts to
 that period — without it, the latest-by-end fact is used, which can silently be a
-later quarter, an annual figure, or a restatement.
+later quarter or an annual figure. When multiple facts share the same pinned
+period end (e.g. a restatement), the **original (earliest-filed)** fact is
+selected, so a later restatement of the same period can't silently replace it.
 
 A rerun for the same ticker/event archives the prior run to `_archive/<timestamp>/`
 first, rather than overwriting it.
@@ -182,9 +188,11 @@ uv run earnings validate-outlook --ticker ACME --event-id 2026-q2
 
 `outlook-brief.md` is agent-authored interpretive synthesis — no deterministic way
 to grade "is this a good base case." Fails if the underlying claims haven't
-passed `analyze`, or if the brief cites any claim id (`claim-###`) that doesn't
-exist in this run's `claims.json` — every conclusion in the brief must trace back
-to real, validated evidence.
+passed `analyze`, if `claims.json` has changed since `analyze` last ran (validation
+is bound to the exact input SHA-256 hashes, so a stale "ok" is rejected), if the
+brief cites any claim id (`claim-###`) that doesn't exist in this run's
+`claims.json`, or if the brief cites **no** claim ids at all — every conclusion in
+the brief must trace back to real, validated evidence.
 
 ### 5. `earnings check-review` — gate the final semantic review
 
@@ -194,8 +202,11 @@ uv run earnings check-review --ticker ACME --event-id 2026-q2
 
 Requires `review-report.json` to already exist (written by Skill 3's review pass).
 Validates its schema and every claim id it cites, then renders `review-report.md`.
-Exit 0 = pass, 1 = pass with warnings (read them), 2 = fail — not complete; go
-back and revise, don't silently patch the brief.
+It also requires that `earnings validate-outlook` has **passed** for this run (a
+passing `outlook-validation.json`) and that `outlook-brief.md` has not changed since
+it was validated (hash match) — so the review can't run against a skipped or
+subsequently-edited brief. Exit 0 = pass, 1 = pass with warnings (read them), 2 =
+fail — not complete; go back and revise, don't silently patch the brief.
 
 ## Run output
 

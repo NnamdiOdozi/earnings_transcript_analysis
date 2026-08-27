@@ -174,7 +174,6 @@ TAVILY_MAX_RESULTS = int(_get("tavily", "max_results", 5))
 TAVILY_INCLUDE_EXTERNAL_COMMENTARY = bool(_get("tavily", "include_external_commentary", False))
 TAVILY_INCLUDE_ANSWER = bool(_get("tavily", "include_answer", False))
 TAVILY_INCLUDE_RAW_CONTENT = bool(_get("tavily", "include_raw_content", False))
-TAVILY_EXTRACT_SELECTED_RESULTS = bool(_get("tavily", "extract_selected_results", True))
 TAVILY_EXTRACT_DEPTH = str(_get("tavily", "extract_depth", "basic"))
 TAVILY_MAX_EXTRACTED_SOURCES = int(_get("tavily", "max_extracted_sources", 10))
 

@@ -80,8 +80,8 @@ information. Treat this as an open gap, not a solved problem — see
 ## Extract step: search hits become citable evidence
 
 A search hit alone is a short snippet — not something a claim can quote-check
-against. So after the search loop, `cmd_prepare` (gated by `config.toml [tavily]
-extract_selected_results`, default `true`) automatically:
+against. So after the search loop, `cmd_prepare` automatically extracts the
+selected hits:
 
 1. Pools every hit across all queries, applies the causality guard above, dedupes
    by URL, then selects up to `max_extracted_sources` (default 10) by **round-robin

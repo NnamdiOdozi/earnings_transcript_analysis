@@ -109,6 +109,11 @@ SEGMENT_ID_WIDTH = 4
 SANITISATION_INJECTION_SCAN_ENABLED = bool(_get("sanitisation", "injection_scan_enabled", True))
 SANITISATION_INJECTION_PATTERNS = list(_get("sanitisation", "injection_patterns", []))
 
+# --- PDF ingestion (config.toml [pdf_ingestion]) ---
+PDF_FACTSET_REFORMAT_ENABLED = bool(_get("pdf_ingestion", "factset_reformat_enabled", True))
+PDF_FACTSET_SEPARATOR_PATTERN = str(_get("pdf_ingestion", "factset_separator_pattern", r"^[.]{10,}\s*$"))
+PDF_FACTSET_BANNER_PATTERNS = list(_get("pdf_ingestion", "factset_banner_patterns", []))
+
 # --- Validation tolerances (config.toml [validation]) ---
 CALC_RELATIVE_TOLERANCE = float(_get("validation", "calc_relative_tolerance", 0.01))
 CALC_ABSOLUTE_TOLERANCE = float(_get("validation", "calc_absolute_tolerance", 0.005))

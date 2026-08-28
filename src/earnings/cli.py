@@ -331,14 +331,53 @@ def cmd_prepare(args: argparse.Namespace) -> int:
         d.mkdir(parents=True, exist_ok=True)
 
     loaded = load_transcript(args.transcript)
+
+    pdf_source_record = None
+    pdf_reformat_note = None
+    if loaded.raw_bytes is not None:
+        from .reformat import looks_like_factset_format, reformat_factset_transcript
+
+        pdf_raw_path = raw_dir / f"transcript{loaded.raw_suffix}"
+        pdf_raw_path.write_bytes(loaded.raw_bytes)
+        pdf_source_record = SourceRecord(
+            path=str(pdf_raw_path.relative_to(run_dir)),
+            origin=loaded.origin,
+            retrieved_at=_now_iso(),
+            content_type="application/pdf",
+            sha256=sha256_hex(loaded.raw_bytes),
+            byte_length=len(loaded.raw_bytes),
+        )
+        if config.PDF_FACTSET_REFORMAT_ENABLED and looks_like_factset_format(
+            loaded.raw_text, config.PDF_FACTSET_SEPARATOR_PATTERN
+        ):
+            loaded.raw_text = reformat_factset_transcript(
+                loaded.raw_text, config.PDF_FACTSET_SEPARATOR_PATTERN, config.PDF_FACTSET_BANNER_PATTERNS
+            )
+            pdf_reformat_note = "PDF source: FactSet-style layout detected and reformatted."
+        else:
+            pdf_reformat_note = "PDF source: no known vendor layout auto-detected; segmented as-is."
+
     raw_bytes = loaded.raw_text.encode("utf-8")
-    raw_filename = "transcript.html" if loaded.is_html else "transcript.txt"
+    if loaded.is_html:
+        raw_filename = "transcript.html"
+    elif loaded.raw_bytes is not None:
+        raw_filename = "transcript.converted.md"
+    else:
+        raw_filename = "transcript.txt"
     raw_path = raw_dir / raw_filename
     raw_path.write_text(loaded.raw_text, encoding="utf-8")  # archive raw, verbatim, before sanitisation
     _append_processing_log(args.ticker, args.event_id, loaded, raw_bytes, run_dir)
 
     sanitized = sanitize(loaded.raw_text, is_html=loaded.is_html)
     segments = segment_transcript(sanitized)
+    if loaded.raw_bytes is not None and not any(seg.speaker for seg in segments):
+        raise ValueError(
+            "PDF ingestion produced zero recognised speaker turns after segmentation -- "
+            "refusing to proceed with an unattributed transcript. This PDF's vendor "
+            "layout is not one we've handled before; if it is FactSet-style, check "
+            "config.toml [pdf_ingestion] patterns; otherwise this vendor needs its own "
+            "reformatter. See docs/AUDITABILITY.md 'Known limitations'."
+        )
     transcript_path = normalized_dir / config.TRANSCRIPT_FILENAME
     with transcript_path.open("w", encoding="utf-8") as fh:
         for seg in segments:
@@ -571,18 +610,21 @@ def cmd_prepare(args: argparse.Namespace) -> int:
         ticker=args.ticker.upper(),
         event_id=args.event_id,
         created_at=_now_iso(),
-        sources=[
-            SourceRecord(
-                path=str(raw_path.relative_to(run_dir)),
-                origin=loaded.origin,
-                retrieved_at=_now_iso(),
-                content_type=loaded.content_type,
-                sha256=sha256_hex(raw_bytes),
-                byte_length=len(raw_bytes),
-            )
-        ]
-        + web_search_sources
-        + web_evidence_sources,
+        sources=(
+            ([pdf_source_record] if pdf_source_record else [])
+            + [
+                SourceRecord(
+                    path=str(raw_path.relative_to(run_dir)),
+                    origin=loaded.origin,
+                    retrieved_at=_now_iso(),
+                    content_type=loaded.content_type,
+                    sha256=sha256_hex(raw_bytes),
+                    byte_length=len(raw_bytes),
+                )
+            ]
+            + web_search_sources
+            + web_evidence_sources
+        ),
         queries=queries,
         notes=[
             "Raw source archived verbatim before sanitisation.",
@@ -591,6 +633,7 @@ def cmd_prepare(args: argparse.Namespace) -> int:
             f"Web search evidence ({provider}): {web_search_status}",
             f"Web evidence (extracted, citable): {len(web_evidence)} source(s)",
         ]
+        + ([pdf_reformat_note] if pdf_reformat_note else [])
         + web_evidence_notes,
     )
     _write_json(run_dir / config.MANIFEST_FILENAME, manifest.model_dump())

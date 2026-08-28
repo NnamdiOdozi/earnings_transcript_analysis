@@ -59,6 +59,22 @@ injection_patterns = [
     "end of (transcript|document)\\.? (now|then) (ignore|disregard|follow)",
 ]
 
+[pdf_ingestion]
+# PDF-syndicated transcripts sometimes use a FactSet CallStreet-style layout: speaker
+# Name and Title on separate lines, separated by a dotted rule between turns, instead
+# of the "Name — Title:" single-line header segmentation expects. When enabled, the
+# separator pattern below (matched >=2 times) auto-detects that ONE confirmed vendor
+# layout and rewrites it; banner_patterns strip page-number/footer lines during the
+# rewrite. Any other vendor's PDF layout is NOT auto-handled -- see
+# docs/AUDITABILITY.md "Known limitations".
+factset_reformat_enabled = true
+factset_separator_pattern = '^[.]{10,}\s*$'
+factset_banner_patterns = [
+    '^FINAL TRANSCRIPT\s*$',
+    '^Copyright ©.*$',
+    '^\d{1,4}\s*$',
+]
+
 [validation]
 calc_relative_tolerance = 0.01     # 1% relative tolerance for recomputed derived metrics
 calc_absolute_tolerance = 0.005

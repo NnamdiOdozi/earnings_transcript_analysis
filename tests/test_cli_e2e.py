@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from earnings import config, sources
+from earnings import config, ingest, sources
 from earnings.cli import _escape_currency, main
 
 FIXTURES = Path(__file__).parent / "fixtures"
@@ -851,3 +851,21 @@ def test_discover_peers_archives_prior_output_on_rerun(isolated_runs_dir, monkey
     assert archive_root.exists(), "prior peer-discovery should have been archived on rerun"
     archived_manifests = list(archive_root.glob("*/manifest.json"))
     assert archived_manifests, "the archived prior discovery should include its manifest.json"
+
+
+def test_prepare_pdf_with_unrecognised_layout_fails_loudly(isolated_runs_dir, tmp_path, monkeypatch):
+    """A PDF whose extracted text has no recognisable speaker lines at all (no
+    'Name — Title:' headers, no FactSet dotted-separator markers) must raise rather
+    than silently produce a run with one giant unattributed segment."""
+    plain_prose = (
+        "This is just plain prose extracted from a PDF with an unknown vendor layout. "
+        "There are no speaker headers here at all, just paragraphs of text running on "
+        "with no structural markers the segmenter can recognise.\n"
+    )
+    monkeypatch.setattr(ingest, "_extract_pdf_text", lambda data: plain_prose)
+
+    pdf_path = tmp_path / "unrecognised.pdf"
+    pdf_path.write_bytes(b"%PDF-fake-bytes")
+
+    with pytest.raises(ValueError, match="zero recognised speaker turns"):
+        main(["prepare", "--ticker", "ACME", "--event-id", "2026-pdf", "--transcript", str(pdf_path)])

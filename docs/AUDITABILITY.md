@@ -137,6 +137,19 @@ before they ever reach your models"; Exa publishes SOC 2 and zero-data-retention
 no prompt-injection filter specifically. Either way, that evidence is still bound by the same
 exact-quote and number checks, which cap its blast radius too.
 
+## 5b. PDF sources: extraction, provenance, and one confirmed vendor layout
+
+Local files and URLs may now also be `.pdf`. Text is extracted with `pypdf` — a
+plain library call, no OCR, no layout inference beyond what pypdf gives us. The
+original PDF bytes are archived and hashed alongside the converted text, so
+provenance is preserved exactly as for HTML/text sources. Some PDF-syndicated
+transcripts (confirmed: FactSet CallStreet) put a speaker's Name and Title on
+separate lines instead of the single-line header the segmenter expects; that
+**one confirmed layout** is auto-detected and rewritten. We do not know other
+vendors' PDF layouts and do not guess at them. If segmentation produces zero
+recognised speaker turns from a PDF source, `prepare` **fails loudly** rather
+than silently continuing with one giant unattributed segment.
+
 ## 6. Lower cost and more consistency
 
 Handing the mechanical work to Python isn't only about trust — it is also cheaper and steadier.

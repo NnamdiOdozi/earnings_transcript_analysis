@@ -139,7 +139,10 @@ uv run earnings prepare \
 ```
 
 `--transcript` also accepts a URL — it's fetched, then archived and sanitised the
-same way as a local file. A URL transcript larger than the `max_fetch_mb` cap is
+same way as a local file. Local files and URLs may be `.txt`, `.md`, `.html`, or
+`.pdf` — PDFs are converted to text via `pypdf`, with the original PDF bytes
+archived alongside the converted text for provenance. A URL transcript larger than
+the `max_fetch_mb` cap is
 **rejected** (fail-closed), never silently truncated. Always pass a real
 `--event-date` on a live run — it
 sharpens web-search queries and is what the causality guard checks against. Web

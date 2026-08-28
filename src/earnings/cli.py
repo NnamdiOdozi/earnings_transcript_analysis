@@ -84,7 +84,18 @@ def _input_hashes(run_dir: Path) -> dict[str, str]:
         config.TRANSCRIPT_FILENAME: run_dir / config.NORMALIZED_SUBDIR / config.TRANSCRIPT_FILENAME,
         config.FINANCIALS_FILENAME: run_dir / config.EVIDENCE_SUBDIR / config.FINANCIALS_FILENAME,
         config.METRICS_FILENAME: run_dir / config.METRICS_FILENAME,
+        config.MANIFEST_FILENAME: run_dir / config.MANIFEST_FILENAME,
+        f"{config.EVIDENCE_SUBDIR}/{config.WEB_EVIDENCE_FILENAME}": (
+            run_dir / config.EVIDENCE_SUBDIR / config.WEB_EVIDENCE_FILENAME
+        ),
     }
+    manifest_path = run_dir / config.MANIFEST_FILENAME
+    if manifest_path.is_file():
+        try:
+            manifest = Manifest.model_validate_json(manifest_path.read_text(encoding="utf-8"))
+            candidates.update({f"source:{source.path}": run_dir / source.path for source in manifest.sources})
+        except ValidationError:
+            pass
     return {name: sha256_hex(path.read_bytes()) for name, path in candidates.items() if path.exists()}
 
 
@@ -118,7 +129,62 @@ def _hash_gate_ok(recorded_hash: str | None, path: Path) -> bool:
     file's current bytes. A missing hash now fails the gate, not passes it -- this
     closes the hole where a hand-written validation.json with no input_hashes
     sailed through."""
-    return bool(recorded_hash) and not _stale(recorded_hash, path)
+    return bool(recorded_hash) and path.is_file() and not _stale(recorded_hash, path)
+
+
+def _manifest_source_errors(run_dir: Path, manifest: Manifest) -> list[str]:
+    """Verify that every provenance record still names the bytes it claims to."""
+    errors: list[str] = []
+    root = run_dir.resolve()
+    for index, source in enumerate(manifest.sources):
+        path = (run_dir / source.path).resolve()
+        label = f"manifest source[{index}] {source.path!r}"
+        if not source.path or not path.is_relative_to(root):
+            errors.append(f"{label} is empty, absolute, or escapes the run directory")
+            continue
+        if not path.is_file():
+            errors.append(f"{label} does not exist")
+            continue
+        content = path.read_bytes()
+        if source.byte_length != len(content):
+            errors.append(f"{label} byte_length does not match the file")
+        if not re.fullmatch(r"[0-9a-f]{64}", source.sha256) or source.sha256 != sha256_hex(content):
+            errors.append(f"{label} sha256 does not match the file")
+    return errors
+
+
+def _validation_inputs_current(run_dir: Path, validation: ValidationResult) -> bool:
+    """Fail closed unless every hashed analyze input still exists and matches."""
+    locations = {
+        config.CLAIMS_FILENAME: run_dir / config.CLAIMS_FILENAME,
+        config.TRANSCRIPT_FILENAME: run_dir / config.NORMALIZED_SUBDIR / config.TRANSCRIPT_FILENAME,
+        config.FINANCIALS_FILENAME: run_dir / config.EVIDENCE_SUBDIR / config.FINANCIALS_FILENAME,
+        config.METRICS_FILENAME: run_dir / config.METRICS_FILENAME,
+        config.MANIFEST_FILENAME: run_dir / config.MANIFEST_FILENAME,
+        f"{config.EVIDENCE_SUBDIR}/{config.WEB_EVIDENCE_FILENAME}": (
+            run_dir / config.EVIDENCE_SUBDIR / config.WEB_EVIDENCE_FILENAME
+        ),
+    }
+    required = {config.CLAIMS_FILENAME, config.TRANSCRIPT_FILENAME, config.MANIFEST_FILENAME}
+    manifest = _load_validated_json(run_dir / config.MANIFEST_FILENAME, Manifest)
+    if manifest is None:
+        return False
+    required.update(f"source:{source.path}" for source in manifest.sources)
+    for optional in (config.FINANCIALS_FILENAME, config.METRICS_FILENAME):
+        if locations[optional].is_file():
+            required.add(optional)
+    web_index = f"{config.EVIDENCE_SUBDIR}/{config.WEB_EVIDENCE_FILENAME}"
+    if locations[web_index].is_file():
+        required.add(web_index)
+    if not required.issubset(validation.input_hashes):
+        return False
+    return all(
+        _hash_gate_ok(
+            recorded_hash,
+            locations.get(name, run_dir / name.removeprefix("source:")),
+        )
+        for name, recorded_hash in validation.input_hashes.items()
+    )
 
 
 def _write_validation(run_dir: Path, result: ValidationResult) -> None:
@@ -156,22 +222,30 @@ def _review_round_count(run_dir: Path) -> int:
     return len([d for d in history_dir.iterdir() if d.is_dir() and d.name.startswith("round-")])
 
 
+def _review_bundle_matches_snapshot(run_dir: Path, round_number: int) -> bool:
+    """Whether claims, brief, and report still equal one accepted round exactly."""
+    prior_dir = run_dir / config.REVIEW_HISTORY_SUBDIR / f"round-{round_number}"
+    filenames = (config.CLAIMS_FILENAME, config.OUTLOOK_BRIEF_FILENAME, config.REVIEW_REPORT_JSON_FILENAME)
+    return all(
+        (prior_dir / filename).is_file()
+        and (run_dir / filename).is_file()
+        and (prior_dir / filename).read_bytes() == (run_dir / filename).read_bytes()
+        for filename in filenames
+    )
+
+
 def _snapshot_review_round(run_dir: Path, round_number: int) -> None:
     """After a structurally-valid review-report.json is accepted (any verdict, or an
     escalation), snapshot claims.json/outlook-brief.md/review-report.json under
     _review_history/round-<N>/ so the NEXT round's `review-diff` can diff against a
     known-good prior state. Called once per completed round, from cmd_check_review.
 
-    Idempotent: if review-report.json is byte-identical to the most recently
-    snapshotted round's copy, skip -- nothing new happened (e.g. check-review was
-    called twice on an unchanged report), so don't create a redundant round-N+1
-    that inflates the round count and eats into max_review_rounds for no reason.
+    Idempotent only when the complete reviewed bundle is byte-identical to the
+    latest snapshot. Comparing the report alone allowed changed claims or brief
+    bytes to inherit an old verdict and suppress the next snapshot.
     """
-    if round_number > 1:
-        prior_report = run_dir / config.REVIEW_HISTORY_SUBDIR / f"round-{round_number - 1}" / config.REVIEW_REPORT_JSON_FILENAME
-        current_report = run_dir / config.REVIEW_REPORT_JSON_FILENAME
-        if prior_report.exists() and current_report.exists() and prior_report.read_bytes() == current_report.read_bytes():
-            return
+    if round_number > 1 and _review_bundle_matches_snapshot(run_dir, round_number - 1):
+        return
     dest = run_dir / config.REVIEW_HISTORY_SUBDIR / f"round-{round_number}"
     dest.mkdir(parents=True, exist_ok=True)
     for filename in (config.CLAIMS_FILENAME, config.OUTLOOK_BRIEF_FILENAME, config.REVIEW_REPORT_JSON_FILENAME):
@@ -196,6 +270,10 @@ def _unclosed_review_report(run_dir: Path) -> bool:
     if not report_path.exists():
         return False
     completed = _review_round_count(run_dir)
+    # Once the configured cap is exhausted, a stray new report cannot be accepted.
+    # It must not lock unrelated inspection/correction commands forever either.
+    if completed >= config.REVIEW_MAX_ROUNDS:
+        return False
     if completed == 0:
         return True  # a report exists but round 1 was never closed
     latest_snapshot = run_dir / config.REVIEW_HISTORY_SUBDIR / f"round-{completed}" / config.REVIEW_REPORT_JSON_FILENAME
@@ -225,6 +303,7 @@ def cmd_review_diff(args: argparse.Namespace) -> int:
     auto-escalation check. Never touches claims.json/outlook-brief.md -- read-only.
     """
     run_dir = config.run_dir(args.ticker, args.event_id)
+
     completed_rounds = _review_round_count(run_dir)
     round_number = completed_rounds + 1
 
@@ -235,7 +314,8 @@ def cmd_review_diff(args: argparse.Namespace) -> int:
         print(
             f"Review round cap reached ({config.REVIEW_MAX_ROUNDS} max, see config.toml [review] "
             f"max_review_rounds). Not attempting round {round_number}. Surface the last "
-            f"{config.REVIEW_REPORT_JSON_FILENAME} findings to the user -- do not loop further."
+            f"accepted _review_history/round-{completed_rounds}/{config.REVIEW_REPORT_JSON_FILENAME} "
+            "findings to the user -- do not loop further."
         )
         return 4  # distinct from 2 (schema/fail) -- "stop, don't correct" not "go fix it"
 
@@ -315,17 +395,19 @@ def cmd_review_diff(args: argparse.Namespace) -> int:
             len(prior_report.get(k, []))
             for k in ("source_checks", "claim_findings", "outlook_findings", "process_findings")
         ),
+        claims_sha256=sha256_hex((run_dir / config.CLAIMS_FILENAME).read_bytes()),
+        outlook_brief_sha256=sha256_hex((run_dir / config.OUTLOOK_BRIEF_FILENAME).read_bytes()),
         claims_changed=diff_entries,
         affected_brief_sections=sorted(affected_sections),
         auto_escalated=auto_escalated,
         auto_escalation_reason="; ".join(reasons) if reasons else None,
     )
-    _write_json(run_dir / "review-diff.json", review_diff.model_dump())
+    _write_json(run_dir / config.REVIEW_DIFF_FILENAME, review_diff.model_dump())
 
     if auto_escalated:
         print(f"Auto-escalated to full review: {'; '.join(reasons)}")
         return 3
-    print(f"Wrote review-diff.json for round {round_number} ({len(diff_entries)} claim(s) changed).")
+    print(f"Wrote {config.REVIEW_DIFF_FILENAME} for round {round_number} ({len(diff_entries)} claim(s) changed).")
     return 0
 
 
@@ -877,6 +959,15 @@ def cmd_analyze(args: argparse.Namespace) -> int:
     if not manifest.sources:
         print(f"error: {manifest_path} has no sources recorded. Run `earnings prepare` first.", file=sys.stderr)
         return 2
+    if manifest.ticker != args.ticker.upper() or manifest.event_id != args.event_id:
+        print(f"error: {manifest_path} belongs to a different ticker or event.", file=sys.stderr)
+        return 2
+    manifest_errors = _manifest_source_errors(run_dir, manifest)
+    if manifest_errors:
+        print(f"error: {manifest_path} failed provenance checks:", file=sys.stderr)
+        for error in manifest_errors:
+            print(f"  {error}", file=sys.stderr)
+        return 2
 
     from .models import Segment
 
@@ -975,12 +1066,13 @@ def cmd_validate_outlook(args: argparse.Namespace) -> int:
         print("Outlook brief blocked: underlying claims have not passed validation.")
         return 1
 
-    # Staleness guard: validation.json's claims.json hash must be PRESENT and match
-    # the current file -- a missing hash now fails this gate instead of passing it.
-    if not _hash_gate_ok(validation.input_hashes.get(config.CLAIMS_FILENAME), claims_path):
+    # Recheck every input that analyze bound into validation.json. A later edit to
+    # transcript, manifest, archived source, financials, metrics, or claims cannot
+    # inherit the prior passing result.
+    if not _validation_inputs_current(run_dir, validation):
         print(
-            f"Outlook brief blocked: {config.CLAIMS_FILENAME} changed since `analyze` "
-            "(or no hash was recorded for it). Re-run `earnings analyze`."
+            "Outlook brief blocked: an analyze input changed, disappeared, or lacks a required hash. "
+            "Re-run `earnings analyze`."
         )
         return 1
 
@@ -1023,6 +1115,11 @@ def cmd_check_review(args: argparse.Namespace) -> int:
     """
     run_dir = config.run_dir(args.ticker, args.event_id)
 
+    completed_rounds = _review_round_count(run_dir)
+    repeated_accepted_bundle = bool(
+        completed_rounds and _review_bundle_matches_snapshot(run_dir, completed_rounds)
+    )
+
     # Round cap FIRST, before any other check, any parsing, or any write. It depends
     # on nothing but _review_round_count(run_dir), so there's no reason to let a
     # capped round get as far as writing review-report.md with a verdict that's
@@ -1032,12 +1129,13 @@ def cmd_check_review(args: argparse.Namespace) -> int:
     # earlier _unclosed_review_report gate stayed permanently tripped with no
     # command able to clear it (analyze/validate-outlook/check-review/review-diff
     # all refuse). Checking the cap before any write closes both holes at once.
-    round_number = _review_round_count(run_dir) + 1
-    if round_number > config.REVIEW_MAX_ROUNDS:
+    round_number = completed_rounds if repeated_accepted_bundle else completed_rounds + 1
+    if not repeated_accepted_bundle and round_number > config.REVIEW_MAX_ROUNDS:
         print(
             f"error: review round cap reached ({config.REVIEW_MAX_ROUNDS} max, see config.toml "
             f"[review] max_review_rounds). Refusing to accept round {round_number}. Surface the "
-            f"last {config.REVIEW_REPORT_JSON_FILENAME} findings to the user -- do not loop further.",
+            f"last accepted _review_history/round-{completed_rounds}/{config.REVIEW_REPORT_JSON_FILENAME} "
+            "findings to the user -- do not loop further.",
             file=sys.stderr,
         )
         return 4
@@ -1053,6 +1151,9 @@ def cmd_check_review(args: argparse.Namespace) -> int:
         return 2
     if not validation.ok:
         print("Review blocked: underlying claims have not passed validation.")
+        return 2
+    if not _validation_inputs_current(run_dir, validation):
+        print("Review blocked: an analyze input changed or disappeared. Re-run `earnings analyze`.")
         return 2
 
     if not outlook_path.exists():
@@ -1104,14 +1205,62 @@ def cmd_check_review(args: argparse.Namespace) -> int:
         print(f"Review validation FAILED: could not parse {config.REVIEW_REPORT_JSON_FILENAME}: {exc}")
         return 2
 
+    # Bind the verdict to the exact claims and brief bytes that were reviewed.
+    if not _hash_gate_ok(report.claims_sha256, claims_path):
+        print(f"Review blocked: report is not bound to the current {config.CLAIMS_FILENAME}.")
+        return 2
+    if not _hash_gate_ok(report.outlook_brief_sha256, outlook_path):
+        print(f"Review blocked: report is not bound to the current {config.OUTLOOK_BRIEF_FILENAME}.")
+        return 2
+
+    if round_number == 1:
+        if report.review_mode != "full" or report.review_diff_sha256 is not None:
+            print("Review blocked: round 1 requires review_mode='full' and no review_diff_sha256.")
+            return 2
+    else:
+        # Every later round must pass through the deterministic diff command, even
+        # when that command decides the semantic work must be a full review.
+        diff_path = run_dir / config.REVIEW_DIFF_FILENAME
+        review_diff = _load_validated_json(diff_path, ReviewDiff)
+        if review_diff is None:
+            print(f"Review blocked: run `earnings review-diff` before round {round_number}.")
+            return 2
+        if review_diff.round_number != round_number or review_diff.since_round != round_number - 1:
+            print(f"Review blocked: {config.REVIEW_DIFF_FILENAME} belongs to a different review round.")
+            return 2
+        if not _hash_gate_ok(review_diff.claims_sha256, claims_path) or not _hash_gate_ok(
+            review_diff.outlook_brief_sha256, outlook_path
+        ):
+            print(f"Review blocked: {config.REVIEW_DIFF_FILENAME} is stale. Re-run `earnings review-diff`.")
+            return 2
+        if not _hash_gate_ok(report.review_diff_sha256, diff_path):
+            print(f"Review blocked: report is not bound to the current {config.REVIEW_DIFF_FILENAME}.")
+            return 2
+        if review_diff.auto_escalated and report.review_mode != "full":
+            print("Review blocked: review-diff auto-escalated this round to a full review.")
+            return 2
+        if report.escalate_full_review and report.review_mode != "diff":
+            print("Review blocked: only a diff review may request escalation to a full review.")
+            return 2
+
     raw_claims = json.loads(claims_path.read_text(encoding="utf-8"))
     claim_ids = {c.get("id") for c in raw_claims if c.get("id")}
     issues = validate_review_report(report, claim_ids)
     if issues:
-        print(f"Review validation FAILED: {len(issues)} citation issue(s).")
+        print(f"Review validation FAILED: {len(issues)} issue(s).")
         for issue in issues:
             print(f"  {issue.check}: {issue.message}")
         return 2
+
+    if repeated_accepted_bundle:
+        print(f"Review round {completed_rounds} was already accepted; no new snapshot written.")
+        if report.escalate_full_review:
+            return 3
+        if report.verdict == "fail":
+            return 2
+        if report.verdict == "pass_with_warnings":
+            return 1
+        return 0
 
     md = _render_review_report(args.ticker, args.event_id, report)
     (run_dir / config.REVIEW_REPORT_MD_FILENAME).write_text(md, encoding="utf-8")
@@ -1159,8 +1308,12 @@ def _render_review_report(ticker: str, event_id: str, report: ReviewReport) -> s
         f"# Review Report: {ticker.upper()} — {event_id}",
         "",
         f"**Verdict:** {report.verdict}",
+        f"**Review mode:** {report.review_mode}",
         f"**Reviewed at (agent-reported):** {report.reviewed_at} (model: {report.model})",
         f"**Checked at (system clock):** {_now_iso()}",
+        f"**Claims SHA-256:** `{report.claims_sha256}`",
+        f"**Outlook brief SHA-256:** `{report.outlook_brief_sha256}`",
+        f"**Review diff SHA-256:** `{report.review_diff_sha256 or 'n/a'}`",
         "",
         "## Summary",
         _escape_currency(report.summary),

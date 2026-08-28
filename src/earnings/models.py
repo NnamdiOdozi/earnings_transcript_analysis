@@ -183,6 +183,7 @@ class OutlookValidation(BaseModel):
 # proves those (see .claude/agents/outlook-reviewer.md).
 ReviewVerdict = Literal["pass", "pass_with_warnings", "fail"]
 FindingSeverity = Literal["info", "low", "medium", "high", "critical"]
+ReviewMode = Literal["full", "diff"]
 
 
 class ReviewFinding(BaseModel):
@@ -200,8 +201,14 @@ class ReviewReport(BaseModel):
     """
 
     verdict: ReviewVerdict
+    review_mode: ReviewMode
     reviewed_at: str  # ISO 8601 UTC timestamp
     model: str = "opus"
+    # Mechanically verified receipt binding this judgment to the current artifacts.
+    # Hash agreement proves version identity, not semantic comprehension.
+    claims_sha256: str
+    outlook_brief_sha256: str
+    review_diff_sha256: Optional[str] = None
     source_checks: list[ReviewFinding] = Field(default_factory=list)
     claim_findings: list[ReviewFinding] = Field(default_factory=list)
     outlook_findings: list[ReviewFinding] = Field(default_factory=list)
@@ -232,6 +239,8 @@ class ReviewDiff(BaseModel):
     previous_verdict: str
     previous_summary: str
     previous_finding_count: int
+    claims_sha256: str
+    outlook_brief_sha256: str
     claims_changed: list[ClaimDiffEntry] = Field(default_factory=list)
     affected_brief_sections: list[int] = Field(default_factory=list)  # ALL sections citing a changed claim, informational
     auto_escalated: bool = False

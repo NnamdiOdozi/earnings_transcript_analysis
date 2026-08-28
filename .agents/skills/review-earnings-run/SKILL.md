@@ -38,12 +38,13 @@ material omitted.
      - **Exit 3:** Python auto-escalated to a full review (too many claims
        changed, a changed claim's period/values differ, `outlook-brief.md`'s
        text changed at all since the last round, or a conclusion-bearing brief
-       section cites a changed claim). Dispatch a full review exactly as round
-       1 — ignore `review-diff.json`'s existence for this dispatch.
+       section cites a changed claim). Dispatch a full review with
+       `review_mode: "full"`. The reviewer must still read and hash
+       `review-diff.json`, because it is the receipt that selected full-review mode.
      - **Exit 4:** the review round cap (`config.toml [review]
        max_review_rounds`) has been reached. **Stop. Do not dispatch anything
        further.** Report to the user that the cap was reached, and surface the
-       findings from the last `review-report.json` (whatever its verdict) —
+       findings from the last accepted `_review_history/round-N/review-report.json` (whatever its verdict) —
        never claim the run is complete, never silently drop the findings.
 
 3. **Dispatch the subagent.** Use the `Agent` tool with `subagent_type:
@@ -58,7 +59,8 @@ material omitted.
 4. **Wait for `review-report.json`.** The subagent writes only this file — never a
    `.md` file, never edits to `claims.json`/`outlook-brief.md` themselves. If it
    returns without writing the file, treat that as a failed dispatch and retry once
-   before escalating to the user.
+   before escalating to the user. The report must contain the current claims,
+   brief, and later-round diff hashes described by the canonical remit.
 
 5. **Run the deterministic gate IMMEDIATELY — before touching claims.json or
    outlook-brief.md for any correction.** This step snapshots the round under

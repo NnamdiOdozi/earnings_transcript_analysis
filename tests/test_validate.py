@@ -954,22 +954,36 @@ def _finding(artifact: str, passage: str = "n/a") -> ReviewFinding:
     )
 
 
+def _review_report(**overrides) -> ReviewReport:
+    values = {
+        "verdict": "pass",
+        "review_mode": "full",
+        "reviewed_at": "2026-08-25T12:00:00Z",
+        "claims_sha256": "a" * 64,
+        "outlook_brief_sha256": "b" * 64,
+        "source_checks": [_finding("manifest.json")],
+        "process_findings": [_finding("validation.json")],
+        "summary": "Clean.",
+    }
+    values.update(overrides)
+    return ReviewReport(**values)
+
+
 def test_validate_review_report_passes_with_real_claim_citations():
-    report = ReviewReport(
-        verdict="pass",
-        reviewed_at="2026-08-25T12:00:00Z",
+    report = _review_report(
         claim_findings=[_finding("claims.json#claim-001")],
-        summary="Clean.",
     )
     issues = validate_review_report(report, claim_ids={"claim-001", "claim-002"})
     assert issues == []
 
 
 def test_validate_review_report_fails_for_fabricated_claim_citation():
-    report = ReviewReport(
+    report = _review_report(
         verdict="fail",
-        reviewed_at="2026-08-25T12:00:00Z",
-        claim_findings=[_finding("claims.json#claim-999", "claim-999 does not exist")],
+        claim_findings=[ReviewFinding(
+            severity="high", artifact="claims.json#claim-999", passage="claim-999 does not exist",
+            evidence="e", recommendation="r",
+        )],
         summary="Fabricated citation.",
     )
     issues = validate_review_report(report, claim_ids={"claim-001"})
@@ -978,9 +992,21 @@ def test_validate_review_report_fails_for_fabricated_claim_citation():
     assert "claim-999" in issues[0].message
 
 
+def test_validate_review_report_rejects_empty_review_receipts():
+    report = _review_report(source_checks=[], process_findings=[])
+    issues = validate_review_report(report, claim_ids={"claim-001"})
+    assert [issue.check for issue in issues].count("review_receipt") == 2
+
+
+def test_validate_review_report_rejects_fail_without_high_severity():
+    report = _review_report(verdict="fail", claim_findings=[_finding("claims.json#claim-001")])
+    issues = validate_review_report(report, claim_ids={"claim-001"})
+    assert any(issue.check == "verdict_severity" and "no finding" in issue.message for issue in issues)
+
+
 def test_review_report_rejects_invalid_verdict():
     with pytest.raises(ValidationError):
-        ReviewReport(verdict="maybe", reviewed_at="2026-08-25T12:00:00Z", summary="Bad verdict.")
+        _review_report(verdict="maybe", summary="Bad verdict.")
 
 
 @pytest.mark.parametrize(
@@ -1038,11 +1064,8 @@ def test_dollar_escaping_reports_line_numbers():
 
 
 def test_validate_review_report_ignores_hyphenated_prose_in_finding_text():
-    report = ReviewReport(
-        verdict="pass",
-        reviewed_at="2026-08-25T12:00:00Z",
+    report = _review_report(
         claim_findings=[_finding("claims.json#claim-001", "a claim-based, claim-level assessment")],
-        summary="Clean.",
     )
     issues = validate_review_report(report, claim_ids={"claim-001"})
     assert issues == []
@@ -1052,9 +1075,7 @@ def test_validate_review_report_catches_fabricated_id_in_evidence_and_recommenda
     # (#15) The citation scan must cover all four ReviewFinding text fields, not just
     # artifact/passage -- a fabricated claim id hidden in evidence or recommendation
     # must still be caught.
-    report = ReviewReport(
-        verdict="pass",
-        reviewed_at="2026-08-25T12:00:00Z",
+    report = _review_report(
         claim_findings=[
             ReviewFinding(
                 severity="info",

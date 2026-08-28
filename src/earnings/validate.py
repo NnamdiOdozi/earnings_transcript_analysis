@@ -487,6 +487,22 @@ def validate_review_report(report: ReviewReport, claim_ids: set[str]) -> list[Va
         report.source_checks + report.claim_findings + report.outlook_findings + report.process_findings
     )
     severities = {f.severity for f in all_findings}
+    if not report.source_checks:
+        issues.append(
+            ValidationIssue(
+                claim_index=-1,
+                check="review_receipt",
+                message="source_checks is empty; the report contains no content-dependent source review receipt",
+            )
+        )
+    if not report.process_findings:
+        issues.append(
+            ValidationIssue(
+                claim_index=-1,
+                check="review_receipt",
+                message="process_findings is empty; the report contains no validation/process review receipt",
+            )
+        )
     if report.verdict == "pass" and severities & {"medium", "high", "critical"}:
         issues.append(
             ValidationIssue(
@@ -509,6 +525,22 @@ def validate_review_report(report: ReviewReport, claim_ids: set[str]) -> list[Va
                     f"{sorted(severities & {'high', 'critical'})} -- that verdict requires no "
                     "'high'/'critical' finding (should be 'fail')"
                 ),
+            )
+        )
+    if report.verdict == "pass_with_warnings" and not all_findings and not report.unverified_items:
+        issues.append(
+            ValidationIssue(
+                claim_index=-1,
+                check="verdict_severity",
+                message="verdict is 'pass_with_warnings' but no findings or unverified items explain the warning",
+            )
+        )
+    if report.verdict == "fail" and not severities & {"high", "critical"}:
+        issues.append(
+            ValidationIssue(
+                claim_index=-1,
+                check="verdict_severity",
+                message="verdict is 'fail' but no finding has 'high' or 'critical' severity",
             )
         )
     for idx, finding in enumerate(all_findings):

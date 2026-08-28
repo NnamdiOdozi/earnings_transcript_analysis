@@ -11,8 +11,12 @@ why that matters).
 ```json
 {
   "verdict": "pass_with_warnings",
+  "review_mode": "full",
   "reviewed_at": "2026-08-25T12:00:00Z",
   "model": "opus",
+  "claims_sha256": "<64 lowercase hexadecimal characters>",
+  "outlook_brief_sha256": "<64 lowercase hexadecimal characters>",
+  "review_diff_sha256": null,
   "source_checks": [
     {
       "severity": "info",
@@ -56,6 +60,11 @@ why that matters).
   verdict against severities and rejects the report if they're inconsistent
   (fixed 2026-08-29) — get it right the first time rather than relying on the
   gate to catch it.
+- `review_mode`: `"full"` | `"diff"`. Round 1 is always `"full"`. Every later
+  round must bind to `review-diff.json`; `auto_escalated: true` requires `"full"`.
+- `claims_sha256`, `outlook_brief_sha256`, `review_diff_sha256`: exact lowercase
+  SHA-256 receipts for the reviewed bytes. `review_diff_sha256` is `null` only in
+  round 1. These prove version identity, not comprehension.
 - `model`: record the actual model/reasoning tier used for this pass (e.g.
   `"opus"`, `"gpt-5.6-medium"`), not a placeholder -- this field is provenance,
   same as everything else in this pipeline.
@@ -72,3 +81,6 @@ why that matters).
   human reviewing the report can find it.
 - `unverified_items`: things you could not check (missing file, ambiguous
   context) — list them rather than guessing or silently skipping.
+- `source_checks` and `process_findings`: each must contain at least one
+  substantive entry. Empty arrays are rejected because they provide no evidence
+  that the source and deterministic-validation portions of the remit were covered.

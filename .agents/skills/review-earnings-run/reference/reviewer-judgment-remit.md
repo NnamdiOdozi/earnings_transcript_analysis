@@ -20,15 +20,17 @@ own merits, not rubber-stamping a process you watched happen.
 
 Do **not** re-derive anything Python has already deterministically proven:
 
-- Do not recompute hashes or re-verify `manifest.json` checksums.
+- Do not audit or reinterpret hashes or re-verify `manifest.json` checksums.
+  Computing the three SHA-256 values required to bind your report is bookkeeping,
+  not a second provenance audit.
 - Do not re-run exact-quote matching (`check_exact_quote`) or numeric grounding
   (`check_numeric`, `check_claim_text_numbers`, `check_calculation_inputs`).
 - Do not re-check claim-id citation resolution (`check_inference_citations`,
   `check_outlook_brief_citations`).
 
 All of that is `earnings analyze`'s and `earnings validate-outlook`'s job, and both
-must have already passed before you begin (verify: `validation.json` has
-`"ok": true`, and `outlook-brief.md` exists). Your `process_findings` should
+must have already passed before you begin. Verify that `validation.json` and
+`outlook-validation.json` have `"ok": true`, and that `outlook-brief.md` exists. Your `process_findings` should
 state *that* these steps ran and produced the expected artifacts -- cite the fact
 that `validation.json.ok == true`, not redo the arithmetic behind it.
 
@@ -138,8 +140,8 @@ Given a run directory (e.g. `runs/MSFT/2026-q2/`), read:
 
 ## Diff-based re-review (round 2+)
 
-- If `review-diff.json` exists in the run directory, this is a re-review, not a
-  fresh judgment from nothing.
+- Every round after round 1 has a Python-generated `review-diff.json`. Read it
+  first. Its `auto_escalated` value determines the minimum review scope.
 - Read `review-diff.json` first: it lists exactly which claims were
   added/changed/removed since the last round, whether `outlook-brief.md`'s text
   changed at all since the last round (any change there forces
@@ -157,7 +159,10 @@ Given a run directory (e.g. `runs/MSFT/2026-q2/`), read:
   period confusion -- that a single-claim diff wouldn't surface). Nothing prevents
   you from reading the full bundle; the diff is a starting point, not a
   restriction.
-- If, having looked, you judge the diff-based review is NOT sufficient to
+- If `auto_escalated` is true, set `review_mode` to `"full"` and perform the
+  complete review. Still bind the report to `review-diff.json`; it is the receipt
+  that required the full review, not a file to ignore.
+- If, having looked, you judge a non-auto-escalated diff review is NOT sufficient to
   responsibly render a verdict -- the change is more consequential than it first
   appeared, or you need the full original context to be confident -- set
   `escalate_full_review: true` in your `review-report.json`, explain why in
@@ -192,6 +197,18 @@ flagging, the `evidence` that supports or contradicts it, and a concrete
 real id from this run's `claims.json` -- `earnings check-review` will reject the
 whole report if any citation is fabricated, same rule as everywhere else in this
 pipeline.
+
+Set `review_mode` to `"full"` for round 1 and for an auto-escalated later
+round. Set it to `"diff"` only when you actually used the bounded diff-review
+procedure. Record the lowercase SHA-256 hashes of the exact `claims.json` and
+`outlook-brief.md` bytes you reviewed. For every later round, also record the
+SHA-256 of `review-diff.json`; use `null` only in round 1. `check-review` verifies
+all three bindings and rejects stale or copied verdicts.
+
+Include at least one substantive `source_checks` entry and one
+`process_findings` entry. These are content-dependent coverage evidence. They do
+not independently prove comprehension, so describe what was actually checked
+rather than inserting a generic placeholder.
 
 Set `verdict`:
 - `"pass"` -- no findings above `low` severity.

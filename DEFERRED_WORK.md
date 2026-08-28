@@ -95,3 +95,49 @@ of what was considered and why stays visible.
 
   Dead config (part of item 6) and the cli.py structural split (Phase 3)
   remain OPEN — deliberately deferred, not yet scoped in detail.
+
+### [2026-08-28] Phase 3 scope expansion: close residual review-receipt gaps before refactoring
+- **Source:** independent adversarial re-review of the Phase 1/2 changes. The
+  ordinary suite passed, but direct bypass probes showed that the completion
+  labels were too broad.
+- **Scope:**
+  1. Bind every semantic verdict to the exact `claims.json` and
+     `outlook-brief.md` bytes. For round 2+, also require a current,
+     schema-valid `review-diff.json`, bind the verdict to its hash, and validate
+     the declared `full`/`diff` review mode.
+  2. Make snapshot idempotency compare the whole reviewed bundle, not only
+     `review-report.json`.
+  3. Treat a missing hashed target as a failed hash gate. Recheck all analysis
+     input hashes downstream. Verify each manifest source exists and matches its
+     recorded byte length and SHA-256 before analysis.
+  4. Make an exhausted round cap a terminal policy result without leaving the
+     rest of the CLI mechanically locked by an unaccepted report. Always point
+     users to the last accepted history snapshot, not the unaccepted working file.
+  5. Require content-dependent source and process review entries. Enforce both
+     directions of verdict/severity consistency, including `fail` requiring a
+     `high` or `critical` finding.
+  6. Reconcile the full-review escalation instructions. An auto-escalated later
+     round still reads and hash-binds `review-diff.json`, because that file is the
+     deterministic receipt selecting full-review mode.
+- **Status:** DONE — 2026-08-28. Implementation and regression tests written,
+  then independently verified live: a second, more skeptical review pushed
+  back on 4 of the original points (snapshot identity, cap-exhaustion
+  mutation risk, explicit regression tests for scenarios A/B/F/G, manifest
+  path containment); on re-checking the actual code, 2 of the 4 were already
+  correctly handled (snapshot identity via full-bundle-byte comparison in
+  `_review_bundle_matches_snapshot`; path containment via `is_relative_to` in
+  `_manifest_source_errors`), and the other 2 were genuine test-coverage gaps,
+  closed by adding
+  `test_check_review_rejects_round_two_without_review_diff_when_cap_not_reached`
+  and `test_check_review_refuses_mutated_bundle_after_cap_exhausted`. Also
+  live-validated end-to-end (token-light: reused cached sources/claims, zero
+  new LLM calls) against a scratch copy of the MSFT 2026-q2 run, exercising
+  round-1 pass_with_warnings, an edited claim, auto-escalation via
+  `review-diff`, and round-2 pass_with_warnings. Full suite passes with 168
+  tests. The requested independent GPT-5.6 Sol medium review was dispatched
+  but could not start because that model's usage limit had been reached; the
+  user assigned the independent review to another agent instead, which is the
+  re-review described above.
+- **Explicit exclusions:** Do not remove the six currently-unused settings. The
+  user may need them later. Do not perform the broad `cli.py` refactor in this
+  phase. Those two earlier entries remain open exactly as requested.

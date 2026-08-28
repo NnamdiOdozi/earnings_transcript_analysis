@@ -65,6 +65,7 @@ OUTLOOK_BRIEF_FILENAME = "outlook-brief.md"
 OUTLOOK_VALIDATION_FILENAME = "outlook-validation.json"  # Python-owned: real-clock stamp for validate-outlook
 REVIEW_REPORT_JSON_FILENAME = "review-report.json"  # agent-authored (Outlook_Reviewer subagent)
 REVIEW_REPORT_MD_FILENAME = "review-report.md"  # Python-rendered from the JSON above
+REVIEW_DIFF_FILENAME = "review-diff.json"  # Python-authored context for every review after round 1
 
 # --- Cross-run processing log (repo root, not per-run -- see cli._append_processing_log) ---
 LOGS_DIR = Path("logs")

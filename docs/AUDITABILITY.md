@@ -143,18 +143,6 @@ before they ever reach your models"; Exa publishes SOC 2 and zero-data-retention
 no prompt-injection filter specifically. Either way, that evidence is still bound by the same
 exact-quote and number checks, which cap its blast radius too.
 
-## 5b. PDF sources: extraction, provenance, and one confirmed vendor layout
-
-Local files and URLs may now also be `.pdf`. Text is extracted with `pypdf` — a
-plain library call, no OCR, no layout inference beyond what pypdf gives us. The
-original PDF bytes are archived and hashed alongside the converted text, so
-provenance is preserved exactly as for HTML/text sources. Some PDF-syndicated
-transcripts (confirmed: FactSet CallStreet) put a speaker's Name and Title on
-separate lines instead of the single-line header the segmenter expects; that
-**one confirmed layout** is auto-detected and rewritten. We do not know other
-vendors' PDF layouts and do not guess at them. If segmentation produces zero
-recognised speaker turns from a PDF source, `prepare` **fails loudly** rather
-than silently continuing with one giant unattributed segment.
 
 ## 6. Lower cost and more consistency
 
@@ -185,8 +173,9 @@ A correction after a failed review doesn't need the reviewer to re-read everythi
 from scratch. The **first** review is always full and independent — a summary built
 by the same pipeline being reviewed could hide that pipeline's own blind spots, so
 nothing is allowed to shortcut it. From the **second** review on, Python builds a
-`review-diff.json`: exactly which claims changed, which brief sections cite them, and
-the prior verdict. Four things force a full review anyway, no matter how small the
+`review-diff.json`: exactly which claims changed, which brief sections cite them,
+the current claims and brief hashes, and the prior verdict. Four things force a
+full review anyway, no matter how small the
 diff looks: too many claims changed at once, a changed claim's reporting period or
 figures differ, a changed claim is cited in a conclusion-driving section (the
 outlook summary or a base/upside/downside case), or the forward-looking brief's own

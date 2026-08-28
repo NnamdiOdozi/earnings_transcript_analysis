@@ -1,11 +1,11 @@
 # Earnings Transcript Analysis (POC)
 
 A small, auditable pipeline that turns one company earnings-call transcript into
-two Markdown documents: a **signal card**, where every substantive claim traces
-back to an exact quotation and every calculation is reproducible in Python, and
 an **outlook brief** — an agent-authored, forward-looking synthesis (base/upside/
-downside cases) built on that same evidence, independently reviewed for fair
-reading and narrative balance before it's considered final.
+downside cases), independently reviewed for fair reading and narrative balance
+before it's considered final. That brief is built on a **fact sheet**, where
+every substantive claim it draws on traces back to an exact quotation and every
+calculation is reproducible in Python.
 
 This is a proof of concept; if you've never used it, read this in order. The
 Python code only does deterministic work — ingest, sanitise, segment, hash,
@@ -194,8 +194,9 @@ uv run earnings validate-outlook --ticker ACME --event-id 2026-q2
 
 `outlook-brief.md` is agent-authored interpretive synthesis — no deterministic way
 to grade "is this a good base case." Fails if the underlying claims haven't
-passed `analyze`, if `claims.json` has changed since `analyze` last ran (validation
-is bound to the exact input SHA-256 hashes, so a stale "ok" is rejected), if the
+passed `analyze`, if any hashed analysis input has changed since `analyze` last ran
+(including archived sources, the manifest, transcript, claims, financials, and
+metrics when present), if the
 brief cites any claim id (`claim-###`) that doesn't exist in this run's
 `claims.json`, or if the brief cites **no** claim ids at all — every conclusion in
 the brief must trace back to real, validated evidence.
@@ -207,7 +208,9 @@ uv run earnings check-review --ticker ACME --event-id 2026-q2
 ```
 
 Requires `review-report.json` to already exist (written by Skill 3's review pass).
-Validates its schema and every claim id it cites, then renders `review-report.md`.
+Validates its schema, artifact hashes, review mode, coverage receipts, verdict
+consistency, and every claim id it cites, then renders `review-report.md`. Every
+round after round 1 must also have a current Python-generated `review-diff.json`.
 It also requires that `earnings validate-outlook` has **passed** for this run (a
 passing `outlook-validation.json`) and that `outlook-brief.md` has not changed since
 it was validated (hash match) — so the review can't run against a skipped or
@@ -287,7 +290,7 @@ which when you're deciding how much to trust a number:
 | `validation.json`, `signal-card.md` | Python | Deterministic check results, then a mechanical re-format of already-validated claims — not interpretive. |
 | `outlook-brief.md` | **Agent** | Fully interpretive synthesis (base/upside/downside cases). Python only validates the claim ids it cites resolve — it does not grade the reasoning. |
 | `outlook-validation.json` | Python | `outlook-brief.md` carries no timestamp of its own (agent-authored, never rewritten); this is the real-clock record of when it was last checked, so a stale unvalidated brief can't be mistaken for a freshly-checked one. |
-| `review-report.json` | **Agent** (fresh-context reviewer) | Judgment Python structurally cannot make (fair reading, narrative balance). Its `reviewed_at` field is the agent's own self-report — the agent has no real clock, so treat it as approximate, not authoritative (see `review-report.md`'s separate "Checked at" line). |
+| `review-report.json` | **Agent** (fresh-context reviewer) | Judgment Python structurally cannot make (fair reading, narrative balance), bound to the exact claims, brief, review mode, and later-round diff hashes. Its `reviewed_at` field is the agent's own self-report — the agent has no real clock, so treat it as approximate, not authoritative (see `review-report.md`'s separate "Checked at" line). |
 | `review-report.md` | Python, from `review-report.json` | Never hand-written, so it can't drift from the structured verdict. Renders both the agent-reported `reviewed_at` and a Python real-clock "Checked at" stamp side by side, so a fabricated/rounded agent timestamp is visible rather than silently trusted. |
 
 See "What's deterministic, what's agentic" above for why this split exists.

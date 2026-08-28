@@ -1,16 +1,14 @@
 ---
 name: review-outlook-brief
-description: Codex-side equivalent of the Claude Code outlook-reviewer subagent -- a final semantic audit of a completed run's outlook brief, run in-session (no subagent dispatch mechanism exists outside Claude Code). Use only after earnings validate-outlook has already passed.
+description: Codex-side final semantic audit of a completed run's outlook brief, using a fresh subagent when available or a deliberate in-session review pass otherwise. Use only after earnings validate-outlook has already passed.
 ---
 
 # Review Outlook Brief (Codex / non-Claude-Code environments)
 
-Claude Code has a custom-subagent mechanism (`.claude/agents/outlook-reviewer.md`,
-dispatched with a fresh context via the `Agent` tool) that other environments,
-including Codex, do not have. This skill is the equivalent judgment applied by
-**you, the current agent**, running as a distinct pass over the finished run
-bundle -- not a separate process, just a deliberate role switch at the end of the
-session rather than folding this judgment into the same pass that wrote
+Claude Code uses its custom `outlook-reviewer` subagent. In Codex, dispatch a
+fresh review subagent when the host exposes that capability. Otherwise apply the
+same judgment as a deliberate, separate in-session pass over the finished bundle.
+In either case, do not fold the review into the drafting pass that wrote
 `outlook-brief.md`.
 
 Recommended model/reasoning for this pass: GPT-5.6, medium reasoning. This is a
@@ -46,12 +44,12 @@ different about running as Codex -- the steps below.
      - **Exit 3:** Python auto-escalated to a full review on its own (too many
        claims changed, a changed claim's period/values differ, the brief's text
        changed at all since the last round, or a conclusion-bearing brief
-       section cites a changed claim). Ignore `review-diff.json` and do a full
-       review, step 3 as written for round 1.
+       section cites a changed claim). Read and hash `review-diff.json` as the
+       scope-decision receipt, but do a full review with `review_mode: "full"`.
      - **Exit 4:** the review round cap (`config.toml [review]
        max_review_rounds`) is reached. **Stop here.** Do not draft another
        review-report.json. Report to the user that the cap was hit and restate
-       the findings from the last `review-report.json` verbatim (whatever its
+       the findings from the last accepted `_review_history/round-N/review-report.json` (whatever its
        verdict) -- never claim the run is complete, never drop the findings
        silently.
 
@@ -68,7 +66,8 @@ different about running as Codex -- the steps below.
 4. **Write `review-report.json`**, per the canonical file's "Output" section
    and `reference/review-report-schema.md` (in
    `.agents/skills/review-earnings-run/reference/`, shared with the Claude
-   Code path) for the exact shape.
+   Code path) for the exact shape. Include the required current artifact hashes;
+   `check-review` rejects a report copied from another artifact version or round.
 
 5. **Run the deterministic gate IMMEDIATELY -- before touching claims.json or
    outlook-brief.md for any correction.** Run it out of order (correcting

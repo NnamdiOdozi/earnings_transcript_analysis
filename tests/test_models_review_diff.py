@@ -29,6 +29,8 @@ def test_review_diff_round_trips():
         previous_verdict="pass",
         previous_summary="Looks fine.",
         previous_finding_count=0,
+        claims_sha256="a" * 64,
+        outlook_brief_sha256="b" * 64,
         claims_changed=[
             ClaimDiffEntry(claim_id="claim-001", change="changed", old={"a": 1}, new={"a": 2}),
         ],
@@ -48,6 +50,8 @@ def test_review_diff_defaults():
         previous_verdict="pass",
         previous_summary="",
         previous_finding_count=0,
+        claims_sha256="a" * 64,
+        outlook_brief_sha256="b" * 64,
     )
     assert diff.claims_changed == []
     assert diff.affected_brief_sections == []
@@ -58,7 +62,10 @@ def test_review_diff_defaults():
 def test_review_report_escalate_full_review_defaults_false():
     report = ReviewReport(
         verdict="pass",
+        review_mode="full",
         reviewed_at="2026-08-27T00:00:00Z",
+        claims_sha256="a" * 64,
+        outlook_brief_sha256="b" * 64,
         summary="ok",
     )
     assert report.escalate_full_review is False

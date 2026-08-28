@@ -186,15 +186,26 @@ from scratch. The **first** review is always full and independent — a summary 
 by the same pipeline being reviewed could hide that pipeline's own blind spots, so
 nothing is allowed to shortcut it. From the **second** review on, Python builds a
 `review-diff.json`: exactly which claims changed, which brief sections cite them, and
-the prior verdict. Three things force a full review anyway, no matter how small the
+the prior verdict. Four things force a full review anyway, no matter how small the
 diff looks: too many claims changed at once, a changed claim's reporting period or
-figures differ, or a changed claim is cited in a conclusion-driving section (the
-outlook summary or a base/upside/downside case). The reviewer can also demand a full
-review itself if a targeted look doesn't feel safe. A **hard cap** (three rounds by
-default) then stops the loop outright — the last verdict must be shown to the user,
-never quietly dropped. Discovered live: editing a claim *before* closing the round
-that flagged it corrupts the next diff, so Python now refuses to let a correction
-proceed until the round is formally closed.
+figures differ, a changed claim is cited in a conclusion-driving section (the
+outlook summary or a base/upside/downside case), or the forward-looking brief's own
+text changed at all — the diff only tracks claims in detail, not brief prose, so a
+narrative-only correction can't be judged from the diff alone. The reviewer can also
+demand a full review itself if a targeted look doesn't feel safe. A **hard cap**
+(three rounds by default) then stops the loop outright — the last verdict must be
+shown to the user, never quietly dropped, and the cap is checked before anything
+else runs, so a refused round can never overwrite the record with a verdict that was
+never accepted.
+
+Two things were found by actually running this feature, not by reasoning about it:
+editing a claim *before* closing the round that flagged it corrupts the next diff, so
+Python now refuses to let a correction proceed until the round is formally closed.
+And the round cap was originally checked too late — after the record had already
+been written — which meant a refused round could still overwrite it, and because the
+refused attempt was never formally closed, every further command refused too, with
+no way back short of raising the cap. The cap check now runs first, before anything
+else in the process.
 
 ## 8. Gates: the line stops if a check fails
 

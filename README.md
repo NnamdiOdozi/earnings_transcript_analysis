@@ -208,22 +208,33 @@ Validates its schema and every claim id it cites, then renders `review-report.md
 It also requires that `earnings validate-outlook` has **passed** for this run (a
 passing `outlook-validation.json`) and that `outlook-brief.md` has not changed since
 it was validated (hash match) — so the review can't run against a skipped or
-subsequently-edited brief. On success it also snapshots the round under
-`_review_history/round-<N>/`, so a later correction can be diff-reviewed instead of
-re-reviewed from scratch (see below). Exit 0 = pass, 1 = pass with warnings (read
-them), 2 = fail (or a schema/citation problem) — not complete; go back and revise,
-don't silently patch the brief. Exit 3 = the reviewer itself judged a diff-based
-re-review insufficient and asked for a full one this same round.
+subsequently-edited brief. The round cap (below) is checked before anything else in
+this command — before parsing the report, before rendering `review-report.md` — so
+a refused round never overwrites the file with an unaccepted verdict. On success it
+also snapshots the round under `_review_history/round-<N>/`, so a later correction
+can be diff-reviewed instead of re-reviewed from scratch (see below). Exit 0 = pass,
+1 = pass with warnings (read them), 2 = fail (or a schema/citation problem) — not
+complete; go back and revise, don't silently patch the brief. Exit 3 = the reviewer
+itself judged a diff-based re-review insufficient and asked for a full one,
+dispatched again right away — it still becomes the next round number once closed,
+not a free retry (see below). Exit 4 = the round cap was reached; stop entirely,
+don't attempt a correction, surface the last verdict to the user.
 
 **Round 1 is always a full review.** From round 2 on, `earnings review-diff
 --ticker ACME --event-id 2026-q2` builds `review-diff.json` — which claims were
 added/changed/removed since the last round, which brief sections cite them, and the
 prior round's verdict — so the reviewer can target its re-read instead of rereading
-the whole bundle. Three things force a full review regardless: more than
+the whole bundle. Four things force a full review regardless: more than
 `config.toml [review] diff_review_max_claims_changed` claims changed, a changed
-claim's `period`/`values` differ, or a changed claim is cited in a conclusion-bearing
-section (Outlook in brief / Base / Upside / Downside case). The reviewer can also
-self-escalate if the diff looks insufficient. **CRITICAL ordering rule:** run
+claim's `period`/`values` differ, a changed claim is cited in a conclusion-bearing
+section (Outlook in brief / Base / Upside / Downside case), or `outlook-brief.md`'s
+text changed at all since the last round — `review-diff` only diffs `claims.json`
+in detail, not brief prose, so any brief edit forces a full review rather than risk
+judging a narrative-only correction from an empty diff. In practice this means most
+real correction rounds (which usually touch the brief) escalate to a full review
+anyway; the diff mechanism mainly pays off when a round's only change is to
+`claims.json` itself. The reviewer can also self-escalate if the diff looks
+insufficient. **CRITICAL ordering rule:** run
 `check-review` immediately after the reviewer, before touching `claims.json` or
 `outlook-brief.md` for any correction — editing first corrupts the round's snapshot,
 so the next diff shows no changes even though real corrections happened.

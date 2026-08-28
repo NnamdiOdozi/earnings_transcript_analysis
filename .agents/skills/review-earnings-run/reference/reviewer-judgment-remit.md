@@ -163,10 +163,13 @@ Given a run directory (e.g. `runs/MSFT/2026-q2/`), read:
   `escalate_full_review: true` in your `review-report.json`, explain why in
   `summary`, and stop there (still write findings for what you did check, but do
   not force a verdict you're not confident in). You'll be re-dispatched for a
-  full review this same round. Note this still consumes a round slot toward
-  `config.toml [review] max_review_rounds` — there's no partial-credit *verdict*
-  for the diff attempt, but it does count against the cap. An early, honest
-  escalation is still better than a wrong verdict, but it isn't free.
+  full review right away, in the same correction cycle, with no intervening
+  drafting step — but it becomes the *next* round number once closed, not a
+  free retry of this one: the escalated attempt is itself snapshotted, so it
+  still consumes a round slot toward `config.toml [review] max_review_rounds`.
+  There's no partial-credit *verdict* for the diff attempt, but it does count
+  against the cap. An early, honest escalation is still better than a wrong
+  verdict, but it isn't free.
 - If not escalating, judge only what the diff and your own follow-up reading
   actually covered; do not claim to have re-verified the entire bundle when you
   reviewed a targeted diff.

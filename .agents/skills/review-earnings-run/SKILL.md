@@ -31,14 +31,16 @@ material omitted.
      - **Exit 0:** `review-diff.json` was written. Go to step 3, but when
        dispatching the subagent, additionally tell it explicitly that
        `review-diff.json` exists in the run directory and must be read FIRST,
-       before deciding how to proceed. (The subagent's own file,
-       `.claude/agents/outlook-reviewer.md`, carries the detailed instructions
-       for what to do with it.)
+       before deciding how to proceed. (The canonical judgment contract,
+       `reference/reviewer-judgment-remit.md`, carries the detailed instructions
+       for what to do with it — the subagent reads it directly, you don't need
+       to restate it.)
      - **Exit 3:** Python auto-escalated to a full review (too many claims
-       changed, a changed claim's period/values differ, or a conclusion-bearing
-       brief section cites a changed claim). Dispatch a full review exactly as
-       round 1 — ignore `review-diff.json`'s existence for this dispatch.
-     - **Exit 2:** the review round cap (`config.toml [review]
+       changed, a changed claim's period/values differ, `outlook-brief.md`'s
+       text changed at all since the last round, or a conclusion-bearing brief
+       section cites a changed claim). Dispatch a full review exactly as round
+       1 — ignore `review-diff.json`'s existence for this dispatch.
+     - **Exit 4:** the review round cap (`config.toml [review]
        max_review_rounds`) has been reached. **Stop. Do not dispatch anything
        further.** Report to the user that the cap was reached, and surface the
        findings from the last `review-report.json` (whatever its verdict) —
@@ -83,15 +85,15 @@ material omitted.
    - Exit 0 (`pass`): report clean, no action needed.
    - Exit 1 (`pass_with_warnings`): report the warnings from `review-report.md`
      explicitly — the run can be considered complete, but the user should see them.
-   - Exit 2 (`fail`, a schema/citation problem, a verdict/severity inconsistency,
-     or the round cap being reached): the run is **not** complete. Do not mark it
-     done or hand it off as final. Go back to
-     Stage 2 drafting for a revision addressing the specific findings (or Stage 1,
-     if the finding is about a claim itself), then re-run this skill **from step
-     2** (the round-determination step must run again before re-dispatching —
-     never assume the same round type as last time). Never silently rewrite
-     `outlook-brief.md` on the reviewer's behalf — a human or the drafting step
-     should see the specific finding and decide the fix.
+   - Exit 2 (`fail`, a schema/citation problem, or a verdict/severity
+     inconsistency): the run is **not** complete. Do not mark it done or hand
+     it off as final. Go back to Stage 2 drafting for a revision addressing the
+     specific findings (or Stage 1, if the finding is about a claim itself),
+     then re-run this skill **from step 2** (the round-determination step must
+     run again before re-dispatching — never assume the same round type as
+     last time). Never silently rewrite `outlook-brief.md` on the reviewer's
+     behalf — a human or the drafting step should see the specific finding and
+     decide the fix.
    - Exit 3 (`escalate_full_review` set by the reviewer): the diff-based review
      was judged insufficient. Immediately re-dispatch a full review (go to step
      3, full-review branch). Note this DOES consume a round slot toward
@@ -101,6 +103,10 @@ material omitted.
      diff attempt (it can't pass or fail the run), but it does count against
      the cap — an early, honest escalation is still better than a wrong
      verdict, but it isn't free.
+   - Exit 4 (round cap reached): **do not treat this like exit 2.** This is not
+     "go correct it" — no amount of drafting fixes an exhausted cap. Stop
+     entirely, same as step 2's exit-4 handling, and surface the last accepted
+     verdict to the user as final for this run.
 
 ## Reference files
 

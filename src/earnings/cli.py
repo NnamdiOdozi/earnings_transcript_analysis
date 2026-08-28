@@ -237,7 +237,7 @@ def cmd_review_diff(args: argparse.Namespace) -> int:
             f"max_review_rounds). Not attempting round {round_number}. Surface the last "
             f"{config.REVIEW_REPORT_JSON_FILENAME} findings to the user -- do not loop further."
         )
-        return 2
+        return 4  # distinct from 2 (schema/fail) -- "stop, don't correct" not "go fix it"
 
     since_round = completed_rounds
     prior_dir = run_dir / config.REVIEW_HISTORY_SUBDIR / f"round-{since_round}"
@@ -865,11 +865,17 @@ def cmd_analyze(args: argparse.Namespace) -> int:
         return 2
 
     manifest_path = run_dir / config.MANIFEST_FILENAME
-    if not manifest_path.exists():
-        # manifest.json is prepare's own provenance record (source hashes,
-        # retrieval timestamps) -- analyze was never checking it existed at all,
-        # so claims could validate against a run with no source manifest.
-        print(f"error: {manifest_path} not found. Run `earnings prepare` first.", file=sys.stderr)
+    # manifest.json is prepare's own provenance record (source hashes, retrieval
+    # timestamps) -- analyze was never checking it existed at all, so claims could
+    # validate against a run with no source manifest. Schema-validated, not just
+    # existence-checked: a content-free {} would pass a bare .exists() test but
+    # carries no sources, defeating the point of requiring it.
+    manifest = _load_validated_json(manifest_path, Manifest)
+    if manifest is None:
+        print(f"error: {manifest_path} not found or invalid. Run `earnings prepare` first.", file=sys.stderr)
+        return 2
+    if not manifest.sources:
+        print(f"error: {manifest_path} has no sources recorded. Run `earnings prepare` first.", file=sys.stderr)
         return 2
 
     from .models import Segment
@@ -1016,6 +1022,26 @@ def cmd_check_review(args: argparse.Namespace) -> int:
     validated JSON (never trusts agent-authored markdown to match its own JSON).
     """
     run_dir = config.run_dir(args.ticker, args.event_id)
+
+    # Round cap FIRST, before any other check, any parsing, or any write. It depends
+    # on nothing but _review_round_count(run_dir), so there's no reason to let a
+    # capped round get as far as writing review-report.md with a verdict that's
+    # about to be refused -- that happened in practice (found live, 2026-08-29):
+    # the render+write below used to run before this check, so a refused round
+    # still overwrote review-report.md, and because it was never snapshotted, the
+    # earlier _unclosed_review_report gate stayed permanently tripped with no
+    # command able to clear it (analyze/validate-outlook/check-review/review-diff
+    # all refuse). Checking the cap before any write closes both holes at once.
+    round_number = _review_round_count(run_dir) + 1
+    if round_number > config.REVIEW_MAX_ROUNDS:
+        print(
+            f"error: review round cap reached ({config.REVIEW_MAX_ROUNDS} max, see config.toml "
+            f"[review] max_review_rounds). Refusing to accept round {round_number}. Surface the "
+            f"last {config.REVIEW_REPORT_JSON_FILENAME} findings to the user -- do not loop further.",
+            file=sys.stderr,
+        )
+        return 4
+
     validation_path = run_dir / config.VALIDATION_FILENAME
     outlook_path = run_dir / config.OUTLOOK_BRIEF_FILENAME
     claims_path = run_dir / config.CLAIMS_FILENAME
@@ -1091,14 +1117,6 @@ def cmd_check_review(args: argparse.Namespace) -> int:
     (run_dir / config.REVIEW_REPORT_MD_FILENAME).write_text(md, encoding="utf-8")
     print(f"Review verdict: {report.verdict}. Wrote {config.REVIEW_REPORT_MD_FILENAME}.")
 
-    round_number = _review_round_count(run_dir) + 1
-    if round_number > config.REVIEW_MAX_ROUNDS:
-        print(
-            f"error: review round cap reached ({config.REVIEW_MAX_ROUNDS} max, see config.toml "
-            f"[review] max_review_rounds). Refusing to accept round {round_number}.",
-            file=sys.stderr,
-        )
-        return 2
     _snapshot_review_round(run_dir, round_number)
 
     if report.escalate_full_review:

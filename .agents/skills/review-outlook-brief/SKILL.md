@@ -48,7 +48,7 @@ different about running as Codex -- the steps below.
        changed at all since the last round, or a conclusion-bearing brief
        section cites a changed claim). Ignore `review-diff.json` and do a full
        review, step 3 as written for round 1.
-     - **Exit 2:** the review round cap (`config.toml [review]
+     - **Exit 4:** the review round cap (`config.toml [review]
        max_review_rounds`) is reached. **Stop here.** Do not draft another
        review-report.json. Report to the user that the cap was hit and restate
        the findings from the last `review-report.json` verbatim (whatever its
@@ -89,8 +89,8 @@ different about running as Codex -- the steps below.
    - Exit 0 (`pass`): report clean, no action needed.
    - Exit 1 (`pass_with_warnings`): report the warnings from `review-report.md`
      explicitly -- the run can be considered complete, but the user should see them.
-   - Exit 2 (`fail`, a schema/citation problem, a verdict/severity inconsistency,
-     or the round cap): the run is **not** complete. Go back to Stage 2 drafting
+   - Exit 2 (`fail`, a schema/citation problem, or a verdict/severity
+     inconsistency): the run is **not** complete. Go back to Stage 2 drafting
      for a revision addressing the specific findings (or Stage 1, if the finding
      is about a claim itself), then re-run this skill **from step 2** -- the
      round-determination step must run again before you re-review, never assume
@@ -104,6 +104,10 @@ different about running as Codex -- the steps below.
      partial-credit *verdict* for the diff attempt (it can't pass or fail the
      run), but it does count against the cap -- an early, honest escalation is
      still better than a wrong verdict, but it isn't free.
+   - Exit 4 (round cap reached): **do not treat this like exit 2.** This is not
+     "go correct it" -- no amount of drafting fixes an exhausted cap. Stop
+     entirely, same as step 2's exit-4 handling, and surface the last accepted
+     verdict to the user as final for this run.
 
 ## Reference files
 

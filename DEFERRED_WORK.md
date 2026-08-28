@@ -62,11 +62,36 @@ of what was considered and why stays visible.
      implement or remove, don't leave them as false configurability; no
      atomic writes/no concurrency lock (both correctly flagged as
      acceptable for a POC, not urgent).
-- **Status:** Phase 1 (items 1-4) DONE — 2026-08-29, verified line-by-line
-  against blueprint, 155 tests passing (was 149), committed. Phase 2 (item 5,
-  reviewer-instruction consolidation + all confirmed drift fixed; the
-  manifest.json check in `analyze`; the duplicate-snapshot idempotency fix)
-  also DONE — 2026-08-29, 157 tests passing, committed. Dead config (part of
-  item 6) and the cli.py structural split (Phase 3) remain OPEN — deliberately
-  deferred, not yet scoped in detail. Both phases sent to a fresh Opus-model
-  subagent for an independent second review before Phase 3 starts.
+- **Status:** Phase 1 (items 1-4) and Phase 2 (item 5, `manifest.json` check,
+  snapshot idempotency) DONE — 2026-08-29, committed.
+
+  A fresh Opus-model subagent independently reviewed both phases together
+  (given no conversation context, asked to verify each claimed fix against
+  the real code rather than trust the commit messages) and found a genuine
+  deadlock: the round-cap check in `check-review` ran *after* rendering and
+  writing `review-report.md`, so a capped-out round still overwrote the file
+  with a verdict that was never accepted, and because it was never
+  snapshotted, the earlier unclosed-report gate stayed permanently tripped —
+  every one of `analyze`/`validate-outlook`/`check-review`/`review-diff`
+  refused, with no CLI path back short of raising the cap in config. I
+  reproduced this myself end-to-end before accepting the finding. Fixed
+  same-day: the cap check now runs first, before any parsing or writing, in
+  both commands, and returns a distinct exit code (4, not 2) so the skills
+  can tell "stop entirely, cap reached" apart from "fail, go correct it" —
+  they were being conflated, which was itself part of the confusion. Also
+  fixed from the same review: a test that claimed to test the fail-open hash
+  gate but actually only exercised schema rejection (the real gate path was
+  untested); `manifest.json`'s check deepened from existence-only to
+  schema-validated with at least one recorded source; a stale "three things
+  force a full review" claim in README.md (now four); a stale pointer in
+  `review-earnings-run/SKILL.md` to a file that no longer carries the content
+  it pointed to; a missing escalation trigger in that same file's list (its
+  Codex twin had been updated, it hadn't); and an internal contradiction in
+  the canonical reviewer file ("this same round" vs. "consumes a round
+  slot") that both SKILL.md wrappers stated correctly but the canonical
+  source didn't. 159 tests passing. Not yet independently re-reviewed a
+  third time — the fix itself hasn't been audited by a fresh pass, only
+  self-reviewed and manually reproduced.
+
+  Dead config (part of item 6) and the cli.py structural split (Phase 3)
+  remain OPEN — deliberately deferred, not yet scoped in detail.

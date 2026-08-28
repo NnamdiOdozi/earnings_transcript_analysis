@@ -991,7 +991,7 @@ def test_review_diff_blocked_when_round_cap_reached(isolated_runs_dir, monkeypat
     run_dir = _seed_reviewed_run(isolated_runs_dir)
     diff_path = run_dir / "review-diff.json"
     assert not diff_path.exists()
-    assert main(["review-diff", "--ticker", "ACME", "--event-id", "2026-q2"]) == 2
+    assert main(["review-diff", "--ticker", "ACME", "--event-id", "2026-q2"]) == 4
     assert not diff_path.exists()
 
 
@@ -1088,13 +1088,28 @@ def test_check_review_blocks_when_claims_edited_after_validate_outlook(isolated_
 
 
 def test_validate_outlook_rejects_hand_written_validation_json_without_hashes(isolated_runs_dir):
-    """A hand-written validation.json with only {"ok": true} (no input_hashes) must be
-    rejected -- _hash_gate_ok requires the recorded hash be PRESENT, not just absent-and-
-    therefore-not-stale. Previously json.loads()+.get() let this sail straight through."""
+    """A hand-written validation.json with only {"ok": true} is missing required
+    ValidationResult fields (checked_claims), so _load_validated_json's schema
+    validation rejects it outright -- it never reaches the hash gate at all.
+    Previously json.loads()+.get() let this sail straight through."""
     run_dir = _seed_validated_run(isolated_runs_dir)
     (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text("# Outlook\n\nStrong [claim-001].\n")
     (run_dir / config.VALIDATION_FILENAME).write_text(json.dumps({"ok": True}))
     assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) != 0
+
+
+def test_validate_outlook_rejects_schema_valid_validation_json_missing_claims_hash(isolated_runs_dir):
+    """The actual _hash_gate_ok path (distinct from the schema-rejection test above):
+    a SCHEMA-VALID validation.json whose input_hashes simply omits claims.json's entry
+    -- e.g. hand-constructed, or from a tool that didn't know to include it. Must be
+    rejected: a missing recorded hash fails this gate, it doesn't pass by default."""
+    run_dir = _seed_validated_run(isolated_runs_dir)
+    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text("# Outlook\n\nStrong [claim-001].\n")
+    validation = json.loads((run_dir / config.VALIDATION_FILENAME).read_text())
+    assert config.CLAIMS_FILENAME in validation["input_hashes"]  # sanity: it's really there normally
+    del validation["input_hashes"][config.CLAIMS_FILENAME]
+    (run_dir / config.VALIDATION_FILENAME).write_text(json.dumps(validation))
+    assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 1
 
 
 def test_check_review_enforces_round_cap_even_when_review_diff_skipped(isolated_runs_dir, monkeypatch):
@@ -1116,8 +1131,38 @@ def test_check_review_enforces_round_cap_even_when_review_diff_skipped(isolated_
         "escalate_full_review": False,
     }
     (run_dir / config.REVIEW_REPORT_JSON_FILENAME).write_text(json.dumps(review_report))
-    assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 2
+    assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 4
     assert not (run_dir / config.REVIEW_HISTORY_SUBDIR / "round-2").exists()
+
+
+def test_check_review_cap_refusal_does_not_write_report_md_or_deadlock(isolated_runs_dir, monkeypatch):
+    """Reproduces a real bug found live (2026-08-29): the cap check used to run AFTER
+    rendering/writing review-report.md, so a refused round still overwrote the file
+    with a verdict that was never accepted, and because it was never snapshotted, the
+    unclosed-review-report gate stayed permanently tripped -- analyze, validate-outlook,
+    check-review and review-diff all refused, with no CLI path to recover."""
+    monkeypatch.setattr(config, "REVIEW_MAX_ROUNDS", 1)
+    run_dir = _seed_reviewed_run(isolated_runs_dir)  # round 1 already closed
+    original_md = (run_dir / config.REVIEW_REPORT_MD_FILENAME).read_text()
+    review_report = {
+        "verdict": "pass", "reviewed_at": "2026-08-27T00:00:00Z", "model": "opus",
+        "source_checks": [], "claim_findings": [], "outlook_findings": [], "process_findings": [],
+        "unverified_items": [], "summary": "round 2 attempt", "escalate_full_review": False,
+    }
+    (run_dir / config.REVIEW_REPORT_JSON_FILENAME).write_text(json.dumps(review_report))
+
+    assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 4
+    # review-report.md must NOT have been overwritten with the refused round's content.
+    assert (run_dir / config.REVIEW_REPORT_MD_FILENAME).read_text() == original_md
+    assert not (run_dir / config.REVIEW_HISTORY_SUBDIR / "round-2").exists()
+
+    # The cap is a deliberate hard stop, not a bug -- reverting claims/brief content
+    # doesn't lift it, because it depends only on how many rounds have completed, not
+    # on file content. The one real recovery is raising the cap (a conscious decision,
+    # not automatic): confirm that actually works, i.e. this isn't a permanent brick.
+    monkeypatch.setattr(config, "REVIEW_MAX_ROUNDS", 2)
+    assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) not in (2, 4)
+    assert (run_dir / config.REVIEW_HISTORY_SUBDIR / "round-2").exists()
 
 
 def _finding(severity, artifact="claims.json#claim-001"):

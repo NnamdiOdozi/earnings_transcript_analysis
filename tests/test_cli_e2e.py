@@ -1033,12 +1033,142 @@ def test_analyze_blocked_by_unclosed_review_report(isolated_runs_dir):
     (run_dir / config.REVIEW_REPORT_JSON_FILENAME).write_text(json.dumps(review_report))
     # Dispatch happened, review-report.json exists -- but check-review was never run.
     # Correcting now, before closing the round, must be blocked.
-    claims = json.loads((run_dir / config.CLAIMS_FILENAME).read_text())
+    claims_path = run_dir / config.CLAIMS_FILENAME
+    original_claims_bytes = claims_path.read_bytes()
+    claims = json.loads(original_claims_bytes)
     claims[0]["claim_text"] = "Revenue was $110 million, corrected."
-    (run_dir / config.CLAIMS_FILENAME).write_text(json.dumps(claims))
+    claims_path.write_text(json.dumps(claims))
     assert main(["analyze", "--ticker", "ACME", "--event-id", "2026-q2"]) == 2
     assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 2
 
-    # Closing the round unblocks both commands.
+    # Since claims.json was premized (edited before the round closed), the correction
+    # must also be reverted before check-review will close the round: check-review now
+    # also gates on claims_sha256 (Fix 1b(a)), so a stale claims.json blocks closing too,
+    # not just analyze/validate-outlook. Revert to the bytes validate-outlook actually
+    # validated, then close the round.
+    claims_path.write_bytes(original_claims_bytes)
     assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 2  # fail verdict
+
+    # Now that the round is closed, the correction can be made safely.
+    claims_path.write_text(json.dumps(claims))
     assert main(["analyze", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
+
+
+# --- Review-gating fixes: brief-prose diff, hash-gate strictness, round cap, verdict/severity ---
+
+def test_review_diff_escalates_on_brief_prose_change_alone(isolated_runs_dir):
+    """A narrative-only correction (same claims, same citations, different conclusion
+    drawn) must still auto-escalate -- review-diff previously only diffed claims.json,
+    so this produced an empty claims_changed diff and auto_escalated stayed False."""
+    run_dir = _seed_reviewed_run(isolated_runs_dir)
+    # claims.json is untouched (byte-identical to round 1); only the brief's prose changes.
+    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text(
+        "# Outlook Brief\n\n## 1. Outlook in brief\n\nActually a weak quarter, revise down.\n\n"
+        "## 2. Q&A highlights\n\nRevenue grew steadily [claim-001].\n\n"
+        "## 5. Base case\n\nContinued momentum expected.\n"
+    )
+    assert main(["review-diff", "--ticker", "ACME", "--event-id", "2026-q2"]) == 3
+    diff = json.loads((run_dir / "review-diff.json").read_text())
+    assert diff["claims_changed"] == []
+    assert diff["auto_escalated"] is True
+
+
+def test_check_review_blocks_when_claims_edited_after_validate_outlook(isolated_runs_dir):
+    """claims_sha256 is recorded in outlook-validation.json at validate-outlook time but
+    was never checked by check-review -- claims.json could be edited afterwards, leaving
+    the brief untouched, and this gate previously missed it entirely."""
+    run_dir = _seed_validated_run(isolated_runs_dir)
+    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text("# Outlook\n\nStrong [claim-001].\n")
+    assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
+    # Edit claims.json in place (leave outlook-brief.md untouched).
+    claims = json.loads((run_dir / config.CLAIMS_FILENAME).read_text())
+    claims[0]["confidence"] = 0.5
+    (run_dir / config.CLAIMS_FILENAME).write_text(json.dumps(claims))
+    assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 2
+
+
+def test_validate_outlook_rejects_hand_written_validation_json_without_hashes(isolated_runs_dir):
+    """A hand-written validation.json with only {"ok": true} (no input_hashes) must be
+    rejected -- _hash_gate_ok requires the recorded hash be PRESENT, not just absent-and-
+    therefore-not-stale. Previously json.loads()+.get() let this sail straight through."""
+    run_dir = _seed_validated_run(isolated_runs_dir)
+    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text("# Outlook\n\nStrong [claim-001].\n")
+    (run_dir / config.VALIDATION_FILENAME).write_text(json.dumps({"ok": True}))
+    assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) != 0
+
+
+def test_check_review_enforces_round_cap_even_when_review_diff_skipped(isolated_runs_dir, monkeypatch):
+    """The round cap was previously enforced only in review-diff. If a round is closed
+    via check-review without going through review-diff first, check-review must still
+    refuse rather than accept and snapshot an unbounded number of rounds."""
+    monkeypatch.setattr(config, "REVIEW_MAX_ROUNDS", 1)
+    run_dir = _seed_reviewed_run(isolated_runs_dir)  # round 1 already closed
+    review_report = {
+        "verdict": "pass",
+        "reviewed_at": "2026-08-27T00:00:00Z",
+        "model": "opus",
+        "source_checks": [],
+        "claim_findings": [],
+        "outlook_findings": [],
+        "process_findings": [],
+        "unverified_items": [],
+        "summary": "Second round, bypassing review-diff.",
+        "escalate_full_review": False,
+    }
+    (run_dir / config.REVIEW_REPORT_JSON_FILENAME).write_text(json.dumps(review_report))
+    assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 2
+    assert not (run_dir / config.REVIEW_HISTORY_SUBDIR / "round-2").exists()
+
+
+def _finding(severity, artifact="claims.json#claim-001"):
+    return {
+        "severity": severity,
+        "artifact": artifact,
+        "passage": "Revenue was $110 million.",
+        "evidence": "Matches quote.",
+        "recommendation": "None.",
+    }
+
+
+def test_check_review_blocks_pass_verdict_with_medium_severity_finding(isolated_runs_dir):
+    """verdict: 'pass' must be internally consistent with the reviewer's own assigned
+    severities -- 'pass' requires nothing above 'low'."""
+    run_dir = _seed_validated_run(isolated_runs_dir)
+    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text("# Outlook\n\nStrong [claim-001].\n")
+    assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
+    review_report = {
+        "verdict": "pass",
+        "reviewed_at": "2026-08-27T00:00:00Z",
+        "model": "opus",
+        "source_checks": [],
+        "claim_findings": [_finding("medium")],
+        "outlook_findings": [],
+        "process_findings": [],
+        "unverified_items": [],
+        "summary": "Minor issue but marked pass.",
+        "escalate_full_review": False,
+    }
+    (run_dir / config.REVIEW_REPORT_JSON_FILENAME).write_text(json.dumps(review_report))
+    assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 2
+
+
+def test_check_review_blocks_pass_with_warnings_verdict_with_critical_severity_finding(isolated_runs_dir):
+    """verdict: 'pass_with_warnings' must not co-exist with a 'critical' finding -- that
+    combination should have been verdict: 'fail'."""
+    run_dir = _seed_validated_run(isolated_runs_dir)
+    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text("# Outlook\n\nStrong [claim-001].\n")
+    assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
+    review_report = {
+        "verdict": "pass_with_warnings",
+        "reviewed_at": "2026-08-27T00:00:00Z",
+        "model": "opus",
+        "source_checks": [],
+        "claim_findings": [_finding("critical")],
+        "outlook_findings": [],
+        "process_findings": [],
+        "unverified_items": [],
+        "summary": "Serious issue but marked pass_with_warnings.",
+        "escalate_full_review": False,
+    }
+    (run_dir / config.REVIEW_REPORT_JSON_FILENAME).write_text(json.dumps(review_report))
+    assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 2

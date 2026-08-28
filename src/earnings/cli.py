@@ -20,7 +20,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from dotenv import load_dotenv
-from pydantic import ValidationError
+from pydantic import BaseModel, ValidationError
 
 from . import config
 from .ingest import load_transcript
@@ -95,6 +95,30 @@ def _stale(recorded_hash: str | None, path: Path) -> bool:
     if not recorded_hash or not path.exists():
         return False
     return sha256_hex(path.read_bytes()) != recorded_hash
+
+
+def _load_validated_json(path: Path, model: type[BaseModel]) -> BaseModel | None:
+    """Schema-validate a Python-owned gate file (ValidationResult/OutlookValidation)
+    instead of trusting a raw dict via json.loads()+.get() -- a hand-written or
+    malformed file now fails schema validation instead of silently passing whatever
+    truthy 'ok' field it happens to have. Returns None if the file doesn't exist or
+    fails schema validation; caller decides how to report that."""
+    if not path.exists():
+        return None
+    try:
+        return model.model_validate_json(path.read_text(encoding="utf-8"))
+    except ValidationError:
+        return None
+
+
+def _hash_gate_ok(recorded_hash: str | None, path: Path) -> bool:
+    """Strict hash-match gate for stage-to-stage checks: the recorded hash must be
+    PRESENT (unlike _stale's own permissive default, which answers the different
+    question "did the file change since a hash WAS recorded") and must match the
+    file's current bytes. A missing hash now fails the gate, not passes it -- this
+    closes the hole where a hand-written validation.json with no input_hashes
+    sailed through."""
+    return bool(recorded_hash) and not _stale(recorded_hash, path)
 
 
 def _write_validation(run_dir: Path, result: ValidationResult) -> None:
@@ -210,6 +234,8 @@ def cmd_review_diff(args: argparse.Namespace) -> int:
     prior_report = json.loads((prior_dir / config.REVIEW_REPORT_JSON_FILENAME).read_text(encoding="utf-8"))
     current_claims = json.loads((run_dir / config.CLAIMS_FILENAME).read_text(encoding="utf-8"))
     current_brief = (run_dir / config.OUTLOOK_BRIEF_FILENAME).read_text(encoding="utf-8")
+    prior_brief_path = prior_dir / config.OUTLOOK_BRIEF_FILENAME
+    prior_brief = prior_brief_path.read_text(encoding="utf-8") if prior_brief_path.exists() else None
 
     prior_by_id = {c["id"]: c for c in prior_claims if c.get("id")}
     current_by_id = {c["id"]: c for c in current_claims if c.get("id")}
@@ -260,6 +286,13 @@ def cmd_review_diff(args: argparse.Namespace) -> int:
         auto_escalated = True
         hit = affected_sections & set(config.REVIEW_DIFF_CONCLUSION_SECTIONS)
         reasons.append(f"conclusion-bearing section(s) {sorted(hit)} cite a changed claim")
+    if prior_brief is not None and prior_brief != current_brief:
+        auto_escalated = True
+        reasons.append(
+            "outlook-brief.md text changed since the last round -- review-diff only diffs "
+            "claims.json, not brief prose, so a narrative-only correction cannot be safely "
+            "assessed from the diff alone"
+        )
 
     review_diff = ReviewDiff(
         generated_at=_now_iso(),
@@ -909,19 +942,21 @@ def cmd_validate_outlook(args: argparse.Namespace) -> int:
     outlook_path = run_dir / config.OUTLOOK_BRIEF_FILENAME
     claims_path = run_dir / config.CLAIMS_FILENAME
 
-    if not validation_path.exists():
-        print(f"error: {validation_path} not found. Run `earnings analyze` first.", file=sys.stderr)
+    validation = _load_validated_json(validation_path, ValidationResult)
+    if validation is None:
+        print(f"error: {validation_path} not found or invalid. Run `earnings analyze` first.", file=sys.stderr)
         return 2
-    validation = json.loads(validation_path.read_text(encoding="utf-8"))
-    if not validation.get("ok"):
+    if not validation.ok:
         print("Outlook brief blocked: underlying claims have not passed validation.")
         return 1
 
-    # Staleness guard: validation.json must belong to the CURRENT claims.json. If claims
-    # were edited after `analyze`, the recorded input hash no longer matches and the "ok"
-    # is stale -- re-run analyze rather than validate a brief against unvalidated claims.
-    if _stale(validation.get("input_hashes", {}).get(config.CLAIMS_FILENAME), claims_path):
-        print(f"Outlook brief blocked: {config.CLAIMS_FILENAME} changed since `analyze`. Re-run `earnings analyze`.")
+    # Staleness guard: validation.json's claims.json hash must be PRESENT and match
+    # the current file -- a missing hash now fails this gate instead of passing it.
+    if not _hash_gate_ok(validation.input_hashes.get(config.CLAIMS_FILENAME), claims_path):
+        print(
+            f"Outlook brief blocked: {config.CLAIMS_FILENAME} changed since `analyze` "
+            "(or no hash was recorded for it). Re-run `earnings analyze`."
+        )
         return 1
 
     if not outlook_path.exists():
@@ -967,11 +1002,11 @@ def cmd_check_review(args: argparse.Namespace) -> int:
     claims_path = run_dir / config.CLAIMS_FILENAME
     report_path = run_dir / config.REVIEW_REPORT_JSON_FILENAME
 
-    if not validation_path.exists():
-        print(f"error: {validation_path} not found. Run `earnings analyze` first.", file=sys.stderr)
+    validation = _load_validated_json(validation_path, ValidationResult)
+    if validation is None:
+        print(f"error: {validation_path} not found or invalid. Run `earnings analyze` first.", file=sys.stderr)
         return 2
-    validation = json.loads(validation_path.read_text(encoding="utf-8"))
-    if not validation.get("ok"):
+    if not validation.ok:
         print("Review blocked: underlying claims have not passed validation.")
         return 2
 
@@ -987,12 +1022,27 @@ def cmd_check_review(args: argparse.Namespace) -> int:
     if not outlook_validation_path.exists():
         print(f"error: {outlook_validation_path} not found. Run `earnings validate-outlook` first.", file=sys.stderr)
         return 2
-    outlook_validation = json.loads(outlook_validation_path.read_text(encoding="utf-8"))
-    if not outlook_validation.get("ok"):
+    outlook_validation = _load_validated_json(outlook_validation_path, OutlookValidation)
+    if outlook_validation is None:
+        print(f"error: {outlook_validation_path} not found or invalid. Run `earnings validate-outlook` first.", file=sys.stderr)
+        return 2
+    if not outlook_validation.ok:
         print("Review blocked: outlook brief has not passed `earnings validate-outlook`.")
         return 2
-    if _stale(outlook_validation.get("outlook_brief_sha256"), outlook_path):
-        print(f"Review blocked: {config.OUTLOOK_BRIEF_FILENAME} changed since `validate-outlook`. Re-run it.")
+    if not _hash_gate_ok(outlook_validation.outlook_brief_sha256, outlook_path):
+        print(
+            f"Review blocked: {config.OUTLOOK_BRIEF_FILENAME} changed since `validate-outlook` "
+            "(or no hash was recorded for it). Re-run it."
+        )
+        return 2
+    # NEW: claims.json's hash was recorded at validate-outlook time but never checked
+    # here -- claims.json could be edited after validate-outlook passed, leaving the
+    # brief untouched, and this gate would previously miss it entirely.
+    if not _hash_gate_ok(outlook_validation.claims_sha256, claims_path):
+        print(
+            f"Review blocked: {config.CLAIMS_FILENAME} changed since `validate-outlook` "
+            "(or no hash was recorded for it). Re-run `earnings validate-outlook`."
+        )
         return 2
 
     if not report_path.exists():
@@ -1023,6 +1073,13 @@ def cmd_check_review(args: argparse.Namespace) -> int:
     print(f"Review verdict: {report.verdict}. Wrote {config.REVIEW_REPORT_MD_FILENAME}.")
 
     round_number = _review_round_count(run_dir) + 1
+    if round_number > config.REVIEW_MAX_ROUNDS:
+        print(
+            f"error: review round cap reached ({config.REVIEW_MAX_ROUNDS} max, see config.toml "
+            f"[review] max_review_rounds). Refusing to accept round {round_number}.",
+            file=sys.stderr,
+        )
+        return 2
     _snapshot_review_round(run_dir, round_number)
 
     if report.escalate_full_review:

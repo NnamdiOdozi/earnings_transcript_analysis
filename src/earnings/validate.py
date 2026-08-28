@@ -472,16 +472,45 @@ def validate_claims(
 
 
 def validate_review_report(report: ReviewReport, claim_ids: set[str]) -> list[ValidationIssue]:
-    """The one thing Python re-checks about Outlook_Reviewer's own output: every
-    claim-### id it cites in a finding's artifact/passage text must be real. The
-    reviewer's judgment (verdict, severities, recommendations) is not re-derived or
-    graded here -- only citation integrity, same non-negotiable rule as everywhere
-    else in this pipeline (check_outlook_brief_citations, check_inference_citations).
+    """The reviewer's judgment (which findings to raise, what severity to assign) is
+    not re-derived or graded here. Two things ARE mechanically re-checked against
+    Outlook_Reviewer's own output: (1) every claim-### id it cites in a finding's
+    artifact/passage text must be real -- citation integrity, same non-negotiable
+    rule as everywhere else in this pipeline (check_outlook_brief_citations,
+    check_inference_citations); (2) the declared verdict is internally consistent
+    with the severities the reviewer itself assigned to its own findings -- e.g.
+    verdict="pass" while a finding is severity="critical" is an arithmetic
+    inconsistency in already-structured JSON, not a judgment call.
     """
     issues: list[ValidationIssue] = []
     all_findings = (
         report.source_checks + report.claim_findings + report.outlook_findings + report.process_findings
     )
+    severities = {f.severity for f in all_findings}
+    if report.verdict == "pass" and severities & {"medium", "high", "critical"}:
+        issues.append(
+            ValidationIssue(
+                claim_index=-1,
+                check="verdict_severity",
+                message=(
+                    f"verdict is 'pass' but finding severities include "
+                    f"{sorted(severities & {'medium', 'high', 'critical'})} -- 'pass' requires no "
+                    "finding above 'low'"
+                ),
+            )
+        )
+    if report.verdict == "pass_with_warnings" and severities & {"high", "critical"}:
+        issues.append(
+            ValidationIssue(
+                claim_index=-1,
+                check="verdict_severity",
+                message=(
+                    f"verdict is 'pass_with_warnings' but finding severities include "
+                    f"{sorted(severities & {'high', 'critical'})} -- that verdict requires no "
+                    "'high'/'critical' finding (should be 'fail')"
+                ),
+            )
+        )
     for idx, finding in enumerate(all_findings):
         cited = set(
             _CLAIM_ID_RE.findall(

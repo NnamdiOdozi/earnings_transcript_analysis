@@ -50,6 +50,7 @@ RAW_SUBDIR = "raw"
 NORMALIZED_SUBDIR = "normalized"
 EVIDENCE_SUBDIR = "evidence"
 ARCHIVE_SUBDIR = "_archive"  # a prior run's files, moved here (timestamped) instead of overwritten
+REVIEW_HISTORY_SUBDIR = "_review_history"  # per-round snapshots of claims.json/outlook-brief.md/review-report.json, for diffing
 MANIFEST_FILENAME = "manifest.json"
 TRANSCRIPT_FILENAME = "transcript.jsonl"
 FINANCIALS_FILENAME = "financials.json"
@@ -118,6 +119,11 @@ PDF_FACTSET_BANNER_PATTERNS = list(_get("pdf_ingestion", "factset_banner_pattern
 CALC_RELATIVE_TOLERANCE = float(_get("validation", "calc_relative_tolerance", 0.01))
 CALC_ABSOLUTE_TOLERANCE = float(_get("validation", "calc_absolute_tolerance", 0.005))
 NUMERIC_MATCH_TOLERANCE = float(_get("validation", "numeric_match_tolerance", 1e-6))
+
+# --- Review rounds (config.toml [review]) ---
+REVIEW_MAX_ROUNDS = int(_get("review", "max_review_rounds", 3))
+REVIEW_DIFF_MAX_CLAIMS_CHANGED = int(_get("review", "diff_review_max_claims_changed", 3))
+REVIEW_DIFF_CONCLUSION_SECTIONS = list(_get("review", "diff_review_conclusion_sections", [1, 5, 6, 7]))
 
 # --- SEC data pull (config.toml [sec]) ---
 SEC_CONCEPTS = list(_get("sec", "concepts", ["Revenues", "NetIncomeLoss", "EarningsPerShareDiluted"]))

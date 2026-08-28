@@ -29,6 +29,7 @@ from .models import (
     Manifest,
     Metric,
     OutlookValidation,
+    ReviewDiff,
     ReviewReport,
     SourceRecord,
     ValidationIssue,
@@ -121,6 +122,167 @@ def _archive_existing_run(run_dir: Path) -> None:
         if item.name == config.ARCHIVE_SUBDIR:
             continue
         shutil.move(str(item), str(dest / item.name))
+
+
+def _review_round_count(run_dir: Path) -> int:
+    """How many review rounds have completed (each a snapshot under _review_history/round-N/)."""
+    history_dir = run_dir / config.REVIEW_HISTORY_SUBDIR
+    if not history_dir.exists():
+        return 0
+    return len([d for d in history_dir.iterdir() if d.is_dir() and d.name.startswith("round-")])
+
+
+def _snapshot_review_round(run_dir: Path, round_number: int) -> None:
+    """After a structurally-valid review-report.json is accepted (any verdict, or an
+    escalation), snapshot claims.json/outlook-brief.md/review-report.json under
+    _review_history/round-<N>/ so the NEXT round's `review-diff` can diff against a
+    known-good prior state. Called once per completed round, from cmd_check_review."""
+    dest = run_dir / config.REVIEW_HISTORY_SUBDIR / f"round-{round_number}"
+    dest.mkdir(parents=True, exist_ok=True)
+    for filename in (config.CLAIMS_FILENAME, config.OUTLOOK_BRIEF_FILENAME, config.REVIEW_REPORT_JSON_FILENAME):
+        src = run_dir / filename
+        if src.exists():
+            shutil.copy2(src, dest / filename)
+
+
+def _unclosed_review_report(run_dir: Path) -> bool:
+    """True if review-report.json exists on disk but was never closed via
+    `check-review` -- i.e. it doesn't byte-match the most recently completed round's
+    snapshot. Editing claims.json/outlook-brief.md now, before closing that round,
+    silently corrupts the diff-review baseline for every future round on this run:
+    the next round's snapshot would capture the NEW correction under the OLD round
+    number, so review-diff sees no change even though real edits happened. Discovered
+    live (2026-08-28): an agent hand-following the skill's prose instructions made
+    this exact mistake twice in one session, including once immediately after writing
+    the "no exceptions" warning into the skill itself -- prose alone doesn't hold
+    under the pull of "fix the findings now". This is the mechanical backstop.
+    """
+    report_path = run_dir / config.REVIEW_REPORT_JSON_FILENAME
+    if not report_path.exists():
+        return False
+    completed = _review_round_count(run_dir)
+    if completed == 0:
+        return True  # a report exists but round 1 was never closed
+    latest_snapshot = run_dir / config.REVIEW_HISTORY_SUBDIR / f"round-{completed}" / config.REVIEW_REPORT_JSON_FILENAME
+    if not latest_snapshot.exists():
+        return True
+    return report_path.read_bytes() != latest_snapshot.read_bytes()
+
+
+def _block_if_unclosed_review_report(run_dir: Path) -> int | None:
+    """Shared guard for cmd_analyze/cmd_validate_outlook: returns an exit code to
+    return immediately if blocked, or None to proceed. See _unclosed_review_report."""
+    if _unclosed_review_report(run_dir):
+        print(
+            f"error: {config.REVIEW_REPORT_JSON_FILENAME} exists but was never closed via "
+            f"`earnings check-review`. Run check-review FIRST to snapshot that round -- "
+            f"editing claims.json/outlook-brief.md now would corrupt the diff-review "
+            f"baseline for future rounds. See .agents/skills/review-earnings-run/SKILL.md.",
+            file=sys.stderr,
+        )
+        return 2
+    return None
+
+
+def cmd_review_diff(args: argparse.Namespace) -> int:
+    """Build review-diff.json for a round-2+ re-review: what changed in claims.json
+    and outlook-brief.md since the last completed review round, plus an
+    auto-escalation check. Never touches claims.json/outlook-brief.md -- read-only.
+    """
+    run_dir = config.run_dir(args.ticker, args.event_id)
+    completed_rounds = _review_round_count(run_dir)
+    round_number = completed_rounds + 1
+
+    if completed_rounds == 0:
+        print("error: no completed review round to diff against. Round 1 must be a full review.", file=sys.stderr)
+        return 2
+    if round_number > config.REVIEW_MAX_ROUNDS:
+        print(
+            f"Review round cap reached ({config.REVIEW_MAX_ROUNDS} max, see config.toml [review] "
+            f"max_review_rounds). Not attempting round {round_number}. Surface the last "
+            f"{config.REVIEW_REPORT_JSON_FILENAME} findings to the user -- do not loop further."
+        )
+        return 2
+
+    since_round = completed_rounds
+    prior_dir = run_dir / config.REVIEW_HISTORY_SUBDIR / f"round-{since_round}"
+    prior_claims = json.loads((prior_dir / config.CLAIMS_FILENAME).read_text(encoding="utf-8"))
+    prior_report = json.loads((prior_dir / config.REVIEW_REPORT_JSON_FILENAME).read_text(encoding="utf-8"))
+    current_claims = json.loads((run_dir / config.CLAIMS_FILENAME).read_text(encoding="utf-8"))
+    current_brief = (run_dir / config.OUTLOOK_BRIEF_FILENAME).read_text(encoding="utf-8")
+
+    prior_by_id = {c["id"]: c for c in prior_claims if c.get("id")}
+    current_by_id = {c["id"]: c for c in current_claims if c.get("id")}
+
+    diff_entries: list[dict] = []
+    for cid, claim in current_by_id.items():
+        if cid not in prior_by_id:
+            diff_entries.append({"claim_id": cid, "change": "added", "old": None, "new": claim})
+        elif claim != prior_by_id[cid]:
+            diff_entries.append({"claim_id": cid, "change": "changed", "old": prior_by_id[cid], "new": claim})
+    for cid, claim in prior_by_id.items():
+        if cid not in current_by_id:
+            diff_entries.append({"claim_id": cid, "change": "removed", "old": claim, "new": None})
+
+    changed_ids = {e["claim_id"] for e in diff_entries}
+
+    # Which brief sections (## N. Title) cite a changed claim id -- ALL sections,
+    # informational regardless of escalation.
+    affected_sections: set[int] = set()
+    section_pattern = re.compile(r"^## (\d+)\.", re.MULTILINE)
+    section_starts = [(int(m.group(1)), m.start()) for m in section_pattern.finditer(current_brief)]
+    for i, (num, start) in enumerate(section_starts):
+        end = section_starts[i + 1][1] if i + 1 < len(section_starts) else len(current_brief)
+        body = current_brief[start:end]
+        if any(f"[{cid}]" in body for cid in changed_ids):
+            affected_sections.add(num)
+
+    # NOTE: input_hash_changes was deliberately dropped from this function and from
+    # ReviewDiff. Only claims.json/outlook-brief.md/review-report.json are snapshotted
+    # per round (not validation.json), so there is no prior validation.json to diff
+    # against. The claims_changed diff above already captures everything meaningful --
+    # any transcript/financials/metrics.json change not reflected in claims.json would
+    # mean `analyze` was rerun, a much bigger event that should trigger a full
+    # `prepare`/`_archive_existing_run` cycle, not a diff-review.
+
+    auto_escalated = False
+    reasons: list[str] = []
+    if len(diff_entries) > config.REVIEW_DIFF_MAX_CLAIMS_CHANGED:
+        auto_escalated = True
+        reasons.append(f"{len(diff_entries)} claims changed, over the {config.REVIEW_DIFF_MAX_CLAIMS_CHANGED} threshold")
+    for entry in diff_entries:
+        if entry["change"] == "changed":
+            old, new = entry["old"], entry["new"]
+            if old.get("period") != new.get("period") or old.get("values") != new.get("values"):
+                auto_escalated = True
+                reasons.append(f"{entry['claim_id']}: period or values changed")
+    if affected_sections & set(config.REVIEW_DIFF_CONCLUSION_SECTIONS):
+        auto_escalated = True
+        hit = affected_sections & set(config.REVIEW_DIFF_CONCLUSION_SECTIONS)
+        reasons.append(f"conclusion-bearing section(s) {sorted(hit)} cite a changed claim")
+
+    review_diff = ReviewDiff(
+        generated_at=_now_iso(),
+        round_number=round_number,
+        since_round=since_round,
+        previous_verdict=prior_report.get("verdict", "unknown"),
+        previous_summary=prior_report.get("summary", ""),
+        previous_finding_count=sum(
+            len(prior_report.get(k, []))
+            for k in ("source_checks", "claim_findings", "outlook_findings", "process_findings")
+        ),
+        claims_changed=diff_entries,
+        affected_brief_sections=sorted(affected_sections),
+        auto_escalated=auto_escalated,
+        auto_escalation_reason="; ".join(reasons) if reasons else None,
+    )
+    _write_json(run_dir / "review-diff.json", review_diff.model_dump())
+
+    if auto_escalated:
+        print(f"Auto-escalated to full review: {'; '.join(reasons)}")
+        return 3
+    print(f"Wrote review-diff.json for round {round_number} ({len(diff_entries)} claim(s) changed).")
+    return 0
 
 
 def _parse_event_cutoff(event_date: str | None):
@@ -644,6 +806,9 @@ def cmd_prepare(args: argparse.Namespace) -> int:
 
 def cmd_analyze(args: argparse.Namespace) -> int:
     run_dir = config.run_dir(args.ticker, args.event_id)
+    blocked = _block_if_unclosed_review_report(run_dir)
+    if blocked is not None:
+        return blocked
     claims_path = run_dir / config.CLAIMS_FILENAME
     transcript_path = run_dir / config.NORMALIZED_SUBDIR / config.TRANSCRIPT_FILENAME
     financials_path = run_dir / config.EVIDENCE_SUBDIR / config.FINANCIALS_FILENAME
@@ -737,6 +902,9 @@ def cmd_validate_outlook(args: argparse.Namespace) -> int:
     claims already passed `analyze`, and every claim id the brief cites is real.
     """
     run_dir = config.run_dir(args.ticker, args.event_id)
+    blocked = _block_if_unclosed_review_report(run_dir)
+    if blocked is not None:
+        return blocked
     validation_path = run_dir / config.VALIDATION_FILENAME
     outlook_path = run_dir / config.OUTLOOK_BRIEF_FILENAME
     claims_path = run_dir / config.CLAIMS_FILENAME
@@ -853,6 +1021,14 @@ def cmd_check_review(args: argparse.Namespace) -> int:
     md = _render_review_report(args.ticker, args.event_id, report)
     (run_dir / config.REVIEW_REPORT_MD_FILENAME).write_text(md, encoding="utf-8")
     print(f"Review verdict: {report.verdict}. Wrote {config.REVIEW_REPORT_MD_FILENAME}.")
+
+    round_number = _review_round_count(run_dir) + 1
+    _snapshot_review_round(run_dir, round_number)
+
+    if report.escalate_full_review:
+        print(f"Reviewer escalated: full review required (round {round_number} diff was insufficient).")
+        return 3
+
     if report.verdict == "fail":
         return 2
     if report.verdict == "pass_with_warnings":
@@ -929,7 +1105,14 @@ def _render_signal_card(ticker: str, event_id: str, claims: list[Claim], segment
         lines.append(f"## {category.replace('_', ' ').title()}")
         for claim in group:
             speaker = f" ({claim.speaker})" if claim.speaker else ""
-            lines.append(f"- **{claim.status}**{speaker}: {_escape_currency(claim.claim_text)}")
+            # classification (e.g. "analytical_inference") must render alongside status --
+            # without it, a reader cannot tell the pipeline's own inference apart from a
+            # direct quote/fact, both of which render identically otherwise (found live,
+            # 2026-08-28: a reviewer flagged an inference claim rendering indistinguishably
+            # from a real quote, attributed to the speaker whose words it was derived from).
+            lines.append(
+                f"- **{claim.status}** [{claim.classification}]{speaker}: {_escape_currency(claim.claim_text)}"
+            )
             location = claim.segment_id or claim.web_evidence_id
             lines.append(f'  > "{_escape_currency(claim.quote)}" — {location}')
         lines.append("")
@@ -1025,6 +1208,14 @@ def build_parser() -> argparse.ArgumentParser:
     check_review.add_argument("--ticker", required=True)
     check_review.add_argument("--event-id", required=True)
     check_review.set_defaults(func=cmd_check_review)
+
+    review_diff = sub.add_parser(
+        "review-diff",
+        help="Build review-diff.json for a round-2+ diff-based re-review (see cmd_review_diff)",
+    )
+    review_diff.add_argument("--ticker", required=True)
+    review_diff.add_argument("--event-id", required=True)
+    review_diff.set_defaults(func=cmd_review_diff)
 
     return parser
 

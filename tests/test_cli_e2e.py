@@ -124,6 +124,10 @@ def test_prepare_then_analyze_valid_claims_produces_signal_card(isolated_runs_di
     assert "ACME" in card
     assert "110 million" in card
     assert "_Generated:" in card
+    # classification must render alongside status -- otherwise an analytical_inference
+    # claim is indistinguishable from a direct quote/reported_fact in the card (found
+    # live: a reviewer flagged an inference rendering as if it were the speaker's words).
+    assert "[reported_fact]" in card
 
 
 def test_analyze_blocks_signal_card_when_claim_has_paraphrased_quote(isolated_runs_dir):
@@ -869,3 +873,172 @@ def test_prepare_pdf_with_unrecognised_layout_fails_loudly(isolated_runs_dir, tm
 
     with pytest.raises(ValueError, match="zero recognised speaker turns"):
         main(["prepare", "--ticker", "ACME", "--event-id", "2026-pdf", "--transcript", str(pdf_path)])
+
+
+# --- Diff-based re-review (round 2+) ---
+
+def _seed_reviewed_run(isolated_runs_dir, ticker="ACME", event="2026-q2", verdict="pass", escalate=False):
+    """_seed_validated_run + a passing validate-outlook + a fake round-1
+    review-report.json + a successful check-review, so _review_history/round-1/
+    exists and diff-review tests have a completed round to diff against."""
+    run_dir = _seed_validated_run(isolated_runs_dir, ticker=ticker, event=event)
+    # claim-001 is cited only in a non-conclusion section (## 2) so a plain text-only
+    # edit to claim-001 does not, by itself, trip the conclusion-section escalation
+    # rule -- the conclusion-section test below adds its own citation in ## 5.
+    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text(
+        "# Outlook Brief\n\n## 1. Outlook in brief\n\nStrong quarter.\n\n"
+        "## 2. Q&A highlights\n\nRevenue grew steadily [claim-001].\n\n"
+        "## 5. Base case\n\nContinued momentum expected.\n"
+    )
+    assert main(["validate-outlook", "--ticker", ticker, "--event-id", event]) == 0
+    review_report = {
+        "verdict": verdict,
+        "reviewed_at": "2026-08-27T00:00:00Z",
+        "model": "opus",
+        "source_checks": [],
+        "claim_findings": [],
+        "outlook_findings": [],
+        "process_findings": [],
+        "unverified_items": [],
+        "summary": "Looks fine.",
+        "escalate_full_review": escalate,
+    }
+    (run_dir / config.REVIEW_REPORT_JSON_FILENAME).write_text(json.dumps(review_report))
+    exit_code = main(["check-review", "--ticker", ticker, "--event-id", event])
+    assert exit_code == (3 if escalate else 0)
+    return run_dir
+
+
+def test_snapshot_review_round_copies_all_three_files(isolated_runs_dir):
+    run_dir = _seed_reviewed_run(isolated_runs_dir)
+    round_dir = run_dir / config.REVIEW_HISTORY_SUBDIR / "round-1"
+    assert round_dir.exists()
+    for filename in (config.CLAIMS_FILENAME, config.OUTLOOK_BRIEF_FILENAME, config.REVIEW_REPORT_JSON_FILENAME):
+        assert (round_dir / filename).exists()
+
+
+def test_review_diff_with_zero_completed_rounds_errors(isolated_runs_dir):
+    run_dir = _seed_validated_run(isolated_runs_dir)
+    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text("# Outlook\n\nStrong [claim-001].\n")
+    assert main(["review-diff", "--ticker", "ACME", "--event-id", "2026-q2"]) == 2
+
+
+def test_review_diff_unchanged_claims_produces_empty_diff(isolated_runs_dir):
+    _seed_reviewed_run(isolated_runs_dir)
+    assert main(["review-diff", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
+    run_dir = isolated_runs_dir / "ACME" / "2026-q2"
+    diff = json.loads((run_dir / "review-diff.json").read_text())
+    assert diff["claims_changed"] == []
+    assert diff["auto_escalated"] is False
+    assert diff["round_number"] == 2
+    assert diff["since_round"] == 1
+
+
+def test_review_diff_text_only_change_under_threshold_not_escalated(isolated_runs_dir):
+    run_dir = _seed_reviewed_run(isolated_runs_dir)
+    claims = json.loads((run_dir / config.CLAIMS_FILENAME).read_text())
+    claims[0]["claim_text"] = "Revenue came in at $110 million."
+    (run_dir / config.CLAIMS_FILENAME).write_text(json.dumps(claims))
+    assert main(["review-diff", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
+    diff = json.loads((run_dir / "review-diff.json").read_text())
+    assert diff["auto_escalated"] is False
+    assert len(diff["claims_changed"]) == 1
+    assert diff["claims_changed"][0]["claim_id"] == "claim-001"
+    assert diff["claims_changed"][0]["change"] == "changed"
+
+
+def test_review_diff_escalates_when_too_many_claims_changed(isolated_runs_dir, monkeypatch):
+    monkeypatch.setattr(config, "REVIEW_DIFF_MAX_CLAIMS_CHANGED", 1)
+    run_dir = _seed_reviewed_run(isolated_runs_dir)
+    claims = json.loads((run_dir / config.CLAIMS_FILENAME).read_text())
+    claims[0]["claim_text"] = "Revenue came in at $110 million."
+    claims.append(dict(claims[0], id="claim-002", claim_text="Second claim added."))
+    (run_dir / config.CLAIMS_FILENAME).write_text(json.dumps(claims))
+    assert main(["review-diff", "--ticker", "ACME", "--event-id", "2026-q2"]) == 3
+    diff = json.loads((run_dir / "review-diff.json").read_text())
+    assert diff["auto_escalated"] is True
+
+
+def test_review_diff_escalates_when_period_changes(isolated_runs_dir):
+    run_dir = _seed_reviewed_run(isolated_runs_dir)
+    claims = json.loads((run_dir / config.CLAIMS_FILENAME).read_text())
+    claims[0]["period"] = "3 months to 30 Jun 2026"
+    (run_dir / config.CLAIMS_FILENAME).write_text(json.dumps(claims))
+    assert main(["review-diff", "--ticker", "ACME", "--event-id", "2026-q2"]) == 3
+    diff = json.loads((run_dir / "review-diff.json").read_text())
+    assert diff["auto_escalated"] is True
+
+
+def test_review_diff_escalates_when_conclusion_section_cites_changed_claim(isolated_runs_dir):
+    run_dir = _seed_reviewed_run(isolated_runs_dir)
+    # Now also cite claim-001 from the ## 5 Base case (conclusion-bearing) section.
+    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text(
+        "# Outlook Brief\n\n## 1. Outlook in brief\n\nStrong quarter.\n\n"
+        "## 2. Q&A highlights\n\nRevenue grew steadily [claim-001].\n\n"
+        "## 5. Base case\n\nContinued momentum expected [claim-001].\n"
+    )
+    claims = json.loads((run_dir / config.CLAIMS_FILENAME).read_text())
+    claims[0]["claim_text"] = "Revenue came in at $110 million, a touch higher."
+    (run_dir / config.CLAIMS_FILENAME).write_text(json.dumps(claims))
+    assert main(["review-diff", "--ticker", "ACME", "--event-id", "2026-q2"]) == 3
+    diff = json.loads((run_dir / "review-diff.json").read_text())
+    assert 5 in diff["affected_brief_sections"]
+    assert diff["auto_escalated"] is True
+
+
+def test_review_diff_blocked_when_round_cap_reached(isolated_runs_dir, monkeypatch):
+    monkeypatch.setattr(config, "REVIEW_MAX_ROUNDS", 1)
+    run_dir = _seed_reviewed_run(isolated_runs_dir)
+    diff_path = run_dir / "review-diff.json"
+    assert not diff_path.exists()
+    assert main(["review-diff", "--ticker", "ACME", "--event-id", "2026-q2"]) == 2
+    assert not diff_path.exists()
+
+
+def test_check_review_escalate_full_review_returns_3_regardless_of_verdict(isolated_runs_dir):
+    run_dir = _seed_validated_run(isolated_runs_dir)
+    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text("# Outlook\n\nStrong [claim-001].\n")
+    assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
+    review_report = {
+        "verdict": "pass",
+        "reviewed_at": "2026-08-27T00:00:00Z",
+        "model": "opus",
+        "source_checks": [],
+        "claim_findings": [],
+        "outlook_findings": [],
+        "process_findings": [],
+        "unverified_items": [],
+        "summary": "Diff was ambiguous, escalating.",
+        "escalate_full_review": True,
+    }
+    (run_dir / config.REVIEW_REPORT_JSON_FILENAME).write_text(json.dumps(review_report))
+    assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 3
+    assert (run_dir / config.REVIEW_REPORT_MD_FILENAME).exists()
+
+
+def test_analyze_blocked_by_unclosed_review_report(isolated_runs_dir):
+    """Reproduces a real sequencing bug found live: correcting claims.json after a
+    reviewer dispatch but BEFORE running check-review corrupts the next round's diff
+    baseline (the round-N snapshot ends up holding post-correction files against the
+    pre-correction verdict). analyze must refuse to run until check-review closes the
+    outstanding round."""
+    run_dir = _seed_validated_run(isolated_runs_dir)
+    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text("# Outlook\n\nStrong [claim-001].\n")
+    assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
+    review_report = {
+        "verdict": "fail", "reviewed_at": "2026-08-27T00:00:00Z", "model": "opus",
+        "source_checks": [], "claim_findings": [], "outlook_findings": [], "process_findings": [],
+        "unverified_items": [], "summary": "Needs a fix.", "escalate_full_review": False,
+    }
+    (run_dir / config.REVIEW_REPORT_JSON_FILENAME).write_text(json.dumps(review_report))
+    # Dispatch happened, review-report.json exists -- but check-review was never run.
+    # Correcting now, before closing the round, must be blocked.
+    claims = json.loads((run_dir / config.CLAIMS_FILENAME).read_text())
+    claims[0]["claim_text"] = "Revenue was $110 million, corrected."
+    (run_dir / config.CLAIMS_FILENAME).write_text(json.dumps(claims))
+    assert main(["analyze", "--ticker", "ACME", "--event-id", "2026-q2"]) == 2
+    assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 2
+
+    # Closing the round unblocks both commands.
+    assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 2  # fail verdict
+    assert main(["analyze", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0

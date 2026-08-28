@@ -132,6 +132,35 @@ Given a run directory (e.g. `runs/MSFT/2026-q2/`), read:
 - `signal-card.md`, `outlook-brief.md`
 - `config.toml` at the repo root (for context on what checks/thresholds applied)
 
+## Diff-based re-review (round 2+)
+
+- If `review-diff.json` exists in the run directory, this is a re-review, not a
+  fresh judgment from nothing.
+- Read `review-diff.json` first: it lists exactly which claims were
+  added/changed/removed since the last round, which brief sections cite them, and
+  the prior round's verdict/summary/finding count.
+- For each changed/added claim, re-apply the FULL judgment remit above (source
+  correctness, fair reading, numerical correctness, temporal integrity, etc.) --
+  the diff tells you WHERE to look, it doesn't replace the judgment itself.
+- You may still read any other file in the run bundle if something in the diff
+  looks ambiguous or if you suspect the change has knock-on effects the diff
+  doesn't show (e.g. a claim removed from one section but a stale reference to it
+  lingers unnoticed elsewhere, or the correction reveals a pattern -- systematic
+  period confusion -- that a single-claim diff wouldn't surface). Nothing prevents
+  you from reading the full bundle; the diff is a starting point, not a
+  restriction.
+- If, having looked, you judge the diff-based review is NOT sufficient to
+  responsibly render a verdict -- the change is more consequential than it first
+  appeared, or you need the full original context to be confident -- set
+  `escalate_full_review: true` in your `review-report.json`, explain why in
+  `summary`, and stop there (still write findings for what you did check, but do
+  not force a verdict you're not confident in). The skill will then dispatch you
+  again for a full review this same round -- no penalty for escalating honestly,
+  a real penalty for a wrong verdict.
+- If not escalating, judge only what the diff and your own follow-up reading
+  actually covered; do not claim to have re-verified the entire bundle when you
+  reviewed a targeted diff.
+
 ## Output
 
 Write **only** `review-report.json` into the run directory, matching

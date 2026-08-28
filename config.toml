@@ -80,6 +80,11 @@ calc_relative_tolerance = 0.01     # 1% relative tolerance for recomputed derive
 calc_absolute_tolerance = 0.005
 numeric_match_tolerance = 1e-6     # how close a claimed number must be to a source number
 
+[review]
+max_review_rounds = 3               # 1 full review + up to N-1 diff-based re-reviews; the (max_review_rounds+1)th attempt is refused outright
+diff_review_max_claims_changed = 3  # more than this many added/changed/removed claims forces a full review instead of a diff review
+diff_review_conclusion_sections = [1, 5, 6, 7]  # outlook-brief.md section numbers (Outlook in brief, Base/Upside/Downside case) -- any citing a changed claim forces a full review
+
 [sec]
 # us-gaap XBRL concepts pulled from SEC company-facts when a CIK is available.
 concepts = ["Revenues", "RevenueFromContractWithCustomerExcludingAssessedTax", "NetIncomeLoss", "EarningsPerShareDiluted"]

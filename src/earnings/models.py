@@ -208,3 +208,31 @@ class ReviewReport(BaseModel):
     process_findings: list[ReviewFinding] = Field(default_factory=list)
     unverified_items: list[str] = Field(default_factory=list)
     summary: str
+    # Set true ONLY when reviewing from a review-diff.json (round 2+) and the diff is
+    # judged insufficient to render a verdict responsibly. When true, verdict/findings
+    # are still written but check-review treats this as neither pass nor fail -- the
+    # skill must fall back to a full review THIS round, no partial credit.
+    escalate_full_review: bool = False
+
+
+class ClaimDiffEntry(BaseModel):
+    claim_id: str
+    change: Literal["added", "removed", "changed"]
+    old: Optional[dict] = None  # None when change == "added"
+    new: Optional[dict] = None  # None when change == "removed"
+
+
+class ReviewDiff(BaseModel):
+    """Python-generated: what changed since the last completed review round, for a
+    diff-based re-review. Never agent-authored. See cli.cmd_review_diff."""
+
+    generated_at: str  # ISO 8601 UTC timestamp
+    round_number: int  # the round this diff is FOR (e.g. 2 for the first re-review)
+    since_round: int  # the round being diffed against (round_number - 1)
+    previous_verdict: str
+    previous_summary: str
+    previous_finding_count: int
+    claims_changed: list[ClaimDiffEntry] = Field(default_factory=list)
+    affected_brief_sections: list[int] = Field(default_factory=list)  # ALL sections citing a changed claim, informational
+    auto_escalated: bool = False
+    auto_escalation_reason: Optional[str] = None

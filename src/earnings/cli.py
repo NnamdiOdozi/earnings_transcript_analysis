@@ -160,7 +160,18 @@ def _snapshot_review_round(run_dir: Path, round_number: int) -> None:
     """After a structurally-valid review-report.json is accepted (any verdict, or an
     escalation), snapshot claims.json/outlook-brief.md/review-report.json under
     _review_history/round-<N>/ so the NEXT round's `review-diff` can diff against a
-    known-good prior state. Called once per completed round, from cmd_check_review."""
+    known-good prior state. Called once per completed round, from cmd_check_review.
+
+    Idempotent: if review-report.json is byte-identical to the most recently
+    snapshotted round's copy, skip -- nothing new happened (e.g. check-review was
+    called twice on an unchanged report), so don't create a redundant round-N+1
+    that inflates the round count and eats into max_review_rounds for no reason.
+    """
+    if round_number > 1:
+        prior_report = run_dir / config.REVIEW_HISTORY_SUBDIR / f"round-{round_number - 1}" / config.REVIEW_REPORT_JSON_FILENAME
+        current_report = run_dir / config.REVIEW_REPORT_JSON_FILENAME
+        if prior_report.exists() and current_report.exists() and prior_report.read_bytes() == current_report.read_bytes():
+            return
     dest = run_dir / config.REVIEW_HISTORY_SUBDIR / f"round-{round_number}"
     dest.mkdir(parents=True, exist_ok=True)
     for filename in (config.CLAIMS_FILENAME, config.OUTLOOK_BRIEF_FILENAME, config.REVIEW_REPORT_JSON_FILENAME):
@@ -851,6 +862,14 @@ def cmd_analyze(args: argparse.Namespace) -> int:
 
     if not claims_path.exists():
         print(f"error: {claims_path} not found. Write claims.json first (see skill).", file=sys.stderr)
+        return 2
+
+    manifest_path = run_dir / config.MANIFEST_FILENAME
+    if not manifest_path.exists():
+        # manifest.json is prepare's own provenance record (source hashes,
+        # retrieval timestamps) -- analyze was never checking it existed at all,
+        # so claims could validate against a run with no source manifest.
+        print(f"error: {manifest_path} not found. Run `earnings prepare` first.", file=sys.stderr)
         return 2
 
     from .models import Segment

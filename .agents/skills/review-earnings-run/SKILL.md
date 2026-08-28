@@ -71,16 +71,21 @@ material omitted.
    ```
    This validates `review-report.json`'s schema, checks every claim id it cites
    against `claims.json` (same non-negotiable rule as every other citation check in
-   this pipeline), and — only if that passes — renders `review-report.md`
-   deterministically from the validated JSON, then snapshots this round under
-   `_review_history/round-<N>/` for any future diff-review.
+   this pipeline), cross-checks the declared `verdict` against the `severity` of
+   the reviewer's own findings (`"pass"` requires nothing above `low`,
+   `"pass_with_warnings"` requires no `high`/`critical`), enforces the round cap
+   even if `review-diff` was somehow skipped, and — only if all of that passes —
+   renders `review-report.md` deterministically from the validated JSON, then
+   snapshots this round under `_review_history/round-<N>/` for any future
+   diff-review.
 
 6. **Report the verdict to the user.**
    - Exit 0 (`pass`): report clean, no action needed.
    - Exit 1 (`pass_with_warnings`): report the warnings from `review-report.md`
      explicitly — the run can be considered complete, but the user should see them.
-   - Exit 2 (`fail`, or a schema/citation problem in the report itself): the run is
-     **not** complete. Do not mark it done or hand it off as final. Go back to
+   - Exit 2 (`fail`, a schema/citation problem, a verdict/severity inconsistency,
+     or the round cap being reached): the run is **not** complete. Do not mark it
+     done or hand it off as final. Go back to
      Stage 2 drafting for a revision addressing the specific findings (or Stage 1,
      if the finding is about a claim itself), then re-run this skill **from step
      2** (the round-determination step must run again before re-dispatching —
@@ -99,6 +104,10 @@ material omitted.
 
 ## Reference files
 
+- `reference/reviewer-judgment-remit.md` — the canonical judgment contract the
+  `outlook-reviewer` subagent reads (what to judge, run bundle, diff-based
+  re-review, output rules). Shared with Codex's `review-outlook-brief` skill —
+  one copy, not two independently drifting ones.
 - `reference/review-report-schema.md` — the `ReviewReport`/`ReviewFinding` JSON
   shape and severity guidance, for both the reviewer subagent and anyone reading
   its output.

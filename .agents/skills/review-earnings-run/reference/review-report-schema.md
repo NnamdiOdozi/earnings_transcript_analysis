@@ -1,8 +1,12 @@
 # review-report.json schema
 
-Matches `earnings.models.ReviewReport`. This is the only file the
-`outlook-reviewer` subagent writes — `review-report.md` is rendered
+Matches `earnings.models.ReviewReport`. This is the only file the reviewer
+writes, regardless of how it was dispatched — `review-report.md` is rendered
 deterministically from it by `earnings check-review`, never written by hand.
+Shared by both the Claude Code `outlook-reviewer` subagent and Codex's
+`review-outlook-brief` in-session pass — one copy, not two independently
+drifting ones (see `reviewer-judgment-remit.md` in this same directory for
+why that matters).
 
 ```json
 {
@@ -47,10 +51,14 @@ deterministically from it by `earnings check-review`, never written by hand.
 ## Field notes
 
 - `verdict`: `"pass"` | `"pass_with_warnings"` | `"fail"`. `fail` should mean at
-  least one `high`/`critical` finding exists somewhere in the four finding lists.
-  `earnings check-review` does not currently cross-check verdict against severities
-  (documented limitation) — the reviewer is responsible for keeping them
-  consistent.
+  least one `high`/`critical` finding exists somewhere in the four finding lists;
+  `pass` requires nothing above `low`. `earnings check-review` cross-checks
+  verdict against severities and rejects the report if they're inconsistent
+  (fixed 2026-08-29) — get it right the first time rather than relying on the
+  gate to catch it.
+- `model`: record the actual model/reasoning tier used for this pass (e.g.
+  `"opus"`, `"gpt-5.6-medium"`), not a placeholder -- this field is provenance,
+  same as everything else in this pipeline.
 - `severity`: `"info"` | `"low"` | `"medium"` | `"high"` | `"critical"`. Use `info`
   for confirmations (e.g. "process compliance: validation.json.ok == true"), not
   just problems — a review with zero `source_checks`/`process_findings` entries

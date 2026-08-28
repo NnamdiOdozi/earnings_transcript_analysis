@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 
 from earnings import config, ingest, sources
-from earnings.cli import _escape_currency, main
+from earnings.cli import _escape_currency, _review_round_count, main
 
 FIXTURES = Path(__file__).parent / "fixtures"
 
@@ -1172,3 +1172,27 @@ def test_check_review_blocks_pass_with_warnings_verdict_with_critical_severity_f
     }
     (run_dir / config.REVIEW_REPORT_JSON_FILENAME).write_text(json.dumps(review_report))
     assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 2
+
+
+def test_analyze_requires_manifest_json(isolated_runs_dir):
+    """analyze previously never checked manifest.json existed at all -- claims could
+    validate against a run with no source-provenance record."""
+    transcript = str(FIXTURES / "normal_transcript.txt")
+    main(["prepare", "--ticker", "ACME", "--event-id", "2026-q2", "--transcript", transcript])
+    run_dir = isolated_runs_dir / "ACME" / "2026-q2"
+    (run_dir / config.CLAIMS_FILENAME).write_text("[]")
+    (run_dir / config.MANIFEST_FILENAME).unlink()
+    assert main(["analyze", "--ticker", "ACME", "--event-id", "2026-q2"]) == 2
+
+
+def test_snapshot_review_round_is_idempotent_on_unchanged_report(isolated_runs_dir):
+    """Calling check-review twice on an unchanged review-report.json must not create
+    a redundant round-2 snapshot -- that would inflate the round count and eat into
+    max_review_rounds for nothing new having happened."""
+    run_dir = _seed_reviewed_run(isolated_runs_dir)  # round-1 already snapshotted
+    assert _review_round_count(run_dir) == 1
+    # Re-run check-review against the SAME, unchanged review-report.json (as if it
+    # were accidentally invoked twice with no new dispatch in between).
+    main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"])
+    assert _review_round_count(run_dir) == 1
+    assert not (run_dir / config.REVIEW_HISTORY_SUBDIR / "round-2").exists()

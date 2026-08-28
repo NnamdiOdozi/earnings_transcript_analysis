@@ -62,8 +62,11 @@ of what was considered and why stays visible.
      implement or remove, don't leave them as false configurability; no
      atomic writes/no concurrency lock (both correctly flagged as
      acceptable for a POC, not urgent).
-- **Status:** Phase 1 (items 1-4 above) DONE — 2026-08-29, verified line-by-line
-  against blueprint, 155 tests passing (was 149), committed. Items 5-6 (reviewer
-  instruction consolidation + drift fixes; dead config; manifest.json check in
-  `analyze`; duplicate-snapshot idempotency) still OPEN, not yet scoped in
-  detail.
+- **Status:** Phase 1 (items 1-4) DONE — 2026-08-29, verified line-by-line
+  against blueprint, 155 tests passing (was 149), committed. Phase 2 (item 5,
+  reviewer-instruction consolidation + all confirmed drift fixed; the
+  manifest.json check in `analyze`; the duplicate-snapshot idempotency fix)
+  also DONE — 2026-08-29, 157 tests passing, committed. Dead config (part of
+  item 6) and the cli.py structural split (Phase 3) remain OPEN — deliberately
+  deferred, not yet scoped in detail. Both phases sent to a fresh Opus-model
+  subagent for an independent second review before Phase 3 starts.

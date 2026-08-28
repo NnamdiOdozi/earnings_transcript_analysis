@@ -1,0 +1,11 @@
+{
+  "url": "https://uk.marketscreener.com/quote/stock/LLOYDS-BANKING-GROUP-PLC-4000786/consensus/",
+  "title": "Consensus Lloyds Banking Group plc",
+  "score": null,
+  "published_date": null,
+  "_class": "consensus",
+  "_select_key": "consensus",
+  "_provider": "exa",
+  "_query": "Lloyds Banking Group plc LLOY 2026-h1 analyst consensus estimate revenue EPS",
+  "_retrieved_at": "2026-08-28T08:19:00Z"
+}

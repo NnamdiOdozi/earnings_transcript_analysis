@@ -1,0 +1,216 @@
+{
+  "ticker": "LLOY",
+  "event_id": "peer-discovery",
+  "created_at": "2026-08-28T08:17:51Z",
+  "sources": [
+    {
+      "path": "raw/query-01-hit-01.json",
+      "origin": "https://www.marketbeat.com/stocks/LON/LLOY/competitors-and-alternatives/",
+      "retrieved_at": "2026-08-28T08:17:46Z",
+      "content_type": "application/json",
+      "sha256": "15690193ee0daa5a9a8a678ff930cc38a875d484ddcd7b3f188f37cafb02ed1c",
+      "byte_length": 361
+    },
+    {
+      "path": "raw/query-01-hit-02.json",
+      "origin": "https://koalagains.com/stocks/LSE/LLOY/competition",
+      "retrieved_at": "2026-08-28T08:17:46Z",
+      "content_type": "application/json",
+      "sha256": "737816e5cd25bd39cef46f1bc455c2efe89d7b17f05d9cf8a04aa5a71daa9606",
+      "byte_length": 385
+    },
+    {
+      "path": "raw/query-01-hit-03.json",
+      "origin": "https://www.globaldata.com/company-profile/lloyds-banking-group-plc/competitors/",
+      "retrieved_at": "2026-08-28T08:17:46Z",
+      "content_type": "application/json",
+      "sha256": "d42bd730021a6b7a08706fc6dcfaf51c674430b5c4f296e59aa4ce0829d2d33d",
+      "byte_length": 369
+    },
+    {
+      "path": "raw/query-01-hit-04.json",
+      "origin": "https://assetnext.app/compare/lloyds-banking-group-plc",
+      "retrieved_at": "2026-08-28T08:17:46Z",
+      "content_type": "application/json",
+      "sha256": "bb72024fe103a51914b388aac9a11d6ea71625659e5b6d22ef9bc80f16c6e410",
+      "byte_length": 371
+    },
+    {
+      "path": "raw/query-01-hit-05.json",
+      "origin": "https://simplywall.st/stocks/gb/banks/lse-lloy/lloyds-banking-group-shares/valuation",
+      "retrieved_at": "2026-08-28T08:17:46Z",
+      "content_type": "application/json",
+      "sha256": "8cfd7173140eae3fcc181aacbee74e3e322392fa787e3797ab19d537f3d58aa4",
+      "byte_length": 422
+    },
+    {
+      "path": "raw/query-02-hit-01.json",
+      "origin": "https://www.marketbeat.com/stocks/LON/LLOY/competitors-and-alternatives/",
+      "retrieved_at": "2026-08-28T08:17:47Z",
+      "content_type": "application/json",
+      "sha256": "f2987bdca1d66454ca854ddf351103e3fbe0925f6a64f446e85e04df368b62c4",
+      "byte_length": 389
+    },
+    {
+      "path": "raw/query-02-hit-02.json",
+      "origin": "https://koalagains.com/stocks/LSE/LLOY/competition",
+      "retrieved_at": "2026-08-28T08:17:47Z",
+      "content_type": "application/json",
+      "sha256": "fccc1d96a814bd08beee3e094b77010a346cf0a5b60adf1228dc8cf9dfbada18",
+      "byte_length": 400
+    },
+    {
+      "path": "raw/query-02-hit-03.json",
+      "origin": "https://www.tipranks.com/stocks/gb:lloy/similar-stocks",
+      "retrieved_at": "2026-08-28T08:17:47Z",
+      "content_type": "application/json",
+      "sha256": "49a923587a8c977bd07c56731993aeb8280d1409181986486534206eb9142d6d",
+      "byte_length": 350
+    },
+    {
+      "path": "raw/query-02-hit-04.json",
+      "origin": "https://simplywall.st/stocks/gb/banks/lse-lloy/lloyds-banking-group-shares",
+      "retrieved_at": "2026-08-28T08:17:47Z",
+      "content_type": "application/json",
+      "sha256": "2a622219c254bfff029e8f5ac54b387b50402e40da5aa237f10e7295cddf9b67",
+      "byte_length": 417
+    },
+    {
+      "path": "raw/query-02-hit-05.json",
+      "origin": "https://www.marketscreener.com/quote/stock/LLOYDS-BANKING-GROUP-PLC-438763/consensus/",
+      "retrieved_at": "2026-08-28T08:17:47Z",
+      "content_type": "application/json",
+      "sha256": "51b06ee6d410b46ec2b2d96898f2784c162c29354899820351dffbc86742dead",
+      "byte_length": 406
+    },
+    {
+      "path": "raw/query-03-hit-01.json",
+      "origin": "https://www.marketbeat.com/stocks/LON/LLOY/competitors-and-alternatives/",
+      "retrieved_at": "2026-08-28T08:17:49Z",
+      "content_type": "application/json",
+      "sha256": "eb8a9f87176093d9c18248bb266efb5254d870e5474290f051aa9d68a95b6573",
+      "byte_length": 365
+    },
+    {
+      "path": "raw/query-03-hit-02.json",
+      "origin": "https://assetnext.app/similar-companies/lloyds-banking-group-plc",
+      "retrieved_at": "2026-08-28T08:17:49Z",
+      "content_type": "application/json",
+      "sha256": "f2011cb9a36d1d071be2768a6808696c2a64eff272528337e0a6f680c206111f",
+      "byte_length": 383
+    },
+    {
+      "path": "raw/query-03-hit-03.json",
+      "origin": "https://markets.ft.com/data/equities/tearsheet/summary?s=LLOY%3ALSE",
+      "retrieved_at": "2026-08-28T08:17:49Z",
+      "content_type": "application/json",
+      "sha256": "13daf909998a00caed939fe60c7fb3150c33f2c20fc48b1ae738cb81e43042cd",
+      "byte_length": 365
+    },
+    {
+      "path": "raw/query-03-hit-04.json",
+      "origin": "https://www.alphaspread.com/security/lse/lloy/summary",
+      "retrieved_at": "2026-08-28T08:17:49Z",
+      "content_type": "application/json",
+      "sha256": "39b426bbc9cf96d61b32a15f74bfba44896cbb062cb1c428cb972ed97d31f97b",
+      "byte_length": 376
+    },
+    {
+      "path": "raw/query-03-hit-05.json",
+      "origin": "https://danelfin.com/stocks/BARC.L-barclays-vs-LLOY.L-lloyds-banking-compare",
+      "retrieved_at": "2026-08-28T08:17:49Z",
+      "content_type": "application/json",
+      "sha256": "f3d0b480b64aec8738eb304b18fd22748445cff564acb2836d6fa162ca0aab0c",
+      "byte_length": 398
+    },
+    {
+      "path": "candidate-01.md",
+      "origin": "https://www.marketbeat.com/stocks/LON/LLOY/competitors-and-alternatives/",
+      "retrieved_at": "2026-08-28T08:17:49Z",
+      "content_type": "text/markdown",
+      "sha256": "8b884dd90847ad7e0fa6ceb5cb090b9f9e002fd3d4726d52135af344f433039e",
+      "byte_length": 58618
+    },
+    {
+      "path": "candidate-02.md",
+      "origin": "https://koalagains.com/stocks/LSE/LLOY/competition",
+      "retrieved_at": "2026-08-28T08:17:49Z",
+      "content_type": "text/markdown",
+      "sha256": "336943cb587d07a4ec0827dbf762a2266e9215cd922559c7f380f9b17ea98ab2",
+      "byte_length": 35544
+    },
+    {
+      "path": "candidate-03.md",
+      "origin": "https://www.globaldata.com/company-profile/lloyds-banking-group-plc/competitors/",
+      "retrieved_at": "2026-08-28T08:17:49Z",
+      "content_type": "text/markdown",
+      "sha256": "ce0ee481f26421c9015cf77be26ba211d7e87b4c9faa737adca3da6dc48aa6bc",
+      "byte_length": 1571
+    },
+    {
+      "path": "candidate-04.md",
+      "origin": "https://assetnext.app/compare/lloyds-banking-group-plc",
+      "retrieved_at": "2026-08-28T08:17:49Z",
+      "content_type": "text/markdown",
+      "sha256": "4baf8d6c9ea97a7d8d9381ffc3e289253ab994dfefe95669c81f01797b8b417a",
+      "byte_length": 2552
+    },
+    {
+      "path": "candidate-05.md",
+      "origin": "https://simplywall.st/stocks/gb/banks/lse-lloy/lloyds-banking-group-shares/valuation",
+      "retrieved_at": "2026-08-28T08:17:50Z",
+      "content_type": "text/markdown",
+      "sha256": "2a1d5ec92e73e4bac4004011de3397e80979ac4009e58bfdc31faf34a18cab63",
+      "byte_length": 9998
+    },
+    {
+      "path": "candidate-06.md",
+      "origin": "https://www.tipranks.com/stocks/gb:lloy/similar-stocks",
+      "retrieved_at": "2026-08-28T08:17:50Z",
+      "content_type": "text/markdown",
+      "sha256": "70223d06512c1bf9686601418018334ded708dc9362ebc0d5abe3ea1d867014a",
+      "byte_length": 19623
+    },
+    {
+      "path": "candidate-07.md",
+      "origin": "https://simplywall.st/stocks/gb/banks/lse-lloy/lloyds-banking-group-shares",
+      "retrieved_at": "2026-08-28T08:17:50Z",
+      "content_type": "text/markdown",
+      "sha256": "82baea1413653fcd21f6da914044762238f82cb7fab742d3633236b4bdf5b753",
+      "byte_length": 68990
+    },
+    {
+      "path": "candidate-08.md",
+      "origin": "https://www.marketscreener.com/quote/stock/LLOYDS-BANKING-GROUP-PLC-438763/consensus/",
+      "retrieved_at": "2026-08-28T08:17:50Z",
+      "content_type": "text/markdown",
+      "sha256": "78c6d5c93575ee398bb251ee4590ab67994e6ad503074ba4c85aa2e0895807a2",
+      "byte_length": 6880
+    },
+    {
+      "path": "candidate-09.md",
+      "origin": "https://assetnext.app/similar-companies/lloyds-banking-group-plc",
+      "retrieved_at": "2026-08-28T08:17:50Z",
+      "content_type": "text/markdown",
+      "sha256": "f1811fbe5eb2118050c9c7f52aa697d954a6f83554934b10e9029efed351b28f",
+      "byte_length": 3837
+    },
+    {
+      "path": "candidate-10.md",
+      "origin": "https://markets.ft.com/data/equities/tearsheet/summary?s=LLOY%3ALSE",
+      "retrieved_at": "2026-08-28T08:17:51Z",
+      "content_type": "text/markdown",
+      "sha256": "5b42708b96665b845aea8cb2b47432b6177adda2ffac8d8aedf0294ae7d1f187",
+      "byte_length": 1136
+    }
+  ],
+  "notes": [
+    "Peer-group discovery via exa: 15 hit(s) from 3 queries.",
+    "Extracted 10 candidate page(s) for the agent to read and pick ~4 peers."
+  ],
+  "queries": [
+    "Lloyds Banking Group plc LLOY peer group comparable companies",
+    "Lloyds Banking Group plc LLOY closest competitors comparable stocks analysts",
+    "stocks most similar to LLOY Lloyds Banking Group plc"
+  ]
+}

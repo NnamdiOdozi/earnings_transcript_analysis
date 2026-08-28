@@ -1,0 +1,106 @@
+{
+  "verdict": "pass",
+  "reviewed_at": "2026-08-28T08:34:36Z",
+  "model": "gpt-5.6-medium",
+  "source_checks": [
+    {
+      "severity": "info",
+      "artifact": "manifest.json",
+      "passage": "Web evidence (extracted, citable): 10 source(s)",
+      "evidence": "All 55 archived raw search-hit records and all 10 extracted web pages were read. The extracted pages match their recorded titles and origins; none is a 404 or unrelated page. web-001 contains a Yahoo Finance error banner but also contains the expected Lloyds estimates table and is not cited by the brief.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "evidence/web/web-005.md",
+      "passage": "Published Jul 29, 2026, 02:12 PM",
+      "evidence": "The archived Reuters report concerns Standard Chartered first-half results and predates Lloyds' 30 July 2026 presentation. Its US$4.78 billion profit, 9% growth, and US$4.52 billion analyst-average figures are present in context.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "evidence/web/web-006.md",
+      "passage": "Jul 23, 2026, 4:50 PM GMT",
+      "evidence": "Although retrieved after the event, the archived page itself is timestamped before the 30 July event and its latest analyst entries end on 21 July. The cited 2026 revenue forecast of GBP21.80 billion and 10.36% growth appears in the page. Treating it as pre-event evidence is reasonable, while the brief correctly declines to compare this full-year revenue measure with first-half net income.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "evidence/web/web-007.md",
+      "passage": "31 Jul 2026 07:00",
+      "evidence": "The NatWest half-year RNS was published after Lloyds' 30 July event. HSBC's half-year sources, web-004 and web-009, are dated 4 August 2026. The outlook brief explicitly excludes these post-event sources from pre-event peer context and cites neither one.",
+      "recommendation": "None."
+    }
+  ],
+  "claim_findings": [
+    {
+      "severity": "info",
+      "artifact": "claims.json#claim-023",
+      "passage": "Barclays reported second-quarter group income of £8.3 billion, up 16% year-on-year, and raised its 2026 income guidance to about £31.5 billion before Lloyds reported.",
+      "evidence": "Resolved. Revised claim-023 explicitly says second-quarter, and its period is now 3 months to 30 Jun 2026. web-008 confirms GBP8.3 billion and 16% are Q2 figures, while GBP16.5 billion and 11% are H1 figures.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "claims.json#claim-015",
+      "passage": "Accelerate 2030 targets mid-single-digit net income growth, high-single-digit other-income growth, a cost-income ratio below 45%, return on tangible equity around 20%, and capital generation above 225 basis points by 2030.",
+      "evidence": "Resolved. The false one-year period has been removed. This is appropriate because the claim combines compound annual growth over the plan, annual cost-income-ratio reductions, and 2028 and 2030 end-state targets.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "claims.json#claim-018",
+      "passage": "The plan assumes average real United Kingdom gross domestic product growth of 1.4%, inflation around 2%, nominal gross domestic product growth around 3.5%, and a 3.5% terminal base rate.",
+      "evidence": "Resolved. The revised claim no longer includes unemployment. Every macro assumption that remains in claim_text is present in the stored quote, and the outlook brief uses the same corrected scope.",
+      "recommendation": "None."
+    }
+  ],
+  "outlook_findings": [
+    {
+      "severity": "info",
+      "artifact": "outlook-brief.md",
+      "passage": "For the 12 months to 31 Dec 2026, management guides to:",
+      "evidence": "Resolved. New claim-028 is quote-anchored to seg-0003 and has an unambiguous full-year period. The below-50% guide now appears in the outlook summary, management-guidance list, base case, monitoring list, signal card, and evidence appendix.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "outlook-brief.md",
+      "passage": "Strong peer performance before Lloyds reported shows that the banking backdrop was capable of supporting growth. Barclays reported second-quarter group income up 16%, while Standard Chartered reported first-half pre-tax profit up 9% and above its analyst average [claim-023][claim-024]. These peers have different reporting periods and business mixes, so they are context rather than direct forecasts for Lloyds.",
+      "evidence": "Resolved. The revised passage explicitly identifies Barclays' figure as second-quarter and adds that the peers have different reporting periods and business mixes. It remains context rather than a direct Lloyds forecast.",
+      "recommendation": "None."
+    }
+  ],
+  "process_findings": [
+    {
+      "severity": "info",
+      "artifact": "validation.json",
+      "passage": "\"ok\": true",
+      "evidence": "The refreshed validation.json is present, records 28 checked claims, contains no issues or warnings, and has ok == true. This prerequisite was confirmed, not re-derived.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "outlook-validation.json",
+      "passage": "\"ok\": true",
+      "evidence": "The refreshed outlook-validation.json is present, has ok == true, contains no errors, and records new outlook_brief_sha256 and claims_sha256 bindings. All mandatory artifacts exist and all 28 claim ids are non-empty.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "injection-scan.json",
+      "passage": "\"finding_count\": 0",
+      "evidence": "The configured prompt-injection scan found no hits. The full transcript was read as untrusted source data and contained no genuine instruction-hijack attempt.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "outlook-brief.md",
+      "passage": "NatWest and HSBC half-year sources in the pack were published after Lloyds' 30 July event. They are not used as pre-event context.",
+      "evidence": "Temporal integrity is preserved. The brief uses only Barclays results dated 28 July and Standard Chartered results dated 29 July as pre-event peer context. Its categories and metrics are appropriate for a United Kingdom banking group; no cross-sector template language was found.",
+      "recommendation": "None."
+    }
+  ],
+  "unverified_items": [],
+  "summary": "Pass. All four prior findings are resolved: the Barclays figure is correctly identified as Q2, the mixed-horizon Accelerate 2030 claim no longer carries a false one-year period, the macro claim now matches its displayed quote, and the material 2026 cost-income-ratio guidance is captured and fully integrated. The revised brief remains balanced, temporally disciplined, and appropriate for a United Kingdom banking group, with no new semantic regression found."
+}

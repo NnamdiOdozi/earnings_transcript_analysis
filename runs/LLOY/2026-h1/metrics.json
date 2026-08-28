@@ -1,0 +1,66 @@
+[
+  {
+    "name": "Net income",
+    "value": 9.7,
+    "unit": "GBP billion",
+    "period": "6 months to 30 Jun 2026",
+    "definition": "The Group's reported net income for the first half",
+    "source_claim_ids": ["claim-002"]
+  },
+  {
+    "name": "Banking net interest income",
+    "value": 7.3,
+    "unit": "GBP billion",
+    "period": "6 months to 30 Jun 2026",
+    "definition": "The Group's reported banking net interest income for the first half",
+    "source_claim_ids": ["claim-008"]
+  },
+  {
+    "name": "Banking net interest margin",
+    "value": 319,
+    "unit": "basis points",
+    "period": "6 months to 30 Jun 2026",
+    "definition": "The reported banking net interest margin for the first half",
+    "source_claim_ids": ["claim-009"]
+  },
+  {
+    "name": "Other income",
+    "value": 3.3,
+    "unit": "GBP billion",
+    "period": "6 months to 30 Jun 2026",
+    "definition": "The Group's reported other income for the first half",
+    "source_claim_ids": ["claim-010"]
+  },
+  {
+    "name": "Return on tangible equity",
+    "value": 17.1,
+    "unit": "%",
+    "period": "6 months to 30 Jun 2026",
+    "definition": "The Group's reported return on tangible equity for the first half",
+    "source_claim_ids": ["claim-001"]
+  },
+  {
+    "name": "Asset quality ratio",
+    "value": 25,
+    "unit": "basis points",
+    "period": "6 months to 30 Jun 2026",
+    "definition": "The impairment charge expressed relative to average loans and advances",
+    "source_claim_ids": ["claim-004"]
+  },
+  {
+    "name": "Pro forma Common Equity Tier 1 ratio after distributions",
+    "value": 13.1,
+    "unit": "%",
+    "period": "as of 30 Jun 2026",
+    "definition": "The Group's pro forma Common Equity Tier 1 capital ratio after announced distributions",
+    "source_claim_ids": ["claim-005"]
+  },
+  {
+    "name": "Capital generation",
+    "value": 108,
+    "unit": "basis points",
+    "period": "6 months to 30 Jun 2026",
+    "definition": "The Group's reported organic capital generation for the first half",
+    "source_claim_ids": ["claim-005"]
+  }
+]

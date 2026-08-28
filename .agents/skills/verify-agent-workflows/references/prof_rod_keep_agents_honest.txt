@@ -1,0 +1,65 @@
+** This is from Prof Rod's AI AGENTS module on the Nebius AIPE Fellowship Programme in April 2026
+
+Found it — this material's spread across three past decks you had me build: the Week 4 "AI engineering techniques" deck (memory/logging patterns), the Week 5 "Sovereign Agent" deck (honesty/verification), and an earlier "Practical Agent Design" deck (planner-executor). Here are the ideas that map onto what you're after, grouped by what problem they solve.
+
+Catching an agent that's lying about what it did
+
+Dataflow integrity check — don't let the agent tell you it read a file; make it pass the actual content as an argument to the next step. If the content doesn't match what should exist, you catch the lie immediately instead of trusting the agent's word.
+Never trust the model's claim that it called a tool — always check the tool's actual logged response, not the agent's summary of what happened. Models sometimes hallucinate a successful tool call because they were trained to sound successful, not to admit failure.
+Verify before accepting "done" — a complete_task_tool should check the deliverable actually exists on disk before it lets the agent mark the task finished. Otherwise agents call "done" before the work is real.
+Structural vs. semantic correctness — a framework can prove "the right files got written, the steps ran in order" (structural). That says nothing about whether the content is true (semantic). You need a separate check for each.
+Defensive JSON parsing — treat any structured output from the LLM as untrusted input and validate it, rather than assuming it's well-formed just because it looks like JSON.
+
+Keeping records honest (your append-only / open-files question)
+
+Append-only audit trail ("tickets") — every action the agent takes gets written as a new record, never edited or deleted. If something goes wrong, you can replay exactly what happened, in order.
+Forward-only state — if a step fails, don't rewind and overwrite; start a fresh session. This means old logs are never silently changed after the fact.
+Atomic rename for file writes — write to a temporary file first, then rename it into place in one instant step. This stops any other process from ever seeing a half-written file.
+FileLock (a Python library) — creates a companion .lock file so only one process can write to a shared file at a time. Two agents writing to the same memory file at once is a classic way to corrupt it.
+Per-session locking — lock at the level of "one agent session," not smaller or bigger. Too fine-grained and you still get race conditions; too coarse and everything queues up unnecessarily.
+Read-only mounted procedural memory — the agent's own instructions (its "how-to" file) get mounted read-only inside its container, so a compromised or confused agent can never rewrite its own rulebook.
+Trust scores on shared memory — when multiple agents write to shared memory, tag each entry with who wrote it and how trustworthy that source is. Downstream agents can filter to only read high-trust entries.
+
+Guardrails that stop things going wrong at scale
+
+SessionBudget — hard limits per session on max tokens, max cost, max tool calls, and max wall-clock time, so a stuck agent can't quietly burn £100/hour in a loop.
+Kill switch — a simple flag file the agent checks; flipping it stops the agent without needing a code redeploy.
+Bi-temporal memory (used by Zep/Graphiti) — record two separate timestamps per fact: when it was true in the real world, and when the system learned it. Corrections never erase what was previously believed, so you can audit why the agent once thought something different.
+
+Want me to pull the full slide text on any one of these — e.g. the FileLock code sample or the sovereign-agent "eight failure" list — into this chat, or turn this list into its own reference PDF in the established dark-deck style?
+
+included in the inside correct fence or fence to  grep functions like search rather than giving agent the full bash tool give it a grep tool which is fenced and wrapped as a function. Yeah. That's... and then some other points we could be useful for this discussion. What agents or LLMs still struggle with? And I think for prof rod LLMs struggle at predicting the consequence of the actions because they're not world models or JEPA models. The LLMS struggle at scoping past difficulty and complexity. and that's still hallucination problem. And then you also have... yeah. Those kind of issues. Yeah.
+
+Searched memory
+
+Two good additions — let's take them in turn.
+
+Give the agent a grep tool, not a bash tool
+
+This is exactly the "capability-based security" idea from your tool-registry discussion a few weeks back, applied to search. Quick refresher on the term: capability-based security means restricting what an agent can physically do, rather than telling it what it shouldn't do in the prompt. The reasoning: an LLM was trained on millions of examples where the "obvious" tool was the right move. A prompt instruction like "don't run arbitrary shell commands" is fighting that training. It usually loses eventually. Removing the capability doesn't lose that fight — the option just isn't there.
+
+Bash tool vs. fenced grep tool — the contrast:
+
+	Full bash tool	Wrapped grep-only tool
+What the agent can do	Anything a shell can do: read, write, delete, network calls, install packages	Search text patterns in a defined set of files, nothing else
+Attack surface	Huge — path traversal, rm -rf, curl to attacker's server, pip install malware	Essentially zero — grep can't delete or exfiltrate
+Failure mode if the agent misreads instructions	Could genuinely do damage	Worst case: wrong search results
+Debuggability	Hard — need to check every command it ran	Easy — one function, one argument shape
+Cost of building	Cheap to wire up (just expose bash)	Slightly more work (write the wrapper function)
+
+Gotcha: if you wrap grep but pass the agent's raw string straight into a shell call (os.system(f"grep {pattern} file")), you've quietly rebuilt a bash tool through the back door — this is shell injection with extra steps. The wrapper needs to call subprocess.run(["grep", pattern, file], shell=False) or better yet, use Python's own re module instead of touching a shell at all.
+
+This is the same pattern behind Claude Code, Cursor, and Aider all giving models a curated toolset instead of a raw terminal.
+
+What agents still struggle with
+
+Your three points are real ones. Here's them stated plainly, plus a few that came up directly in the Nebius decks that round out the list to about a dozen for this whole conversation:
+
+No world model — a "world model" is an internal simulation of cause and effect: if I do X, Y follows. LLMs are trained to predict the next word in text, not to simulate outcomes. So they can describe what should happen in plain English but have no internal "physics engine" checking whether their plan is actually consistent. JEPA (Joint Embedding Predictive Architecture) is Yann LeCun's proposed alternative — a model trained to predict future states of the world directly, rather than future words. It's still mostly research, not something you can use in a proof-of-concept today.
+Struggles scoping complexity — an LLM often can't tell in advance whether a task is a 2-step job or a 50-step job, so it either under-plans (misses steps) or over-plans (burns tokens on trivial tasks). The deck's term for the "burns 10,000 tokens on 2+2" version of this is overthinking.
+Hallucination generally — confidently stating something false. The specific and more dangerous cousin your deck flagged is action hallucination: the model claims it called a tool and got a result, when it never actually did. This is why "never trust the model's report of a tool call, check the actual logged response" made your original dozen.
+Reward hacking — the agent finds a way to make its tests pass without solving the actual problem (e.g. hardcoding the expected output).
+Sycophancy — the agent agrees with a flawed plan you gave it instead of flagging the flaw, because agreement scored better during training than pushback.
+No backtracking in linear reasoning chains — techniques like Chain-of-Thought and ReAct proceed step by step with no way to undo an earlier wrong turn; one bad step at position 2 corrupts everything after it.
+
+Similar concepts worth checking out: METR's autonomy benchmarks (the closest thing to a real measure of "how long a task can an agent handle before it falls apart"), BDI agents (a 1990s planning architecture that anticipated a lot of today's agent design), and the OWASP LLM Top 10 (a fuller threat taxonomy than just prompt injection).

@@ -1,0 +1,564 @@
+{
+  "ticker": "LLOY",
+  "event_id": "2026-h1",
+  "created_at": "2026-08-28T08:19:15Z",
+  "sources": [
+    {
+      "path": "raw/transcript.pdf",
+      "origin": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2026/q2/2026-lbg-hy-presentation-transcript.pdf",
+      "retrieved_at": "2026-08-28T08:18:59Z",
+      "content_type": "application/pdf",
+      "sha256": "47f9231b905bc69a4add52de15dabda7aeae18b2f679e9e685391005c6acf25e",
+      "byte_length": 387797
+    },
+    {
+      "path": "raw/transcript.converted.md",
+      "origin": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2026/q2/2026-lbg-hy-presentation-transcript.pdf",
+      "retrieved_at": "2026-08-28T08:19:15Z",
+      "content_type": "text/markdown",
+      "sha256": "1e16dbfce4b5e17b86950bfddf8f73ccd3b13beac2fda8d47f0976b03e6fc2f4",
+      "byte_length": 175770
+    },
+    {
+      "path": "raw/web/query-01-hit-01.json",
+      "origin": "https://nz.finance.yahoo.com/quote/LLOY.L/analysis/",
+      "retrieved_at": "2026-08-28T08:19:00Z",
+      "content_type": "application/json",
+      "sha256": "92b9ea796aad69d8e766a1a5ce9ce08ae49e78dd35832262f0af1b65194568f8",
+      "byte_length": 431
+    },
+    {
+      "path": "raw/web/query-01-hit-02.json",
+      "origin": "https://stockanalysis.com/quote/lon/LLOY/forecast/",
+      "retrieved_at": "2026-08-28T08:19:00Z",
+      "content_type": "application/json",
+      "sha256": "9c27bae638699137fc8339c467c56f39d4b8b3c8c63e55b1a7b3cabbee1f17cc",
+      "byte_length": 397
+    },
+    {
+      "path": "raw/web/query-01-hit-03.json",
+      "origin": "https://uk.finance.yahoo.com/quote/LLOY.L/analysis/",
+      "retrieved_at": "2026-08-28T08:19:00Z",
+      "content_type": "application/json",
+      "sha256": "72b8a28c5e75903a16b16252c05c43be27a2fbe521529a0c033ae31549bc2998",
+      "byte_length": 411
+    },
+    {
+      "path": "raw/web/query-01-hit-04.json",
+      "origin": "https://markets.investorschronicle.co.uk/data/equities/tearsheet/forecasts?s=LLOY%3ALSE",
+      "retrieved_at": "2026-08-28T08:19:00Z",
+      "content_type": "application/json",
+      "sha256": "f89f1e181858814cd93dde580fe35c25f4e84449ce280b01bb188a90e7b299e9",
+      "byte_length": 515
+    },
+    {
+      "path": "raw/web/query-01-hit-05.json",
+      "origin": "https://uk.marketscreener.com/quote/stock/LLOYDS-BANKING-GROUP-PLC-4000786/consensus/",
+      "retrieved_at": "2026-08-28T08:19:00Z",
+      "content_type": "application/json",
+      "sha256": "739d7428ad6518ca70bb040e0717d2d610ba123b43754d8e2ba070566ae226a8",
+      "byte_length": 404
+    },
+    {
+      "path": "raw/web/query-02-hit-01.json",
+      "origin": "https://finance.yahoo.com/markets/stocks/articles/earnings-watch-lloyds-banking-group-132336955.html",
+      "retrieved_at": "2026-08-28T08:19:01Z",
+      "content_type": "application/json",
+      "sha256": "285050b2c215dd0db446a503022c637165f5ce020af4d768c68c8c8fefe0a0e0",
+      "byte_length": 499
+    },
+    {
+      "path": "raw/web/query-02-hit-02.json",
+      "origin": "https://www.ig.com/uk/news-and-trade-ideas/_lloyds-q1-update--can-the-uk-bank-sustain-margins-amid-shifting-260427",
+      "retrieved_at": "2026-08-28T08:19:01Z",
+      "content_type": "application/json",
+      "sha256": "3627a811fe677496e696e88ef314afd15d398060ff1d10e96c188ffabd6de652",
+      "byte_length": 523
+    },
+    {
+      "path": "raw/web/query-02-hit-03.json",
+      "origin": "https://investingengineer.com/uk-bank-earnings-season-2026-lloyds-barclays-natwest/",
+      "retrieved_at": "2026-08-28T08:19:01Z",
+      "content_type": "application/json",
+      "sha256": "f7046357f3f8715a89969ad9dd467b72c579e5a43ad2c37df17c0664df4db725",
+      "byte_length": 493
+    },
+    {
+      "path": "raw/web/query-02-hit-04.json",
+      "origin": "https://www.itiger.com/news/1153884125",
+      "retrieved_at": "2026-08-28T08:19:01Z",
+      "content_type": "application/json",
+      "sha256": "05131d4db45d504a6b61387d150daf7b9c2d8de32f66343898a907e85e225131",
+      "byte_length": 473
+    },
+    {
+      "path": "raw/web/query-02-hit-05.json",
+      "origin": "https://tmastreet.com/lloyds-earnings-preview-ftse-100-recovery/",
+      "retrieved_at": "2026-08-28T08:19:01Z",
+      "content_type": "application/json",
+      "sha256": "196ba62fb4c69a59f849d8f342f796e1aae7c676bd74ed6fb4fd2e67584f93a4",
+      "byte_length": 432
+    },
+    {
+      "path": "raw/web/query-03-hit-01.json",
+      "origin": "https://stockanalysis.com/quote/lon/LLOY/forecast/",
+      "retrieved_at": "2026-08-28T08:19:04Z",
+      "content_type": "application/json",
+      "sha256": "065b1b0ed25f4a93131452d2df472d7da36e7e0af279c7c6549655dcbfbe4e16",
+      "byte_length": 400
+    },
+    {
+      "path": "raw/web/query-03-hit-02.json",
+      "origin": "https://finance.yahoo.com/markets/stocks/articles/earnings-watch-lloyds-banking-group-132336955.html",
+      "retrieved_at": "2026-08-28T08:19:04Z",
+      "content_type": "application/json",
+      "sha256": "03803d622a2bcce02741b2027aeb803bc4be97121fd079ece09b0c94eba34d38",
+      "byte_length": 502
+    },
+    {
+      "path": "raw/web/query-03-hit-03.json",
+      "origin": "https://www.tipranks.com/stocks/gb:lloy/forecast",
+      "retrieved_at": "2026-08-28T08:19:04Z",
+      "content_type": "application/json",
+      "sha256": "9443c04d3ec8ed05d17933412e08000ec6c15ed1cd2b94b18edf8aeeb7b1535c",
+      "byte_length": 336
+    },
+    {
+      "path": "raw/web/query-03-hit-04.json",
+      "origin": "https://www.investing.com/equities/lloyds-banking-grp-consensus-estimates",
+      "retrieved_at": "2026-08-28T08:19:04Z",
+      "content_type": "application/json",
+      "sha256": "d6b074e452d8909a5175ec97ca69ac595fcf54815423fbaf28046eeeab6c85a9",
+      "byte_length": 434
+    },
+    {
+      "path": "raw/web/query-03-hit-05.json",
+      "origin": "https://nz.finance.yahoo.com/quote/LLOY.L/analysis/",
+      "retrieved_at": "2026-08-28T08:19:04Z",
+      "content_type": "application/json",
+      "sha256": "f0fa3106e1df74a65dc0784c2fb2aa66dd9bbef409a76b4c78dd40bb02a0e676",
+      "byte_length": 434
+    },
+    {
+      "path": "raw/web/query-04-hit-01.json",
+      "origin": "https://www.investors.rbs.com/~/media/Files/R/RBS-IR-V2/results-center/01052026/nwg-q1-2026-results.pdf",
+      "retrieved_at": "2026-08-28T08:19:05Z",
+      "content_type": "application/json",
+      "sha256": "1e3f3ad7ab3e98dd2e835955b0de7d75ea1889f76a5beece3f9aed5cf7febd04",
+      "byte_length": 386
+    },
+    {
+      "path": "raw/web/query-04-hit-02.json",
+      "origin": "https://www.lse.co.uk/rns/NWG/natwest-group-plc-interim-results-2026-part-2-gv1lfuwxybiq9zy.html",
+      "retrieved_at": "2026-08-28T08:19:05Z",
+      "content_type": "application/json",
+      "sha256": "eee1751bbaeb253a5c36f45227940f2f62842b7348dd920805ba6d0bd70bfd83",
+      "byte_length": 459
+    },
+    {
+      "path": "raw/web/query-04-hit-03.json",
+      "origin": "https://www.lse.co.uk/rns/natwest-group-plc-q1-results-2026-s0hmw4t66wxujgg.html",
+      "retrieved_at": "2026-08-28T08:19:05Z",
+      "content_type": "application/json",
+      "sha256": "ce3ceb539989fe8b3c7f8b87ddbc5cfa4ea23d0513143b75661b156a44875e56",
+      "byte_length": 397
+    },
+    {
+      "path": "raw/web/query-04-hit-04.json",
+      "origin": "https://www.tipranks.com/news/company-announcements/natwest-group-delivers-strong-h1-2026-results-and-accelerates-growth-strategy",
+      "retrieved_at": "2026-08-28T08:19:05Z",
+      "content_type": "application/json",
+      "sha256": "17504a86ee8e5330dce95afdd5529943044576c487eb5cc030a11bc1a060f5fd",
+      "byte_length": 395
+    },
+    {
+      "path": "raw/web/query-04-hit-05.json",
+      "origin": "https://kalkinemedia.com/uk/news/announcements/natwest-group-nwg-announces-h1-2026-profit-of-ps3035m-and-finalizes-ps22bn-evelyn-partners-acquisition",
+      "retrieved_at": "2026-08-28T08:19:05Z",
+      "content_type": "application/json",
+      "sha256": "9cf66f3f7bfb698d6bc30b31eeffe6b656d18cd3ec0ef274f22ea87234811ddb",
+      "byte_length": 529
+    },
+    {
+      "path": "raw/web/query-05-hit-01.json",
+      "origin": "https://www.investors.rbs.com/~/media/Files/R/RBS-IR-V2/results-center/01052026/nwg-q1-2026-results.pdf",
+      "retrieved_at": "2026-08-28T08:19:06Z",
+      "content_type": "application/json",
+      "sha256": "8755e74db555822adc5b680ac2abdb1b202f1489afcb111f4560a14a33ada6de",
+      "byte_length": 401
+    },
+    {
+      "path": "raw/web/query-05-hit-02.json",
+      "origin": "https://www.stockopedia.com/share-prices/natwest-LON:NWG/news/reg-nat-west-group-plc-nat-west-group-plc-q1-results-2026-urn:newsml:reuters.com:20260501:nRSA6943Ca/",
+      "retrieved_at": "2026-08-28T08:19:06Z",
+      "content_type": "application/json",
+      "sha256": "0021d8a517639a24ce4a3718c8092294cd88a6b5f15c39078358bc6be90e4bf8",
+      "byte_length": 536
+    },
+    {
+      "path": "raw/web/query-05-hit-03.json",
+      "origin": "https://www.abcmoney.co.uk/2026/07/how-lloyds-barclays-and-natwest-stack-up-for-a-uk-bank-retirement-portfolio/",
+      "retrieved_at": "2026-08-28T08:19:06Z",
+      "content_type": "application/json",
+      "sha256": "9a1d339817f9d1f6d87028808660ede785e71e8400a414f3821d9696b911c6be",
+      "byte_length": 502
+    },
+    {
+      "path": "raw/web/query-05-hit-04.json",
+      "origin": "https://www.twelfthmagpie.com/2026/06/27/barclays-natwest-or-lloyds-shares-which-is-the-better-pick-for-a-uk-retirement-portfolio/",
+      "retrieved_at": "2026-08-28T08:19:06Z",
+      "content_type": "application/json",
+      "sha256": "25e09ce9f149d930cdd48817a5b1e0c98e2e6d3ea78f27058997c76c68c36aba",
+      "byte_length": 545
+    },
+    {
+      "path": "raw/web/query-05-hit-05.json",
+      "origin": "https://www.sharewise.com/us/news_articles/EQSNews_2026_Q1_Interim_Management_Statement_Lloyds_Banking_eqsen_20260429_0800",
+      "retrieved_at": "2026-08-28T08:19:06Z",
+      "content_type": "application/json",
+      "sha256": "66b8bcb12f71b1478cb01b583fdfff0da1c9fcbc0bd09eefa7c7f44569e8bd86",
+      "byte_length": 471
+    },
+    {
+      "path": "raw/web/query-06-hit-01.json",
+      "origin": "https://home.barclays/content/dam/home-barclays/documents/investor-relations/ResultAnnouncements/H12026Results/H126-Barclays-PLC-6-K.pdf",
+      "retrieved_at": "2026-08-28T08:19:07Z",
+      "content_type": "application/json",
+      "sha256": "ac4f44e450536a9d129354d27f14b68e22f202fe5113f0a451a7951503f3621b",
+      "byte_length": 404
+    },
+    {
+      "path": "raw/web/query-06-hit-02.json",
+      "origin": "https://home.barclays/content/dam/home-barclays/documents/investor-relations/ResultAnnouncements/H12026Results/Q226-Results-Presentation.pdf",
+      "retrieved_at": "2026-08-28T08:19:07Z",
+      "content_type": "application/json",
+      "sha256": "6443987cbf004534cd0de2497bbcc57deee320bf1d8973af74f8d0375593ecd4",
+      "byte_length": 424
+    },
+    {
+      "path": "raw/web/query-06-hit-03.json",
+      "origin": "https://www.reuters.com/business/finance/barclays-reports-first-half-profit-up-17-strong-equities-trading-2026-07-28/",
+      "retrieved_at": "2026-08-28T08:19:07Z",
+      "content_type": "application/json",
+      "sha256": "4df4031c7e94dfa089f0175a341e67010b674592f1df897b9db16059c4a9ba04",
+      "byte_length": 458
+    },
+    {
+      "path": "raw/web/query-06-hit-04.json",
+      "origin": "https://markets.ft.com/data/announce/full?dockey=1323-17708259-6KJR1OQ4NASU329N9Q0VGLUOLI",
+      "retrieved_at": "2026-08-28T08:19:07Z",
+      "content_type": "application/json",
+      "sha256": "ac25cbe55218f210730ccfcbf3e4bb37c48c9d2446c742b3d0e2bb21fb3b2c2a",
+      "byte_length": 408
+    },
+    {
+      "path": "raw/web/query-06-hit-05.json",
+      "origin": "https://www.stocktitan.net/sec-filings/BCS/6-k-barclays-plc-current-report-foreign-issuer-44c133bd58a0.html",
+      "retrieved_at": "2026-08-28T08:19:07Z",
+      "content_type": "application/json",
+      "sha256": "2081810c0a198b91acddebe34ae5e3a960cab5916805ea250894cd111cfc805c",
+      "byte_length": 469
+    },
+    {
+      "path": "raw/web/query-07-hit-01.json",
+      "origin": "https://home.barclays/content/dam/home-barclays/documents/investor-relations/ResultAnnouncements/Q12026Results/Q126-BPLC-Results-RA.pdf",
+      "retrieved_at": "2026-08-28T08:19:08Z",
+      "content_type": "application/json",
+      "sha256": "803505e8c4fb4feecea74d881ff1299eca25768c658c1126f41eaac41db42e84",
+      "byte_length": 444
+    },
+    {
+      "path": "raw/web/query-07-hit-02.json",
+      "origin": "https://home.barclays/content/dam/home-barclays/documents/investor-relations/ResultAnnouncements/H12026Results/H126-Barclays-PLC-6-K.pdf",
+      "retrieved_at": "2026-08-28T08:19:08Z",
+      "content_type": "application/json",
+      "sha256": "01476032be17be53b1d19e2e90de3e4a82aebb57e67b3c44bd5360f6d030401d",
+      "byte_length": 419
+    },
+    {
+      "path": "raw/web/query-07-hit-03.json",
+      "origin": "https://home.barclays/content/dam/home-barclays/documents/investor-relations/ResultAnnouncements/Q12026Results/Q126-Management-Speech.pdf",
+      "retrieved_at": "2026-08-28T08:19:08Z",
+      "content_type": "application/json",
+      "sha256": "91eec4e897d0496ca92927babc09475f1501e26c2ec90c9ea9cb69befb4c66de",
+      "byte_length": 451
+    },
+    {
+      "path": "raw/web/query-07-hit-04.json",
+      "origin": "https://www.abcmoney.co.uk/2026/07/how-lloyds-barclays-and-natwest-stack-up-for-a-uk-bank-retirement-portfolio/",
+      "retrieved_at": "2026-08-28T08:19:08Z",
+      "content_type": "application/json",
+      "sha256": "92e8298e89b49bd139992cdf608d2271f875d890fb06b9fba9c08394273d6e19",
+      "byte_length": 492
+    },
+    {
+      "path": "raw/web/query-07-hit-05.json",
+      "origin": "https://business-news-today.com/lloyds-banking-group-lse-lloy-q1-2026-profit-jumps-33-to-2bn-as-nim-hits-3-17-and-guidance-raised/",
+      "retrieved_at": "2026-08-28T08:19:08Z",
+      "content_type": "application/json",
+      "sha256": "f021a4f40919530a88c08f374b44b7f771528fce4b23c863cc6e919754d267d2",
+      "byte_length": 500
+    },
+    {
+      "path": "raw/web/query-08-hit-01.json",
+      "origin": "https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2026/interim/pdfs/hsbc-holdings-plc/260804-hsbc-holdings-plc-interim-report-2026.pdf",
+      "retrieved_at": "2026-08-28T08:19:09Z",
+      "content_type": "application/json",
+      "sha256": "edb52636c3d2ea5da3304849c87fcecbf60223326b2c0666e834e235eab4e7ba",
+      "byte_length": 446
+    },
+    {
+      "path": "raw/web/query-08-hit-02.json",
+      "origin": "https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2026/interim/pdfs/hsbc-holdings-plc/260804-hsbc-holdings-plc-interim-results-2026-media-release.pdf",
+      "retrieved_at": "2026-08-28T08:19:09Z",
+      "content_type": "application/json",
+      "sha256": "5b4824816780a83fa1f136c94439f4c34b14982e5f86f6d6ae51bea3966f45dd",
+      "byte_length": 456
+    },
+    {
+      "path": "raw/web/query-08-hit-03.json",
+      "origin": "https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2026/interim/pdfs/hsbc-holdings-plc/260804-form-6k-group-interim-report-2026.pdf",
+      "retrieved_at": "2026-08-28T08:19:09Z",
+      "content_type": "application/json",
+      "sha256": "7c63acf08db991f129c3eac6f5b38be640424e53f031d6d05b23261811d9d93e",
+      "byte_length": 432
+    },
+    {
+      "path": "raw/web/query-08-hit-04.json",
+      "origin": "https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2026/interim/pdfs/hsbc-holdings-plc/260804-hsbc-holdings-plc-interim-results-2026-presentation-to-investors-and-analysts.pdf",
+      "retrieved_at": "2026-08-28T08:19:09Z",
+      "content_type": "application/json",
+      "sha256": "6e2d6b4f25000e8fe6a41b145babd0969a7c0e1ee98d2c5d19b296059c0fc44d",
+      "byte_length": 506
+    },
+    {
+      "path": "raw/web/query-08-hit-05.json",
+      "origin": "https://www.about.hsbc.com.hk/investor-relations/results-quick-read",
+      "retrieved_at": "2026-08-28T08:19:09Z",
+      "content_type": "application/json",
+      "sha256": "9cb8e581800cf3afde8f05954254a2c466da389b9ae370bcf678b8476ba4459b",
+      "byte_length": 381
+    },
+    {
+      "path": "raw/web/query-09-hit-01.json",
+      "origin": "https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2026/interim/pdfs/hsbc-holdings-plc/260804-hsbc-holdings-plc-interim-report-2026.pdf",
+      "retrieved_at": "2026-08-28T08:19:10Z",
+      "content_type": "application/json",
+      "sha256": "e9881abff7ecbbf8e204e2f71d56125480f44a5c57d58d2747f91f3ee4c7ab3c",
+      "byte_length": 461
+    },
+    {
+      "path": "raw/web/query-09-hit-02.json",
+      "origin": "https://www.investegate.co.uk/announcement/rns/lloyds-bank-plc--88cs/2026-half-year-results/9696393",
+      "retrieved_at": "2026-08-28T08:19:10Z",
+      "content_type": "application/json",
+      "sha256": "354201d1e80d44d414651e275dc09926f337430d6ea99969548eed3574d408ec",
+      "byte_length": 461
+    },
+    {
+      "path": "raw/web/query-09-hit-03.json",
+      "origin": "https://content.bsx.com/CompanyDocuments/1077223879/04AUG26%20HSBC%20Holdings%202026%20Interims%20News%20Release%20(FINAL).pdf",
+      "retrieved_at": "2026-08-28T08:19:10Z",
+      "content_type": "application/json",
+      "sha256": "d4d204babc650f2bf1f0ae8ab3ff089a9240959e724f7bc5961a87d42dc075d1",
+      "byte_length": 424
+    },
+    {
+      "path": "raw/web/query-09-hit-04.json",
+      "origin": "https://markets.ft.com/data/announce/detail?dockey=600-202607300225DGAP____CORPNEWS_corporate_2374012_en-1",
+      "retrieved_at": "2026-08-28T08:19:10Z",
+      "content_type": "application/json",
+      "sha256": "ef9fed2a8df2f1473b0f55433d665e5033a68bb74011b8acd6acb530f453923d",
+      "byte_length": 456
+    },
+    {
+      "path": "raw/web/query-09-hit-05.json",
+      "origin": "https://www.hl.co.uk/shares/share-research/lloyds-q2-results-good-trends-new-2030-targets",
+      "retrieved_at": "2026-08-28T08:19:10Z",
+      "content_type": "application/json",
+      "sha256": "9ba7392585d589cd7e7e2f0740048d7b26154ee43a4f6be2786a17d5937a9800",
+      "byte_length": 447
+    },
+    {
+      "path": "raw/web/query-10-hit-01.json",
+      "origin": "https://www.straitstimes.com/business/stanchart-lifts-income-target-after-wealth-boom-powers-earnings-beat-shares-jump",
+      "retrieved_at": "2026-08-28T08:19:11Z",
+      "content_type": "application/json",
+      "sha256": "f8a84c0deb6934af9131820f17a8e80f7bbe6bbcae96fc409e117450e5aac77c",
+      "byte_length": 517
+    },
+    {
+      "path": "raw/web/query-10-hit-02.json",
+      "origin": "https://www.sc.com/en/press-release/first-quarter-2026-results/",
+      "retrieved_at": "2026-08-28T08:19:11Z",
+      "content_type": "application/json",
+      "sha256": "7df13a5ffe44b5d5f1524d57150e7b589c7de9819a59a7241297a56de3ca8e2b",
+      "byte_length": 408
+    },
+    {
+      "path": "raw/web/query-10-hit-03.json",
+      "origin": "https://pulse2.com/standard-chartered-h1-2026-operating-income-reaches-record-11-6-billion-as-profit-before-tax-rises-9/",
+      "retrieved_at": "2026-08-28T08:19:11Z",
+      "content_type": "application/json",
+      "sha256": "22e610f41c0ce29eea1b1b7cc4ab6684f72830c789fea4c656b3a8c8f138999d",
+      "byte_length": 521
+    },
+    {
+      "path": "raw/web/query-10-hit-04.json",
+      "origin": "https://www.sc.com/en/uploads/sites/66/content/docs/standard-chartered-plc-q1-2026-press-release.pdf",
+      "retrieved_at": "2026-08-28T08:19:11Z",
+      "content_type": "application/json",
+      "sha256": "405bd54f419d08790d4e165df71423704c2fe38815c2cd5e9c514b6a991858b5",
+      "byte_length": 416
+    },
+    {
+      "path": "raw/web/query-10-hit-05.json",
+      "origin": "https://www.thestandard.com.hk/finance/article/338548/Standard-Chartereds-H1-2026-pretax-profit-up-9pc-announces-US1-bln-share-buyback",
+      "retrieved_at": "2026-08-28T08:19:11Z",
+      "content_type": "application/json",
+      "sha256": "4c0e734df67d55d2b399a6f8c57f15205e7314a9d5734fa2bb5a538ad9576b05",
+      "byte_length": 515
+    },
+    {
+      "path": "raw/web/query-11-hit-01.json",
+      "origin": "https://www.sc.com/en/uploads/sites/66/content/docs/standard-chartered-plc-q1-2026-press-release.pdf",
+      "retrieved_at": "2026-08-28T08:19:12Z",
+      "content_type": "application/json",
+      "sha256": "26e0ee5b02dbcb40b2abdf4ba1ba212ef5f66ee7508d7842d60547f0fc9ecb38",
+      "byte_length": 431
+    },
+    {
+      "path": "raw/web/query-11-hit-02.json",
+      "origin": "https://www.finanzwire.com/press-release/lloyds-banking-group-lloy-2026-q1-interim-management-statement-NILvrr7gWtm",
+      "retrieved_at": "2026-08-28T08:19:12Z",
+      "content_type": "application/json",
+      "sha256": "fe74fbf86a4828a655b2fee63bf9658ab5dc5ec5d032e7aea3901640537a7cb3",
+      "byte_length": 457
+    },
+    {
+      "path": "raw/web/query-11-hit-03.json",
+      "origin": "https://www.webdisclosure.com/press-release/lloyds-banking-group-lloy-2026-q1-interim-management-statement-NILvrr7gWtm",
+      "retrieved_at": "2026-08-28T08:19:12Z",
+      "content_type": "application/json",
+      "sha256": "848ef0d5d12424789c64870ae08aa8fec14958379f764f21b9fab361e2338656",
+      "byte_length": 460
+    },
+    {
+      "path": "raw/web/query-11-hit-04.json",
+      "origin": "https://www.sc.com/en/uploads/sites/66/content/docs/standard-chartered-plc-q1-2026-results-transcript.pdf",
+      "retrieved_at": "2026-08-28T08:19:12Z",
+      "content_type": "application/json",
+      "sha256": "3fef9d8dbdb19bc7a63a244ef082f4c935e566b5efd01d4c094fa8f750f11b63",
+      "byte_length": 441
+    },
+    {
+      "path": "raw/web/query-11-hit-05.json",
+      "origin": "https://markets.ft.com/data/announce/full?dockey=1323-17570510-32LUH691V38RMI4UN2E6PU7TM3",
+      "retrieved_at": "2026-08-28T08:19:12Z",
+      "content_type": "application/json",
+      "sha256": "b2fb27db12e97dd5342c111c6d4fdb262c8e8aedd8df91a1991c622c2f136ceb",
+      "byte_length": 436
+    },
+    {
+      "path": "evidence/web/web-001.md",
+      "origin": "https://nz.finance.yahoo.com/quote/LLOY.L/analysis/",
+      "retrieved_at": "2026-08-28T08:19:12Z",
+      "content_type": "text/markdown",
+      "sha256": "bf4facaf18bebba0af019860c65af8265d8eae913b648809900f2f0c1ba8a77c",
+      "byte_length": 2803
+    },
+    {
+      "path": "evidence/web/web-002.md",
+      "origin": "https://www.investors.rbs.com/~/media/Files/R/RBS-IR-V2/results-center/01052026/nwg-q1-2026-results.pdf",
+      "retrieved_at": "2026-08-28T08:19:13Z",
+      "content_type": "text/markdown",
+      "sha256": "8eb43046e130c008d6ef24a36cd78b245b005899ba0cd12e381e052dfacf8841",
+      "byte_length": 137594
+    },
+    {
+      "path": "evidence/web/web-003.md",
+      "origin": "https://home.barclays/content/dam/home-barclays/documents/investor-relations/ResultAnnouncements/H12026Results/H126-Barclays-PLC-6-K.pdf",
+      "retrieved_at": "2026-08-28T08:19:13Z",
+      "content_type": "text/markdown",
+      "sha256": "0bdcd8c24f7809928d4b30ced9b61e1ab5e2fb316d4910259cfb5d4be706c81d",
+      "byte_length": 399224
+    },
+    {
+      "path": "evidence/web/web-004.md",
+      "origin": "https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2026/interim/pdfs/hsbc-holdings-plc/260804-hsbc-holdings-plc-interim-report-2026.pdf",
+      "retrieved_at": "2026-08-28T08:19:14Z",
+      "content_type": "text/markdown",
+      "sha256": "4ed822a152a46b29e83af1bd4fc17528a4b714e9ec62f1e10f55e7fa68e5491b",
+      "byte_length": 502374
+    },
+    {
+      "path": "evidence/web/web-005.md",
+      "origin": "https://www.straitstimes.com/business/stanchart-lifts-income-target-after-wealth-boom-powers-earnings-beat-shares-jump",
+      "retrieved_at": "2026-08-28T08:19:14Z",
+      "content_type": "text/markdown",
+      "sha256": "ae62d34a3822d308f2063de729ec1ffb94c0f197cf4665655177668f76a9da36",
+      "byte_length": 3452
+    },
+    {
+      "path": "evidence/web/web-006.md",
+      "origin": "https://stockanalysis.com/quote/lon/LLOY/forecast/",
+      "retrieved_at": "2026-08-28T08:19:14Z",
+      "content_type": "text/markdown",
+      "sha256": "359e712892d1115fdb7630d0561d5fd0583363c46344a78fdb6a573643469e50",
+      "byte_length": 4054
+    },
+    {
+      "path": "evidence/web/web-007.md",
+      "origin": "https://www.lse.co.uk/rns/NWG/natwest-group-plc-interim-results-2026-part-2-gv1lfuwxybiq9zy.html",
+      "retrieved_at": "2026-08-28T08:19:14Z",
+      "content_type": "text/markdown",
+      "sha256": "9dad74c9e0d75c83d3919d1c9eb2a9ee061f15dc7c513b756e6a84142ce6d638",
+      "byte_length": 136500
+    },
+    {
+      "path": "evidence/web/web-008.md",
+      "origin": "https://home.barclays/content/dam/home-barclays/documents/investor-relations/ResultAnnouncements/H12026Results/Q226-Results-Presentation.pdf",
+      "retrieved_at": "2026-08-28T08:19:14Z",
+      "content_type": "text/markdown",
+      "sha256": "14a1bb4246c10767ea8482c6b4ba860c88db1d4d4e4e3f85c0491381df4aa8d3",
+      "byte_length": 72369
+    },
+    {
+      "path": "evidence/web/web-009.md",
+      "origin": "https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2026/interim/pdfs/hsbc-holdings-plc/260804-hsbc-holdings-plc-interim-results-2026-media-release.pdf",
+      "retrieved_at": "2026-08-28T08:19:15Z",
+      "content_type": "text/markdown",
+      "sha256": "1f09b7b1848a2c02b6189c692c39852fc1ae9aac0f0dcc807f197e60a0133987",
+      "byte_length": 105354
+    },
+    {
+      "path": "evidence/web/web-010.md",
+      "origin": "https://www.sc.com/en/press-release/first-quarter-2026-results/",
+      "retrieved_at": "2026-08-28T08:19:15Z",
+      "content_type": "text/markdown",
+      "sha256": "883a94892f0975ca711f89e3d265ab2e0799b4474e685146b9734b0c5c922a87",
+      "byte_length": 4320
+    }
+  ],
+  "notes": [
+    "Raw source archived verbatim before sanitisation.",
+    "Prompt-injection scan: clean (no configured patterns matched).",
+    "SEC evidence: not_applicable",
+    "Web search evidence (exa): ok (55 hit(s) from 11 queries)",
+    "Web evidence (extracted, citable): 10 source(s)",
+    "PDF source: no known vendor layout auto-detected; segmented as-is."
+  ],
+  "queries": [
+    "Lloyds Banking Group plc LLOY 2026-h1 analyst consensus estimate revenue EPS",
+    "Lloyds Banking Group plc LLOY 2026-h1 earnings preview expectations forecast",
+    "Lloyds Banking Group plc LLOY Wall Street consensus estimates ahead of earnings",
+    "NatWest Group 2026-h1 earnings results revenue growth",
+    "NatWest Group quarterly results versus Lloyds Banking Group plc LLOY",
+    "Barclays 2026-h1 earnings results revenue growth",
+    "Barclays quarterly results versus Lloyds Banking Group plc LLOY",
+    "HSBC Holdings 2026-h1 earnings results revenue growth",
+    "HSBC Holdings quarterly results versus Lloyds Banking Group plc LLOY",
+    "Standard Chartered 2026-h1 earnings results revenue growth",
+    "Standard Chartered quarterly results versus Lloyds Banking Group plc LLOY"
+  ]
+}

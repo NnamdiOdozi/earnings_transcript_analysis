@@ -93,6 +93,12 @@ Validation FAILED: 1 issue(s).
 The run stops. No output is produced. A paraphrase — even a harmless-looking one — is caught,
 because "reached" is not what was actually said.
 
+Every claim also carries a label for *what kind* of statement it is — a reported fact, a
+paraphrase of management's own opinion, an analyst's question, or the pipeline's own inference
+drawn from other claims — and the signal card shows that label next to every entry, not just the
+quote. A reader can then tell apart "the company said this" from "we concluded this from what
+the company said" at a glance, rather than the two looking identical on the page.
+
 ## 4. Numbers must be grounded — and some arithmetic is re-checked
 
 Beyond the quote, every number a claim states must actually appear in the cited source (or in
@@ -165,10 +171,30 @@ is a *fair* reading of its quote, whether the outlook narrative is balanced, or 
 something important was left out. So a final **reviewer agent** — run with a fresh, independent
 view and no memory of the drafting — reads the finished bundle and judges exactly those things.
 
-On this very run, the reviewer caught real issues the machine checks passed clean: several peer
-figures were labelled with the wrong reporting period, and one competitor (Apple) had published
-its results the day *after* the call — so they could not have informed it. Both were corrected
-before the run was accepted.
+On a real run (MSFT, 28 Jan 2026 call), the reviewer caught issues the machine checks passed
+clean: a brief section invented a defect in a source file it never actually opened; three
+peer companies' fetched results turned out to be for a much later quarter than the call itself,
+despite carrying no publish date for the mechanical guard to catch; and forward-looking guidance
+was cited selectively — the favourable numbers made the brief, several unfavourable ones (margin
+pressure, a segment miss, a flagged pricing risk) did not. All were corrected before the run was
+accepted, across two further, narrower re-reviews rather than starting over each time.
+
+## 7b. Re-reviews are targeted, not free — and capped
+
+A correction after a failed review doesn't need the reviewer to re-read everything
+from scratch. The **first** review is always full and independent — a summary built
+by the same pipeline being reviewed could hide that pipeline's own blind spots, so
+nothing is allowed to shortcut it. From the **second** review on, Python builds a
+`review-diff.json`: exactly which claims changed, which brief sections cite them, and
+the prior verdict. Three things force a full review anyway, no matter how small the
+diff looks: too many claims changed at once, a changed claim's reporting period or
+figures differ, or a changed claim is cited in a conclusion-driving section (the
+outlook summary or a base/upside/downside case). The reviewer can also demand a full
+review itself if a targeted look doesn't feel safe. A **hard cap** (three rounds by
+default) then stops the loop outright — the last verdict must be shown to the user,
+never quietly dropped. Discovered live: editing a claim *before* closing the round
+that flagged it corrupts the next diff, so Python now refuses to let a correction
+proceed until the round is formally closed.
 
 ## 8. Gates: the line stops if a check fails
 

@@ -208,8 +208,30 @@ Validates its schema and every claim id it cites, then renders `review-report.md
 It also requires that `earnings validate-outlook` has **passed** for this run (a
 passing `outlook-validation.json`) and that `outlook-brief.md` has not changed since
 it was validated (hash match) — so the review can't run against a skipped or
-subsequently-edited brief. Exit 0 = pass, 1 = pass with warnings (read them), 2 =
-fail — not complete; go back and revise, don't silently patch the brief.
+subsequently-edited brief. On success it also snapshots the round under
+`_review_history/round-<N>/`, so a later correction can be diff-reviewed instead of
+re-reviewed from scratch (see below). Exit 0 = pass, 1 = pass with warnings (read
+them), 2 = fail (or a schema/citation problem) — not complete; go back and revise,
+don't silently patch the brief. Exit 3 = the reviewer itself judged a diff-based
+re-review insufficient and asked for a full one this same round.
+
+**Round 1 is always a full review.** From round 2 on, `earnings review-diff
+--ticker ACME --event-id 2026-q2` builds `review-diff.json` — which claims were
+added/changed/removed since the last round, which brief sections cite them, and the
+prior round's verdict — so the reviewer can target its re-read instead of rereading
+the whole bundle. Three things force a full review regardless: more than
+`config.toml [review] diff_review_max_claims_changed` claims changed, a changed
+claim's `period`/`values` differ, or a changed claim is cited in a conclusion-bearing
+section (Outlook in brief / Base / Upside / Downside case). The reviewer can also
+self-escalate if the diff looks insufficient. **CRITICAL ordering rule:** run
+`check-review` immediately after the reviewer, before touching `claims.json` or
+`outlook-brief.md` for any correction — editing first corrupts the round's snapshot,
+so the next diff shows no changes even though real corrections happened.
+`cmd_analyze`/`cmd_validate_outlook` refuse to run if an unclosed
+`review-report.json` is sitting in the run directory, precisely to catch this. A hard
+cap (`config.toml [review] max_review_rounds`, default 3) refuses a further review
+attempt outright once reached — the last verdict must be surfaced to the user, never
+silently dropped.
 
 ## Run output
 
@@ -228,6 +250,8 @@ runs/<ticker>/<event-id>/
   outlook-validation.json     # Python's real-clock record of when validate-outlook last checked outlook-brief.md
   review-report.json          # agent-written semantic review verdict
   review-report.md            # rendered from review-report.json, never hand-written
+  review-diff.json            # round 2+: what changed since the last round (Python-built)
+  _review_history/round-<N>/  # per-round snapshot of claims/brief/report, for diffing
   _archive/<timestamp>/       # a prior run's files, if this ticker/event was prepared before
 ```
 

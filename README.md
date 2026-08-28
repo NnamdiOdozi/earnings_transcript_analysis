@@ -1,8 +1,11 @@
 # Earnings Transcript Analysis (POC)
 
-A small, auditable pipeline that turns one company earnings-call transcript into a
-concise Markdown **signal card**, where every substantive claim traces back to an
-exact quotation and every calculation is reproducible in Python.
+A small, auditable pipeline that turns one company earnings-call transcript into
+two Markdown documents: a **signal card**, where every substantive claim traces
+back to an exact quotation and every calculation is reproducible in Python, and
+an **outlook brief** — an agent-authored, forward-looking synthesis (base/upside/
+downside cases) built on that same evidence, independently reviewed for fair
+reading and narrative balance before it's considered final.
 
 This is a proof of concept; if you've never used it, read this in order. The
 Python code only does deterministic work — ingest, sanitise, segment, hash,

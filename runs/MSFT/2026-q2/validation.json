@@ -1,6 +1,12 @@
 {
   "ok": true,
-  "checked_claims": 19,
+  "checked_claims": 44,
   "issues": [],
-  "validated_at": "2026-08-26T18:15:07Z"
+  "warnings": [],
+  "validated_at": "2026-08-28T10:32:55Z",
+  "input_hashes": {
+    "claims.json": "492d43edf6bd3127dd5ea5ed23e5040b319796f0148b0443f5774a19aef7f72a",
+    "transcript.jsonl": "fc2bc2fb29c66ec431c883ef232caa1fa7052eb72616732c2a4635101a7776f0",
+    "financials.json": "44cbe96c9fef1efdf6d3fbcf3dd0da345edbecd5bc0bb7fab5deeeb424603ac5"
+  }
 }

@@ -1,0 +1,162 @@
+{
+  "verdict": "pass_with_warnings",
+  "reviewed_at": "2026-08-28T13:10:00Z",
+  "model": "opus",
+  "escalate_full_review": false,
+  "source_checks": [
+    {
+      "severity": "info",
+      "artifact": "normalized/transcript.jsonl",
+      "passage": "Windows OEM grew 5% with strong execution as well as a continued benefit from Windows 10 end of support. Results were ahead of expectations as inventory levels remained elevated with increased purchasing ahead of memory price increases.",
+      "evidence": "seg-0004 (Amy Hood, prepared remarks) was re-read end to end this round, because all three changed/added claims quote it or seg-0003. It is a genuine Microsoft FY2026 Q2 CFO script: quarterly results, segment detail, then Q3 and FY26 guidance. Every sentence quoted by claim-042, claim-043, claim-044 and claim-023 appears verbatim in it, in the order the claims imply.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "evidence/financials.json",
+      "passage": "\"RevenueFromContractWithCustomerExcludingAssessedTax\": {\"value\": 81273000000, \"start\": \"2025-10-01\", \"end\": \"2025-12-31\", \"period_type\": \"quarter\"}",
+      "evidence": "All three SEC facts are period_type 'quarter', 1 Oct 2025 to 31 Dec 2025, from the 10-Q filed 28 Jan 2026 (accession 0001193125-26-027207). The one new claim, claim-044, is labelled '3 months to 31 Dec 2025', which agrees with that period_type and start/end. No quarter-versus-half-year or quarter-versus-year-to-date mismatch in the changed claim set.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "manifest.json",
+      "passage": "\"path\": \"raw/transcript.html\", \"origin\": \"https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q2\", \"retrieved_at\": \"2026-08-28T10:14:02Z\"",
+      "evidence": "Provenance sanity read. The transcript origin is Microsoft's own FY2026 Q2 investor-events page, and every source entry carries path, origin, retrieved_at, content_type, sha256 and byte_length. Retrieval (10:13-10:14Z) precedes the injection scan (10:13:57Z) and validation (10:32:55Z), so stage ordering is coherent. Hashes were read, not recomputed.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "claims.json#claim-044",
+      "passage": "\"segment_id\": \"seg-0004\", \"speaker\": \"AMY HOOD\", \"status\": \"reported\"",
+      "evidence": "Temporal integrity for the changed set. All three changed/added claims are transcript-only; none introduces a web source. No post-event material entered the run this round. The single pre-event web source (web-004, Oracle, published 10 Dec 2025) is unchanged, and the brief's section 9 exclusion note for the three post-event peer files is still in place.",
+      "recommendation": "None."
+    }
+  ],
+  "claim_findings": [
+    {
+      "severity": "low",
+      "artifact": "claims.json#claim-044",
+      "passage": "Windows OEM revenue grew 5% this quarter, ahead of expectations, partly on elevated inventory purchasing pulled forward ahead of memory price increases -- the same dynamic behind the guided ~10% Q3 Windows OEM decline.",
+      "evidence": "The first half of the claim_text matches the quote exactly. The second half does not. claim-044's quote says nothing about Q3 guidance. The link is real, but it lives in a different sentence of seg-0004: 'Growth rates will be impacted as the benefit from Windows 10 end of support normalizes and as elevated inventory levels come down through the quarter. Therefore, Windows OEM revenue should decline roughly 10 percent.' Two consequences. First, an auditor tracing claim-044's quote cannot verify the causal clause; this is the same quote-scoping defect flagged against claim-042 in round 2, reintroduced in the claim written to fix it. Second, management named two drivers of the Q3 decline (Windows 10 end-of-support normalisation and inventory unwind), so 'the same dynamic' is a single-cause reading of a two-cause sentence. The claim is also classified reported_fact while the trailing clause is a causal statement about forward guidance. signal-card.md line 36 renders this claim_text under Hood's name with only the 5% quote beneath it, so a card-only reader sees the causal clause attributed to her without the sentence that supports it.",
+      "recommendation": "Trim claim-044's claim_text to what its quote supports: 'Windows OEM revenue grew 5% this quarter, ahead of expectations, partly on elevated inventory purchasing pulled forward ahead of memory price increases.' If the link to the Q3 guide is wanted, add a separate claim quoting the 'Growth rates will be impacted as the benefit from Windows 10 end of support normalizes and as elevated inventory levels come down through the quarter' sentence, which names both drivers."
+    },
+    {
+      "severity": "info",
+      "artifact": "claims.json#claim-032",
+      "passage": "\"quote\": \"now have 15 million paid Microsoft 365 Copilot seats\", \"values\": {\"m365_copilot_seats_millions\": 15}, \"period\": \"as of 31 Dec 2025\"",
+      "evidence": "Round-2 medium finding resolved. m365_copilot_seat_adds_growth_pct has been removed from claim-032's values, so the quarterly flow no longer sits under a point-in-time 'as of' label and is no longer duplicated. It now lives only in claim-039, correctly periodised as '3 months to 31 Dec 2025'. claim_text, quote, values and period are internally consistent.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "claims.json#claim-042",
+      "passage": "Management flagged rising memory prices as a forward risk to Windows OEM/on-premises server revenue and future capital expenditures -- with the impact on Microsoft Cloud gross margins building more gradually as assets depreciate over six years.",
+      "evidence": "Round-2 low finding resolved. 'PC market outcomes' has been dropped, so claim_text now covers exactly what its quote covers: Windows OEM, on-premises server markets, capital expenditures and the six-year depreciation effect on Microsoft Cloud gross margins. The PC-market point remains solely in claim-043, whose quote does contain it. The overlap between the two claims is gone.",
+      "recommendation": "None."
+    }
+  ],
+  "outlook_findings": [
+    {
+      "severity": "low",
+      "artifact": "outlook-brief.md",
+      "passage": "Azure's reported constant-currency growth this quarter (38% cc) [claim-017] is guided to a similar 37%-38% cc band in Q3 [claim-020] — roughly flat, not a deceleration, once compared on the same (constant-currency) basis",
+      "evidence": "Round-2 low finding only half applied. 'Essentially flat' was softened to 'roughly flat', matching section 1, but the flat assertion 'not a deceleration' survives unchanged. At the low end of the guided band 37% cc is a one-point deceleration against the reported 38% cc, and the band midpoint (37.5%) also sits below it. The defensible statement is that the apparent step-down from the 39% nominal figure is a currency artefact, not that no deceleration is guided at all. Separately, Hood guided FX to add 2 points to Intelligent Cloud revenue growth in Q3, and said FX increased reported Q2 results 'slightly less than expected, particularly in Intelligent Cloud revenue'; neither appears anywhere in the brief, despite the brief resting a lot of weight on the nominal-versus-constant-currency distinction.",
+      "recommendation": "Replace 'not a deceleration' with 'with at most about a one-point deceleration at the low end of the band'. Optionally add that FX is guided to add roughly 2 points to Intelligent Cloud growth in Q3, so nominal Azure growth will not be directly comparable to the cc guide."
+    },
+    {
+      "severity": "low",
+      "artifact": "outlook-brief.md",
+      "passage": "Windows OEM's 5% growth this quarter was itself partly a pull-forward, on elevated inventory purchased ahead of memory price increases [claim-044] -- the same dynamic sits behind the guided ~10% Q3 Windows OEM decline [claim-023].",
+      "evidence": "This is the round-2 low finding largely addressed, and the addition is a genuine improvement: the brief no longer presents memory pricing as a purely forward risk. Two residual gaps. First, it carries claim-044's over-reach forward verbatim: management attributed the Q3 decline to Windows 10 end-of-support normalisation as well as inventory unwind, so 'the same dynamic' overstates the share attributable to the memory-price pull-forward. Second, only the Windows OEM half of the round-2 recommendation was applied. The on-premises server beat had the same cause in the same segment ('revenue increased 2% and 1% in constant currency ahead of expectations driven by demand for our hybrid solutions, including a benefit from the launch of SQL server 2025, as well as higher transactional purchasing ahead of memory price increases'), and Hood guided that line to decline in the low single digits in Q3 with memory pricing creating 'additional volatility'. No claim captures the on-premises server sentence, so the brief cannot cite it.",
+      "recommendation": "Change 'the same dynamic sits behind' to 'this inventory unwind, alongside the normalising Windows 10 end-of-support benefit, sits behind' the guided Q3 decline [claim-023]. Optionally add a Stage 1 claim quoting the on-premises server sentence from seg-0004 so the second pulled-forward beat can be cited too."
+    },
+    {
+      "severity": "low",
+      "artifact": "outlook-brief.md",
+      "passage": "only Oracle's fetched web evidence predates this event (filed 10 Dec 2025) [claim-035][claim-036][claim-037][claim-038]",
+      "evidence": "Half of the round-2 recommendation was applied. claim-037 is now cited in section 9 alongside the other three Oracle claims, which fixes the citation gap. But the section 10 evidence appendix still lists only claim-035, claim-036 and claim-038; claim-037 has no appendix line. A reader following the brief's own audit trail therefore sees claim-037 cited but cannot see what it says without opening claims.json, whereas every other cited claim's quote is reproduced in the appendix.",
+      "recommendation": "Add an appendix line for claim-037: \"Q2 Cloud Revenue (IaaS plus SaaS) $8.0 billion, up 34% in USD and up 33% in constant currency\" — web-004 (Oracle), placed between the claim-036 and claim-038 entries."
+    },
+    {
+      "severity": "info",
+      "artifact": "outlook-brief.md",
+      "passage": "- [claim-032] \"now have 15 million paid Microsoft 365 Copilot seats\" — segment seg-0003",
+      "evidence": "Round-2 medium finding resolved. The section 10 appendix entry for claim-032 now reproduces only that claim's actual quote; the seat-adds sentence appears solely under claim-039 two lines later. Section 4 also cites the two ids correctly and separately: claim-039 for the record seat-add quarter (+160% YoY) and claim-032 for the 15 million installed seats. The stock-versus-flow separation is now consistent across claims.json, signal-card.md and outlook-brief.md.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "outlook-brief.md",
+      "passage": "Microsoft Cloud gross margin is guided to roughly 65% year-over-year (down from this quarter's 67% [claim-006], though that specific comparison is sequential, not the YoY basis the 65% guide is stated on) [claim-022]",
+      "evidence": "Numerical direction, unit and period spot-check on the sections the diff touched. This passage is the strongest example: it states the direction correctly and explicitly flags that its own comparison mixes a sequential read with a year-over-year guide, which is exactly the kind of period mismatch that would otherwise pass deterministic checks. Elsewhere: capex 'decrease on a sequential basis' [claim-024] is labelled sequential as spoken; FY26 operating margins 'up slightly' [claim-025] is correctly distinguished from the Q3 'down slightly' guide [claim-021]; Windows OEM 5% growth is attributed to the OEM line, not the 1% 'Windows OEM and Devices' line; and free cash flow of $5.9B 'decreased sequentially' matches the transcript's own word. No sign, unit or period inversion found.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "signal-card.md",
+      "passage": "- **reported** [reported_fact] (AMY HOOD): Windows OEM revenue grew 5% ... - **forward_looking** [management_guidance] (AMY HOOD): Management flagged rising memory prices as a forward risk ...",
+      "evidence": "Cross-sector appropriateness re-check over the changed claims and both prose artifacts. Every metric introduced this round is one the company reported on this call: Windows OEM revenue growth, memory pricing, PC-market exposure, Copilot seats. No churn, ARR, cohort, same-store, loss-ratio or other imported-template vocabulary. The card also continues to tag claim-034 as [analytical_inference] with no speaker, so the one inference stays visibly distinct from management statements.",
+      "recommendation": "None."
+    }
+  ],
+  "process_findings": [
+    {
+      "severity": "info",
+      "artifact": "review-diff.json",
+      "passage": "\"round_number\": 3, \"auto_escalated\": true, \"auto_escalation_reason\": \"claim-032: period or values changed; conclusion-bearing section(s) [6, 7] cite a changed claim\"",
+      "evidence": "This is round 3 and the diff was auto-escalated before dispatch. The changed set is small (claim-032 and claim-042 edited, claim-044 added), so rather than a diff-only pass I re-read seg-0004 end to end, the whole of outlook-brief.md, the changed claims plus their neighbours (claim-017, claim-020, claim-023, claim-037, claim-039, claim-043), financials.json, the manifest header and the relevant signal-card entries. I did not re-read the Q&A segments end to end; that limitation is recorded in unverified_items. I am confident enough in what I read to render a verdict, so escalate_full_review is false.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "validation.json",
+      "passage": "\"ok\": true, \"checked_claims\": 44, \"issues\": [], \"warnings\": []",
+      "evidence": "Deterministic validation ran on the revised claim set and passed: 44 claims (up from 43, consistent with the single added claim-044), zero issues, zero warnings, validated_at 2026-08-28T10:32:55Z, with input hashes recorded for claims.json, transcript.jsonl and financials.json. Confirmed present with ok == true. Exact-quote matching, numeric grounding and calculation recomputation were not re-derived here, per remit.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "outlook-validation.json",
+      "passage": "\"ok\": true, \"errors\": [], \"outlook_brief_sha256\": \"90633f685d1deb88ccebbaead140d10dc3c7cd49004c552cb8b6c86c73f9033c\", \"claims_sha256\": \"492d43edf6bd3127dd5ea5ed23e5040b319796f0148b0443f5774a19aef7f72a\"",
+      "evidence": "The hash-binding gate is present with ok == true and no errors. Its claims_sha256 is identical to the claims.json hash recorded in validation.json, so both stages are bound to the same revised claims file, and both hashes differ from the round-2 values, consistent with a genuine Stage 1 plus Stage 2 revision. Both files carry the same validated_at timestamp (10:32:55Z). Hashes were read, not recomputed.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "claims.json",
+      "passage": "claim-001 ... claim-044",
+      "evidence": "All 44 claims carry non-empty, unique, sequential ids with no numbering gap. claim-044 follows the existing convention and names segment_id seg-0004, which exists in the transcript. Every claim id cited in outlook-brief.md and in this report resolves to a real claim in this run.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "manifest.json",
+      "passage": "\"created_at\": \"2026-08-28T10:14:02Z\", sources: raw/transcript.html plus the archived raw/web hit files and extracted web-evidence markdown",
+      "evidence": "All mandatory stage artifacts are present for this round: manifest.json with every source hashed, validation.json (ok), outlook-validation.json (ok), outlook-brief.md, signal-card.md, claims.json and injection-scan.json.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "injection-scan.json",
+      "passage": "\"match\": \"repeat your instructions\", \"context\": \"one question. Operator, can you please repeat your instructions? (Operator Direction.) KEITH WEISS,\"",
+      "evidence": "The scan is non-empty, so I read its one hit in transcript context rather than skipping it. It is a call participant asking the conference-call operator to re-read the standard question-queue instructions. That is ordinary earnings-call housekeeping, not an attempt to redirect the analysis. Scan judged clean: one false positive, zero genuine injection attempts. The scan timestamp (2026-08-28T10:13:57Z) belongs to this run, not a stale copy.",
+      "recommendation": "None. Keep the pattern despite this false positive, since 'repeat your instructions' is a common genuine injection phrasing."
+    },
+    {
+      "severity": "info",
+      "artifact": "runs/MSFT/2026-q2/",
+      "passage": "n/a",
+      "evidence": "metrics.json is still absent from the current run directory, though it exists in earlier _archive snapshots. review-report.md present in the directory is the round-2 render and will be regenerated deterministically by earnings check-review from this report.",
+      "recommendation": "None, unless metrics.json is expected to be regenerated on every run."
+    }
+  ],
+  "unverified_items": [
+    "Segments seg-0005 through seg-0030 (the Q&A) were not re-read end to end this round. None of the three changed or added claims quotes them. A Q&A answer added or altered since round 2 that cuts against the brief's narrative would not necessarily have been caught by this round's reading.",
+    "evidence/web/web-001.md through web-003.md and web-005.md through web-010.md were not read this round. Only web-004 (Oracle) is cited by any claim, and it was verified in round 2; the rest are post-event and cited nowhere, so they cannot affect any published statement.",
+    "The archived raw/web/query-NN-hit-NN.json files were not opened individually; provenance was checked at the manifest level.",
+    "raw/transcript.html was not diffed against normalized/transcript.jsonl. I reviewed the normalized segments only, so I cannot rule out content lost or altered during HTML-to-segment normalisation.",
+    "Whether the omission of claim-037 from the section 10 appendix is deliberate or an oversight could not be determined; it is flagged on the assumption it is an oversight, since claim-037 is now cited in section 9."
+  ],
+  "summary": "Round 3 of runs/MSFT/2026-q2. The diff was auto-escalated before dispatch, so I re-read seg-0004 end to end, the whole brief, the changed claims and their neighbours, financials.json and the manifest, rather than judging the diff alone. Verdict is pass_with_warnings: three low findings, no medium, no high, no critical. Both round-2 medium findings are genuinely fixed at source. claim-032's values no longer carry the +160% seat-add flow under an 'as of 31 Dec 2025' point-in-time label; that number now lives only in claim-039, correctly periodised, and section 4 plus the section 10 appendix cite the two ids separately with matching quotes. claim-042's claim_text has dropped 'PC market outcomes', so it now covers exactly what its quote covers and no longer overlaps claim-043. The new claim-044 is a real improvement: the brief no longer presents memory pricing as a purely forward risk, and now says Windows OEM's 5% beat was partly demand pulled forward ahead of memory price increases. Three residual lows. First, claim-044's claim_text reaches past its own quote by asserting that the pull-forward is 'the same dynamic behind' the guided ~10% Q3 Windows OEM decline; the transcript does support a link, but in a different sentence, and that sentence names two drivers (Windows 10 end-of-support normalisation as well as the inventory unwind), so the single-cause framing is overstated and is carried verbatim into signal-card.md under Amy Hood's name. This is the same quote-scoping defect flagged against claim-042 in round 2, reintroduced in the claim written to close that gap. Second, section 2 still says Azure's Q3 cc guide is 'roughly flat, not a deceleration'; at the low end of the 37%-38% band that is a one-point deceleration, and the brief still nowhere mentions that FX is guided to add about 2 points to Intelligent Cloud growth in Q3. Third, claim-037 is now cited in section 9 but was never added to the section 10 evidence appendix, so it is the one cited claim whose quote a reader cannot see in the brief; the on-premises server counterpart of the pull-forward story also remains uncaptured by any claim. Numerical direction, units and periods check out across the touched sections, including the sequential-versus-year-over-year caveat the brief attaches to the 67%-to-65% Microsoft Cloud gross-margin comparison. No post-event evidence entered the run this round. Process compliance is clean: validation.json.ok == true over 44 claims with zero issues, outlook-validation.json.ok == true binding the identical claims_sha256, manifest.json present with all sources hashed, all 44 claim ids non-empty, unique and gapless, and the single injection-scan hit read in context and judged a false positive."
+}

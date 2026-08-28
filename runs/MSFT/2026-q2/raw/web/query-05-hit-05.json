@@ -1,7 +1,11 @@
 {
-  "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526027207/msft-20251231.htm",
-  "title": "10-Q",
-  "score": 0,
-  "published_date": "2026-01-26T00:00:00.000Z",
-  "_retrieved_at": "2026-08-26T18:15:04Z"
+  "url": "https://finance.yahoo.com/technology/ai/articles/microsoft-vs-alphabet-one-bets-171811915.html",
+  "title": "Microsoft vs Alphabet: One Bets on OpenAI While The Other Controls Its Own AI Destiny. This Is The Better Buy Today",
+  "score": null,
+  "published_date": null,
+  "_class": "peer",
+  "_select_key": "peer:Alphabet",
+  "_provider": "exa",
+  "_query": "Alphabet quarterly results versus Microsoft MSFT",
+  "_retrieved_at": "2026-08-28T10:13:58Z"
 }

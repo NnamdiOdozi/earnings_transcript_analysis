@@ -1,0 +1,11 @@
+{
+  "url": "https://www.apple.com/newsroom/pdfs/fy2026q2/FY26_Q2_Consolidated_Financial_Statements.pdf",
+  "title": "(In millions, except number of shares, which are reflected in thousands, and per-share amounts)",
+  "score": null,
+  "published_date": null,
+  "_class": "peer",
+  "_select_key": "peer:Apple",
+  "_provider": "exa",
+  "_query": "Apple 2026-q2 earnings results revenue growth",
+  "_retrieved_at": "2026-08-28T10:13:59Z"
+}

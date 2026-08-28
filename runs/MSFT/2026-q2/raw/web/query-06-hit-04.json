@@ -1,7 +1,11 @@
 {
-  "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526027198/msft-20260128.htm",
-  "title": "8-K",
-  "score": 0,
+  "url": "https://www.theglobeandmail.com/investing/markets/stocks/AMZN/pressreleases/3730734/amazon-amzn-q2-2026-earnings-call-transcript/",
+  "title": "Amazon (AMZN) Q2 2026 Earnings Call Transcript - The Globe and Mail",
+  "score": null,
   "published_date": null,
-  "_retrieved_at": "2026-08-26T18:15:04Z"
+  "_class": "peer",
+  "_select_key": "peer:Amazon",
+  "_provider": "exa",
+  "_query": "Amazon 2026-q2 earnings results revenue growth",
+  "_retrieved_at": "2026-08-28T10:13:59Z"
 }

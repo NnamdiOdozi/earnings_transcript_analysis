@@ -1,7 +1,11 @@
 {
-  "url": "https://news.microsoft.com/source/2026/01/28/microsoft-cloud-and-ai-strength-drives-second-quarter-results-3/",
-  "title": "Microsoft Cloud and AI strength drives second quarter results",
-  "score": 0,
-  "published_date": "2026-01-28T00:00:00.000Z",
-  "_retrieved_at": "2026-08-26T18:15:03Z"
+  "url": "https://tickerleague.com/companies/MSFT/estimates",
+  "title": "Estimates for Microsoft (MSFT)",
+  "score": null,
+  "published_date": null,
+  "_class": "consensus",
+  "_select_key": "consensus",
+  "_provider": "exa",
+  "_query": "Microsoft MSFT Wall Street consensus estimates ahead of earnings",
+  "_retrieved_at": "2026-08-28T10:13:58Z"
 }

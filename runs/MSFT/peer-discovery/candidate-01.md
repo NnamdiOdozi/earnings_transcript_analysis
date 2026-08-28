@@ -1,53 +1,109 @@
-MSFT Vs Its Peers: The Return Does Not Match The Rank | Trefis
+# MSFT PE Benchmarks
 
-# MSFT Vs Its Peers: The Return Does Not Match The Rank
+Current PE Ratio
 
-August 11th, 2026 · by Trefis Team
+20.8
 
----
+Diluted • annual
 
-Microsoft’s business is firing on all cylinders, yet its stock has lagged its peers. The market is either seeing a problem ahead or offering a rare opportunity.
+Forward PE
 
-Microsoft (MSFT) is the engine behind the corporate AI push, a sprawling software and cloud computing giant trading at about $506.06 a share. The stock has climbed +22% in just the last three months. But when you line it up with its direct competitors, a stark mismatch appears: its fundamentals rank near the top of the group, while its stock performance over the last year sits near the bottom. Has Microsoft’s price simply run too far ahead of its results, or have its results not yet caught up to a fundamental shift in the business?
+20.5
 
-Photo by StockSnap on Pixabay
+NTM Estimate
 
-Where does Microsoft actually stand in its peer group?
+Sector Companies
 
-By the numbers, Microsoft is a powerhouse. Its operating margin of 47% is the highest in its competitive set, and its revenue grew 17.8% over the last twelve months, second only to Alphabet. Yet the market has rewarded this performance with a twelve-month stock return of -2.1%, badly trailing Alphabet’s +82% and Apple’s +41%.
+500
 
-At the same time, investors are paying a premium price for Microsoft, which trades at 28.1 times earnings. That’s significantly more expensive than Alphabet’s 17.8 multiple, for a company whose stock has performed far worse over the past year. The numbers show a company delivering elite profitability and strong growth, yet its stock has been left behind by peers.
+327 with PE data
 
-| | MSFT | GOOGL | AMZN | AAPL | ORCL | CRM |
-| --- | --- | --- | --- | --- | --- | --- |
-| Market Cap ($ Bil) | 3,758.0 | 4,344.2 | 2,994.8 | 4,517.9 | 434.3 | 171.4 |
-| PE Ratio | 28.1 | 17.8 | 22.1 | 35.0 | 25.4 | 21.4 |
-| LTM Revenue Growth | 17.8% | 20% | 15.8% | 14.2% | 17.4% | 11.0% |
-| LTM Operating Margin | 47% | 33% | 12.1% | 33% | 33% | 22% |
-| 12M Stock Return | -2.1% | 82% | 25% | 41% | -39% | -17.3% |
+Sector Median PE
 
-The market is betting on an AI-fueled transformation.
+78.1
 
-The premium valuation isn’t for the past year; it’s for the AI future. Management’s latest commentary was dominated by explosive growth in its AI-centric businesses. Revenue from Azure and other cloud services grew 43%, a significant acceleration. The company now has “over 30 million paid Microsoft 365 Copilot seats,” a key product for bringing AI to office workers, with seat additions rapidly increasing.
+327 companies
 
-This is the narrative the market is buying. The high price-to-earnings multiple reflects a belief that these new, fast-growing segments will redefine the company’s financial profile. The tension between this heavy investment and profitability is a key theme.
+Peer Companies
 
-But this AI buildout is expensive and carries real risks. Capital expenditures were $41 billion in the last quarter alone. This large spending has investors questioning the potential for overcapacity if demand slows. Meanwhile, legacy segments are struggling. Xbox revenue decreased 10% in the latest quarter. For the upcoming fiscal year, management expects revenue from its Windows OEM and Devices segment to “decline in the high teens.” This drag from older businesses is the story that explains the stock’s lagging one-year return.
+10
 
-The test is whether AI growth can outrun the legacy drag.
+Direct competitors
 
-The mismatch in the peer group boils down to this: the market is pricing Microsoft on its AI potential, while the stock’s recent return reflects the weight of its legacy businesses and heavy investment. The bull case is that the AI businesses are growing so fast they will soon dwarf the declining segments, justifying the current valuation. Management seems confident, stating they “continue to expect another fiscal year of double-digit revenue and operating income growth.”
+### Sector Analysis: Technology
 
-For investors who see this as a broad technological shift, a technology ETF might offer a way to participate in the theme without betting on a single company’s execution. But for Microsoft itself, the clearest signal will be whether its AI-centric businesses can maintain their extreme momentum.
+Total Companies
 
-The ultimate watchable is Azure. Management stated on their latest call that for the first half of the new fiscal year, they “continue to expect H1 growth to accelerate.” Watching for confirmation of that acceleration in the next two quarters will be the key test of whether the market has the story right.
+500
 
-This piece pulled one thread; our full peer-by-peer dashboards for MSFT lay every metric side by side, updated daily.
+With PE Data
 
-Prefer the theme to this single name? A technology ETF like XLK owns the whole group. That way no single company’s next surprise decides the outcome.
+327
 
-The Best Stock In The Group Is Still A Single Stock
+Median PE
 
-Ranking a company against its peers sharpens the picture, and whichever name wins is still a single stock. A position that has grown large enough to matter is worth sizing deliberately rather than by accident. What a position that size would do to your net worth is exactly what the Trefis Wealth team computes, with the same rules-based systematic discipline that runs our High Quality Portfolio. Request a free vulnerability audit of your biggest positions.
+78.1
 
-Invest with Trefis → More Ideas →
+PE Range
+
+0.0 - 198.6
+
+Forward PE Median
+
+24.4
+
+### Technology Sector
+
+5040 companies • sector
+
+Below Median(40th %ile)
+
+Current PE: 20.8 Forward PE: 20.5 Median PE: 25.5 Average PE: 40.4
+
+Min PE: 0.1 Max PE: 199.4 25th-75th %ile: 13.3 - 52.3
+
+Min: 0.1 Max: 199.4
+
+Current: 20.8
+
+### Software - Infrastructure Industry
+
+324 companies • industry
+
+Below Median(36th %ile)
+
+Current PE: 20.8 Forward PE: 20.5 Median PE: 28.3 Average PE: 44.3
+
+Min PE: 0.1 Max PE: 191.0 25th-75th %ile: 14.9 - 56.7
+
+Min: 0.1 Max: 191.0
+
+Current: 20.8
+
+### Peer Companies
+
+4 companies • peers
+
+Low PE(25th %ile)
+
+Current PE: 20.8 Forward PE: 20.5 Median PE: 75.5 Average PE: 93.2
+
+Min PE: 37.7 Max PE: 184.2 25th-75th %ile: 41.3 - 127.4
+
+Min: 37.7 Max: 184.2
+
+Current: 20.8
+
+### Peer Companies
+
+PLTR CRWD ORCL CRWV PANW CORZ ZETA AI BB NET
+
+### Stock List PE Comparison
+
+- • Sector: Companies in the same broad industry sector
+- • Industry: Companies in the same specific industry classification
+- • Peers: Direct competitors identified through business analysis
+- • Position: Where this stock ranks relative to the benchmark group
+- • Forward PE: Based on next 4 quarters analyst EPS estimates from earnings data
+
+Last updated: 8/22/2026, 7:59:24 AM• Based on latest annual diluted PE ratios

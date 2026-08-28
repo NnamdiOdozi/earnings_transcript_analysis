@@ -1,7 +1,11 @@
 {
-  "url": "https://microsoft.gcs-web.com/static-files/3870467c-5877-477c-ac71-167d20612da7",
-  "title": "Form 8-K for Microsoft Corp filed 01/28/2026",
-  "score": 0,
-  "published_date": "2026-01-28T00:00:00.000Z",
-  "_retrieved_at": "2026-08-26T18:15:03Z"
+  "url": "https://tickerleague.com/companies/MSFT/estimates",
+  "title": "Estimates for Microsoft (MSFT)",
+  "score": null,
+  "published_date": null,
+  "_class": "consensus",
+  "_select_key": "consensus",
+  "_provider": "exa",
+  "_query": "Microsoft MSFT 2026-q2 analyst consensus estimate revenue EPS",
+  "_retrieved_at": "2026-08-28T10:13:58Z"
 }

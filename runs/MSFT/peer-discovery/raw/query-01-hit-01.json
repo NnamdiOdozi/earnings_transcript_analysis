@@ -1,10 +1,10 @@
 {
-  "url": "https://www.trefis.com/stock/msft/articles/610939/msft-vs-its-peers-the-return-does-not-match-the-rank/2026-08-11",
-  "title": "MSFT Vs Its Peers: The Return Does Not Match The Rank",
+  "url": "https://evidinvest.com/benchmarks/MSFT",
+  "title": "Microsoft Corporation (MSFT) Peer Benchmarks & Industry PE 2026 | EvidInvest",
   "score": null,
-  "published_date": "2026-08-11T00:00:00.000Z",
+  "published_date": null,
+  "_class": "peer_group",
   "_provider": "exa",
   "_query": "Microsoft MSFT peer group comparable companies",
-  "_class": "peer_group",
-  "_retrieved_at": "2026-08-27T08:41:35Z"
+  "_retrieved_at": "2026-08-28T10:12:52Z"
 }

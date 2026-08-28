@@ -1,7 +1,11 @@
 {
-  "url": "https://www.theglobeandmail.com/investing/markets/stocks/MSFT/pressreleases/37285635/microsoft-msft-q2-2026-earnings-call-transcript/",
-  "title": "Microsoft (MSFT) Q2 2026 Earnings Call Transcript",
-  "score": 0,
+  "url": "https://finviz.com/news/289503/microsoft-set-to-report-q2-2026-earnings-analysts-eye-azure-growth-ai-spending-capex-as-shares-dip-over-6-in-6-months",
+  "title": "Microsoft Set To Report Q2 2026 Earnings: Analysts Eye Azure Growth, AI Spending, CapEx As Shares Dip Over 6% In 6 Months",
+  "score": null,
   "published_date": null,
-  "_retrieved_at": "2026-08-26T18:15:03Z"
+  "_class": "consensus",
+  "_select_key": "consensus",
+  "_provider": "exa",
+  "_query": "Microsoft MSFT 2026-q2 earnings preview expectations forecast",
+  "_retrieved_at": "2026-08-28T10:13:58Z"
 }

@@ -1,7 +1,11 @@
 {
-  "url": "https://www.theglobeandmail.com/investing/markets/stocks/MSFT/pressreleases/37285635/microsoft-msft-q2-2026-earnings-call-transcript/",
-  "title": "Microsoft (MSFT) Q2 2026 Earnings Call Transcript",
-  "score": 0,
+  "url": "https://beancount.io/bg/blog/2026/07/31/amazon-fy2026-q2-earnings-analysis",
+  "title": "",
+  "score": null,
   "published_date": null,
-  "_retrieved_at": "2026-08-26T18:15:04Z"
+  "_class": "peer",
+  "_select_key": "peer:Amazon",
+  "_provider": "exa",
+  "_query": "Amazon 2026-q2 earnings results revenue growth",
+  "_retrieved_at": "2026-08-28T10:13:59Z"
 }

@@ -1,7 +1,11 @@
 {
-  "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526027198/0001193125-26-027198.txt",
-  "title": "",
-  "score": 0,
+  "url": "https://finance.yahoo.com/markets/stocks/articles/microsoft-vs-alphabet-why-stand-160740120.html",
+  "title": "Microsoft Vs. Alphabet: How and Why They Stand Head-and-Shoulders Above Other Hyperscalers",
+  "score": null,
   "published_date": null,
-  "_retrieved_at": "2026-08-26T18:15:04Z"
+  "_class": "peer",
+  "_select_key": "peer:Alphabet",
+  "_provider": "exa",
+  "_query": "Alphabet quarterly results versus Microsoft MSFT",
+  "_retrieved_at": "2026-08-28T10:13:58Z"
 }

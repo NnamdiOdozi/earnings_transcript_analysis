@@ -1,7 +1,11 @@
 {
-  "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526027198/msft-20260128.htm",
-  "title": "8-K",
-  "score": 0,
+  "url": "https://www.microsoft.com/en-us/investor/earnings/fy-2026-q4/press-release-webcast",
+  "title": "FY26 Q4 - Press Releases - Investor Relations - Microsoft",
+  "score": null,
   "published_date": null,
-  "_retrieved_at": "2026-08-26T18:15:04Z"
+  "_class": "peer",
+  "_select_key": "peer:Alphabet",
+  "_provider": "exa",
+  "_query": "Alphabet quarterly results versus Microsoft MSFT",
+  "_retrieved_at": "2026-08-28T10:13:58Z"
 }

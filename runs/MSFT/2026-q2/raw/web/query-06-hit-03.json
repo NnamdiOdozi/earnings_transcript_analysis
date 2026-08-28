@@ -1,7 +1,11 @@
 {
-  "url": "https://www.microsoft.com/en-us/investor/earnings/fy-2026-q2/press-release-webcast",
-  "title": "FY26 Q2 - Press Releases - Investor Relations - Microsoft",
-  "score": 0,
+  "url": "https://finance.yahoo.com/markets/stocks/articles/amazon-amzn-q2-2026-earnings-013019156.html",
+  "title": "Amazon (AMZN) Q2 2026 Earnings Call Transcript",
+  "score": null,
   "published_date": null,
-  "_retrieved_at": "2026-08-26T18:15:04Z"
+  "_class": "peer",
+  "_select_key": "peer:Amazon",
+  "_provider": "exa",
+  "_query": "Amazon 2026-q2 earnings results revenue growth",
+  "_retrieved_at": "2026-08-28T10:13:59Z"
 }

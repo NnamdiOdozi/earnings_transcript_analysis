@@ -1,7 +1,11 @@
 {
-  "url": "https://www.microsoft.com/en-us/investor/earnings/fy-2026-q2/press-release-webcast",
-  "title": "FY26 Q2 - Press Releases - Investor Relations - Microsoft",
-  "score": 0,
+  "url": "https://sg.finance.yahoo.com/quote/MSFT/analysis/",
+  "title": "Microsoft Corporation (MSFT) analyst ratings, estimates and forecasts \u2013 Yahoo Finance",
+  "score": null,
   "published_date": null,
-  "_retrieved_at": "2026-08-26T18:15:03Z"
+  "_class": "consensus",
+  "_select_key": "consensus",
+  "_provider": "exa",
+  "_query": "Microsoft MSFT Wall Street consensus estimates ahead of earnings",
+  "_retrieved_at": "2026-08-28T10:13:58Z"
 }

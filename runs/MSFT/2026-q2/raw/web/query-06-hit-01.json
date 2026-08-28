@@ -1,7 +1,11 @@
 {
-  "url": "https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q2",
-  "title": "Microsoft FY26 Second Quarter Earnings Conference Call",
-  "score": 0,
-  "published_date": "2026-01-28T00:00:00.000Z",
-  "_retrieved_at": "2026-08-26T18:15:04Z"
+  "url": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Second-Quarter-Results/",
+  "title": "Amazon.com, Inc. - Amazon.com Announces Second Quarter Results",
+  "score": null,
+  "published_date": null,
+  "_class": "peer",
+  "_select_key": "peer:Amazon",
+  "_provider": "exa",
+  "_query": "Amazon 2026-q2 earnings results revenue growth",
+  "_retrieved_at": "2026-08-28T10:13:59Z"
 }

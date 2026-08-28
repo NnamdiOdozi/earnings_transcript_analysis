@@ -1,7 +1,11 @@
 {
-  "url": "https://news.microsoft.com/source/2026/01/28/microsoft-cloud-and-ai-strength-drives-second-quarter-results-3/",
-  "title": "Microsoft Cloud and AI strength drives second quarter results",
-  "score": 0,
-  "published_date": "2026-01-28T00:00:00.000Z",
-  "_retrieved_at": "2026-08-26T18:15:04Z"
+  "url": "https://cdn.prod.nntech.io/company-events/reports/ef6863e9-7d78-3f83-8ffa-0dc356aefcae/presentation.pdf",
+  "title": "Alphabet Q2 2026 Earnings Slides",
+  "score": null,
+  "published_date": null,
+  "_class": "peer",
+  "_select_key": "peer:Alphabet",
+  "_provider": "exa",
+  "_query": "Alphabet 2026-q2 earnings results revenue growth",
+  "_retrieved_at": "2026-08-28T10:13:58Z"
 }

@@ -1,7 +1,11 @@
 {
-  "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526027198/msft-20260128.htm",
-  "title": "8-K",
-  "score": 0,
+  "url": "https://finance.yahoo.com/markets/stocks/articles/microsoft-msft-reports-next-week-140028056.html",
+  "title": "Microsoft (MSFT) Reports Next Week: Wall Street Expects Earnings Growth",
+  "score": null,
   "published_date": null,
-  "_retrieved_at": "2026-08-26T18:15:03Z"
+  "_class": "consensus",
+  "_select_key": "consensus",
+  "_provider": "exa",
+  "_query": "Microsoft MSFT 2026-q2 analyst consensus estimate revenue EPS",
+  "_retrieved_at": "2026-08-28T10:13:58Z"
 }

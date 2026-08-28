@@ -13,9 +13,12 @@ material omitted.
 ## Steps
 
 1. **Confirm the prerequisite passed.** `run_dir/validation.json` must have
-   `"ok": true` and `run_dir/outlook-brief.md` must exist. If either is missing,
-   stop and go back to `produce-earnings-signal-card` first — do not dispatch the
-   reviewer against an unvalidated run.
+   `"ok": true`, `run_dir/outlook-validation.json` must have `"ok": true` (the
+   gate `earnings validate-outlook` writes -- it hash-binds
+   `outlook_brief_sha256`/`claims_sha256` to the current files, so a stale or
+   hand-edited brief/claims fails here), and `run_dir/outlook-brief.md` must
+   exist. If any is missing, stop and go back to `produce-earnings-signal-card`
+   first — do not dispatch the reviewer against an unvalidated run.
 
 2. **Dispatch the subagent.** Use the `Agent` tool with `subagent_type:
    "outlook-reviewer"`. Give it the run directory path (e.g.

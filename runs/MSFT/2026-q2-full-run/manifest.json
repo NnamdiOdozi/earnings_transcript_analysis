@@ -1,0 +1,555 @@
+{
+  "ticker": "MSFT",
+  "event_id": "2026-q2-full-run",
+  "created_at": "2026-08-28T21:17:06Z",
+  "sources": [
+    {
+      "path": "raw/transcript.html",
+      "origin": "https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q2",
+      "retrieved_at": "2026-08-28T21:17:06Z",
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "86874223daee253c44ea42d9f610fcad9ddc56347bc16a72f15112b286393a3e",
+      "byte_length": 343382
+    },
+    {
+      "path": "raw/web/query-01-hit-01.json",
+      "origin": "https://sg.finance.yahoo.com/quote/MSFT/analysis/",
+      "retrieved_at": "2026-08-28T21:16:51Z",
+      "content_type": "application/json",
+      "sha256": "1b02c036a807624eb78efd5ee2d5235ed7edfbb69de1700781542cd148abc5a8",
+      "byte_length": 430
+    },
+    {
+      "path": "raw/web/query-01-hit-02.json",
+      "origin": "https://tickerleague.com/companies/MSFT/estimates",
+      "retrieved_at": "2026-08-28T21:16:51Z",
+      "content_type": "application/json",
+      "sha256": "592cc0813740997af95f004f57926a43fac2784b29a9073b9fe61af0ab5e966e",
+      "byte_length": 370
+    },
+    {
+      "path": "raw/web/query-01-hit-03.json",
+      "origin": "https://www.tipranks.com/stocks/msft/earnings/q3-2026-report",
+      "retrieved_at": "2026-08-28T21:16:51Z",
+      "content_type": "application/json",
+      "sha256": "fa7139feaabf2a98ed847ddb151d96be7f52c8fea191bbdeea69c4330afb6bac",
+      "byte_length": 351
+    },
+    {
+      "path": "raw/web/query-01-hit-04.json",
+      "origin": "https://www.fxempire.com/stocks/msft/earnings",
+      "retrieved_at": "2026-08-28T21:16:51Z",
+      "content_type": "application/json",
+      "sha256": "b4988ddca159117f28bff69cb992d898e1fb41179c72a9a830cc0fbbd6e1d97a",
+      "byte_length": 393
+    },
+    {
+      "path": "raw/web/query-01-hit-05.json",
+      "origin": "https://finance.yahoo.com/markets/stocks/articles/microsoft-msft-earnings-expected-grow-140029060.html",
+      "retrieved_at": "2026-08-28T21:16:51Z",
+      "content_type": "application/json",
+      "sha256": "eb2a9b830f30abe91b9669312ccb293c349a1029559c9c9e08cc0b77d4f8b7c1",
+      "byte_length": 452
+    },
+    {
+      "path": "raw/web/query-02-hit-01.json",
+      "origin": "https://www.barchart.com/story/news/36923033/microsoft-earnings-preview-what-to-expect",
+      "retrieved_at": "2026-08-28T21:16:53Z",
+      "content_type": "application/json",
+      "sha256": "720cda326ff8b0527283ea3eaf64c5a70d45adfe271359b4deb2be1e255fda9f",
+      "byte_length": 441
+    },
+    {
+      "path": "raw/web/query-02-hit-02.json",
+      "origin": "https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q2",
+      "retrieved_at": "2026-08-28T21:16:53Z",
+      "content_type": "application/json",
+      "sha256": "7116783f6144e718d9c8447425c0967035a0fdc8ce0368238c2525d25cbe55c9",
+      "byte_length": 442
+    },
+    {
+      "path": "raw/web/query-02-hit-03.json",
+      "origin": "https://stockminded.com/2026/01/27/microsoft-earnings-q2-2026-preview-tmr/",
+      "retrieved_at": "2026-08-28T21:16:53Z",
+      "content_type": "application/json",
+      "sha256": "ea1e26073b0dd681b0cca9d1bec6f700513fc329b71b72e7550a12c344a0e6be",
+      "byte_length": 472
+    },
+    {
+      "path": "raw/web/query-02-hit-04.json",
+      "origin": "https://finance.yahoo.com/news/microsoft-reports-q2-earnings-jan-215122444.html",
+      "retrieved_at": "2026-08-28T21:16:53Z",
+      "content_type": "application/json",
+      "sha256": "1a0e1afa8eaf7bffdec2fa16246f039a5b47b00d85a85151b1da0488105cf3c6",
+      "byte_length": 450
+    },
+    {
+      "path": "raw/web/query-02-hit-05.json",
+      "origin": "https://seekingalpha.com/article/4862628-microsoft-get-reading-for-another-blowout-quarter-preview-upgrade",
+      "retrieved_at": "2026-08-28T21:16:53Z",
+      "content_type": "application/json",
+      "sha256": "c00950f0abbce618006f76ddb0e46491b56024d6d91bf1b31115d4781b93aea1",
+      "byte_length": 473
+    },
+    {
+      "path": "raw/web/query-03-hit-01.json",
+      "origin": "https://sg.finance.yahoo.com/quote/MSFT/analysis/",
+      "retrieved_at": "2026-08-28T21:16:54Z",
+      "content_type": "application/json",
+      "sha256": "231143b269db2d90c8e12e3db0997b3b12adbc3f966afef542bda3cb3a246980",
+      "byte_length": 424
+    },
+    {
+      "path": "raw/web/query-03-hit-02.json",
+      "origin": "https://finance.yahoo.com/markets/stocks/articles/microsoft-msft-reports-next-week-140028056.html",
+      "retrieved_at": "2026-08-28T21:16:54Z",
+      "content_type": "application/json",
+      "sha256": "495b2c602aa49518dab0d0685fe3e1ca5524c94cc077253bfcfe16e5f7188da9",
+      "byte_length": 453
+    },
+    {
+      "path": "raw/web/query-03-hit-03.json",
+      "origin": "https://tickerleague.com/companies/MSFT/estimates",
+      "retrieved_at": "2026-08-28T21:16:54Z",
+      "content_type": "application/json",
+      "sha256": "38d7ac1b8c4791e631874ef050c8b419a99da6e42ca5930323833503bf0de52e",
+      "byte_length": 364
+    },
+    {
+      "path": "raw/web/query-03-hit-04.json",
+      "origin": "https://m.investing.com/analysis/microsoft-q4-earnings-can-220b-in-ai-investment-cement-azures-cloud-dominance-200684810?ampMode=1",
+      "retrieved_at": "2026-08-28T21:16:54Z",
+      "content_type": "application/json",
+      "sha256": "105b9cfb4e60a55ef8dd5d46fbd1f6ce1c82794891540fe0d4cfd5742b80a3d5",
+      "byte_length": 517
+    },
+    {
+      "path": "raw/web/query-03-hit-05.json",
+      "origin": "https://www.nasdaq.com/articles/ahead-microsoft-msft-q2-earnings-get-ready-wall-street-estimates-key-metrics",
+      "retrieved_at": "2026-08-28T21:16:54Z",
+      "content_type": "application/json",
+      "sha256": "e275e9c16b67925ea942ca2681afc62a41392db15893d27c1be09304ffa64370",
+      "byte_length": 484
+    },
+    {
+      "path": "raw/web/query-04-hit-01.json",
+      "origin": "https://www.prnewswire.com/news-releases/oracle-announces-fiscal-year-2026-second-quarter-financial-results-302638471.html",
+      "retrieved_at": "2026-08-28T21:16:55Z",
+      "content_type": "application/json",
+      "sha256": "c0a81b87ddcffa5088f31e7a462c71ea3ab91274c5fcab2dcbf6b51d1615d1b7",
+      "byte_length": 471
+    },
+    {
+      "path": "raw/web/query-04-hit-02.json",
+      "origin": "https://www.sec.gov/Archives/edgar/data/1341439/000119312525314207/orcl-ex99_1.htm",
+      "retrieved_at": "2026-08-28T21:16:55Z",
+      "content_type": "application/json",
+      "sha256": "3d6a11f9aa2e41185135d1213b85171ef7861e779b82bbd8d55f217bc084192d",
+      "byte_length": 350
+    },
+    {
+      "path": "raw/web/query-04-hit-03.json",
+      "origin": "https://exa.ai/library/markets/stocks/ORCL/earnings/FY2026/Q2/transcript",
+      "retrieved_at": "2026-08-28T21:16:55Z",
+      "content_type": "application/json",
+      "sha256": "cdf4eb9fb9683fbf6bf32e93eca1d35821bab550ed43b9b39b5c83ac7cae48ad",
+      "byte_length": 384
+    },
+    {
+      "path": "raw/web/query-04-hit-04.json",
+      "origin": "https://quarter-results.com/financial-reports/NYSE/ORCL/Q2/2026/orcl-q2-2026-earnings-report/",
+      "retrieved_at": "2026-08-28T21:16:55Z",
+      "content_type": "application/json",
+      "sha256": "90aaa9262d447335e9f521efc1fdcd76e070e400d96b68b00de5c2be299f5c33",
+      "byte_length": 443
+    },
+    {
+      "path": "raw/web/query-04-hit-05.json",
+      "origin": "https://www.navfile.com/center/oracle-2026-q2-earnings-broad-market-pullback-as-ai-spending-rises",
+      "retrieved_at": "2026-08-28T21:16:55Z",
+      "content_type": "application/json",
+      "sha256": "5262106ab03a0d90b8ee3aa3d96ce3346542b5986bb1903cd8658276e3c3cb88",
+      "byte_length": 457
+    },
+    {
+      "path": "raw/web/query-05-hit-01.json",
+      "origin": "https://www.microsoft.com/en-us/investor/earnings/fy-2026-q4/press-release-webcast",
+      "retrieved_at": "2026-08-28T21:16:57Z",
+      "content_type": "application/json",
+      "sha256": "59b91b869b01237e5ca971ae8b6bb8eb9954e88464ecaad2f0f36f6108475c77",
+      "byte_length": 403
+    },
+    {
+      "path": "raw/web/query-05-hit-02.json",
+      "origin": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Record-Q4-and-FY-2026-Results-Driven-by-Cloud-Infrastructure--Cloud-Applications/",
+      "retrieved_at": "2026-08-28T21:16:57Z",
+      "content_type": "application/json",
+      "sha256": "729347d564fb7b6fcdd5349c10f9d9c1794806999991a6cb6ca8300474425279",
+      "byte_length": 529
+    },
+    {
+      "path": "raw/web/query-05-hit-03.json",
+      "origin": "https://finance.yahoo.com/news/msft-vs-orcl-enterprise-cloud-152700764.html",
+      "retrieved_at": "2026-08-28T21:16:57Z",
+      "content_type": "application/json",
+      "sha256": "e79fddd449c66ced0954322b35ac9c3fb2185b416a775ad6888bdef20352df35",
+      "byte_length": 428
+    },
+    {
+      "path": "raw/web/query-05-hit-04.json",
+      "origin": "https://investor.oracle.com/investor-news/news-details/2025/Oracle-Announces-Fiscal-Year-2026-Second-Quarter-Financial-Results/default.aspx",
+      "retrieved_at": "2026-08-28T21:16:57Z",
+      "content_type": "application/json",
+      "sha256": "cde368ef83a27dd3d1612b122cf99ee82973cbce4301c5bd2b823872e0ff421b",
+      "byte_length": 477
+    },
+    {
+      "path": "raw/web/query-05-hit-05.json",
+      "origin": "https://finance.yahoo.com/news/microsoft-vs-oracle-cloud-ai-151100811.html",
+      "retrieved_at": "2026-08-28T21:16:57Z",
+      "content_type": "application/json",
+      "sha256": "5c3da4a3ce47a5ea11ded815fd5409d0642645921def29bddec9e2f73d46e52c",
+      "byte_length": 405
+    },
+    {
+      "path": "raw/web/query-06-hit-01.json",
+      "origin": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000011/a8-kex991q2202603282026.htm",
+      "retrieved_at": "2026-08-28T21:16:58Z",
+      "content_type": "application/json",
+      "sha256": "373142443ae851e26e3393bc57f9dc14f82bc4f444bc2409852a337bc2e5f876",
+      "byte_length": 360
+    },
+    {
+      "path": "raw/web/query-06-hit-02.json",
+      "origin": "https://www.apple.com/newsroom/pdfs/fy2026q2/FY26_Q2_Consolidated_Financial_Statements.pdf",
+      "retrieved_at": "2026-08-28T21:16:58Z",
+      "content_type": "application/json",
+      "sha256": "51d1e2dbdf09f4beb585dc54f76dbab40bdac80f1c3af1c01205f5ae06684a16",
+      "byte_length": 444
+    },
+    {
+      "path": "raw/web/query-06-hit-03.json",
+      "origin": "https://exa.ai/library/markets/stocks/AAPL/earnings/FY2026/Q2/transcript",
+      "retrieved_at": "2026-08-28T21:16:58Z",
+      "content_type": "application/json",
+      "sha256": "29743ab0bcf3ceb171e1f2a133a09483e4efd7ce41de42775ca34d545e815917",
+      "byte_length": 382
+    },
+    {
+      "path": "raw/web/query-06-hit-04.json",
+      "origin": "https://www.theglobeandmail.com/investing/markets/stocks/AAPL-Q/pressreleases/1634023/apple-aapl-q2-2026-earnings-call-transcript/",
+      "retrieved_at": "2026-08-28T21:16:58Z",
+      "content_type": "application/json",
+      "sha256": "6b7aa0b3fe11c4b07f21e4067d5bde632a039eb1a38f1c3e45927d8af34dc6f6",
+      "byte_length": 453
+    },
+    {
+      "path": "raw/web/query-06-hit-05.json",
+      "origin": "https://www.opencapital.sh/filings/0000320193-26-000013",
+      "retrieved_at": "2026-08-28T21:16:58Z",
+      "content_type": "application/json",
+      "sha256": "ab95e56f973ffcbc27d68d1127abcb2471cbcff59feca1a0c1789f742782731f",
+      "byte_length": 359
+    },
+    {
+      "path": "raw/web/query-07-hit-01.json",
+      "origin": "https://10q10k.net/compare/AAPL-vs-MSFT",
+      "retrieved_at": "2026-08-28T21:16:59Z",
+      "content_type": "application/json",
+      "sha256": "4a8ec31ed718e0fbff818397dc0e371195da29f879657d2af0bbb0def3e7c4b0",
+      "byte_length": 396
+    },
+    {
+      "path": "raw/web/query-07-hit-02.json",
+      "origin": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000018/a8-kex991q3202606272026.htm",
+      "retrieved_at": "2026-08-28T21:16:59Z",
+      "content_type": "application/json",
+      "sha256": "3c50bb387b19d83b7723bde1ed70440a981be6f0970ee98266f4800631d4f357",
+      "byte_length": 363
+    },
+    {
+      "path": "raw/web/query-07-hit-03.json",
+      "origin": "https://www.microsoft.com/en-us/investor/earnings/fy-2026-q4/press-release-webcast",
+      "retrieved_at": "2026-08-28T21:16:59Z",
+      "content_type": "application/json",
+      "sha256": "10ec9d320f58eadbd8468c9939eda70504608517ab196772eedc2046a2cd8f32",
+      "byte_length": 401
+    },
+    {
+      "path": "raw/web/query-07-hit-04.json",
+      "origin": "https://www.microsoft.com/en-us/investor/earnings/fy-2026-q3/press-release-webcast",
+      "retrieved_at": "2026-08-28T21:16:59Z",
+      "content_type": "application/json",
+      "sha256": "711057b4d3a56c2fcb074375d48e71a0b45d30e6112f28b91d08f85e92077976",
+      "byte_length": 401
+    },
+    {
+      "path": "raw/web/query-07-hit-05.json",
+      "origin": "https://www.apple.com.cn/newsroom/pdfs/fy2026q3/FY26_Q3_Consolidated_Financial_Statements.pdf",
+      "retrieved_at": "2026-08-28T21:16:59Z",
+      "content_type": "application/json",
+      "sha256": "45745857a53cbd05a895599e642b5aa9b536b59cf6260537effc2e7e2fbf4956",
+      "byte_length": 401
+    },
+    {
+      "path": "raw/web/query-08-hit-01.json",
+      "origin": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
+      "retrieved_at": "2026-08-28T21:17:00Z",
+      "content_type": "application/json",
+      "sha256": "cb667e297e2d909cb548cec5c25dc8845206b46407ca9b559b55758c0496f01f",
+      "byte_length": 364
+    },
+    {
+      "path": "raw/web/query-08-hit-02.json",
+      "origin": "https://abc.xyz/investor/events/event-details/2026/2026-Q2-Earnings-Call-2026-GgTAq7Is0z/default.aspx",
+      "retrieved_at": "2026-08-28T21:17:00Z",
+      "content_type": "application/json",
+      "sha256": "0da0cd18e7ee0fa2277b12f491b7a7e22e79f08e2361c1a7744e49c6677b525a",
+      "byte_length": 417
+    },
+    {
+      "path": "raw/web/query-08-hit-03.json",
+      "origin": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000071/goog-20260630.htm",
+      "retrieved_at": "2026-08-28T21:17:00Z",
+      "content_type": "application/json",
+      "sha256": "863d6374d30d6d3b4a637b10169a07e57c4e98143fd61220151742b3c971f619",
+      "byte_length": 362
+    },
+    {
+      "path": "raw/web/query-08-hit-04.json",
+      "origin": "https://cdn.prod.nntech.io/company-events/reports/ef6863e9-7d78-3f83-8ffa-0dc356aefcae/presentation.pdf",
+      "retrieved_at": "2026-08-28T21:17:00Z",
+      "content_type": "application/json",
+      "sha256": "3bb8c86c6fad68dd9d6eb60a2a31c34ed8f2bdc9c0b9638da6e0bac886bffcdb",
+      "byte_length": 400
+    },
+    {
+      "path": "raw/web/query-08-hit-05.json",
+      "origin": "https://stockanalysis.com/stocks/googl/transcripts/657320-q2-2026/",
+      "retrieved_at": "2026-08-28T21:17:00Z",
+      "content_type": "application/json",
+      "sha256": "f5b5c922a4aef075c649268de5727107b7007c6491ba384395cc964af5562c60",
+      "byte_length": 388
+    },
+    {
+      "path": "raw/web/query-09-hit-01.json",
+      "origin": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
+      "retrieved_at": "2026-08-28T21:17:01Z",
+      "content_type": "application/json",
+      "sha256": "525f032ae45a86c29248bdcd2b482567bd7a03b0b7059569aab84a5172bed2b2",
+      "byte_length": 367
+    },
+    {
+      "path": "raw/web/query-09-hit-02.json",
+      "origin": "https://www.microsoft.com/en-us/investor/earnings/fy-2026-q4/press-release-webcast",
+      "retrieved_at": "2026-08-28T21:17:01Z",
+      "content_type": "application/json",
+      "sha256": "189207a1ff12d7bb902b007a004398a923b71540bd69f9ff17ee1a701a6442a1",
+      "byte_length": 407
+    },
+    {
+      "path": "raw/web/query-09-hit-03.json",
+      "origin": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323632/msft-ex99_1.htm",
+      "retrieved_at": "2026-08-28T21:17:01Z",
+      "content_type": "application/json",
+      "sha256": "f8b9d5ed815f449fdae5ea2c4d874975d4622d14e48a2df0fab1e9f238438082",
+      "byte_length": 356
+    },
+    {
+      "path": "raw/web/query-09-hit-04.json",
+      "origin": "https://finance.yahoo.com/markets/stocks/articles/microsoft-vs-alphabet-why-stand-160740120.html",
+      "retrieved_at": "2026-08-28T21:17:01Z",
+      "content_type": "application/json",
+      "sha256": "a39c42667c8ff06296c552cd90fd31ba3500300098d53fa101f11c3b6508e239",
+      "byte_length": 454
+    },
+    {
+      "path": "raw/web/query-09-hit-05.json",
+      "origin": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000071/goog-20260630.htm",
+      "retrieved_at": "2026-08-28T21:17:01Z",
+      "content_type": "application/json",
+      "sha256": "ebfc078fd37bb861a80b6c8c05d129f750280e8e1567abc670a705a15da01a22",
+      "byte_length": 365
+    },
+    {
+      "path": "raw/web/query-10-hit-01.json",
+      "origin": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Second-Quarter-Results/",
+      "retrieved_at": "2026-08-28T21:17:03Z",
+      "content_type": "application/json",
+      "sha256": "06dceabe9feec6b9bc9c90ee16d71691c4d9376ac2bb44958cbcc898f9ec39e2",
+      "byte_length": 433
+    },
+    {
+      "path": "raw/web/query-10-hit-02.json",
+      "origin": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000026/amzn-20260630.htm",
+      "retrieved_at": "2026-08-28T21:17:03Z",
+      "content_type": "application/json",
+      "sha256": "5f5a936fba0d9e1cd97ed292568f94e684bff364967c6ea19905b73d849cbe9e",
+      "byte_length": 358
+    },
+    {
+      "path": "raw/web/query-10-hit-03.json",
+      "origin": "https://stockanalysis.com/stocks/amzn/transcripts/657334-q2-2026/",
+      "retrieved_at": "2026-08-28T21:17:03Z",
+      "content_type": "application/json",
+      "sha256": "3f6d0c5acc23fdc7db45544dcd28a46bca76bf64335e90632457809a4f0ff763",
+      "byte_length": 380
+    },
+    {
+      "path": "raw/web/query-10-hit-04.json",
+      "origin": "https://finance.yahoo.com/markets/stocks/articles/amazon-amzn-q2-2026-earnings-013019156.html",
+      "retrieved_at": "2026-08-28T21:17:03Z",
+      "content_type": "application/json",
+      "sha256": "6bad68e56ccad8e3e8a7ac379840353745712ee37471f8bdf32e575d8497faa5",
+      "byte_length": 400
+    },
+    {
+      "path": "raw/web/query-10-hit-05.json",
+      "origin": "https://capedge.com/company/1018724/transcripts/2026/q2",
+      "retrieved_at": "2026-08-28T21:17:03Z",
+      "content_type": "application/json",
+      "sha256": "87ed2e2d0822fb816281a6762293200819d1d2075274801f7cf33b2a2f219475",
+      "byte_length": 370
+    },
+    {
+      "path": "raw/web/query-11-hit-01.json",
+      "origin": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Second-Quarter-Results/",
+      "retrieved_at": "2026-08-28T21:17:04Z",
+      "content_type": "application/json",
+      "sha256": "9f5c01263c53210ce92eafdbbcf9114e283c740ca4ee112afd4e439fc33536b0",
+      "byte_length": 436
+    },
+    {
+      "path": "raw/web/query-11-hit-02.json",
+      "origin": "https://finance.yahoo.com/technology/ai/articles/microsoft-amazon-spending-billions-ai-174738514.html",
+      "retrieved_at": "2026-08-28T21:17:04Z",
+      "content_type": "application/json",
+      "sha256": "05fd7e5cefde5ce9fbedb8dad570d89a24a65ec5a6f0cc354871770834423e01",
+      "byte_length": 447
+    },
+    {
+      "path": "raw/web/query-11-hit-03.json",
+      "origin": "https://www.microsoft.com/en-us/investor/earnings/fy-2026-q4/press-release-webcast",
+      "retrieved_at": "2026-08-28T21:17:04Z",
+      "content_type": "application/json",
+      "sha256": "d7156fdc575f7be472f991fe4c21aabd3db3e53de7af316ed1ce76092325918e",
+      "byte_length": 403
+    },
+    {
+      "path": "raw/web/query-11-hit-04.json",
+      "origin": "https://www.crn.com/news/cloud/2026/aws-vs-microsoft-vs-google-cloud-earnings-q2-2026-face-off",
+      "retrieved_at": "2026-08-28T21:17:04Z",
+      "content_type": "application/json",
+      "sha256": "e8482315e24a2d0f1e5a7ab065c53274f1082e14c61fcbc09b4269e3ec17448c",
+      "byte_length": 418
+    },
+    {
+      "path": "raw/web/query-11-hit-05.json",
+      "origin": "https://www.microsoft.com/en-us/investor/earnings/fy-2026-q2/performance",
+      "retrieved_at": "2026-08-28T21:17:04Z",
+      "content_type": "application/json",
+      "sha256": "8c70352d5b8838d71ec62494e51624bd639a103f70763861d5afcfe3742e4ac6",
+      "byte_length": 390
+    },
+    {
+      "path": "evidence/web/web-001.md",
+      "origin": "https://sg.finance.yahoo.com/quote/MSFT/analysis/",
+      "retrieved_at": "2026-08-28T21:17:04Z",
+      "content_type": "text/markdown",
+      "sha256": "89e72eeda476d68828ef446c2f6c08d961e5dec69c0c853bb7b0d9eeb67ebf5b",
+      "byte_length": 2923
+    },
+    {
+      "path": "evidence/web/web-002.md",
+      "origin": "https://www.prnewswire.com/news-releases/oracle-announces-fiscal-year-2026-second-quarter-financial-results-302638471.html",
+      "retrieved_at": "2026-08-28T21:17:04Z",
+      "content_type": "text/markdown",
+      "sha256": "35ad6e3fb63c572163321c7508db87e4d72a260c990f10ee245d1d8668355857",
+      "byte_length": 41197
+    },
+    {
+      "path": "evidence/web/web-003.md",
+      "origin": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000011/a8-kex991q2202603282026.htm",
+      "retrieved_at": "2026-08-28T21:17:05Z",
+      "content_type": "text/markdown",
+      "sha256": "8ba898034eb648430ac8a154c778e57ec1590de6b4fd3596a41fd85a64ad014b",
+      "byte_length": 12652
+    },
+    {
+      "path": "evidence/web/web-004.md",
+      "origin": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
+      "retrieved_at": "2026-08-28T21:17:05Z",
+      "content_type": "text/markdown",
+      "sha256": "b224b662e81f7c8e5dec8327dae28c1f461a4fa45dd3ef56718ae62728b0e962",
+      "byte_length": 29327
+    },
+    {
+      "path": "evidence/web/web-005.md",
+      "origin": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Second-Quarter-Results/",
+      "retrieved_at": "2026-08-28T21:17:05Z",
+      "content_type": "text/markdown",
+      "sha256": "a283a9046cba14de50dda1b8a3985c28584c0b85feda600282d78a99823884d8",
+      "byte_length": 47946
+    },
+    {
+      "path": "evidence/web/web-006.md",
+      "origin": "https://tickerleague.com/companies/MSFT/estimates",
+      "retrieved_at": "2026-08-28T21:17:05Z",
+      "content_type": "text/markdown",
+      "sha256": "8a333f91a8cadb2a19b779e4339806cbbcba9ef8f0ea9d5df82feb6fc7fd144b",
+      "byte_length": 3999
+    },
+    {
+      "path": "evidence/web/web-007.md",
+      "origin": "https://www.sec.gov/Archives/edgar/data/1341439/000119312525314207/orcl-ex99_1.htm",
+      "retrieved_at": "2026-08-28T21:17:05Z",
+      "content_type": "text/markdown",
+      "sha256": "3e2beb054c3db2324f09b5806c0b4cd5e98f70579d3d8bd208d26636437157f0",
+      "byte_length": 41752
+    },
+    {
+      "path": "evidence/web/web-008.md",
+      "origin": "https://www.apple.com/newsroom/pdfs/fy2026q2/FY26_Q2_Consolidated_Financial_Statements.pdf",
+      "retrieved_at": "2026-08-28T21:17:06Z",
+      "content_type": "text/markdown",
+      "sha256": "bd9705b96e7c03dff46165af1cfd7238874ced373dc5e679eb23d4306d424cf2",
+      "byte_length": 6157
+    },
+    {
+      "path": "evidence/web/web-009.md",
+      "origin": "https://abc.xyz/investor/events/event-details/2026/2026-Q2-Earnings-Call-2026-GgTAq7Is0z/default.aspx",
+      "retrieved_at": "2026-08-28T21:17:06Z",
+      "content_type": "text/markdown",
+      "sha256": "6490d85b0b2d5a77ace5ad5351ce3fbf517e396e3a636e5f6d272546896c7714",
+      "byte_length": 56064
+    },
+    {
+      "path": "evidence/web/web-010.md",
+      "origin": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000026/amzn-20260630.htm",
+      "retrieved_at": "2026-08-28T21:17:06Z",
+      "content_type": "text/markdown",
+      "sha256": "08e4eed50105bacaf24254741ca929bd60bcaf61461e5d45c7c08092704f824c",
+      "byte_length": 205746
+    }
+  ],
+  "notes": [
+    "Raw source archived verbatim before sanitisation.",
+    "Prompt-injection scan: 1 suspicious phrase(s) flagged in transcript -- advisory only, run not blocked. See injection-scan.json.",
+    "SEC evidence: ok (CIK 0000789019)",
+    "Web search evidence (exa): ok (55 hit(s) from 11 queries)",
+    "Web evidence (extracted, citable): 10 source(s)"
+  ],
+  "queries": [
+    "Microsoft Corporation MSFT 2026-q2-full-run analyst consensus estimate revenue EPS",
+    "Microsoft Corporation MSFT 2026-q2-full-run earnings preview expectations forecast",
+    "Microsoft Corporation MSFT Wall Street consensus estimates ahead of earnings",
+    "Oracle 2026-q2-full-run earnings results revenue growth",
+    "Oracle quarterly results versus Microsoft Corporation MSFT",
+    "Apple 2026-q2-full-run earnings results revenue growth",
+    "Apple quarterly results versus Microsoft Corporation MSFT",
+    "Alphabet 2026-q2-full-run earnings results revenue growth",
+    "Alphabet quarterly results versus Microsoft Corporation MSFT",
+    "Amazon 2026-q2-full-run earnings results revenue growth",
+    "Amazon quarterly results versus Microsoft Corporation MSFT"
+  ]
+}

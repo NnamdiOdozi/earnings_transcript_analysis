@@ -1,0 +1,11 @@
+{
+  "url": "https://www.sec.gov/Archives/edgar/data/1341439/000119312525314207/orcl-ex99_1.htm",
+  "title": "EX-99.1",
+  "score": null,
+  "published_date": null,
+  "_class": "peer",
+  "_select_key": "peer:Oracle",
+  "_provider": "exa",
+  "_query": "Oracle 2026-q2-full-run earnings results revenue growth",
+  "_retrieved_at": "2026-08-28T21:16:55Z"
+}

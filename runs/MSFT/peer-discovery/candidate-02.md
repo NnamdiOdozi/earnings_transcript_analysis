@@ -1,91 +1,109 @@
-MSFT Peers: AAPL, ADBE, CRWD, DOCN, FTNT, GDDY, GOOGL, NET, NVDA, OKTA, ORCL, PANW — Microsoft Corporation | SharesGrow.com
+# MSFT PE Benchmarks
 
-← Back to all stocks
+Current PE Ratio
 
-# Microsoft Corporation MSFT NASDAQ
+20.8
 
-NASDAQ Global Select • Technology • Software - Infrastructure • US • USD
+Diluted • annual
 
-SharesGrow Score89/1007/7 Pass
+Forward PE
 
-SharesGrow Intrinsic Value$515.47+39.9%
+20.5
 
-Analyst Price Target$551.96+49.8%
+NTM Estimate
 
-Microsoft Corporation (MSFT) has 12 identified peers for comparison in the Technology sector. Peers include AAPL, ADBE, CRWD, DOCN, FTNT, GDDY and others.
+Sector Companies
 
-MSFT has a market capitalization of $2.74T, compared to an average peer market cap of $1.19T. MSFT is significantly larger than its average peer.
+500
 
-## Peers & Similar Companies — MSFT
+327 with PE data
 
-AAPLApple Inc. $281.74 -0.72% $4.14T
+Sector Median PE
 
-ADBEAdobe Inc. $206.43 +1.83% $82.06B
+78.1
 
-CRWDCrowdStrike Holdings, Inc. $742.91 +5.97% $189.12B
+327 companies
 
-DOCNDigitalOcean Holdings, Inc. $149.84 +7.58% $15.64B
+Peer Companies
 
-FTNTFortinet, Inc. $155.42 +2.69% $113.87B
+10
 
-GDDYGoDaddy Inc. $85.24 +0.82% $11.29B
+Direct competitors
 
-GOOGLAlphabet Inc. $353.65 +4.82% $4.28T
+### Sector Analysis: Technology
 
-NETCloudflare, Inc. $243.70 +2.72% $86.5B
+Total Companies
 
-NVDANVIDIA Corporation $194.89 +1.23% $4.72T
+500
 
-OKTAOkta, Inc. $131.27 +5.62% $21.81B
+With PE Data
 
-ORCLOracle Corporation $147.79 -0.50% $425.7B
+327
 
-PANWPalo Alto Networks, Inc. $332.00 +9.14% $226.26B
+Median PE
 
-## People Also View
+78.1
 
-NVDANVIDIA Corporation$194.89+1.23%
+PE Range
 
-GOOGLAlphabet Inc.$353.65+4.82%
+0.0 - 198.6
 
-AAPLApple Inc.$281.74-0.72%
+Forward PE Median
 
-ORCLOracle Corporation$147.79-0.50%
+24.4
 
-PLTRPalantir Technologies Inc.$115.67+2.43%
+### Technology Sector
 
-PANWPalo Alto Networks, Inc.$332.00+9.14%
+5040 companies • sector
 
-CRWDCrowdStrike Holdings, Inc.$742.91+5.97%
+Below Median(40th %ile)
 
-FTNTFortinet, Inc.$155.42+2.69%
+Current PE: 20.8 Forward PE: 20.5 Median PE: 25.5 Average PE: 40.4
 
-▪ Stock Alerts
+Min PE: 0.1 Max PE: 199.4 25th-75th %ile: 13.3 - 52.3
 
-## Get Undervalued Stock Alerts
+Min: 0.1 Max: 199.4
 
-Be the first to know when stocks drop below their intrinsic value.
+Current: 20.8
 
-Subscribe
+### Software - Infrastructure Industry
 
-Need Help?
+324 companies • industry
 
-Contact Us ×
+Below Median(36th %ile)
 
-🎓
+Current PE: 20.8 Forward PE: 20.5 Median PE: 28.3 Average PE: 44.3
 
-SharesGrow Academy
+Min PE: 0.1 Max PE: 191.0 25th-75th %ile: 14.9 - 56.7
 
-Learn how to calculate Intrinsic Value and find undervalued stocks.
+Min: 0.1 Max: 191.0
 
-Weekly live sessions
+Current: 20.8
 
-📧 admin@sharesgrow.com
+### Peer Companies
 
-📞+65 8912 8000 (+6589128000)
+4 companies • peers
 
-Send us a message
+Low PE(25th %ile)
 
-Name Email Phone (optional) Subject General Enquiry SharesGrow Academy Bug Report Feature Request Business / Partnership Message
+Current PE: 20.8 Forward PE: 20.5 Median PE: 75.5 Average PE: 93.2
 
-Send Message
+Min PE: 37.7 Max PE: 184.2 25th-75th %ile: 41.3 - 127.4
+
+Min: 37.7 Max: 184.2
+
+Current: 20.8
+
+### Peer Companies
+
+PLTR CRWD ORCL CRWV PANW CORZ ZETA AI BB NET
+
+### Stock List PE Comparison
+
+- • Sector: Companies in the same broad industry sector
+- • Industry: Companies in the same specific industry classification
+- • Peers: Direct competitors identified through business analysis
+- • Position: Where this stock ranks relative to the benchmark group
+- • Forward PE: Based on next 4 quarters analyst EPS estimates from earnings data
+
+Last updated: 8/22/2026, 7:59:24 AM• Based on latest annual diluted PE ratios

@@ -1,110 +1,53 @@
-Who Are Microsoft's (MSFT) Main Competitors? ​
+MSFT Vs Its Peers: The Return Does Not Match The Rank | Trefis
 
-Rising Gas Prices Are Hitting Household Budgets. Some Grocery Stores Eye Price Cuts.
+# MSFT Vs Its Peers: The Return Does Not Match The Rank
 
-Even With Rates Rising, Mortgages Are Cheaper Now Than They Were for the Last 2 Springs
+August 11th, 2026 · by Trefis Team
 
-Can You Save Enough To Pay for College and Avoid Debt?
+---
 
-Healthcare Costs Are Rising Fast and Workers Are Paying More
+Microsoft’s business is firing on all cylinders, yet its stock has lagged its peers. The market is either seeing a problem ahead or offering a rare opportunity.
 
-- Top Stories
+Microsoft (MSFT) is the engine behind the corporate AI push, a sprawling software and cloud computing giant trading at about $506.06 a share. The stock has climbed +22% in just the last three months. But when you line it up with its direct competitors, a stark mismatch appears: its fundamentals rank near the top of the group, while its stock performance over the last year sits near the bottom. Has Microsoft’s price simply run too far ahead of its results, or have its results not yet caught up to a fundamental shift in the business?
 
-Table of Contents
+Photo by StockSnap on Pixabay
 
-Expand
+Where does Microsoft actually stand in its peer group?
 
-Table of Contents
+By the numbers, Microsoft is a powerhouse. Its operating margin of 47% is the highest in its competitive set, and its revenue grew 17.8% over the last twelve months, second only to Alphabet. Yet the market has rewarded this performance with a twelve-month stock return of -2.1%, badly trailing Alphabet’s +82% and Apple’s +41%.
 
-Microsoft's Competitors
+At the same time, investors are paying a premium price for Microsoft, which trades at 28.1 times earnings. That’s significantly more expensive than Alphabet’s 17.8 multiple, for a company whose stock has performed far worse over the past year. The numbers show a company delivering elite profitability and strong growth, yet its stock has been left behind by peers.
 
-Microsoft's Core Focus
+| | MSFT | GOOGL | AMZN | AAPL | ORCL | CRM |
+| --- | --- | --- | --- | --- | --- | --- |
+| Market Cap ($ Bil) | 3,758.0 | 4,344.2 | 2,994.8 | 4,517.9 | 434.3 | 171.4 |
+| PE Ratio | 28.1 | 17.8 | 22.1 | 35.0 | 25.4 | 21.4 |
+| LTM Revenue Growth | 17.8% | 20% | 15.8% | 14.2% | 17.4% | 11.0% |
+| LTM Operating Margin | 47% | 33% | 12.1% | 33% | 33% | 22% |
+| 12M Stock Return | -2.1% | 82% | 25% | 41% | -39% | -17.3% |
 
-Other Microsoft Products
+The market is betting on an AI-fueled transformation.
 
-The Bottom Line
+The premium valuation isn’t for the past year; it’s for the AI future. Management’s latest commentary was dominated by explosive growth in its AI-centric businesses. Revenue from Azure and other cloud services grew 43%, a significant acceleration. The company now has “over 30 million paid Microsoft 365 Copilot seats,” a key product for bringing AI to office workers, with seat additions rapidly increasing.
 
-Close
+This is the narrative the market is buying. The high price-to-earnings multiple reflects a belief that these new, fast-growing segments will redefine the company’s financial profile. The tension between this heavy investment and profitability is a key theme.
 
-### Key Takeaways
+But this AI buildout is expensive and carries real risks. Capital expenditures were $41 billion in the last quarter alone. This large spending has investors questioning the potential for overcapacity if demand slows. Meanwhile, legacy segments are struggling. Xbox revenue decreased 10% in the latest quarter. For the upcoming fiscal year, management expects revenue from its Windows OEM and Devices segment to “decline in the high teens.” This drag from older businesses is the story that explains the stock’s lagging one-year return.
 
-- Microsoft has a whole host of competitors because it has a wide-ranging business. Competitors include Apple, Google, SAP, IBM, Sony, and Oracle.
-- Software is still Microsoft's core business, and it faces direct competition from enterprise software giants like Oracle and SAP, as well as from open-source options like Linux, distributed by Red Hat.
-- Beyond software, Microsoft competes in the hardware arena, such as against Apple with tablets, Sony with video game consoles, and Logitech with peripherals.
-- The company also competes with Google via its browser, Bing.
+The test is whether AI growth can outrun the legacy drag.
 
-## Microsoft's Competitors
+The mismatch in the peer group boils down to this: the market is pricing Microsoft on its AI potential, while the stock’s recent return reflects the weight of its legacy businesses and heavy investment. The bull case is that the AI businesses are growing so fast they will soon dwarf the declining segments, justifying the current valuation. Management seems confident, stating they “continue to expect another fiscal year of double-digit revenue and operating income growth.”
 
-Microsoft Corporation’s (MSFT) primary competitors include some of the most prominent technology companies in the industry. The list includes well-known brands such as Apple (AAPL), Google (GOOG), SAP SE (SAP), IBM (IBM), and Oracle (ORCL), among others. Because Microsoft is a diversified corporation that offers many types of products and services, the company faces stiff competition in several key areas of the technology sector.1
+For investors who see this as a broad technological shift, a technology ETF might offer a way to participate in the theme without betting on a single company’s execution. But for Microsoft itself, the clearest signal will be whether its AI-centric businesses can maintain their extreme momentum.
 
-## Microsoft's Core Focus
+The ultimate watchable is Azure. Management stated on their latest call that for the first half of the new fiscal year, they “continue to expect H1 growth to accelerate.” Watching for confirmation of that acceleration in the next two quarters will be the key test of whether the market has the story right.
 
-Microsoft got its start by focusing on software, and although the company has branched out into other areas, it still has a strong emphasis in this field. Some of the most successful software corporations in the world, such as Oracle and the German firm SAP SE, compete directly with Microsoft for the lucrative business services market.
+This piece pulled one thread; our full peer-by-peer dashboards for MSFT lay every metric side by side, updated daily.
 
-The Windows operating system is perhaps the best-known Microsoft product. Though Windows dominates the global OS field, the company competes with a number of smaller firms, such as Red Hat, that distribute open-source operating systems such as Linux.
+Prefer the theme to this single name? A technology ETF like XLK owns the whole group. That way no single company’s next surprise decides the outcome.
 
-## Other Microsoft Products
+The Best Stock In The Group Is Still A Single Stock
 
-Microsoft is also an important player in the hardware field. Its products include tablets designed to compete with similar devices made by other companies, such as Apple. The company makes a variety of computer accessories as well, which brings it in direct competition with several firms that specialize in this area, such as Logitech.
+Ranking a company against its peers sharpens the picture, and whichever name wins is still a single stock. A position that has grown large enough to matter is worth sizing deliberately rather than by accident. What a position that size would do to your net worth is exactly what the Trefis Wealth team computes, with the same rules-based systematic discipline that runs our High Quality Portfolio. Request a free vulnerability audit of your biggest positions.
 
-Although Google's eponymous search engine dominates the field in the U.S., Microsoft is also a major force in online search with its Bing search engine.
-
-Microsoft faces competitive pressures in all areas of its operations. The pressure comes from a diverse mix of technology companies, both large and small.
-
-## The Bottom Line
-
-Microsoft has a broad product offering, resulting in it coming into direct competition with many firms in the technology sector. Software is the core of the company, which means it competes against Oracle and SAP and against open-source providers like Linux's distributor.
-
-With hardware, the company goes up against Apple and Logitech, and in gaming, with Sony. Its rivals don't stop there. Its Internet browser has to go head-to-head with Google, which sets the standard. Microsoft doesn't have just one defining competitor, but consistent pressure from powerful rivals in almost every line of its business.
-
-Article Sources
-
-Investopedia requires writers to use primary sources to support their work. These include white papers, government data, original reporting, and interviews with industry experts. We also reference original research from other reputable publishers where appropriate. You can learn more about the standards we follow in producing accurate, unbiased content in our editorial policy.
-
-CompaniesMarketCap. " Largest Tech Companies by Market Cap."
-
-Take the Next Step to Invest
-
-Advertiser Disclosure
-
-×
-
-The offers that appear in this table are from partnerships from which Investopedia receives compensation. This compensation may impact how and where listings appear. Investopedia does not include all offers available in the marketplace.
-
-Read more
-
-Partner Links
-
-## Related Articles
-
-Ringfencing Explained: Protect Utilities and Consumers from Financial Risk
-
-Understanding Cyclical Industries: Definition, Traits, and Real-World Examples
-
-Innovating Beyond Competition: The Blue Ocean Strategy Explained
-
-Investing in the Industrial Goods Sector: A Comprehensive Guide
-
-Industries That Thrive During Economic Downturns
-
-Piotroski Score: 9 Criteria for Analyzing Value Stocks
-
-Top 18 Apple Suppliers: Key Players in the Apple Supply Chain
-
-Maximize Your Profits: A Guide to Spark Spreads in Natural Gas Power
-
-Precedent Transaction Analysis: Understanding Valuation and Key Insights
-
-Event Studies in Investing: Methods and Impact Analysis
-
-Understanding Tor: Anonymous Browsing, Usage, and Legal Aspects
-
-Investing in Sector ETFs: A Comprehensive Overview
-
-Understanding Return on Total Assets (ROTA): Key Metrics and Calculations
-
-Fourier Analysis: Decoding Patterns in Time Series Data
-
-Understanding Model Risk: Key Strategies and Case Studies
-
-Market Approach: Valuing Assets with Comparable Sales
+Invest with Trefis → More Ideas →

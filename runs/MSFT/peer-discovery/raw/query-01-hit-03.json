@@ -1,10 +1,10 @@
 {
-  "url": "https://meyka.com/stock/MSFT/peers/",
-  "title": "NASDAQ: MSFT Peer Comparison & Competitors",
+  "url": "https://seekingalpha.com/symbol/MSFT/peers/comparison",
+  "title": "Microsoft Corporation (MSFT) Stock Competitors & Similar ...",
   "score": null,
-  "published_date": "2025-06-30T00:00:00.000Z",
+  "published_date": null,
   "_class": "peer_group",
   "_provider": "exa",
-  "_query": "Microsoft MSFT peer group comparable companies",
-  "_retrieved_at": "2026-08-28T10:12:52Z"
+  "_query": "Microsoft Corporation MSFT peer group comparable companies",
+  "_retrieved_at": "2026-08-28T21:15:16Z"
 }

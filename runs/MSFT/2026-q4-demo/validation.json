@@ -1,0 +1,13 @@
+{
+  "ok": false,
+  "checked_claims": 44,
+  "issues": [
+    {
+      "claim_index": 2,
+      "check": "exact_quote",
+      "message": "Quote does not occur exactly in seg-0003"
+    }
+  ],
+  "warnings": [],
+  "validated_at": "2026-08-27T15:07:26Z"
+}

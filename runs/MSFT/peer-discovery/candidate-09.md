@@ -1,499 +1,554 @@
-MSFT Competitors & Industry Analysis - Peer Comparison – Financhill
+Microsoft's (MSFT) vs Industry Peers | Macroaxis
 
-#### Price Performance History
+# Microsoft Competitors
 
-#### Performance vs. Valuation Benchmarks
+| MSFT Stock | | | USD 499.85 7.04 1.43% |
+| --- | --- | --- | --- |
 
-### SEE THE 1% OF STOCKS YOU NEED TO OWN FOR MASSIVE RETURNS
+At $2.9 trillion in market capitalization, Microsoft trades at 23.41x earnings, compared with a median of 34.92x across the peers below. Its net margin of 39.34% compares with a peer median of 27.15%. Peers commonly used for benchmarking Microsoft include Apple, Alphabet, and NVIDIA. With a 39.34% profit margin, Microsoft margin comparisons against the peer set below carry the real signal on pricing power.
 
-#### GET BETTER TRADE IDEAS
+### Microsoft Peers
 
-## Competitors
+| | Market Cap | P/E | Net Margin |
+| --- | --- | --- | --- |
+| Apple Inc | 4.97 trillion | 41.14 | 27.15% |
+| Alphabet Inc Class A | 4.12 trillion | 34.92 | 54.77% |
+| NVIDIA | 4.6 trillion | 30.21 | 62.97% |
+| Oracle | 339.15 billion | 20.58 | 25.37% |
+| SPS Commerce | 2.55 billion | 28.44 | 11.92% |
+| Fortinet | 112.26 billion | 58.04 | 27.49% |
+| DigitalOcean Holdings | 12.48 billion | 49.2 | 24.97% |
+| Godaddy | 13.92 billion | 16.66 | 17.32% |
 
-| Company | Revenue Forecast | Earnings Forecast | Revenue Growth Forecast | Earnings Growth Forecast | Analyst Price Target Median |
-| --- | --- | --- | --- | --- | --- |
-| MSFT Microsoft Corp. | $90.6B | $4.70 | 16.66% | 13.87% | $563.05 |
-| ORCL Oracle Corp. | $19.1B | $1.74 | 28.12% | 18.28% | $248.15 |
-| PLTR Palantir Technologies, Inc. | $2B | $0.37 | 69.41% | 77.14% | $182.20 |
-| PANW Palo Alto Networks, Inc. | $3.2B | $0.44 | 30.2% | -6.72% | $336.70 |
-| SAP SAP SE | $10.1B | $2.08 | 11.09% | 12.74% | $242.92 |
-| CRM Salesforce, Inc. | $11.4B | $3.36 | 11.06% | 3.49% | $241.72 |
-| APP Applovin Corp. | $2.1B | $4.07 | 47.83% | 66.1% | $654.60 |
+### Microsoft vs Apple Correlation Overview
 
-| Company | Price | Analyst Target | Market Cap | P/E Ratio | Dividend per Share | Dividend Yield | Price / LTM Sales |
+Very good diversification
+
+Measured correlation between Microsoft and Apple was 0.03 over the selected window. At a correlation of 0.03, holding both names removes only the non-overlapping portion of variance.
+
+Lower Correlation Peers
+
+| -0.57 | HQ | Horizon Quantum Holdings | Earnings Call Shortly | Pair Corr |
+| --- | --- | --- | --- | --- |
+| -0.34 | BB | BlackBerry | | Pair Corr |
+
+## Microsoft Peer Group
+
+Microsoft's closest comparables by industry are Oracle (ORCL), Fortinet (FTNT), DigitalOcean Holdings (DOCN), and Godaddy (GDDY). For breadth, the comparison also carries Apple Inc (AAPL), Alphabet Inc Class A (GOOGL), NVIDIA (NVDA), and SPS Commerce (SPSC) from the surrounding information technology space.
+
+##### Specify up to 10 symbols:
+
+AAPL GOOGL NVDA ORCL SPSC FTNT DOCN GDDY RPD
+
+Range
+
+| Low | Sentiment | High |
+| --- | --- | --- |
+| 498.58 | 501.52 | 504.46 |
+
+| Low | Intrinsic | High |
+| --- | --- | --- |
+| 466.74 | 484.19 | 501.64 |
+
+| Low | Next | High |
+| --- | --- | --- |
+| 534.34 | 537.29 | 540.23 |
+
+Analyst
+
+| Low | Target | High |
+| --- | --- | --- |
+| 505.75 | 555.77 | 616.90 |
+
+## Microsoft Competition Correlation Matrix
+
+The displayed matrix compares Microsoft across 9 securities in the displayed peer set, and the strongest historical relationship is between DOCN and ORCL at 0.83. The clearest offset is DOCN and SPSC at -0.70, while average absolute correlation of 0.49 makes the set look moderately clustered. 
+
+Color intensity highlights the strength of each historical relationship. Open any cell for the full pair correlation view.
+
+AAPL 
+
+GOOGL 
+
+NVDA 
+
+ORCL 
+
+SPSC 
+
+FTNT 
+
+DOCN 
+
+GDDY 
+
+RPD 
+
+AAPL 
+
+-0.48
+
+0.03
+
+-0.47
+
+0.53
+
+0.55
+
+-0.55
+
+0.66
+
+0.71
+
+AAPL 
+
+GOOGL 
+
+-0.48
+
+0.47
+
+0.66
+
+-0.47
+
+-0.67
+
+0.45
+
+-0.13
+
+-0.48
+
+GOOGL 
+
+NVDA 
+
+0.03
+
+0.47
+
+0.51
+
+-0.47
+
+-0.29
+
+0.38
+
+-0.01
+
+-0.31
+
+NVDA 
+
+ORCL 
+
+-0.47
+
+0.66
+
+0.51
+
+-0.62
+
+-0.55
+
+0.83
+
+-0.38
+
+-0.68
+
+ORCL 
+
+SPSC 
+
+0.53
+
+-0.47
+
+-0.47
+
+-0.62
+
+0.54
+
+-0.7
+
+0.51
+
+0.74
+
+SPSC 
+
+FTNT 
+
+0.55
+
+-0.67
+
+-0.29
+
+-0.55
+
+0.54
+
+-0.36
+
+0.1
+
+0.72
+
+FTNT 
+
+DOCN 
+
+-0.55
+
+0.45
+
+0.38
+
+0.83
+
+-0.7
+
+-0.36
+
+-0.6
+
+-0.67
+
+DOCN 
+
+GDDY 
+
+0.66
+
+-0.13
+
+-0.01
+
+-0.38
+
+0.51
+
+0.1
+
+-0.6
+
+0.5
+
+GDDY 
+
+RPD 
+
+0.71
+
+-0.48
+
+-0.31
+
+-0.68
+
+0.74
+
+0.72
+
+-0.67
+
+0.5
+
+RPD 
+
+AAPL 
+
+GOOGL 
+
+NVDA 
+
+ORCL 
+
+SPSC 
+
+FTNT 
+
+DOCN 
+
+GDDY 
+
+RPD 
+
+High positive correlations Top pair relationships
+
+DOCN and ORCL show the strongest positive relationship in this peer set (0.83 correlation), suggesting the two have tended to move together over the measured period.
+
+| DOCN | 0.83 | ORCL |
+| --- | --- | --- |
+| RPD | 0.74 | SPSC |
+| RPD | 0.72 | FTNT |
+| RPD | 0.71 | AAPL |
+| GDDY | 0.66 | AAPL |
+| ORCL | 0.66 | GOOGL |
+
+High negative correlations Top pair relationships
+
+DOCN and SPSC show the strongest inverse relationship in this peer set (-0.70 correlation), suggesting the two have often moved in opposite directions over the measured period.
+
+| DOCN | 0.7 | SPSC |
+| --- | --- | --- |
+| RPD | 0.68 | ORCL |
+| RPD | 0.67 | DOCN |
+| FTNT | 0.67 | GOOGL |
+| SPSC | 0.62 | ORCL |
+| GDDY | 0.6 | DOCN |
+
+### Risk-Adjusted Indicators
+
+These readings put Microsoft's swings and worst drops side by side with peers, so the comparison is fair. Two names can share a sector and still carry opposite risk - these readings show which positions add exposure and which offset it.
+
+Peer Risk-Adjusted Indicators
+
+| | Mean Deviation | Jensen Alpha | Sortino Ratio | Potential Upside | Value @Risk | Drawdown | |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| MSFT Microsoft Corp. | $464.72 | $563.05 | $3.5T | 27.68x | $0.91 | 0.75% | 10.87x |
-| ORCL Oracle Corp. | $129.87 | $248.15 | $378.6B | 22.30x | $0.50 | 1.54% | 5.62x |
-| PLTR Palantir Technologies, Inc. | $123.06 | $182.20 | $316.4B | 138.64x | $0.00 | 0% | 60.56x |
-| PANW Palo Alto Networks, Inc. | $331.83 | $336.70 | $265.8B | 272.95x | $0.00 | 0% | 25.06x |
-| SAP SAP SE | $183.62 | $242.92 | $214.5B | 24.79x | $2.94 | 1.43% | 4.95x |
-| CRM Salesforce, Inc. | $184.02 | $241.72 | $160.3B | 21.30x | $0.44 | 0.92% | 3.74x |
-| APP Applovin Corp. | $395.90 | $654.60 | $134.1B | 34.92x | $0.00 | 0% | 21.76x |
+| AAPL | 1.41 | 0.20 | 0.02 | 3.14 | -2.14 | 12.19 | |
+| GOOGL | 1.74 | -0.16 | 0.00 | 3.94 | -4.44 | 11.95 | |
+| NVDA | 2.07 | 0.12 | -0.01 | 4.06 | -4.13 | 12.46 | |
+| ORCL | 3.14 | -0.56 | 0.00 | 8.34 | -6.25 | 20.43 | |
+| SPSC | 2.26 | 0.30 | 0.08 | 5.67 | -4.33 | 13.19 | |
+| FTNT | 2.35 | 0.88 | 0.35 | 5.65 | -3.25 | 24.53 | |
+| DOCN | 4.62 | 0.10 | 0.05 | 11.22 | -7.35 | 50.40 | |
+| GDDY | 2.80 | 0.23 | 0.00 | 6.75 | -5.16 | 25.04 | |
+| RPD | 3.67 | 0.81 | 0.18 | 8.81 | -6.60 | 24.24 | |
+
+## Net Income vs. Peers
+
+Net income is what remains after all costs - operating expenses, interest, taxes, and preferred dividends - are deducted from Microsoft's total revenue. The relationship between net income growth and revenue growth at Microsoft reveals whether margin expansion is driving earnings or whether top-line growth is being consumed by rising costs and financing charges.
+
+Compare Microsoft and related stocks such as Apple Inc, Alphabet Class A, and NVIDIA Net Income Over Time
+
+| Price To Sales Ratio | Dividend Yield |
+| --- | --- |
+| PTB Ratio | Days Sales Outstanding |
+| Book Value Per Share | Free Cash Flow Yield |
+| Invested Capital | Operating Cash Flow Per Share |
+| Average Payables | Stock Based Compensation To Revenue |
+| Capex To Depreciation | PB Ratio |
+| EV To Sales | Free Cash Flow Per Share |
+| ROIC | Inventory Turnover |
+| Net Income Per Share | Days Of Inventory On Hand |
+| Payables Turnover | Sales General And Administrative To Revenue |
+| Average Inventory | Research And Ddevelopement To Revenue |
+| Capex To Revenue | Cash Per Share |
+| Price To Operating Cash Flow Ratio | Interest Coverage |
+| Payout Ratio | Capex To Operating Cash Flow |
+| PFCF Ratio | Days Payables Outstanding |
+| Net Current Asset Value | Income Quality |
+| ROE | Tangible Asset Value |
+| EV To Operating Cash Flow | PE Ratio |
+| Return On Tangible Assets | EV To Free Cash Flow |
+| Earnings Yield | Intangibles To Total Assets |
+| Net Debt To EBITDA | Current Ratio |
+| Tangible Book Value Per Share | Receivables Turnover |
+| Graham Number | Shareholders Equity Per Share |
+| Debt To Equity | Capex Per Share |
+| Graham Net Net | Average Receivables |
+| Revenue Per Share | Interest Debt Per Share |
+| Debt To Assets | Short Term Coverage Ratios |
+| Price Earnings Ratio | Operating Cycle |
+| Price Book Value Ratio | Price Earnings To Growth Ratio |
+| Days Of Payables Outstanding | Dividend Payout Ratio |
+| Price To Operating Cash Flows Ratio | Price To Free Cash Flows Ratio |
+| Pretax Profit Margin | Ebt Per Ebit |
+| Operating Profit Margin | Effective Tax Rate |
+| Company Equity Multiplier | Long Term Debt To Capitalization |
+| Total Debt To Capitalization | Return On Capital Employed |
+| Debt Equity Ratio | Ebit Per Revenue |
+| Quick Ratio | Dividend Paid And Capex Coverage Ratio |
+| Net Income Per EBT | Cash Ratio |
+| Cash Conversion Cycle | Operating Cash Flow Sales Ratio |
+| Days Of Inventory Outstanding | Days Of Sales Outstanding |
+| Free Cash Flow Operating Cash Flow Ratio | Cash Flow Coverage Ratios |
+| Price To Book Ratio | Fixed Asset Turnover |
+| Capital Expenditure Coverage Ratio | Price Cash Flow Ratio |
+| Enterprise Value Multiple | Debt Ratio |
+| Cash Flow To Debt Ratio | Price Sales Ratio |
+| Asset Turnover | Net Profit Margin |
+| Gross Profit Margin | Price Fair Value |
 
-| Company | Total Debt / Total Capital | Beta | Debt to Equity | Quick Ratio |
-| --- | --- | --- | --- | --- |
-| MSFT Microsoft Corp. | 43.27% | 0.914 | 25.28% | 101.79x |
-| ORCL Oracle Corp. | 85.35% | 1.896 | 250.94% | 102.53x |
-| PLTR Palantir Technologies, Inc. | 16.28% | 1.614 | 2.35% | 682.73x |
-| PANW Palo Alto Networks, Inc. | 40.2% | 1.183 | 6.03% | 66.34x |
-| SAP SAP SE | 37% | 0.625 | 12.23% | 87.53x |
-| CRM Salesforce, Inc. | 67.91% | 0.360 | 31.19% | 61.51x |
-| APP Applovin Corp. | 69.34% | 2.129 | 133.99% | 315.63x |
+The table lists peer results year by year. It opens on the latest years; earlier ones sit to the left.
 
-| Company | Gross Profit | Operating Income | Return on Invested Capital | Return on Common Equity | EBIT Margin | Free Cash Flow |
-| --- | --- | --- | --- | --- | --- | --- |
-| MSFT Microsoft Corp. | $60.5B | $40.6B | 25.87% | 34.14% | 46.33% | $19.6B |
-| ORCL Oracle Corp. | $12.5B | $6.1B | 10.3% | 54.71% | 36.26% | -$1.9B |
-| PLTR Palantir Technologies, Inc. | $1.4B | $754M | 32.36% | 33.45% | 46.18% | $891.8M |
-| PANW Palo Alto Networks, Inc. | $2B | -$183M | 6.51% | 6.93% | -8.39% | $788M |
-| SAP SAP SE | $7.2B | $2.7B | 14.57% | 17.42% | 29.92% | $3B |
-| CRM Salesforce, Inc. | $8.6B | $2.4B | 10.81% | 14.57% | 21.8% | $6.6B |
-| APP Applovin Corp. | $1.6B | $1.4B | 76.75% | 253.74% | 78.15% | $1.3B |
+Compare Microsoft and related stocks such as Apple Inc, Alphabet Class A, and NVIDIA Net Income Over Time
 
-## Microsoft Corp. vs. Competitors
+| | 2010 | 2011 | 2012 | 2013 | 2014 | 2015 | 2016 | 2017 | 2018 | 2019 | 2020 | 2021 | 2022 | 2023 | 2024 | 2025 | 2026 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| AAPL | 61.2 M | 41.7 B | 37 B | 39.5 B | 53.4 B | 45.7 B | 48.4 B | 59.5 B | 55.3 B | 57.4 B | 94.7 B | 99.8 B | 97 B | 93.7 B | 112 B | 128.8 B | 112 B |
+| GOOGL | -6 M | 9.7 B | 10.7 B | 12.7 B | 14.1 B | 16.3 B | 19.5 B | 12.7 B | 30.7 B | 34.3 B | 40.3 B | 76 B | 60 B | 73.8 B | 100.1 B | 132.2 B | 132.2 B |
+| NVDA | 4.1 M | 581.1 M | 562.5 M | 440 M | 631 M | 614 M | 1.7 B | 3 B | 4.1 B | 2.8 B | 4.3 B | 9.8 B | 4.4 B | 29.8 B | 72.9 B | 120.1 B | 120.1 B |
+| ORCL | 5.9 M | 10 B | 10.9 B | 11 B | 9.9 B | 8.9 B | 9.5 B | 3.6 B | 11.1 B | 10.1 B | 13.7 B | 6.7 B | 8.5 B | 10.5 B | 12.4 B | 17.1 B | 17.1 B |
+| SPSC | -2.2 M | 13.7 M | 1.2 M | 1.1 M | 2.7 M | 4.6 M | 5.7 M | -2.4 M | 23.9 M | 33.7 M | 45.6 M | 44.6 M | 55.1 M | 65.8 M | 77.1 M | 93.3 M | 93.3 M |
+| FTNT | -5.3 M | 62.5 M | 66.8 M | 44.3 M | 25.3 M | 8 M | 32.2 M | 31.4 M | 334.9 M | 331.7 M | 488.5 M | 606.8 M | 857.3 M | 1.1 B | 1.7 B | 1.9 B | 1.9 B |
+| DOCN | -36 M | -36 M | -36 M | -36 M | -36 M | -36 M | -36 M | -36 M | -36 M | -40.4 M | -43.6 M | -19.5 M | -27.8 M | 19.4 M | 84.5 M | 259.3 M | 259.3 M |
+| GDDY | -270.4 M | -270.4 M | -279.1 M | -199.9 M | -143.3 M | -75.6 M | -16.5 M | 136.4 M | 77.1 M | 137 M | -495.1 M | 242.3 M | 352.2 M | 1.4 B | 936.9 M | 875 M | 875 M |
+| RPD | -12.4 M | -12.4 M | -12.4 M | -18.9 M | -32.6 M | -49.9 M | -49 M | -45.5 M | -55.5 M | -53.8 M | -98.8 M | -146.3 M | -124.7 M | -149.3 M | 25.5 M | 23.4 M | 23.4 M |
 
-Which has Higher Returns MSFT or ORCL?
+## Microsoft Competitive Analysis
 
-Oracle Corp. has a net margin of 38.34% compared to Microsoft Corp.'s net margin of 22.83%. Microsoft Corp.'s return on equity of 34.14% beat Oracle Corp.'s return on equity of 54.71%.
+ Among Microsoft, Apple, Alphabet, and NVIDIA, each company brings a distinct financial profile to the table. It contributes 331.84 B in revenue from a 2901.10 B base. Profitability stands at a 39.34% net margin with return on equity reaching 34.01%. On equity returns, Apple earns 141.47% compared to 34.01% at Microsoft. Alphabet carries a higher earnings multiple of 34.92x compared to 23.41x for it. Net profitability gives NVIDIA an edge at 62.97% versus the company at 39.34%. 
 
-| Company | Gross Margin | Earnings Per Share | Invested Capital |
-| --- | --- | --- | --- |
-| MSFT Microsoft Corp. | 67.63% | $4.27 | $539.8B |
-| ORCL Oracle Corp. | 62.97% | $1.45 | $210.5B |
+ Better Than Average 
 
-What do Analysts Say About MSFT or ORCL?
+ Worse Than Peers 
 
-Microsoft Corp. has a consensus price target of $563.05, signalling upside risk potential of 21.16%. On the other hand Oracle Corp. has an analysts' consensus of $248.15 which suggests that it could grow by 91.07%. Given that Oracle Corp. has higher upside potential than Microsoft Corp., analysts believe Oracle Corp. is more attractive than Microsoft Corp..
+MSFT 
 
-| Company | Buy Ratings | Hold Ratings | Sell Ratings |
-| --- | --- | --- | --- |
-| MSFT Microsoft Corp. | 56 | 5 | 0 |
-| ORCL Oracle Corp. | 24 | 15 | 0 |
+AAPL 
 
-Is MSFT or ORCL More Risky?
+GOOGL 
 
-Microsoft Corp. has a beta of 0.883, which suggesting that the stock is 11.692% less volatile than S&P 500. In comparison Oracle Corp. has a beta of 1.522, suggesting its more volatile than the S&P 500 by 52.154%.
+NVDA 
 
-Which is a Better Dividend Stock MSFT or ORCL?
+ORCL 
 
-Microsoft Corp. has a quarterly dividend of $0.91 per share corresponding to a yield of 0.75%. Oracle Corp. offers a yield of 1.54% to investors and pays a quarterly dividend of $0.50 per share. Microsoft Corp. pays 24.34% of its earnings as a dividend. Oracle Corp. pays out 34.32% of its earnings as a dividend. Both of these payout ratios are sufficient to cover dividend payouts with earnings for the foreseeable future.
+SPSC 
 
-Which has Better Financial Ratios MSFT or ORCL?
+FTNT 
 
-Microsoft Corp. quarterly revenues are $90B, which are larger than Oracle Corp. quarterly revenues of $19.2B. Microsoft Corp.'s net income of $35.8B is higher than Oracle Corp.'s net income of $4.3B. Notably, Microsoft Corp.'s price-to-earnings ratio is 27.68x while Oracle Corp.'s PE ratio is 22.30x. Generally a lower price-to-earnings ratio signals a stock is trading at a lower multiple of earnings and is a better value. Another key metric is the price-to-sales ratio, which for Microsoft Corp. is 10.87x versus 5.62x for Oracle Corp.. Usually stocks with elevated PS ratios are considered overvalued.
+ 1.43 
 
-| Company | Price/Sales Ratio | Price/Earnings Ratio | Quarterly Revenue | Quarterly Net Income |
-| --- | --- | --- | --- | --- |
-| MSFT Microsoft Corp. | 10.87x | 27.68x | $90B | $35.8B |
-| ORCL Oracle Corp. | 5.62x | 22.30x | $19.2B | $4.3B |
+ 499.85 
 
-Which has Higher Returns MSFT or PLTR?
+Microsoft
 
-Palantir Technologies, Inc. has a net margin of 38.34% compared to Microsoft Corp.'s net margin of 53.68%. Microsoft Corp.'s return on equity of 34.14% beat Palantir Technologies, Inc.'s return on equity of 33.45%.
+ 0.28 
 
-| Company | Gross Margin | Earnings Per Share | Invested Capital |
-| --- | --- | --- | --- |
-| MSFT Microsoft Corp. | 67.63% | $4.27 | $539.8B |
-| PLTR Palantir Technologies, Inc. | 86.78% | $0.34 | $8.8B |
+ 313.29 
 
-What do Analysts Say About MSFT or PLTR?
+Apple
 
-Microsoft Corp. has a consensus price target of $563.05, signalling upside risk potential of 21.16%. On the other hand Palantir Technologies, Inc. has an analysts' consensus of $182.20 which suggests that it could grow by 48.06%. Given that Palantir Technologies, Inc. has higher upside potential than Microsoft Corp., analysts believe Palantir Technologies, Inc. is more attractive than Microsoft Corp..
+ 0.96 
 
-| Company | Buy Ratings | Hold Ratings | Sell Ratings |
-| --- | --- | --- | --- |
-| MSFT Microsoft Corp. | 56 | 5 | 0 |
-| PLTR Palantir Technologies, Inc. | 4 | 15 | 6 |
+ 354.33 
 
-Is MSFT or PLTR More Risky?
+Alphabet
 
-Microsoft Corp. has a beta of 0.883, which suggesting that the stock is 11.692% less volatile than S&P 500. In comparison Palantir Technologies, Inc. has a beta of 1.775, suggesting its more volatile than the S&P 500 by 77.521%.
+ 5.64 
 
-Which is a Better Dividend Stock MSFT or PLTR?
+ 223.89 
 
-Microsoft Corp. has a quarterly dividend of $0.91 per share corresponding to a yield of 0.75%. Palantir Technologies, Inc. offers a yield of 0% to investors and pays a quarterly dividend of $0.00 per share. Microsoft Corp. pays 24.34% of its earnings as a dividend. Palantir Technologies, Inc. pays out -- of its earnings as a dividend. Microsoft Corp.'s payout ratio is sufficient to cover dividend payouts with earnings for the foreseeable future.
+NVIDIA
 
-Which has Better Financial Ratios MSFT or PLTR?
+ 2.41 
 
-Microsoft Corp. quarterly revenues are $90B, which are larger than Palantir Technologies, Inc. quarterly revenues of $1.6B. Microsoft Corp.'s net income of $35.8B is higher than Palantir Technologies, Inc.'s net income of $870.5M. Notably, Microsoft Corp.'s price-to-earnings ratio is 27.68x while Palantir Technologies, Inc.'s PE ratio is 138.64x. Generally a lower price-to-earnings ratio signals a stock is trading at a lower multiple of earnings and is a better value. Another key metric is the price-to-sales ratio, which for Microsoft Corp. is 10.87x versus 60.56x for Palantir Technologies, Inc.. Usually stocks with elevated PS ratios are considered overvalued.
+ 146.93 
 
-| Company | Price/Sales Ratio | Price/Earnings Ratio | Quarterly Revenue | Quarterly Net Income |
-| --- | --- | --- | --- | --- |
-| MSFT Microsoft Corp. | 10.87x | 27.68x | $90B | $35.8B |
-| PLTR Palantir Technologies, Inc. | 60.56x | 138.64x | $1.6B | $870.5M |
+Oracle
 
-Which has Higher Returns MSFT or PANW?
+ 1.07 
 
-Palo Alto Networks, Inc. has a net margin of 38.34% compared to Microsoft Corp.'s net margin of -5.9%. Microsoft Corp.'s return on equity of 34.14% beat Palo Alto Networks, Inc.'s return on equity of 6.93%.
+ 73.41 
 
-| Company | Gross Margin | Earnings Per Share | Invested Capital |
-| --- | --- | --- | --- |
-| MSFT Microsoft Corp. | 67.63% | $4.27 | $539.8B |
-| PANW Palo Alto Networks, Inc. | 64.39% | -$0.22 | $29.7B |
+SPS Commerce
 
-What do Analysts Say About MSFT or PANW?
+ 0.31 
 
-Microsoft Corp. has a consensus price target of $563.05, signalling upside risk potential of 21.16%. On the other hand Palo Alto Networks, Inc. has an analysts' consensus of $336.70 which suggests that it could grow by 1.47%. Given that Microsoft Corp. has higher upside potential than Palo Alto Networks, Inc., analysts believe Microsoft Corp. is more attractive than Palo Alto Networks, Inc..
+ 159.62 
 
-| Company | Buy Ratings | Hold Ratings | Sell Ratings |
-| --- | --- | --- | --- |
-| MSFT Microsoft Corp. | 56 | 5 | 0 |
-| PANW Palo Alto Networks, Inc. | 37 | 13 | 2 |
+Fortinet
 
-Is MSFT or PANW More Risky?
+Market Volatility
 
-Microsoft Corp. has a beta of 0.883, which suggesting that the stock is 11.692% less volatile than S&P 500. In comparison Palo Alto Networks, Inc. has a beta of 1.149, suggesting its more volatile than the S&P 500 by 14.897%.
+(90 Days Market Risk)
 
-Which is a Better Dividend Stock MSFT or PANW?
+Low
 
-Microsoft Corp. has a quarterly dividend of $0.91 per share corresponding to a yield of 0.75%. Palo Alto Networks, Inc. offers a yield of 0% to investors and pays a quarterly dividend of $0.00 per share. Microsoft Corp. pays 24.34% of its earnings as a dividend. Palo Alto Networks, Inc. pays out -- of its earnings as a dividend. Microsoft Corp.'s payout ratio is sufficient to cover dividend payouts with earnings for the foreseeable future.
+Low
 
-Which has Better Financial Ratios MSFT or PANW?
+Low
 
-Microsoft Corp. quarterly revenues are $90B, which are larger than Palo Alto Networks, Inc. quarterly revenues of $3B. Microsoft Corp.'s net income of $35.8B is higher than Palo Alto Networks, Inc.'s net income of -$177M. Notably, Microsoft Corp.'s price-to-earnings ratio is 27.68x while Palo Alto Networks, Inc.'s PE ratio is 272.95x. Generally a lower price-to-earnings ratio signals a stock is trading at a lower multiple of earnings and is a better value. Another key metric is the price-to-sales ratio, which for Microsoft Corp. is 10.87x versus 25.06x for Palo Alto Networks, Inc.. Usually stocks with elevated PS ratios are considered overvalued.
+Low
 
-| Company | Price/Sales Ratio | Price/Earnings Ratio | Quarterly Revenue | Quarterly Net Income |
-| --- | --- | --- | --- | --- |
-| MSFT Microsoft Corp. | 10.87x | 27.68x | $90B | $35.8B |
-| PANW Palo Alto Networks, Inc. | 25.06x | 272.95x | $3B | -$177M |
+Stable
 
-Which has Higher Returns MSFT or SAP?
+Low
 
-SAP SE has a net margin of 38.34% compared to Microsoft Corp.'s net margin of 20.37%. Microsoft Corp.'s return on equity of 34.14% beat SAP SE's return on equity of 17.42%.
+Stable
 
-| Company | Gross Margin | Earnings Per Share | Invested Capital |
-| --- | --- | --- | --- |
-| MSFT Microsoft Corp. | 67.63% | $4.27 | $539.8B |
-| SAP SAP SE | 73.22% | $1.94 | $61.3B |
+Market Performance
 
-What do Analysts Say About MSFT or SAP?
+(90 Days Performance)
 
-Microsoft Corp. has a consensus price target of $563.05, signalling upside risk potential of 21.16%. On the other hand SAP SE has an analysts' consensus of $242.92 which suggests that it could grow by 32.29%. Given that SAP SE has higher upside potential than Microsoft Corp., analysts believe SAP SE is more attractive than Microsoft Corp..
+Neutral Trend
 
-| Company | Buy Ratings | Hold Ratings | Sell Ratings |
-| --- | --- | --- | --- |
-| MSFT Microsoft Corp. | 56 | 5 | 0 |
-| SAP SAP SE | 14 | 2 | 0 |
+Muted
 
-Is MSFT or SAP More Risky?
+Weakening
 
-Microsoft Corp. has a beta of 0.883, which suggesting that the stock is 11.692% less volatile than S&P 500. In comparison SAP SE has a beta of 0.764, suggesting its less volatile than the S&P 500 by 23.609%.
+Cooling
 
-Which is a Better Dividend Stock MSFT or SAP?
+Weakening
 
-Microsoft Corp. has a quarterly dividend of $0.91 per share corresponding to a yield of 0.75%. SAP SE offers a yield of 1.43% to investors and pays a quarterly dividend of $2.94 per share. Microsoft Corp. pays 24.34% of its earnings as a dividend. SAP SE pays out 30.8% of its earnings as a dividend. Both of these payout ratios are sufficient to cover dividend payouts with earnings for the foreseeable future.
+Moderate
 
-Which has Better Financial Ratios MSFT or SAP?
+Improving
 
-Microsoft Corp. quarterly revenues are $90B, which are larger than SAP SE quarterly revenues of $9.9B. Microsoft Corp.'s net income of $35.8B is higher than SAP SE's net income of $2.2B. Notably, Microsoft Corp.'s price-to-earnings ratio is 27.68x while SAP SE's PE ratio is 24.79x. Generally a lower price-to-earnings ratio signals a stock is trading at a lower multiple of earnings and is a better value. Another key metric is the price-to-sales ratio, which for Microsoft Corp. is 10.87x versus 4.95x for SAP SE. Usually stocks with elevated PS ratios are considered overvalued.
+Odds of Distress
 
-| Company | Price/Sales Ratio | Price/Earnings Ratio | Quarterly Revenue | Quarterly Net Income |
-| --- | --- | --- | --- | --- |
-| MSFT Microsoft Corp. | 10.87x | 27.68x | $90B | $35.8B |
-| SAP SAP SE | 4.95x | 24.79x | $9.9B | $2.2B |
+(Probability Of Bankruptcy)
 
-Which has Higher Returns MSFT or CRM?
+Minimal
 
-Salesforce, Inc. has a net margin of 38.34% compared to Microsoft Corp.'s net margin of 18.93%. Microsoft Corp.'s return on equity of 34.14% beat Salesforce, Inc.'s return on equity of 14.57%.
+Below Average
 
-| Company | Gross Margin | Earnings Per Share | Invested Capital |
-| --- | --- | --- | --- |
-| MSFT Microsoft Corp. | 67.63% | $4.27 | $539.8B |
-| CRM Salesforce, Inc. | 74.07% | $2.42 | $76.8B |
+Minimal
 
-What do Analysts Say About MSFT or CRM?
+Minimal
 
-Microsoft Corp. has a consensus price target of $563.05, signalling upside risk potential of 21.16%. On the other hand Salesforce, Inc. has an analysts' consensus of $241.72 which suggests that it could grow by 31.36%. Given that Salesforce, Inc. has higher upside potential than Microsoft Corp., analysts believe Salesforce, Inc. is more attractive than Microsoft Corp..
+Minimal
 
-| Company | Buy Ratings | Hold Ratings | Sell Ratings |
-| --- | --- | --- | --- |
-| MSFT Microsoft Corp. | 56 | 5 | 0 |
-| CRM Salesforce, Inc. | 41 | 12 | 2 |
+Minimal
 
-Is MSFT or CRM More Risky?
+Minimal
 
-Microsoft Corp. has a beta of 0.883, which suggesting that the stock is 11.692% less volatile than S&P 500. In comparison Salesforce, Inc. has a beta of 0.788, suggesting its less volatile than the S&P 500 by 21.185%.
+Comparative Valuation
 
-Which is a Better Dividend Stock MSFT or CRM?
+(Enterprise Value)
 
-Microsoft Corp. has a quarterly dividend of $0.91 per share corresponding to a yield of 0.75%. Salesforce, Inc. offers a yield of 0.92% to investors and pays a quarterly dividend of $0.44 per share. Microsoft Corp. pays 24.34% of its earnings as a dividend. Salesforce, Inc. pays out 21.33% of its earnings as a dividend. Both of these payout ratios are sufficient to cover dividend payouts with earnings for the foreseeable future.
+Aligned With Model
 
-Which has Better Financial Ratios MSFT or CRM?
+Above Model Estimate
 
-Microsoft Corp. quarterly revenues are $90B, which are larger than Salesforce, Inc. quarterly revenues of $11.1B. Microsoft Corp.'s net income of $35.8B is higher than Salesforce, Inc.'s net income of $2.1B. Notably, Microsoft Corp.'s price-to-earnings ratio is 27.68x while Salesforce, Inc.'s PE ratio is 21.30x. Generally a lower price-to-earnings ratio signals a stock is trading at a lower multiple of earnings and is a better value. Another key metric is the price-to-sales ratio, which for Microsoft Corp. is 10.87x versus 3.74x for Salesforce, Inc.. Usually stocks with elevated PS ratios are considered overvalued.
+Below Model Estimate
 
-| Company | Price/Sales Ratio | Price/Earnings Ratio | Quarterly Revenue | Quarterly Net Income |
-| --- | --- | --- | --- | --- |
-| MSFT Microsoft Corp. | 10.87x | 27.68x | $90B | $35.8B |
-| CRM Salesforce, Inc. | 3.74x | 21.30x | $11.1B | $2.1B |
+Above Model Estimate
 
-Which has Higher Returns MSFT or APP?
+Above Model Estimate
 
-Applovin Corp. has a net margin of 38.34% compared to Microsoft Corp.'s net margin of 65.44%. Microsoft Corp.'s return on equity of 34.14% beat Applovin Corp.'s return on equity of 253.74%.
+(Average Analysts Consensus)
 
-| Company | Gross Margin | Earnings Per Share | Invested Capital |
-| --- | --- | --- | --- |
-| MSFT Microsoft Corp. | 67.63% | $4.27 | $539.8B |
-| APP Applovin Corp. | 88.19% | $3.56 | $5.9B |
+Cautious Hold
 
-What do Analysts Say About MSFT or APP?
+Strong Hold
 
-Microsoft Corp. has a consensus price target of $563.05, signalling upside risk potential of 21.16%. On the other hand Applovin Corp. has an analysts' consensus of $654.60 which suggests that it could grow by 65.35%. Given that Applovin Corp. has higher upside potential than Microsoft Corp., analysts believe Applovin Corp. is more attractive than Microsoft Corp..
+Strong Hold
 
-| Company | Buy Ratings | Hold Ratings | Sell Ratings |
-| --- | --- | --- | --- |
-| MSFT Microsoft Corp. | 56 | 5 | 0 |
-| APP Applovin Corp. | 20 | 4 | 2 |
+Hold
 
-Is MSFT or APP More Risky?
+Strong Sell
 
-Microsoft Corp. has a beta of 0.883, which suggesting that the stock is 11.692% less volatile than S&P 500. In comparison Applovin Corp. has a beta of 2.082, suggesting its more volatile than the S&P 500 by 108.15%.
+Analysts still back Microsoft, while our signals point the other way. That gap usually means price targets rest on results that have not shown up in the chart yet.
 
-Which is a Better Dividend Stock MSFT or APP?
+## Microsoft Competition Peer Performance Charts
 
-Microsoft Corp. has a quarterly dividend of $0.91 per share corresponding to a yield of 0.75%. Applovin Corp. offers a yield of 0% to investors and pays a quarterly dividend of $0.00 per share. Microsoft Corp. pays 24.34% of its earnings as a dividend. Applovin Corp. pays out -- of its earnings as a dividend. Microsoft Corp.'s payout ratio is sufficient to cover dividend payouts with earnings for the foreseeable future.
+## Peer Comparison Metrics & Methodology
 
-Which has Better Financial Ratios MSFT or APP?
+Operating margins at Microsoft versus its direct competitors indicate whether the business holds pricing power or runs a leaner cost base. The peer set helps show whether recent outperformance is broad-based or company-specific. For peer comparison, Microsoft has a market cap of 2.9 trillion, P/E of 23.41, profit margin of 39.34%. 
 
-Microsoft Corp. quarterly revenues are $90B, which are larger than Applovin Corp. quarterly revenues of $1.8B. Microsoft Corp.'s net income of $35.8B is higher than Applovin Corp.'s net income of $1.2B. Notably, Microsoft Corp.'s price-to-earnings ratio is 27.68x while Applovin Corp.'s PE ratio is 34.92x. Generally a lower price-to-earnings ratio signals a stock is trading at a lower multiple of earnings and is a better value. Another key metric is the price-to-sales ratio, which for Microsoft Corp. is 10.87x versus 21.76x for Applovin Corp.. Usually stocks with elevated PS ratios are considered overvalued.
+Microsoft data is compiled from periodic company reporting and market reference feeds and standardized for comparability. Analyst projections are included when active coverage applies.
 
-| Company | Price/Sales Ratio | Price/Earnings Ratio | Quarterly Revenue | Quarterly Net Income |
-| --- | --- | --- | --- | --- |
-| MSFT Microsoft Corp. | 10.87x | 27.68x | $90B | $35.8B |
-| APP Applovin Corp. | 21.76x | 34.92x | $1.8B | $1.2B |
+Editorial review and methodology oversight provided by: Ellen Johnson, Member of Macroaxis Editorial Board
 
-## Related Companies
-
-Palo Alto Networks, Inc.
-
-## Get MSFT Stock Alert
-
-Signup to receive the latest stock alerts
-
-Get Exclusive Trade Ideas
-
-## Financial Ratios
-
-MSFT
-
-Sector
-
-P/E ratio
-
-27.68x
-
-1.69x
-
-PEG ratio
-
-1.19x
-
-0.04x
-
-P/B ratio
-
-8.33x
-
-2.53x
-
-Price / LTM sales
-
-10.87x
-
-2.92x
-
-## Growth Metrics
-
-MSFT
-
-Sector
-
-Revenue growth
-
-18.3%
-
-10.86%
-
-Earnings growth
-
-23.32%
-
-21.54%
-
-Revenue (5-year growth)
-
-14.52%
-
-8.99%
-
-Earnings forecast
-
-$4.70
-
-$0.22
-
-## Profitability
-
-MSFT
-
-Sector
-
-Profitability FY 2026
-
-$225.5B
-
-$92M
-
-Return on invested capital
-
-25.87%
-
-1.83%
-
-Return on assets
-
-19.7%
-
-0.7%
-
-Return on equity
-
-34.14%
-
-2.83%
-
-## Earnings Date
-
-Last Earnings Date
-
-Jul
-
-29
-
-Next Earnings Date
-
-Jul
-
-29
-
-Estimated Next Earnings Date
-
-Oct
-
-28
-
-## Balance Sheet
-
-MSFT
-
-Sector
-
-Total cash
-
-$76.8B
-
-$84.6M
-
-Short term investments
-
-$55.9B
-
-$9.1M
-
-Total assets
-
-$758.4B
-
-$418.7M
-
-Long term debt
-
-$91.8B
-
-$5.8M
-
-## Information Technology Sector
-
-Top Information Technology Stocks to Buy Now
-
-### SEE THE 1% OF STOCKS YOU NEED TO OWN FOR MASSIVE RETURNS
-
-#### GET BETTER TRADE IDEAS
-
-## Popular
-
-Investing,Intelligent Group Ltd,Microsoft Cor 7h ago
-
-##### Why Did Microsoft Go Up So Much After Earnings?
-
-Until the past week, 2026 had been a fairly dreary…
-
-Investing,Astera Labs, Inc.,Broadcom Inc 17h ago
-
-##### Will Astera Labs Stock Recover?
-
-Semiconductor company Astera Labs (NASDAQ:ALAB) is one of several businesses…
-
-Investing,ServiceNow Inc 2d ago
-
-##### Is ServiceNow Going to Be a Trillion Dollar Stock?
-
-Enterprise software and AI platform provider ServiceNow (NYSE:NOW) has been…
-
-## Stock Ideas
-
-Buy
-
-56
-
-##### Is NVDA Stock a Buy?
-
-Market Cap: $4.9TP/E Ratio: 41x
-
-Sell
-
-37
-
-##### Is AAPL Stock a Buy?
-
-Market Cap: $4.5TP/E Ratio: 41x
-
-Buy
-
-59
-
-##### Is GOOG Stock a Buy?
-
-Market Cap: $4.4TP/E Ratio: 33x
-
-## Alerts
-
-Buy
-
-74
-
-##### RUSHB alert for Aug 2
-
-Rush Enterprises, Inc. [RUSHB] is up 127.14% over the past day.
-
-Buy
-
-64
-
-##### DFNS alert for Aug 2
-
-LGL Systems Acquisition [DFNS] is up 122.18% over the past day.
-
-Buy
-
-55
-
-##### ATKR alert for Aug 2
-
-Atkore, Inc. [ATKR] is up 28.22% over the past day.
-
-Master Safe Stock Market Strategies Get Paid To Own Stocks. Insure Your Stocks During Downtrends. Master "The Vacation Trade".
-
-## THE #1 STOCK ANALYSIS TOOLTO MAKE SMARTER BUY AND SELL DECISIONS
-
-Show me the best stock
+Updated August 7, 2026

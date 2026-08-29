@@ -3,7 +3,7 @@
 A small, auditable pipeline that turns one company earnings-call transcript into
 an **outlook brief** — an agent-authored, forward-looking synthesis (base/upside/
 downside cases), independently reviewed for fair reading and narrative balance
-before it's considered final. That brief is built on a **fact sheet**, where
+before it's considered final. That brief is built on a **signal card**, where
 every substantive claim it draws on traces back to an exact quotation and every
 calculation is reproducible in Python.
 
@@ -206,6 +206,23 @@ the brief must trace back to real, validated evidence.
 ```bash
 uv run earnings check-review --ticker ACME --event-id 2026-q2
 ```
+
+The reviewer grades each finding by severity. That determines whether the run
+can finish:
+
+| Severity | Plain-English meaning | Permitted verdict | Practical result |
+|---|---|---|---|
+| `info` | A check was completed or useful context was recorded. It is not a problem. | `pass`, or `pass_with_warnings` if another warning exists | No correction is required. |
+| `low` | A local wording, attribution or provenance problem that does not materially affect the analysis. | `pass` or `pass_with_warnings` | The run may complete. The issue is still recorded. |
+| `medium` | A meaningful error exists, but the reviewer judges that the principal conclusion remains intact. | `pass_with_warnings` | The run completes, but the warning must be shown to the user. |
+| `high` | The problem could materially change how the results, guidance, a central risk or the outlook conclusion should be understood. | `fail` | The run stops for correction and re-review. |
+| `critical` | The evidence or review is fundamentally unreliable, such as the wrong company or period, fabricated support, or a compromised evidence boundary. | `fail` | The run stops for correction and re-review. |
+
+The reviewer decides severity because materiality is a matter of meaning, not
+arithmetic. Python does not second-guess that judgment. It enforces the recorded
+result: `pass` cannot contain a `medium`, `high` or `critical` finding;
+`pass_with_warnings` cannot contain a `high` or `critical` finding; and `fail`
+must contain at least one `high` or `critical` finding.
 
 Requires `review-report.json` to already exist (written by Skill 3's review pass).
 Validates its schema, artifact hashes, review mode, coverage receipts, verdict

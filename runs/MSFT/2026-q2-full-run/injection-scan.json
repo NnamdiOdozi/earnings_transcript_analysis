@@ -1,0 +1,12 @@
+{
+  "scanned_at": "2026-08-28T21:16:49Z",
+  "pattern_count": 25,
+  "finding_count": 1,
+  "findings": [
+    {
+      "pattern": "repeat (your |the )*(system )?(prompt|instructions)",
+      "match": "repeat your instructions",
+      "context": "one question. Operator, can you please repeat your instructions? (Operator Direction.) KEITH WEISS,"
+    }
+  ]
+}

@@ -1,109 +1,100 @@
-# MSFT PE Benchmarks
+MSFT Peers, Competitors & Sector Benchmarks | TECHi
 
-Current PE Ratio
+NasdaqGS · Technology · Peers
 
-20.8
+# Microsoft Corporation peer comparison.
 
-Diluted • annual
+4 closest publicly-traded peers for MSFT in the Technology sector (Technology) — one click to each competitor's full quote page.
 
-Forward PE
+Price Aug 14, 4:00 PM EDT · Statements Mar 30, 8:00 PM EDT
 
-20.5
+## 4 competitors TECHi tracks against MSFT.
 
-NTM Estimate
+Peer tape
 
-Sector Companies
+Flat 0
 
-500
+Down 4
 
-327 with PE data
+- ORCL
+- Oracle Corp.
+- $150.52-3.65%
+- CRWD
+- CrowdStrike Holdings
+- $216.95-3.80%
+- NOW
+- ServiceNow Inc.
+- $124.00-2.55%
+- FTNT
+- Fortinet Inc.
+- $160.01-3.28%
 
-Sector Median PE
+## Cohort moving down together.
 
-78.1
+0 of 4 peers up vs 4 down today, and MSFT is moving with the cohort. Group moves of this kind are usually macro or sector-level — read the news subpage for the catalyst, not a stock-specific note.
 
-327 companies
+## Common questions.
 
-Peer Companies
+Who are MSFT's peers?+
 
-10
+Microsoft Corporation's current comparison set includes ORCL, CRWD, NOW, FTNT.
 
-Direct competitors
+How does MSFT compare with its sector?+
 
-### Sector Analysis: Technology
+The MSFT Peers page keeps comparable quotes and available valuation or operating fields side by side so differences remain attributable to the underlying data.
 
-Total Companies
+Market pulse
 
-500
+$495.40
 
-With PE Data
+MSFT
 
-327
+-0.30%
 
-Median PE
+Day range
 
-78.1
+$493.93 - $500.01
 
-PE Range
+Market cap
 
-0.0 - 198.6
+$3.68T
 
-Forward PE Median
+Volume
 
-24.4
+14.4M
 
-### Technology Sector
+Last tick
 
-5040 companies • sector
+Aug 14, 4:00 PM EDT
 
-Below Median(40th %ile)
+52-week position
 
-Current PE: 20.8 Forward PE: 20.5 Median PE: 25.5 Average PE: 40.4
+71%
 
-Min PE: 0.1 Max PE: 199.4 25th-75th %ile: 13.3 - 52.3
+$349.20 - $553.72
 
-Min: 0.1 Max: 199.4
+Use this to answer the core investor question for this tab.
 
-Current: 20.8
+Focused evidence that complements the main quote dashboard.
 
-### Software - Infrastructure Industry
+Weak when
 
-324 companies • industry
+Provider data is delayed, sparse, or not yet confirmed by filings.
 
-Below Median(36th %ile)
+Target $569.56 · +14.97% i Consensus return potential = (Target price - Current price) / Current price x 100. Here: ($569.56 - $495.40) / $495.40 = +14.97%.
 
-Current PE: 20.8 Forward PE: 20.5 Median PE: 28.3 Average PE: 44.3
+64
 
-Min PE: 0.1 Max PE: 191.0 25th-75th %ile: 14.9 - 56.7
+93%
 
-Min: 0.1 Max: 191.0
+Hold
 
-Current: 20.8
+5
 
-### Peer Companies
+7%
 
-4 companies • peers
+Sell
 
-Low PE(25th %ile)
+0
 
-Current PE: 20.8 Forward PE: 20.5 Median PE: 75.5 Average PE: 93.2
-
-Min PE: 37.7 Max PE: 184.2 25th-75th %ile: 41.3 - 127.4
-
-Min: 37.7 Max: 184.2
-
-Current: 20.8
-
-### Peer Companies
-
-PLTR CRWD ORCL CRWV PANW CORZ ZETA AI BB NET
-
-### Stock List PE Comparison
-
-- • Sector: Companies in the same broad industry sector
-- • Industry: Companies in the same specific industry classification
-- • Peers: Direct competitors identified through business analysis
-- • Position: Where this stock ranks relative to the benchmark group
-- • Forward PE: Based on next 4 quarters analyst EPS estimates from earnings data
-
-Last updated: 8/22/2026, 7:59:24 AM• Based on latest annual diluted PE ratios
+0%

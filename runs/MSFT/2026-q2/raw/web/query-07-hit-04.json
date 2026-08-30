@@ -1,11 +1,12 @@
 {
-  "url": "https://www.crn.com/news/cloud/2026/aws-vs-microsoft-vs-google-cloud-earnings-q2-2026-face-off",
-  "title": "AWS Vs. Microsoft Vs. Google Cloud Earnings Q2 2026 Face-Off",
+  "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323632/msft-ex99_1.htm",
+  "title": "EX-99.1",
   "score": null,
   "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:Amazon",
+  "_select_key": "peer:Alphabet",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "Amazon quarterly results versus Microsoft MSFT",
-  "_retrieved_at": "2026-08-28T10:13:59Z"
+  "_query": "Alphabet quarterly results versus Microsoft MSFT",
+  "_retrieved_at": "2026-08-30T11:56:56Z"
 }

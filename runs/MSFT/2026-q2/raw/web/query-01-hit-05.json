@@ -1,11 +1,12 @@
 {
-  "url": "https://finviz.com/news/285331/ahead-of-microsoft-msft-q2-earnings-get-ready-with-wall-street-estimates-for-key-metrics",
-  "title": "Ahead of Microsoft (MSFT) Q2 Earnings: Get Ready With Wall Street Estimates for Key Metrics",
+  "url": "https://tickerleague.com/companies/MSFT/estimates",
+  "title": "Estimates for Microsoft (MSFT)",
   "score": null,
   "published_date": null,
   "_class": "consensus",
   "_select_key": "consensus",
+  "_temporal_status": "undated",
   "_provider": "exa",
   "_query": "Microsoft MSFT 2026-q2 analyst consensus estimate revenue EPS",
-  "_retrieved_at": "2026-08-28T10:13:58Z"
+  "_retrieved_at": "2026-08-30T11:56:50Z"
 }

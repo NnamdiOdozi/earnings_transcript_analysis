@@ -1,11 +1,12 @@
 {
-  "url": "https://seekingalpha.com/news/4542925-microsoft-q2-2026-earnings-preview",
-  "title": "Microsoft heads into Q2 earnings with cloud strength, AI spending in focus",
+  "url": "https://www.barchart.com/story/news/36923033/microsoft-earnings-preview-what-to-expect",
+  "title": "Microsoft Earnings Preview: What to Expect",
   "score": null,
-  "published_date": "2026-01-27T00:00:00.000Z",
+  "published_date": "2026-01-07T00:00:00.000Z",
   "_class": "consensus",
   "_select_key": "consensus",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
   "_query": "Microsoft MSFT 2026-q2 earnings preview expectations forecast",
-  "_retrieved_at": "2026-08-28T10:13:58Z"
+  "_retrieved_at": "2026-08-30T11:56:51Z"
 }

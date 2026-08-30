@@ -1,11 +1,12 @@
 {
-  "url": "https://finance.yahoo.com/news/msft-vs-orcl-enterprise-cloud-152700764.html",
-  "title": "MSFT vs. ORCL: Which Enterprise Cloud & AI Stock Has Better Upside?",
+  "url": "https://www.microsoft.com/en-us/investor/earnings/fy-2026-q2/performance",
+  "title": "FY26 Q2 - Performance - Investor Relations - Microsoft",
   "score": null,
-  "published_date": "2025-12-26T00:00:00.000Z",
+  "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:Oracle",
+  "_select_key": "peer:Amazon",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "Oracle quarterly results versus Microsoft MSFT",
-  "_retrieved_at": "2026-08-28T10:13:59Z"
+  "_query": "Amazon quarterly results versus Microsoft MSFT",
+  "_retrieved_at": "2026-08-30T11:57:00Z"
 }

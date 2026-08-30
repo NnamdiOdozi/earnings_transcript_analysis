@@ -1,11 +1,12 @@
 {
-  "url": "https://finance.yahoo.com/markets/stocks/articles/microsoft-vs-alphabet-why-stand-160740120.html",
-  "title": "Microsoft Vs. Alphabet: How and Why They Stand Head-and-Shoulders Above Other Hyperscalers",
+  "url": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Record-Q4-and-FY-2026-Results-Driven-by-Cloud-Infrastructure--Cloud-Applications/",
+  "title": "Oracle - Oracle Announces Record Q4 and FY 2026 Results Driven by Cloud Infrastructure & Cloud Applications",
   "score": null,
   "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:Alphabet",
+  "_select_key": "peer:Oracle",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "Alphabet quarterly results versus Microsoft MSFT",
-  "_retrieved_at": "2026-08-28T10:13:58Z"
+  "_query": "Oracle quarterly results versus Microsoft MSFT",
+  "_retrieved_at": "2026-08-30T11:56:54Z"
 }

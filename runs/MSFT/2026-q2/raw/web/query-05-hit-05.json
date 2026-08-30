@@ -1,11 +1,12 @@
 {
-  "url": "https://finance.yahoo.com/technology/ai/articles/microsoft-vs-alphabet-one-bets-171811915.html",
-  "title": "Microsoft vs Alphabet: One Bets on OpenAI While The Other Controls Its Own AI Destiny. This Is The Better Buy Today",
+  "url": "https://finance.yahoo.com/news/microsoft-vs-oracle-cloud-ai-151100811.html",
+  "title": "Microsoft vs. Oracle: Which Cloud & AI Giant Has an Edge Right Now?",
   "score": null,
   "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:Alphabet",
+  "_select_key": "peer:Oracle",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "Alphabet quarterly results versus Microsoft MSFT",
-  "_retrieved_at": "2026-08-28T10:13:58Z"
+  "_query": "Oracle quarterly results versus Microsoft MSFT",
+  "_retrieved_at": "2026-08-30T11:56:54Z"
 }

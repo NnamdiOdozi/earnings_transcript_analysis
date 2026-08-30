@@ -1,11 +1,12 @@
 {
-  "url": "https://www.microsoft.com/en-us/investor/earnings/fy-2026-q4/press-release-webcast",
-  "title": "FY26 Q4 - Press Releases - Investor Relations - Microsoft",
+  "url": "https://finance.yahoo.com/technology/ai/articles/microsoft-vs-alphabet-one-bets-171811915.html",
+  "title": "Microsoft vs Alphabet: One Bets on OpenAI While The Other Controls Its Own AI Destiny. This Is The Better Buy Today",
   "score": null,
   "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:Amazon",
+  "_select_key": "peer:Alphabet",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "Amazon quarterly results versus Microsoft MSFT",
-  "_retrieved_at": "2026-08-28T10:13:59Z"
+  "_query": "Alphabet quarterly results versus Microsoft MSFT",
+  "_retrieved_at": "2026-08-30T11:56:56Z"
 }

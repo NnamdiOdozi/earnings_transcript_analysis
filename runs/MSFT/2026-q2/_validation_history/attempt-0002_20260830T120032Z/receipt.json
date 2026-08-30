@@ -1,9 +1,11 @@
 {
-  "ok": true,
+  "attempt": 2,
+  "started_at": "2026-08-30T12:00:32Z",
+  "finished_at": "2026-08-30T12:00:32Z",
+  "outcome": "passed",
+  "exit_code": 0,
   "checked_claims": 27,
-  "issues": [],
-  "warnings": [],
-  "validated_at": "2026-08-30T12:00:32Z",
+  "issue_counts": {},
   "input_hashes": {
     "claims.json": "11e6b2914cd5f1e3ca09e2037f5e13042bbbf16ba0d106d5b6877d2df4bdc921",
     "transcript.jsonl": "76e5eb1939b61fb235b636419ff5f06afcdc79c353e8c692c9c00c2e23a94650",

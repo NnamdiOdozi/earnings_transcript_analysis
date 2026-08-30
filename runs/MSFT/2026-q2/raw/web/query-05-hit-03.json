@@ -1,11 +1,12 @@
 {
-  "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323632/msft-ex99_1.htm",
-  "title": "EX-99.1",
+  "url": "https://finance.yahoo.com/news/msft-vs-orcl-enterprise-cloud-152700764.html",
+  "title": "MSFT vs. ORCL: Which Enterprise Cloud & AI Stock Has Better Upside?",
   "score": null,
-  "published_date": null,
+  "published_date": "2025-12-26T00:00:00.000Z",
   "_class": "peer",
-  "_select_key": "peer:Alphabet",
+  "_select_key": "peer:Oracle",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "Alphabet quarterly results versus Microsoft MSFT",
-  "_retrieved_at": "2026-08-28T10:13:58Z"
+  "_query": "Oracle quarterly results versus Microsoft MSFT",
+  "_retrieved_at": "2026-08-30T11:56:54Z"
 }

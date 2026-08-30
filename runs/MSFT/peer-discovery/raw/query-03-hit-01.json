@@ -1,10 +1,11 @@
 {
-  "url": "https://altindex.com/similar-stocks/msft",
-  "title": "Stocks Similar to MSFT \u2014 Top 5 Alternatives by Industry & Market Cap | AltIndex",
+  "url": "https://www.tipranks.com/stocks/msft/similar-stocks",
+  "title": "",
   "score": null,
-  "published_date": "2026-08-19T00:00:00.000Z",
+  "published_date": null,
   "_class": "peer_group",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "stocks most similar to MSFT Microsoft Corporation",
-  "_retrieved_at": "2026-08-28T21:15:18Z"
+  "_query": "stocks most similar to MSFT Microsoft",
+  "_retrieved_at": "2026-08-30T11:55:36Z"
 }

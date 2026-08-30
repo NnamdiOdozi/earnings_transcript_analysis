@@ -1,11 +1,12 @@
 {
-  "url": "https://www.stocktitan.net/news/ORCL/oracle-announces-fiscal-year-2026-second-quarter-financial-9isaxe57c9u6.html",
-  "title": "Oracle Q2 EPS Jumps 91% as Cloud Revenue Hits $8.0B | ORCL Stock News",
+  "url": "https://www.theglobeandmail.com/investing/markets/stocks/AMZN/pressreleases/3730734/amazon-amzn-q2-2026-earnings-call-transcript/",
+  "title": "Amazon (AMZN) Q2 2026 Earnings Call Transcript - The Globe and Mail",
   "score": null,
-  "published_date": "2025-12-10T00:00:00.000Z",
+  "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:Oracle",
+  "_select_key": "peer:Amazon",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "Oracle 2026-q2 earnings results revenue growth",
-  "_retrieved_at": "2026-08-28T10:13:59Z"
+  "_query": "Amazon 2026-q2 earnings results revenue growth",
+  "_retrieved_at": "2026-08-30T11:56:57Z"
 }

@@ -69,12 +69,15 @@ before relying on it:
    is real enforcement, but with a real gap: the same live testing found most
    `general`-topic hits carry **no `published_date` at all** (evergreen
    stock-data/aggregator pages), so this check can't act on them — they pass
-   through regardless of when they were actually published. A note is added to
-   `manifest.json` for every hit this layer does manage to exclude.
+   through regardless of when they were actually published. Python records the
+   result as `_temporal_status` on each raw hit and `temporal_status` on extracted
+   `WebEvidence`: `pre_event`, `post_event`, `undated`, or `unchecked` when no
+   usable cutoff was supplied. A note is added to `manifest.json` for every hit
+   this layer does manage to exclude.
 
-Net effect: the causality guard reliably catches a *dated* post-event hit; it
-does not currently catch an *undated* one that happens to reflect post-event
-information. Treat this as an open gap, not a solved problem — see
+Net effect: the causality guard reliably catches and labels a *dated* post-event
+hit. It labels but cannot resolve an *undated* one that happens to reflect
+post-event information. Treat that status as a review prompt, not proof — see
 `README.md`'s "Known limitations".
 
 ## Extract step: search hits become citable evidence

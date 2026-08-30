@@ -1,11 +1,12 @@
 {
-  "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
-  "title": "Document",
+  "url": "https://finance.yahoo.com/technology/ai/articles/oracle-vs-microsoft-enterprise-ai-145400793.html",
+  "title": "Oracle vs. Microsoft: Which Enterprise AI Stock Is the Better Buy?",
   "score": null,
   "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:Alphabet",
+  "_select_key": "peer:Oracle",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "Alphabet quarterly results versus Microsoft MSFT",
-  "_retrieved_at": "2026-08-28T10:13:58Z"
+  "_query": "Oracle quarterly results versus Microsoft MSFT",
+  "_retrieved_at": "2026-08-30T11:56:54Z"
 }

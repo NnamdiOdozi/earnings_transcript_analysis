@@ -728,10 +728,41 @@ def test_validate_claims_grounds_web_evidence_citation():
         ),
     ]
     web_evidence_texts = {"web-001": "Analysts noted strong demand for the new product line this quarter."}
-    result = validate_claims(claims, segments_by_id={}, financials={}, web_evidence_texts=web_evidence_texts)
+    result = validate_claims(
+        claims,
+        segments_by_id={},
+        financials={},
+        web_evidence_texts=web_evidence_texts,
+        web_evidence_statuses={"web-001": "undated"},
+    )
     assert result.ok is True
     # Web evidence WAS consumed (a claim cites web-001), so no "unconsumed" advisory.
     assert result.warnings == []
+
+
+def test_validate_claims_rejects_post_event_web_evidence():
+    claims = [
+        Claim(
+            id="claim-test-007",
+            category="demand_activity",
+            classification="reported_fact",
+            claim_text="Analysts noted strong demand for the new product line.",
+            quote="Analysts noted strong demand for the new product line this quarter.",
+            web_evidence_id="web-001",
+            status="reported",
+            confidence=0.8,
+        ),
+    ]
+    web_evidence_texts = {"web-001": "Analysts noted strong demand for the new product line this quarter."}
+    result = validate_claims(
+        claims,
+        segments_by_id={},
+        financials={},
+        web_evidence_texts=web_evidence_texts,
+        web_evidence_statuses={"web-001": "post_event"},
+    )
+    assert result.ok is False
+    assert result.issues[0].check == "temporal_eligibility"
 
 
 def test_warns_when_web_evidence_fetched_but_uncited(revenue_segment, financials):

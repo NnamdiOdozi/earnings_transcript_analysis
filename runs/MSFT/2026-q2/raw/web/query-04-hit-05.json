@@ -1,11 +1,12 @@
 {
-  "url": "https://stockanalysis.com/stocks/googl/transcripts/657320-q2-2026/",
-  "title": "Alphabet (GOOGL) Q2 2026 Earnings Call Transcript & Audio",
+  "url": "https://www.cnbc.com/2025/12/10/oracle-orcl-q2-earnings-report-2026.html",
+  "title": "Oracle (ORCL) Q2 earnings report 2026",
   "score": null,
-  "published_date": null,
+  "published_date": "2025-12-10T00:00:00.000Z",
   "_class": "peer",
-  "_select_key": "peer:Alphabet",
+  "_select_key": "peer:Oracle",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "Alphabet 2026-q2 earnings results revenue growth",
-  "_retrieved_at": "2026-08-28T10:13:58Z"
+  "_query": "Oracle 2026-q2 earnings results revenue growth",
+  "_retrieved_at": "2026-08-30T11:56:53Z"
 }

@@ -5,7 +5,8 @@
   "published_date": null,
   "_class": "peer",
   "_select_key": "peer:Apple",
+  "_temporal_status": "undated",
   "_provider": "exa",
   "_query": "Apple quarterly results versus Microsoft MSFT",
-  "_retrieved_at": "2026-08-28T10:14:00Z"
+  "_retrieved_at": "2026-08-30T11:57:02Z"
 }

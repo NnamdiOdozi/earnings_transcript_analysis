@@ -13,6 +13,11 @@ from earnings.process import sha256_hex
 FIXTURES = Path(__file__).parent / "fixtures"
 
 
+def _validation_attempt_dirs(run_dir: Path) -> list[Path]:
+    history_dir = run_dir / config.VALIDATION_HISTORY_SUBDIR
+    return sorted(path for path in history_dir.iterdir() if path.is_dir())
+
+
 @pytest.fixture
 def isolated_runs_dir(tmp_path, monkeypatch):
     """Redirect config.RUNS_DIR to a tmp_path subdirectory for the duration of the
@@ -53,6 +58,60 @@ def test_prepare_then_analyze_empty_transcript_yields_zero_segments_and_passes(i
     assert validation["ok"] is True
     assert validation["checked_claims"] == 0
     assert validation["validated_at"]  # real-clock stamp, not agent-authored
+
+
+def test_analyze_preserves_each_failed_and_passing_claims_attempt(isolated_runs_dir):
+    transcript = str(FIXTURES / "normal_transcript.txt")
+    assert main(["prepare", "--ticker", "ACME", "--event-id", "2026-q2", "--transcript", transcript]) == 0
+    run_dir = isolated_runs_dir / "ACME" / "2026-q2"
+
+    malformed_claims = b'[{"id": "claim-broken"'
+    (run_dir / config.CLAIMS_FILENAME).write_bytes(malformed_claims)
+    assert main(["analyze", "--ticker", "ACME", "--event-id", "2026-q2"]) == 1
+
+    (run_dir / config.CLAIMS_FILENAME).write_text("[]", encoding="utf-8")
+    (run_dir / config.METRICS_FILENAME).write_text("[]", encoding="utf-8")
+    assert main(["analyze", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
+
+    attempts = _validation_attempt_dirs(run_dir)
+    assert len(attempts) == 2
+    assert attempts[0].name.startswith("attempt-0001_")
+    assert attempts[1].name.startswith("attempt-0002_")
+
+    assert (attempts[0] / config.CLAIMS_FILENAME).read_bytes() == malformed_claims
+    failed_validation = json.loads((attempts[0] / config.VALIDATION_FILENAME).read_text())
+    failed_receipt = json.loads((attempts[0] / config.VALIDATION_ATTEMPT_RECEIPT_FILENAME).read_text())
+    assert failed_validation["ok"] is False
+    assert failed_receipt["outcome"] == "failed"
+    assert failed_receipt["exit_code"] == 1
+    assert failed_receipt["issue_counts"] == {"schema": 1}
+    assert config.MANIFEST_FILENAME in failed_receipt["input_hashes"]
+    assert config.TRANSCRIPT_FILENAME in failed_receipt["input_hashes"]
+    assert not (attempts[0] / config.MANIFEST_FILENAME).exists()
+
+    assert (attempts[1] / config.CLAIMS_FILENAME).read_text() == "[]"
+    assert (attempts[1] / config.METRICS_FILENAME).read_text() == "[]"
+    passed_receipt = json.loads((attempts[1] / config.VALIDATION_ATTEMPT_RECEIPT_FILENAME).read_text())
+    assert passed_receipt["attempt"] == 2
+    assert passed_receipt["outcome"] == "passed"
+    assert passed_receipt["exit_code"] == 0
+    assert passed_receipt["issue_counts"] == {}
+
+
+def test_analyze_records_blocked_attempt_when_claims_are_missing(isolated_runs_dir):
+    transcript = str(FIXTURES / "normal_transcript.txt")
+    assert main(["prepare", "--ticker", "ACME", "--event-id", "2026-q2", "--transcript", transcript]) == 0
+    run_dir = isolated_runs_dir / "ACME" / "2026-q2"
+
+    assert main(["analyze", "--ticker", "ACME", "--event-id", "2026-q2"]) == 2
+
+    attempts = _validation_attempt_dirs(run_dir)
+    assert len(attempts) == 1
+    receipt = json.loads((attempts[0] / config.VALIDATION_ATTEMPT_RECEIPT_FILENAME).read_text())
+    assert receipt["outcome"] == "blocked"
+    assert receipt["exit_code"] == 2
+    assert not (attempts[0] / config.CLAIMS_FILENAME).exists()
+    assert not (attempts[0] / config.VALIDATION_FILENAME).exists()
 
 
 def test_prepare_appends_to_cross_run_processing_log(isolated_runs_dir, tmp_path):
@@ -525,6 +584,13 @@ def test_discover_peers_applies_optional_event_date_cutoff(isolated_runs_dir, mo
     disc_dir = isolated_runs_dir / "MSFT" / "peer-discovery"
     manifest = json.loads((disc_dir / config.MANIFEST_FILENAME).read_text())
     assert any("causality guard" in note for note in manifest["notes"])
+    raw_hits = [json.loads(path.read_text()) for path in (disc_dir / "raw").glob("*.json")]
+    statuses_by_url = {hit["url"]: hit["_temporal_status"] for hit in raw_hits}
+    assert statuses_by_url == {
+        "https://ex.com/before": "pre_event",
+        "https://ex.com/after": "post_event",
+        "https://ex.com/undated": "undated",
+    }
 
 
 @pytest.mark.parametrize("provider", ["exa", "tavily"])
@@ -576,7 +642,9 @@ def test_prepare_excludes_web_evidence_published_after_event_date(isolated_runs_
 
     web_evidence_lines = (run_dir / config.EVIDENCE_SUBDIR / config.WEB_EVIDENCE_FILENAME).read_text().strip().splitlines()
     assert len(web_evidence_lines) == 1
-    assert "before" in web_evidence_lines[0]
+    web_evidence = json.loads(web_evidence_lines[0])
+    assert "before" in web_evidence["url"]
+    assert web_evidence["temporal_status"] == "pre_event"
 
     # still archived under raw/web/ for audit (both hits, all 3 consensus queries -> 6
     # files), just never extracted as citable evidence.
@@ -609,8 +677,10 @@ def test_prepare_extraction_selection_preserves_order_when_score_is_none(isolate
 
     run_dir = isolated_runs_dir / "ACME" / "2026-q2"
     web_evidence_lines = (run_dir / config.EVIDENCE_SUBDIR / config.WEB_EVIDENCE_FILENAME).read_text().strip().splitlines()
-    first_two = [json.loads(line)["url"] for line in web_evidence_lines[:2]]
+    first_two_evidence = [json.loads(line) for line in web_evidence_lines[:2]]
+    first_two = [evidence["url"] for evidence in first_two_evidence]
     assert first_two == ["https://example.com/first", "https://example.com/second"]
+    assert all(evidence["temporal_status"] == "unchecked" for evidence in first_two_evidence)
 
 
 def test_normalize_hits_maps_both_provider_shapes_to_one_canonical_shape():
@@ -1280,6 +1350,52 @@ def test_check_review_refuses_mutated_bundle_after_cap_exhausted(isolated_runs_d
     exit_code = main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"])
     assert exit_code == 4  # refused -- the mutated bundle is NOT treated as the accepted round-1 repeat
     assert not (run_dir / config.REVIEW_HISTORY_SUBDIR / "round-2").exists()
+
+
+def test_analyze_clears_stale_review_report_md_after_cap_exhausted_bundle_edit(isolated_runs_dir, monkeypatch):
+    """Once the cap is exhausted, `analyze` is allowed to run on a corrected bundle
+    (see the deadlock-fix test above) -- but the top-level review-report.md from the
+    now-inapplicable round-1 verdict must not linger looking final next to files it no
+    longer describes. The accepted verdict itself stays intact under
+    _review_history/round-1/."""
+    monkeypatch.setattr(config, "REVIEW_MAX_ROUNDS", 1)
+    run_dir = _seed_reviewed_run(isolated_runs_dir)
+    assert (run_dir / config.REVIEW_REPORT_MD_FILENAME).exists()
+
+    claims = json.loads((run_dir / config.CLAIMS_FILENAME).read_text())
+    claims[0]["confidence"] = 0.5
+    (run_dir / config.CLAIMS_FILENAME).write_text(json.dumps(claims))
+    assert main(["analyze", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
+
+    assert not (run_dir / config.REVIEW_REPORT_MD_FILENAME).exists()
+    assert (run_dir / config.REVIEW_HISTORY_SUBDIR / "round-1" / config.REVIEW_REPORT_JSON_FILENAME).exists()
+
+
+def test_validate_outlook_clears_stale_review_report_md_after_brief_edit(isolated_runs_dir):
+    """Same cleanup, exercised through validate-outlook's call site and a brief edit
+    instead of a claims edit, and without the cap being exhausted -- this is also the
+    ordinary round-2 workflow, not just the post-cap edge case."""
+    run_dir = _seed_reviewed_run(isolated_runs_dir)
+    assert (run_dir / config.REVIEW_REPORT_MD_FILENAME).exists()
+
+    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text(
+        "# Outlook Brief\n\n## 1. Outlook in brief\n\nRevised after round 1 findings.\n\n"
+        "## 2. Q&A highlights\n\nRevenue grew steadily [claim-001].\n\n"
+        "## 5. Base case\n\nContinued momentum expected.\n"
+    )
+    assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
+
+    assert not (run_dir / config.REVIEW_REPORT_MD_FILENAME).exists()
+    assert (run_dir / config.REVIEW_HISTORY_SUBDIR / "round-1" / config.REVIEW_REPORT_JSON_FILENAME).exists()
+
+
+def test_analyze_preserves_review_report_md_when_bundle_unchanged(isolated_runs_dir):
+    """The cleanup must not fire on a no-op re-run: the round-1 bundle still matches
+    its snapshot, so the rendered review-report.md is still an accurate receipt."""
+    run_dir = _seed_reviewed_run(isolated_runs_dir)
+    assert (run_dir / config.REVIEW_REPORT_MD_FILENAME).exists()
+    assert main(["analyze", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
+    assert (run_dir / config.REVIEW_REPORT_MD_FILENAME).exists()
 
 
 def _finding(severity, artifact="claims.json#claim-001"):

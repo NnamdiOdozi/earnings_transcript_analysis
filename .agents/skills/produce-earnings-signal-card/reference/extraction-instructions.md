@@ -135,11 +135,13 @@ for the period (`--peers`, agent-supplied). This is the point of the web search:
 - Use consensus and peer claims to ground the forward-looking `outlook-brief.md`
   base/upside/downside cases — the brief cites these claim ids like any other.
 Two causality cautions: only trust a consensus/peer source dated **before** the event
-(the run drops dated post-event hits, but undated ones slip through — judge the
-content); and a peer that reported **after** this event was not knowable at the call,
-so don't treat its numbers as context management had. If `analyze` warns that web
-evidence was fetched but no claim cited any, that means these sources went unused —
-revisit whether a consensus/peer/surprise claim was missed.
+(the run drops `post_event` hits; `undated` and `unchecked` entries in
+`web-evidence.jsonl` still require you to judge the full content); and a peer that
+reported **after** this event was not knowable at the call, so don't treat its
+numbers as context management had. `pre_event` means only that provider metadata
+passed the cutoff. It does not prove that a mutable page contains no later edits.
+If `analyze` warns that web evidence was fetched but no claim cited any, that means
+these sources went unused — revisit whether a consensus/peer/surprise claim was missed.
 
 ## Numeric claims
 

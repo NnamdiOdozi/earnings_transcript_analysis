@@ -1,11 +1,12 @@
 {
-  "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000026/amzn-20260630.htm",
-  "title": "amzn-20260630",
+  "url": "https://abc.xyz/investor/events/event-details/2026/2026-Q2-Earnings-Call-2026-GgTAq7Is0z/default.aspx",
+  "title": "Alphabet Investor Relations - 2026 Q2 Earnings Call",
   "score": null,
   "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:Amazon",
+  "_select_key": "peer:Alphabet",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "Amazon 2026-q2 earnings results revenue growth",
-  "_retrieved_at": "2026-08-28T10:13:59Z"
+  "_query": "Alphabet 2026-q2 earnings results revenue growth",
+  "_retrieved_at": "2026-08-30T11:56:55Z"
 }

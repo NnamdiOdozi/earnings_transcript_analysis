@@ -16,7 +16,7 @@ import json
 import re
 import shutil
 import sys
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -32,6 +32,7 @@ from .models import (
     ReviewDiff,
     ReviewReport,
     SourceRecord,
+    TemporalStatus,
     ValidationIssue,
     ValidationResult,
     WebEvidence,
@@ -44,6 +45,7 @@ from .validate import (
     validate_metrics,
     validate_review_report,
 )
+from .validation_history import ValidationAttempt
 
 
 def _now_iso() -> str:
@@ -93,7 +95,11 @@ def _input_hashes(run_dir: Path) -> dict[str, str]:
     if manifest_path.is_file():
         try:
             manifest = Manifest.model_validate_json(manifest_path.read_text(encoding="utf-8"))
-            candidates.update({f"source:{source.path}": run_dir / source.path for source in manifest.sources})
+            root = run_dir.resolve()
+            for source in manifest.sources:
+                source_path = (run_dir / source.path).resolve()
+                if source.path and source_path.is_relative_to(root):
+                    candidates[f"source:{source.path}"] = source_path
         except ValidationError:
             pass
     return {name: sha256_hex(path.read_bytes()) for name, path in candidates.items() if path.exists()}
@@ -282,6 +288,24 @@ def _unclosed_review_report(run_dir: Path) -> bool:
     return report_path.read_bytes() != latest_snapshot.read_bytes()
 
 
+def _clear_stale_review_report_md(run_dir: Path) -> None:
+    """Delete the top-level review-report.md if it no longer describes the current
+    bundle. Once the round cap is exhausted, `_unclosed_review_report` deliberately
+    stops blocking analyze/validate-outlook (see its docstring) so a corrected bundle
+    can still be produced -- but that leaves a seemingly-final review-report.md sitting
+    next to files it no longer applies to. The accepted verdict is preserved unchanged
+    under _review_history/round-N/; only this top-level rendering is cleared. Safe to
+    call any time: a no-op when there's no completed round or the bundle still matches
+    the latest one.
+    """
+    completed = _review_round_count(run_dir)
+    if not completed:
+        return
+    md_path = run_dir / config.REVIEW_REPORT_MD_FILENAME
+    if md_path.exists() and not _review_bundle_matches_snapshot(run_dir, completed):
+        md_path.unlink()
+
+
 def _block_if_unclosed_review_report(run_dir: Path) -> int | None:
     """Shared guard for cmd_analyze/cmd_validate_outlook: returns an exit code to
     return immediately if blocked, or None to proceed. See _unclosed_review_report."""
@@ -418,7 +442,7 @@ def _parse_event_cutoff(event_date: str | None):
     if not event_date:
         return None
     try:
-        return datetime.strptime(event_date[:10], "%Y-%m-%d").date()
+        return date.fromisoformat(event_date[:10])
     except (ValueError, TypeError):
         return None
 
@@ -429,22 +453,29 @@ def _filter_post_event(hits: list[dict], event_cutoff) -> tuple[list[dict], int]
     Hits with no parseable published_date are KEPT, not dropped (undated post-event
     slippage is a consciously-accepted residual risk -- see README known limitations).
     Returns (kept_hits, excluded_count). With no cutoff, keeps everything."""
-    if not event_cutoff:
-        return list(hits), 0
     kept: list[dict] = []
     excluded = 0
     for hit in hits:
-        published = hit.get("published_date")
-        if published:
-            try:
-                published_date = datetime.strptime(published[:10], "%Y-%m-%d").date()
-            except ValueError:
-                published_date = None
-            if published_date and published_date > event_cutoff:
-                excluded += 1
-                continue
+        temporal_status = _classify_temporal_status(hit.get("published_date"), event_cutoff)
+        hit["_temporal_status"] = temporal_status
+        if temporal_status == "post_event":
+            excluded += 1
+            continue
         kept.append(hit)
     return kept, excluded
+
+
+def _classify_temporal_status(published_date: str | None, event_cutoff) -> TemporalStatus:
+    """Classify provider publication metadata without interpreting page content."""
+    if not event_cutoff:
+        return "unchecked"
+    if not published_date:
+        return "undated"
+    try:
+        parsed_date = date.fromisoformat(published_date[:10])
+    except (ValueError, TypeError):
+        return "undated"
+    return "post_event" if parsed_date > event_cutoff else "pre_event"
 
 
 def _select_round_robin(hits: list[dict], max_extracted: int) -> list[dict]:
@@ -528,6 +559,7 @@ def cmd_discover_peers(args: argparse.Namespace) -> int:
         hits = web_search(query, provider=provider, max_results=max_results, end_date=provider_end_date)
         for hit in hits:
             hit["_class"] = "peer_group"  # tag for the shared selection helper below
+            hit["_temporal_status"] = _classify_temporal_status(hit.get("published_date"), event_cutoff)
         all_hits.extend(hits)
         for hi, hit in enumerate(hits, start=1):
             retrieved_at = _now_iso()
@@ -782,6 +814,7 @@ def cmd_prepare(args: argparse.Namespace) -> int:
             for hit in hits:
                 hit["_class"] = qclass  # coarse label written to the raw archive (provenance)
                 hit["_select_key"] = select_key  # finer bucket the round-robin interleaves on
+                hit["_temporal_status"] = _classify_temporal_status(hit.get("published_date"), event_cutoff)
             all_hits.extend(hits)
             # archive_all_sources controls how many hits per query we keep -- the
             # config default (true) matches "narrow queries, but don't discard what
@@ -873,6 +906,7 @@ def cmd_prepare(args: argparse.Namespace) -> int:
                         title=hit.get("title"),
                         publisher=None,
                         published_at=hit.get("published_date"),
+                        temporal_status=hit.get("_temporal_status", "unchecked"),
                         retrieved_at=_now_iso(),
                         content_path=str(content_path.relative_to(run_dir)),
                         content_sha256=sha256_hex(content_bytes),
@@ -932,9 +966,12 @@ def cmd_prepare(args: argparse.Namespace) -> int:
 
 def cmd_analyze(args: argparse.Namespace) -> int:
     run_dir = config.run_dir(args.ticker, args.event_id)
+    attempt = ValidationAttempt.start(run_dir, _input_hashes(run_dir))
     blocked = _block_if_unclosed_review_report(run_dir)
     if blocked is not None:
+        attempt.finish("blocked", blocked)
         return blocked
+    _clear_stale_review_report_md(run_dir)
     claims_path = run_dir / config.CLAIMS_FILENAME
     transcript_path = run_dir / config.NORMALIZED_SUBDIR / config.TRANSCRIPT_FILENAME
     financials_path = run_dir / config.EVIDENCE_SUBDIR / config.FINANCIALS_FILENAME
@@ -944,6 +981,7 @@ def cmd_analyze(args: argparse.Namespace) -> int:
 
     if not claims_path.exists():
         print(f"error: {claims_path} not found. Write claims.json first (see skill).", file=sys.stderr)
+        attempt.finish("blocked", 2)
         return 2
 
     manifest_path = run_dir / config.MANIFEST_FILENAME
@@ -955,18 +993,22 @@ def cmd_analyze(args: argparse.Namespace) -> int:
     manifest = _load_validated_json(manifest_path, Manifest)
     if manifest is None:
         print(f"error: {manifest_path} not found or invalid. Run `earnings prepare` first.", file=sys.stderr)
+        attempt.finish("blocked", 2)
         return 2
     if not manifest.sources:
         print(f"error: {manifest_path} has no sources recorded. Run `earnings prepare` first.", file=sys.stderr)
+        attempt.finish("blocked", 2)
         return 2
     if manifest.ticker != args.ticker.upper() or manifest.event_id != args.event_id:
         print(f"error: {manifest_path} belongs to a different ticker or event.", file=sys.stderr)
+        attempt.finish("blocked", 2)
         return 2
     manifest_errors = _manifest_source_errors(run_dir, manifest)
     if manifest_errors:
         print(f"error: {manifest_path} failed provenance checks:", file=sys.stderr)
         for error in manifest_errors:
             print(f"  {error}", file=sys.stderr)
+        attempt.finish("blocked", 2)
         return 2
 
     from .models import Segment
@@ -981,11 +1023,13 @@ def cmd_analyze(args: argparse.Namespace) -> int:
 
     web_evidence_path = run_dir / config.EVIDENCE_SUBDIR / config.WEB_EVIDENCE_FILENAME
     web_evidence_texts: dict[str, str] = {}
+    web_evidence_statuses: dict[str, TemporalStatus] = {}
     if web_evidence_path.exists():
         with web_evidence_path.open(encoding="utf-8") as fh:
             for line in fh:
                 we = WebEvidence.model_validate_json(line)
                 web_evidence_texts[we.id] = (run_dir / we.content_path).read_text(encoding="utf-8")
+                web_evidence_statuses[we.id] = we.temporal_status
 
     try:
         raw_claims = json.loads(claims_path.read_text(encoding="utf-8"))
@@ -997,10 +1041,11 @@ def cmd_analyze(args: argparse.Namespace) -> int:
             issues=[ValidationIssue(claim_index=-1, check="schema", message=f"Could not parse {config.CLAIMS_FILENAME}: {exc}")],
         )
         _write_validation(run_dir, result)
+        attempt.finish("failed", 1, result, validation_path=run_dir / config.VALIDATION_FILENAME)
         print(f"Validation FAILED: could not parse {config.CLAIMS_FILENAME}: {exc}")
         return 1
 
-    result = validate_claims(claims, segments_by_id, financials, web_evidence_texts)
+    result = validate_claims(claims, segments_by_id, financials, web_evidence_texts, web_evidence_statuses)
 
     metrics_path = run_dir / config.METRICS_FILENAME
     if metrics_path.exists():
@@ -1015,6 +1060,7 @@ def cmd_analyze(args: argparse.Namespace) -> int:
                 issues=[ValidationIssue(claim_index=-1, check="schema", message=f"Could not parse {config.METRICS_FILENAME}: {exc}")],
             )
             _write_validation(run_dir, result)
+            attempt.finish("failed", 1, result, validation_path=run_dir / config.VALIDATION_FILENAME)
             print(f"Validation FAILED: could not parse {config.METRICS_FILENAME}: {exc}")
             return 1
         metric_issues = validate_metrics(metrics, claim_ids)
@@ -1034,6 +1080,7 @@ def cmd_analyze(args: argparse.Namespace) -> int:
         print(f"  WARNING: {warning}")
 
     if not result.ok:
+        attempt.finish("failed", 1, result, validation_path=run_dir / config.VALIDATION_FILENAME)
         print(f"Validation FAILED: {len(result.issues)} issue(s). See {config.VALIDATION_FILENAME}.")
         for issue in result.issues:
             print(f"  claim[{issue.claim_index}] {issue.check}: {issue.message}")
@@ -1041,6 +1088,7 @@ def cmd_analyze(args: argparse.Namespace) -> int:
 
     card = _render_signal_card(args.ticker, args.event_id, claims, segments_by_id)
     (run_dir / config.SIGNAL_CARD_FILENAME).write_text(card, encoding="utf-8")
+    attempt.finish("passed", 0, result, validation_path=run_dir / config.VALIDATION_FILENAME)
     print(f"Validation passed ({result.checked_claims} claims). Wrote {config.SIGNAL_CARD_FILENAME}.")
     return 0
 
@@ -1054,6 +1102,7 @@ def cmd_validate_outlook(args: argparse.Namespace) -> int:
     blocked = _block_if_unclosed_review_report(run_dir)
     if blocked is not None:
         return blocked
+    _clear_stale_review_report_md(run_dir)
     validation_path = run_dir / config.VALIDATION_FILENAME
     outlook_path = run_dir / config.OUTLOOK_BRIEF_FILENAME
     claims_path = run_dir / config.CLAIMS_FILENAME

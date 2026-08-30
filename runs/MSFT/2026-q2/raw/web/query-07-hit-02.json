@@ -1,11 +1,12 @@
 {
-  "url": "https://finance.yahoo.com/technology/ai/articles/microsoft-amazon-spending-billions-ai-174738514.html",
-  "title": "Microsoft and Amazon Are Spending Billions on AI. 1 Is Getting Far Better Returns.",
+  "url": "https://finance.yahoo.com/markets/stocks/articles/microsoft-vs-alphabet-why-stand-160740120.html",
+  "title": "Microsoft Vs. Alphabet: How and Why They Stand Head-and-Shoulders Above Other Hyperscalers",
   "score": null,
   "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:Amazon",
+  "_select_key": "peer:Alphabet",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "Amazon quarterly results versus Microsoft MSFT",
-  "_retrieved_at": "2026-08-28T10:13:59Z"
+  "_query": "Alphabet quarterly results versus Microsoft MSFT",
+  "_retrieved_at": "2026-08-30T11:56:56Z"
 }

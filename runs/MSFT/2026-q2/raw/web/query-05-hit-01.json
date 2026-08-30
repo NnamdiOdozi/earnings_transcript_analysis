@@ -4,8 +4,9 @@
   "score": null,
   "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:Alphabet",
+  "_select_key": "peer:Oracle",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "Alphabet quarterly results versus Microsoft MSFT",
-  "_retrieved_at": "2026-08-28T10:13:58Z"
+  "_query": "Oracle quarterly results versus Microsoft MSFT",
+  "_retrieved_at": "2026-08-30T11:56:54Z"
 }

@@ -1,11 +1,12 @@
 {
-  "url": "https://finviz.com/news/289503/microsoft-set-to-report-q2-2026-earnings-analysts-eye-azure-growth-ai-spending-capex-as-shares-dip-over-6-in-6-months",
-  "title": "Microsoft Set To Report Q2 2026 Earnings: Analysts Eye Azure Growth, AI Spending, CapEx As Shares Dip Over 6% In 6 Months",
+  "url": "https://seekingalpha.com/article/4862628-microsoft-get-reading-for-another-blowout-quarter-preview-upgrade",
+  "title": "Microsoft: Get Reading For Another Blowout Quarter ...",
   "score": null,
-  "published_date": null,
+  "published_date": "2026-01-26T00:00:00.000Z",
   "_class": "consensus",
   "_select_key": "consensus",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
   "_query": "Microsoft MSFT 2026-q2 earnings preview expectations forecast",
-  "_retrieved_at": "2026-08-28T10:13:58Z"
+  "_retrieved_at": "2026-08-30T11:56:51Z"
 }

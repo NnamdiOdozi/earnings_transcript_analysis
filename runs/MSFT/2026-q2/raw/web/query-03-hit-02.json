@@ -1,11 +1,12 @@
 {
-  "url": "https://tickerleague.com/companies/MSFT/estimates",
-  "title": "Estimates for Microsoft (MSFT)",
+  "url": "https://www.barchart.com/stocks/quotes/MSFT/earnings-estimates",
+  "title": "MSFT Earnings Estimates for Microsoft Corp Stock - Barchart.com",
   "score": null,
   "published_date": null,
   "_class": "consensus",
   "_select_key": "consensus",
+  "_temporal_status": "undated",
   "_provider": "exa",
   "_query": "Microsoft MSFT Wall Street consensus estimates ahead of earnings",
-  "_retrieved_at": "2026-08-28T10:13:58Z"
+  "_retrieved_at": "2026-08-30T11:56:52Z"
 }

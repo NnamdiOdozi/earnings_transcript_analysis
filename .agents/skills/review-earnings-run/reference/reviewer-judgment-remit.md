@@ -88,7 +88,9 @@ Things structurally outside what a deterministic check can evaluate:
    `published_date`/manifest metadata alone -- it's frequently absent or
    unenforced by the search provider (see README "Known limitations"); read the
    cited `web_evidence` content itself and flag anything referencing facts that
-   could only be known after the event date.
+   could only be known after the event date. Treat `temporal_status` as a routing
+   aid, not proof: `undated`/`unchecked` demand scrutiny, while `pre_event` can
+   still describe a living page updated after the event.
 
 7. **Completeness and balance.** Does the outlook brief omit material guidance,
    risks, or a Q&A answer that runs contrary to its overall narrative? An outlook

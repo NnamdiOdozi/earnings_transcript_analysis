@@ -279,6 +279,8 @@ runs/<ticker>/<event-id>/
   claims.json                 # quote-anchored claims (agent-written)
   metrics.json                # optional: company-defined metrics (agent-written)
   validation.json             # per-claim / per-metric pass/fail detail + real-clock validated_at
+  _validation_history/
+    attempt-<N>_<timestamp>/  # claims/optional metrics/validation + receipt for every analyze invocation
   signal-card.md               # written only after validation passes
   outlook-brief.md            # agent-authored forward-looking synthesis
   outlook-validation.json     # Python's real-clock record of when validate-outlook last checked outlook-brief.md
@@ -302,9 +304,9 @@ which when you're deciding how much to trust a number:
 |---|---|---|
 | `manifest.json`, `raw/`, `normalized/transcript.jsonl` | Python | Mechanical fetch/transform of the source — no interpretation. |
 | `evidence/financials.json` | Python (SEC XBRL API) | Self-documenting — carries its own filing accession number, so any figure traces to the exact filing it came from. |
-| `evidence/web-evidence.jsonl` | Python (Exa/Tavily extract API) | Full extracted content, so it's quote-checkable — not just a search snippet. |
+| `evidence/web-evidence.jsonl` | Python (Exa/Tavily extract API) | Full extracted content, so it's quote-checkable — not just a search snippet. Each entry records a mechanical `temporal_status`; undated and mutable pages still need agent review. |
 | `claims.json`, `metrics.json` | **Agent** | Interpretive — the agent decides what's worth reporting. `Metric` carries a `source` field so provenance isn't only implied by the file living next to `claims.json` rather than under `evidence/`. Python only checks it, never writes it. |
-| `validation.json`, `signal-card.md` | Python | Deterministic check results, then a mechanical re-format of already-validated claims — not interpretive. |
+| `validation.json`, `_validation_history/`, `signal-card.md` | Python | Current deterministic result, append-only per-attempt snapshots and receipts, then a mechanical re-format of already-validated claims — not interpretive. |
 | `outlook-brief.md` | **Agent** | Fully interpretive synthesis (base/upside/downside cases). Python only validates the claim ids it cites resolve — it does not grade the reasoning. |
 | `outlook-validation.json` | Python | `outlook-brief.md` carries no timestamp of its own (agent-authored, never rewritten); this is the real-clock record of when it was last checked, so a stale unvalidated brief can't be mistaken for a freshly-checked one. |
 | `review-report.json` | **Agent** (fresh-context reviewer) | Judgment Python structurally cannot make (fair reading, narrative balance), bound to the exact claims, brief, review mode, and later-round diff hashes. Its `reviewed_at` field is the agent's own self-report — the agent has no real clock, so treat it as approximate, not authoritative (see `review-report.md`'s separate "Checked at" line). |
@@ -383,8 +385,10 @@ cross-industry contamination.
   2026-08-26 returned identical results with and without the date param on both
   providers, including hits published years past the cutoff. The **client-side** layer
   (dropping any hit whose `published_date` is after `--event-date`) is real
-  enforcement, but most hits carry no `published_date`, so they pass through unchecked.
-  Net: a *dated* post-event source is reliably excluded; an *undated* one is not. This
+  enforcement, but most hits carry no `published_date`, so they cannot be excluded
+  mechanically. Python now labels every returned hit `pre_event`, `post_event`,
+  `undated`, or `unchecked` when no cutoff was supplied. Net: a *dated* post-event
+  source is reliably excluded; an *undated* one is labelled but remains eligible. This
   matters more now that web search targets **consensus** and **peer** results — a
   consensus page is often undated *and* living (the same URL shows the pre-event
   estimate before the call and the reported beat/miss after), so an undated consensus

@@ -1,11 +1,12 @@
 {
-  "url": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Record-Q4-and-FY-2026-Results-Driven-by-Cloud-Infrastructure--Cloud-Applications/",
-  "title": "Oracle - Oracle Announces Record Q4 and FY 2026 Results Driven by Cloud Infrastructure & Cloud Applications",
+  "url": "https://finance.yahoo.com/technology/ai/articles/microsoft-amazon-spending-billions-ai-174738514.html",
+  "title": "Microsoft and Amazon Are Spending Billions on AI. 1 Is Getting Far Better Returns.",
   "score": null,
   "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:Oracle",
+  "_select_key": "peer:Amazon",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "Oracle quarterly results versus Microsoft MSFT",
-  "_retrieved_at": "2026-08-28T10:13:59Z"
+  "_query": "Amazon quarterly results versus Microsoft MSFT",
+  "_retrieved_at": "2026-08-30T11:57:00Z"
 }

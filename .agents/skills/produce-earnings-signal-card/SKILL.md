@@ -42,12 +42,17 @@ Use this skill on a source pack already built by `build-earnings-source-pack`. D
 
    This runs Python's deterministic validators (exact-quote, numeric, calculation,
    inference-citation, metric-provenance, schema) and writes `validation.json`.
+   Every invocation also creates a numbered, timestamped folder under
+   `_validation_history/`, preserving that attempt's exact `claims.json`, optional
+   `metrics.json`, validation result, and receipt. Do not delete or rewrite an old
+   attempt when correcting the current files.
 
 5. **If validation fails:** the command exits non-zero and does **not** write
    `signal-card.md`. Read `validation.json`, fix the offending claims/metrics
    (correct the quote, drop an unsupported number, fix a calculation block, add a
    missing citation), and re-run step 4. Do not hand-edit `signal-card.md` directly
-   and do not bypass a failed validation by writing the card yourself.
+   and do not bypass a failed validation by writing the card yourself. The rerun
+   becomes the next attempt folder; prior failures remain available for analysis.
 
 6. **If validation passes:** `signal-card.md` is written automatically, grouped by
    category, following `reference/signal-card-template.md`.

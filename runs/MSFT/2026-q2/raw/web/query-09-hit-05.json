@@ -1,11 +1,12 @@
 {
-  "url": "https://finance.yahoo.com/news/microsoft-vs-oracle-cloud-ai-151100811.html",
-  "title": "Microsoft vs. Oracle: Which Cloud & AI Giant Has an Edge Right Now?",
+  "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323632/msft-ex99_1.htm",
+  "title": "EX-99.1",
   "score": null,
   "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:Oracle",
+  "_select_key": "peer:Amazon",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "Oracle quarterly results versus Microsoft MSFT",
-  "_retrieved_at": "2026-08-28T10:13:59Z"
+  "_query": "Amazon quarterly results versus Microsoft MSFT",
+  "_retrieved_at": "2026-08-30T11:57:00Z"
 }

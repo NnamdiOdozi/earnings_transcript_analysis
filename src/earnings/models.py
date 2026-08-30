@@ -7,6 +7,7 @@ from pydantic import BaseModel, Field
 
 Section = Literal["prepared", "qa"]
 ClaimStatus = Literal["reported", "forward_looking"]
+TemporalStatus = Literal["pre_event", "post_event", "undated", "unchecked"]
 
 # Generic evidence categories -- deliberately industry-agnostic. No category names a
 # sector-specific metric (e.g. no "cloud_revenue" or "same_store_sales"); those live in
@@ -54,6 +55,9 @@ class WebEvidence(BaseModel):
     title: Optional[str] = None
     publisher: Optional[str] = None
     published_at: Optional[str] = None
+    # Python compares provider-supplied publication metadata with the event cutoff.
+    # "undated" and "unchecked" still require semantic hindsight review.
+    temporal_status: TemporalStatus = "unchecked"
     retrieved_at: str  # ISO 8601 UTC timestamp
     content_path: str  # path relative to the run directory, e.g. evidence/web/web-001.md
     content_sha256: str

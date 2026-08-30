@@ -1,11 +1,12 @@
 {
-  "url": "https://tickerleague.com/companies/MSFT/estimates",
-  "title": "Estimates for Microsoft (MSFT)",
+  "url": "https://sg.finance.yahoo.com/quote/MSFT/analysis/",
+  "title": "Microsoft Corporation (MSFT) analyst ratings, estimates and forecasts \u2013 Yahoo Finance",
   "score": null,
   "published_date": null,
   "_class": "consensus",
   "_select_key": "consensus",
+  "_temporal_status": "undated",
   "_provider": "exa",
   "_query": "Microsoft MSFT 2026-q2 analyst consensus estimate revenue EPS",
-  "_retrieved_at": "2026-08-28T10:13:58Z"
+  "_retrieved_at": "2026-08-30T11:56:50Z"
 }

@@ -92,7 +92,7 @@
     "segment_id": "seg-0004",
     "speaker": "AMY HOOD",
     "status": "reported",
-    "values": {"commercial_rpo_billions": 625, "commercial_rpo_growth_percent": 110},
+    "values": {"commercial_rpo_billions": 625, "commercial_rpo_growth_percent": 110, "weighted_average_duration_years": 2.5},
     "confidence": 0.99,
     "inferred_from": [],
     "period": "as of 31 Dec 2025"

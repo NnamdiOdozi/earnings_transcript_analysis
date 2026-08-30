@@ -10,7 +10,15 @@ from typing import Any
 
 from .calculations import recompute
 from .config import NUMERIC_MATCH_TOLERANCE
-from .models import Claim, Metric, ReviewReport, Segment, ValidationIssue, ValidationResult
+from .models import (
+    Claim,
+    Metric,
+    ReviewReport,
+    Segment,
+    TemporalStatus,
+    ValidationIssue,
+    ValidationResult,
+)
 from .process import normalize_whitespace
 
 # How claim ids are cited in free text (claims.json ids, and inside outlook-brief.md's
@@ -367,6 +375,7 @@ def validate_claims(
     segments_by_id: dict[str, Segment],
     financials: dict[str, Any],
     web_evidence_texts: dict[str, str] | None = None,
+    web_evidence_statuses: dict[str, TemporalStatus] | None = None,
 ) -> ValidationResult:
     """Run all checks over every claim. A claim with no resolvable evidence
     reference (bad segment_id/web_evidence_id pairing, or a dangling id) fails
@@ -379,6 +388,7 @@ def validate_claims(
     issues: list[ValidationIssue] = []
     claim_ids = {claim.id for claim in claims if claim.id}
     web_evidence_texts = web_evidence_texts or {}
+    web_evidence_statuses = web_evidence_statuses or {}
 
     # Every claim.id must be non-empty and globally unique across this claims.json --
     # a missing id already fails pydantic parsing at load time (see models.Claim), so
@@ -435,6 +445,15 @@ def validate_claims(
                 )
                 continue
             location = claim.web_evidence_id
+            if web_evidence_statuses.get(claim.web_evidence_id) == "post_event":
+                issues.append(
+                    ValidationIssue(
+                        claim_index=idx,
+                        check="temporal_eligibility",
+                        message=f"Web evidence {claim.web_evidence_id!r} was published after the event cutoff",
+                    )
+                )
+                continue
 
         quote_error = check_exact_quote(claim, text, location)
         if quote_error:

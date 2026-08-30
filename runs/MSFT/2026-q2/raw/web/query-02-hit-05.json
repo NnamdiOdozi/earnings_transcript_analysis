@@ -1,11 +1,12 @@
 {
-  "url": "https://www.tipranks.com/news/analysts-weigh-in-on-microsoft-stock-msft-ahead-of-q2-earnings",
-  "title": "",
+  "url": "https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q2",
+  "title": "Microsoft FY26 Second Quarter Earnings Conference Call",
   "score": null,
-  "published_date": null,
+  "published_date": "2026-01-28T00:00:00.000Z",
   "_class": "consensus",
   "_select_key": "consensus",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
   "_query": "Microsoft MSFT 2026-q2 earnings preview expectations forecast",
-  "_retrieved_at": "2026-08-28T10:13:58Z"
+  "_retrieved_at": "2026-08-30T11:56:51Z"
 }

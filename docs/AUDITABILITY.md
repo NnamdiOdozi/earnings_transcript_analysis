@@ -63,6 +63,12 @@ it happened, which company, and the same fingerprint:
 This is the audit trail across the whole history of work — "what did we process, and when" —
 without needing to open any individual run.
 
+Each deterministic claims check is also retained inside its own run. Every
+`earnings analyze` invocation creates a numbered, timestamped folder under
+`_validation_history/`. It preserves the exact claims submitted, optional metrics,
+the validation report and a receipt containing the outcome and input hashes. This
+makes failed correction cycles visible instead of leaving only the final pass.
+
 ## 3. The heart of it: every claim is quote-anchored
 
 This is the single most important control. The AI is not allowed to *summarise loosely*. For
@@ -142,6 +148,13 @@ defences: Tavily states it "acts as a firewall … blocking malicious prompt inj
 before they ever reach your models"; Exa publishes SOC 2 and zero-data-retention assurances but
 no prompt-injection filter specifically. Either way, that evidence is still bound by the same
 exact-quote and number checks, which cap its blast radius too.
+
+Python also labels provider publication metadata as `pre_event`, `post_event`,
+`undated`, or `unchecked`. Dated post-event results are excluded from citable
+evidence. An undated label is not a rejection because many useful pages do not expose
+a structured publication date. The reviewer must still inspect the page itself for
+hindsight or later updates. A pre-event label proves only the metadata comparison,
+not that every sentence on a mutable page existed at that time.
 
 
 ## 6. Lower cost and more consistency

@@ -4,7 +4,8 @@
   "score": null,
   "published_date": null,
   "_class": "peer_group",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "Microsoft Corporation MSFT closest competitors comparable stocks analysts",
-  "_retrieved_at": "2026-08-28T21:15:18Z"
+  "_query": "Microsoft MSFT closest competitors comparable stocks analysts",
+  "_retrieved_at": "2026-08-30T11:55:35Z"
 }

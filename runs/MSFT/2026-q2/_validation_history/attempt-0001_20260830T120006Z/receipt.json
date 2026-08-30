@@ -1,11 +1,15 @@
 {
-  "ok": true,
+  "attempt": 1,
+  "started_at": "2026-08-30T12:00:06Z",
+  "finished_at": "2026-08-30T12:00:06Z",
+  "outcome": "failed",
+  "exit_code": 1,
   "checked_claims": 27,
-  "issues": [],
-  "warnings": [],
-  "validated_at": "2026-08-30T12:00:32Z",
+  "issue_counts": {
+    "numeric": 1
+  },
   "input_hashes": {
-    "claims.json": "11e6b2914cd5f1e3ca09e2037f5e13042bbbf16ba0d106d5b6877d2df4bdc921",
+    "claims.json": "90bb6e6b9991b08333fb7a962b5a5ebe650ad2ef5c4d34e8e8462556ee9945e8",
     "transcript.jsonl": "76e5eb1939b61fb235b636419ff5f06afcdc79c353e8c692c9c00c2e23a94650",
     "financials.json": "44cbe96c9fef1efdf6d3fbcf3dd0da345edbecd5bc0bb7fab5deeeb424603ac5",
     "manifest.json": "98befaa969a44f006f395c622f812b561efe72210ba4ab2f2a5146c883e14fd7",

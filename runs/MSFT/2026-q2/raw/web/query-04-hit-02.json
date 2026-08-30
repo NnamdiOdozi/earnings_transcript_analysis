@@ -1,11 +1,12 @@
 {
-  "url": "https://abc.xyz/investor/events/event-details/2026/2026-Q2-Earnings-Call-2026-GgTAq7Is0z/default.aspx",
-  "title": "Alphabet Investor Relations - 2026 Q2 Earnings Call",
+  "url": "https://www.oracle.com/news/announcement/q2fy26-earnings-release-2025-12-10/",
+  "title": "Oracle Announces Fiscal Year 2026 Second Quarter ...",
   "score": null,
-  "published_date": null,
+  "published_date": "2025-12-10T00:00:00.000Z",
   "_class": "peer",
-  "_select_key": "peer:Alphabet",
+  "_select_key": "peer:Oracle",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "Alphabet 2026-q2 earnings results revenue growth",
-  "_retrieved_at": "2026-08-28T10:13:58Z"
+  "_query": "Oracle 2026-q2 earnings results revenue growth",
+  "_retrieved_at": "2026-08-30T11:56:53Z"
 }

@@ -1,11 +1,12 @@
 {
-  "url": "https://quarter-results.com/financial-reports/NYSE/ORCL/Q2/2026/orcl-q2-2026-earnings-report/",
-  "title": "Oracle Corporation (ORCL) Q2 2026 Earnings Report | Quarter Results",
+  "url": "https://www.constellationr.com/insights/news/aws-sees-q2-boom-sales-growth-37",
+  "title": "AWS sees Q2 boom with sales growth of 37% | Constellation Research",
   "score": null,
-  "published_date": "2025-12-10T00:00:00.000Z",
+  "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:Oracle",
+  "_select_key": "peer:Amazon",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "Oracle 2026-q2 earnings results revenue growth",
-  "_retrieved_at": "2026-08-28T10:13:59Z"
+  "_query": "Amazon 2026-q2 earnings results revenue growth",
+  "_retrieved_at": "2026-08-30T11:56:57Z"
 }

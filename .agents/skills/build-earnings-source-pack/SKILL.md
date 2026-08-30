@@ -79,6 +79,10 @@ Use this skill when the user gives you a ticker, an event date/id, and a transcr
 6. **Verify the pack.** Open `manifest.json` and confirm each source has a sha256
    hash, retrieval timestamp, and origin. Open `normalized/transcript.jsonl` and
    spot-check that segments look correct (prepared vs qa, speakers where obvious).
+   When `evidence/web-evidence.jsonl` exists, also inspect each entry's
+   `temporal_status`: `pre_event` is metadata-dated on/before the event;
+   `undated` needs content-level judgment later; `unchecked` means no usable event
+   cutoff was supplied. A `post_event` result must not appear as citable evidence.
 
 7. **Report back to the user** the run directory path and segment counts. Do not
    proceed to claim extraction in this skill — that is `produce-earnings-signal-card`.

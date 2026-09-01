@@ -66,7 +66,7 @@ the exact-quote requirement.
   `Metric.source_claim_ids`, an `analytical_inference`'s `inferred_from`, and
   `outlook-brief.md`'s evidence appendix can all cite it.
 - A claim cites **exactly one** evidence source: either `segment_id` (a transcript
-  segment) or `web_evidence_id` (extracted Tavily content — see "Citing web
+  segment) or `web_evidence_id` (extracted web content — see "Citing web
   evidence" below). Never set both, never set neither.
 - `status` is `"reported"` for results already achieved, `"forward_looking"` for
   guidance/expectations.
@@ -115,7 +115,8 @@ punctuation mark must match.
 
 If `earnings prepare` extracted web evidence (check for
 `evidence/web-evidence.jsonl` in the run directory — it exists only when web search
-(Exa/Tavily) was enabled and at least one hit was successfully extracted), a claim
+(the configured provider, Exa by default) was enabled and at least one hit was
+successfully extracted), a claim
 can cite one of those sources instead of a transcript segment: set `web_evidence_id`
 (e.g. `"web-003"`) instead of `segment_id`, and leave `segment_id` unset. Everything
 else works identically — `quote` must be an exact substring of that source's

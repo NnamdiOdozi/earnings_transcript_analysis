@@ -56,10 +56,12 @@ Four ideas hold this design together:
    claim the agent later writes is checked back against that same boundary —
    exact quote, real number, correct calculation. Nothing partial or
    unverified is ever produced.
-3. **The agent reasons inside that boundary, not around it.** It decides
-   what's worth reporting, drafts the interpretive outlook, and builds
-   scenarios — but every substantive claim it makes must trace back to
-   something Python can mechanically confirm.
+3. **The agent reasons inside that boundary, not around it.** It's free to
+   prioritise, compare evidence across sources, challenge management's framing,
+   and draw new qualitative conclusions from several validated claims at once —
+   synthesis Python structurally cannot do. What it can't do is invent a fact,
+   a quote, or a number: every substantive claim and every material figure it
+   writes must trace back to something Python can mechanically confirm.
 4. **A second, independent agent pass challenges the reasoning.** A
    fresh-context reviewer — with no memory of why any drafting decision was
    made — judges fairness, narrative balance, and completeness: the things a

@@ -26,7 +26,11 @@ Do **not** re-derive anything Python has already deterministically proven:
 - Do not re-run exact-quote matching (`check_exact_quote`) or numeric grounding
   (`check_numeric`, `check_claim_text_numbers`, `check_calculation_inputs`).
 - Do not re-check claim-id citation resolution (`check_inference_citations`,
-  `check_outlook_brief_citations`).
+  `check_outlook_brief_citations`) or material-number grounding
+  (`check_outlook_brief_numbers` — a currency/%/magnitude-word/bps/"x"-multiple
+  figure not grounded in its cited claim). Python already proved *that* a number
+  is grounded; it cannot judge whether the conclusion built on it is *sound* —
+  that's yours (see item 8 below).
 
 All of that is `earnings analyze`'s and `earnings validate-outlook`'s job, and both
 must have already passed before you begin. Verify that `validation.json` and
@@ -97,10 +101,25 @@ Things structurally outside what a deterministic check can evaluate:
    that only cites confirming evidence while an available claim in `claims.json`
    cuts the other way is a real finding.
 
-8. **Reasoning quality.** For `analytical_inference` claims and the outlook's
-   base/upside/downside cases, does the stated conclusion actually follow from its
-   cited evidence, and is uncertainty communicated honestly (not overstated
-   confidence on a thin evidentiary base)?
+8. **Reasoning quality.** Python can only confirm that a citation resolves and a
+   number is grounded, not that the inference built on them is sound. For
+   `analytical_inference` claims, every qualitative synthesis in the outlook prose
+   (see `outlook-brief-template.md`'s freedom envelope), and the base/upside/
+   downside cases, judge specifically:
+   - **Unsupported inferential leaps** — does the stated conclusion actually follow
+     from its cited claims, or does it go further than they support? ("Do claims
+     012, 018, and 021 actually justify this conclusion?", not "does claim-012
+     exist?".)
+   - **Unjustified confidence** — is uncertainty communicated honestly, or is a
+     thin evidentiary base dressed up in confident prose?
+   - **Narrative cherry-picking and ignored counterevidence** — did the brief
+     surface the strongest evidence against its own base case (the freedom
+     envelope asks the author to), or quietly drop it?
+   - **Scenarios disconnected from validated evidence** — does each
+     upside/downside case trace a real conditions → mechanism → consequence
+     chain back to cited claims, or is it generic, evidence-free speculation?
+   - **Fact vs. interpretation blurring** — can you tell, from the prose alone,
+     which sentences are reported fact and which are the author's reading of it?
 
 9. **Process compliance (confirmation, not re-derivation).** Confirm each
    mandatory stage produced its expected artifact: `manifest.json` exists with

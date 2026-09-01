@@ -370,6 +370,115 @@ def check_outlook_brief_dollar_escaping(outlook_text: str) -> list[str]:
     ]
 
 
+# A material number carries an explicit quantitative marker -- currency, percent,
+# a magnitude word, basis points, or an "x" multiple -- so this deliberately does NOT
+# fire on bare unitless numbers (markdown heading ordinals like "## 5. Base case", list
+# numbering, or day-of-month/period digits like the mandated "3 months to 31 Dec 2025"
+# phrasing). Those would otherwise make check_outlook_brief_numbers reject every real
+# brief on sight. A bare magnitude count with no unit word ("15 seats") is out of scope
+# for this first pass -- see reference/outlook-brief-template.md.
+_MAGNITUDE_WORD = r"thousand|million|billion|trillion|bps|basis\s+points"
+_MATERIAL_SUFFIX_RE = re.compile(rf"^(?:x\b|\s*(?:{_MAGNITUDE_WORD})\b)", re.IGNORECASE)
+_LIST_ITEM_RE = re.compile(r"^\s*(?:[-*+]|\d+\.)\s+")
+_HEADING_RE = re.compile(r"^\s*#+\s")
+
+
+def _material_numbers(text: str) -> set[tuple[float, bool]]:
+    """Numbers in free prose carrying a financial/quantitative unit marker: a currency
+    symbol, %, a magnitude word, bps/basis points, or a trailing "x" multiple (e.g.
+    "\\$81.3B", "37%", "15 million", "200 bps", "3.2x"). Returns (value, is_percent)
+    pairs so callers can apply the same percent/fraction leniency as
+    check_claim_text_numbers (10% written vs. 0.10 stored).
+    """
+    cleaned = _RANGE_HYPHEN_RE.sub(" ", text)
+    numbers: set[tuple[float, bool]] = set()
+    for match in _NUMBER_RE.finditer(cleaned):
+        token = match.group()
+        is_percent = "%" in token
+        material = is_percent or any(c in token for c in "$€£")
+        if not material:
+            trailing = cleaned[match.end() : match.end() + 20]
+            material = bool(_MATERIAL_SUFFIX_RE.match(trailing))
+        if material:
+            value = _clean_number_token(token)
+            if value is not None:
+                numbers.add((value, is_percent))
+    return numbers
+
+
+def _outlook_grounding_units(outlook_text: str) -> list[str]:
+    """Split outlook-brief.md into the spans check_outlook_brief_numbers grounds
+    numbers against: each markdown list item -- INCLUDING any word-wrapped
+    continuation lines that follow it, up to the next marker/blank line -- is its own
+    unit (so one bullet's number can't be "grounded" by a claim cited only in a
+    sibling bullet), each blank-line-separated block of ordinary prose is one unit,
+    and heading lines are dropped entirely -- structural, never data to ground.
+
+    A list item starts a fresh buffer rather than being emitted immediately: a
+    hand-written bullet routinely wraps across several physical lines with its
+    "[claim-###]" citation only on the last one, and emitting just the first line as
+    the whole unit would silently lose that citation -- every number earlier in the
+    same bullet would then see `cited` as empty and fail as "citing no claims" even
+    though the bullet is properly cited. (Caught live: an outlook brief's own
+    word-wrapped bullets tripped exactly this on first use.)
+    """
+    units: list[str] = []
+    buffer: list[str] = []
+
+    def flush() -> None:
+        if buffer:
+            units.append("\n".join(buffer))
+            buffer.clear()
+
+    for line in outlook_text.split("\n"):
+        if not line.strip() or _HEADING_RE.match(line):
+            flush()
+        else:
+            if _LIST_ITEM_RE.match(line):
+                flush()  # close the previous item/paragraph; this line starts a new one
+            buffer.append(line)
+    flush()
+    return units
+
+
+def check_outlook_brief_numbers(outlook_text: str, claims_by_id: dict[str, Claim]) -> list[str]:
+    """Any material number (currency, %, magnitude word, bps, or an "x" multiple) in
+    outlook-brief.md must already be grounded in one of the claims cited *in that same
+    grounding unit* (see _outlook_grounding_units) -- catches this pipeline's highest-
+    risk hallucination shape, an invented margin/growth/guidance figure dressed up with
+    real citations, without policing bare unitless numbers. Scoped per unit, not per
+    document, so a number can't be laundered through an unrelated claim cited elsewhere
+    in the brief. A unit citing no claim ids grounds nothing, so any material number
+    there fails outright -- an uncited paragraph is exactly as ungrounded as one citing
+    the wrong id.
+    """
+    errors: list[str] = []
+    for unit in _outlook_grounding_units(outlook_text):
+        material = _material_numbers(unit)
+        if not material:
+            continue
+        cited = _CLAIM_ID_RE.findall(unit)
+        allowed: set[float] = set()
+        for cid in cited:
+            claim = claims_by_id.get(cid)
+            if claim is None:
+                continue  # unknown id: already reported by check_outlook_brief_citations
+            allowed |= extract_numbers(claim.quote) | extract_numbers(claim.claim_text) | _claim_declared_numbers(claim)
+        for value, is_percent in sorted(material):
+            # The value/100 leniency is deliberately one-directional: it only fires
+            # when the OUTLOOK text itself writes "%" (is_percent here, not on the
+            # claim). A claim written as "31%" does not make a bare 0.31 elsewhere
+            # grounded -- a bare decimal could be a ratio, a per-share amount, or
+            # something unrelated, so Python never infers "% was meant" from a cited
+            # claim's own representation. See test_outlook_numbers_percent_leniency_*.
+            if not _is_grounded(value, allowed) and not (is_percent and _is_grounded(value / 100, allowed)):
+                errors.append(
+                    f"outlook-brief.md states {value!r} in a passage citing {cited or 'no claims'}, "
+                    "but that value is not grounded in any cited claim's quote, claim_text, or values"
+                )
+    return errors
+
+
 def validate_claims(
     claims: list[Claim],
     segments_by_id: dict[str, Segment],

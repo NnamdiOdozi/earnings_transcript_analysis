@@ -46,6 +46,7 @@ from .process import (
 from .validate import (
     check_outlook_brief_citations,
     check_outlook_brief_dollar_escaping,
+    check_outlook_brief_numbers,
     validate_claims,
     validate_metrics,
     validate_review_report,
@@ -1159,9 +1160,11 @@ def cmd_validate_outlook(args: argparse.Namespace) -> int:
 
     raw_claims = json.loads(claims_path.read_text(encoding="utf-8"))
     claim_ids = {c.get("id") for c in raw_claims if c.get("id")}
+    claims_by_id = {c["id"]: Claim.model_validate(c) for c in raw_claims if c.get("id")}
     outlook_text = outlook_path.read_text(encoding="utf-8")
     errors = check_outlook_brief_citations(outlook_text, claim_ids)
     errors += check_outlook_brief_dollar_escaping(outlook_text)
+    errors += check_outlook_brief_numbers(outlook_text, claims_by_id)
     # Bind this record to the exact brief + claims bytes so `check-review` can prove the
     # brief it reviews is still the one that passed here.
     outlook_validation = OutlookValidation(

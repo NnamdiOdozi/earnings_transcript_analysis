@@ -144,9 +144,17 @@ checks only what *can* be checked mechanically. It fails if:
   sources, the manifest, transcript, claims, financials, or metrics);
 - the brief cites a claim id (`claim-###`) that doesn't exist in this run's
   `claims.json`;
-- the brief cites **no** claim ids at all.
+- the brief cites **no** claim ids at all;
+- a material number in the brief (one carrying a currency symbol, `%`, a
+  magnitude word, bps, or an "x" multiple) isn't grounded in a claim cited
+  alongside it — see
+  `.agents/skills/produce-earnings-signal-card/reference/outlook-brief-template.md`'s
+  "freedom envelope" for exactly what this does and doesn't restrict.
 
-Every conclusion in the brief must trace back to real, validated evidence.
+Every conclusion in the brief must trace back to real, validated evidence — but
+the agent is free to synthesise new qualitative conclusions from several
+validated claims at once; nothing requires every sentence to already exist
+verbatim as a claim.
 
 ## 5. Independent review — `earnings check-review`
 

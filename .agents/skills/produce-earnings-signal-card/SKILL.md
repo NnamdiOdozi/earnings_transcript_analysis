@@ -83,9 +83,12 @@ guaranteed before proceeding.
 Only start this stage once Stage 1's `earnings analyze` has passed.
 
 7. **Write `outlook-brief.md`.** Follow `reference/outlook-brief-template.md`'s
-   10-section structure. This is interpretive synthesis (base/upside/downside cases,
-   what to monitor) — you write it directly, Python does not generate it. Every claim
-   id you cite must exist in this run's `claims.json`.
+   default structure and freedom envelope. This is interpretive synthesis
+   (base/upside/downside cases, what to monitor) — you write it directly, Python
+   does not generate it, and you're expected to rank, compare, and draw new
+   qualitative conclusions from validated claims, not just restate them. Every claim
+   id you cite must exist in this run's `claims.json`, and every material number you
+   introduce must be grounded in a claim cited alongside it.
 
 8. **Validate the brief.** Run:
 
@@ -93,8 +96,9 @@ Only start this stage once Stage 1's `earnings analyze` has passed.
    uv run earnings validate-outlook --ticker <TICKER> --event-id <EVENT_ID>
    ```
 
-   Fails if the underlying claims haven't passed `analyze`, or if any cited claim id
-   doesn't resolve. Fix and re-run until it passes.
+   Fails if the underlying claims haven't passed `analyze`, if any cited claim id
+   doesn't resolve, or if a material number isn't grounded in a claim cited
+   alongside it. Fix and re-run until it passes.
 
 9. **Report back to the user** the run directory path and a brief summary of both
    `signal-card.md` (evidence appendix) and `outlook-brief.md` (the forward-looking
@@ -106,5 +110,5 @@ Only start this stage once Stage 1's `earnings analyze` has passed.
   taxonomy, Metric discovery, exact quotes, calculation blocks.
 - `reference/signal-card-template.md` — the Markdown structure the rendered
   evidence card follows.
-- `reference/outlook-brief-template.md` — the 10-section outlook structure and the
-  claim-id citation rule `validate-outlook` enforces.
+- `reference/outlook-brief-template.md` — the freedom envelope, the default outlook
+  structure, and the claim-id/numeric-grounding rules `validate-outlook` enforces.

@@ -16,6 +16,7 @@ from earnings.validate import (
     check_numeric,
     check_outlook_brief_citations,
     check_outlook_brief_dollar_escaping,
+    check_outlook_brief_numbers,
     extract_numbers,
     validate_claims,
     validate_review_report,
@@ -1092,6 +1093,161 @@ def test_dollar_escaping_reports_line_numbers():
     text = "line one is fine\nline two has $81.3B\nline three is fine\nline four has $51.5B"
     errors = check_outlook_brief_dollar_escaping(text)
     assert "[2, 4]" in errors[0]
+
+
+def _outlook_claim(id_: str, claim_text: str, quote: str = "irrelevant transcript text") -> Claim:
+    return Claim(
+        id=id_,
+        category="reported_financial_performance",
+        classification="reported_fact",
+        claim_text=claim_text,
+        quote=quote,
+        segment_id="seg-0001",
+        status="reported",
+        confidence=0.9,
+    )
+
+
+def test_outlook_numbers_grounded_percent_and_currency_pass():
+    claims = {
+        "claim-001": _outlook_claim("claim-001", "Operating margin was 24%."),
+        "claim-002": _outlook_claim("claim-002", "Revenue was \\$81.3 billion."),
+    }
+    text = "Margin held at 24% while revenue reached \\$81.3 billion [claim-001][claim-002]."
+    assert check_outlook_brief_numbers(text, claims) == []
+
+
+def test_outlook_numbers_invented_percent_fails():
+    claims = {"claim-001": _outlook_claim("claim-001", "Operating margin was 24%.")}
+    text = "We expect margin to reach 31% [claim-001]."
+    errors = check_outlook_brief_numbers(text, claims)
+    assert len(errors) == 1
+    assert "31.0" in errors[0] and "claim-001" in errors[0]
+
+
+def test_outlook_numbers_invented_currency_fails():
+    claims = {"claim-001": _outlook_claim("claim-001", "Revenue was \\$81.3 billion.")}
+    text = "Revenue could reach \\$95 billion [claim-001]."
+    errors = check_outlook_brief_numbers(text, claims)
+    assert len(errors) == 1
+    assert "95.0" in errors[0]
+
+
+@pytest.mark.parametrize(
+    "grounded_text,invented_text",
+    [
+        (
+            "Copilot usage reached 15 million paid seats [claim-003].",
+            "Copilot usage reached 22 million paid seats [claim-003].",
+        ),
+        (
+            "Margin expanded 200 bps [claim-003].",
+            "Margin expanded 350 bps [claim-003].",
+        ),
+        (
+            "Leverage remains 3.2x [claim-003].",
+            "Leverage remains 4.5x [claim-003].",
+        ),
+    ],
+)
+def test_outlook_numbers_covers_magnitude_words_bps_and_x_multiples(grounded_text, invented_text):
+    # The claim's own prose states all three unit shapes so one fixture claim can
+    # ground all three parametrized cases.
+    claims = {
+        "claim-003": _outlook_claim(
+            "claim-003",
+            "Copilot reached 15 million paid seats, margin expanded 200 basis points, "
+            "and leverage was 3.2x EBITDA.",
+        )
+    }
+    assert check_outlook_brief_numbers(grounded_text, claims) == []
+    errors = check_outlook_brief_numbers(invented_text, claims)
+    assert len(errors) == 1
+
+
+def test_outlook_numbers_ignores_headings_and_mandated_period_phrasing():
+    # Heading ordinals ("## 5.") and the template-mandated "N months to DD Mon YYYY"
+    # period phrasing must never be treated as material numbers -- regression for the
+    # false-positive risk this check would otherwise have on every real brief.
+    text = (
+        "## 5. Base case\n\n"
+        "The headline results cover the 3 months to 31 Dec 2025, "
+        "with 10 items on management's agenda."
+    )
+    assert check_outlook_brief_numbers(text, {}) == []
+
+
+def test_outlook_numbers_scoped_per_bullet_not_document_wide():
+    # claim-006's 999 must not ground a DIFFERENT bullet that never cited claim-006 --
+    # regression against document-wide (rather than per-unit) number laundering.
+    claims = {
+        "claim-005": _outlook_claim("claim-005", "Revenue growth was 37%."),
+        "claim-006": _outlook_claim("claim-006", "An unrelated figure was 999%."),
+    }
+    text = "- Growth was 37% [claim-005].\n- Margin guidance is 999% [claim-005]."
+    errors = check_outlook_brief_numbers(text, claims)
+    assert len(errors) == 1
+    assert "999.0" in errors[0]
+
+
+def test_outlook_numbers_bullet_continuation_lines_keep_their_citation():
+    # Regression: a hand-written bullet routinely word-wraps across several physical
+    # lines with its "[claim-###]" citation only on the LAST one. The number appears
+    # on line 1, the citation on line 3 -- both must be treated as the same grounding
+    # unit, or the number wrongly reads as "citing no claims" (caught live on a real
+    # outlook brief's own wrapped bullets).
+    claims = {"claim-007": _outlook_claim("claim-007", "Full-year NII guidance is 96.5.")}
+    text = (
+        "- Full-year NII guidance raised to about 96.5% and\n"
+        "  total NII to approximately 105.5%, with Markets NII\n"
+        "  increasing further [claim-007]."
+    )
+    errors = check_outlook_brief_numbers(text, claims)
+    assert len(errors) == 1  # 96.5 grounded; 105.5 is not -- proves the unit is shared, not lost
+    assert "105.5" in errors[0]
+    assert "96.5" not in errors[0]
+
+
+def test_outlook_numbers_uncited_passage_with_material_number_fails():
+    text = "Margin should reach 31% next quarter."
+    errors = check_outlook_brief_numbers(text, {})
+    assert len(errors) == 1
+    assert "no claims" in errors[0]
+
+
+def test_outlook_numbers_percent_leniency_supported_direction():
+    # SUPPORTED: a claim storing a fraction (0.31, e.g. a `values` ratio field) grounds
+    # an outlook passage that explicitly writes "%". Safe because the outlook text
+    # itself says "%" -- Python isn't guessing what the author meant, it's checking the
+    # one alternate reading ("%" as 31 vs. as 0.31) that an explicit "%" makes possible.
+    claims = {
+        "claim-101": Claim(
+            id="claim-101",
+            category="costs_margins_efficiency",
+            classification="reported_fact",
+            claim_text="Operating margin improved.",
+            quote="Operating margin improved to record levels.",
+            segment_id="seg-0001",
+            status="reported",
+            confidence=0.9,
+            values={"operating_margin_ratio": 0.31},
+        )
+    }
+    assert check_outlook_brief_numbers("Operating margin reached 31% [claim-101].", claims) == []
+
+
+def test_outlook_numbers_percent_leniency_is_not_bidirectional_by_design():
+    # DELIBERATELY UNSUPPORTED: a claim written as "31%" does NOT imply a bare 0.31
+    # elsewhere is grounded, even numerically. A bare 0.31 could be a ratio, a
+    # per-share dollar amount, or something unrelated -- Python never infers "the
+    # author meant %" just because a cited claim happens to contain a percent. The
+    # leniency only ever fires off an explicit "%" (or other unit marker) in the text
+    # actually being validated, never off a cited claim's own representation. Proven
+    # here via the "x"-multiple marker, which is material but carries no percent
+    # leniency of its own -- if reverse inference were happening, this would pass.
+    claims = {"claim-102": _outlook_claim("claim-102", "Operating margin was 31%.")}
+    errors = check_outlook_brief_numbers("Leverage stood at 0.31x [claim-102].", claims)
+    assert len(errors) == 1
 
 
 def test_validate_review_report_ignores_hyphenated_prose_in_finding_text():

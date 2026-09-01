@@ -323,7 +323,7 @@
     "id": "claim-024",
     "category": "capacity_supply_execution",
     "classification": "management_opinion",
-    "claim_text": "Management said a lot of the GPUs being purchased were already contracted for most of their useful life.",
+    "claim_text": "Management said most GPUs being purchased were already contracted for most of their useful life, and some large-customer GPU contracts covered the entire useful life.",
     "quote": "the majority of the capital that we’re spending today, and a lot of the GPUs that we’re buying are already contracted for most of their useful life. And so, a way to think about that is much of that risk that I think you’re pointing to isn’t there, because they’re already sold for the entirety of their useful life.",
     "segment_id": "seg-0010",
     "speaker": "AMY HOOD",
@@ -371,32 +371,5 @@
     "confidence": 0.99,
     "inferred_from": [],
     "period": "3 months to 30 Nov 2025"
-  },
-  {
-    "id": "claim-028",
-    "category": "current_guidance",
-    "classification": "management_guidance",
-    "claim_text": "Microsoft expected third-quarter operating margin to decline slightly year over year.",
-    "quote": "Operating margins should be down slightly year-over-year.",
-    "segment_id": "seg-0004",
-    "speaker": "AMY HOOD",
-    "status": "forward_looking",
-    "values": {},
-    "confidence": 0.99,
-    "inferred_from": [],
-    "period": "3 months to 31 Mar 2026"
-  },
-  {
-    "id": "claim-029",
-    "category": "capacity_supply_execution",
-    "classification": "management_opinion",
-    "claim_text": "Microsoft allocates new GPU capacity first to growing first-party Copilot usage and long-term research and product innovation, with the remainder serving Azure demand.",
-    "quote": "And the first thing we’re doing is solving for the increased usage in sales and the accelerating pace of M365 Copilot, as well as GitHub Copilot, our first-party apps. Then we make sure we’re investing in the long-term nature of R&D and product innovation. And much of the acceleration that I think you’ve seen from us in products over the past bit is coming because we are allocating GPUs and capacity to many of the talented AI people we’ve been hiring over the past years. Then when you end up, is that you end up with the remainder going towards serving the Azure capacity that continues to grow in terms of demand.",
-    "segment_id": "seg-0006",
-    "speaker": "AMY HOOD",
-    "status": "reported",
-    "values": {},
-    "confidence": 0.98,
-    "inferred_from": []
   }
 ]

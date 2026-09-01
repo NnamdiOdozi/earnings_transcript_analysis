@@ -1,6 +1,6 @@
 # Signal Card: MSFT — 2026-q2
 
-_Generated: 2026-08-30T12:00:32Z_
+_Generated: 2026-08-30T14:45:44Z_
 
 ## Reported Financial Performance
 - **reported** [reported_fact] (AMY HOOD): Microsoft reported revenue of \$81.3 billion, up 17% year over year and 15% in constant currency.
@@ -59,6 +59,8 @@ _Generated: 2026-08-30T12:00:32Z_
   > "For Intelligent Cloud, we expect revenue of \$34.1 to \$34.4 billion, or growth of 27% to 29%. In Azure, we expect Q3 revenue growth to be between 37% and 38% in constant currency against a prior year comparable that included significantly accelerating growth rates in both Q3 and Q4." — seg-0004
 - **forward_looking** [management_guidance] (AMY HOOD): More Personal Computing revenue was expected at \$12.3 billion to \$12.8 billion, with Windows OEM and Devices revenue down in the low teens.
   > "In More Personal Computing, we expect revenue to be \$12.3 to \$12.8 billion. Windows OEM and Devices revenue should decline in the low teens." — seg-0004
+- **forward_looking** [management_guidance] (AMY HOOD): Microsoft expected third-quarter operating margin to decline slightly year over year.
+  > "Operating margins should be down slightly year-over-year." — seg-0004
 
 ## Guidance Change
 - **forward_looking** [management_guidance] (AMY HOOD): Microsoft raised its fiscal-year operating-margin expectation to slightly positive year-over-year growth.
@@ -71,7 +73,9 @@ _Generated: 2026-08-30T12:00:32Z_
   > "55%, or roughly \$350 billion, is related to the breadth of our portfolio, a breadth of customers across solutions, across Azure, across industries, across geographies. That is a significant RPO balance, larger than most peers, more diversified than most peers. And frankly, I think we have super high confidence in it. And when you think about that portion alone growing 28%, it’s really impressive work on the breadth as well as the adoption curve that we’re seeing" — seg-0015
 
 ## Capacity Supply Execution
-- **forward_looking** [management_opinion] (AMY HOOD): Management said most GPUs being purchased were already contracted for most of their useful life, and some large-customer GPU contracts covered the entire useful life.
+- **forward_looking** [management_opinion] (AMY HOOD): Management said a lot of the GPUs being purchased were already contracted for most of their useful life.
   > "the majority of the capital that we’re spending today, and a lot of the GPUs that we’re buying are already contracted for most of their useful life. And so, a way to think about that is much of that risk that I think you’re pointing to isn’t there, because they’re already sold for the entirety of their useful life." — seg-0010
 - **forward_looking** [management_guidance] (AMY HOOD): Management described the Atlanta and Wisconsin capacity projects as multiyear deliveries and said capacity needed to be added globally.
   > "You’ve mentioned specific sites like Atlanta or Wisconsin. Those are multiyear deliveries, so I wouldn’t focus necessarily on specific locations. The real thing we’ve got to do, and we’re working incredibly hard at doing it, is adding capacity globally." — seg-0017
+- **reported** [management_opinion] (AMY HOOD): Microsoft allocates new GPU capacity first to growing first-party Copilot usage and long-term research and product innovation, with the remainder serving Azure demand.
+  > "And the first thing we’re doing is solving for the increased usage in sales and the accelerating pace of M365 Copilot, as well as GitHub Copilot, our first-party apps. Then we make sure we’re investing in the long-term nature of R&D and product innovation. And much of the acceleration that I think you’ve seen from us in products over the past bit is coming because we are allocating GPUs and capacity to many of the talented AI people we’ve been hiring over the past years. Then when you end up, is that you end up with the remainder going towards serving the Azure capacity that continues to grow in terms of demand." — seg-0006

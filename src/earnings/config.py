@@ -69,6 +69,11 @@ OUTLOOK_VALIDATION_FILENAME = "outlook-validation.json"  # Python-owned: real-cl
 REVIEW_REPORT_JSON_FILENAME = "review-report.json"  # agent-authored (Outlook_Reviewer subagent)
 REVIEW_REPORT_MD_FILENAME = "review-report.md"  # Python-rendered from the JSON above
 REVIEW_DIFF_FILENAME = "review-diff.json"  # Python-authored context for every review after round 1
+# Sidecar: review-diff.json's own SHA-256, for the reviewer to Read and copy into
+# review_diff_sha256 -- it has no execution tool, so it cannot compute this itself
+# (unlike claims_sha256/outlook_brief_sha256, which it already copies from
+# outlook-validation.json). See cli.cmd_review_diff.
+REVIEW_DIFF_SHA256_FILENAME = "review-diff.sha256"
 
 # --- Cross-run processing log (repo root, not per-run -- see cli._append_processing_log) ---
 LOGS_DIR = Path("logs")

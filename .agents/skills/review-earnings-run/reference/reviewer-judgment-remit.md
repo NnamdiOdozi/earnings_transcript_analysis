@@ -157,6 +157,8 @@ Given a run directory (e.g. `runs/MSFT/2026-q2/`), read:
 - `claims.json`, `validation.json`, `outlook-validation.json`, `metrics.json` (if
   present), `injection-scan.json` (if present)
 - `signal-card.md`, `outlook-brief.md`
+- From round 2 on: `review-diff.json` and its sidecar `review-diff.sha256` (see
+  "Diff-based re-review" below)
 - `config.toml` at the repo root (for context on what checks/thresholds applied)
 
 ## Diff-based re-review (round 2+)
@@ -222,9 +224,18 @@ pipeline.
 Set `review_mode` to `"full"` for round 1 and for an auto-escalated later
 round. Set it to `"diff"` only when you actually used the bounded diff-review
 procedure. Record the lowercase SHA-256 hashes of the exact `claims.json` and
-`outlook-brief.md` bytes you reviewed. For every later round, also record the
-SHA-256 of `review-diff.json`; use `null` only in round 1. `check-review` verifies
-all three bindings and rejects stale or copied verdicts.
+`outlook-brief.md` bytes you reviewed -- you have no execution tool, so don't
+compute these; `outlook-validation.json` already carries both
+(`claims_sha256`/`outlook_brief_sha256`), just copy them. For every later
+round, also record the SHA-256 of `review-diff.json` as `review_diff_sha256`;
+use `null` only in round 1. This one has no existing file to copy it from
+directly, so Python writes it as a plain-text sidecar, `review-diff.sha256`,
+right alongside `review-diff.json` -- read that file and copy its contents
+verbatim. Do not leave `review_diff_sha256` null from round 2 on and do not
+attempt to compute or guess a hash yourself; either is a schema violation
+`check-review` will reject. `check-review` independently re-verifies all three
+bindings against the actual files regardless of what you copied, and rejects
+stale or copied-from-elsewhere verdicts.
 
 Include at least one substantive `source_checks` entry and one
 `process_findings` entry. These are content-dependent coverage evidence. They do

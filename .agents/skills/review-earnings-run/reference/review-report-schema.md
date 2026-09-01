@@ -64,7 +64,11 @@ why that matters).
   round must bind to `review-diff.json`; `auto_escalated: true` requires `"full"`.
 - `claims_sha256`, `outlook_brief_sha256`, `review_diff_sha256`: exact lowercase
   SHA-256 receipts for the reviewed bytes. `review_diff_sha256` is `null` only in
-  round 1. These prove version identity, not comprehension.
+  round 1. These prove version identity, not comprehension. You have no
+  execution tool to compute any of these -- copy `claims_sha256`/
+  `outlook_brief_sha256` from `outlook-validation.json` and, from round 2 on,
+  `review_diff_sha256` from the `review-diff.sha256` sidecar Python writes next
+  to `review-diff.json` (see `reviewer-judgment-remit.md`).
 - `model`: record the actual model/reasoning tier used for this pass (e.g.
   `"opus"`, `"gpt-5.6-medium"`), not a placeholder -- this field is provenance,
   same as everything else in this pipeline.

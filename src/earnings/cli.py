@@ -432,7 +432,12 @@ def cmd_review_diff(args: argparse.Namespace) -> int:
         auto_escalated=auto_escalated,
         auto_escalation_reason="; ".join(reasons) if reasons else None,
     )
-    _write_json(run_dir / config.REVIEW_DIFF_FILENAME, review_diff.model_dump())
+    diff_path = run_dir / config.REVIEW_DIFF_FILENAME
+    _write_json(diff_path, review_diff.model_dump())
+    # The reviewer has no execution tool, so it cannot hash this file itself (unlike
+    # claims_sha256/outlook_brief_sha256, which it already copies from
+    # outlook-validation.json) -- write the digest as a sidecar it can just Read.
+    (run_dir / config.REVIEW_DIFF_SHA256_FILENAME).write_text(sha256_hex(diff_path.read_bytes()), encoding="utf-8")
 
     if auto_escalated:
         print(f"Auto-escalated to full review: {'; '.join(reasons)}")

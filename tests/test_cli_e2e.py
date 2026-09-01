@@ -1038,6 +1038,19 @@ def test_review_diff_unchanged_claims_produces_empty_diff(isolated_runs_dir):
     assert diff["since_round"] == 1
 
 
+def test_review_diff_writes_readable_sha256_sidecar(isolated_runs_dir):
+    # The reviewer subagent has no execution tool (Read/Grep/Glob/Write only), so it
+    # cannot hash review-diff.json itself the way it can for claims_sha256/
+    # outlook_brief_sha256 (copied from outlook-validation.json) -- this sidecar is
+    # the equivalent free ride for review_diff_sha256, required from round 2 on.
+    _seed_reviewed_run(isolated_runs_dir)
+    assert main(["review-diff", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
+    run_dir = isolated_runs_dir / "ACME" / "2026-q2"
+    recorded = (run_dir / config.REVIEW_DIFF_SHA256_FILENAME).read_text(encoding="utf-8")
+    actual = sha256_hex((run_dir / config.REVIEW_DIFF_FILENAME).read_bytes())
+    assert recorded == actual
+
+
 def test_review_diff_text_only_change_under_threshold_not_escalated(isolated_runs_dir):
     run_dir = _seed_reviewed_run(isolated_runs_dir)
     claims = json.loads((run_dir / config.CLAIMS_FILENAME).read_text())

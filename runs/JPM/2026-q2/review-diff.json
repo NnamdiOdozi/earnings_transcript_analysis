@@ -1,0 +1,14 @@
+{
+  "generated_at": "2026-09-01T12:54:43Z",
+  "round_number": 3,
+  "since_round": 2,
+  "previous_verdict": "pass_with_warnings",
+  "previous_summary": "Round 2 is a genuine improvement over round 1, not a cosmetic patch. The one high-severity finding is fully resolved: the Wells Fargo contrast in section 4 now cites two new, source-accurate claims (claim-033, claim-034) showing Wells Fargo's actual 25% EPS growth and 20%/24% CIB Banking/Markets revenue growth, correctly reframing Wells Fargo as supporting evidence for a sector-wide capital-markets cycle rather than a company that was contradicted by its own source. The claims-side gap on Investment Banking sustainability is also resolved: claim-030 now captures management's 'pipeline remains quite robust' statement, giving the evidence pack both sides of the question the brief turns on. Of the three round-1 medium findings, the upside case's ROTCE mechanism is now arithmetically correct (deployment at 17% is described as dilutive, not additive, to a 23% ROTCE) but introduces a new misattributed citation ('has consequences' cited to claim-018, which does not contain that phrase). The single-vendor-consensus fix was applied to sections 2 and 9 but not to section 1, which still frames the $5.52 Zacks figure alone as 'the' consensus. The AI-CapEx misattribution is partially fixed: the caution clause now correctly cites the new claim-031, but the preceding 'macro backdrop touching commercial lending demand' phrase is still loosely attached to claim-021, which doesn't establish that link. The round-1 low finding on CCB 'decelerating' language was not addressed and remains present verbatim. A new low-severity issue: claims-033 and 034 append content to their claim_text that their own quotes don't support (the figures are accurate and correctly grounded via the other of the pair, but the claim-by-claim fair-reading discipline slipped). None of these residual issues rise to high/critical: they are incomplete-attribution and precision issues in an otherwise well-corrected, well-sourced, temporally sound, and industry-appropriate brief, so the verdict is pass_with_warnings rather than fail. Separately, this review-report.json could not be bound to review-diff.json's actual SHA-256 hash because this dispatch had no shell/execution tool to compute it; that value must be filled in externally before earnings check-review will accept this report.",
+  "previous_finding_count": 13,
+  "claims_sha256": "a217ccedcb202af7b7dd5f45cf166b96e725d4e067abdce9ed5eca01e811bb93",
+  "outlook_brief_sha256": "0296bf9c4634224c00b219a7313e35bb615d249281f862729619aa8b9e7d5ff7",
+  "claims_changed": [],
+  "affected_brief_sections": [],
+  "auto_escalated": false,
+  "auto_escalation_reason": null
+}

@@ -1,11 +1,12 @@
 {
-  "url": "https://www.barchart.com/stocks/quotes/JPM/earnings-estimates",
-  "title": "JPM Earnings Estimates for JP Morgan Chase & Company Stock - Barchart.com",
+  "url": "https://www.barchart.com/story/news/947288/jpmorgan-chase-earnings-preview-what-to-expect",
+  "title": "JPMorgan Chase Earnings Preview: What to Expect",
   "score": null,
-  "published_date": null,
+  "published_date": "2026-03-25T00:00:00.000Z",
   "_class": "consensus",
   "_select_key": "consensus",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
   "_query": "JPMorgan Chase JPM Wall Street consensus estimates ahead of earnings",
-  "_retrieved_at": "2026-08-27T20:08:43Z"
+  "_retrieved_at": "2026-09-01T12:06:18Z"
 }

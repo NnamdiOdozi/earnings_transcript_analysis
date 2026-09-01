@@ -1,11 +1,12 @@
 {
-  "url": "https://finance.yahoo.com/markets/stocks/articles/jpmorgan-chase-co-jpm-reports-140003501.html",
-  "title": "JPMorgan Chase & Co. (JPM) Reports Next Week",
+  "url": "https://www.ainvest.com/news/gear-jpmorgan-chase-jpm-q1-earnings-wall-street-estimates-key-metrics-2604/",
+  "title": "Gear Up for JPMorgan Chase & Co. (JPM) Q1 Earnings: Wall Street Estimates for Key Metrics",
   "score": null,
-  "published_date": "2026-07-07T00:00:00.000Z",
+  "published_date": "2026-04-09T00:00:00.000Z",
   "_class": "consensus",
   "_select_key": "consensus",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
   "_query": "JPMorgan Chase JPM Wall Street consensus estimates ahead of earnings",
-  "_retrieved_at": "2026-08-27T20:08:43Z"
+  "_retrieved_at": "2026-09-01T12:06:18Z"
 }

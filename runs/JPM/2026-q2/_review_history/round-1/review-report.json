@@ -1,0 +1,142 @@
+{
+  "verdict": "fail",
+  "review_mode": "full",
+  "reviewed_at": "2026-09-01T13:15:00Z",
+  "model": "opus",
+  "claims_sha256": "e9ce83bc432a80b7efafbb1230b9c126ac5a4bac004eddbafa36851e82627671",
+  "outlook_brief_sha256": "47ba808a56f92b129af4ea1ce1bd4c892e534c82210c3a4d5f1ad5e75a4118d5",
+  "review_diff_sha256": null,
+  "source_checks": [
+    {
+      "severity": "info",
+      "artifact": "evidence/web/web-003.md",
+      "passage": "Wells Fargo Reports Second Quarter 2026 Net Income of $6.4 billion, or $2.00 per Diluted Share",
+      "evidence": "Archived content is the genuine Wells Fargo Q2 2026 news release dated 14 July 2026, with a full company-wide financial summary table. The headline quoted in claim-027 appears verbatim and the $6.4bn / $2.00 figures match the table (net income 6,407; diluted EPS 2.00). Source is correctly represented.",
+      "recommendation": "None. But see the outlook finding on how this document's other contents were used."
+    },
+    {
+      "severity": "info",
+      "artifact": "evidence/web/web-005.md, evidence/web/web-004.md, evidence/web/web-012.md",
+      "passage": "n/a",
+      "evidence": "Goldman Sachs press release (web-005) contains the $20.34bn/$6.63bn/$20.98/23.5% figures used by claim-026. Citigroup Q2 2026 results PDF (web-004) contains Jane Fraser's 'net income up 45%... best quarterly revenue in a decade' quote used by claim-028, and the release's own body confirms net income of $5.8bn vs $4.0bn. Reuters BofA article (web-012) contains the 'Investment banking fees jump 50% in Q2' bullet used by claim-029. All three are the real documents their URLs and titles imply, not 404s or unrelated pages.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "evidence/web/web-011.md",
+      "passage": "Wall Street analysts forecast that JPMorgan Chase & Co. (JPM) will report quarterly earnings of $5.52 per share in its upcoming release",
+      "evidence": "Temporal integrity check on the one undated source that the brief actually relies on. web-evidence.jsonl gives web-011 published_at null / temporal_status 'undated', so metadata alone proves nothing. Reading the content itself: it is written entirely in the pre-print future tense ('will report ... in its upcoming release', 'revised in the past 30 days') and contains no post-call facts. It is genuinely pre-event material. The Zacks attribution in claim-024's claim_text is also supported by the page ('This article originally published on Zacks Investment Research').",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "evidence/financials.json",
+      "passage": "\"period_type\": \"half_year\", \"start\": \"2026-01-01\", \"end\": \"2026-06-30\"",
+      "evidence": "Period-consistency check between SEC/XBRL evidence and the claims. The only two XBRL facts present (NetIncomeLoss 37,649m; EarningsPerShareDiluted 13.63) are half-year cumulative to 30 Jun 2026, while every headline claim (e.g. claim-001) is labelled '3 months to 30 Jun 2026'. No claim grounds a quarterly figure against a half-year fact, so the quarter-vs-YTD confusion this field exists to catch has not occurred, and outlook-brief.md section 9 discloses the limitation explicitly.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "normalized/transcript.jsonl#seg-0003",
+      "passage": "Including (sic) [Excluding] the significant items noted on the page, the Firm delivered net income of $16.9 billion, EPS of $6.14 and an ROTCE of 23%.",
+      "evidence": "Read the whole of seg-0003 in context against claims 001-014. Each claim_text is a fair characterisation, including the non-obvious one: claim-001 and claim-002 state 'excluding significant items', which is correct because the transcript carries a '(sic) [Excluding]' correction. Period labels ('3 months to 30 Jun 2026' for flows, 'as of 30 Jun 2026' for CET1 and AUM stocks, '12 months to 31 Dec 2026' for the full-year outlook items) match the transcript's own cues. Incremental-vs-cumulative is also handled correctly for claim-023, whose speaker says 'year-to-date' and whose claim_text preserves it.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "signal-card.md",
+      "passage": "n/a",
+      "evidence": "Cross-sector appropriateness check. Every category used (reported financial performance, balance sheet solvency, costs/margins, cash flow and capital allocation, demand activity, risk, current guidance, regulatory/legal/macro, Q&A insight) and every metric (CET1, RWA, NII, Card net charge-off rate, ROTCE, AUM, IB fees) is banking-appropriate. No imported template language from another industry (no subscriptions, churn, bookings, same-store sales) appears in either signal-card.md or outlook-brief.md.",
+      "recommendation": "None."
+    }
+  ],
+  "claim_findings": [
+    {
+      "severity": "medium",
+      "artifact": "claims.json",
+      "passage": "the pipeline remains quite robust and the current activity levels seem to be encouraging more activity. As a result, while conversion will obviously be dependent on market conditions, we expect activity levels to remain healthy.",
+      "evidence": "This sentence is in seg-0003, in the same prepared-remarks paragraph the extractor used for claim-008, and management repeats the point in seg-0008 ('the pipeline is actually quite robust ... is itself begetting more activity'). It is management's only explicit forward-looking statement about the sustainability of Investment Banking activity, which is the single question the whole outlook brief turns on. No claim in claims.json captures it. The extractor did capture the cautionary half of the same answer (claim-015 pull-forward, claim-016 hard to repeat), so the evidence pack itself is one-sided on the central issue before the brief is even written.",
+      "recommendation": "Add a management_guidance/management_opinion claim for the 'pipeline remains quite robust ... we expect activity levels to remain healthy' statement from seg-0003 (and/or the seg-0008 restatement), so the sustainability question has evidence on both sides in claims.json."
+    },
+    {
+      "severity": "low",
+      "artifact": "claims.json#claim-024",
+      "passage": "Ahead of the print, Wall Street consensus (Zacks) forecast JPMorgan Q2 2026 EPS of $5.52 and revenue of $48.71 billion.",
+      "evidence": "claim-024 itself is accurate and correctly attributes the number to Zacks. The problem is coverage: the run also archived evidence/web/web-001.md (a pre_event, 2026-07-09 AlphaStreet preview) giving a 14-analyst consensus of $5.67 EPS on $50.54bn revenue, with an EPS range of $5.09 to $6.56. No claim was extracted from it, so the single-vendor number becomes the run's only 'consensus' and downstream prose treats it as definitive.",
+      "recommendation": "Extract a second consensus claim from web-001 so the brief can present a range or at least acknowledge vendor disagreement."
+    }
+  ],
+  "outlook_findings": [
+    {
+      "severity": "high",
+      "artifact": "outlook-brief.md",
+      "passage": "a materially different growth profile from Wells Fargo, whose EPS of $2.00 [claim-027] was far more pedestrian, consistent with its narrower capital-markets footprint",
+      "evidence": "Two compounding defects in the sentence that carries section 4's whole argument. (1) The cited claim does not support it: claim-027 contains only Wells Fargo's absolute net income ($6.4bn) and EPS ($2.00). It contains no growth rate at all, so it cannot establish a 'growth profile'. The comparison being drawn is between EPS levels across different companies (Goldman's $20.98 in claim-026 versus Wells Fargo's $2.00), which differ mainly because of share count and say nothing about performance. (2) The run's own archived source contradicts the conclusion: evidence/web/web-003.md, the document claim-027 comes from, states that Wells Fargo's diluted EPS was 'up 25% from a year ago', revenue up 9%, ROTCE up from 15.2% to 17.7%, Corporate and Investment Banking revenue up 16% and Markets revenue up 24%. Wells Fargo therefore both grew strongly and participated in the capital-markets strength. The brief's only piece of discriminating counterevidence for its central 'sector-wide cycle, not company-specific alpha' thesis is thus unsupported by the claim it cites and contradicted by the source sitting in this run's evidence pack.",
+      "recommendation": "Remove the Wells Fargo EPS-level comparison. Either drop the Wells Fargo contrast entirely and rest the sector-wide argument on the growth figures that do exist (claim-026 ROE, claim-028 net income growth, claim-029 IB fee growth), or extract a claim for Wells Fargo's actual year-on-year growth from web-003 and re-argue the point against those numbers, which currently cut the other way."
+    },
+    {
+      "severity": "medium",
+      "artifact": "outlook-brief.md",
+      "passage": "deploys more of its targeted $40 billion of excess capital at its stated 17% return goal [claim-018][claim-019], then fee income and capital deployment reinforce each other without introducing new pricing or volume risk. The consequence is that ROTCE holds near or above this quarter's 23% [claim-001]",
+      "evidence": "The upside case's mechanism does not follow from its own cited claims and is arithmetically backwards. claim-019 puts the deployment target return at 17%; claim-001 puts current ROTCE at 23%. Deploying incremental capital at a 17% return dilutes a 23% ROTCE rather than holding it 'near or above' it. Separately, 'without introducing new pricing or volume risk' is asserted with no supporting claim and runs against the transcript the claims come from, where Jamie Dimon says of deployment 'we do think we'll deploy it, and that has consequences' (seg-0079). This is an upside case whose conditions-to-consequence chain breaks in the middle.",
+      "recommendation": "Rewrite the upside case so the consequence follows from the cited claims: either drop the capital-deployment leg and rest the ROTCE case on sustained fee income, or state plainly that deployment at a 17% target return would be accretive to earnings but dilutive to a 23% ROTCE. Remove the unsupported 'without introducing new pricing or volume risk' clause."
+    },
+    {
+      "severity": "medium",
+      "artifact": "outlook-brief.md",
+      "passage": "comfortably ahead of the $5.52 Wall Street consensus set ahead of the print [claim-001][claim-024][claim-025]",
+      "evidence": "The brief presents $5.52 as 'the' Wall Street consensus, and section 9 says only that no full-year consensus was captured. Neither passage tells the reader that this run archived a second pre-print consensus (evidence/web/web-001.md, dated 2026-07-09, temporal_status pre_event) putting the 14-analyst consensus at $5.67 EPS on $50.54bn revenue, with EPS estimates spanning $5.09 to $6.56. The revenue estimates differ by $1.8bn between the two vendors. The beat conclusion survives either number, so the direction is not wrong, but 'comfortably ahead of the consensus' overstates the precision of a single-vendor figure when the run holds a conflicting one. Section 2 repeats the same framing ('the pre-print consensus of $5.52'), dropping even the Zacks attribution that claim-024 carries.",
+      "recommendation": "Attribute the number ('the Zacks consensus of $5.52') and note in section 9 that another archived pre-print source in this run gives a 14-analyst consensus of $5.67 with a $5.09-$6.56 range, so the size of the beat is vendor-dependent."
+    },
+    {
+      "severity": "medium",
+      "artifact": "outlook-brief.md",
+      "passage": "management pointed to a broader AI-driven capital-expenditure cycle (total U.S. CapEx of roughly $4 trillion a year, with AI CapEx rising from $400 billion to $700 billion year-on-year) as a macro backdrop touching commercial lending demand, while cautioning that attributing any specific loan growth to AI specifically is often not clean-cut [claim-021]",
+      "evidence": "Only the parenthetical numbers come from claim-021, which is Jamie Dimon's CapEx quote from seg-0075 and says nothing about lending. The two characterisations wrapped around it - 'a macro backdrop touching commercial lending demand' and the caution about attributing loan growth to AI - come from a different speaker in a different segment (Jeremy Barnum, seg-0074: 'we do see some decent kind of CapEx and associated loan growth across the franchise ... I would be a little reluctant to draw that conclusion too strongly'), which was never extracted as a claim. The statements are true against the transcript, but they are attributed to a claim that does not contain them, so a reader auditing the brief through claims.json cannot verify them.",
+      "recommendation": "Either extract a claim for the seg-0074 answer and cite it alongside claim-021, or cut the lending-demand and attribution-caution language and let the sentence carry only what claim-021 actually says."
+    },
+    {
+      "severity": "low",
+      "artifact": "outlook-brief.md",
+      "passage": "is the better read on the \"core franchise\" trend, and it is decelerating relative to the CIB/Markets pace",
+      "evidence": "'Decelerating' asserts a change in CCB's own growth rate over time. No cited claim establishes that: claim-007 gives a single year-on-year growth rate of 8% for one quarter, and the run contains no prior-period CCB growth rate to compare it with. What the evidence supports is only that CCB grew more slowly than CIB in this quarter, which is a level difference, not a trend.",
+      "recommendation": "Replace 'decelerating relative to the CIB/Markets pace' with a level statement, e.g. 'growing well below the CIB/Markets pace', unless a prior-period CCB growth claim is added."
+    }
+  ],
+  "process_findings": [
+    {
+      "severity": "info",
+      "artifact": "validation.json",
+      "passage": "n/a",
+      "evidence": "Confirmed present, not re-derived: validation.json.ok == true, checked_claims == 29, issues == [] and warnings == []. It records input hashes for claims.json, transcript.jsonl, financials.json, manifest.json, web-evidence.jsonl and every raw source. The claims.json hash it records (e9ce83bc...) matches the one in outlook-validation.json, so the same claims bytes were validated and reviewed.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "outlook-validation.json",
+      "passage": "n/a",
+      "evidence": "Confirmed present with ok == true, recording outlook_brief_sha256 47ba808a... and claims_sha256 e9ce83bc.... These are the bytes this review is bound to; neither file was edited by me. outlook-brief.md and signal-card.md both exist, and all 29 entries in claims.json have non-empty ids running claim-001 to claim-029 (claim-020 exists but is unused by the brief, which is acceptable).",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "manifest.json",
+      "passage": "n/a",
+      "evidence": "manifest.json exists, is dated 2026-09-01T12:06:53Z, and hashes every source: raw/transcript.txt plus 25 web queries at 8 hits each. Provenance spot-check on a sample: retrieval timestamps (2026-09-01T12:06Z) are consistent across manifest.json and web-evidence.jsonl, and origin URLs match the titles and content of the archived evidence files I opened (Wells Fargo IR PDF, Goldman Sachs pressroom, Citigroup earnings PDF, Reuters BofA article). Checksums were read as bookkeeping only, not re-audited.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "injection-scan.json",
+      "passage": "\"pattern_count\": 25, \"finding_count\": 0, \"findings\": []",
+      "evidence": "The prompt-injection scan ran over the transcript with 25 patterns and returned zero hits, so there was nothing to judge in context - no genuine hijack attempts and no false positives to adjudicate. Stating this explicitly rather than skipping it.",
+      "recommendation": "None."
+    }
+  ],
+  "unverified_items": [
+    "Whether the quarterly figures in claim-001 reconcile to evidence/financials.json could not be checked. The XBRL pack holds only half-year facts (net income $37,649m, diluted EPS $13.63 for 1 Jan - 30 Jun 2026); backing out an implied Q1 of roughly $7.49 EPS from the Q2 $6.14 in claim-001 is not a valid cross-check because claim-001 is stated excluding significant items while the XBRL figures are as-reported. The brief discloses this gap in section 9.",
+    "The $6.14 reported EPS in claim-001 is stated excluding significant items, while the $5.52 Zacks consensus in claim-024 does not state a basis. Whether the beat comparison in claim-025 and in the brief is like-for-like could not be determined from the archived evidence.",
+    "Publication dates for web-006, web-007, web-013 and web-015 are null (temporal_status 'undated'). None of them is cited by any claim used in the brief, so they were not read in full; only web-011, the one undated source the brief does depend on, was checked for temporal integrity."
+  ],
+  "summary": "One high-severity finding blocks this run. Section 4's Wells Fargo contrast - the only discriminating counterevidence for the brief's central thesis that this was a sector-wide capital-markets cycle rather than JPMorgan-specific execution - compares EPS levels across different companies ($20.98 versus $2.00), is not supported by the claim it cites (claim-027 carries no growth rate), and is contradicted by the very document that claim comes from: web-003 shows Wells Fargo EPS up 25% year-on-year with Markets revenue up 24% and CIB revenue up 16%. Three medium findings follow: the upside case's ROTCE mechanism is backwards (deploying capital at a 17% target return dilutes a 23% ROTCE rather than holding it), the $5.52 consensus is presented as definitive while the run archived a conflicting $5.67 fourteen-analyst consensus, and an AI-CapEx sentence attributes lending-demand commentary to claim-021, which does not contain it. On the claims side, the extractor captured management's cautionary comments on Investment Banking sustainability but not its explicit 'pipeline remains quite robust ... we expect activity levels to remain healthy' statement from the same passage, leaving the evidence pack one-sided on the question the brief turns on. Sourcing, provenance, period labelling and temporal integrity are otherwise sound: the archived peer documents are genuine, the one undated source the brief relies on is verifiably pre-print, quarter-versus-half-year period labels are correct throughout, the injection scan is clean, and the prose is industry-appropriate for a bank."
+}

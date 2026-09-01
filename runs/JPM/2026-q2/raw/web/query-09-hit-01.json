@@ -1,11 +1,12 @@
 {
-  "url": "https://www.jpmorganchase.com/content/dam/jpmc/jpmorgan-chase-and-co/investor-relations/documents/quarterly-earnings/2026/2nd-quarter/6cded9fd-a164-4e6c-8cff-377357cf105c.pdf",
-  "title": "2Q26 Earnings Press Release",
+  "url": "https://www.marketscreener.com/news/bank-of-america-profit-rises-on-record-trading-boost-ce7f5edcd18cf325",
+  "title": "BofA rides market whiplash to trading records, deal activity shines | MarketScreener",
   "score": null,
-  "published_date": null,
+  "published_date": "2026-07-14T00:00:00.000Z",
   "_class": "peer",
-  "_select_key": "peer:Citigroup",
+  "_select_key": "peer:Bank of America",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "Citigroup quarterly results versus JPMorgan Chase JPM",
-  "_retrieved_at": "2026-08-27T20:08:50Z"
+  "_query": "Bank of America 2026-q2 analyst earnings reaction results",
+  "_retrieved_at": "2026-09-01T12:06:25Z"
 }

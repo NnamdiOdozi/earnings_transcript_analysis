@@ -1,11 +1,12 @@
 {
-  "url": "https://news.alphastreet.com/jpmorgan-chase-posts-27-revenue-jump-in-q2-2026-beats-on-eps/",
-  "title": "JPMorgan Chase Posts 27% Revenue Jump in Q2 2026, Beats on EPS - Alphastreet",
+  "url": "https://www.jpmorganchase.com/content/dam/jpmc/jpmorgan-chase-and-co/investor-relations/documents/quarterly-earnings/2026/2nd-quarter/2Q26-earnings-transcript.pdf",
+  "title": "2Q26 Earnings Transcript",
   "score": null,
-  "published_date": "2026-07-14T00:00:00.000Z",
-  "_class": "peer",
-  "_select_key": "peer:Bank of America",
+  "published_date": null,
+  "_class": "consensus",
+  "_select_key": "consensus",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "Bank of America quarterly results versus JPMorgan Chase JPM",
-  "_retrieved_at": "2026-08-27T20:08:45Z"
+  "_query": "JPMorgan Chase JPM 2026-q2 analyst earnings reaction results",
+  "_retrieved_at": "2026-09-01T12:06:20Z"
 }

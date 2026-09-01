@@ -1,11 +1,12 @@
 {
-  "url": "https://www.indmoney.com/blog/us-stocks/us-bank-earnings-q2-jpm-bac-gs-wfc-citi-stock-earnings",
-  "title": "JPMorgan, BofA, Goldman, Wells Fargo & Citi Q2 Earnings ...",
+  "url": "https://247wallst.com/investing/2026/04/08/jpmorgan-vs-bank-of-america-wall-street-has-a-clear-favorite-stock-right-now/",
+  "title": "JPMorgan vs. Bank of America: Wall Street Has a Clear Favorite Stock Right Now - 24/7 Wall St.",
   "score": null,
-  "published_date": "2026-07-14T00:00:00.000Z",
+  "published_date": "2026-04-08T00:00:00.000Z",
   "_class": "peer",
-  "_select_key": "peer:Wells Fargo",
+  "_select_key": "peer:Bank of America",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "Wells Fargo quarterly results versus JPMorgan Chase JPM",
-  "_retrieved_at": "2026-08-27T20:08:47Z"
+  "_query": "Bank of America quarterly results versus JPMorgan Chase JPM",
+  "_retrieved_at": "2026-09-01T12:06:23Z"
 }

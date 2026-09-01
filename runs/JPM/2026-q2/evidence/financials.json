@@ -1,10 +1,10 @@
 {
   "NetIncomeLoss": {
-    "value": 21155000000,
-    "start": "2026-04-01",
+    "value": 37649000000,
+    "start": "2026-01-01",
     "end": "2026-06-30",
-    "duration_days": 90,
-    "period_type": "quarter",
+    "duration_days": 180,
+    "period_type": "half_year",
     "unit": "USD",
     "form": "10-Q",
     "fy": 2026,
@@ -12,11 +12,11 @@
     "accn": "0001628280-26-054343"
   },
   "EarningsPerShareDiluted": {
-    "value": 7.7,
-    "start": "2026-04-01",
+    "value": 13.63,
+    "start": "2026-01-01",
     "end": "2026-06-30",
-    "duration_days": 90,
-    "period_type": "quarter",
+    "duration_days": 180,
+    "period_type": "half_year",
     "unit": "USD/shares",
     "form": "10-Q",
     "fy": 2026,

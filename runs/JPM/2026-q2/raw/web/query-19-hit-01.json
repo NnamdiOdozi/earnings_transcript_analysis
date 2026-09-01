@@ -1,0 +1,12 @@
+{
+  "url": "https://www.reuters.com/business/finance/citi-results-beat-wall-st-estimates-investment-banking-trading-strength-2026-07-14/",
+  "title": "Citi shares fall as investor worry over expenses ...",
+  "score": null,
+  "published_date": "2026-07-14T00:00:00.000Z",
+  "_class": "peer",
+  "_select_key": "peer:Citigroup",
+  "_temporal_status": "pre_event",
+  "_provider": "exa",
+  "_query": "Citigroup 2026-q2 analyst earnings reaction results",
+  "_retrieved_at": "2026-09-01T12:06:36Z"
+}

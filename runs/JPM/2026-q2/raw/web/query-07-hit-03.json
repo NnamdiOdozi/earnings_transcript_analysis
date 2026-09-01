@@ -1,11 +1,12 @@
 {
-  "url": "https://iberempresa.com/en/companies/jpmorgan-and-wells-fargo-boost-profits-by-41-and-17-in-the-second-quarter",
-  "title": "JPMorgan and Wells Fargo Boost Profits by 41% and 17% in the Second Quarter | Iber Empresa",
+  "url": "https://www.fool.com/investing/2026/06/09/jpmorgan-chase-trades-premium-bank-of-america/",
+  "title": "JPMorgan Chase Trades at a Big Premium to Bank of America. Is It Worth the Difference? | The Motley Fool",
   "score": null,
-  "published_date": "2026-07-14T00:00:00.000Z",
+  "published_date": "2026-06-09T00:00:00.000Z",
   "_class": "peer",
-  "_select_key": "peer:Wells Fargo",
+  "_select_key": "peer:Bank of America",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "Wells Fargo quarterly results versus JPMorgan Chase JPM",
-  "_retrieved_at": "2026-08-27T20:08:47Z"
+  "_query": "Bank of America quarterly results versus JPMorgan Chase JPM",
+  "_retrieved_at": "2026-09-01T12:06:23Z"
 }

@@ -1,11 +1,12 @@
 {
-  "url": "https://finvexx.com/article/finance-terminal/2026-07-14-goldman-sachs-jpmorgan-earnings-trading-winners-losers-july-2026",
-  "title": "Goldman Sachs JPMorgan Earnings: Trading Winners Losers July 2026 | Finvexx",
+  "url": "https://www.sec.gov/Archives/edgar/data/72971/000007297126000288/ex993-wellsfargo2q26pres.htm",
+  "title": "ex993-wellsfargo2q26pres",
   "score": null,
-  "published_date": "2026-07-14T00:00:00.000Z",
+  "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:Goldman Sachs",
+  "_select_key": "peer:Wells Fargo",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "Goldman Sachs quarterly results versus JPMorgan Chase JPM",
-  "_retrieved_at": "2026-08-27T20:08:52Z"
+  "_query": "Wells Fargo 2026-q2 earnings results revenue growth",
+  "_retrieved_at": "2026-09-01T12:06:27Z"
 }

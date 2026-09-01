@@ -1,0 +1,469 @@
+[
+  {
+    "id": "claim-001",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "JPMorgan reported Q2 2026 net income of $16.9 billion, EPS of $6.14, and ROTCE of 23%, excluding significant items.",
+    "quote": "the Firm delivered net income of $16.9 billion, EPS of $6.14 and an ROTCE of 23%",
+    "segment_id": "seg-0003",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {
+      "net_income_billions": 16.9,
+      "eps": 6.14,
+      "rotce_pct": 23
+    },
+    "confidence": 0.98,
+    "period": "3 months to 30 Jun 2026",
+    "inferred_from": []
+  },
+  {
+    "id": "claim-002",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Revenue was up 15% year-on-year, excluding significant items, driven by Markets, AWM/CCB asset management fees, Investment Banking, and deposit/loan balances, partly offset by lower rates.",
+    "quote": "revenue was up 15% year-on-year, predominantly driven by Markets revenue, higher asset management fees in AWM and CCB, higher Investment Banking revenue, and higher deposit and loan balances, partially offset by the impact of lower rates",
+    "segment_id": "seg-0003",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {
+      "revenue_growth_yoy_pct": 15
+    },
+    "confidence": 0.97,
+    "period": "3 months to 30 Jun 2026",
+    "inferred_from": []
+  },
+  {
+    "id": "claim-003",
+    "category": "costs_margins_efficiency",
+    "classification": "reported_fact",
+    "claim_text": "Expenses were $27.3 billion, up 15% year-on-year, driven by volume/revenue-related expense and front-office hiring/labor inflation.",
+    "quote": "Expenses of $27.3 billion were up 15% year-on-year, largely driven by volume and revenue-related expense, as well as growth in front office hiring and labor inflation",
+    "segment_id": "seg-0003",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {
+      "expenses_billions": 27.3,
+      "expense_growth_yoy_pct": 15
+    },
+    "confidence": 0.97,
+    "period": "3 months to 30 Jun 2026",
+    "inferred_from": []
+  },
+  {
+    "id": "claim-004",
+    "category": "balance_sheet_solvency",
+    "classification": "reported_fact",
+    "claim_text": "Credit costs were $2.5 billion, with net charge-offs of $2.4 billion and a net reserve build of $149 million.",
+    "quote": "credit costs were $2.5 billion, with net charge-offs of $2.4 billion and a net reserve build of $149 million",
+    "segment_id": "seg-0003",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {
+      "credit_costs_billions": 2.5,
+      "net_charge_offs_billions": 2.4,
+      "net_reserve_build_millions": 149
+    },
+    "confidence": 0.98,
+    "period": "3 months to 30 Jun 2026",
+    "inferred_from": []
+  },
+  {
+    "id": "claim-005",
+    "category": "balance_sheet_solvency",
+    "classification": "reported_fact",
+    "claim_text": "The standardized CET1 ratio was 14.1%, down 20 basis points versus the prior quarter as net income was more than offset by higher RWA and capital distributions.",
+    "quote": "we ended the quarter with a standardized CET1 ratio of 14.1%, down 20 basis points versus the prior quarter, as net income was more than offset by higher RWA and capital distributions",
+    "segment_id": "seg-0003",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {
+      "cet1_ratio_pct": 14.1,
+      "cet1_change_bps": 20
+    },
+    "confidence": 0.98,
+    "period": "as of 30 Jun 2026",
+    "inferred_from": []
+  },
+  {
+    "id": "claim-006",
+    "category": "cash_flow_capital_allocation",
+    "classification": "management_guidance",
+    "claim_text": "The Board intends to increase the quarterly dividend to $1.65 per share, effective in the third quarter.",
+    "quote": "the Board intends to increase the quarterly dividend to $1.65 per share effective in the third quarter",
+    "segment_id": "seg-0003",
+    "speaker": "Jeremy Barnum",
+    "status": "forward_looking",
+    "values": {
+      "quarterly_dividend_per_share": 1.65
+    },
+    "confidence": 0.97,
+    "inferred_from": []
+  },
+  {
+    "id": "claim-007",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Consumer & Community Banking (CCB) reported net income of $5.3 billion and revenue of $20.3 billion, up 8% year-on-year, driven by higher Card NII, Auto lease income, and Wealth Management fees.",
+    "quote": "CCB reported net income of $5.3 billion. Revenue of $20.3 billion was up 8% year-on-year, predominantly driven by higher Card NII, largely on higher revolving balances, as well as higher operating lease income in Auto and asset management fees in Wealth Management",
+    "segment_id": "seg-0003",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {
+      "ccb_net_income_billions": 5.3,
+      "ccb_revenue_billions": 20.3,
+      "ccb_revenue_growth_yoy_pct": 8
+    },
+    "confidence": 0.97,
+    "period": "3 months to 30 Jun 2026",
+    "inferred_from": []
+  },
+  {
+    "id": "claim-008",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Commercial & Investment Bank (CIB) reported net income of $9.7 billion and revenue of $24.9 billion, up 27% year-on-year; IB fees were up 30% year-on-year with particularly strong equity underwriting.",
+    "quote": "the CIB reported net income of $9.7 billion. Revenue of $24.9 billion was up 27% year-on-year, driven by strong performance across the businesses. IB fees were up 30% year-on-year, reflecting double-digit growth across all products, with particularly strong performance in equity underwriting",
+    "segment_id": "seg-0003",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {
+      "cib_net_income_billions": 9.7,
+      "cib_revenue_billions": 24.9,
+      "cib_revenue_growth_yoy_pct": 27,
+      "ib_fees_growth_yoy_pct": 30
+    },
+    "confidence": 0.97,
+    "period": "3 months to 30 Jun 2026",
+    "inferred_from": []
+  },
+  {
+    "id": "claim-009",
+    "category": "demand_activity",
+    "classification": "reported_fact",
+    "claim_text": "The Equities business had an exceptionally strong quarter, with revenue up 86% year-on-year, reflecting highly dynamic market conditions.",
+    "quote": "The equities business delivered an exceptionally strong quarter, with revenue up 86% year-on-year, reflecting the highly dynamic market conditions",
+    "segment_id": "seg-0003",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {
+      "equities_revenue_growth_yoy_pct": 86
+    },
+    "confidence": 0.97,
+    "period": "3 months to 30 Jun 2026",
+    "inferred_from": []
+  },
+  {
+    "id": "claim-010",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Asset & Wealth Management (AWM) reported net income of $2 billion with a pre-tax margin of 38%; revenue of $6.9 billion was up 19% year-on-year.",
+    "quote": "AWM reported net income of $2 billion, with pre-tax margin of 38%. Revenue of $6.9 billion was up 19% year-on-year, driven by growth in management fees on higher average market levels and strong net inflows, as well as investment valuation gains, higher loan balances and higher brokerage activity",
+    "segment_id": "seg-0003",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {
+      "awm_net_income_billions": 2,
+      "awm_pretax_margin_pct": 38,
+      "awm_revenue_billions": 6.9,
+      "awm_revenue_growth_yoy_pct": 19
+    },
+    "confidence": 0.97,
+    "period": "3 months to 30 Jun 2026",
+    "inferred_from": []
+  },
+  {
+    "id": "claim-011",
+    "category": "operational_performance",
+    "classification": "reported_fact",
+    "claim_text": "AUM reached $5.1 trillion, up 18% year-on-year, and client assets reached $7.7 trillion, up 19% year-on-year, driven by higher market levels and continued net inflows.",
+    "quote": "AUM of $5.1 trillion was up 18% year-on-year and client assets of $7.7 trillion were up 19% year-on-year, driven by higher market levels and continued net inflows",
+    "segment_id": "seg-0003",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {
+      "aum_trillions": 5.1,
+      "aum_growth_yoy_pct": 18,
+      "client_assets_trillions": 7.7,
+      "client_assets_growth_yoy_pct": 19
+    },
+    "confidence": 0.97,
+    "period": "as of 30 Jun 2026",
+    "inferred_from": []
+  },
+  {
+    "id": "claim-012",
+    "category": "current_guidance",
+    "classification": "management_guidance",
+    "claim_text": "For full-year 2026, management now expects NII ex. Markets of about $96.5 billion and total NII of approximately $105.5 billion, with Markets NII increasing to about $9 billion.",
+    "quote": "we now expect NII ex. Markets to be about $96.5 billion and total NII to be approximately $105.5 billion as a function of Markets NII increasing to about $9 billion",
+    "segment_id": "seg-0003",
+    "speaker": "Jeremy Barnum",
+    "status": "forward_looking",
+    "values": {
+      "nii_ex_markets_outlook_billions": 96.5,
+      "total_nii_outlook_billions": 105.5,
+      "markets_nii_outlook_billions": 9
+    },
+    "confidence": 0.97,
+    "period": "12 months to 31 Dec 2026",
+    "inferred_from": []
+  },
+  {
+    "id": "claim-013",
+    "category": "current_guidance",
+    "classification": "management_guidance",
+    "claim_text": "The full-year 2026 adjusted expense outlook was raised to about $107.5 billion.",
+    "quote": "the new adjusted expense outlook is about $107.5 billion",
+    "segment_id": "seg-0003",
+    "speaker": "Jeremy Barnum",
+    "status": "forward_looking",
+    "values": {
+      "expense_outlook_billions": 107.5
+    },
+    "confidence": 0.96,
+    "period": "12 months to 31 Dec 2026",
+    "inferred_from": []
+  },
+  {
+    "id": "claim-014",
+    "category": "risk",
+    "classification": "management_guidance",
+    "claim_text": "Management now expects the full-year Card net charge-off rate to be approximately 3.2%, reflecting better-than-expected consumer credit performance.",
+    "quote": "we now expect Card net charge-off rate to be approximately 3.2%, reflecting better-than-expected consumer credit performance",
+    "segment_id": "seg-0003",
+    "speaker": "Jeremy Barnum",
+    "status": "forward_looking",
+    "values": {
+      "card_nco_rate_outlook_pct": 3.2
+    },
+    "confidence": 0.96,
+    "period": "12 months to 31 Dec 2026",
+    "inferred_from": []
+  },
+  {
+    "id": "claim-015",
+    "category": "management_explanation",
+    "classification": "management_opinion",
+    "claim_text": "The CFO acknowledged that some Investment Banking pull-forward occurred and that large deals contributed meaningfully to the quarter's results.",
+    "quote": "clearly, there was some pull forward, and clearly, the large deals contributed meaningfully to this quarter's results",
+    "segment_id": "seg-0008",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": []
+  },
+  {
+    "id": "claim-016",
+    "category": "management_explanation",
+    "classification": "management_opinion",
+    "claim_text": "Management said it is hard to imagine the specific combination of factors behind this quarter's exceptional Equities performance being repeated, though the background environment remains supportive.",
+    "quote": "I think the particular set of things that happened in Equities this quarter, it's a little bit hard to imagine that being repeated, but the background environment is quite supportive",
+    "segment_id": "seg-0008",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": []
+  },
+  {
+    "id": "claim-017",
+    "category": "current_guidance",
+    "classification": "management_guidance",
+    "claim_text": "Management reaffirmed its expectation of low-to-mid single digit Consumer deposit growth for the year, unchanged from prior guidance.",
+    "quote": "we talked about expecting low (sic) [low-to-mid-] single digit growth this year, and that expectation is still in effect, it's unchanged",
+    "segment_id": "seg-0013",
+    "speaker": "Jeremy Barnum",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.85,
+    "period": "12 months to 31 Dec 2026",
+    "inferred_from": []
+  },
+  {
+    "id": "claim-018",
+    "category": "cash_flow_capital_allocation",
+    "classification": "management_guidance",
+    "claim_text": "Management indicated it still expects to deploy approximately $40 billion of excess capital over time.",
+    "quote": "We still think the number – use just approximately $40 billion, and I think we now think we could actually deploy that over time.",
+    "segment_id": "seg-0079",
+    "speaker": "Jamie Dimon",
+    "status": "forward_looking",
+    "values": {
+      "capital_deployment_estimate_billions": 40
+    },
+    "confidence": 0.9,
+    "inferred_from": []
+  },
+  {
+    "id": "claim-019",
+    "category": "cash_flow_capital_allocation",
+    "classification": "management_guidance",
+    "claim_text": "Management's stated goal is to deploy capital at a 17% return over time.",
+    "quote": "the goal is to deploy our capital at a 17% return. That is the goal, which we think we can do over time.",
+    "segment_id": "seg-0079",
+    "speaker": "Jamie Dimon",
+    "status": "forward_looking",
+    "values": {
+      "capital_deployment_target_return_pct": 17
+    },
+    "confidence": 0.92,
+    "inferred_from": []
+  },
+  {
+    "id": "claim-020",
+    "category": "regulatory_legal_macro",
+    "classification": "management_opinion",
+    "claim_text": "Jamie Dimon stated JPMorgan holds $80 billion or more of market risk capital, versus a largest-ever quarterly loss of $1.4 billion, as part of an argument that some capital rules overstate required risk capital.",
+    "quote": "We have $80 billion or more now of market risk capital, and the biggest quarterly loss we ever had was $1.4 billion.",
+    "segment_id": "seg-0034",
+    "speaker": "Jamie Dimon",
+    "status": "reported",
+    "values": {
+      "market_risk_capital_billions": 80,
+      "biggest_quarterly_loss_billions": 1.4
+    },
+    "confidence": 0.9,
+    "inferred_from": []
+  },
+  {
+    "id": "claim-021",
+    "category": "demand_activity",
+    "classification": "management_opinion",
+    "claim_text": "Jamie Dimon estimated total U.S. CapEx at about $4 trillion a year, with AI-related CapEx rising from $400 billion to $700 billion year-on-year.",
+    "quote": "I think CapEx is about $4 trillion a year, and AI went from $400 billion last year to $700 billion this year",
+    "segment_id": "seg-0075",
+    "speaker": "Jamie Dimon",
+    "status": "reported",
+    "values": {
+      "total_capex_trillions": 4,
+      "ai_capex_prior_year_billions": 400,
+      "ai_capex_current_year_billions": 700
+    },
+    "confidence": 0.85,
+    "inferred_from": []
+  },
+  {
+    "id": "claim-022",
+    "category": "management_explanation",
+    "classification": "management_opinion",
+    "claim_text": "Jamie Dimon characterized current conditions as close to as good as it gets, with an uncertain duration.",
+    "quote": "It's getting close to as good as it gets. We just don't know how long it's going to last.",
+    "segment_id": "seg-0040",
+    "speaker": "Jamie Dimon",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.92,
+    "inferred_from": []
+  },
+  {
+    "id": "claim-023",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An analyst pressed management on why adjusted operating leverage was negative year-to-date despite a strong revenue environment.",
+    "quote": "if we look at year-to-date results, it's been a strong revenue environment, but I think operating leverage on an adjusted basis was negative",
+    "segment_id": "seg-0031",
+    "speaker": "Jim Mitchell",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.93,
+    "inferred_from": []
+  },
+  {
+    "id": "claim-024",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Ahead of the print, Wall Street consensus (Zacks) forecast JPMorgan Q2 2026 EPS of $5.52 and revenue of $48.71 billion.",
+    "quote": "Wall Street analysts forecast that JPMorgan Chase & Co. (JPM) will report quarterly earnings of $5.52 per share in its upcoming release, pointing to a year-over-year increase of 11.3%. It is anticipated that revenues will amount to $48.71 billion, exhibiting an increase of 8.4% compared to the year-ago quarter.",
+    "web_evidence_id": "web-011",
+    "status": "reported",
+    "values": {
+      "consensus_eps": 5.52,
+      "consensus_revenue_billions": 48.71
+    },
+    "confidence": 0.9,
+    "period": "3 months to 30 Jun 2026",
+    "inferred_from": []
+  },
+  {
+    "id": "claim-025",
+    "category": "reported_financial_performance",
+    "classification": "analytical_inference",
+    "claim_text": "Reported EPS came in above the Zacks consensus estimate of $5.52 that had been set ahead of the print, an earnings beat versus Wall Street expectations.",
+    "quote": "Wall Street analysts forecast that JPMorgan Chase & Co. (JPM) will report quarterly earnings of $5.52 per share in its upcoming release, pointing to a year-over-year increase of 11.3%. It is anticipated that revenues will amount to $48.71 billion, exhibiting an increase of 8.4% compared to the year-ago quarter.",
+    "web_evidence_id": "web-011",
+    "status": "reported",
+    "values": {},
+    "inferred_from": [
+      "claim-001",
+      "claim-024"
+    ],
+    "confidence": 0.85,
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-026",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Peer Goldman Sachs reported Q2 2026 net revenues of $20.34 billion, net earnings of $6.63 billion, diluted EPS of $20.98, and annualized ROE of 23.5%.",
+    "quote": "The Goldman Sachs Group, Inc. (NYSE: GS) today reported net revenues of $20.34 billion and net earnings of $6.63 billion for the second quarter ended June 30, 2026. Diluted earnings per common share (EPS) was $20.98 and annualized return on average common shareholders’ equity (ROE) was 23.5% for the second quarter of 2026.",
+    "web_evidence_id": "web-005",
+    "status": "reported",
+    "values": {
+      "gs_net_revenues_billions": 20.34,
+      "gs_net_earnings_billions": 6.63,
+      "gs_eps": 20.98,
+      "gs_roe_pct": 23.5
+    },
+    "confidence": 0.95,
+    "period": "3 months to 30 Jun 2026",
+    "inferred_from": []
+  },
+  {
+    "id": "claim-027",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Peer Wells Fargo reported Q2 2026 net income of $6.4 billion, or $2.00 per diluted share.",
+    "quote": "Wells Fargo Reports Second Quarter 2026 Net Income of $6.4 billion, or $2.00 per Diluted Share",
+    "web_evidence_id": "web-003",
+    "status": "reported",
+    "values": {
+      "wfc_net_income_billions": 6.4,
+      "wfc_eps": 2.0
+    },
+    "confidence": 0.95,
+    "period": "3 months to 30 Jun 2026",
+    "inferred_from": []
+  },
+  {
+    "id": "claim-028",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Peer Citigroup's CEO said Q2 2026 net income was up 45% year-on-year, its best quarterly revenue in a decade, with double-digit revenue growth in four of five businesses.",
+    "quote": "With net income up 45%, this was Citi’s best quarterly revenue in a decade with double-digit revenue growth for the firm and in four out of our five businesses.",
+    "web_evidence_id": "web-004",
+    "status": "reported",
+    "values": {
+      "citi_net_income_growth_yoy_pct": 45
+    },
+    "confidence": 0.92,
+    "period": "3 months to 30 Jun 2026",
+    "inferred_from": []
+  },
+  {
+    "id": "claim-029",
+    "category": "demand_activity",
+    "classification": "reported_fact",
+    "claim_text": "Peer Bank of America's investment banking fees jumped 50% in Q2 2026.",
+    "quote": "Investment banking fees jump 50% in Q2",
+    "web_evidence_id": "web-012",
+    "status": "reported",
+    "values": {
+      "bac_ib_fees_growth_pct": 50
+    },
+    "confidence": 0.88,
+    "period": "3 months to 30 Jun 2026",
+    "inferred_from": []
+  }
+]

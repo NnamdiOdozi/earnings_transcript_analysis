@@ -1,11 +1,12 @@
 {
-  "url": "https://www.tradingkey.com/analysis/stocks/us-stocks/262028637-jpmorgan-jpm-q2-2026-earnings-preview-nii-guidance-338-tradingkey",
-  "title": "JPMorgan (JPM) Q2 2026 Earnings Preview: $5.59 EPS Consensus, $103B NII Guidance, and the $338.45 Trigger",
+  "url": "https://www.marketwatch.com/investing/stock/jpm/analystestimates",
+  "title": "JPM | JPMorgan Chase & Co. Analyst Estimates | MarketWatch",
   "score": null,
-  "published_date": "2026-07-14T00:00:00.000Z",
+  "published_date": null,
   "_class": "consensus",
   "_select_key": "consensus",
+  "_temporal_status": "undated",
   "_provider": "exa",
   "_query": "JPMorgan Chase JPM 2026-q2 analyst consensus estimate revenue EPS",
-  "_retrieved_at": "2026-08-27T20:08:40Z"
+  "_retrieved_at": "2026-09-01T12:06:14Z"
 }

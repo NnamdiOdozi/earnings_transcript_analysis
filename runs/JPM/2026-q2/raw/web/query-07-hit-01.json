@@ -1,11 +1,12 @@
 {
-  "url": "https://www.wellsfargo.com/assets/pdf/about/investor-relations/earnings/second-quarter-2026-financial-results.pdf",
-  "title": "2Q26 Financial Results",
+  "url": "https://www.barchart.com/story/news/1819121/jpmorgan-vs-bank-of-america-how-the-2-dividend-paying-bank-stocks-stack-up-in-2026",
+  "title": "JPMorgan vs. Bank of America: How the 2 Dividend-Paying Bank Stocks Stack Up in 2026",
   "score": null,
-  "published_date": null,
+  "published_date": "2026-05-08T00:00:00.000Z",
   "_class": "peer",
-  "_select_key": "peer:Wells Fargo",
+  "_select_key": "peer:Bank of America",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "Wells Fargo quarterly results versus JPMorgan Chase JPM",
-  "_retrieved_at": "2026-08-27T20:08:47Z"
+  "_query": "Bank of America quarterly results versus JPMorgan Chase JPM",
+  "_retrieved_at": "2026-09-01T12:06:23Z"
 }

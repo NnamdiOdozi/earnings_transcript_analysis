@@ -1,11 +1,12 @@
 {
-  "url": "https://www.sec.gov/Archives/edgar/data/19617/000162828026048078/a2q26erfexhibit991narrative.htm",
-  "title": "Document",
+  "url": "https://capedge.com/filing/19617/0001628280-26-029344/JPM-10Q-2026Q1",
+  "title": "JPMorgan Chase & Co. 10-Q Filing | JPM | CapEdge",
   "score": null,
-  "published_date": null,
+  "published_date": "2026-05-01T00:00:00.000Z",
   "_class": "peer",
-  "_select_key": "peer:Wells Fargo",
+  "_select_key": "peer:Bank of America",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "Wells Fargo quarterly results versus JPMorgan Chase JPM",
-  "_retrieved_at": "2026-08-27T20:08:47Z"
+  "_query": "Bank of America quarterly results versus JPMorgan Chase JPM",
+  "_retrieved_at": "2026-09-01T12:06:23Z"
 }

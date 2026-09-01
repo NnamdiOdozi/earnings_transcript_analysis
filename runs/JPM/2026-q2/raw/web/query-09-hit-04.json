@@ -1,11 +1,12 @@
 {
-  "url": "https://www.sec.gov/Archives/edgar/data/19617/000162828026048078/a2q26erfexhibit991narrative.htm",
-  "title": "Document",
+  "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-bank-of-america-tops-q2-2026-estimates-as-profit-jumps-93CH-4791110",
+  "title": "Earnings call transcript: Bank of America tops Q2 2026 ...",
   "score": null,
-  "published_date": null,
+  "published_date": "2026-07-14T00:00:00.000Z",
   "_class": "peer",
-  "_select_key": "peer:Citigroup",
+  "_select_key": "peer:Bank of America",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "Citigroup quarterly results versus JPMorgan Chase JPM",
-  "_retrieved_at": "2026-08-27T20:08:50Z"
+  "_query": "Bank of America 2026-q2 analyst earnings reaction results",
+  "_retrieved_at": "2026-09-01T12:06:25Z"
 }

@@ -1,11 +1,12 @@
 {
-  "url": "https://www.tipranks.com/news/jpm-vs-bac-vs-c-vs-wfc-vs-gs-bank-earnings-crush-estimates-as-jpmorgan-posts-record-profit",
+  "url": "https://www.tipranks.com/news/bac-earnings-bank-of-america-stock-slips-despite-q2-beat-on-banking-and-trading-profits",
   "title": "",
   "score": null,
   "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:Citigroup",
+  "_select_key": "peer:Bank of America",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "Citigroup quarterly results versus JPMorgan Chase JPM",
-  "_retrieved_at": "2026-08-27T20:08:50Z"
+  "_query": "Bank of America 2026-q2 analyst earnings reaction results",
+  "_retrieved_at": "2026-09-01T12:06:25Z"
 }

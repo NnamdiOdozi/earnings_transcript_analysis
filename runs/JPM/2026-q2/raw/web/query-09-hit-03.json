@@ -1,11 +1,12 @@
 {
-  "url": "https://tradingwhisperer.com/investing-news/bank-earnings-update-jpm-bofa-citi/",
-  "title": "Bank Earnings Update: JPM, BofA, Citi - Trading Whisperer",
+  "url": "https://finance.yahoo.com/markets/stocks/articles/bank-america-posts-strong-q2-192650907.html",
+  "title": "Bank of America Posts Strong Q2 as Every Business ...",
   "score": null,
   "published_date": "2026-07-14T00:00:00.000Z",
   "_class": "peer",
-  "_select_key": "peer:Citigroup",
+  "_select_key": "peer:Bank of America",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "Citigroup quarterly results versus JPMorgan Chase JPM",
-  "_retrieved_at": "2026-08-27T20:08:50Z"
+  "_query": "Bank of America 2026-q2 analyst earnings reaction results",
+  "_retrieved_at": "2026-09-01T12:06:25Z"
 }

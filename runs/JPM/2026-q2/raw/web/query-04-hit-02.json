@@ -1,11 +1,12 @@
 {
-  "url": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000353/bac06302026ex992.htm",
-  "title": "bac06302026ex992",
+  "url": "https://www.jpmorganchase.com/content/dam/jpmc/jpmorgan-chase-and-co/investor-relations/documents/quarterly-earnings/2026/2nd-quarter/6cded9fd-a164-4e6c-8cff-377357cf105c.pdf",
+  "title": "2Q26 Earnings Press Release",
   "score": null,
   "published_date": null,
-  "_class": "peer",
-  "_select_key": "peer:Bank of America",
+  "_class": "consensus",
+  "_select_key": "consensus",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "Bank of America 2026-q2 earnings results revenue growth",
-  "_retrieved_at": "2026-08-27T20:08:44Z"
+  "_query": "JPMorgan Chase JPM 2026-q2 earnings guidance outlook estimates",
+  "_retrieved_at": "2026-09-01T12:06:19Z"
 }

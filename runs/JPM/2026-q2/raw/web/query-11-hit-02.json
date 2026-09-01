@@ -1,11 +1,12 @@
 {
-  "url": "https://au.finance.yahoo.com/news/jpmorgan-goldman-posted-record-quarters-135016772.html",
-  "title": "JPMorgan and Goldman Posted Record Quarters \u2014 Their Own CEOs Aren\u2019t Sure It Lasts",
+  "url": "https://www.wellsfargo.com/assets/pdf/about/investor-relations/earnings/second-quarter-2026-financial-results.pdf",
+  "title": "2Q26 Financial Results",
   "score": null,
-  "published_date": null,
+  "published_date": "2026-07-14T00:00:00.000Z",
   "_class": "peer",
-  "_select_key": "peer:Goldman Sachs",
+  "_select_key": "peer:Wells Fargo",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "Goldman Sachs quarterly results versus JPMorgan Chase JPM",
-  "_retrieved_at": "2026-08-27T20:08:52Z"
+  "_query": "Wells Fargo 2026-q2 earnings results revenue growth",
+  "_retrieved_at": "2026-09-01T12:06:27Z"
 }

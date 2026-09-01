@@ -5,7 +5,8 @@
   "published_date": "2026-07-09T00:00:00.000Z",
   "_class": "consensus",
   "_select_key": "consensus",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
   "_query": "JPMorgan Chase JPM 2026-q2 earnings preview expectations forecast",
-  "_retrieved_at": "2026-08-27T20:08:42Z"
+  "_retrieved_at": "2026-09-01T12:06:14Z"
 }

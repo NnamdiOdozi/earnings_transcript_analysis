@@ -1,11 +1,12 @@
 {
-  "url": "https://www.citigroup.com/rcs/citigpa/storage/public/Earnings/Q22026/2026prqtr2rslt.pdf",
-  "title": "SECOND QUARTER 2026 RESULTS AND KEY METRICS",
+  "url": "https://www.reuters.com/business/finance/bank-america-profit-rises-trading-boost-2026-07-14/",
+  "title": "BofA rides market whiplash to trading records, deal activity ...",
   "score": null,
   "published_date": "2026-07-14T00:00:00.000Z",
   "_class": "peer",
-  "_select_key": "peer:Citigroup",
+  "_select_key": "peer:Bank of America",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "Citigroup 2026-q2 earnings results revenue growth",
-  "_retrieved_at": "2026-08-27T20:08:49Z"
+  "_query": "Bank of America 2026-q2 earnings guidance outlook",
+  "_retrieved_at": "2026-09-01T12:06:24Z"
 }

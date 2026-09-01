@@ -1,11 +1,12 @@
 {
-  "url": "https://www.wellsfargo.com/assets/pdf/about/investor-relations/earnings/second-quarter-2026-financial-results.pdf",
-  "title": "2Q26 Financial Results",
+  "url": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000353/bac06302026ex992.htm",
+  "title": "bac06302026ex992",
   "score": null,
-  "published_date": "2026-07-14T00:00:00.000Z",
+  "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:Wells Fargo",
+  "_select_key": "peer:Bank of America",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "Wells Fargo 2026-q2 earnings results revenue growth",
-  "_retrieved_at": "2026-08-27T20:08:46Z"
+  "_query": "Bank of America 2026-q2 earnings results revenue growth",
+  "_retrieved_at": "2026-09-01T12:06:21Z"
 }

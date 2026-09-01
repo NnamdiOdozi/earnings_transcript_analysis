@@ -1,11 +1,12 @@
 {
-  "url": "https://www.opencapital.sh/filings/0000886982-26-000294",
-  "title": "Goldman Sachs Group (GS) Form 8-K SEC Filing - Jul 14, 2026",
+  "url": "https://www.benzinga.com/news/26/07/60442721/bank-america-q2-2026-earnings-call-transcript",
+  "title": "Bank of America Q2 2026 Earnings Call Transcript - Bank of America (NYSE:BAC) - Benzinga",
   "score": null,
-  "published_date": null,
+  "published_date": "2026-07-14T00:00:00.000Z",
   "_class": "peer",
-  "_select_key": "peer:Goldman Sachs",
+  "_select_key": "peer:Bank of America",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "Goldman Sachs 2026-q2 earnings results revenue growth",
-  "_retrieved_at": "2026-08-27T20:08:51Z"
+  "_query": "Bank of America earnings call key trends 2026-q2",
+  "_retrieved_at": "2026-09-01T12:06:26Z"
 }

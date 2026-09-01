@@ -1,11 +1,12 @@
 {
-  "url": "https://getfinancebrief.com/story/jpmorgan-record-profit-big-bank-q2-2026",
-  "title": "JPMorgan's $21.2B Profit Leads Big Bank Q2 Beat | Finance Intelligence Brief",
+  "url": "https://www.jpmorganchase.com/content/dam/jpmc/jpmorgan-chase-and-co/investor-relations/documents/quarterly-earnings/2026/2nd-quarter/6cded9fd-a164-4e6c-8cff-377357cf105c.pdf",
+  "title": "2Q26 Earnings Press Release",
   "score": null,
-  "published_date": "2026-07-14T00:00:00.000Z",
-  "_class": "peer",
-  "_select_key": "peer:Bank of America",
+  "published_date": null,
+  "_class": "consensus",
+  "_select_key": "consensus",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "Bank of America quarterly results versus JPMorgan Chase JPM",
-  "_retrieved_at": "2026-08-27T20:08:45Z"
+  "_query": "JPMorgan Chase JPM 2026-q2 analyst earnings reaction results",
+  "_retrieved_at": "2026-09-01T12:06:20Z"
 }

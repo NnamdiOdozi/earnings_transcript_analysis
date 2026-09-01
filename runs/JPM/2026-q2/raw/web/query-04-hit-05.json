@@ -1,11 +1,12 @@
 {
-  "url": "https://www.marketscreener.com/news/bank-of-america-second-quarter-2026-earnings-presentation-ce7f5edcd18bf724",
-  "title": "Bank of America : Second Quarter 2026 Earnings Presentation | MarketScreener",
+  "url": "https://www.stocktitan.net/sec-filings/JPM/8-k-jpmorgan-chase-co-reports-material-event-1f2ddf4de037.html",
+  "title": "JPMorgan Chase posts $21.2B profit in Q2 2026 | JPM 8-K Filing",
   "score": null,
   "published_date": "2026-07-14T00:00:00.000Z",
-  "_class": "peer",
-  "_select_key": "peer:Bank of America",
+  "_class": "consensus",
+  "_select_key": "consensus",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "Bank of America 2026-q2 earnings results revenue growth",
-  "_retrieved_at": "2026-08-27T20:08:44Z"
+  "_query": "JPMorgan Chase JPM 2026-q2 earnings guidance outlook estimates",
+  "_retrieved_at": "2026-09-01T12:06:19Z"
 }

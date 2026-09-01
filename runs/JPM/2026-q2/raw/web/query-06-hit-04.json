@@ -1,11 +1,12 @@
 {
-  "url": "https://www.wellsfargo.com/assets/pdf/about/investor-relations/earnings/second-quarter-2026-earnings-supplement.pdf",
-  "title": "2Q26 Quarterly Supplement",
+  "url": "https://qz.com/bank-of-america-earnings-record-equities-trading-investment-banking-071426",
+  "title": "Bank of America Q2 2026 earnings: Record equities trading, profit jumps",
   "score": null,
-  "published_date": "2026-06-30T00:00:00.000Z",
+  "published_date": "2026-07-14T00:00:00.000Z",
   "_class": "peer",
-  "_select_key": "peer:Wells Fargo",
+  "_select_key": "peer:Bank of America",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "Wells Fargo 2026-q2 earnings results revenue growth",
-  "_retrieved_at": "2026-08-27T20:08:46Z"
+  "_query": "Bank of America 2026-q2 earnings results revenue growth",
+  "_retrieved_at": "2026-09-01T12:06:21Z"
 }

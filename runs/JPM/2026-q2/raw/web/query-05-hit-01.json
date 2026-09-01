@@ -1,11 +1,12 @@
 {
-  "url": "https://www.sec.gov/Archives/edgar/data/19617/000162828026048078/a2q26erfexhibit991narrative.htm",
-  "title": "Document",
+  "url": "https://www.tradingview.com/news/zacks:3ead5a571094b:0-jpm-q2-earnings-beat-on-trading-ib-higher-cost-outlook-drags-stock/",
+  "title": "JPM Q2 Earnings Beat on Trading & IB, Higher Cost Outlook Drags Stock \u2014 TradingView News",
   "score": null,
-  "published_date": null,
-  "_class": "peer",
-  "_select_key": "peer:Bank of America",
+  "published_date": "2026-07-14T00:00:00.000Z",
+  "_class": "consensus",
+  "_select_key": "consensus",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "Bank of America quarterly results versus JPMorgan Chase JPM",
-  "_retrieved_at": "2026-08-27T20:08:45Z"
+  "_query": "JPMorgan Chase JPM 2026-q2 analyst earnings reaction results",
+  "_retrieved_at": "2026-09-01T12:06:20Z"
 }

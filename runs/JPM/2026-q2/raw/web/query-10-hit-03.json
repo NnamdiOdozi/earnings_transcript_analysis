@@ -1,11 +1,12 @@
 {
-  "url": "https://qz.com/goldman-sachs-q2-2026-earnings-record-equities-trading-071426",
-  "title": "Goldman Sachs posts Q2 2026 earnings beat on record stock trading",
+  "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-bank-of-america-tops-q2-2026-estimates-as-profit-jumps-93CH-4791110",
+  "title": "Earnings call transcript: Bank of America tops Q2 2026 estimates as profit jumps By Investing.com",
   "score": null,
-  "published_date": "2026-07-14T00:00:00.000Z",
+  "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:Goldman Sachs",
+  "_select_key": "peer:Bank of America",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "Goldman Sachs 2026-q2 earnings results revenue growth",
-  "_retrieved_at": "2026-08-27T20:08:51Z"
+  "_query": "Bank of America earnings call key trends 2026-q2",
+  "_retrieved_at": "2026-09-01T12:06:26Z"
 }

@@ -1,11 +1,12 @@
 {
-  "url": "https://www.cnbc.com/2026/07/13/bank-earnings-jpmorgan-chase-goldman-sachs-bank-of-america.html",
-  "title": "Bank earnings: JPMorgan Chase, Goldman Sachs ...",
+  "url": "https://www.wellsfargo.com/about/investor-relations/quarterly-earnings/",
+  "title": "Quarterly earnings - Investor relations",
   "score": null,
-  "published_date": "2026-07-13T00:00:00.000Z",
+  "published_date": "2010-06-12T00:00:00.000Z",
   "_class": "peer",
-  "_select_key": "peer:Goldman Sachs",
+  "_select_key": "peer:Wells Fargo",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "Goldman Sachs quarterly results versus JPMorgan Chase JPM",
-  "_retrieved_at": "2026-08-27T20:08:52Z"
+  "_query": "Wells Fargo 2026-q2 earnings results revenue growth",
+  "_retrieved_at": "2026-09-01T12:06:27Z"
 }

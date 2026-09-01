@@ -1,12 +1,12 @@
 {
-  "url": "https://www.barchart.com/stocks/quotes/MSFT/earnings-estimates",
-  "title": "MSFT Earnings Estimates for Microsoft Corp Stock - Barchart.com",
+  "url": "https://finance.yahoo.com/markets/stocks/articles/microsoft-msft-reports-next-week-140028056.html",
+  "title": "Microsoft (MSFT) Reports Next Week: Wall Street Expects Earnings Growth",
   "score": null,
   "published_date": null,
   "_class": "consensus",
   "_select_key": "consensus",
   "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "Microsoft MSFT 2026-q2 analyst consensus estimate revenue EPS",
-  "_retrieved_at": "2026-08-30T11:56:50Z"
+  "_query": "Microsoft Corporation MSFT 2026-q2 analyst consensus estimate revenue EPS",
+  "_retrieved_at": "2026-09-01T08:14:29Z"
 }

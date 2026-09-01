@@ -62,6 +62,7 @@ WEB_EVIDENCE_FILENAME = "web-evidence.jsonl"  # under evidence/
 VALIDATION_FILENAME = "validation.json"
 VALIDATION_ATTEMPT_RECEIPT_FILENAME = "receipt.json"
 INJECTION_SCAN_FILENAME = "injection-scan.json"  # advisory prompt-injection flag results (see process.scan_for_injection)
+SEGMENTATION_REPORT_FILENAME = "segmentation-report.json"
 SIGNAL_CARD_FILENAME = "signal-card.md"
 OUTLOOK_BRIEF_FILENAME = "outlook-brief.md"
 OUTLOOK_VALIDATION_FILENAME = "outlook-validation.json"  # Python-owned: real-clock stamp for validate-outlook
@@ -91,16 +92,28 @@ HTTP_TIMEOUT_SECONDS = float(_get("http", "timeout_seconds", 20.0))
 MAX_FETCH_BYTES = int(_get("http", "max_fetch_mb", 10)) * 1024 * 1024
 
 # --- Segmentation heuristics (config.toml [segmentation]) ---
-QA_BOUNDARY_MARKERS = tuple(
+QA_STANDALONE_HEADINGS = tuple(
     _get(
         "segmentation",
-        "qa_boundary_markers",
+        "qa_standalone_headings",
         [
-            "questions and answers",
-            "question-and-answer",
             "q&a",
-            "we will now begin the question-and-answer session",
-            "operator instructions",
+            "questions and answers",
+            "question and answer session",
+            "question-and-answer session",
+        ],
+    )
+)
+QA_TRANSITION_PHRASES = tuple(
+    _get(
+        "segmentation",
+        "qa_transition_phrases",
+        [
+            "go to q&a",
+            "move over to q&a",
+            "open the line for q&a",
+            "q&a session commences",
+            "begin the question-and-answer session",
         ],
     )
 )
@@ -198,7 +211,7 @@ EXA_MAX_EXTRACTED_SOURCES = int(_get("exa", "max_extracted_sources", 10))
 
 # --- Invisible / zero-width unicode code points stripped during sanitisation ---
 ZERO_WIDTH_CHARS = (
-    "​",  # zero width space
+    "\u200b",  # zero width space
     "‌",  # zero width non-joiner
     "‍",  # zero width joiner
     "﻿",  # BOM / zero width no-break space

@@ -1,11 +1,11 @@
 {
-  "url": "https://seekingalpha.com/symbol/MSFT/peers/comparison",
-  "title": "Microsoft Corporation (MSFT) Stock Competitors & Similar ...",
+  "url": "https://stockoscope.com/stock/msft/peers",
+  "title": "MSFT Microsoft Corporation \u00b7 Peer Comparison",
   "score": null,
-  "published_date": "2025-02-04T00:00:00.000Z",
+  "published_date": null,
   "_class": "peer_group",
-  "_temporal_status": "pre_event",
+  "_temporal_status": "undated",
   "_provider": "exa",
   "_query": "Microsoft MSFT peer group comparable companies",
-  "_retrieved_at": "2026-08-30T11:55:34Z"
+  "_retrieved_at": "2026-09-01T08:03:17Z"
 }

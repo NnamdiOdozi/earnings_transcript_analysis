@@ -171,7 +171,8 @@ period end (e.g. a restatement), the **original (earliest-filed)** fact is
 selected, so a later restatement of the same period can't silently replace it.
 
 A rerun for the same ticker/event archives the prior run to `_archive/<timestamp>/`
-first, rather than overwriting it.
+first, rather than overwriting it. Agent-authored claims and outlooks are extracted
+fresh for the new run; they are reused only with the user's explicit consent.
 
 ### 3. `earnings analyze` — validate claims and produce the signal card
 
@@ -274,6 +275,7 @@ runs/<ticker>/<event-id>/
   manifest.json               # source URLs/paths, timestamps, sha256 hashes, SEC/Exa-Tavily status, queries sent
   raw/                        # verbatim archived source, before sanitisation
   normalized/transcript.jsonl # sanitised, segmented, speaker-labelled transcript
+  segmentation-report.json   # timestamped receipt for deliberately omitted structural lines
   evidence/financials.json    # SEC/XBRL evidence, if a CIK was resolved
   evidence/web-evidence.jsonl # extracted, citable Exa/Tavily evidence (+ evidence/web/*.md)
   claims.json                 # quote-anchored claims (agent-written)

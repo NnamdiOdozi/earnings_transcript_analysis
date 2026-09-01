@@ -1,12 +1,12 @@
 {
-  "url": "https://www.tipranks.com/stocks/msft/earnings/q3-2026-report",
-  "title": "",
+  "url": "https://sg.finance.yahoo.com/quote/MSFT/analysis/",
+  "title": "Microsoft Corporation (MSFT) analyst ratings, estimates and forecasts \u2013 Yahoo Finance",
   "score": null,
   "published_date": null,
   "_class": "consensus",
   "_select_key": "consensus",
   "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "Microsoft MSFT Wall Street consensus estimates ahead of earnings",
-  "_retrieved_at": "2026-08-30T11:56:52Z"
+  "_query": "Microsoft Corporation MSFT Wall Street consensus estimates ahead of earnings",
+  "_retrieved_at": "2026-09-01T08:14:30Z"
 }

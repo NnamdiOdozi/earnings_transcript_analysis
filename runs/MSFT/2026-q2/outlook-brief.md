@@ -2,99 +2,95 @@
 
 ## 1. Outlook in brief
 
-For the three months to 31 December 2025, Microsoft reported broad commercial growth alongside a large increase in infrastructure investment. Revenue rose 17% to \$81.3 billion, Microsoft Cloud revenue rose 26% to \$51.5 billion, and Azure and other cloud-services revenue rose 39% [claim-001][claim-009][claim-011].
-
-The near-term outlook is for continued double-digit growth, but with capacity allocation and artificial-intelligence infrastructure costs constraining how quickly demand converts into Azure revenue and cloud margin. Management guided to third-quarter revenue of \$80.65 billion to \$81.75 billion, Azure constant-currency growth of 37% to 38%, Microsoft Cloud gross margin of roughly 65%, and company operating margin down slightly year over year [claim-016][claim-018][claim-020][claim-028].
+The headline results cover the 3 months to 31 Dec 2025. Microsoft entered the next quarter with strong cloud demand, a large contracted backlog, and continued adoption of its paid Copilot products [claim-004][claim-009][claim-010][claim-011][claim-012]. Management expects next-quarter revenue of \$80.65 billion to \$81.75 billion and constant-currency Azure growth of 37% to 38% [claim-016][claim-018]. The central tension is that demand still exceeds available supply while heavy infrastructure investment is pressuring cloud gross margin [claim-011][claim-014][claim-019].
 
 ## 2. What changed
 
-Management now expects fiscal-year operating margins to be up slightly. It attributed this change to first-half investment prioritisation and a more favourable revenue mix from Windows original-equipment-manufacturer and commercial on-premises businesses [claim-022].
+The clearest guidance change was the fiscal-year operating-margin outlook. Management now expects a slight year-over-year increase after prioritising investment and benefiting from a more favourable revenue mix [claim-020].
 
-For the next quarter, management expects capital expenditure to decline sequentially, although the mix of short-lived assets should remain similar to the second quarter [claim-017]. This is a change in the quarterly spending direction, not an indication that the wider capacity build has ended. Management described major capacity sites as multiyear deliveries and said capacity must continue to be added globally [claim-026].
+The current quarter also sharpened how Azure guidance should be interpreted. Management described it as an allocated-capacity guide because graphics and central processing units must also serve first-party Copilot products and research and development [claim-022]. This means Azure growth alone does not capture all uses of the capacity being installed.
 
-No reliable event-date consensus estimate was preserved in the eligible evidence, so this brief does not characterize the reported quarter or guidance as a beat or miss.
+No safe, time-bounded analyst-consensus source was available in the source pack. A numerical earnings-surprise conclusion is therefore excluded.
 
 ## 3. Management guidance
 
-- Total third-quarter revenue: \$80.65 billion to \$81.75 billion, representing 15% to 17% growth [claim-016].
-- Productivity and Business Processes revenue: \$34.25 billion to \$34.55 billion, representing 14% to 15% growth [claim-019].
-- Intelligent Cloud revenue: \$34.1 billion to \$34.4 billion. Azure constant-currency revenue growth is expected at 37% to 38% [claim-020].
-- More Personal Computing revenue: \$12.3 billion to \$12.8 billion, with Windows OEM and Devices revenue expected to decline in the low teens [claim-021].
-- Microsoft Cloud gross margin: roughly 65%, down year over year because of continued artificial-intelligence investment [claim-018].
-- Company operating margin: expected to decline slightly year over year in the third quarter [claim-028].
-- Capital expenditure: expected to decline sequentially, with a short-lived-asset mix similar to the second quarter [claim-017].
-- Fiscal-year operating margin: now expected to be up slightly [claim-022].
+For the 3 months to 31 Mar 2026, Microsoft guided:
+
+- Total revenue of \$80.65 billion to \$81.75 billion [claim-016].
+- Intelligent Cloud revenue of \$34.1 billion to \$34.4 billion [claim-017].
+- Azure revenue growth of 37% to 38% in constant currency [claim-018].
+- Microsoft Cloud gross margin of roughly 65%, down year over year because of continued artificial-intelligence investment [claim-019].
+
+For the 12 months to 30 Jun 2026, management expects operating margin to increase slightly year over year [claim-020]. Management did not provide a numerical full-year revenue range in the claims captured for this run.
 
 ## 4. Business drivers
 
-Commercial demand remains the central growth support. Commercial remaining performance obligation reached \$625 billion, up 110%, although approximately 45% was attributable to OpenAI [claim-007][claim-008]. Management said the other roughly \$350 billion was diversified across customers, solutions, industries, and geographies and had grown 28% [claim-025].
+Cloud demand is the main positive driver. Management said demand continued to exceed supply, while commercial remaining performance obligation reached \$625 billion [claim-011][claim-012]. The backlog is concentrated but not solely dependent on one customer. OpenAI represented about 45% of commercial remaining performance obligation, while management described roughly \$350 billion as related to the breadth of the portfolio [claim-013][claim-024].
 
-Adoption is also broadening in first-party products. Microsoft reported 15 million paid Microsoft 365 Copilot seats, with quarterly seat additions up more than 160% year over year. GitHub Copilot paid subscribers exceeded 4.7 million and rose 75% [claim-014][claim-015]. Fabric had more than 31,000 customers and an annual revenue run rate exceeding \$2 billion [claim-013].
+Paid product adoption broadens the demand picture. Microsoft reported 15 million paid Microsoft 365 Copilot seats and more than 4.7 million paid GitHub Copilot subscribers [claim-009][claim-010]. Infrastructure expansion is also material. Microsoft added nearly one gigawatt of capacity during the quarter and spent \$37.5 billion on capital expenditure, with roughly two thirds directed to short-lived assets [claim-008][claim-014].
 
-The conversion of demand into revenue depends on capacity allocation. Management said new graphics-processing-unit capacity first serves growing first-party Copilot usage and long-term research and product innovation, with the remainder serving Azure demand [claim-029]. It also said a lot of the graphics-processing units being purchased were already contracted for most of their useful lives, reducing some utilisation risk [claim-024].
+The cost trade-off remains visible. Company gross margin was 68% and declined slightly year over year, principally because of artificial-intelligence infrastructure investment and usage, partly offset by efficiency gains and business mix [claim-003][claim-021].
+
+Oracle's official pre-event release provides limited peer context. It reported fiscal second-quarter cloud infrastructure revenue of \$4.1 billion, up 68% year over year [claim-027]. That rate is not treated as a causal explanation for Microsoft’s results. The companies use different revenue definitions, operate at different scales, and reported periods that are not established here as perfectly aligned.
 
 ## 5. Base case
 
-The evidence supports a base case of continued commercial growth within management's stated third-quarter ranges. Azure growth moderates from the reported 39% rate to the guided 37% to 38% constant-currency range as supply remains constrained [claim-011][claim-020]. Productivity and Business Processes continues double-digit growth, supported by Microsoft 365 Copilot adoption and existing commercial demand [claim-014][claim-019].
+The base case is continued double-digit company growth with Azure remaining supply-constrained and close to management's 37% to 38% constant-currency range [claim-011][claim-016][claim-018]. The \$625 billion commercial backlog and paid Copilot adoption support demand visibility [claim-009][claim-010][claim-012].
 
-Margins remain mixed across time horizons. Management expects third-quarter company operating margin to decline slightly year over year and Microsoft Cloud gross margin to be roughly 65%, while it now expects fiscal-year operating margin to improve slightly [claim-018][claim-022][claim-028]. The reported quarter already showed artificial-intelligence infrastructure investment and usage offsetting part of the benefit from efficiency gains [claim-003].
+At the same time, Microsoft Cloud gross margin is likely to remain under pressure as new capacity is deployed and used [claim-019][claim-021]. The slight increase expected in full-year operating margin implies that scale, efficiency, and revenue mix can offset much of that pressure at the company level [claim-020].
 
 ## 6. Upside case
 
-The upside condition is faster effective capacity deployment or allocation without a corresponding deterioration in unit economics. Management said Azure growth would have exceeded 40% if all graphics-processing units brought online in the first and second quarters had been allocated to Azure. This was a hypothetical allocation example, not guidance [claim-023].
+The upside case would require capacity to come online on schedule and be allocated to the highest-return uses. The nearly one gigawatt added during the quarter shows that substantial expansion is already under way [claim-008]. Stronger-than-assumed monetisation could come from Azure, Microsoft 365 Copilot, GitHub Copilot, or other first-party uses because management allocates the same capacity across these activities [claim-009][claim-010][claim-022].
 
-Further upside would require Copilot adoption and usage to continue converting into paid seats and revenue while the graphics-processing units described by management as contracted improve utilisation over their useful lives [claim-014][claim-015][claim-024]. Observable confirmation would include Azure growth above the guided range, sustained Copilot seat growth, and cloud margin performing better than the roughly 65% guide [claim-018][claim-020].
+Further evidence would include demand remaining above supply, continued paid-seat expansion, and Azure growth at or above the top of the guided constant-currency range [claim-011][claim-018]. Management's statement that many graphics-processing-unit contracts cover the hardware's useful life could also support improving economics as the installed fleet ages [claim-023].
 
 ## 7. Downside case
 
-The main downside is that infrastructure additions arrive too slowly or are divided among too many internal and external priorities to satisfy Azure demand. Management explicitly described global capacity additions as a multiyear effort [claim-026]. A further warning would be cloud margin falling below guidance as artificial-intelligence infrastructure and product usage costs remain elevated [claim-003][claim-018].
+The downside case centres on execution timing, margin pressure, and backlog concentration. Capacity may arrive later than expected or be allocated away from Azure, creating quarterly variability in reported growth [claim-022][claim-025]. Cloud gross margin could remain below the prior-year level as infrastructure costs and product usage grow [claim-019][claim-021]. Rising memory prices could also increase capital expenditure and affect cloud gross margin over time [claim-026].
 
-Concentration is another risk. Approximately 45% of commercial remaining performance obligation came from OpenAI, even though management emphasized the scale and growth of the remaining portfolio [claim-008][claim-025]. Consumer-facing weakness could add pressure: More Personal Computing revenue declined 3% in the reported quarter, gaming revenue declined 9%, and the next-quarter segment range is below the reported quarter's \$14.3 billion [claim-012][claim-021].
+OpenAI's approximately 45% share of commercial remaining performance obligation creates customer-concentration exposure even though management emphasised the scale and growth of the rest of the portfolio [claim-013][claim-024]. A slowdown in paid Copilot adoption would weaken the case that capacity deployed outside Azure is producing broad-based growth [claim-009][claim-010].
 
 ## 8. What to monitor
 
-- Azure constant-currency growth relative to the 37% to 38% guide [claim-020].
-- Microsoft Cloud gross margin relative to the roughly 65% guide [claim-018].
-- Third-quarter company operating margin relative to management's expectation of a slight year-over-year decline [claim-028].
-- The pace and allocation of new graphics-processing-unit and central-processing-unit capacity [claim-017][claim-023][claim-026].
-- Copilot paid-seat and subscriber growth [claim-014][claim-015].
-- Growth in the commercial remaining-performance-obligation balance excluding OpenAI [claim-008][claim-025].
-- More Personal Computing revenue, particularly Windows OEM and gaming [claim-012][claim-021].
-- Capital expenditure and free cash flow after reported capital expenditure of \$37.5 billion and free cash flow of \$5.9 billion [claim-005][claim-006][claim-017].
+- Azure constant-currency growth against the 37% to 38% range [claim-018].
+- Microsoft Cloud gross margin against the roughly 65% outlook [claim-019].
+- Capacity delivery timing and the allocation of new compute between Azure, first-party products, and research and development [claim-008][claim-022][claim-025].
+- Paid Microsoft 365 Copilot seats and paid GitHub Copilot subscribers [claim-009][claim-010].
+- Commercial remaining performance obligation growth, duration, and the OpenAI share [claim-012][claim-013][claim-024].
+- Capital expenditure, short-lived asset mix, and the effect of memory prices [claim-014][claim-026].
+- Operating cash flow and free cash flow as capital spending remains high [claim-015].
 
 ## 9. Uncertainties and missing evidence
 
-The source pack did not preserve a consensus page whose contents could be proven to represent estimates available before the 28 January 2026 call. Therefore, no surprise calculation or consensus comparison is made.
+The source pack contains no analyst-consensus page whose body establishes that its estimates were current on or before 28 Jan 2026. No beat-or-miss calculation is therefore made. The pack's later-dated Alphabet, Amazon, and Apple materials were not knowable at the event and are excluded from context and causal reasoning.
 
-Only Oracle supplied clearly dated, pre-event peer evidence. Oracle reported fiscal second-quarter revenue growth of 14% and cloud-revenue growth of 34%, but one peer is not sufficient to establish a broad competitive trend [claim-027]. The retrieved Apple, Alphabet, and Amazon pages concerned periods after Microsoft's event and were not used.
+Oracle's pre-event result is cited only as descriptive peer context [claim-027]. It is not used to infer Microsoft market share, demand transfer, competitive causality, or relative execution because the disclosed measures are not demonstrated to be like-for-like.
 
-Management's statement that Azure growth would have exceeded 40% under a different capacity allocation is counterfactual. It indicates allocation pressure but does not establish achievable future Azure growth [claim-023]. Management said a lot of purchased graphics-processing units were contracted for most of their useful lives, but the duration and economics of individual customer contracts are not disclosed in sufficient detail to independently quantify return on infrastructure investment [claim-024].
+Management did not give a numerical full-year revenue range in the captured claims. It also did not quantify how much incoming capacity will be assigned to Azure versus first-party products or research and development [claim-022]. Timing and contract mix can create quarterly volatility [claim-025].
 
 ## 10. Evidence appendix
 
 - [claim-001] “This quarter, revenue was \$81.3 billion, up 17% and 15% in constant currency.” — seg-0004
-- [claim-003] “Company gross margin percentage was 68%, down slightly year-over-year primarily driven by continued investments in AI infrastructure and growing AI product usage” — seg-0004
-- [claim-005] “Capital expenditures were \$37.5 billion” — seg-0004
-- [claim-006] “Cash flow from operations was \$35.8 billion, up 60%” and “free cash flow was \$5.9 billion” — seg-0004
-- [claim-007] “Commercial remaining performance obligation ... increased to \$625 billion and was up 110% year-over-year” — seg-0004
-- [claim-008] “Approximately 45% of our commercial RPO balance is from OpenAI.” — seg-0004
-- [claim-009] “Microsoft Cloud revenue was \$51.5 billion and grew 26%” — seg-0004
-- [claim-011] “In Azure and other cloud services, revenue grew 39% and 38% in constant currency” — seg-0004
-- [claim-012] “Revenue was \$14.3 billion and declined 3%” and “Gaming, revenue decreased 9%” — seg-0004
-- [claim-013] “Fabric’s annual revenue run rate is now over two billion dollars, with over 31,000 customers.” — seg-0003
-- [claim-014] “now have 15 million paid Microsoft 365 Copilot seats” — seg-0003
-- [claim-015] “over 4.7 million paid Copilot subscribers, up 75% year-over-year.” — seg-0003
-- [claim-016] “We expect revenue of \$80.65 to \$81.75 billion” — seg-0004
-- [claim-017] “we expect capital expenditures to decrease on a sequential basis” — seg-0004
-- [claim-018] “Microsoft Cloud gross margin percentage should be roughly 65%” — seg-0004
-- [claim-019] “we expect revenue of \$34.25 to \$34.55 billion” — seg-0004
-- [claim-020] “In Azure, we expect Q3 revenue growth to be between 37% and 38% in constant currency” — seg-0004
-- [claim-021] “we expect revenue to be \$12.3 to \$12.8 billion.” — seg-0004
-- [claim-022] “we now expect FY26 operating margins to be up slightly.” — seg-0004
-- [claim-023] “allocated them all to Azure, the KPI would have been over 40.” — seg-0006
-- [claim-024] “a lot of the GPUs that we’re buying are already contracted for most of their useful life.” — seg-0010
-- [claim-025] “55%, or roughly \$350 billion, is related to the breadth of our portfolio” — seg-0015
-- [claim-026] “Those are multiyear deliveries” and “adding capacity globally.” — seg-0017
-- [claim-027] “Total quarterly revenues were up 14%” and “Cloud revenues were up 34%” — web-002
-- [claim-028] “Operating margins should be down slightly year-over-year.” — seg-0004
-- [claim-029] “the remainder going towards serving the Azure capacity that continues to grow in terms of demand.” — seg-0006
+- [claim-003] “Company gross margin percentage was 68%, down slightly year-over-year primarily driven by continued investments in AI infrastructure and growing AI product usage that was partially offset by ongoing efficiency gains, particularly in Azure and M365 Commercial cloud, as well as sales mix shift to higher margin businesses.” — seg-0004
+- [claim-004] “Microsoft Cloud revenue was \$51.5 billion and grew 26% and 24% in constant currency.” — seg-0004
+- [claim-008] “All up, we added nearly one gigawatt of total capacity this quarter alone.” — seg-0003
+- [claim-009] “All up, it was a record quarter for Microsoft 365 Copilot seat adds, up over 160% year-over-year. We saw accelerating seat growth quarter-over-quarter and now have 15 million paid Microsoft 365 Copilot seats, and multiples more enterprise Chat users.” — seg-0003
+- [claim-010] “And, all up now we have over 4.7 million paid Copilot subscribers, up 75% year-over-year.” — seg-0003
+- [claim-011] “Our customer demand continues to exceed our supply.” — seg-0004
+- [claim-012] “Commercial remaining performance obligation, which continues to be reported net of reserves, increased to \$625 billion and was up 110% year-over-year with a weighted average duration of approximately two and a half years.” — seg-0004
+- [claim-013] “Approximately 45% of our commercial RPO balance is from OpenAI.” — seg-0004
+- [claim-014] “Capital expenditures were \$37.5 billion, and this quarter, roughly two thirds of our capex was on short-lived assets, primarily GPUs and CPUs.” — seg-0004
+- [claim-015] “Cash flow from operations was \$35.8 billion, up 60% driven by strong cloud billings and collections. And free cash flow was \$5.9 billion and decreased sequentially reflecting the higher cash capital expenditures from a lower mix of finance leases.” — seg-0004
+- [claim-016] “We expect revenue of \$80.65 to \$81.75 billion or growth of 15% to %17 with continued strong growth across our commercial businesses, partially offset by our consumer businesses.” — seg-0004
+- [claim-017] “For Intelligent Cloud, we expect revenue of \$34.1 to \$34.4 billion, or growth of 27% to 29%.” — seg-0004
+- [claim-018] “In Azure, we expect Q3 revenue growth to be between 37% and 38% in constant currency against a prior year comparable that included significantly accelerating growth rates in both Q3 and Q4.” — seg-0004
+- [claim-019] “Microsoft Cloud gross margin percentage should be roughly 65%, down year-over-year driven by continued investments in AI.” — seg-0004
+- [claim-020] “With the strong work delivered in H1 to prioritize investment in key growth areas and the favorable impact from a higher mix of revenue in our Windows OEM and Commercial on-prem businesses, we now expect FY26 operating margins to be up slightly.” — seg-0004
+- [claim-021] “Company gross margin percentage was 68%, down slightly year-over-year primarily driven by continued investments in AI infrastructure and growing AI product usage that was partially offset by ongoing efficiency gains, particularly in Azure and M365 Commercial cloud, as well as sales mix shift to higher margin businesses.” — seg-0004
+- [claim-022] “Sometimes, I think it’s probably better to think about the Azure guidance that we give as an allocated capacity guide about what we can deliver in Azure revenue, because as we spend the capital and put GPUs, specifically, it applies to CPUs, but GPUs more specifically, we’re really making long-term decisions.” — seg-0007
+- [claim-023] “And on the GPU contracts that we’ve talked about, including for some of our largest customers, those are sold for the entire useful life of the GPU.” — seg-0012
+- [claim-024] “The first thing to focus on is the reason we talked about that number is because 55%, or roughly \$350 billion, is related to the breadth of our portfolio, a breadth of customers across solutions, across Azure, across industries, across geographies.” — seg-0018
+- [claim-025] “As a reminder, there can be quarterly variability in year-on-year growth rates depending on the timing of capacity delivery and when it comes online, as well as from in-period revenue recognition depending on the mix of contracts.” — seg-0004
+- [claim-026] “In addition, rising memory prices would impact capital expenditures, though the impact on Microsoft Cloud gross margins will build more gradually as these assets depreciate over six years.” — seg-0004
+- [claim-027] “Q2 Cloud Infrastructure (IaaS) Revenue \$4.1 billion, up 68% in USD and up 66% in constant currency” — web-007

@@ -16,7 +16,7 @@ import json
 import re
 import shutil
 import sys
-from datetime import date, datetime, timezone
+from datetime import UTC, date, datetime
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -37,7 +37,12 @@ from .models import (
     ValidationResult,
     WebEvidence,
 )
-from .process import sanitize, scan_for_injection, segment_transcript, sha256_hex
+from .process import (
+    sanitize,
+    scan_for_injection,
+    segment_transcript_with_report,
+    sha256_hex,
+)
 from .validate import (
     check_outlook_brief_citations,
     check_outlook_brief_dollar_escaping,
@@ -49,7 +54,7 @@ from .validation_history import ValidationAttempt
 
 
 def _now_iso() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    return datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def _write_json(path: Path, data) -> None:
@@ -689,7 +694,8 @@ def cmd_prepare(args: argparse.Namespace) -> int:
     _append_processing_log(args.ticker, args.event_id, loaded, raw_bytes, run_dir)
 
     sanitized = sanitize(loaded.raw_text, is_html=loaded.is_html)
-    segments = segment_transcript(sanitized)
+    segmentation = segment_transcript_with_report(sanitized)
+    segments = segmentation.segments
     if loaded.raw_bytes is not None and not any(seg.speaker for seg in segments):
         raise ValueError(
             "PDF ingestion produced zero recognised speaker turns after segmentation -- "
@@ -702,6 +708,16 @@ def cmd_prepare(args: argparse.Namespace) -> int:
     with transcript_path.open("w", encoding="utf-8") as fh:
         for seg in segments:
             fh.write(seg.model_dump_json() + "\n")
+    _write_json(
+        run_dir / config.SEGMENTATION_REPORT_FILENAME,
+        {
+            "created_at": _now_iso(),
+            "sanitized_input_sha256": sha256_hex(sanitized.encode("utf-8")),
+            "segment_count": len(segments),
+            "omission_count": len(segmentation.omissions),
+            "omissions": segmentation.omissions,
+        },
+    )
 
     # Best-effort prompt-injection FLAG over the sanitised transcript (config-gated).
     # Advisory only -- it records matches, never blocks the run or removes text. Runs
@@ -738,7 +754,10 @@ def cmd_prepare(args: argparse.Namespace) -> int:
 
             cik = resolve_cik(args.ticker)
         if cik:
-            from .sources import extract_financials_from_company_facts, get_company_facts
+            from .sources import (
+                extract_financials_from_company_facts,
+                get_company_facts,
+            )
 
             facts = get_company_facts(int(cik))
             financials = extract_financials_from_company_facts(
@@ -765,7 +784,12 @@ def cmd_prepare(args: argparse.Namespace) -> int:
     web_evidence_notes: list[str] = []
     queries: list[str] = []
     if config.RESEARCH_WEB_SEARCH_ENABLED:
-        from .sources import build_consensus_queries, build_peer_queries, web_extract, web_search
+        from .sources import (
+            build_consensus_queries,
+            build_peer_queries,
+            web_extract,
+            web_search,
+        )
 
         max_results = config.EXA_NUM_RESULTS if provider == "exa" else config.TAVILY_MAX_RESULTS
         max_extracted = config.EXA_MAX_EXTRACTED_SOURCES if provider == "exa" else config.TAVILY_MAX_EXTRACTED_SOURCES
@@ -950,6 +974,10 @@ def cmd_prepare(args: argparse.Namespace) -> int:
         queries=queries,
         notes=[
             "Raw source archived verbatim before sanitisation.",
+            (
+                f"Segmentation: {len(segmentation.omissions)} structural omission(s) recorded in "
+                f"{config.SEGMENTATION_REPORT_FILENAME}."
+            ),
             injection_note,
             f"SEC evidence: {sec_status}" + (f" (CIK {cik})" if sec_status == "ok" else ""),
             f"Web search evidence ({provider}): {web_search_status}",

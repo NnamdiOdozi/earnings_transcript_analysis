@@ -12,13 +12,22 @@ timeout_seconds = 20.0
 max_fetch_mb = 10            # hard cap on any single fetched resource
 
 [segmentation]
-# A line containing any of these (case-insensitive) marks the prepared -> Q&A boundary.
-qa_boundary_markers = [
-    "questions and answers",
-    "question-and-answer",
+# Exact, case-insensitive structural headings. These may be omitted from segment
+# text, but every omission is recorded in segmentation-report.json.
+qa_standalone_headings = [
     "q&a",
-    "we will now begin the question-and-answer session",
-    "operator instructions",
+    "questions and answers",
+    "question and answer session",
+    "question-and-answer session",
+]
+# Narrow phrases which mark the first prepared -> Q&A transition. A matching
+# sentence is preserved under its speaker before the section changes.
+qa_transition_phrases = [
+    "go to q&a",
+    "move over to q&a",
+    "open the line for q&a",
+    "q&a session commences",
+    "begin the question-and-answer session",
 ]
 
 [sanitisation]
@@ -145,4 +154,3 @@ type = "auto"                     # Exa /search "type": auto | neural | keyword 
 num_results = 5
 max_extracted_sources = 10        # cap across all queries combined; selected by score when the
                                    # provider gives one, otherwise by the provider's own result order
-

@@ -1,12 +1,12 @@
 {
-  "url": "https://www.microsoft.com/en-us/investor/earnings/fy-2026-q3/press-release-webcast",
-  "title": "FY26 Q3 - Press Releases - Investor Relations - Microsoft",
+  "url": "https://10q10k.net/compare/AAPL-vs-MSFT",
+  "title": "Apple Inc. (AAPL) vs Microsoft (MSFT) \u2014 Revenue, Margins, FCF & Balance Sheet | 10q10k.net",
   "score": null,
   "published_date": null,
   "_class": "peer",
   "_select_key": "peer:Apple",
   "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "Apple quarterly results versus Microsoft MSFT",
-  "_retrieved_at": "2026-08-30T11:57:02Z"
+  "_query": "Apple quarterly results versus Microsoft Corporation MSFT",
+  "_retrieved_at": "2026-09-01T08:14:32Z"
 }

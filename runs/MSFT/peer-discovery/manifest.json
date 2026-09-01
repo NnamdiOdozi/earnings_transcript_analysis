@@ -1,204 +1,204 @@
 {
   "ticker": "MSFT",
   "event_id": "peer-discovery",
-  "created_at": "2026-08-30T11:55:38Z",
+  "created_at": "2026-09-01T08:03:22Z",
   "sources": [
     {
       "path": "raw/query-01-hit-01.json",
-      "origin": "https://seekingalpha.com/symbol/MSFT/peers/comparison",
-      "retrieved_at": "2026-08-30T11:55:34Z",
+      "origin": "https://stockoscope.com/stock/msft/peers",
+      "retrieved_at": "2026-09-01T08:03:17Z",
       "content_type": "application/json",
-      "sha256": "2b16b47d946a4f66d9a8f2178e2611c7544c329d5ff59c3d9f32cc45037542ac",
-      "byte_length": 396
+      "sha256": "b3c9b94d89c9958f7c042c694395daf675d080fe15097cecbe45f3d536860a87",
+      "byte_length": 348
     },
     {
       "path": "raw/query-01-hit-02.json",
-      "origin": "https://meyka.com/stock/MSFT/peers/",
-      "retrieved_at": "2026-08-30T11:55:34Z",
+      "origin": "https://sharesgrow.com/peers/MSFT/",
+      "retrieved_at": "2026-09-01T08:03:17Z",
       "content_type": "application/json",
-      "sha256": "0a8f85d4e9181a67262cc412e358ac2cf3963399087aed947298ed5a8e304e2c",
-      "byte_length": 360
+      "sha256": "134d24463a7300caa02588b70129a0f6026665cf02db14b73bec291e3de6bbde",
+      "byte_length": 421
     },
     {
       "path": "raw/query-01-hit-03.json",
       "origin": "https://evidinvest.com/benchmarks/MSFT",
-      "retrieved_at": "2026-08-30T11:55:34Z",
+      "retrieved_at": "2026-09-01T08:03:17Z",
       "content_type": "application/json",
-      "sha256": "7dd16f1128444fdf0eb0184fa73f6e8d3e0441f15a5114b03c1768e2a6d718d6",
+      "sha256": "6412ee06e982a9abf6826575253f753a65df9a670b21c34dce48eac1b7ab6b21",
       "byte_length": 373
     },
     {
       "path": "raw/query-01-hit-04.json",
-      "origin": "https://sharesgrow.com/peers/MSFT/",
-      "retrieved_at": "2026-08-30T11:55:34Z",
+      "origin": "https://valuesense.io/ticker/msft/compare",
+      "retrieved_at": "2026-09-01T08:03:17Z",
       "content_type": "application/json",
-      "sha256": "6af7346ea2ccf979894bbc56869c7ba757d8b3bcda72c959e6e57803e968df1e",
-      "byte_length": 421
+      "sha256": "340313ec8e7e2f7e25a3f13292bd431ed2484810c0b06d0734f2c73829a3d247",
+      "byte_length": 365
     },
     {
       "path": "raw/query-01-hit-05.json",
       "origin": "https://www.macroaxis.com/competition/MSFT",
-      "retrieved_at": "2026-08-30T11:55:34Z",
+      "retrieved_at": "2026-09-01T08:03:17Z",
       "content_type": "application/json",
-      "sha256": "87dd6092e7302b7df1885f8c3271f4ee5de4f65150a5c0d8f784c8beb97e80f5",
+      "sha256": "8776b4383eb0875d91b10a1580d5e3a94307b2a3f4862d09546a2f13e9618608",
       "byte_length": 374
     },
     {
       "path": "raw/query-02-hit-01.json",
-      "origin": "https://www.tipranks.com/stocks/msft/similar-stocks",
-      "retrieved_at": "2026-08-30T11:55:35Z",
-      "content_type": "application/json",
-      "sha256": "ff5697d70f011563081f3be46b262c1467e7e6d26066e8d5a327d2ecc8160fb9",
-      "byte_length": 325
-    },
-    {
-      "path": "raw/query-02-hit-02.json",
       "origin": "https://www.marketbeat.com/stocks/NASDAQ/MSFT/competitors-and-alternatives/",
-      "retrieved_at": "2026-08-30T11:55:35Z",
+      "retrieved_at": "2026-09-01T08:03:19Z",
       "content_type": "application/json",
-      "sha256": "59e2e31c4ce3da4287f620ad1b2bd623b63eb4fcc9e9922e4b5fec8e13a60cf6",
+      "sha256": "2b38afb38522b50ea7cd911dfc93f49ab93bc7b2e7ba07a851d161c086b49655",
       "byte_length": 349
     },
     {
-      "path": "raw/query-02-hit-03.json",
-      "origin": "https://www.macroaxis.com/competition/MSFT",
-      "retrieved_at": "2026-08-30T11:55:35Z",
+      "path": "raw/query-02-hit-02.json",
+      "origin": "https://www.tipranks.com/stocks/msft/similar-stocks",
+      "retrieved_at": "2026-09-01T08:03:19Z",
       "content_type": "application/json",
-      "sha256": "383a3ace6a6a2825cb4ae25d3a358284c69e97b033b5932c2d6d137415137894",
-      "byte_length": 389
+      "sha256": "16237c4030d9bf1198f57e764ec399846e85f9bb7ac7d3fa8bfbe606b4032257",
+      "byte_length": 325
+    },
+    {
+      "path": "raw/query-02-hit-03.json",
+      "origin": "https://seekingalpha.com/symbol/MSFT/peers/comparison",
+      "retrieved_at": "2026-09-01T08:03:19Z",
+      "content_type": "application/json",
+      "sha256": "4aaa5eccc066434d33d48fd28a95d5b9442c3eaa4854ac9171dbabd37b1ec602",
+      "byte_length": 411
     },
     {
       "path": "raw/query-02-hit-04.json",
-      "origin": "https://financhill.com/stocks/sp500/msft/competitors",
-      "retrieved_at": "2026-08-30T11:55:35Z",
+      "origin": "https://www.investopedia.com/ask/answers/120314/who-are-microsofts-msft-main-competitors.asp",
+      "retrieved_at": "2026-09-01T08:03:19Z",
       "content_type": "application/json",
-      "sha256": "9b72855049691b9edabdb5e33c87fc3302e4d33fdfd8d538cfff3e47ad75ebce",
-      "byte_length": 399
+      "sha256": "56104bea2ec3224ed071babc81398ed488927d3afe825bee22c7849d9ac85b3d",
+      "byte_length": 434
     },
     {
       "path": "raw/query-02-hit-05.json",
-      "origin": "https://www.barchart.com/stocks/quotes/MSFT/competitors",
-      "retrieved_at": "2026-08-30T11:55:35Z",
+      "origin": "https://www.macroaxis.com/competition/MSFT",
+      "retrieved_at": "2026-09-01T08:03:19Z",
       "content_type": "application/json",
-      "sha256": "be9e85215633c51753de8a9bb29575fc405c3979681466e768dbcc2b82fbaf69",
-      "byte_length": 385
+      "sha256": "f740eb3ddc66cdbf458cd6a8920304582f01ccc65d72fca6bdd314fff5caeeda",
+      "byte_length": 389
     },
     {
       "path": "raw/query-03-hit-01.json",
       "origin": "https://www.tipranks.com/stocks/msft/similar-stocks",
-      "retrieved_at": "2026-08-30T11:55:36Z",
+      "retrieved_at": "2026-09-01T08:03:20Z",
       "content_type": "application/json",
-      "sha256": "5886bc66594a9b22d36d065d02e30084716fd5f3ec154889c6e03ccb947c196e",
+      "sha256": "4b3d48cb04aec700c750e333d52a31faf4b424e816da20bc4838036813ee64ab",
       "byte_length": 301
     },
     {
       "path": "raw/query-03-hit-02.json",
       "origin": "https://assetnext.app/similar-companies/microsoft-corporation",
-      "retrieved_at": "2026-08-30T11:55:36Z",
+      "retrieved_at": "2026-09-01T08:03:20Z",
       "content_type": "application/json",
-      "sha256": "3497b136622a9a0a30fff9f055b268f7b314a892efe53490049e19535fa264d1",
+      "sha256": "0c864291615b43c63d6e6e4e67cca404e711cc0c4061e0b3436e2942f9bcf48f",
       "byte_length": 393
     },
     {
       "path": "raw/query-03-hit-03.json",
       "origin": "https://stockti.com/stock/MSFT/peers",
-      "retrieved_at": "2026-08-30T11:55:36Z",
+      "retrieved_at": "2026-09-01T08:03:20Z",
       "content_type": "application/json",
-      "sha256": "b1f02433b9399b0ce86f5aeacb2cdb50b6ef45cf1626eaf50dde27102af65a04",
+      "sha256": "e5f587ce1cc13057f4b2e79a70043a3e086865d52cd33a6cf19e5dc525966f04",
       "byte_length": 335
     },
     {
       "path": "raw/query-03-hit-04.json",
-      "origin": "https://www.trefis.com/stock/msft/articles/569002/better-bet-than-microsoft-stock-pay-less-to-get-more-from-industry-peers/2025-07-09",
-      "retrieved_at": "2026-08-30T11:55:36Z",
+      "origin": "https://portrop.com/",
+      "retrieved_at": "2026-09-01T08:03:20Z",
       "content_type": "application/json",
-      "sha256": "7aaf793debdaf4cdb6c4d41974acc8853fb25c3d8087769610cbfa0ba20e3540",
-      "byte_length": 489
+      "sha256": "3461a13c05836e68526a6b1f14ac79628640de215fb8c521b08a92e70a34ef0a",
+      "byte_length": 317
     },
     {
       "path": "raw/query-03-hit-05.json",
       "origin": "https://assetnext.app/companies-with-microsoft-corporation-like-valuation",
-      "retrieved_at": "2026-08-30T11:55:36Z",
+      "retrieved_at": "2026-09-01T08:03:20Z",
       "content_type": "application/json",
-      "sha256": "8df18c6aaec564a277d639dc205e4aa1bbb881b6cc03b29f7488b467a1db8ed7",
+      "sha256": "0528d5c49ee4d002406a0b39ed994eaa0b64c463a31f2f3739804e77a92b9c71",
       "byte_length": 421
     },
     {
       "path": "candidate-01.md",
-      "origin": "https://seekingalpha.com/symbol/MSFT/peers/comparison",
-      "retrieved_at": "2026-08-30T11:55:36Z",
+      "origin": "https://stockoscope.com/stock/msft/peers",
+      "retrieved_at": "2026-09-01T08:03:20Z",
       "content_type": "text/markdown",
-      "sha256": "1814319a0ec5a2cb79896790b38dfda158e8445205c58b5e9405ae7176788bc3",
-      "byte_length": 671
+      "sha256": "6cdfac3dce73b05bf4b27ef3fd3858e6aee65662e285a464bdadcdf61181183e",
+      "byte_length": 5220
     },
     {
       "path": "candidate-02.md",
-      "origin": "https://meyka.com/stock/MSFT/peers/",
-      "retrieved_at": "2026-08-30T11:55:36Z",
+      "origin": "https://sharesgrow.com/peers/MSFT/",
+      "retrieved_at": "2026-09-01T08:03:21Z",
       "content_type": "text/markdown",
-      "sha256": "43efe27169fe8d834f6619d789b038142681f23723057651724148c4d911069d",
-      "byte_length": 94575
+      "sha256": "89ffab69972aa57dc320a0cc3eaeb372f0f2c9759973063f3e51071fd1fca729",
+      "byte_length": 1777
     },
     {
       "path": "candidate-03.md",
       "origin": "https://evidinvest.com/benchmarks/MSFT",
-      "retrieved_at": "2026-08-30T11:55:36Z",
+      "retrieved_at": "2026-09-01T08:03:21Z",
       "content_type": "text/markdown",
       "sha256": "518d0c55f582d6d86bbd6b0c758d7311311a98e4a0050a45101463ef804eb757",
       "byte_length": 1596
     },
     {
       "path": "candidate-04.md",
-      "origin": "https://sharesgrow.com/peers/MSFT/",
-      "retrieved_at": "2026-08-30T11:55:37Z",
+      "origin": "https://valuesense.io/ticker/msft/compare",
+      "retrieved_at": "2026-09-01T08:03:21Z",
       "content_type": "text/markdown",
-      "sha256": "2f0803493e792e0d39d63adb5ca335b0619437ead1c68be1b2dcd07ec004e640",
-      "byte_length": 2082
+      "sha256": "114417e5a92af40ee3041da375efdfe540468363575a00fd23ec2a98a93eb775",
+      "byte_length": 5809
     },
     {
       "path": "candidate-05.md",
       "origin": "https://www.macroaxis.com/competition/MSFT",
-      "retrieved_at": "2026-08-30T11:55:37Z",
+      "retrieved_at": "2026-09-01T08:03:21Z",
       "content_type": "text/markdown",
-      "sha256": "42f3356f525431a607b3da2dc18a23c0ad721fabb3732aa143cd96cbbc3ef963",
-      "byte_length": 12081
+      "sha256": "d0aa69808b8c39cdfedee060ebae618fed3d7d79aa027277686e4c2f8d0b3ed1",
+      "byte_length": 5853
     },
     {
       "path": "candidate-06.md",
-      "origin": "https://www.tipranks.com/stocks/msft/similar-stocks",
-      "retrieved_at": "2026-08-30T11:55:37Z",
-      "content_type": "text/markdown",
-      "sha256": "13d17445e8d53ef4aadec0574bae4656c97dad714a594957db1ec98691982ae1",
-      "byte_length": 6278
-    },
-    {
-      "path": "candidate-07.md",
       "origin": "https://www.marketbeat.com/stocks/NASDAQ/MSFT/competitors-and-alternatives/",
-      "retrieved_at": "2026-08-30T11:55:37Z",
+      "retrieved_at": "2026-09-01T08:03:21Z",
       "content_type": "text/markdown",
       "sha256": "32be66f05c8c4ee85f24f8ce43dc30369e946dba632915187b608deff48eaa39",
       "byte_length": 59281
     },
     {
-      "path": "candidate-08.md",
-      "origin": "https://financhill.com/stocks/sp500/msft/competitors",
-      "retrieved_at": "2026-08-30T11:55:37Z",
+      "path": "candidate-07.md",
+      "origin": "https://www.tipranks.com/stocks/msft/similar-stocks",
+      "retrieved_at": "2026-09-01T08:03:22Z",
       "content_type": "text/markdown",
-      "sha256": "045cb83be9352f11b18c4b9ef4f552b2c257197a08271055d34ba6e0495ae898",
-      "byte_length": 21314
+      "sha256": "13d17445e8d53ef4aadec0574bae4656c97dad714a594957db1ec98691982ae1",
+      "byte_length": 6278
+    },
+    {
+      "path": "candidate-08.md",
+      "origin": "https://seekingalpha.com/symbol/MSFT/peers/comparison",
+      "retrieved_at": "2026-09-01T08:03:22Z",
+      "content_type": "text/markdown",
+      "sha256": "1814319a0ec5a2cb79896790b38dfda158e8445205c58b5e9405ae7176788bc3",
+      "byte_length": 671
     },
     {
       "path": "candidate-09.md",
-      "origin": "https://www.barchart.com/stocks/quotes/MSFT/competitors",
-      "retrieved_at": "2026-08-30T11:55:38Z",
+      "origin": "https://www.investopedia.com/ask/answers/120314/who-are-microsofts-msft-main-competitors.asp",
+      "retrieved_at": "2026-09-01T08:03:22Z",
       "content_type": "text/markdown",
-      "sha256": "ab255bdc1f7b661cede83d467677c24bf23d50dcb75d720b347c05c682f0d9dd",
-      "byte_length": 4483
+      "sha256": "94a85a8f92831d761402954aa140fb92555037fbc80da5592082c1398e13bb0b",
+      "byte_length": 5308
     },
     {
       "path": "candidate-10.md",
       "origin": "https://assetnext.app/similar-companies/microsoft-corporation",
-      "retrieved_at": "2026-08-30T11:55:38Z",
+      "retrieved_at": "2026-09-01T08:03:22Z",
       "content_type": "text/markdown",
       "sha256": "1ea45eb7e4f562f816d132975f8d70bd33287d1c2801f2cb91a22dc0852da54f",
       "byte_length": 3569

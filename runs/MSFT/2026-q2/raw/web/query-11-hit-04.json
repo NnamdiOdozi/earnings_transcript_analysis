@@ -1,12 +1,12 @@
 {
-  "url": "https://www.apple.com/newsroom/pdfs/fy2026q3/FY26%5FQ3%5FConsolidated%5FFinancial%5FStatements.pdf",
-  "title": "2026-07-30 Apple reports third quarter results",
+  "url": "https://finance.yahoo.com/news/apple-vs-microsoft-best-tech-205000503.html",
+  "title": "Apple Vs Microsoft: Which is the Best Tech Investment as ...",
   "score": null,
-  "published_date": null,
+  "published_date": "2026-01-26T00:00:00.000Z",
   "_class": "peer",
   "_select_key": "peer:Apple",
-  "_temporal_status": "undated",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "Apple quarterly results versus Microsoft MSFT",
-  "_retrieved_at": "2026-08-30T11:57:02Z"
+  "_query": "Apple quarterly results versus Microsoft Corporation MSFT",
+  "_retrieved_at": "2026-09-01T08:14:32Z"
 }

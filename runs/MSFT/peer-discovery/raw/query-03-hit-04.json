@@ -1,11 +1,11 @@
 {
-  "url": "https://www.trefis.com/stock/msft/articles/569002/better-bet-than-microsoft-stock-pay-less-to-get-more-from-industry-peers/2025-07-09",
-  "title": "Better Bet Than Microsoft Stock: Pay Less To Get More From Industry Peers | Trefis",
+  "url": "https://portrop.com/",
+  "title": "Portrop - Stock Similarity & Portfolio Matching",
   "score": null,
-  "published_date": "2025-07-09T00:00:00.000Z",
+  "published_date": null,
   "_class": "peer_group",
-  "_temporal_status": "pre_event",
+  "_temporal_status": "undated",
   "_provider": "exa",
   "_query": "stocks most similar to MSFT Microsoft",
-  "_retrieved_at": "2026-08-30T11:55:36Z"
+  "_retrieved_at": "2026-09-01T08:03:20Z"
 }

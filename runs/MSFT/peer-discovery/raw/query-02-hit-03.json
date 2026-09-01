@@ -1,11 +1,11 @@
 {
-  "url": "https://www.macroaxis.com/competition/MSFT",
-  "title": "Microsoft Competitors and Relative Positioning | Stocks: MSFT - Macroaxis",
+  "url": "https://seekingalpha.com/symbol/MSFT/peers/comparison",
+  "title": "Microsoft Corporation (MSFT) Stock Competitors & Similar ...",
   "score": null,
-  "published_date": null,
+  "published_date": "2025-02-05T00:00:00.000Z",
   "_class": "peer_group",
-  "_temporal_status": "undated",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
   "_query": "Microsoft MSFT closest competitors comparable stocks analysts",
-  "_retrieved_at": "2026-08-30T11:55:35Z"
+  "_retrieved_at": "2026-09-01T08:03:19Z"
 }

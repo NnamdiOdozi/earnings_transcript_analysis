@@ -7,6 +7,7 @@ from earnings.process import (
     sanitize,
     scan_for_injection,
     segment_transcript,
+    segment_transcript_with_report,
     sha256_hex,
     strip_invisible_and_control_chars,
 )
@@ -51,9 +52,9 @@ def test_html_to_text_strips_script_style_and_comments():
 
 
 def test_strip_invisible_and_control_chars_removes_zero_width_and_control():
-    dirty = "Rev​enue﻿ grew\x07 by 10%\x00"
+    dirty = "Rev\u200benue﻿ grew\x07 by 10%\x00"
     clean = strip_invisible_and_control_chars(dirty)
-    assert "​" not in clean
+    assert "\u200b" not in clean
     assert "﻿" not in clean
     assert "\x07" not in clean
     assert "\x00" not in clean
@@ -114,6 +115,50 @@ def test_segment_transcript_qa_boundary_resets_speaker():
     qa_segments = [s for s in segments if s.section == "qa"]
     assert qa_segments, "expected at least one qa segment"
     assert qa_segments[0].speaker is None
+
+
+def test_msft_html_preserves_transition_closing_and_affiliated_analyst():
+    raw = (FIXTURES / "msft_html_transition.html").read_text(encoding="utf-8")
+    result = segment_transcript_with_report(sanitize(raw, is_html=True))
+
+    joined = " ".join(segment.text for segment in result.segments)
+    assert "Operator, can you please repeat your instructions?" in joined
+    assert "wraps up the Q&A portion" in joined
+    assert any(
+        segment.speaker == "KEITH WEISS, Morgan Stanley"
+        and "Thank you guys for taking the question" in segment.text
+        for segment in result.segments
+    )
+    assert result.omissions == []
+
+
+def test_jpm_factset_speakers_unchanged_and_transition_preserved():
+    raw = (FIXTURES / "jpm_factset_transition.txt").read_text(encoding="utf-8")
+    result = segment_transcript_with_report(sanitize(raw, is_html=False))
+
+    by_speaker = {segment.speaker: segment for segment in result.segments}
+    assert "let's open the line for Q&A" in by_speaker["Jeremy Barnum"].text
+    assert by_speaker["Jeremy Barnum"].section == "prepared"
+    assert by_speaker["Operator"].section == "qa"
+    assert by_speaker["Ken Usdin"].section == "qa"
+    assert by_speaker["Jamie Dimon"].section == "qa"
+    assert result.omissions == []
+
+
+def test_lloyds_preserves_qa_prose_and_records_only_standalone_heading():
+    raw = (FIXTURES / "lloyds_pdf_transition.txt").read_text(encoding="utf-8")
+    result = segment_transcript_with_report(sanitize(raw, is_html=False))
+
+    joined = " ".join(segment.text for segment in result.segments)
+    assert "before the Q&A session commences" in joined
+    assert "concludes what's been a comprehensive Q&A session" in joined
+    assert "QUESTION AND ANSWER SESSION" not in joined
+    assert result.omissions == [
+        {"text": "QUESTION AND ANSWER SESSION", "reason": "qa_heading"}
+    ]
+    closing = next(segment for segment in result.segments if "concludes what's" in segment.text)
+    assert closing.speaker == "Douglas Radcliffe"
+    assert closing.section == "qa"
 
 
 def test_segment_transcript_quote_can_be_copied_verbatim_and_matches():

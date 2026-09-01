@@ -1,12 +1,12 @@
 {
-  "url": "https://www.microsoft.com/en-us/investor/earnings/fy-2026-q4/press-release-webcast",
-  "title": "FY26 Q4 - Press Releases - Investor Relations - Microsoft",
+  "url": "https://www.microsoft.com/en-us/investor/earnings/fy-2026-q2/performance",
+  "title": "FY26 Q2 - Performance - Investor Relations - Microsoft",
   "score": null,
   "published_date": null,
   "_class": "peer",
   "_select_key": "peer:Amazon",
   "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "Amazon quarterly results versus Microsoft MSFT",
-  "_retrieved_at": "2026-08-30T11:57:00Z"
+  "_query": "Amazon quarterly results versus Microsoft Corporation MSFT",
+  "_retrieved_at": "2026-09-01T08:14:31Z"
 }

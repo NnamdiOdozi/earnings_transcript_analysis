@@ -1,6 +1,6 @@
 {
-  "url": "https://abc.xyz/investor/events/event-details/2026/2026-Q2-Earnings-Call-2026-GgTAq7Is0z/default.aspx",
-  "title": "Alphabet Investor Relations - 2026 Q2 Earnings Call",
+  "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
+  "title": "Consolidated Alphabet operating income increased 30%",
   "score": null,
   "published_date": null,
   "_class": "peer",
@@ -8,5 +8,5 @@
   "_temporal_status": "undated",
   "_provider": "exa",
   "_query": "Alphabet 2026-q2 earnings results revenue growth",
-  "_retrieved_at": "2026-08-30T11:56:55Z"
+  "_retrieved_at": "2026-09-01T08:14:31Z"
 }

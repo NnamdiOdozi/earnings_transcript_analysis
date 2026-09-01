@@ -60,6 +60,24 @@ def test_prepare_then_analyze_empty_transcript_yields_zero_segments_and_passes(i
     assert validation["validated_at"]  # real-clock stamp, not agent-authored
 
 
+def test_prepare_archives_segmentation_omission_receipt(isolated_runs_dir):
+    transcript = str(FIXTURES / "lloyds_pdf_transition.txt")
+    assert main(["prepare", "--ticker", "LLOY", "--event-id", "2026-h1", "--transcript", transcript]) == 0
+
+    run_dir = isolated_runs_dir / "LLOY" / "2026-h1"
+    report = json.loads((run_dir / config.SEGMENTATION_REPORT_FILENAME).read_text())
+    assert report["created_at"]
+    assert len(report["sanitized_input_sha256"]) == 64
+    assert report["segment_count"] > 0
+    assert report["omission_count"] == 1
+    assert report["omissions"] == [
+        {"text": "QUESTION AND ANSWER SESSION", "reason": "qa_heading"}
+    ]
+
+    manifest = json.loads((run_dir / config.MANIFEST_FILENAME).read_text())
+    assert any(config.SEGMENTATION_REPORT_FILENAME in note for note in manifest["notes"])
+
+
 def test_analyze_preserves_each_failed_and_passing_claims_attempt(isolated_runs_dir):
     transcript = str(FIXTURES / "normal_transcript.txt")
     assert main(["prepare", "--ticker", "ACME", "--event-id", "2026-q2", "--transcript", transcript]) == 0

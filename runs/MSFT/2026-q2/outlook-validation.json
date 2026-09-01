@@ -1,7 +1,7 @@
 {
   "ok": true,
-  "validated_at": "2026-08-30T14:46:11Z",
+  "validated_at": "2026-09-01T08:19:37Z",
   "errors": [],
-  "outlook_brief_sha256": "68bd64353030a607ea5802cb1d78b1b1bbd0c387ad6f8d72290d1910f921b0ed",
-  "claims_sha256": "6a40737c6960b56f0a7a27469ba09530617c8d7da6eb36db0d8ebf4519a6e512"
+  "outlook_brief_sha256": "6f51b047b2077637667c8250c756a168eeedb6e06da20c23a071e8605ff50889",
+  "claims_sha256": "50134a9f5dcacb3d07e9ab325c95dbe3ffe03b55ff7cee44ed65cd69c2c346d8"
 }

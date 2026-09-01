@@ -9,6 +9,27 @@ Use this skill on a source pack already built by `build-earnings-source-pack`. D
 **not** browse the web or fetch new sources in this skill — work only from
 `normalized/transcript.jsonl` and `evidence/financials.json` already on disk.
 
+## Fresh extraction is the default
+
+Starting work on a newly prepared source pack means extracting and synthesising
+from that pack from scratch. Do not read, copy, adapt, remap, or use as a draft any
+prior `claims.json`, `metrics.json`, `signal-card.md`, or `outlook-brief.md` from
+`_archive/`, `_review_history/`, another event directory, or an earlier run. The
+fact that the company or earnings event is unchanged is not permission to reuse
+agent-authored work.
+
+Reuse is allowed only when the user explicitly authorizes it for the current run.
+Silence, a request to rerun, or a request to correct validation errors is not reuse
+consent. If reuse is authorized, state exactly which artifacts will be reused and
+disclose that provenance in the final report.
+
+Correcting the current run's `claims.json` or `metrics.json` after a failed
+deterministic validation is not prior-run reuse; it is the normal attempt loop in
+steps 4–5 below. If prior outputs have already been exposed in the active agent's
+context and the user requires an independent fresh extraction, use a fresh-context
+agent when available. Otherwise, disclose that strict independence cannot be
+guaranteed before proceeding.
+
 ## Stage 1: evidence extraction
 
 1. **Load the pack.** Read `runs/<TICKER>/<EVENT_ID>/normalized/transcript.jsonl`

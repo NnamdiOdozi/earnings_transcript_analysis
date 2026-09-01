@@ -17,23 +17,50 @@ from __future__ import annotations
 import hashlib
 import re
 import unicodedata
+from dataclasses import dataclass
 
 from bs4 import BeautifulSoup, Comment
 
-from .config import QA_BOUNDARY_MARKERS, SEGMENT_ID_PREFIX, SEGMENT_ID_WIDTH, ZERO_WIDTH_CHARS
+from .config import (
+    QA_STANDALONE_HEADINGS,
+    QA_TRANSITION_PHRASES,
+    SEGMENT_ID_PREFIX,
+    SEGMENT_ID_WIDTH,
+    ZERO_WIDTH_CHARS,
+)
 from .models import Segment
 
-# Speaker label heuristics: "Name — Title:" or "Name:" at line start.
+# Speaker label heuristics: "Name — Title:", "Name:", or "Name, Company:".
 # Deliberately conservative -- only fires on short, title-cased leading tokens
 # followed by a colon, to avoid mis-detecting ordinary prose sentences.
+_SPEAKER_NAME_PATTERN = r"[A-Z][A-Za-z.'\-]*(?:\s+[A-Z][A-Za-z.'\-]*){0,4}"
 _SPEAKER_LINE_RE = re.compile(
-    r"^(?P<speaker>[A-Z][A-Za-z.'\-]*(?:\s+[A-Z][A-Za-z.'\-]*){0,4})"
+    rf"^(?P<speaker>{_SPEAKER_NAME_PATTERN})"
     r"(?:\s*[—–-]\s*[^:]{0,80})?:\s*(?P<rest>.*)$"
 )
+_SPEAKER_WITH_AFFILIATION_RE = re.compile(
+    rf"^(?P<speaker>{_SPEAKER_NAME_PATTERN},\s*[^,:]{{1,80}}):\s*(?P<rest>.*)$"
+)
+
+
+@dataclass(frozen=True)
+class SegmentationResult:
+    """Hold transcript segments and deliberate structural omissions.
+
+    Attributes
+    ----------
+    segments : list of Segment
+        Normalized transcript segments in source order.
+    omissions : list of dict
+        Non-empty source lines deliberately removed as structural headings.
+    """
+
+    segments: list[Segment]
+    omissions: list[dict[str, str]]
 
 # Control characters except \n (0x0A) and \t (0x09).
 _CONTROL_CHAR_RE = re.compile(
-    "[" + "".join(chr(c) for c in range(0x00, 0x20) if c not in (0x09, 0x0A)) + chr(0x7F) + "]"
+    "[" + "".join(chr(c) for c in range(0x20) if c not in (0x09, 0x0A)) + chr(0x7F) + "]"
 )
 
 
@@ -112,7 +139,8 @@ def sha256_hex(data: bytes) -> str:
 
 
 def _detect_speaker(line: str) -> tuple[str | None, str]:
-    match = _SPEAKER_LINE_RE.match(line.strip())
+    stripped = line.strip()
+    match = _SPEAKER_WITH_AFFILIATION_RE.match(stripped) or _SPEAKER_LINE_RE.match(stripped)
     if not match:
         return None, line
     speaker = match.group("speaker").strip()
@@ -124,26 +152,48 @@ def _detect_speaker(line: str) -> tuple[str | None, str]:
     return speaker, rest
 
 
-def _is_qa_boundary(line: str) -> bool:
-    lowered = line.strip().lower()
-    return any(marker in lowered for marker in QA_BOUNDARY_MARKERS)
+def _qa_match_text(line: str) -> str:
+    """Canonical text for configured Q&A rules, including curly apostrophes."""
+    return normalize_whitespace(line).casefold().replace("’", "'")
 
 
-def segment_transcript(sanitized_text: str) -> list[Segment]:
+def _is_qa_heading(line: str) -> bool:
+    candidate = _qa_match_text(line).removesuffix(":").strip()
+    return candidate in QA_STANDALONE_HEADINGS
+
+
+def _has_qa_transition(line: str) -> bool:
+    candidate = _qa_match_text(line)
+    return any(phrase in candidate for phrase in QA_TRANSITION_PHRASES)
+
+
+def segment_transcript_with_report(sanitized_text: str) -> SegmentationResult:
     """Split sanitized transcript text into prepared-remarks vs Q&A segments.
 
-    Heuristic: scan lines in order; once a Q&A boundary marker line is seen, every
-    subsequent line belongs to the "qa" section (including the boundary line itself,
-    which is dropped as pure noise). Each contiguous run of lines attributed to the
-    same speaker (or to no speaker) becomes one segment. Speaker labels are detected
-    per-line via _detect_speaker; once a speaker line is seen, following unlabelled
-    lines are attributed to that same speaker until a new speaker line appears.
+    The first configured transition moves the state from prepared to Q&A. Meaningful
+    transition sentences remain in the prepared segment under their speaker. Only an
+    exact standalone Q&A heading is omitted, and every such omission is returned in
+    the report. After the transition, later Q&A wording cannot alter segmentation.
+
+    Every non-empty line is therefore represented as segment text, captured speaker
+    metadata, or an explicit structural omission.
+
+    Parameters
+    ----------
+    sanitized_text : str
+        Visible transcript text after HTML and control-character sanitisation.
+
+    Returns
+    -------
+    SegmentationResult
+        Ordered segments and the receipt of deliberately omitted headings.
     """
     lines = [ln for ln in sanitized_text.split("\n")]
     section = "prepared"
     segments: list[Segment] = []
     current_speaker: str | None = None
     current_lines: list[str] = []
+    omissions: list[dict[str, str]] = []
     counter = 0
 
     def flush():
@@ -155,16 +205,8 @@ def segment_transcript(sanitized_text: str) -> list[Segment]:
         seg_id = f"{SEGMENT_ID_PREFIX}-{counter:0{SEGMENT_ID_WIDTH}d}"
         segments.append(Segment(id=seg_id, section=section, speaker=current_speaker, text=text))
 
-    for raw_line in lines:
-        line = raw_line.strip()
-        if not line:
-            continue
-        if _is_qa_boundary(line):
-            flush()
-            current_lines = []
-            section = "qa"
-            current_speaker = None
-            continue
+    def append_content(line: str) -> None:
+        nonlocal current_lines, current_speaker
         speaker, rest = _detect_speaker(line)
         if speaker is not None:
             flush()
@@ -172,5 +214,44 @@ def segment_transcript(sanitized_text: str) -> list[Segment]:
             current_speaker = speaker
         else:
             current_lines.append(line)
+
+    for raw_line in lines:
+        line = raw_line.strip()
+        if not line:
+            continue
+        if _is_qa_heading(line):
+            omissions.append({"text": line, "reason": "qa_heading"})
+            if section == "qa":
+                continue
+            flush()
+            current_lines = []
+            section = "qa"
+            current_speaker = None
+            continue
+        if section == "prepared" and _has_qa_transition(line):
+            # Preserve the hand-off under the current speaker, then change state.
+            append_content(line)
+            flush()
+            current_lines = []
+            current_speaker = None
+            section = "qa"
+            continue
+        append_content(line)
     flush()
-    return segments
+    return SegmentationResult(segments=segments, omissions=omissions)
+
+
+def segment_transcript(sanitized_text: str) -> list[Segment]:
+    """Return transcript segments without the structural-omission receipt.
+
+    Parameters
+    ----------
+    sanitized_text : str
+        Visible transcript text after HTML and control-character sanitisation.
+
+    Returns
+    -------
+    list of Segment
+        Ordered prepared-remarks and questions-and-answers segments.
+    """
+    return segment_transcript_with_report(sanitized_text).segments

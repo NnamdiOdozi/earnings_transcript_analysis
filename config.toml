@@ -118,14 +118,28 @@ include_previous_period = true
 # from the --peers CLI flag, kept out of config because peers are per-company). Empty a
 # list to disable that class. These replace the old official-document queries, which
 # merely restated the call -- keeping per-run search spend flat.
+# Query counts are deliberately generous relative to the extraction cap below: search
+# hits are cheap candidate generation, and several will turn out post-event, undated-
+# and-unusable, or duplicate. More query formulations increase retrieval DIVERSITY
+# (not just a bigger sample of the same ranking), so the pool surviving date/dedup/
+# temporal screening stays adequate even after attrition. The retrieval boundary
+# (what gets searched/archived) is deliberately wider than the evidence boundary
+# (what's extracted) and the analytical boundary (what a claim actually cites) --
+# widening this list does not by itself make more material to the LLM, only more
+# candidates for the deterministic filters above to screen before extraction.
 consensus_queries = [
     "{company} {ticker} {event_id} analyst consensus estimate revenue EPS",
     "{company} {ticker} {event_id} earnings preview expectations forecast",
     "{company} {ticker} Wall Street consensus estimates ahead of earnings",
+    "{company} {ticker} {event_id} earnings guidance outlook estimates",
+    "{company} {ticker} {event_id} analyst earnings reaction results",
 ]
 peer_queries = [
     "{peer} {event_id} earnings results revenue growth",
     "{peer} quarterly results versus {company} {ticker}",
+    "{peer} {event_id} earnings guidance outlook",
+    "{peer} {event_id} analyst earnings reaction results",
+    "{peer} earnings call key trends {event_id}",
 ]
 # Peer-group DISCOVERY (run via `earnings discover-peers` BEFORE prepare): find the
 # company's analyst-recognised comparables so the agent can pick ~4 to pass as --peers.
@@ -140,17 +154,21 @@ peer_group_queries = [
 
 [tavily]
 search_depth = "basic"
-max_results = 5
+max_results = 8                   # search hits per query -- cheap candidates, filtered well before extraction
 include_external_commentary = false
 include_answer = false            # no generated-answer synthesis -- primary sources only
 include_raw_content = false       # full content comes from the separate extract step, not search
 extract_depth = "basic"
-max_extracted_sources = 10        # cap across all queries combined, selected by Tavily's own score
+# 15, not 10: with more query templates above, a flat 10 would waste the added
+# retrieval diversity on the same handful of extraction slots. 15 archived candidates,
+# after undated/post-event/duplicate attrition, typically yields ~8-10 genuinely
+# usable sources -- extraction stays selective, retrieval just isn't starved.
+max_extracted_sources = 15        # cap across all queries combined, selected by Tavily's own score
 
 [exa]
 type = "auto"                     # Exa /search "type": auto | neural | keyword -- "auto" never
                                    # returns a relevance "score" (live-confirmed); "neural" does.
                                    # See sources._normalize_hits for what this means downstream.
-num_results = 5
-max_extracted_sources = 10        # cap across all queries combined; selected by score when the
+num_results = 8                   # search hits per query -- cheap candidates, filtered well before extraction
+max_extracted_sources = 15        # cap across all queries combined; selected by score when the
                                    # provider gives one, otherwise by the provider's own result order

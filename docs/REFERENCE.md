@@ -31,17 +31,29 @@ one `earnings prepare` calls, no fallback, no dual-run. `cli.py` never calls
 `earnings prepare` builds queries from two config-driven, industry-agnostic
 classes, targeting information the transcript does **not** already contain:
 
-- **consensus** — `config.toml [research] consensus_queries`: analyst
-  estimates/expectations for this event, so the beat-or-miss surprise becomes
-  citable. Always run.
-- **peer** — `config.toml [research] peer_queries`, one query per name passed
-  to `--peers`. With no `--peers`, no peer queries run.
+- **consensus** — `config.toml [research] consensus_queries` (5 templates by
+  default): analyst estimates/expectations for this event, so the beat-or-miss
+  surprise becomes citable. Always run.
+- **peer** — `config.toml [research] peer_queries` (5 templates by default),
+  one query per template per name passed to `--peers`. With no `--peers`, no
+  peer queries run.
 
 Every hit is archived under `raw/web/`, hashed, and timestamped. Up to
-`config.toml [research] max_extracted_sources` (default 10) are selected for
-full extraction, by round-robin across buckets (consensus, and each peer
+`config.toml [tavily]`/`[exa] max_extracted_sources` (default 15) are selected
+for full extraction, by round-robin across buckets (consensus, and each peer
 separately) rather than a flat score sort — this stops one bucket with
 more/higher-scored hits from starving the others.
+
+Search hits per query (`[tavily] max_results` / `[exa] num_results`, default 8)
+are deliberately generous relative to the extraction cap: search is cheap
+candidate generation, several hits will turn out post-event, undated, or
+duplicate, and more query templates increase retrieval *diversity* rather than
+just returning a bigger sample of the same ranking. The **retrieval boundary**
+(what's searched and archived) is wider on purpose than the **evidence
+boundary** (what's extracted into `evidence/web-evidence.jsonl`) and the
+**analytical boundary** (what a claim actually cites) — widening query/hit
+counts gives the deterministic filters more to screen, it does not by itself
+put more material in front of the LLM.
 
 ### Exa vs. Tavily differences
 

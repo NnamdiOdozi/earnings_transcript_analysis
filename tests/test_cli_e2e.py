@@ -375,13 +375,13 @@ def test_prepare_calls_web_search_by_default_and_archives_hits(isolated_runs_dir
         ]
     )
     assert rc == 0
-    assert len(calls) == 3  # one per config [research] consensus_queries template (no --peers)
+    assert len(calls) == 5  # one per config [research] consensus_queries template (no --peers)
     assert all("Acme Corp" in q and "ACME" in q for q in calls)
     assert any("2026-q2" in q for q in calls)  # event_id fills the period placeholder
 
     run_dir = isolated_runs_dir / "ACME" / "2026-q2"
     archived = sorted((run_dir / config.RAW_SUBDIR / "web").glob("*.json"))
-    assert len(archived) == 3  # one hit archived per query, per the fake
+    assert len(archived) == 5  # one hit archived per query, per the fake
     # Fetch time embedded in the file itself, not just cross-referenced via manifest.
     assert all(json.loads(f.read_text())["_retrieved_at"] for f in archived)
     # Which provider produced this hit -- the archive directory is always literally
@@ -395,24 +395,24 @@ def test_prepare_calls_web_search_by_default_and_archives_hits(isolated_runs_dir
 
     manifest = json.loads((run_dir / config.MANIFEST_FILENAME).read_text())
     assert any(f"Web search evidence ({provider}): ok" in note for note in manifest["notes"])
-    assert any("Web evidence (extracted, citable): 3 source(s)" in note for note in manifest["notes"])
+    assert any("Web evidence (extracted, citable): 5 source(s)" in note for note in manifest["notes"])
     # The full query set is also recorded once at the manifest level, in order --
     # "query-NN" in a hit's filename indexes into this list.
     assert manifest["queries"] == calls
 
-    # 3 search hits (one per query, distinct URLs) all get extracted -- capped by
-    # max_extracted_sources (10, default), so all 3 are selected here.
-    assert len(extract_calls) == 3
+    # 5 search hits (one per query, distinct URLs) all get extracted -- capped by
+    # max_extracted_sources (15, default), so all 5 are selected here.
+    assert len(extract_calls) == 5
 
     extracted_files = sorted((run_dir / config.EVIDENCE_SUBDIR / config.WEB_SUBDIR).glob("*.md"))
-    assert len(extracted_files) == 3
+    assert len(extracted_files) == 5
     assert "Full extracted content" in extracted_files[0].read_text()
 
     web_evidence_lines = (run_dir / config.EVIDENCE_SUBDIR / config.WEB_EVIDENCE_FILENAME).read_text().strip().splitlines()
-    assert len(web_evidence_lines) == 3
+    assert len(web_evidence_lines) == 5
 
-    # transcript source + 3 search-hit sources + 3 extracted web-evidence sources
-    assert len(manifest["sources"]) == 7
+    # transcript source + 5 search-hit sources + 5 extracted web-evidence sources
+    assert len(manifest["sources"]) == 11
     assert all(len(s["sha256"]) == 64 for s in manifest["sources"])
 
 
@@ -442,15 +442,15 @@ def test_prepare_peer_queries_run_and_are_class_tagged(isolated_runs_dir, monkey
         ]
     )
     assert rc == 0
-    # 3 consensus + (2 peers x 2 peer_queries templates) = 7 queries
-    assert len(calls) == 7
+    # 5 consensus + (2 peers x 5 peer_queries templates) = 15 queries
+    assert len(calls) == 15
     assert any("Amazon" in q for q in calls) and any("Google" in q for q in calls)
 
     run_dir = isolated_runs_dir / "ACME" / "2026-q2"
     archived = [json.loads(f.read_text()) for f in sorted((run_dir / config.RAW_SUBDIR / "web").glob("*.json"))]
     classes = [a["_class"] for a in archived]
-    assert classes.count("consensus") == 3
-    assert classes.count("peer") == 4
+    assert classes.count("consensus") == 5
+    assert classes.count("peer") == 10
     # every peer query names a peer -- provenance traceable per hit
     peer_queries = [a["_query"] for a in archived if a["_class"] == "peer"]
     assert all(("Amazon" in q or "Google" in q) for q in peer_queries)
@@ -520,20 +520,21 @@ def test_prepare_extraction_round_robins_so_consensus_never_starves_peers(isolat
         ]
     )
     assert rc == 0
-    # 3 consensus x6 = 18 consensus hits; 4 peer queries x1 = 4 peer hits (2 Amazon,
-    # 2 Google). Round-robin into 10 slots -> both classes represented (old code: 10
-    # consensus, 0 peer) AND both peers represented (the sub-class-by-peer fix).
+    # 5 consensus x6 = 30 consensus hits; 10 peer queries x1 = 10 peer hits (5 Amazon,
+    # 5 Google). Round-robin into the monkeypatched 10 slots -> both classes
+    # represented (old code: 10 consensus, 0 peer) AND both peers represented (the
+    # sub-class-by-peer fix): 3 buckets drawn in turn until the cap is hit mid-round.
     run_dir = isolated_runs_dir / "ACME" / "2026-q2"
     archived = {a["url"]: a for f in (run_dir / config.RAW_SUBDIR / "web").glob("*.json")
                 for a in [json.loads(f.read_text())]}
     extracted_classes = [archived[url]["_class"] for url in extracted]
     extracted_keys = [archived[url]["_select_key"] for url in extracted]
     assert len(extracted) == 10
-    assert extracted_classes.count("peer") == 4  # all 4 peer hits survived
-    assert extracted_classes.count("consensus") == 6
+    assert extracted_classes.count("peer") == 6  # both peers survive well past the old 2-hit exhaustion point
+    assert extracted_classes.count("consensus") == 4
     # neither peer starved: each of the two peers contributes to citable evidence
-    assert extracted_keys.count("peer:Amazon") == 2
-    assert extracted_keys.count("peer:Google") == 2
+    assert extracted_keys.count("peer:Amazon") == 3
+    assert extracted_keys.count("peer:Google") == 3
 
 
 @pytest.mark.parametrize("provider", ["exa", "tavily"])
@@ -664,9 +665,9 @@ def test_prepare_excludes_web_evidence_published_after_event_date(isolated_runs_
     assert "before" in web_evidence["url"]
     assert web_evidence["temporal_status"] == "pre_event"
 
-    # still archived under raw/web/ for audit (both hits, all 3 consensus queries -> 6
+    # still archived under raw/web/ for audit (both hits, all 5 consensus queries -> 10
     # files), just never extracted as citable evidence.
-    assert len(list((run_dir / config.RAW_SUBDIR / "web").glob("*.json"))) == 6
+    assert len(list((run_dir / config.RAW_SUBDIR / "web").glob("*.json"))) == 10
 
 
 def test_prepare_extraction_selection_preserves_order_when_score_is_none(isolated_runs_dir, monkeypatch):

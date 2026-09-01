@@ -41,10 +41,13 @@ Pass `--company-name` to fill the `{company}` placeholder (falls back to `--tick
 for the period.
 
 Config defaults (`config.toml [tavily]`): `search_depth = "basic"`, `max_results =
-5`, `include_external_commentary = false` — official company/regulatory sources
-only, no general news or analyst commentary by default. `config.toml [research]
-archive_all_sources = true` controls whether *every* hit per query is archived
-(default) or only the top hit — flip it off to reduce volume.
+8`, `include_external_commentary = false` — official company/regulatory sources
+only, no general news or analyst commentary by default. Search hits are
+deliberately generous relative to the extraction cap below (see the config
+comment) since several will turn out post-event, undated, or duplicate before
+extraction. `config.toml [research] archive_all_sources = true` controls whether
+*every* hit per query is archived (default) or only the top hit — flip it off to
+reduce volume.
 
 ## Causality guard: two layers, one of them weaker than it looks
 
@@ -87,7 +90,7 @@ against. So after the search loop, `cmd_prepare` automatically extracts the
 selected hits:
 
 1. Pools every hit across all queries, applies the causality guard above, dedupes
-   by URL, then selects up to `max_extracted_sources` (default 10) by **round-robin
+   by URL, then selects up to `max_extracted_sources` (default 15) by **round-robin
    across buckets**, not a flat score sort. The bucket is consensus (one) and each
    peer separately (`peer:<name>`), so one bucket that returned more/higher-scored
    hits can't fill every slot and starve the others — consensus was crowding out all

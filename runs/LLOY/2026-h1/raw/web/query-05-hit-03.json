@@ -1,11 +1,12 @@
 {
-  "url": "https://www.abcmoney.co.uk/2026/07/how-lloyds-barclays-and-natwest-stack-up-for-a-uk-bank-retirement-portfolio/",
-  "title": "How Lloyds, Barclays and NatWest Stack Up for a UK Bank Retirement Portfolio | ABC Money",
+  "url": "https://www.financial-news.co.uk/lloyds-banking-group-half-year-profit-hits-4-3bn-as-dividend-jumps-30/",
+  "title": "Lloyds Banking Group Half-Year Profit Hits \u00a34.3bn as Dividend Jumps 30% - Financial News",
   "score": null,
-  "published_date": "2026-07-02T00:00:00.000Z",
-  "_class": "peer",
-  "_select_key": "peer:NatWest Group",
+  "published_date": "2026-08-26T00:00:00.000Z",
+  "_class": "consensus",
+  "_select_key": "consensus",
+  "_temporal_status": "unchecked",
   "_provider": "exa",
-  "_query": "NatWest Group quarterly results versus Lloyds Banking Group plc LLOY",
-  "_retrieved_at": "2026-08-28T08:19:06Z"
+  "_query": "Lloyds Banking Group plc LLOY 2026-h1 analyst earnings reaction results",
+  "_retrieved_at": "2026-09-01T22:03:50Z"
 }

@@ -1,11 +1,12 @@
 {
-  "url": "https://www.finanzwire.com/press-release/lloyds-banking-group-lloy-2026-q1-interim-management-statement-NILvrr7gWtm",
-  "title": "Lloyds Banking Group (LLOY) |",
+  "url": "https://home.barclays/content/dam/home-barclays/documents/investor-relations/ResultAnnouncements/H12026Results/Q226-Results-Presentation.pdf",
+  "title": "Q2 2026 Results Presentation",
   "score": null,
-  "published_date": "2026-04-29T00:00:00.000Z",
+  "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:Standard Chartered",
+  "_select_key": "peer:Barclays",
+  "_temporal_status": "unchecked",
   "_provider": "exa",
-  "_query": "Standard Chartered quarterly results versus Lloyds Banking Group plc LLOY",
-  "_retrieved_at": "2026-08-28T08:19:12Z"
+  "_query": "Barclays 2026-h1 earnings results revenue growth",
+  "_retrieved_at": "2026-09-01T22:03:56Z"
 }

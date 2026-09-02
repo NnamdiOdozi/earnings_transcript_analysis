@@ -4,8 +4,9 @@
   "score": null,
   "published_date": "2026-07-02T00:00:00.000Z",
   "_class": "peer",
-  "_select_key": "peer:Barclays",
+  "_select_key": "peer:NatWest Group",
+  "_temporal_status": "unchecked",
   "_provider": "exa",
-  "_query": "Barclays quarterly results versus Lloyds Banking Group plc LLOY",
-  "_retrieved_at": "2026-08-28T08:19:08Z"
+  "_query": "NatWest Group quarterly results versus Lloyds Banking Group plc LLOY",
+  "_retrieved_at": "2026-09-01T22:03:52Z"
 }

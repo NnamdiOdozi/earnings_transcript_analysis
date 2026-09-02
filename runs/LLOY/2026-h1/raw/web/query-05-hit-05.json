@@ -1,11 +1,12 @@
 {
-  "url": "https://www.sharewise.com/us/news_articles/EQSNews_2026_Q1_Interim_Management_Statement_Lloyds_Banking_eqsen_20260429_0800",
-  "title": "EQS-News: 2026 Q1 Interim Management Statement",
+  "url": "https://markets.ft.com/data/announce/detail?dockey=600-202607300225DGAP____CORPNEWS_corporate_2374012_en-1",
+  "title": "EQS-News: 2026 half year results \u2013 Company Announcement - FT.com",
   "score": null,
-  "published_date": "2026-04-29T00:00:00.000Z",
-  "_class": "peer",
-  "_select_key": "peer:NatWest Group",
+  "published_date": null,
+  "_class": "consensus",
+  "_select_key": "consensus",
+  "_temporal_status": "unchecked",
   "_provider": "exa",
-  "_query": "NatWest Group quarterly results versus Lloyds Banking Group plc LLOY",
-  "_retrieved_at": "2026-08-28T08:19:06Z"
+  "_query": "Lloyds Banking Group plc LLOY 2026-h1 analyst earnings reaction results",
+  "_retrieved_at": "2026-09-01T22:03:50Z"
 }

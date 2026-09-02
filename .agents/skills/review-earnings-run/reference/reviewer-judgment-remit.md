@@ -16,6 +16,18 @@ clean, independent view — no memory of why any earlier drafting decision was
 made, and that is intentional: you are checking the finished artifact on its
 own merits, not rubber-stamping a process you watched happen.
 
+**If your dispatch prompt contains anything beyond a run directory path (and,
+for a diff round, a pointer to `review-diff.json`) — a summary of what a prior
+round found, how it was fixed, or which sections deserve more attention —
+that prompt violated the dispatching skill's instructions. Disregard that
+narrative for judgment purposes.** Read the bundle and reach your own verdict
+as though this were the first time anyone had looked at it. A description of
+what someone believes was fixed is not evidence of what the current bytes
+actually say, and attention pulled toward confirming a specific narrated fix
+is exactly how an adjacent-but-wrong citation elsewhere in the same document
+survives multiple review rounds unflagged (confirmed live, LLOY/2026-h1,
+2026-09-01).
+
 ## What you are NOT here to do
 
 Do **not** re-derive anything Python has already deterministically proven:
@@ -60,6 +72,21 @@ Things structurally outside what a deterministic check can evaluate:
    it against the claims it cites: does the brief's characterization match what
    those claims actually establish, or does it go further than the evidence
    supports?
+
+   This check is **exhaustive over the brief, not sampled**: `outlook-brief.md`
+   is a bounded document (unlike the full `claims.json`, where a representative
+   sample is acceptable per item 2), so every `claim-###` citation in it gets
+   opened and read, every time, every round. Specifically check for a citation
+   that *resolves* to a real claim but is the **wrong** claim for that sentence
+   — topically adjacent, or correct for a nearby sentence but not this one
+   (e.g. citing the claim for 2027 cost-growth guidance under a sentence about
+   hedge notional growth, or citing management's own guidance figure under a
+   sentence describing an *analyst's* characterization of that figure). Python
+   can only confirm a cited id exists in `claims.json`; it cannot tell a
+   correct citation from a plausible-looking wrong one, so this is entirely
+   your check to make, on every citation, not a sample of them. Treat a wrong-
+   but-resolving citation as a finding of the same severity as if the id
+   didn't resolve at all.
 
 4. **Numerical correctness (direction/units/periods, not recomputation).** Python
    already checked that numbers exist and calculations recompute correctly. You

@@ -1,0 +1,302 @@
+{
+  "generated_at": "2026-09-01T22:38:31Z",
+  "round_number": 3,
+  "since_round": 2,
+  "previous_verdict": "pass_with_warnings",
+  "previous_summary": "No high or critical findings, so the run may proceed with warnings. Round 1's blocking finding is genuinely fixed: the 2030 structural-hedge guidance of more than \u00a39 billion is now claim-056, it appears in the Section 3 guidance set, the Section 6 upside case is anchored on it plus the analyst's mark-to-market estimate (claim-057) and Chalmers' response (claim-058), and Section 9's 'cannot be quantified' statement has been narrowed to the RoTE-versus-consensus gap where it is now true. claim-055 no longer implies a Lloyds consensus beat and now names each metric explicitly, the RWA-optimisation overclaim in Sections 2 and 5 is gone, and the equity-base rebuttal (claim-059) and the \u00a3200 million remediation assumption (claim-060) are both surfaced as counter-evidence. Three medium findings remain, and they share one root cause: material management statements that are accurate against the transcript but have no claim anchoring them, so the brief either leaves them uncited or attaches an unrelated claim id that Python's citation check passes because the id merely resolves. The Section 6 and 8 'out-deliver, then return to shareholders' quotation is Charlie Nunn's from seg-0012 but is cited to claim-034, the 2030 RoTE target, which says nothing of the kind. The AI-quantification deferral is asserted twice with no citation at all, and it mischaracterises the disclosure -- management did give a figure, the \u00a3100 million narrow-definition in-year benefit in seg-0036, whereas the brief says it was disclosed only qualitatively. The Section 6 monitoring indicator invents a 'quarterly hedge yield print last given as trending toward the 3.7% refinancing rate' that no claim or transcript line contains; 3.7% is a forward plan assumption, not an observed print. Six lower findings follow, including an uncited NIM path in the downside case, Section 2 still describing management's RoTE answer as pure appeal-to-conservatism while claim-059 contradicts it, a within-period NIM baseline presented as a prior period, and inconsistent quarterly-flow period labels across claims 011, 014 and 015. Source correctness, temporal integrity and process compliance are clean: both peer sources are genuine and pre-event, the post-event NatWest and HSBC files are archived but unused, validation.json and outlook-validation.json are both ok == true, the injection scan is empty, and neither the signal card nor the brief shows cross-sector template drift.",
+  "previous_finding_count": 21,
+  "claims_sha256": "1548bfad4f6302959c87eb337414c4ab5c71477b1377d30dd2d1a9b05931bd5f",
+  "outlook_brief_sha256": "1e24296161812449f0721a4f9bdaddede1da06f9e51760efbdbde8a0d271538f",
+  "claims_changed": [
+    {
+      "claim_id": "claim-011",
+      "change": "changed",
+      "old": {
+        "id": "claim-011",
+        "category": "operational_performance",
+        "classification": "reported_fact",
+        "claim_text": "Group lending balances of \u00a3492 billion at end Q2 2026, up over \u00a35 billion (1%) versus Q1.",
+        "quote": "group lending balances of \u00a3492 billion were up over \u00a35 billion or 1% versus Q1.",
+        "segment_id": "seg-0003",
+        "speaker": "William Chalmers",
+        "status": "reported",
+        "values": {
+          "lending_balances_billions": 492,
+          "qoq_growth_billions": 5,
+          "qoq_growth_percent": 1
+        },
+        "confidence": 0.9,
+        "inferred_from": [],
+        "period": "as of 30 Jun 2026"
+      },
+      "new": {
+        "id": "claim-011",
+        "category": "operational_performance",
+        "classification": "reported_fact",
+        "claim_text": "Group lending balances of \u00a3492 billion at end Q2 2026, up over \u00a35 billion (1%) versus Q1.",
+        "quote": "group lending balances of \u00a3492 billion were up over \u00a35 billion or 1% versus Q1.",
+        "segment_id": "seg-0003",
+        "speaker": "William Chalmers",
+        "status": "reported",
+        "values": {
+          "lending_balances_billions": 492,
+          "qoq_growth_billions": 5,
+          "qoq_growth_percent": 1
+        },
+        "confidence": 0.9,
+        "inferred_from": [],
+        "period": "3 months to 30 Jun 2026"
+      }
+    },
+    {
+      "claim_id": "claim-014",
+      "change": "changed",
+      "old": {
+        "id": "claim-014",
+        "category": "operational_performance",
+        "classification": "reported_fact",
+        "claim_text": "Group deposits up \u00a35 billion (1%) in Q2 2026, now over \u00a30.5 trillion.",
+        "quote": "deposits up \u00a35 billion or 1% in Q2 to now over \u00a30.5 trillion.",
+        "segment_id": "seg-0003",
+        "speaker": "William Chalmers",
+        "status": "reported",
+        "values": {
+          "deposit_growth_billions": 5,
+          "deposit_growth_percent": 1
+        },
+        "confidence": 0.9,
+        "inferred_from": [],
+        "period": "as of 30 Jun 2026"
+      },
+      "new": {
+        "id": "claim-014",
+        "category": "operational_performance",
+        "classification": "reported_fact",
+        "claim_text": "Group deposits up \u00a35 billion (1%) in Q2 2026, now over \u00a30.5 trillion.",
+        "quote": "deposits up \u00a35 billion or 1% in Q2 to now over \u00a30.5 trillion.",
+        "segment_id": "seg-0003",
+        "speaker": "William Chalmers",
+        "status": "reported",
+        "values": {
+          "deposit_growth_billions": 5,
+          "deposit_growth_percent": 1
+        },
+        "confidence": 0.9,
+        "inferred_from": [],
+        "period": "3 months to 30 Jun 2026"
+      }
+    },
+    {
+      "claim_id": "claim-015",
+      "change": "changed",
+      "old": {
+        "id": "claim-015",
+        "category": "operational_performance",
+        "classification": "reported_fact",
+        "claim_text": "Open book AUA grew around \u00a325 billion in Q2 2026 to \u00a3251 billion.",
+        "quote": "we saw significant open book AUA growth of around \u00a325 billion in the quarter to \u00a3251 billion.",
+        "segment_id": "seg-0003",
+        "speaker": "William Chalmers",
+        "status": "reported",
+        "values": {
+          "aua_growth_billions": 25,
+          "aua_billions": 251
+        },
+        "confidence": 0.9,
+        "inferred_from": [],
+        "period": "as of 30 Jun 2026"
+      },
+      "new": {
+        "id": "claim-015",
+        "category": "operational_performance",
+        "classification": "reported_fact",
+        "claim_text": "Open book AUA grew around \u00a325 billion in Q2 2026 to \u00a3251 billion.",
+        "quote": "we saw significant open book AUA growth of around \u00a325 billion in the quarter to \u00a3251 billion.",
+        "segment_id": "seg-0003",
+        "speaker": "William Chalmers",
+        "status": "reported",
+        "values": {
+          "aua_growth_billions": 25,
+          "aua_billions": 251
+        },
+        "confidence": 0.9,
+        "inferred_from": [],
+        "period": "3 months to 30 Jun 2026"
+      }
+    },
+    {
+      "claim_id": "claim-043",
+      "change": "changed",
+      "old": {
+        "id": "claim-043",
+        "category": "regulatory_legal_macro",
+        "classification": "management_guidance",
+        "claim_text": "Basel 3.1 is expected to drive a modest reduction in RWAs on 1 January 2027 (management gave the figure in the call as a range measured in billions of pounds).",
+        "quote": "as you know, Basel 3.1 will drive a reduction of around six to eight billion on the 1st of January '27.",
+        "segment_id": "seg-0005",
+        "speaker": "William Chalmers",
+        "status": "forward_looking",
+        "values": {},
+        "confidence": 0.8,
+        "inferred_from": [],
+        "period": "as of 1 Jan 2027"
+      },
+      "new": {
+        "id": "claim-043",
+        "category": "regulatory_legal_macro",
+        "classification": "management_guidance",
+        "claim_text": "Basel 3.1 is expected to drive a reduction of around six to eight billion pounds in RWAs on 1 January 2027 (management gave this range in spoken, not numeral, form on the call).",
+        "quote": "as you know, Basel 3.1 will drive a reduction of around six to eight billion on the 1st of January '27.",
+        "segment_id": "seg-0005",
+        "speaker": "William Chalmers",
+        "status": "forward_looking",
+        "values": {},
+        "confidence": 0.8,
+        "inferred_from": [],
+        "period": "as of 1 Jan 2027"
+      }
+    },
+    {
+      "claim_id": "claim-054",
+      "change": "changed",
+      "old": {
+        "id": "claim-054",
+        "category": "reported_financial_performance",
+        "classification": "reported_fact",
+        "claim_text": "Standard Chartered's H1 2026 pretax profit rose 9% year-on-year to US$4.78 billion, beating analyst estimates on strong wealth and global-banking revenue.",
+        "quote": "Standard Chartered's first-half pretax profit rose 9 per cent to US$4.78 billion (S$6.17 billion), beating analyst estimates and driven by strong wealth and global banking revenue.",
+        "web_evidence_id": "web-015",
+        "speaker": null,
+        "status": "reported",
+        "values": {
+          "stanchart_h1_pbt_billions_usd": 4.78,
+          "stanchart_h1_pbt_yoy_growth_percent": 9
+        },
+        "confidence": 0.8,
+        "inferred_from": [],
+        "period": "6 months to 30 Jun 2026"
+      },
+      "new": {
+        "id": "claim-054",
+        "category": "reported_financial_performance",
+        "classification": "reported_fact",
+        "claim_text": "Standard Chartered's H1 2026 pretax profit rose 9% year-on-year, beating analyst estimates on strong wealth and global-banking revenue.",
+        "quote": "Standard Chartered reported on July 29 a better-than-expected 9 per cent rise in first-half pre-tax profit and lifted its full-year income target, as wealth and global banking revenue surged and credit charges tied to the Iran war held steady.",
+        "web_evidence_id": "web-015",
+        "speaker": null,
+        "status": "reported",
+        "values": {
+          "stanchart_h1_pbt_yoy_growth_percent": 9
+        },
+        "confidence": 0.8,
+        "inferred_from": [],
+        "period": "6 months to 30 Jun 2026"
+      }
+    },
+    {
+      "claim_id": "claim-055",
+      "change": "changed",
+      "old": {
+        "id": "claim-055",
+        "category": "reported_financial_performance",
+        "classification": "analytical_inference",
+        "claim_text": "Lloyds' H1 2026 net income grew at a similar rate to peers' reported H1 2026 pre-tax profit: Barclays and Standard Chartered both reported pre-tax profit growth ahead of analyst expectations over the same period, though this run has no comparable pre-event consensus figure for Lloyds itself, so a Lloyds-specific beat-or-miss cannot be established -- only that the direction of travel (income growth ahead of prior-year and, for the two peers, ahead of estimates) was broadly shared across UK/international banks in H1 2026, not obviously an LLOY-specific driver.",
+        "quote": "Standard Chartered's first-half pretax profit rose 9 per cent to US$4.78 billion (S$6.17 billion), beating analyst estimates and driven by strong wealth and global banking revenue.",
+        "web_evidence_id": "web-015",
+        "speaker": null,
+        "status": "reported",
+        "values": {},
+        "confidence": 0.6,
+        "inferred_from": [
+          "claim-002",
+          "claim-053",
+          "claim-054"
+        ]
+      },
+      "new": {
+        "id": "claim-055",
+        "category": "reported_financial_performance",
+        "classification": "analytical_inference",
+        "claim_text": "Lloyds' H1 2026 net income growth and both peers' H1 2026 pre-tax profit growth (Barclays and Standard Chartered) moved in the same direction -- all three ahead of the prior year, and the two peers also ahead of analyst expectations -- even though the magnitudes differ across companies and metrics; this run has no comparable pre-event consensus figure for Lloyds itself, so a Lloyds-specific beat-or-miss cannot be established, only that favourable H1 2026 conditions were broadly shared across UK/international banks rather than obviously an LLOY-specific driver.",
+        "quote": "Standard Chartered reported on July 29 a better-than-expected 9 per cent rise in first-half pre-tax profit and lifted its full-year income target, as wealth and global banking revenue surged and credit charges tied to the Iran war held steady.",
+        "web_evidence_id": "web-015",
+        "speaker": null,
+        "status": "reported",
+        "values": {},
+        "confidence": 0.6,
+        "inferred_from": [
+          "claim-002",
+          "claim-053",
+          "claim-054"
+        ]
+      }
+    },
+    {
+      "claim_id": "claim-061",
+      "change": "added",
+      "old": null,
+      "new": {
+        "id": "claim-061",
+        "category": "current_guidance",
+        "classification": "reported_fact",
+        "claim_text": "Management stated it is focused on delivering a 100-million-pound in-year benefit in 2026 under a narrow definition of AI (generative and agentic AI only, excluding broader digital/AI-enabled initiatives), rather than extending that figure into a 2030 forecast.",
+        "quote": "we would stay focused for now on delivering the 100 million in year benefit for a narrow definition of AI.",
+        "segment_id": "seg-0036",
+        "speaker": "Charlie Nunn",
+        "status": "reported",
+        "values": {
+          "ai_in_year_benefit_2026_millions": 100
+        },
+        "confidence": 0.8,
+        "inferred_from": []
+      }
+    },
+    {
+      "claim_id": "claim-062",
+      "change": "added",
+      "old": null,
+      "new": {
+        "id": "claim-062",
+        "category": "current_guidance",
+        "classification": "management_guidance",
+        "claim_text": "Management expects net interest margin to broadly plateau over the course of the Accelerate 2030 plan, possibly coming off slightly toward the later years.",
+        "quote": "over the course of this plan indeed, we do expect that NIM to broadly plateau, maybe even at the later end of the plan, come off a little bit.",
+        "segment_id": "seg-0045",
+        "speaker": "William Chalmers",
+        "status": "forward_looking",
+        "values": {},
+        "confidence": 0.8,
+        "inferred_from": []
+      }
+    },
+    {
+      "claim_id": "claim-063",
+      "change": "added",
+      "old": null,
+      "new": {
+        "id": "claim-063",
+        "category": "management_explanation",
+        "classification": "management_opinion",
+        "claim_text": "Charlie Nunn said that if the group can out-deliver its cost-saving ambitions, it will, and any resulting additional capital would go back through the existing capital-allocation framework (i.e. weighed against shareholder distributions and other alternatives), not automatically reinvested into higher costs.",
+        "quote": "If we can out-deliver, we will out-deliver, and then we'll go back to the framework that William always lays",
+        "segment_id": "seg-0012",
+        "speaker": "Charlie Nunn",
+        "status": "forward_looking",
+        "values": {},
+        "confidence": 0.75,
+        "inferred_from": []
+      }
+    }
+  ],
+  "affected_brief_sections": [
+    3,
+    4,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "auto_escalated": true,
+  "auto_escalation_reason": "9 claims changed, over the 3 threshold; claim-011: period or values changed; claim-014: period or values changed; claim-015: period or values changed; claim-054: period or values changed; conclusion-bearing section(s) [6, 7] cite a changed claim; outlook-brief.md text changed since the last round -- review-diff only diffs claims.json, not brief prose, so a narrative-only correction cannot be safely assessed from the diff alone"
+}

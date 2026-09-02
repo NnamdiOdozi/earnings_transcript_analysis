@@ -1,11 +1,12 @@
 {
-  "url": "https://www.sc.com/en/uploads/sites/66/content/docs/standard-chartered-plc-q1-2026-press-release.pdf",
-  "title": "Q1 2026 Press Release Standard Chartered",
+  "url": "https://home.barclays/content/dam/home-barclays/documents/investor-relations/ResultAnnouncements/H12026Results/H126-Barclays-PLC-6-K.pdf",
+  "title": "Barclays PLC",
   "score": null,
   "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:Standard Chartered",
+  "_select_key": "peer:Barclays",
+  "_temporal_status": "unchecked",
   "_provider": "exa",
-  "_query": "Standard Chartered quarterly results versus Lloyds Banking Group plc LLOY",
-  "_retrieved_at": "2026-08-28T08:19:12Z"
+  "_query": "Barclays 2026-h1 earnings results revenue growth",
+  "_retrieved_at": "2026-09-01T22:03:56Z"
 }

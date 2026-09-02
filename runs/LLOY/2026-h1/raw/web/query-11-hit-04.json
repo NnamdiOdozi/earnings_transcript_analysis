@@ -1,11 +1,12 @@
 {
-  "url": "https://www.sc.com/en/uploads/sites/66/content/docs/standard-chartered-plc-q1-2026-results-transcript.pdf",
-  "title": "Q1 2026 Results Transcript Standard Chartered",
+  "url": "https://www.stocktitan.net/sec-filings/BCS/6-k-barclays-plc-current-report-foreign-issuer-44c133bd58a0.html",
+  "title": "Barclays lifts 2026 target as H1 profit hits \u00a36.1bn | BCS SEC Filing - Form 6-K",
   "score": null,
-  "published_date": null,
+  "published_date": "2026-07-28T00:00:00.000Z",
   "_class": "peer",
-  "_select_key": "peer:Standard Chartered",
+  "_select_key": "peer:Barclays",
+  "_temporal_status": "unchecked",
   "_provider": "exa",
-  "_query": "Standard Chartered quarterly results versus Lloyds Banking Group plc LLOY",
-  "_retrieved_at": "2026-08-28T08:19:12Z"
+  "_query": "Barclays 2026-h1 earnings results revenue growth",
+  "_retrieved_at": "2026-09-01T22:03:56Z"
 }

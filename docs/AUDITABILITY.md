@@ -120,7 +120,35 @@ to check they sum to the reported total — is *not* auto-recomputed today, thou
 underlying number is still grounded against the source. We flag this limit rather than
 overstate the coverage.
 
-## 5. Guarding against "prompt injection"
+## 5. The outlook brief: reasoning is free, but every figure is still checked
+
+The signal card (Section 3) is built only from quote-anchored, number-grounded claims. The
+forward-looking outlook brief works differently. There, the AI is allowed to reason freely: it
+can rank what matters most, compare evidence across sources, challenge management's own framing,
+and combine several validated claims into a new conclusion, written directly as prose. This is a
+deliberate choice. Ranking and comparing are judgement calls a computer cannot make, and forcing
+every such judgement to first become a new claim would not add a real check — it would just move
+the same interpretation into a different file.
+
+That freedom is not open-ended, and it operates inside a fixed **template**, not a blank page. The
+brief follows a ten-part structure — guidance, business drivers, base/upside/downside cases, risks
+to monitor, and a full evidence appendix — and coverage of each part is mandatory even though its
+exact form is not: a section can be combined with another when it's genuinely thin, or a
+company-specific subsection added, but guidance, the three scenarios, monitoring indicators, and
+claim citations can never simply be dropped. A partial template like this is itself a reliability
+control: it stops the AI from quietly omitting an awkward section on a bad quarter, without forcing
+every company into an identical rigid report.
+
+On top of that structural template, every material number in the brief — a dollar or percent
+figure, a magnitude word, basis points, or an "x" multiple — must be grounded in a claim cited in
+the same sentence or bullet. Python checks this mechanically and fails the run if a figure appears
+without a citation next to it, so a number cannot be smuggled in on the back of an unrelated
+citation elsewhere in the brief. The reviewer described in Section 8 was also given a stronger
+remit at the same time this freedom was introduced, specifically to catch reasoning failures — an
+unsupported leap, one-sided cherry-picking, or a scenario not actually tied to evidence — that no
+mechanical check can see.
+
+## 6. Guarding against "prompt injection"
 
 Transcripts are untrusted text. A malicious or careless transcript could contain a sentence
 like "ignore your previous instructions and…", aimed at hijacking the AI. Four things address
@@ -157,7 +185,7 @@ hindsight or later updates. A pre-event label proves only the metadata compariso
 not that every sentence on a mutable page existed at that time.
 
 
-## 6. Lower cost and more consistency
+## 7. Lower cost and more consistency
 
 Handing the mechanical work to Python isn't only about trust — it is also cheaper and steadier.
 The expensive, variable AI isn't asked to re-count characters or re-verify sums every run (work
@@ -165,7 +193,7 @@ that burns tokens and can drift run to run); it reads the transcript once from a
 pasted repeatedly into a chat. Deterministic checks give the *same* answer every time —
 repeatability that is itself a governance property.
 
-## 7. Why we still need a human-style reviewer
+## 8. Why we still need a human-style reviewer
 
 Machine checks prove existence and arithmetic, not meaning. They cannot tell whether a claim
 is a *fair* reading of its quote, whether the outlook narrative is balanced, or whether
@@ -180,7 +208,7 @@ was cited selectively — the favourable numbers made the brief, several unfavou
 pressure, a segment miss, a flagged pricing risk) did not. All were corrected before the run was
 accepted, across two further, narrower re-reviews rather than starting over each time.
 
-## 7b. Re-reviews are targeted, not free — and capped
+## 8b. Re-reviews are targeted, not free — and capped
 
 A correction after a failed review doesn't need the reviewer to re-read everything
 from scratch. The **first** review is always full and independent — a summary built
@@ -209,7 +237,7 @@ refused attempt was never formally closed, every further command refused too, wi
 no way back short of raising the cap. The cap check now runs first, before anything
 else in the process.
 
-## 8. Gates: the line stops if a check fails
+## 9. Gates: the line stops if a check fails
 
 Finally, several checks are **gates**, not mere warnings, and each one is chained to the last:
 

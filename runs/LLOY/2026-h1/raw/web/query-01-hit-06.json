@@ -1,0 +1,12 @@
+{
+  "url": "https://www.tipranks.com/stocks/gb:lloy/forecast",
+  "title": "",
+  "score": null,
+  "published_date": null,
+  "_class": "consensus",
+  "_select_key": "consensus",
+  "_temporal_status": "unchecked",
+  "_provider": "exa",
+  "_query": "Lloyds Banking Group plc LLOY 2026-h1 analyst consensus estimate revenue EPS",
+  "_retrieved_at": "2026-09-01T22:03:46Z"
+}

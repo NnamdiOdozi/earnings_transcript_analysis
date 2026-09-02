@@ -1,11 +1,12 @@
 {
-  "url": "https://www.sc.com/en/press-release/first-quarter-2026-results/",
-  "title": "First Quarter 2026 Results | Standard Chartered",
+  "url": "https://www.natwestgroup.com/news-and-insights/latest-stories/financial-reporting/2026/jul/h1-2026-natwest-group-results.html",
+  "title": "H1 2026 NatWest Group Results",
   "score": null,
-  "published_date": "2026-04-30T00:00:00.000Z",
+  "published_date": "2026-07-31T00:00:00.000Z",
   "_class": "peer",
-  "_select_key": "peer:Standard Chartered",
+  "_select_key": "peer:NatWest Group",
+  "_temporal_status": "unchecked",
   "_provider": "exa",
-  "_query": "Standard Chartered 2026-h1 earnings results revenue growth",
-  "_retrieved_at": "2026-08-28T08:19:11Z"
+  "_query": "NatWest Group earnings call key trends 2026-h1",
+  "_retrieved_at": "2026-09-01T22:03:55Z"
 }

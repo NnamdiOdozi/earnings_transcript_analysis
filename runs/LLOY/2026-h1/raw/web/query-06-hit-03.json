@@ -1,11 +1,12 @@
 {
-  "url": "https://www.reuters.com/business/finance/barclays-reports-first-half-profit-up-17-strong-equities-trading-2026-07-28/",
-  "title": "Barclays profit up 17% on equities boom, but shares fall as ...",
+  "url": "https://www.investegate.co.uk/announcement/rns/natwest-group--nwg/natwest-group-plc-interim-results-2026-part-2/9697136",
+  "title": "NatWest Group plc Interim Results 2026 - Part 2",
   "score": null,
-  "published_date": "2026-07-28T00:00:00.000Z",
+  "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:Barclays",
+  "_select_key": "peer:NatWest Group",
+  "_temporal_status": "unchecked",
   "_provider": "exa",
-  "_query": "Barclays 2026-h1 earnings results revenue growth",
-  "_retrieved_at": "2026-08-28T08:19:07Z"
+  "_query": "NatWest Group 2026-h1 earnings results revenue growth",
+  "_retrieved_at": "2026-09-01T22:03:51Z"
 }

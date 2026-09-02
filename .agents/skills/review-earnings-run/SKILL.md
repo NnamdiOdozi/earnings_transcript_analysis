@@ -47,14 +47,30 @@ material omitted.
        findings from the last accepted `_review_history/round-N/review-report.json` (whatever its verdict) —
        never claim the run is complete, never silently drop the findings.
 
-3. **Dispatch the subagent.** Use the `Agent` tool with `subagent_type:
-   "outlook-reviewer"`. Give it the run directory path (e.g.
-   `runs/MSFT/2026-q2/`) and nothing else — it's a fresh context by design and
-   reads the full bundle itself per its own agent definition
-   (`.claude/agents/outlook-reviewer.md`). Do not summarize prior drafting
-   decisions to it; it should judge the finished artifact on its own merits.
-   (For a diff-based round, per step 2 above, also tell it `review-diff.json`
-   exists and should be read first.)
+3. **Dispatch the subagent with a minimal prompt — path only.** Use the `Agent`
+   tool with `subagent_type: "outlook-reviewer"`. The entire dispatch prompt
+   must be the run directory path (e.g. `runs/MSFT/2026-q2/`) plus, for a
+   diff-eligible round only, the single sentence that `review-diff.json` exists
+   and must be read first. **Nothing else.** Do not narrate prior findings, do
+   not describe how you fixed them, do not point at "the sections to look at
+   harder" — not even framed as helpful context for verifying a fix landed.
+
+   This is not a style preference; it's load-bearing. Confirmed failure mode
+   (LLOY/2026-h1, 2026-09-01): dispatch prompts for rounds 2 and 3 included a
+   detailed rundown of the previous round's findings and exactly how each was
+   fixed. Both rounds correctly confirmed those specific fixes — and both
+   missed citation-precision errors (a claim id that resolves but is the
+   *wrong* claim for that sentence) that had been sitting unchanged in the
+   brief since the very first draft, through two prior full reviews. The
+   likely mechanism: narrating "here's what changed and why" concentrates the
+   reviewer's attention on verifying that narrative instead of giving the rest
+   of a long brief with dozens of citations equally fresh scrutiny — even
+   though the remit instructs an independent read. `review-diff.json` already
+   tells the reviewer mechanically what changed (see the remit's diff-based
+   re-review section); it does not need your account of why, and a full review
+   should never be told anything about earlier rounds at all — reads the full
+   bundle itself per its own agent definition
+   (`.claude/agents/outlook-reviewer.md`).
 
 4. **Wait for `review-report.json`.** The subagent writes only this file — never a
    `.md` file, never edits to `claims.json`/`outlook-brief.md` themselves. If it

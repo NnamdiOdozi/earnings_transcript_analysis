@@ -1,11 +1,12 @@
 {
-  "url": "https://www.investors.rbs.com/~/media/Files/R/RBS-IR-V2/results-center/01052026/nwg-q1-2026-results.pdf",
-  "title": "NatWest Group plc",
+  "url": "https://www.ig.com/uk/news-and-trade-ideas/lloyds-banking-group-shares-after-h1-2026-results--what-s-next-f-260814",
+  "title": "Lloyds H1 2026 Results: Earnings, Returns and Accelerate 2030 - IG UK",
   "score": null,
-  "published_date": null,
-  "_class": "peer",
-  "_select_key": "peer:NatWest Group",
+  "published_date": "2026-08-14T00:00:00.000Z",
+  "_class": "consensus",
+  "_select_key": "consensus",
+  "_temporal_status": "unchecked",
   "_provider": "exa",
-  "_query": "NatWest Group quarterly results versus Lloyds Banking Group plc LLOY",
-  "_retrieved_at": "2026-08-28T08:19:06Z"
+  "_query": "Lloyds Banking Group plc LLOY 2026-h1 analyst earnings reaction results",
+  "_retrieved_at": "2026-09-01T22:03:50Z"
 }

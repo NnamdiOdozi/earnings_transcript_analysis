@@ -1,11 +1,12 @@
 {
-  "url": "https://home.barclays/content/dam/home-barclays/documents/investor-relations/ResultAnnouncements/H12026Results/H126-Barclays-PLC-6-K.pdf",
-  "title": "Barclays PLC",
+  "url": "https://www.investors.rbs.com/~/media/Files/R/RBS-IR-V2/results-center/01052026/nwg-q1-2026-slides.pdf",
+  "title": "Q1 2026 Results",
   "score": null,
   "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:Barclays",
+  "_select_key": "peer:NatWest Group",
+  "_temporal_status": "unchecked",
   "_provider": "exa",
-  "_query": "Barclays quarterly results versus Lloyds Banking Group plc LLOY",
-  "_retrieved_at": "2026-08-28T08:19:08Z"
+  "_query": "NatWest Group quarterly results versus Lloyds Banking Group plc LLOY",
+  "_retrieved_at": "2026-09-01T22:03:52Z"
 }

@@ -1,11 +1,12 @@
 {
-  "url": "https://content.bsx.com/CompanyDocuments/1077223879/04AUG26%20HSBC%20Holdings%202026%20Interims%20News%20Release%20(FINAL).pdf",
-  "title": "HSBC Holdings plc",
+  "url": "https://www.natwestgroup.com/news-and-insights/latest-stories/financial-reporting/2026/jul/h1-2026-natwest-group-results.html",
+  "title": "H1 2026 NatWest Group Results",
   "score": null,
-  "published_date": null,
+  "published_date": "2026-07-31T00:00:00.000Z",
   "_class": "peer",
-  "_select_key": "peer:HSBC Holdings",
+  "_select_key": "peer:NatWest Group",
+  "_temporal_status": "unchecked",
   "_provider": "exa",
-  "_query": "HSBC Holdings quarterly results versus Lloyds Banking Group plc LLOY",
-  "_retrieved_at": "2026-08-28T08:19:10Z"
+  "_query": "NatWest Group 2026-h1 analyst earnings reaction results",
+  "_retrieved_at": "2026-09-01T22:03:54Z"
 }

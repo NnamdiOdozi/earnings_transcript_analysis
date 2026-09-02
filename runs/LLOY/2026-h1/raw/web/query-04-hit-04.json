@@ -1,11 +1,12 @@
 {
-  "url": "https://www.tipranks.com/news/company-announcements/natwest-group-delivers-strong-h1-2026-results-and-accelerates-growth-strategy",
-  "title": "",
+  "url": "https://www.investegate.co.uk/announcement/rns/lloyds-bank-plc--88cs/2026-half-year-results/9696393",
+  "title": "2026 half year results | Company Announcement | Investegate",
   "score": null,
-  "published_date": null,
-  "_class": "peer",
-  "_select_key": "peer:NatWest Group",
+  "published_date": "2026-07-30T00:00:00.000Z",
+  "_class": "consensus",
+  "_select_key": "consensus",
+  "_temporal_status": "unchecked",
   "_provider": "exa",
-  "_query": "NatWest Group 2026-h1 earnings results revenue growth",
-  "_retrieved_at": "2026-08-28T08:19:05Z"
+  "_query": "Lloyds Banking Group plc LLOY 2026-h1 earnings guidance outlook estimates",
+  "_retrieved_at": "2026-09-01T22:03:50Z"
 }

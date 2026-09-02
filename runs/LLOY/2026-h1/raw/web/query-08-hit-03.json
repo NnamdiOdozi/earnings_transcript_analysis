@@ -1,11 +1,12 @@
 {
-  "url": "https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2026/interim/pdfs/hsbc-holdings-plc/260804-form-6k-group-interim-report-2026.pdf",
-  "title": "Form 6K - Interim Report 2026",
+  "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-natwest-group-lifts-2026-outlook-after-strong-h1-2026-93CH-4827204",
+  "title": "Earnings call transcript: NatWest Group lifts 2026 outlook ...",
   "score": null,
-  "published_date": null,
+  "published_date": "2026-07-31T00:00:00.000Z",
   "_class": "peer",
-  "_select_key": "peer:HSBC Holdings",
+  "_select_key": "peer:NatWest Group",
+  "_temporal_status": "unchecked",
   "_provider": "exa",
-  "_query": "HSBC Holdings 2026-h1 earnings results revenue growth",
-  "_retrieved_at": "2026-08-28T08:19:09Z"
+  "_query": "NatWest Group 2026-h1 earnings guidance outlook",
+  "_retrieved_at": "2026-09-01T22:03:54Z"
 }

@@ -1,0 +1,170 @@
+{
+  "verdict": "pass_with_warnings",
+  "review_mode": "full",
+  "reviewed_at": "2026-09-01T22:45:00Z",
+  "model": "claude-opus-5",
+  "claims_sha256": "f3012e209bfc3cd9a07c9cfa70d5a24e84af9c72b97df828f5ccf60e8a502581",
+  "outlook_brief_sha256": "e3f4a4d4db95932dfe01b9a56289254597693663aa3353df2b74813c1fdf3787",
+  "review_diff_sha256": "3bbed7c59423c486a81228ccc7bca0ecf7383c6882fae547238ea743ee72621c",
+  "source_checks": [
+    {
+      "severity": "info",
+      "artifact": "evidence/web/web-013.md",
+      "passage": "Profit before tax for the January to June period of £6.1 billion ($8.11 billion) was just above forecasts of about £5.94 billion",
+      "evidence": "Genuine Reuters article (headline 'Barclays profit up 17% on equities boom, but shares fall as costs set to rise', dateline 'LONDON, July 28'), matching the URL and the published_at of 2026-07-28 in web-evidence.jsonl. Content is the Barclays H1 2026 story it claims to be, not a 404 or an unrelated page. Published two days before Lloyds' 30 July call, so it is a legitimate pre-event peer comparator for claim-053.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "low",
+      "artifact": "evidence/web/web-015.md",
+      "passage": "Standard Chartered's first-half pretax profit rose 9 per cent to US$4.78 billion (S$6.17 billion), beating analyst estimates and driven by strong wealth and global banking revenue.",
+      "evidence": "The file is a genuine Straits Times article dated 'Published Jul 29, 2026', consistent with web-evidence.jsonl and pre-event. However, the exact sentence used as the anchoring quote for claim-054 and claim-055 sits in the article's bullet summary block, which the publisher labels 'AI generated' four lines below it. The reporter's own body text states the same fact ('Standard Chartered reported on July 29 a better-than-expected 9 per cent rise in first-half pre-tax profit', and 'pre-tax profit for the first six months of 2026 reached US$4.78 billion' versus 'the US$4.52 billion average of 16 analyst estimates'), so the substance is sound, but the anchor itself is a machine-written summary rather than publisher-authored reporting.",
+      "recommendation": "Re-anchor claim-054 and claim-055 to the article body sentence (e.g. the 'US$4.52 billion average of 16 analyst estimates' line, which also supplies the consensus figure) rather than the block the publisher marks as AI generated."
+    },
+    {
+      "severity": "info",
+      "artifact": "evidence/web-evidence.jsonl",
+      "passage": "n/a",
+      "evidence": "Temporal integrity check: 15 web-evidence records exist; only web-013 (28 Jul 2026) and web-015 (29 Jul 2026) are cited by any claim, and both pre-date the 30 July 2026 call. Records that post-date the event -- web-002 (NatWest H1, published_at 2026-07-31) and web-004 (HSBC interim results, published_at 2026-08-04) -- are archived but referenced by no claim and by no line of outlook-brief.md. Every temporal_status value in the file is 'unchecked', so I read the two used files directly rather than trusting metadata; neither contains any fact that could only be known after 30 July 2026. Section 9 of the brief also correctly declines to use the undated LLOY consensus pages (web-001, web-006, web-011, all published_at null) as pre-event consensus.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "runs/LLOY/2026-h1/normalized/transcript.jsonl",
+      "passage": "we expect hedge income to grow to more than £9 billion in 2030.",
+      "evidence": "Source-correctness sample of the transcript segments behind the five new/changed claims: seg-0005 (slide 55) carries the 2030 hedge-income guidance verbatim for claim-056 and the remediation sentence for claim-060; seg-0010 carries Ben Toms' 'My number's around ten and a half billion' for claim-057; seg-0011 carries both 'you'll get to a number that I suspect isn't wildly different to what you've just said' for claim-058 and 'it is a higher RoTE, but on a higher equity base' for claim-059. Read in full surrounding context, all five claim_text values are fair characterisations, none drops a qualifier the speaker attached in the same breath, and claim-058 correctly preserves that Chalmers declined to put a number on it. The manifest lists raw/transcript.pdf from lloydsbankinggroup.com with a retrieval timestamp consistent with the converted markdown.",
+      "recommendation": "None."
+    }
+  ],
+  "claim_findings": [
+    {
+      "severity": "low",
+      "artifact": "claims.json#claim-055",
+      "passage": "Lloyds' H1 2026 net income grew at a similar rate to peers' reported H1 2026 pre-tax profit",
+      "evidence": "The round-1 conflation and the implied Lloyds consensus beat are both fixed -- the claim now names each metric explicitly and states outright that no Lloyds pre-event consensus figure exists in this run. What remains is the word 'similar': Lloyds' net income grew 9% (claim-002), Standard Chartered's pre-tax profit grew 9% (claim-054), but Barclays' pre-tax profit grew 17% (claim-053). One of the two peers is close to Lloyds' rate and the other is nearly double it, so 'a similar rate to peers' overstates the match.",
+      "recommendation": "Replace 'grew at a similar rate to peers' reported H1 2026 pre-tax profit' with the actual spread, e.g. 'grew 9%, in line with Standard Chartered's 9% pre-tax profit growth and below Barclays' 17%'."
+    },
+    {
+      "severity": "low",
+      "artifact": "claims.json#claim-043",
+      "passage": "Basel 3.1 is expected to drive a modest reduction in RWAs on 1 January 2027 (management gave the figure in the call as a range measured in billions of pounds).",
+      "evidence": "The claim's own quote states the figure: 'Basel 3.1 will drive a reduction of around six to eight billion on the 1st of January '27.' The claim_text withholds it and substitutes the evaluative word 'modest', which the speaker never used -- against a group RWA base this is management's own stated range, not a characterisation the transcript supports. The parenthetical reads as a workaround for numeric grounding rather than a description, and it leaves the downstream reader of Section 4 ('an anticipated Basel 3.1 RWA reduction at the start of 2027 [claim-043]') with no magnitude at all.",
+      "recommendation": "State the range in words in claim_text, mirroring the quote (e.g. 'a reduction of around six to eight billion pounds'), and drop 'modest'."
+    },
+    {
+      "severity": "low",
+      "artifact": "claims.json#claim-014",
+      "passage": "\"period\": \"as of 30 Jun 2026\"",
+      "evidence": "Period-labelling consistency (Python cannot judge this): claim-014 ('Group deposits up £5 billion (1%) in Q2 2026'), claim-011 ('up over £5 billion or 1% versus Q1') and claim-015 ('grew around £25 billion in Q2 2026') all describe an incremental quarterly flow but are labelled 'as of 30 Jun 2026', a point-in-time stamp. The directly comparable claim-013 ('Commercial lending balances up £3.1 billion in Q2 2026'), sourced from the same seg-0003 passage and the same kind of flow, is labelled '3 months to 30 Jun 2026'. Each of the three mixes a stock level and a quarterly flow in one claim, and the label fits only the stock half.",
+      "recommendation": "Label the flow component '3 months to 30 Jun 2026' consistently with claim-013, or split each into a stock claim ('as of 30 Jun 2026') and a flow claim ('3 months to 30 Jun 2026')."
+    },
+    {
+      "severity": "info",
+      "artifact": "claims.json#claim-057",
+      "passage": "\"segment_id\": \"seg-0010\", \"speaker\": \"Ben Toms, RBC\"",
+      "evidence": "Checked because the claim's speaker differs from the segment's own speaker field ('Charlie Nunn' for seg-0010, 'William Chalmers' for seg-0008 behind claim-052). This is a segmentation artifact, not a misattribution: the transcript appends each analyst's question to the end of the preceding answer segment, and the quoted words are genuinely Ben Toms' inside seg-0010 ('Question 2: Ben Toms, RBC ... My number's around ten and a half billion'). Same pattern verified for claim-052.",
+      "recommendation": "None for this run. If the segmenter is revisited, splitting analyst questions into their own segments would remove the apparent speaker mismatch."
+    }
+  ],
+  "outlook_findings": [
+    {
+      "severity": "medium",
+      "artifact": "outlook-brief.md",
+      "passage": "A second upside path is faster-than-guided delivery on the further £2 billion of 2027-2030 gross cost saves [claim-037], which management said it would \"out-deliver\" and return to shareholders if capacity allowed, rather than reinvest into higher costs [claim-034]",
+      "evidence": "The quoted commitment is real -- Charlie Nunn says it in seg-0012: 'If we can out-deliver, we will out-deliver, and then we'll go back to the framework that William always lays out around if we have additional capital, we'll look at the alternatives ... distributing to our shareholders is an important way that we think we add value.' But it is nowhere in claims.json: no claim covers seg-0012. The id the brief attaches to it, claim-034, is the 2030 RoTE/capital-generation target ('We're targeting a RoTE of circa 20% and more than 225 basis points of capital generation in 2030') and says nothing about out-delivering cost saves or about returning versus reinvesting. Python's citation check passes because the id resolves; the inference does not trace to it. The same unanchored quotation is repeated in Section 8: 'Progress of the £2 billion 2027-2030 gross cost-save programme against the \"out-deliver, then return to shareholders\" framing [claim-034][claim-037]'.",
+      "recommendation": "Add a claim quoting seg-0012 (Charlie Nunn, 'If we can out-deliver, we will out-deliver...') and cite that claim in Sections 6 and 8 in place of claim-034, or delete the quoted commitment and rest the second upside path on claim-037 alone."
+    },
+    {
+      "severity": "medium",
+      "artifact": "outlook-brief.md",
+      "passage": "Management explicitly declined to quantify AI's revenue and cost contribution to the 2027-2030 targets beyond a narrowly defined in-year 2026 benefit figure disclosed only qualitatively on this call, deferring a fuller AI framework to the January 2027 year-end results (see Section 9) — this is a genuine gap in an otherwise fully quantified guidance set, not an oversight on our part.",
+      "evidence": "Two problems. First, this is a material assertion about what management said, made in Section 3 and repeated at the head of Section 9 ('Management declined to give a full 2030 AI revenue/cost quantification, citing uncertainty over customer adoption and regulatory approval...'), with no claim citation at either place -- no claim in claims.json covers seg-0014 or seg-0036, the two segments that actually contain it. Second, 'disclosed only qualitatively' is wrong: in seg-0036 Nunn gives the figure, 'we would stay focused for now on delivering the 100 million in year benefit for a narrow definition of AI', and separately quantifies the earlier November framing at '70% of the revenue was linked to digital and AI, and 60% of our gross cost saves'. The benefit was narrowly scoped, not unquantified. The deferral itself is accurate ('We'll have a discussion next year at the year-end results in January').",
+      "recommendation": "Add claims for the seg-0036 deferral and the £100 million in-year AI benefit, cite them in Sections 3, 8 and 9, and change 'disclosed only qualitatively on this call' to state the £100 million narrow-definition figure that was in fact given."
+    },
+    {
+      "severity": "medium",
+      "artifact": "outlook-brief.md",
+      "passage": "The observable indicator would be the quarterly hedge yield print (last given as trending toward the 3.7% refinancing rate [claim-047]) failing to compress even as market rates hold",
+      "evidence": "claim-047 establishes only that the plan assumes a 3.7% hedge refinancing rate and that the market is at least 50bps above it. 3.7% is a forward-looking reinvestment assumption for the 2027-2030 plan (seg-0005: 'Our expectations for the reinvestment on our hedge are predicated upon this assumption and average around 3.7% over the period'), not an observed print. Nothing in claims.json or in the transcript reports a 'quarterly hedge yield print ... last given as trending toward 3.7%'. The upside case's stated confirming indicator is therefore built on a disclosure this run does not contain, and it also inverts the logic -- a realised yield converging on 3.7% would confirm the plan assumption, not the upside. The same claim id is stretched again in Section 8, where it is cited for 'hedge notional growth versus the \"pretty modest\" guidance'; that phrase comes from seg-0011 but is not in claim-047's text or quote.",
+      "recommendation": "Drop the parenthetical 'last given as trending toward the 3.7% refinancing rate', or replace it with what claim-047 does support (realised reinvestment yields printing above the 3.7% plan assumption). Add a claim for the 'pretty modest notional growth' statement in seg-0011 if Section 8 is to keep monitoring it."
+    },
+    {
+      "severity": "low",
+      "artifact": "outlook-brief.md",
+      "passage": "margin compression could outpace the structural hedge tailwind earlier than the \"broad plateau, maybe coming off a touch\" NIM path management described for the back half of the plan",
+      "evidence": "The paraphrase is faithful to seg-0045 ('we do expect that NIM to broadly plateau, maybe even at the later end of the plan, come off a little bit ... broad stability, maybe even coming off a touch towards right at the end of it'), but no claim in claims.json covers seg-0045, and the sentence carries no citation. The same applies to the 'progressively more, second half of the plan' cost-save maturation pattern later in Section 7, which comes from seg-0015 and is likewise uncited. The downside case's central benchmark is thus verifiable only by going back to the raw transcript, which is what the claims layer exists to prevent.",
+      "recommendation": "Add claims for the seg-0045 NIM-path guidance and the seg-0015 cost-save maturation comment, and cite them in Section 7."
+    },
+    {
+      "severity": "low",
+      "artifact": "outlook-brief.md",
+      "passage": "The 2028 RoTE guidance of \"more than 18%\" was explicitly flagged by an analyst as light versus consensus expectations, and management's response leaned heavily on the assumptions being conservative rather than disputing the comparison [claim-047][claim-048]",
+      "evidence": "Round 1's finding is only half-addressed. claim-059 now records that Chalmers also argued 'it is a higher RoTE, but on a higher equity base', and Section 9 surfaces it -- but Section 2 still tells the reader management did not dispute the comparison, which claim-059 contradicts, and Section 9 flags this itself ('informative but incomplete in this brief's earlier sections') rather than the earlier section being corrected. Separately, claim-048 (around 3% cost growth over the new plan, from seg-0009) is cited here and in Section 1 for the conservatism argument, but it is a cost-growth guidance claim from a different question and supports neither the conservatism characterisation nor the consensus exchange.",
+      "recommendation": "Amend the Section 2 sentence to note the equity-base rebuttal and cite claim-059 there, and drop claim-048 from the conservatism citations in Sections 1 and 2."
+    },
+    {
+      "severity": "low",
+      "artifact": "outlook-brief.md",
+      "passage": "net interest margin rose to 322bps in Q2 from 319bps for H1",
+      "evidence": "Period-comparison error of the kind Python cannot catch: both numbers are grounded in claim-017, but 319bps is the H1 average, which already contains Q2's 322bps -- it is not an earlier period the margin rose from. The real sequential move is +5bps in the quarter (claim-017: 'a second quarter margin of 322 basis points up five basis points in the quarter'), implying a Q1 figure around 317bps. As written the sentence presents a within-period average as a prior-period baseline.",
+      "recommendation": "Rewrite as 'net interest margin was 319bps for H1, with the Q2 margin at 322bps, up 5bps quarter on quarter [claim-017]'."
+    },
+    {
+      "severity": "low",
+      "artifact": "outlook-brief.md",
+      "passage": "cost:income ratio of 50.4% for H1 and 49% in Q2, already inside the below 50 percent full-year guidance band [claim-005][claim-022]",
+      "evidence": "The trailing clause attaches to both figures as written, but 50.4% (claim-022, H1) is above the sub-50% band, not inside it; only the 49% Q2 figure (claim-005) is. claim-005's own text is careful about this ('the Q2 cost income ratio at 49% was in line with our guidance'), so the imprecision is introduced by the brief.",
+      "recommendation": "Attach the guidance-band clause to the Q2 figure only, e.g. 'cost:income ratio of 50.4% for H1, with Q2 at 49%, already inside the below-50% full-year guidance band'."
+    },
+    {
+      "severity": "info",
+      "artifact": "outlook-brief.md",
+      "passage": "structural hedge income could land above the greater than £9 billion 2030 framing management gave [claim-056] ... an analyst put a higher mark-to-market estimate against 2030 hedge income than management's guidance [claim-057], and William Chalmers' response implied that running market-implied rates through the current hedge notional lands close to that higher analyst figure [claim-058]",
+      "evidence": "Round 1's high-severity finding is properly resolved. The 2030 hedge-income guidance is now in claims.json (claim-056), listed in the Section 3 guidance set, and the Section 6 upside case is re-anchored on it rather than on the 2027 £8 billion figure. Section 9's 'cannot be quantified from this run's evidence' statement has been narrowed to the RoTE-versus-consensus gap, where it is now true -- neither claim-047 nor claim-059 states an as-modelled RoTE. The chain conditions (market rates above 3.5%/3.7%) to mechanism (market rates applied to the £246bn notional) to consequence (hedge income above £9bn) traces to claims 045, 047, 056, 057 and 058, and the brief correctly stops short of asserting the £10.5bn figure as management's own number, matching claim-058's hedged wording.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "signal-card.md",
+      "passage": "n/a",
+      "evidence": "Cross-sector appropriateness: every category and metric in the signal card and the brief is banking-native -- net interest margin, structural hedge income, asset quality ratio, RWA optimisation, CET1, cost:income, capital generation in basis points. No subscription, churn, bookings, backlog, same-store or other imported-template language appears in either file. The peer set (Barclays, Standard Chartered) is sector-appropriate.",
+      "recommendation": "None."
+    }
+  ],
+  "process_findings": [
+    {
+      "severity": "info",
+      "artifact": "validation.json",
+      "passage": "n/a",
+      "evidence": "validation.json.ok == true, checked_claims == 60, issues == [] and warnings == [] -- confirmed present, not re-derived. Its input_hashes block binds claims.json, transcript.jsonl, financials.json, manifest.json and evidence/web-evidence.jsonl, and its claims.json hash matches the one recorded in outlook-validation.json. All 60 claims carry non-empty ids, running claim-001 to claim-060 with no gaps or duplicates.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "outlook-validation.json",
+      "passage": "n/a",
+      "evidence": "outlook-validation.json exists with ok == true, errors == [], and carries both hash bindings (outlook_brief_sha256 e3f4a4d4..., claims_sha256 f3012e20...). Both were copied verbatim into this report as the receipt for the bytes reviewed. outlook-brief.md and signal-card.md are both present, and manifest.json exists with every source hashed (transcript PDF plus converted markdown, 200 raw web hit files, and 15 evidence/web/*.md files).",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "injection-scan.json",
+      "passage": "n/a",
+      "evidence": "Prompt-injection scan is clean, not skipped: pattern_count == 25, finding_count == 0, findings == []. There were no flagged hits to judge in transcript context, so no false-positive assessment was required this round.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "review-diff.json",
+      "passage": "\"auto_escalated\": true",
+      "evidence": "review-diff.json was read first, as required for round 2. It reports round_number 2, since_round 1, previous_verdict 'fail', previous_finding_count 20, six claims changed (claim-055 reworded; claim-056 to claim-060 added), affected_brief_sections [3, 6, 7, 9, 10], and auto_escalated true because the claim-change count exceeded the threshold of 3, conclusion-bearing sections 6 and 7 cite changed claims, and outlook-brief.md's prose changed. review_mode is therefore set to 'full' and the whole bundle was re-reviewed independently rather than only the diff. Its SHA-256 was copied verbatim from the review-diff.sha256 sidecar.",
+      "recommendation": "None."
+    }
+  ],
+  "unverified_items": [
+    "evidence/financials.json is an empty object ({}), so no SEC-derived facts exist for this run. The remit's cross-check of a claim's stated period against a structured fact's period_type/start/end could not be performed for any claim; period labelling was judged against the transcript's own cues only. This is expected for a UK issuer without XBRL facts in this pipeline, not a defect in the run.",
+    "Only the two web-evidence files actually cited by claims (web-013, web-015) were read in full. The other thirteen evidence/web/*.md files, and the 200 raw/web/query-NN-hit-NN.json envelopes, were not opened -- none is referenced by any claim or by outlook-brief.md, so nothing in the finished artifacts depends on them.",
+    "The £100 million in-year AI benefit and the January year-end deferral (seg-0036) were verified against the transcript, but I could not verify them against any claim because no claim covers that segment -- see the medium outlook finding on Section 3."
+  ],
+  "summary": "No high or critical findings, so the run may proceed with warnings. Round 1's blocking finding is genuinely fixed: the 2030 structural-hedge guidance of more than £9 billion is now claim-056, it appears in the Section 3 guidance set, the Section 6 upside case is anchored on it plus the analyst's mark-to-market estimate (claim-057) and Chalmers' response (claim-058), and Section 9's 'cannot be quantified' statement has been narrowed to the RoTE-versus-consensus gap where it is now true. claim-055 no longer implies a Lloyds consensus beat and now names each metric explicitly, the RWA-optimisation overclaim in Sections 2 and 5 is gone, and the equity-base rebuttal (claim-059) and the £200 million remediation assumption (claim-060) are both surfaced as counter-evidence. Three medium findings remain, and they share one root cause: material management statements that are accurate against the transcript but have no claim anchoring them, so the brief either leaves them uncited or attaches an unrelated claim id that Python's citation check passes because the id merely resolves. The Section 6 and 8 'out-deliver, then return to shareholders' quotation is Charlie Nunn's from seg-0012 but is cited to claim-034, the 2030 RoTE target, which says nothing of the kind. The AI-quantification deferral is asserted twice with no citation at all, and it mischaracterises the disclosure -- management did give a figure, the £100 million narrow-definition in-year benefit in seg-0036, whereas the brief says it was disclosed only qualitatively. The Section 6 monitoring indicator invents a 'quarterly hedge yield print last given as trending toward the 3.7% refinancing rate' that no claim or transcript line contains; 3.7% is a forward plan assumption, not an observed print. Six lower findings follow, including an uncited NIM path in the downside case, Section 2 still describing management's RoTE answer as pure appeal-to-conservatism while claim-059 contradicts it, a within-period NIM baseline presented as a prior period, and inconsistent quarterly-flow period labels across claims 011, 014 and 015. Source correctness, temporal integrity and process compliance are clean: both peer sources are genuine and pre-event, the post-event NatWest and HSBC files are archived but unused, validation.json and outlook-validation.json are both ok == true, the injection scan is empty, and neither the signal card nor the brief shows cross-sector template drift."
+}

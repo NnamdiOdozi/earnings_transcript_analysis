@@ -206,3 +206,8 @@ output/
 # Archived pipeline runs (superseded copies moved aside on re-prepare) -- not tracked;
 # the prior states already live in git history.
 runs/**/_archive/
+
+# sharing docs and outputs
+sharing/
+
+TEMP.md

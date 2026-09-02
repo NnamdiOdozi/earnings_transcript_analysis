@@ -1,11 +1,12 @@
 {
-  "url": "https://www.sc.com/en/uploads/sites/66/content/docs/standard-chartered-plc-q1-2026-press-release.pdf",
-  "title": "Q1 2026 Press Release Standard Chartered",
+  "url": "https://www.fool.com/earnings/call-transcripts/2026/08/07/natwest-nwg-q2-2026-earnings-call-transcript/",
+  "title": "NatWest (NWG) Q2 2026 Earnings Call Transcript",
   "score": null,
-  "published_date": null,
+  "published_date": "2026-08-07T00:00:00.000Z",
   "_class": "peer",
-  "_select_key": "peer:Standard Chartered",
+  "_select_key": "peer:NatWest Group",
+  "_temporal_status": "unchecked",
   "_provider": "exa",
-  "_query": "Standard Chartered 2026-h1 earnings results revenue growth",
-  "_retrieved_at": "2026-08-28T08:19:11Z"
+  "_query": "NatWest Group earnings call key trends 2026-h1",
+  "_retrieved_at": "2026-09-01T22:03:55Z"
 }

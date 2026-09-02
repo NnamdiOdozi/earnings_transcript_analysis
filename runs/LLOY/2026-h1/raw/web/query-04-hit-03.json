@@ -1,11 +1,12 @@
 {
-  "url": "https://www.lse.co.uk/rns/natwest-group-plc-q1-results-2026-s0hmw4t66wxujgg.html",
-  "title": "NatWest Group plc Q1 Results 2026 | Regulatory News",
+  "url": "https://www.lloydsbankinggroup.com/insights/how-is-lloyds-banking-group-performing-2026.html",
+  "title": "How is Lloyds Banking Group performing in 2026?",
   "score": null,
-  "published_date": null,
-  "_class": "peer",
-  "_select_key": "peer:NatWest Group",
+  "published_date": "2026-07-30T00:00:00.000Z",
+  "_class": "consensus",
+  "_select_key": "consensus",
+  "_temporal_status": "unchecked",
   "_provider": "exa",
-  "_query": "NatWest Group 2026-h1 earnings results revenue growth",
-  "_retrieved_at": "2026-08-28T08:19:05Z"
+  "_query": "Lloyds Banking Group plc LLOY 2026-h1 earnings guidance outlook estimates",
+  "_retrieved_at": "2026-09-01T22:03:50Z"
 }

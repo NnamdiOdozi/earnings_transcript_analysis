@@ -1,11 +1,12 @@
 {
-  "url": "https://stockanalysis.com/quote/lon/LLOY/forecast/",
-  "title": "Lloyds Banking Group (LON:LLOY) Stock Forecast & Price Targets",
+  "url": "https://markets.investorschronicle.markitdigital.com/data/equities/tearsheet/forecasts?s=LLOY%3ALSE",
+  "title": "Lloyds Banking Group plc (LLOY:LSE) Share price, analysis, charts, news, dividends, EPS forecasts, annual reports and RNS - Investors Chronicle",
   "score": null,
   "published_date": null,
   "_class": "consensus",
   "_select_key": "consensus",
+  "_temporal_status": "unchecked",
   "_provider": "exa",
   "_query": "Lloyds Banking Group plc LLOY 2026-h1 analyst consensus estimate revenue EPS",
-  "_retrieved_at": "2026-08-28T08:19:00Z"
+  "_retrieved_at": "2026-09-01T22:03:46Z"
 }

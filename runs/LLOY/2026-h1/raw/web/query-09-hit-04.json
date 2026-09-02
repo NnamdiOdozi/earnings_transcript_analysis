@@ -1,11 +1,12 @@
 {
-  "url": "https://markets.ft.com/data/announce/detail?dockey=600-202607300225DGAP____CORPNEWS_corporate_2374012_en-1",
-  "title": "EQS-News: 2026 half year results \u2013 Company Announcement - FT.com",
+  "url": "https://tradevae.com/news/stock-markets/natwest-shares-jump-after-strong-h1-2026-results-and-accelerated-capital-returns/",
+  "title": "NatWest Shares Jump After Strong H1 2026 Results and Accelerated Capital Returns",
   "score": null,
-  "published_date": null,
+  "published_date": "2026-07-31T00:00:00.000Z",
   "_class": "peer",
-  "_select_key": "peer:HSBC Holdings",
+  "_select_key": "peer:NatWest Group",
+  "_temporal_status": "unchecked",
   "_provider": "exa",
-  "_query": "HSBC Holdings quarterly results versus Lloyds Banking Group plc LLOY",
-  "_retrieved_at": "2026-08-28T08:19:10Z"
+  "_query": "NatWest Group 2026-h1 analyst earnings reaction results",
+  "_retrieved_at": "2026-09-01T22:03:54Z"
 }

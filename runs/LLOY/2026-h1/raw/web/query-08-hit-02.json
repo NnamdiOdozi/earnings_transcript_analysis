@@ -1,11 +1,12 @@
 {
-  "url": "https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2026/interim/pdfs/hsbc-holdings-plc/260804-hsbc-holdings-plc-interim-results-2026-media-release.pdf",
-  "title": "Interim Results 2026 media release",
+  "url": "https://www.stocktitan.net/sec-filings/NWG/6-k-nat-west-group-plc-current-report-foreign-issuer-66711cbd7661.html",
+  "title": "NatWest Group posts \u00a33.0bn profit in H1 2026 | NWG SEC Filing - Form 6-K",
   "score": null,
-  "published_date": null,
+  "published_date": "2026-07-31T00:00:00.000Z",
   "_class": "peer",
-  "_select_key": "peer:HSBC Holdings",
+  "_select_key": "peer:NatWest Group",
+  "_temporal_status": "unchecked",
   "_provider": "exa",
-  "_query": "HSBC Holdings 2026-h1 earnings results revenue growth",
-  "_retrieved_at": "2026-08-28T08:19:09Z"
+  "_query": "NatWest Group 2026-h1 earnings guidance outlook",
+  "_retrieved_at": "2026-09-01T22:03:54Z"
 }

@@ -1,11 +1,12 @@
 {
-  "url": "https://www.investegate.co.uk/announcement/rns/lloyds-bank-plc--88cs/2026-half-year-results/9696393",
-  "title": "2026 half year results | Company Announcement | Investegate",
+  "url": "https://www.hl.co.uk/shares/share-research/natwest-q2-results-solid-buybacks-pulled-forward",
+  "title": "NatWest (Q2 Results): solid, buybacks pulled forward | HL",
   "score": null,
-  "published_date": "2026-07-30T00:00:00.000Z",
+  "published_date": "2026-07-31T00:00:00.000Z",
   "_class": "peer",
-  "_select_key": "peer:HSBC Holdings",
+  "_select_key": "peer:NatWest Group",
+  "_temporal_status": "unchecked",
   "_provider": "exa",
-  "_query": "HSBC Holdings quarterly results versus Lloyds Banking Group plc LLOY",
-  "_retrieved_at": "2026-08-28T08:19:10Z"
+  "_query": "NatWest Group 2026-h1 analyst earnings reaction results",
+  "_retrieved_at": "2026-09-01T22:03:54Z"
 }

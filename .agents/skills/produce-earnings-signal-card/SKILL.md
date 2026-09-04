@@ -56,6 +56,19 @@ guaranteed before proceeding.
    `reference/extraction-instructions.md` "Citing web evidence"). Copy every quote,
    do not retype it. Do not use sector-specific vocabulary that isn't the company's
    own — discover what matters from its disclosures, not from a fixed KPI list.
+   If you hit a genuine gap the transcript/SEC/web evidence can't fill (e.g. you
+   need a price series), `src/earnings/prices.py` has three functions available
+   at your discretion, not part of `prepare`/`analyze`. Default to
+   `get_price_series(ticker, run_dir=...)` (Yahoo Finance, free, no API key) for
+   a plain price query; reach for `get_price_series_fmp(ticker, days=365,
+   run_dir=...)` or `get_price_series_alpha_vantage(ticker, compact=True,
+   run_dir=...)` specifically when Yahoo has no data for the symbol, or you need
+   something those two providers offer beyond price. All three return daily
+   OHLCV as `{date, open, high, low, close, volume}` dicts. Always pass
+   `run_dir=runs/<TICKER>/<EVENT_ID>` (this run's own directory) so the call —
+   request and full response, API key redacted — is logged into this run's own
+   `price_lookups.jsonl`, not just the cross-run
+   `logs/price_lookups.jsonl`.
 
 4. **Optionally discover company-defined metrics.** If the transcript supports it,
    also write `runs/<TICKER>/<EVENT_ID>/metrics.json` per

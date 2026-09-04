@@ -78,6 +78,10 @@ REVIEW_DIFF_SHA256_FILENAME = "review-diff.sha256"
 # --- Cross-run processing log (repo root, not per-run -- see cli._append_processing_log) ---
 LOGS_DIR = Path("logs")
 PROCESSING_LOG_FILENAME = "processing_log.jsonl"
+# Agent-discretionary price-series lookups (prices.py) log here cross-run, and
+# additionally under the same filename inside a run directory when the caller
+# passes run_dir -- same dual pattern as this file vs. a run's own manifest.json.
+PRICE_LOOKUP_LOG_FILENAME = "price_lookups.jsonl"
 
 # --- Extractor lessons memory (repo root, not per-run) ---
 # Append-only, deduplicated one-line process lessons proposed by the reviewer and

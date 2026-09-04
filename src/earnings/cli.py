@@ -1190,6 +1190,34 @@ def cmd_validate_outlook(args: argparse.Namespace) -> int:
     return 0
 
 
+def _persist_extractor_lessons(proposed_lessons: list[str]) -> None:
+    """Append new, deduplicated one-line lessons to config.EXTRACTOR_LESSONS_PATH.
+
+    Append-only: existing lines are never rewritten or reordered. Dedup is exact-string
+    match against lines already in the file, so re-accepting an already-snapshotted
+    review round (or two rounds proposing the same lesson) does not create duplicates.
+    """
+    if not proposed_lessons:
+        return
+    path = config.EXTRACTOR_LESSONS_PATH
+    path.parent.mkdir(parents=True, exist_ok=True)
+    existing = set()
+    if path.is_file():
+        existing = {line.strip() for line in path.read_text(encoding="utf-8").splitlines() if line.strip()}
+    new_lines = [f"- {lesson.strip()}" for lesson in proposed_lessons if f"- {lesson.strip()}" not in existing]
+    if not new_lines:
+        return
+    with path.open("a", encoding="utf-8") as f:
+        if not existing:
+            f.write("# Extractor lessons\n\n")
+            f.write(
+                "Process guidance only, proposed by the outlook-reviewer and persisted by "
+                "`earnings check-review`. Never facts, quotes, or numbers -- see "
+                "produce-earnings-signal-card/SKILL.md.\n\n"
+            )
+        f.write("\n".join(new_lines) + "\n")
+
+
 def cmd_check_review(args: argparse.Namespace) -> int:
     """Gate the Outlook_Reviewer subagent's review-report.json: it must exist
     (written by the subagent, never by this command -- semantic judgment isn't
@@ -1336,6 +1364,11 @@ def cmd_check_review(args: argparse.Namespace) -> int:
         for issue in issues:
             print(f"  {issue.check}: {issue.message}")
         return 2
+
+    # Report is now structurally accepted (any verdict) -- persist any new proposed
+    # lessons regardless of pass/fail, same as the checks above already ran regardless
+    # of verdict. Dedup means re-accepting an already-snapshotted round is harmless.
+    _persist_extractor_lessons(report.proposed_lessons)
 
     if repeated_accepted_bundle:
         print(f"Review round {completed_rounds} was already accepted; no new snapshot written.")

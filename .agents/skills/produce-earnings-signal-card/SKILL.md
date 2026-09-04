@@ -25,18 +25,25 @@ disclose that provenance in the final report.
 
 Correcting the current run's `claims.json` or `metrics.json` after a failed
 deterministic validation is not prior-run reuse; it is the normal attempt loop in
-steps 4–5 below. If prior outputs have already been exposed in the active agent's
+steps 6–7 below. If prior outputs have already been exposed in the active agent's
 context and the user requires an independent fresh extraction, use a fresh-context
 agent when available. Otherwise, disclose that strict independence cannot be
 guaranteed before proceeding.
 
 ## Stage 1: evidence extraction
 
-1. **Load the pack.** Read `runs/<TICKER>/<EVENT_ID>/normalized/transcript.jsonl`
+1. **Read past lessons, if any.** If `.agents/memory/extractor-lessons.md` exists,
+   read it before extracting. It holds one-line process lessons the reviewer has
+   flagged as generalizable mistakes from prior runs — how to check your own work,
+   never facts, quotes, or numbers to reuse. This is not the "fresh extraction"
+   rule being relaxed: you still extract this run's claims from this run's evidence
+   only; the lessons just tell you what to watch for while doing so.
+
+2. **Load the pack.** Read `runs/<TICKER>/<EVENT_ID>/normalized/transcript.jsonl`
    (one JSON segment per line: `id`, `section`, `speaker`, `text`) and
    `evidence/financials.json` if present.
 
-2. **Extract claims.** Follow `reference/extraction-instructions.md` for the generic
+3. **Extract claims.** Follow `reference/extraction-instructions.md` for the generic
    (industry-agnostic) categories, classification taxonomy, and how to write exact
    quotes and calculation blocks. Write the result as
    `runs/<TICKER>/<EVENT_ID>/claims.json`, an array of claim objects matching
@@ -50,12 +57,21 @@ guaranteed before proceeding.
    do not retype it. Do not use sector-specific vocabulary that isn't the company's
    own — discover what matters from its disclosures, not from a fixed KPI list.
 
-3. **Optionally discover company-defined metrics.** If the transcript supports it,
+4. **Optionally discover company-defined metrics.** If the transcript supports it,
    also write `runs/<TICKER>/<EVENT_ID>/metrics.json` per
    `reference/extraction-instructions.md`'s Metric section — every metric must cite
    at least one real claim id.
 
-4. **Validate.** Run:
+5. **Self-check before validating.** Reread your own `claims.json` once, end to
+   end, before running `earnings analyze`. This is a cheap self-critique pass, not
+   a re-extraction: look specifically for speaker attribution errors (an analyst's
+   question misattributed as a management statement), period-basis errors
+   (quarterly vs. year-to-date/half-year figures conflated), and claims whose
+   `claim_text` doesn't actually match what its cited `quote` says in context, not
+   just that the quote text exists. Fix anything you find yourself; Python's
+   validators below check groundedness, not these judgment errors.
+
+6. **Validate.** Run:
 
    ```bash
    uv run earnings analyze --ticker <TICKER> --event-id <EVENT_ID>
@@ -68,21 +84,21 @@ guaranteed before proceeding.
    `metrics.json`, validation result, and receipt. Do not delete or rewrite an old
    attempt when correcting the current files.
 
-5. **If validation fails:** the command exits non-zero and does **not** write
+7. **If validation fails:** the command exits non-zero and does **not** write
    `signal-card.md`. Read `validation.json`, fix the offending claims/metrics
    (correct the quote, drop an unsupported number, fix a calculation block, add a
-   missing citation), and re-run step 4. Do not hand-edit `signal-card.md` directly
+   missing citation), and re-run step 6. Do not hand-edit `signal-card.md` directly
    and do not bypass a failed validation by writing the card yourself. The rerun
    becomes the next attempt folder; prior failures remain available for analysis.
 
-6. **If validation passes:** `signal-card.md` is written automatically, grouped by
+8. **If validation passes:** `signal-card.md` is written automatically, grouped by
    category, following `reference/signal-card-template.md`.
 
 ## Stage 2: outlook synthesis
 
 Only start this stage once Stage 1's `earnings analyze` has passed.
 
-7. **Write `outlook-brief.md`.** Follow `reference/outlook-brief-template.md`'s
+9. **Write `outlook-brief.md`.** Follow `reference/outlook-brief-template.md`'s
    default structure and freedom envelope. This is interpretive synthesis
    (base/upside/downside cases, what to monitor) — you write it directly, Python
    does not generate it, and you're expected to rank, compare, and draw new
@@ -90,7 +106,7 @@ Only start this stage once Stage 1's `earnings analyze` has passed.
    id you cite must exist in this run's `claims.json`, and every material number you
    introduce must be grounded in a claim cited alongside it.
 
-8. **Validate the brief.** Run:
+10. **Validate the brief.** Run:
 
    ```bash
    uv run earnings validate-outlook --ticker <TICKER> --event-id <EVENT_ID>
@@ -100,9 +116,9 @@ Only start this stage once Stage 1's `earnings analyze` has passed.
    doesn't resolve, or if a material number isn't grounded in a claim cited
    alongside it. Fix and re-run until it passes.
 
-9. **Report back to the user** the run directory path and a brief summary of both
-   `signal-card.md` (evidence appendix) and `outlook-brief.md` (the forward-looking
-   read).
+11. **Report back to the user** the run directory path and a brief summary of both
+    `signal-card.md` (evidence appendix) and `outlook-brief.md` (the forward-looking
+    read).
 
 ## Reference files
 

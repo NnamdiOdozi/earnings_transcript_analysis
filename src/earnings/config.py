@@ -79,6 +79,13 @@ REVIEW_DIFF_SHA256_FILENAME = "review-diff.sha256"
 LOGS_DIR = Path("logs")
 PROCESSING_LOG_FILENAME = "processing_log.jsonl"
 
+# --- Extractor lessons memory (repo root, not per-run) ---
+# Append-only, deduplicated one-line process lessons proposed by the reviewer and
+# persisted by cli.cmd_check_review once review-report.json passes validate_review_report.
+# Read (not written) by the produce-earnings-signal-card skill before extraction. See
+# models.ReviewReport.proposed_lessons.
+EXTRACTOR_LESSONS_PATH = Path(".agents/memory/extractor-lessons.md")
+
 # --- SEC endpoints (data.sec.gov requires a compliant identifying User-Agent) ---
 SEC_SUBMISSIONS_URL = "https://data.sec.gov/submissions/CIK{cik:010d}.json"
 SEC_COMPANY_FACTS_URL = "https://data.sec.gov/api/xbrl/companyfacts/CIK{cik:010d}.json"

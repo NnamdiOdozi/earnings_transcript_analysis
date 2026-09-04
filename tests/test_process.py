@@ -101,6 +101,45 @@ def test_segment_transcript_splits_prepared_and_qa():
     assert ids[0] == "seg-0001"
 
 
+def test_segment_transcript_detects_non_ascii_speaker_names():
+    # Regression (confirmed live, SBRY/q1-2627, 2026-09-04): a speaker name with a
+    # non-ASCII letter (e.g. "Bláthnaid") previously fell outside
+    # _SPEAKER_NAME_PATTERN's ASCII-only continuation-char class, so the header line
+    # was never recognised as a new speaker -- her turn was silently merged into the
+    # PRECEDING speaker's segment instead of being attributed to her.
+    raw = (
+        "Simon Roberts: Thanks, Matt.\n"
+        "Bláthnaid Bergin: Hi Matt.\n"
+        "François Digard, Kepler Cheuvreux: Thank you for the question.\n"
+    )
+    sanitized = sanitize(raw, is_html=False)
+    segments = segment_transcript(sanitized)
+    speakers = [s.speaker for s in segments]
+    assert "Bláthnaid Bergin" in speakers
+    assert "François Digard, Kepler Cheuvreux" in speakers
+    blathnaid_seg = next(s for s in segments if s.speaker == "Bláthnaid Bergin")
+    assert blathnaid_seg.text == "Hi Matt."
+
+
+def test_segment_transcript_admits_multiword_name_and_affiliation():
+    # Regression (confirmed live, SBRY/q1-2627, 2026-09-04): a 3-word name + 3-word
+    # affiliation ("Xavier Le Mené, Bank of America" = 6 words) tripped the old
+    # >5-word reject guard meant to catch ordinary sentences with a colon in them
+    # (e.g. "Note: revenue grew"), silently merging the turn into the PRECEDING
+    # speaker. Guard raised to 10 words / 100 chars -- still well short of an
+    # ordinary sentence, but with headroom for name + multi-word title + firm.
+    raw = (
+        "Simon Roberts: Hello, Xavier.\n"
+        "Xavier Le Mené, Bank of America: Thank you for taking my question.\n"
+    )
+    sanitized = sanitize(raw, is_html=False)
+    segments = segment_transcript(sanitized)
+    speakers = [s.speaker for s in segments]
+    assert "Xavier Le Mené, Bank of America" in speakers
+    seg = next(s for s in segments if s.speaker == "Xavier Le Mené, Bank of America")
+    assert seg.text == "Thank you for taking my question."
+
+
 def test_segment_transcript_qa_boundary_resets_speaker():
     # Regression: unlabelled lines immediately after the Q&A boundary must not
     # inherit the last prepared-remarks speaker (process.py segment_transcript).

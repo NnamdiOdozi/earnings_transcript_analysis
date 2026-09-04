@@ -141,7 +141,18 @@ types.
 ## Known limitations
 
 - **Speaker-label detection** is a line-start heuristic; unconventional
-  transcript formatting may leave `speaker` as `null`.
+  transcript formatting may leave `speaker` as `null`. Names may contain any
+  Unicode letter (fixed 2026-09-04: previously ASCII-only, so e.g. "Bláthnaid
+  Bergin" was invisible to the detector and her turns were silently merged into
+  the preceding speaker's segment -- see `process._SPEAKER_NAME_PATTERN`), but
+  the FIRST letter of each word is still restricted to ASCII or Latin-1
+  Supplement uppercase (no `\p{Lu}` in stdlib `re`). A "Name, Affiliation"
+  header is rejected outright if the combined word count exceeds 10 or its
+  length exceeds 100 characters (raised 2026-09-04 from 5 words/60 chars after
+  a 3-word name + 3-word affiliation, "Xavier Le Mené, Bank of America", tripped
+  the old limit). Both residual cases fail loudly (the turn merges into the
+  previous speaker, not a crash) rather than silently fabricating an
+  attribution.
 - **Q&A boundary detection** relies on marker phrases (e.g.
   "question-and-answer session"); transcripts without such a marker are
   treated as entirely "prepared."

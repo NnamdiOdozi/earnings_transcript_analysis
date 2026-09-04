@@ -26,6 +26,7 @@ def isolated_runs_dir(tmp_path, monkeypatch):
     """
     monkeypatch.setattr(config, "RUNS_DIR", tmp_path / "runs")
     monkeypatch.setattr(config, "LOGS_DIR", tmp_path / "logs")
+    monkeypatch.setattr(config, "EXTRACTOR_LESSONS_PATH", tmp_path / "extractor-lessons.md")
     monkeypatch.setattr(config, "RESEARCH_SEC_ENABLED", False)
     monkeypatch.setattr(config, "RESEARCH_WEB_SEARCH_ENABLED", False)
     yield tmp_path / "runs"
@@ -1131,6 +1132,50 @@ def test_check_review_escalate_full_review_returns_3_regardless_of_verdict(isola
     _write_review_report(run_dir, review_report)
     assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 3
     assert (run_dir / config.REVIEW_REPORT_MD_FILENAME).exists()
+
+
+def test_check_review_persists_proposed_lessons_deduplicated(isolated_runs_dir):
+    """proposed_lessons on an accepted review-report.json land in the repo-root
+    extractor-lessons memory file, appended once and deduplicated across runs."""
+    run_dir = _seed_validated_run(isolated_runs_dir)
+    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text("# Outlook\n\nStrong [claim-001].\n")
+    assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
+    review_report = {
+        "verdict": "pass",
+        "reviewed_at": "2026-08-27T00:00:00Z",
+        "model": "opus",
+        "source_checks": [],
+        "claim_findings": [],
+        "outlook_findings": [],
+        "process_findings": [],
+        "unverified_items": [],
+        "summary": "Clean run.",
+        "escalate_full_review": False,
+        "proposed_lessons": ["Verify quarterly vs YTD periods before creating financial claims."],
+    }
+    _write_review_report(run_dir, review_report)
+    assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
+
+    lessons_path = config.EXTRACTOR_LESSONS_PATH
+    assert lessons_path.is_file()
+    first_contents = lessons_path.read_text(encoding="utf-8")
+    assert "Verify quarterly vs YTD periods before creating financial claims." in first_contents
+
+    # A second run proposing the same lesson (plus a new one) must not duplicate the first.
+    run_dir_2 = _seed_validated_run(isolated_runs_dir, ticker="MSFT")
+    (run_dir_2 / config.OUTLOOK_BRIEF_FILENAME).write_text("# Outlook\n\nStrong [claim-001].\n")
+    assert main(["validate-outlook", "--ticker", "MSFT", "--event-id", "2026-q2"]) == 0
+    review_report_2 = dict(review_report)
+    review_report_2["proposed_lessons"] = [
+        "Verify quarterly vs YTD periods before creating financial claims.",
+        "Do not treat analyst questions as management statements.",
+    ]
+    _write_review_report(run_dir_2, review_report_2)
+    assert main(["check-review", "--ticker", "MSFT", "--event-id", "2026-q2"]) == 0
+
+    final_contents = lessons_path.read_text(encoding="utf-8")
+    assert final_contents.count("Verify quarterly vs YTD periods before creating financial claims.") == 1
+    assert "Do not treat analyst questions as management statements." in final_contents
 
 
 def test_analyze_blocked_by_unclosed_review_report(isolated_runs_dir):

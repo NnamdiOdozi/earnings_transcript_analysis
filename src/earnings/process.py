@@ -33,7 +33,20 @@ from .models import Segment
 # Speaker label heuristics: "Name — Title:", "Name:", or "Name, Company:".
 # Deliberately conservative -- only fires on short, title-cased leading tokens
 # followed by a colon, to avoid mis-detecting ordinary prose sentences.
-_SPEAKER_NAME_PATTERN = r"[A-Z][A-Za-z.'\-]*(?:\s+[A-Z][A-Za-z.'\-]*){0,4}"
+#
+# Each word's LEADING letter is restricted to ASCII or Latin-1 Supplement uppercase
+# (A-Z, plus accented capitals like À/Ö/Ø/Þ) -- deliberately still not full-Unicode
+# uppercase (stdlib `re` has no \p{Lu}), so a name whose first word starts with a
+# non-Latin-script capital won't be detected. The letters AFTER the first one in each
+# word accept any Unicode letter (`[^\W\d_]`), not just ASCII -- confirmed live
+# (SBRY/q1-2627, 2026-09-04): "Bláthnaid Bergin:" was previously invisible to this
+# regex because "á" fell outside the old `[A-Za-z.'\-]` class, so her turns were
+# silently merged into the PRECEDING speaker's segment (misattributing the CFO's
+# quotes to whoever spoke before her) instead of being rejected loudly.
+_SPEAKER_NAME_PATTERN = (
+    r"[A-ZÀ-ÖØ-Þ](?:[^\W\d_]|[.'\-])*"
+    r"(?:\s+[A-ZÀ-ÖØ-Þ](?:[^\W\d_]|[.'\-])*){0,4}"
+)
 _SPEAKER_LINE_RE = re.compile(
     rf"^(?P<speaker>{_SPEAKER_NAME_PATTERN})"
     r"(?:\s*[—–-]\s*[^:]{0,80})?:\s*(?P<rest>.*)$"
@@ -146,8 +159,12 @@ def _detect_speaker(line: str) -> tuple[str | None, str]:
     speaker = match.group("speaker").strip()
     rest = match.group("rest").strip()
     # Reject speaker candidates that are implausibly long (likely a normal sentence
-    # with a colon in it, e.g. "Note: revenue grew").
-    if len(speaker.split()) > 5 or len(speaker) > 60:
+    # with a colon in it, e.g. "Note: revenue grew"). Raised 5->10 words / 60->100
+    # chars (confirmed live, SBRY/q1-2627, 2026-09-04): a 3-word name + 3-word
+    # affiliation alone ("Xavier Le Mené, Bank of America") already hits 6 words, and
+    # a name + multi-word title + multi-word firm ("head of equity research") could
+    # plausibly reach 9 -- 10 leaves headroom without admitting an ordinary sentence.
+    if len(speaker.split()) > 10 or len(speaker) > 100:
         return None, line
     return speaker, rest
 

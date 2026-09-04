@@ -58,6 +58,39 @@ Use this skill when the user gives you a ticker, an event date/id, and a transcr
    `"SEC evidence: not_applicable"` and the pipeline continues normally — this is an
    expected outcome, not an error, and you should not treat it as a failed run.
 
+   **If `prepare` refuses with "PDF ingestion produced zero recognised speaker
+   turns"**, the source uses a vendor PDF layout `reformat.py`'s one confirmed
+   pattern (FactSet CallStreet) doesn't cover — do not stop and ask the user to
+   reformat it themselves. Instead:
+   a. Read the archived extraction at
+      `runs/<TICKER>/<EVENT_ID>/raw/transcript.converted.md` (or `.pdf`/`.txt`
+      raw source if not a PDF) to see the actual layout.
+   b. Write a one-off Python script (e.g. under your scratchpad, not committed to
+      the repo) that rewrites it into the `Name — Title:` / `Name, Affiliation:`
+      single-line header format `process._detect_speaker` expects — see that
+      function's docstring in `src/earnings/process.py` for the exact accepted
+      forms. Build the speaker list from an **explicit allowlist of the real
+      names/affiliations you can actually read in the source text**, not a fuzzy
+      generic heuristic — a wrong guess here silently misattributes a quote,
+      exactly the failure mode this whole project exists to prevent. Strip only
+      genuine boilerplate (page numbers, repeating headers/footers, stage
+      directions like "[Video playing]"); never alter, summarise, or drop
+      substantive speech.
+   c. Run the script, spot-check the output (headers landed in the right places,
+      no stray banner lines, first/last few turns look right), then re-run
+      `earnings prepare` with `--transcript <path to the reformatted local
+      file>` instead of the original URL/path.
+   d. Disclose to the user, in your final report, that this run's transcript went
+      through a one-off reformatting script you wrote, and roughly what it did
+      (e.g. "merged Name/Title-on-separate-lines into single headers, stripped
+      page banners") — this is evidence preprocessing, not analysis, but it's
+      still a step between the vendor's raw file and what Python hashed, so it
+      belongs in the audit trail same as any other manual step. Do not silently
+      fix and move on.
+   If the layout is too irregular to reformat with confidence (e.g. no
+   consistent structural marker at all), stop and tell the user rather than
+   guessing at speaker attribution.
+
 4. **Web evidence — on by default, not something you call yourself.** Unlike an
    earlier version of this skill, you do **not** decide when to invoke the web
    research provider: `earnings prepare` calls it automatically as part of

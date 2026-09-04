@@ -1,0 +1,12 @@
+{
+  "created_at": "2026-09-04T09:02:51Z",
+  "sanitized_input_sha256": "9b7cf010f36daaa519bc02f76c7413e0f7eb24c7c30cb8b7e5b3d916d2d1a7ca",
+  "segment_count": 104,
+  "omission_count": 1,
+  "omissions": [
+    {
+      "text": "Question and Answer Session",
+      "reason": "qa_heading"
+    }
+  ]
+}

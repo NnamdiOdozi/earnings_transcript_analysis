@@ -48,7 +48,8 @@ why that matters).
   "unverified_items": [
     "evidence/web/web-005.md was not evaluated -- content was empty on read (see manifest.json note)."
   ],
-  "summary": "One medium-severity finding: claim-009 drops a conditional from management's guidance. Otherwise the run is well-supported and industry-appropriate."
+  "summary": "One medium-severity finding: claim-009 drops a conditional from management's guidance. Otherwise the run is well-supported and industry-appropriate.",
+  "proposed_lessons": []
 }
 ```
 
@@ -88,3 +89,8 @@ why that matters).
 - `source_checks` and `process_findings`: each must contain at least one
   substantive entry. Empty arrays are rejected because they provide no evidence
   that the source and deterministic-validation portions of the remit were covered.
+- `proposed_lessons`: optional, usually empty. One-line, generalizable process
+  lessons for the extractor's next run (never facts, quotes, or numbers) -- see
+  `reviewer-judgment-remit.md`'s "Proposed lessons" section for the bar to clear.
+  `earnings check-review` persists new, deduplicated entries to
+  `.agents/memory/extractor-lessons.md`.

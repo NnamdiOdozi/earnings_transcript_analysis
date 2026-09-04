@@ -224,6 +224,11 @@ class ReviewReport(BaseModel):
     # are still written but check-review treats this as neither pass nor fail -- the
     # skill must fall back to a full review THIS round, no partial credit.
     escalate_full_review: bool = False
+    # Optional: one-line, generalizable process lessons (no company facts, quotes, or
+    # numbers) the reviewer wants carried into future extraction. Persisted to
+    # .agents/memory/extractor-lessons.md by cmd_check_review once this report passes
+    # validate_review_report -- see config.EXTRACTOR_LESSONS_PATH.
+    proposed_lessons: list[str] = Field(default_factory=list)
 
 
 class ClaimDiffEntry(BaseModel):

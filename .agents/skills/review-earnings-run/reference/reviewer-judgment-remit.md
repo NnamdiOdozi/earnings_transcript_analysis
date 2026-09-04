@@ -187,6 +187,8 @@ Given a run directory (e.g. `runs/MSFT/2026-q2/`), read:
 - From round 2 on: `review-diff.json` and its sidecar `review-diff.sha256` (see
   "Diff-based re-review" below)
 - `config.toml` at the repo root (for context on what checks/thresholds applied)
+- `.agents/memory/extractor-lessons.md` at the repo root, if present (so you don't
+  propose a lesson that's already there — see "Proposed lessons" below)
 
 ## Diff-based re-review (round 2+)
 
@@ -285,3 +287,26 @@ right the first time rather than relying on the gate to catch it.
 
 List anything you could not verify (missing evidence, a claim whose context was
 ambiguous) in `unverified_items` rather than guessing.
+
+## Proposed lessons (optional)
+
+If a finding reflects a **generalizable extraction mistake** — one likely to recur
+on a different company/quarter, not a one-off slip specific to this run — add a
+single-sentence lesson to `proposed_lessons`. `earnings check-review` appends new,
+deduplicated lessons to `.agents/memory/extractor-lessons.md`, which the extractor
+reads before its next run.
+
+A lesson must be:
+- **Process guidance, never a fact.** How to check work, not what the answer is.
+  Good: `"Verify quarterly vs YTD/half-year periods before creating financial
+  claims."` Bad: anything containing this run's company name, a quote, or a number.
+- **Generalizable**, not tied to this ticker/event. If you can't state it without
+  naming the company, it's not a lesson, it's a finding — leave it out of
+  `proposed_lessons` and let the finding itself stand.
+- **New**, not a restatement of something already in
+  `.agents/memory/extractor-lessons.md` (read it as part of the run bundle if
+  present) — dedup is exact-string, so rephrasing an existing lesson just adds
+  clutter, not signal.
+
+Leave `proposed_lessons` empty (`[]`) when nothing this round rises to that bar —
+most rounds should not add one.

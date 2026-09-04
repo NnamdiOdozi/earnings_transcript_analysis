@@ -1,0 +1,380 @@
+[
+  {
+    "id": "claim-001",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Group (Sainsbury's) total sales grew 3.1% YoY to £8,041m for the 16 weeks to 20 June 2026.",
+    "quote": "| Sainsbury's | 3.1% | 8,041 |",
+    "web_evidence_id": "web-013",
+    "status": "reported",
+    "values": {
+      "revenue_millions": 8041,
+      "growth_pct": 3.1
+    },
+    "confidence": 0.95,
+    "period": "16 weeks to 20 Jun 2026"
+  },
+  {
+    "id": "claim-002",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Grocery sales grew 3.6% YoY to £7,603m in Q1.",
+    "quote": "| Grocery | 3.6% | 7,603 |",
+    "web_evidence_id": "web-013",
+    "status": "reported",
+    "values": {
+      "revenue_millions": 7603,
+      "growth_pct": 3.6
+    },
+    "confidence": 0.95,
+    "period": "16 weeks to 20 Jun 2026"
+  },
+  {
+    "id": "claim-003",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "General Merchandise + Clothing sales fell 3.7% YoY to £438m.",
+    "quote": "| General Merchandise + Clothing | (3.7)% | 438 |",
+    "web_evidence_id": "web-013",
+    "status": "reported",
+    "values": {
+      "revenue_millions": 438,
+      "growth_pct": -3.7
+    },
+    "confidence": 0.95,
+    "period": "16 weeks to 20 Jun 2026"
+  },
+  {
+    "id": "claim-004",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Argos sales fell 0.5% YoY to £1,114m.",
+    "quote": "| Argos | (0.5)% | 1,114 |",
+    "web_evidence_id": "web-013",
+    "status": "reported",
+    "values": {
+      "revenue_millions": 1114,
+      "growth_pct": -0.5
+    },
+    "confidence": 0.95,
+    "period": "16 weeks to 20 Jun 2026"
+  },
+  {
+    "id": "claim-005",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Total Retail sales (excluding fuel) grew 2.7% YoY to £9,153m.",
+    "quote": "| Total Retail (exc. fuel) | 2.7% | 9,153 |",
+    "web_evidence_id": "web-013",
+    "status": "reported",
+    "values": {
+      "revenue_millions": 9153,
+      "growth_pct": 2.7
+    },
+    "confidence": 0.95,
+    "period": "16 weeks to 20 Jun 2026"
+  },
+  {
+    "id": "claim-006",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Like-for-like sales (excluding fuel) grew 2.1% in Q1.",
+    "quote": "| Like-for-like sales (exc. fuel) | 2.1% |",
+    "web_evidence_id": "web-013",
+    "status": "reported",
+    "values": {
+      "growth_pct": 2.1
+    },
+    "confidence": 0.9,
+    "period": "16 weeks to 20 Jun 2026"
+  },
+  {
+    "id": "claim-007",
+    "category": "current_guidance",
+    "classification": "management_guidance",
+    "claim_text": "Management stated FY guidance on profit and cash is unchanged.",
+    "quote": "Our guidance on profit and cash is unchanged.",
+    "segment_id": "seg-0002",
+    "speaker": "Simon Roberts",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.9
+  },
+  {
+    "id": "claim-008",
+    "category": "current_guidance",
+    "classification": "management_guidance",
+    "claim_text": "FY2026/27 guidance: Total underlying operating profit of between £975 million and £1,075 million.",
+    "quote": "We expect to deliver Total underlying operating profit of between £975 million and £1,075 million",
+    "web_evidence_id": "web-011",
+    "status": "forward_looking",
+    "values": {
+      "guidance_low_millions": 975,
+      "guidance_high_millions": 1075
+    },
+    "confidence": 0.95
+  },
+  {
+    "id": "claim-009",
+    "category": "cash_flow_capital_allocation",
+    "classification": "management_guidance",
+    "claim_text": "FY2026/27 guidance: retail free cash flow of more than £500 million.",
+    "quote": "We expect to generate more than £500 million of retail free cash flow in 2026/27",
+    "web_evidence_id": "web-011",
+    "status": "forward_looking",
+    "values": {
+      "free_cash_flow_min_millions": 500
+    },
+    "confidence": 0.9,
+    "period": "12 months to 28 Feb 2027"
+  },
+  {
+    "id": "claim-010",
+    "category": "cash_flow_capital_allocation",
+    "classification": "management_guidance",
+    "claim_text": "FY2026/27 buyback of £300m: £200m core buyback plus £100m from net bank disposal proceeds.",
+    "quote": "we will buy back £300 million of shares, including a £200 million core buyback and an additional return of £100 million of net bank disposal proceeds",
+    "web_evidence_id": "web-011",
+    "status": "forward_looking",
+    "values": {
+      "buyback_total_millions": 300,
+      "buyback_core_millions": 200,
+      "buyback_disposal_millions": 100
+    },
+    "confidence": 0.9
+  },
+  {
+    "id": "claim-011",
+    "category": "current_guidance",
+    "classification": "management_guidance",
+    "claim_text": "Management indicated the current trajectory implies Retail profit growth, including an incremental ~£20m Financial Services contribution, of around £1,045 million -- towards the upper end of guidance.",
+    "quote": "we can see a clear route to growing Retail operating profit year on year. We've shared with you already we expect an additional profit flow from Financial Services of around £20 million. So, that leads us to a Retail profit growth year on year with the £20 million, somewhere around £1,045 million - we can see a route to, which clearly is towards the upper end of our guidance.",
+    "segment_id": "seg-0021",
+    "speaker": "Simon Roberts",
+    "status": "forward_looking",
+    "values": {
+      "retail_profit_estimate_millions": 1045,
+      "financial_services_contribution_millions": 20
+    },
+    "confidence": 0.85
+  },
+  {
+    "id": "claim-012",
+    "category": "demand_activity",
+    "classification": "reported_fact",
+    "claim_text": "Management said the business continues to expect to outperform the grocery market by around 1% this year.",
+    "quote": "we continue to expect to outperform the market by around 1% this year.",
+    "segment_id": "seg-0002",
+    "speaker": "Simon Roberts",
+    "status": "forward_looking",
+    "values": {
+      "market_outperformance_pct": 1
+    },
+    "confidence": 0.9
+  },
+  {
+    "id": "claim-013",
+    "category": "operational_performance",
+    "classification": "reported_fact",
+    "claim_text": "The business now has almost one million more customers regularly using digital Nectar than before.",
+    "quote": "We now have almost one million more customers regularly using digital Nectar to access savings in Sainsbury's and across the full coalition",
+    "segment_id": "seg-0002",
+    "speaker": "Simon Roberts",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.85
+  },
+  {
+    "id": "claim-014",
+    "category": "operational_performance",
+    "classification": "reported_fact",
+    "claim_text": "Nectar Prices are now available on around 11,000 products.",
+    "quote": "Nectar Prices now on around 11,000 products",
+    "segment_id": "seg-0002",
+    "speaker": "Simon Roberts",
+    "status": "reported",
+    "values": {
+      "nectar_prices_product_count": 11000
+    },
+    "confidence": 0.9
+  },
+  {
+    "id": "claim-015",
+    "category": "operational_performance",
+    "classification": "reported_fact",
+    "claim_text": "The company launched 380 new products in the quarter, 50% of which were Taste the Difference range.",
+    "quote": "We've launched 380 new products this quarter, 50% of which are Taste the Difference",
+    "segment_id": "seg-0002",
+    "speaker": "Simon Roberts",
+    "status": "reported",
+    "values": {
+      "new_products_count": 380,
+      "taste_the_difference_share_pct": 50
+    },
+    "confidence": 0.9
+  },
+  {
+    "id": "claim-016",
+    "category": "operational_performance",
+    "classification": "reported_fact",
+    "claim_text": "Full-on fibre labelling was introduced across more than 500 products.",
+    "quote": "we've introduced full-on fibre labelling across more than 500 products, over 100 of which are included in Aldi Price Match or Nectar Prices",
+    "segment_id": "seg-0002",
+    "speaker": "Simon Roberts",
+    "status": "reported",
+    "values": {
+      "fibre_labelled_products_min": 500
+    },
+    "confidence": 0.9
+  },
+  {
+    "id": "claim-017",
+    "category": "operational_performance",
+    "classification": "reported_fact",
+    "claim_text": "More than 100,000 customers opened Argos Pay accounts since its February launch.",
+    "quote": "More than 100,000 customers have opened accounts since the February launch",
+    "segment_id": "seg-0002",
+    "speaker": "Simon Roberts",
+    "status": "reported",
+    "values": {
+      "argos_pay_accounts_min": 100000
+    },
+    "confidence": 0.9
+  },
+  {
+    "id": "claim-018",
+    "category": "costs_margins_efficiency",
+    "classification": "reported_fact",
+    "claim_text": "Management said space allocated to General Merchandise was reduced by a bit more than 3% YoY, reallocated toward food.",
+    "quote": "Space reduced in GM by a bit more than 3% year on year, to give you a kind of sense of the quantum.",
+    "segment_id": "seg-0064",
+    "speaker": "Simon Roberts",
+    "status": "reported",
+    "values": {
+      "gm_space_reduction_pct": 3
+    },
+    "confidence": 0.85
+  },
+  {
+    "id": "claim-019",
+    "category": "costs_margins_efficiency",
+    "classification": "management_opinion",
+    "claim_text": "CFO said margin will always be diluted by inflation, particularly fuel price inflation, flowing through the P&L this year.",
+    "quote": "margin will always be diluted by inflation, particularly the fuel price inflation as well that we see coming through.",
+    "segment_id": "seg-0087",
+    "speaker": "Bláthnaid Bergin",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.85
+  },
+  {
+    "id": "claim-020",
+    "category": "risk",
+    "classification": "management_opinion",
+    "claim_text": "Management flagged continued uncertainty from the conflict in the Middle East as a risk to the economic and consumer outlook.",
+    "quote": "there was a lot of uncertainty still in terms of exactly how the impact of the conflict in the Middle East will impact the economy and consumers.",
+    "segment_id": "seg-0002",
+    "speaker": "Simon Roberts",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.85
+  },
+  {
+    "id": "claim-021",
+    "category": "risk",
+    "classification": "management_opinion",
+    "claim_text": "Management expects fresh food supply-chain cost pressure to begin building by mid-summer.",
+    "quote": "We certainly think by the mid-summer, we'll start to see some of the pressure building from the fresh food supply chains.",
+    "segment_id": "seg-0015",
+    "speaker": "Simon Roberts",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.8
+  },
+  {
+    "id": "claim-022",
+    "category": "qa_insight",
+    "classification": "management_guidance",
+    "claim_text": "CFO reiterated Argos profit guidance of flat YoY, citing only 16 weeks of visibility with summer and peak still to come.",
+    "quote": "We're encouraged with the volume growth at Argos, but we're only 16 weeks into the year. We still have the summer and peak to play out, so our guidance at the moment is profits flat year on year",
+    "segment_id": "seg-0008",
+    "speaker": "Bláthnaid Bergin",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.85
+  },
+  {
+    "id": "claim-023",
+    "category": "qa_insight",
+    "classification": "management_guidance",
+    "claim_text": "CFO said Retail Media (Nectar360) remains on track to deliver a committed incremental £100 million of profit, with World Cup demand already factored into guidance.",
+    "quote": "We committed at the start of this plan to deliver an incremental £100 million profit. We're well on track with that.",
+    "segment_id": "seg-0031",
+    "speaker": "Bláthnaid Bergin",
+    "status": "forward_looking",
+    "values": {
+      "retail_media_profit_target_millions": 100
+    },
+    "confidence": 0.85
+  },
+  {
+    "id": "claim-024",
+    "category": "demand_activity",
+    "classification": "reported_fact",
+    "claim_text": "Ahead of the release, Shore Capital (Clive Black) forecast Q1 grocery sales growth of approximately 2.75-3.25%.",
+    "quote": "Analyst Clive Black forecast grocery sales growth of approximately 2.75–3.25% in Q1, with ex-fuel like-for-like revenues up around 2.25–2.75%, supported by roughly 0.5% space contribution.",
+    "web_evidence_id": "web-010",
+    "status": "reported",
+    "values": {
+      "consensus_grocery_growth_low_pct": 2.75,
+      "consensus_grocery_growth_high_pct": 3.25
+    },
+    "confidence": 0.8,
+    "period": "16 weeks to 20 Jun 2026"
+  },
+  {
+    "id": "claim-025",
+    "category": "demand_activity",
+    "classification": "reported_fact",
+    "claim_text": "Ahead of the release, Shore Capital forecast Argos sales down 2.5-3.5% for the quarter.",
+    "quote": "Shore Capital forecasts Argos sales down 2.5–3.5% amid ongoing weakness in UK consumer confidence",
+    "web_evidence_id": "web-010",
+    "status": "reported",
+    "values": {
+      "consensus_argos_growth_low_pct": -3.5,
+      "consensus_argos_growth_high_pct": -2.5
+    },
+    "confidence": 0.8,
+    "period": "16 weeks to 20 Jun 2026"
+  },
+  {
+    "id": "claim-026",
+    "category": "demand_activity",
+    "classification": "analytical_inference",
+    "claim_text": "Reported Q1 grocery sales growth of 3.6% came in above the pre-event Shore Capital consensus range of 2.75-3.25%, a beat of roughly 35-85 basis points.",
+    "quote": "| Grocery | 3.6% | 7,603 |",
+    "web_evidence_id": "web-013",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.85,
+    "inferred_from": [
+      "claim-002",
+      "claim-024"
+    ]
+  },
+  {
+    "id": "claim-027",
+    "category": "demand_activity",
+    "classification": "analytical_inference",
+    "claim_text": "Reported Argos sales decline of 0.5% was materially better than the pre-event Shore Capital forecast of a 2.5-3.5% decline -- a significant beat on this segment.",
+    "quote": "| Argos | (0.5)% | 1,114 |",
+    "web_evidence_id": "web-013",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.85,
+    "inferred_from": [
+      "claim-004",
+      "claim-025"
+    ]
+  }
+]

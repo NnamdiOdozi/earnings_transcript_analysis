@@ -141,18 +141,27 @@ types.
 ## Known limitations
 
 - **Speaker-label detection** is a line-start heuristic; unconventional
-  transcript formatting may leave `speaker` as `null`. Names may contain any
-  Unicode letter (fixed 2026-09-04: previously ASCII-only, so e.g. "Bláthnaid
-  Bergin" was invisible to the detector and her turns were silently merged into
-  the preceding speaker's segment -- see `process._SPEAKER_NAME_PATTERN`), but
-  the FIRST letter of each word is still restricted to ASCII or Latin-1
-  Supplement uppercase (no `\p{Lu}` in stdlib `re`). A "Name, Affiliation"
-  header is rejected outright if the combined word count exceeds 10 or its
-  length exceeds 100 characters (raised 2026-09-04 from 5 words/60 chars after
-  a 3-word name + 3-word affiliation, "Xavier Le Mené, Bank of America", tripped
-  the old limit). Both residual cases fail loudly (the turn merges into the
-  previous speaker, not a crash) rather than silently fabricating an
-  attribution.
+  transcript formatting may leave `speaker` as `null`. As of 2026-09-04, names may
+  contain any word in any case-bearing script (Latin incl. Extended-A, Cyrillic,
+  Greek, ...) -- validated via Python's `str.isupper()` in
+  `process._is_valid_speaker_name`, not a hand-enumerated Unicode character-class
+  range, after an earlier ASCII/Latin-1-only fix still missed e.g. Czech/Polish
+  capitals. Lowercase name particles ("van", "von", "de", ...) are allowed
+  mid-name via `config.toml [segmentation] speaker_name_particles`. A "Name,
+  Title, Company" header with multiple commas, and a multi-word name up to 10
+  words, are both supported. A known, structural (not merely unfixed) limitation
+  remains: **case-less scripts (CJK, and any script with no upper/lowercase
+  distinction) cannot be detected at all** by an "uppercase first letter"
+  heuristic -- this requires layout/typography information (bold, position) that
+  the current plain-text PDF extraction discards; see `DEFERRED_WORK.md`'s
+  layout-aware PDF extraction entry. A candidate is also rejected if it matches
+  `config.toml [segmentation] speaker_denylist_patterns` (known non-name section
+  headers like "Forward Looking Statements") or if its dash-separated "title"
+  portion contains a digit/currency/percent character (a real title never does;
+  catches false positives like "Group Sales — 3.6%:"). All rejections fail
+  loudly -- the turn merges into the previous speaker and, if it looks
+  speaker-shaped, is recorded as an advisory `near_miss_speakers` entry in
+  `segmentation-report.json` -- rather than silently fabricating an attribution.
 - **Q&A boundary detection** relies on marker phrases (e.g.
   "question-and-answer session"); transcripts without such a marker are
   treated as entirely "prepared."

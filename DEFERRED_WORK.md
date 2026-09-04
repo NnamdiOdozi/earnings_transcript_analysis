@@ -40,3 +40,38 @@ was resolved); don't let finished work accumulate here as dead weight.
   history module is lint-clean in this change. Do not run a broad auto-format until
   the repository's existing wide-line style and intentional Unicode test data have
   explicit rules.
+
+### [2026-09-04] Layout-aware PDF extraction for speaker detection
+- **Scope:** a new PDF-ingestion path that preserves page/position/font
+  information (via pypdf's `visitor_text` API or a switch to PyMuPDF's
+  block/line/span structure) instead of the current `ingest.py:_extract_pdf_text`
+  flattening straight to plain text. Speaker detection would move from
+  regex-on-flattened-text to scoring structural signals (bold + left-aligned +
+  short line → likely speaker; centered/underlined → section heading; repeated
+  top/bottom line across pages → header/footer), with an optional
+  low-confidence-only constrained LLM fallback that maps numbered source blocks
+  to speakers (never rewrites content; Python verifies every output block id
+  exists and nothing was invented or dropped).
+- **Why:** two rounds of regex hardening on `process.py`/`reformat.py` (fixing
+  Unicode support, name particles, multi-comma affiliations, denylisted
+  headers, metric-shaped false positives, FactSet role speakers and banner
+  over-stripping — see `docs/REFERENCE.md`'s Known Limitations) closed every
+  concretely-verified bug found so far, but the approach has a structural
+  ceiling: case-less scripts (CJK, and any script with no upper/lowercase
+  distinction) cannot be detected by any spelling-based heuristic, only by
+  layout/typography. A third-party review independently proposed the same
+  architecture, correctly diagnosing that PDF flattening discards exactly the
+  information (bold, position, font) that makes speaker detection reliable and
+  script-agnostic.
+- **Status:** explicitly deferred, not started. This is a new extraction
+  pipeline (page-aware text/spans → structural cleanup → confidence-scored
+  speaker-candidate state machine → segments + anomaly receipt → optional LLM
+  fallback), realistically 300–600+ lines with real design decisions (PyMuPDF
+  vs. pypdf, how much of the state machine to build, whether to build the LLM
+  fallback at all) — squarely an Opus-planning-tier item per this project's own
+  >250-line rule, not a Sonnet patch. The project is explicitly a POC per
+  `README.md`; the current one-off-reformatter-per-new-vendor pattern (see
+  `build-earnings-source-pack/SKILL.md`'s self-healing step) is a working,
+  if manual, escape hatch. Revisit if the project moves past POC status, or if
+  a third vendor layout (or a case-less-script transcript) makes the one-off
+  script pattern start costing more than the layout-aware rewrite would.

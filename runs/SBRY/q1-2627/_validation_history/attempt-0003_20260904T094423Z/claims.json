@@ -430,12 +430,12 @@
     "id": "claim-032",
     "category": "demand_activity",
     "classification": "reported_fact",
-    "claim_text": "Per the same source, General Merchandise and Clothing's 3.7% decline was worse than the -1.3% that had been expected.",
+    "claim_text": "Per the same source, General Merchandise and Clothing's 3.7% decline was worse than the 1.3% decline that had been expected.",
     "quote": "General Merchandise and Clothing sales declined 3.7% (-1.3% expected) in the period due to a soft clothing market and reduced in-store space allocation in favour of Groceries.",
     "web_evidence_id": "web-014",
     "status": "reported",
     "values": {
-      "consensus_gm_clothing_decline_expected_pct": -1.3
+      "consensus_gm_clothing_decline_expected_pct": 1.3
     },
     "confidence": 0.85,
     "period": "16 weeks to 20 Jun 2026"
@@ -444,12 +444,12 @@
     "id": "claim-033",
     "category": "demand_activity",
     "classification": "reported_fact",
-    "claim_text": "Ahead of the release, analyst consensus for FY total underlying operating profit stood at £1.061 billion -- directly comparable to management's own trajectory figure in claim-011.",
+    "claim_text": "Ahead of the release, analyst consensus for FY total underlying operating profit stood at £1.061 billion -- directly comparable to management's own ~£1,045m trajectory figure in claim-011.",
     "quote": "analyst consensus sitting at £1.061 billion for total underlying operating profit",
     "web_evidence_id": "web-010",
     "status": "reported",
     "values": {
-      "consensus_fy_profit_billions": 1.061
+      "consensus_fy_profit_millions": 1061
     },
     "confidence": 0.85
   },

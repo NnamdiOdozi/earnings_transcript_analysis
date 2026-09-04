@@ -17,7 +17,7 @@ from __future__ import annotations
 import hashlib
 import re
 import unicodedata
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from bs4 import BeautifulSoup, Comment
 
@@ -26,39 +26,126 @@ from .config import (
     QA_TRANSITION_PHRASES,
     SEGMENT_ID_PREFIX,
     SEGMENT_ID_WIDTH,
+    SPEAKER_DENYLIST_PATTERNS,
+    SPEAKER_NAME_PARTICLES,
     ZERO_WIDTH_CHARS,
 )
 from .models import Segment
 
 # Speaker label heuristics: "Name — Title:", "Name:", or "Name, Company:".
-# Deliberately conservative -- only fires on short, title-cased leading tokens
+# Deliberately conservative -- only fires on short, name-shaped leading tokens
 # followed by a colon, to avoid mis-detecting ordinary prose sentences.
 #
-# Each word's LEADING letter is restricted to ASCII or Latin-1 Supplement uppercase
-# (A-Z, plus accented capitals like À/Ö/Ø/Þ) -- deliberately still not full-Unicode
-# uppercase (stdlib `re` has no \p{Lu}), so a name whose first word starts with a
-# non-Latin-script capital won't be detected. The letters AFTER the first one in each
-# word accept any Unicode letter (`[^\W\d_]`), not just ASCII -- confirmed live
-# (SBRY/q1-2627, 2026-09-04): "Bláthnaid Bergin:" was previously invisible to this
-# regex because "á" fell outside the old `[A-Za-z.'\-]` class, so her turns were
-# silently merged into the PRECEDING speaker's segment (misattributing the CFO's
-# quotes to whoever spoke before her) instead of being rejected loudly.
+# The regex alone cannot enforce "starts with an uppercase letter" for arbitrary
+# scripts -- stdlib `re` has no \p{Lu}, and even restricting to Latin-1 Supplement
+# (an earlier version of this fix) still missed Latin Extended-A capitals used in
+# Czech/Polish/etc. names, because that block alternates upper/lower per codepoint
+# with no contiguous range to express in a character class (confirmed live, regex
+# audit 2026-09-04). So the regex below matches any run of Unicode-letter words,
+# permissively -- _is_valid_speaker_name() does the actual "is this name-shaped"
+# judgment afterward, in Python, via str.isupper() (script-agnostic and correct,
+# unlike hand-enumerated Unicode ranges).
+_NAME_WORD_PATTERN = r"[^\W\d_](?:[^\W\d_]|['’.\-])*"
+# Word-repeat count raised 3->9 (confirmed live, follow-up regex audit
+# 2026-09-04): a 6-word plain name with no affiliation ("Jan Willem van der Berg
+# Junior") previously couldn't even match the regex, even though the separate
+# length guard in _detect_speaker already allowed up to 10 words -- the two
+# limits must agree, or the guard's headroom is fiction.
 _SPEAKER_NAME_PATTERN = (
-    r"[A-ZÀ-ÖØ-Þ](?:[^\W\d_]|[.'\-])*"
-    r"(?:\s+[A-ZÀ-ÖØ-Þ](?:[^\W\d_]|[.'\-])*){0,4}"
+    rf"{_NAME_WORD_PATTERN}(?:\s+{_NAME_WORD_PATTERN}){{0,9}}"
+    r"(?:\s+\d{1,2})?"  # optional trailing placeholder index, e.g. "Speaker 1"
 )
+# The dash-title portion is now a named group (`dash_title`), not thrown away,
+# so _detect_speaker can reject it when it looks like a metric rather than a
+# role/title -- confirmed live (follow-up regex audit, 2026-09-04):
+# "Group Sales — 3.6%:" previously matched as speaker "Group Sales" because
+# nothing checked the text between the dash and the colon.
 _SPEAKER_LINE_RE = re.compile(
     rf"^(?P<speaker>{_SPEAKER_NAME_PATTERN})"
-    r"(?:\s*[—–-]\s*[^:]{0,80})?:\s*(?P<rest>.*)$"
+    r"(?:\s*[—–-]\s*(?P<dash_title>[^:]{0,80}))?:\s*(?P<rest>.*)$"
 )
+# Named "name"/"affiliation" groups, not one combined "speaker" group, so the name
+# portion can be validated on its own -- _detect_speaker still joins them back into
+# one speaker string ("Manjari Dhar, RBC"), preserving prior behaviour. Affiliation
+# allows internal commas ("Name, Title, Company:") -- confirmed live (regex audit):
+# the old `[^,:]` class rejected a second comma outright.
 _SPEAKER_WITH_AFFILIATION_RE = re.compile(
-    rf"^(?P<speaker>{_SPEAKER_NAME_PATTERN},\s*[^,:]{{1,80}}):\s*(?P<rest>.*)$"
+    rf"^(?P<name>{_SPEAKER_NAME_PATTERN}),\s*(?P<affiliation>[^:]{{1,100}}):\s*(?P<rest>.*)$"
 )
+_SPEAKER_DENYLIST_RE = (
+    re.compile("^(?:" + "|".join(SPEAKER_DENYLIST_PATTERNS) + ")$", re.IGNORECASE)
+    if SPEAKER_DENYLIST_PATTERNS
+    else None
+)
+
+
+def _is_valid_speaker_name(name: str) -> bool:
+    """True if `name` is name-shaped: the first word starts with an uppercase
+    letter (any script), and every later word either starts uppercase, is a
+    configured lowercase particle (SPEAKER_NAME_PARTICLES, e.g. "van"/"von"), or is
+    a short digit token (a placeholder index like "Speaker 1"). The regex that
+    captured `name` only bounds its shape/length; this is the real "looks like a
+    name" check, done here because stdlib `re` cannot express "uppercase letter"
+    for arbitrary scripts.
+    """
+    words = name.split()
+    if not words or not words[0][0].isupper():
+        return False
+    for word in words[1:]:
+        if word[0].isupper() or word.isdigit():
+            continue
+        if word.lower() in SPEAKER_NAME_PARTICLES:
+            continue
+        return False
+    return True
+
+
+def _is_denylisted_speaker(name: str) -> bool:
+    """True if `name` matches a configured non-name document/section header
+    (e.g. "Forward Looking Statements") -- confirmed live (regex audit
+    2026-09-04): such a line would otherwise be accepted as a fabricated speaker,
+    silently absorbing real content under a name nobody actually said.
+    """
+    return bool(_SPEAKER_DENYLIST_RE and _SPEAKER_DENYLIST_RE.match(name))
+
+
+_METRIC_CHAR_RE = re.compile(r"[\d%$£€¥]")
+
+
+def _looks_like_metric_not_title(dash_title: str) -> bool:
+    """True if a "Name — X:" line's X portion contains a digit or currency/percent
+    symbol -- a real role or job title never does, but a financial-metric line
+    happens to have the same "Word — stuff:" shape. Confirmed live (follow-up
+    regex audit 2026-09-04): "Group Sales — 3.6%:" was accepted as speaker
+    "Group Sales" because nothing checked what came after the dash.
+    """
+    return bool(_METRIC_CHAR_RE.search(dash_title))
+
+
+_NEAR_MISS_MAX_WORDS = 15
+
+
+def _looks_speaker_shaped(candidate: str) -> bool:
+    """Loose heuristic for the near-miss signal ONLY -- never gates real speaker
+    detection, and deliberately looser than _is_valid_speaker_name. True if
+    `candidate` (the text before a trailing colon) has 1-15 words and at least
+    half start with an uppercase letter. Exists so a line that looks speaker-ish
+    but didn't parse is recorded as an advisory near-miss (see
+    segment_transcript_with_report), instead of silently vanishing into whichever
+    segment happens to be open -- confirmed as the umbrella issue behind every
+    speaker-detection bug found so far (regex audit 2026-09-04).
+    """
+    words = candidate.split()
+    if not words or len(words) > _NEAR_MISS_MAX_WORDS:
+        return False
+    capitalized = sum(1 for w in words if w[:1].isupper())
+    return capitalized >= max(1, len(words) // 2)
 
 
 @dataclass(frozen=True)
 class SegmentationResult:
-    """Hold transcript segments and deliberate structural omissions.
+    """Hold transcript segments, deliberate structural omissions, and near-miss
+    speaker lines.
 
     Attributes
     ----------
@@ -66,10 +153,15 @@ class SegmentationResult:
         Normalized transcript segments in source order.
     omissions : list of dict
         Non-empty source lines deliberately removed as structural headings.
+    near_miss_speakers : list of dict
+        Lines that look speaker-shaped (see _looks_speaker_shaped) but did not
+        parse as one -- advisory only, never gates the run. See
+        segment_transcript_with_report.
     """
 
     segments: list[Segment]
     omissions: list[dict[str, str]]
+    near_miss_speakers: list[dict[str, str]] = field(default_factory=list)
 
 # Control characters except \n (0x0A) and \t (0x09).
 _CONTROL_CHAR_RE = re.compile(
@@ -119,6 +211,9 @@ def sanitize(raw_text: str, is_html: bool) -> str:
     return strip_invisible_and_control_chars(text)
 
 
+_INJECTION_FINDINGS_CAP = 500
+
+
 def scan_for_injection(text: str, patterns: list[str]) -> list[dict]:
     """Best-effort prompt-injection FLAG: match each regex in `patterns` (case-
     insensitive) against `text` and return one record per hit -- NOT a classifier, NOT
@@ -127,14 +222,23 @@ def scan_for_injection(text: str, patterns: list[str]) -> list[dict]:
     pattern that fired, the exact matched substring, and a short surrounding context
     window so a reviewer can judge it. Run this AFTER sanitize() so invisible-character
     evasions (e.g. a zero-width space inside "ig<zwsp>nore") are already normalised away.
+
+    Capped at _INJECTION_FINDINGS_CAP total findings (confirmed as a latent gap,
+    regex audit 2026-09-04): a pathologically repetitive document could otherwise
+    produce an unbounded findings list. Still advisory-only -- capping the receipt,
+    not the scan, so a run is never blocked by this.
     """
     findings: list[dict] = []
     for pattern in patterns:
+        if len(findings) >= _INJECTION_FINDINGS_CAP:
+            break
         try:
             regex = re.compile(pattern, re.IGNORECASE)
         except re.error:
             continue  # a malformed config pattern must never crash a run
         for m in regex.finditer(text):
+            if len(findings) >= _INJECTION_FINDINGS_CAP:
+                break
             start = max(0, m.start() - 40)
             end = min(len(text), m.end() + 40)
             findings.append(
@@ -153,10 +257,19 @@ def sha256_hex(data: bytes) -> str:
 
 def _detect_speaker(line: str) -> tuple[str | None, str]:
     stripped = line.strip()
-    match = _SPEAKER_WITH_AFFILIATION_RE.match(stripped) or _SPEAKER_LINE_RE.match(stripped)
-    if not match:
-        return None, line
-    speaker = match.group("speaker").strip()
+    match = _SPEAKER_WITH_AFFILIATION_RE.match(stripped)
+    if match:
+        name = match.group("name").strip()
+        speaker = f"{name}, {match.group('affiliation').strip()}"
+    else:
+        match = _SPEAKER_LINE_RE.match(stripped)
+        if not match:
+            return None, line
+        dash_title = match.group("dash_title")
+        if dash_title and _looks_like_metric_not_title(dash_title):
+            return None, line
+        name = match.group("speaker").strip()
+        speaker = name
     rest = match.group("rest").strip()
     # Reject speaker candidates that are implausibly long (likely a normal sentence
     # with a colon in it, e.g. "Note: revenue grew"). Raised 5->10 words / 60->100
@@ -165,6 +278,8 @@ def _detect_speaker(line: str) -> tuple[str | None, str]:
     # a name + multi-word title + multi-word firm ("head of equity research") could
     # plausibly reach 9 -- 10 leaves headroom without admitting an ordinary sentence.
     if len(speaker.split()) > 10 or len(speaker) > 100:
+        return None, line
+    if not _is_valid_speaker_name(name) or _is_denylisted_speaker(name):
         return None, line
     return speaker, rest
 
@@ -203,7 +318,8 @@ def segment_transcript_with_report(sanitized_text: str) -> SegmentationResult:
     Returns
     -------
     SegmentationResult
-        Ordered segments and the receipt of deliberately omitted headings.
+        Ordered segments, the receipt of deliberately omitted headings, and any
+        near-miss speaker-shaped lines that failed to parse (advisory only).
     """
     lines = [ln for ln in sanitized_text.split("\n")]
     section = "prepared"
@@ -211,6 +327,7 @@ def segment_transcript_with_report(sanitized_text: str) -> SegmentationResult:
     current_speaker: str | None = None
     current_lines: list[str] = []
     omissions: list[dict[str, str]] = []
+    near_misses: list[dict[str, str]] = []
     counter = 0
 
     def flush():
@@ -230,6 +347,9 @@ def segment_transcript_with_report(sanitized_text: str) -> SegmentationResult:
             current_lines = [rest] if rest else []
             current_speaker = speaker
         else:
+            stripped = line.strip()
+            if stripped.endswith(":") and _looks_speaker_shaped(stripped[:-1].strip()):
+                near_misses.append({"text": stripped, "reason": "unparsed_speaker_shaped_line"})
             current_lines.append(line)
 
     for raw_line in lines:
@@ -255,7 +375,7 @@ def segment_transcript_with_report(sanitized_text: str) -> SegmentationResult:
             continue
         append_content(line)
     flush()
-    return SegmentationResult(segments=segments, omissions=omissions)
+    return SegmentationResult(segments=segments, omissions=omissions, near_miss_speakers=near_misses)
 
 
 def segment_transcript(sanitized_text: str) -> list[Segment]:

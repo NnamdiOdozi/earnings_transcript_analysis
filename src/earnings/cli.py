@@ -722,6 +722,12 @@ def cmd_prepare(args: argparse.Namespace) -> int:
             "segment_count": len(segments),
             "omission_count": len(segmentation.omissions),
             "omissions": segmentation.omissions,
+            # Advisory only -- lines that looked speaker-shaped but didn't parse as
+            # one (see process._looks_speaker_shaped). Never blocks the run; exists
+            # so a missed speaker surfaces as data instead of requiring another
+            # accidental discovery (confirmed live, regex audit, 2026-09-04).
+            "near_miss_speaker_count": len(segmentation.near_miss_speakers),
+            "near_miss_speakers": segmentation.near_miss_speakers,
         },
     )
 
@@ -983,6 +989,13 @@ def cmd_prepare(args: argparse.Namespace) -> int:
             (
                 f"Segmentation: {len(segmentation.omissions)} structural omission(s) recorded in "
                 f"{config.SEGMENTATION_REPORT_FILENAME}."
+            ),
+            (
+                f"Segmentation: {len(segmentation.near_miss_speakers)} near-miss speaker-shaped "
+                f"line(s) advisory-flagged in {config.SEGMENTATION_REPORT_FILENAME} -- worth a "
+                "look if any real speaker turns seem to be missing."
+                if segmentation.near_miss_speakers
+                else "Segmentation: no near-miss speaker-shaped lines flagged."
             ),
             injection_note,
             f"SEC evidence: {sec_status}" + (f" (CIK {cik})" if sec_status == "ok" else ""),

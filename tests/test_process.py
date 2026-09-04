@@ -1,7 +1,10 @@
 from pathlib import Path
 
+import pytest
+
 from earnings import config
 from earnings.process import (
+    _detect_speaker,
     html_to_text,
     normalize_whitespace,
     sanitize,
@@ -138,6 +141,80 @@ def test_segment_transcript_admits_multiword_name_and_affiliation():
     assert "Xavier Le Mené, Bank of America" in speakers
     seg = next(s for s in segments if s.speaker == "Xavier Le Mené, Bank of America")
     assert seg.text == "Thank you for taking my question."
+
+
+# Regression (regex audit, 2026-09-04): each case below was a confirmed detection
+# gap in the ASCII/single-comma/no-particle/no-digit speaker regex. One parametrized
+# test rather than one function per case -- same edge, no duplicated setup.
+@pytest.mark.parametrize(
+    "line,expected_speaker,expected_rest",
+    [
+        # Latin Extended-A capital (Czech) -- the earlier À-ÖØ-Þ-only fix didn't
+        # cover this block; _is_valid_speaker_name's str.isupper() check does.
+        ("Škoda Nováková: Thank you.", "Škoda Nováková", "Thank you."),
+        # Curly apostrophe (common when copied from web/Word), not the straight '.
+        ("O’Brien: Thanks, everyone.", "O’Brien", "Thanks, everyone."),
+        # Lowercase nobiliary particle mid-name.
+        (
+            "Wouter van der Vorst, ING Group: Thank you.",
+            "Wouter van der Vorst, ING Group",
+            "Thank you.",
+        ),
+        # Multi-comma "Name, Title, Company:" -- old affiliation group excluded commas.
+        (
+            "John Smith, Managing Director, ABC Capital: Thank you.",
+            "John Smith, Managing Director, ABC Capital",
+            "Thank you.",
+        ),
+        # Anonymized/placeholder speaker with a trailing index.
+        ("Speaker 1: Can you clarify the guidance?", "Speaker 1", "Can you clarify the guidance?"),
+    ],
+)
+def test_detect_speaker_admits_previously_missed_name_shapes(line, expected_speaker, expected_rest):
+    assert _detect_speaker(line) == (expected_speaker, expected_rest)
+
+
+@pytest.mark.parametrize(
+    "line",
+    [
+        "Forward Looking Statements: some legal text follows.",
+        "Non-GAAP Reconciliation: details follow below.",
+    ],
+)
+def test_detect_speaker_rejects_denylisted_section_headers(line):
+    # Regression (regex audit, 2026-09-04): a Title-Case section header ending in a
+    # colon previously matched as a FABRICATED speaker (worse than merging into the
+    # wrong real one), silently absorbing real content under a name nobody said.
+    assert _detect_speaker(line) == (None, line)
+
+
+def test_detect_speaker_rejects_metric_shaped_dash_title():
+    # Regression (follow-up regex audit, 2026-09-04): a dash-separated line whose
+    # "title" portion is actually a financial figure ("Group Sales — 3.6%:") was
+    # accepted as speaker "Group Sales" -- nothing checked what came after the dash.
+    line = "Group Sales — 3.6%: some text."
+    assert _detect_speaker(line) == (None, line)
+
+
+def test_detect_speaker_admits_six_word_plain_name():
+    # Regression (follow-up regex audit, 2026-09-04): the length GUARD in
+    # _detect_speaker allowed up to 10 words, but _SPEAKER_NAME_PATTERN's own
+    # repeat count still capped a bare (no-affiliation) name at 4 words, so a
+    # 6-word name couldn't even match the regex to reach the guard.
+    line = "Jan Willem van der Berg Junior: Long name test."
+    assert _detect_speaker(line) == ("Jan Willem van der Berg Junior", "Long name test.")
+
+
+def test_segment_transcript_records_near_miss_speaker_shaped_lines():
+    # A line that looks speaker-ish (mostly Title-Case words, trailing colon) but
+    # fails the real name check (here: an un-particled lowercase "and") should not
+    # become a speaker, but should be advisory-flagged rather than silently
+    # vanishing into the open segment.
+    raw = "Jane Smith: Thanks for joining.\nGroup Chief Financial and Operating Officer Remarks:\n"
+    result = segment_transcript_with_report(sanitize(raw, is_html=False))
+    assert any(
+        nm["text"].startswith("Group Chief Financial") for nm in result.near_miss_speakers
+    )
 
 
 def test_segment_transcript_qa_boundary_resets_speaker():

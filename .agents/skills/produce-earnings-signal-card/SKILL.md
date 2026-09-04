@@ -64,12 +64,42 @@ guaranteed before proceeding.
 
 5. **Self-check before validating.** Reread your own `claims.json` once, end to
    end, before running `earnings analyze`. This is a cheap self-critique pass, not
-   a re-extraction: look specifically for speaker attribution errors (an analyst's
-   question misattributed as a management statement), period-basis errors
-   (quarterly vs. year-to-date/half-year figures conflated), and claims whose
-   `claim_text` doesn't actually match what its cited `quote` says in context, not
-   just that the quote text exists. Fix anything you find yourself; Python's
-   validators below check groundedness, not these judgment errors.
+   a re-extraction: look specifically for
+   - speaker attribution errors (an analyst's question misattributed as a
+     management statement);
+   - period-basis errors: quarterly vs. year-to-date/half-year figures conflated,
+     or incremental vs. cumulative confused (see extraction-instructions.md's
+     "Stating an unambiguous period");
+   - a `period` you set but cannot point to actual evidence for. For every claim
+     that has a `period`, be able to name the exact quote or evidence passage that
+     establishes each part of it (start date, end date, incremental-vs-cumulative).
+     If any part is inferred, assumed, or extrapolated rather than stated by the
+     source, drop the `period` field on that claim rather than keep a guessed one
+     — a missing period is honest, a wrong one is not (this is the same standing
+     rule as extraction-instructions.md's period section, called out here because
+     it's exactly the kind of thing this self-check pass exists to catch before
+     Python ever sees it — Python cannot check period accuracy at all);
+   - claims whose `claim_text` doesn't actually match what its cited `quote` says
+     in context, not just that the quote text exists.
+
+   Fix anything you find yourself; Python's validators below check groundedness,
+   not these judgment errors.
+
+   **After making a fix here, verify it actually landed before moving on** --
+   re-read the specific claim(s) you changed, or re-grep `claims.json` for the
+   exact string you removed, rather than trusting a bulk find-and-replace's own
+   count of how many instances it changed. A multi-instance replace can silently
+   miss an occurrence that differs only in whitespace or line-formatting, leaving
+   the original problem in place under an untouched claim while you move on
+   believing it's fixed. Confirmed live (SBRY/q1-2627, 2026-09-04): a guessed
+   `period` value was intentionally removed from three claims via a scripted
+   string replace; the tool reported two replacements, that count was trusted at
+   face value, and the third instance (`claim-009`, differently formatted) kept
+   its guessed period all the way to `signal-card.md` -- caught only by the
+   independent reviewer in round 1, not by this self-check step, which is
+   supposed to be exactly where it gets caught. This is a general discipline, not
+   a period-specific one: it applies to any fix made during this step, not only
+   period corrections.
 
 6. **Validate.** Run:
 
@@ -91,6 +121,19 @@ guaranteed before proceeding.
    and do not bypass a failed validation by writing the card yourself. The rerun
    becomes the next attempt folder; prior failures remain available for analysis.
 
+   **Before resubmitting, check this run's own attempt history, not just the
+   latest failure.** If this is attempt 2 or later, read every earlier attempt's
+   `_validation_history/attempt-NNNN_*/receipt.json` in this run (their
+   `issue_counts` are enough — no need to reopen the old `claims.json` unless a
+   count alone is ambiguous) before re-running `earnings analyze`. Confirm your
+   fix for the current failure doesn't reintroduce a `check` type an earlier
+   attempt in this same run already had and fixed — e.g. don't re-break
+   `exact_quote` on a different claim while fixing this attempt's `numeric`
+   failure. This is a within-run regression check, not the cross-run lessons
+   file in step 1 — it exists because nothing else compares attempt N's fix
+   against attempt N-2's, and a multi-attempt correction loop can otherwise
+   cycle between the same two mistakes without anyone noticing.
+
 8. **If validation passes:** `signal-card.md` is written automatically, grouped by
    category, following `reference/signal-card-template.md`.
 
@@ -106,7 +149,31 @@ Only start this stage once Stage 1's `earnings analyze` has passed.
    id you cite must exist in this run's `claims.json`, and every material number you
    introduce must be grounded in a claim cited alongside it.
 
-10. **Validate the brief.** Run:
+10. **Self-check the brief before validating.** `earnings validate-outlook` (next
+    step) only confirms a cited claim id *resolves* — it cannot tell a correct
+    citation from a plausible-looking wrong one, and neither can you rely on it to
+    catch an overstated factual claim. Before running it, reread every `[claim-###]`
+    citation in the brief against the claim it actually points to:
+    - Does the claim you cited actually say what the surrounding sentence
+      attributes to it? A citation that resolves but doesn't support the specific
+      point being made is a "wrong-but-resolving citation" — the same severity as
+      a citation that doesn't resolve at all (see
+      `review-earnings-run/reference/reviewer-judgment-remit.md` item 3).
+    - Does any factual claim about *sequencing or disclosure* ("only revealed in
+      Q&A", "management didn't mention X until...") actually hold up against the
+      full evidence, not just the one segment you're citing? Confirmed live
+      (SBRY/q1-2627, round 1, 2026-09-04): the brief cited `[claim-002]` (grocery
+      growth) next to a quote about "seasonal weakness" that claim-002 doesn't
+      contain, and separately asserted a disclosure was made "only later, in
+      Q&A" when the prepared remarks had already named it — both wrong, both
+      would have been caught by rereading the actual claim and the actual
+      transcript passage before writing the sentence, and neither is something
+      `validate-outlook` can check.
+
+    Fix anything you find, and re-verify the fix landed (see step 5's note on
+    verifying fixes, same discipline applies here).
+
+11. **Validate the brief.** Run:
 
    ```bash
    uv run earnings validate-outlook --ticker <TICKER> --event-id <EVENT_ID>
@@ -116,7 +183,7 @@ Only start this stage once Stage 1's `earnings analyze` has passed.
    doesn't resolve, or if a material number isn't grounded in a claim cited
    alongside it. Fix and re-run until it passes.
 
-11. **Report back to the user** the run directory path and a brief summary of both
+12. **Report back to the user** the run directory path and a brief summary of both
     `signal-card.md` (evidence appendix) and `outlook-brief.md` (the forward-looking
     read).
 

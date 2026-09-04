@@ -183,6 +183,9 @@ Given a run directory (e.g. `runs/MSFT/2026-q2/`), read:
   `evidence/web/*.md` files
 - `claims.json`, `validation.json`, `outlook-validation.json`, `metrics.json` (if
   present), `injection-scan.json` (if present)
+- `_validation_history/attempt-NNNN_*/receipt.json` for every attempt in this run
+  (their `issue_counts` are enough — no need to reopen each attempt's `claims.json`)
+  — this is what "Proposed lessons" below draws its second source from
 - `signal-card.md`, `outlook-brief.md`
 - From round 2 on: `review-diff.json` and its sidecar `review-diff.sha256` (see
   "Diff-based re-review" below)
@@ -290,11 +293,28 @@ ambiguous) in `unverified_items` rather than guessing.
 
 ## Proposed lessons (optional)
 
-If a finding reflects a **generalizable extraction mistake** — one likely to recur
-on a different company/quarter, not a one-off slip specific to this run — add a
-single-sentence lesson to `proposed_lessons`. `earnings check-review` appends new,
-deduplicated lessons to `.agents/memory/extractor-lessons.md`, which the extractor
-reads before its next run.
+`proposed_lessons` has two sources — check both:
+
+1. **A finding of yours reflects a generalizable extraction mistake** — one likely
+   to recur on a different company/quarter, not a one-off slip specific to this
+   run.
+2. **This run's `_validation_history/` shows a repeated-then-fixed mechanical
+   mistake** — the SAME `check` type (e.g. `exact_quote`, `numeric`,
+   `inference_citation`) failed across two or more attempts before finally
+   passing. The extractor's own within-run self-check (see
+   `produce-earnings-signal-card/SKILL.md` step 7) only compares each new attempt
+   against earlier attempts IN THIS SAME RUN; it has no visibility into whether
+   this is a recurring pattern ACROSS runs. You do, because you're dispatched
+   fresh each time and can see whether this multi-attempt struggle plausibly
+   generalizes. A single retry that fixed a typo is not a lesson; the same check
+   type failing 2+ times, or a check type you've reason to believe is a recurring
+   trap (e.g. the parenthetical-negative-notation gotcha already documented in
+   docs/REFERENCE.md), is.
+
+Either source: add a single-sentence lesson to `proposed_lessons`. `earnings
+check-review` appends new, deduplicated lessons to
+`.agents/memory/extractor-lessons.md`, which the extractor reads before its next
+run.
 
 A lesson must be:
 - **Process guidance, never a fact.** How to check work, not what the answer is.

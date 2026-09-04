@@ -1,6 +1,6 @@
 # Signal Card: SBRY — q1-2627
 
-_Generated: 2026-09-04T09:09:36Z_
+_Generated: 2026-09-04T09:48:31Z_
 
 ## Reported Financial Performance
 - **reported** [reported_fact]: Group (Sainsbury's) total sales grew 3.1% YoY to £8,041m for the 16 weeks to 20 June 2026.
@@ -15,6 +15,10 @@ _Generated: 2026-09-04T09:09:36Z_
   > "| Total Retail (exc. fuel) | 2.7% | 9,153 |" — web-013
 - **reported** [reported_fact]: Like-for-like sales (excluding fuel) grew 2.1% in Q1.
   > "| Like-for-like sales (exc. fuel) | 2.1% |" — web-013
+- **reported** [reported_fact]: General Merchandise alone (excluding Clothing) sales fell 6.3% YoY, per the same-day results release, again primarily attributed to the space-reallocation programme.
+  > "General Merchandise sales down (6.3) per cent, primarily reflecting an ongoing programme to focus General" — web-013
+- **reported** [reported_fact]: Per a same-day sell-side note, total sales growth of 2.7% (excluding fuel) was in line with market expectations -- not a surprise on the headline number.
+  > "Sainsbury’s first-quarter sales rose 2.7% to £9.2bn, excluding fuel, which was in line with market expectations." — web-014
 
 ## Current Guidance
 - **forward_looking** [management_guidance] (Simon Roberts): Management stated FY guidance on profit and cash is unchanged.
@@ -31,7 +35,7 @@ _Generated: 2026-09-04T09:09:36Z_
   > "we will buy back £300 million of shares, including a £200 million core buyback and an additional return of £100 million of net bank disposal proceeds" — web-011
 
 ## Demand Activity
-- **forward_looking** [reported_fact] (Simon Roberts): Management said the business continues to expect to outperform the grocery market by around 1% this year.
+- **forward_looking** [management_guidance] (Simon Roberts): Management said the business continues to expect to outperform the grocery market by around 1% this year.
   > "we continue to expect to outperform the market by around 1% this year." — seg-0002
 - **reported** [reported_fact]: Ahead of the release, Shore Capital (Clive Black) forecast Q1 grocery sales growth of approximately 2.75-3.25%.
   > "Analyst Clive Black forecast grocery sales growth of approximately 2.75–3.25% in Q1, with ex-fuel like-for-like revenues up around 2.25–2.75%, supported by roughly 0.5% space contribution." — web-010
@@ -41,6 +45,10 @@ _Generated: 2026-09-04T09:09:36Z_
   > "| Grocery | 3.6% | 7,603 |" — web-013
 - **reported** [analytical_inference]: Reported Argos sales decline of 0.5% was materially smaller than the pre-event decline forecast cited in claim-025 -- a significant beat on this segment.
   > "| Argos | (0.5)% | 1,114 |" — web-013
+- **reported** [reported_fact]: Per the same source, General Merchandise and Clothing's 3.7% decline was worse than the -1.3% that had been expected.
+  > "General Merchandise and Clothing sales declined 3.7% (-1.3% expected) in the period due to a soft clothing market and reduced in-store space allocation in favour of Groceries." — web-014
+- **reported** [reported_fact]: Ahead of the release, analyst consensus for FY total underlying operating profit stood at £1.061 billion -- directly comparable to management's own trajectory figure in claim-011.
+  > "analyst consensus sitting at £1.061 billion for total underlying operating profit" — web-010
 
 ## Operational Performance
 - **reported** [reported_fact] (Simon Roberts): The business now has almost one million more customers regularly using digital Nectar than before.
@@ -59,12 +67,20 @@ _Generated: 2026-09-04T09:09:36Z_
   > "Space reduced in GM by a bit more than 3% year on year, to give you a kind of sense of the quantum." — seg-0064
 - **reported** [management_opinion] (Bláthnaid Bergin): CFO said margin will always be diluted by inflation, particularly fuel price inflation, flowing through the P&L this year.
   > "margin will always be diluted by inflation, particularly the fuel price inflation as well that we see coming through." — seg-0087
+- **forward_looking** [management_guidance] (Simon Roberts): CEO said the company expects to deliver a positive margin outcome in order to grow Retail operating profit year-on-year -- the balancing statement to the margin-dilution point in claim-019, from the same Q&A exchange.
+  > "Clearly, to deliver Retail operating profit growth year-on-year we expect to deliver a positive margin outcome." — seg-0086
+- **reported** [reported_fact] (Simon Roberts): Management's own stated primary cause of the GM+Clothing decline was the planned space reallocation to food, named ahead of seasonal weakness, in the prepared remarks -- before any Q&A question was asked.
+  > "General Merchandise sales were impacted by some seasonal weakness but more significantly by our ongoing and planned programme to tighten ranges and reduce space allocation in favour of food." — seg-0002
 
 ## Risk
 - **reported** [management_opinion] (Simon Roberts): Management flagged continued uncertainty from the conflict in the Middle East as a risk to the economic and consumer outlook.
   > "there was a lot of uncertainty still in terms of exactly how the impact of the conflict in the Middle East will impact the economy and consumers." — seg-0002
 - **forward_looking** [management_opinion] (Simon Roberts): Management expects fresh food supply-chain cost pressure to begin building by mid-summer.
   > "We certainly think by the mid-summer, we'll start to see some of the pressure building from the fresh food supply chains." — seg-0015
+- **reported** [reported_fact] (Simon Roberts): Management said inflation had actually stepped back somewhat in Q1 versus Q4.
+  > "the reality is inflation actually stepped back a bit in the First Quarter compared to Quarter Four." — seg-0015
+- **forward_looking** [management_opinion] (Simon Roberts): Management said inflation would likely not reach the higher levels some industry bodies had earlier forecast.
+  > "won’t reach some of the higher levels of forecasted inflation perhaps that were suggested earlier in the year by some of the industry bodies." — seg-0064
 
 ## Qa Insight
 - **forward_looking** [management_guidance] (Bláthnaid Bergin): CFO reiterated Argos profit guidance of flat YoY, citing only 16 weeks of visibility with summer and peak still to come.

@@ -1,0 +1,229 @@
+{
+  "generated_at": "2026-09-04T09:48:34Z",
+  "round_number": 2,
+  "since_round": 1,
+  "previous_verdict": "fail",
+  "previous_summary": "Fail, on one high-severity finding. Outlook-brief.md sections 1 and 4 accuse management of blurring the cause of the General Merchandise decline and of disclosing the space-reallocation programme \"only later, in Q&A\". Both the transcript's prepared remarks and web-013 in this run's own evidence pack show management named the planned space reduction as the more significant driver up front, and the quoted phrase \"seasonal weakness\" is cited to claim-002, which is the grocery sales figure and contains no such wording. Three medium outlook findings follow a common thread: the brief is more confident than its evidence in both directions -- a one-sided \"clean positive surprise\" framing that ignores the GM+Clothing miss and the five-quarter-low headline growth visible in its own cited source, an upside case resting on three uncited direct quotations that never passed the quote gate, and a base-case positioning judgment that the brief's own section 9 disclaims. On the claims side, the extraction captured the beats but not the misses, and isolated the dilution half of a two-sided CFO answer on margin. Deterministic stages all passed and are confirmed present; the injection scan is genuinely clean; sources opened were authentic and correctly dated. Sector language is appropriate throughout -- grocery, general merchandise, loyalty and retail media, with no template metrics borrowed from another industry.",
+  "previous_finding_count": 18,
+  "claims_sha256": "c2f6dc037a5fee5925224aa338fb884dad233140df0e92da1a09cd86f176c37c",
+  "outlook_brief_sha256": "ff1fef856cae2ab33bd514dd2111db086740036e294e1b16ce5859e5b9b5527e",
+  "claims_changed": [
+    {
+      "claim_id": "claim-009",
+      "change": "changed",
+      "old": {
+        "id": "claim-009",
+        "category": "cash_flow_capital_allocation",
+        "classification": "management_guidance",
+        "claim_text": "FY2026/27 guidance: retail free cash flow of more than \u00a3500 million.",
+        "quote": "We expect to generate more than \u00a3500 million of retail free cash flow in 2026/27",
+        "web_evidence_id": "web-011",
+        "status": "forward_looking",
+        "values": {
+          "free_cash_flow_min_millions": 500
+        },
+        "confidence": 0.9,
+        "period": "12 months to 28 Feb 2027"
+      },
+      "new": {
+        "id": "claim-009",
+        "category": "cash_flow_capital_allocation",
+        "classification": "management_guidance",
+        "claim_text": "FY2026/27 guidance: retail free cash flow of more than \u00a3500 million.",
+        "quote": "We expect to generate more than \u00a3500 million of retail free cash flow in 2026/27",
+        "web_evidence_id": "web-011",
+        "status": "forward_looking",
+        "values": {
+          "free_cash_flow_min_millions": 500
+        },
+        "confidence": 0.9
+      }
+    },
+    {
+      "claim_id": "claim-012",
+      "change": "changed",
+      "old": {
+        "id": "claim-012",
+        "category": "demand_activity",
+        "classification": "reported_fact",
+        "claim_text": "Management said the business continues to expect to outperform the grocery market by around 1% this year.",
+        "quote": "we continue to expect to outperform the market by around 1% this year.",
+        "segment_id": "seg-0002",
+        "speaker": "Simon Roberts",
+        "status": "forward_looking",
+        "values": {
+          "market_outperformance_pct": 1
+        },
+        "confidence": 0.9
+      },
+      "new": {
+        "id": "claim-012",
+        "category": "demand_activity",
+        "classification": "management_guidance",
+        "claim_text": "Management said the business continues to expect to outperform the grocery market by around 1% this year.",
+        "quote": "we continue to expect to outperform the market by around 1% this year.",
+        "segment_id": "seg-0002",
+        "speaker": "Simon Roberts",
+        "status": "forward_looking",
+        "values": {
+          "market_outperformance_pct": 1
+        },
+        "confidence": 0.9
+      }
+    },
+    {
+      "claim_id": "claim-028",
+      "change": "added",
+      "old": null,
+      "new": {
+        "id": "claim-028",
+        "category": "costs_margins_efficiency",
+        "classification": "management_guidance",
+        "claim_text": "CEO said the company expects to deliver a positive margin outcome in order to grow Retail operating profit year-on-year -- the balancing statement to the margin-dilution point in claim-019, from the same Q&A exchange.",
+        "quote": "Clearly, to deliver Retail operating profit growth year-on-year we expect to deliver a positive margin outcome.",
+        "segment_id": "seg-0086",
+        "speaker": "Simon Roberts",
+        "status": "forward_looking",
+        "values": {},
+        "confidence": 0.85
+      }
+    },
+    {
+      "claim_id": "claim-029",
+      "change": "added",
+      "old": null,
+      "new": {
+        "id": "claim-029",
+        "category": "costs_margins_efficiency",
+        "classification": "reported_fact",
+        "claim_text": "Management's own stated primary cause of the GM+Clothing decline was the planned space reallocation to food, named ahead of seasonal weakness, in the prepared remarks -- before any Q&A question was asked.",
+        "quote": "General Merchandise sales were impacted by some seasonal weakness but more significantly by our ongoing and planned programme to tighten ranges and reduce space allocation in favour of food.",
+        "segment_id": "seg-0002",
+        "speaker": "Simon Roberts",
+        "status": "reported",
+        "values": {},
+        "confidence": 0.9
+      }
+    },
+    {
+      "claim_id": "claim-030",
+      "change": "added",
+      "old": null,
+      "new": {
+        "id": "claim-030",
+        "category": "reported_financial_performance",
+        "classification": "reported_fact",
+        "claim_text": "General Merchandise alone (excluding Clothing) sales fell 6.3% YoY, per the same-day results release, again primarily attributed to the space-reallocation programme.",
+        "quote": "General Merchandise sales down (6.3) per cent, primarily reflecting an ongoing programme to focus General",
+        "web_evidence_id": "web-013",
+        "status": "reported",
+        "values": {
+          "decline_pct": 6.3
+        },
+        "confidence": 0.85,
+        "period": "16 weeks to 20 Jun 2026"
+      }
+    },
+    {
+      "claim_id": "claim-031",
+      "change": "added",
+      "old": null,
+      "new": {
+        "id": "claim-031",
+        "category": "reported_financial_performance",
+        "classification": "reported_fact",
+        "claim_text": "Per a same-day sell-side note, total sales growth of 2.7% (excluding fuel) was in line with market expectations -- not a surprise on the headline number.",
+        "quote": "Sainsbury\u2019s first-quarter sales rose 2.7% to \u00a39.2bn, excluding fuel, which was in line with market expectations.",
+        "web_evidence_id": "web-014",
+        "status": "reported",
+        "values": {},
+        "confidence": 0.85,
+        "period": "16 weeks to 20 Jun 2026"
+      }
+    },
+    {
+      "claim_id": "claim-032",
+      "change": "added",
+      "old": null,
+      "new": {
+        "id": "claim-032",
+        "category": "demand_activity",
+        "classification": "reported_fact",
+        "claim_text": "Per the same source, General Merchandise and Clothing's 3.7% decline was worse than the -1.3% that had been expected.",
+        "quote": "General Merchandise and Clothing sales declined 3.7% (-1.3% expected) in the period due to a soft clothing market and reduced in-store space allocation in favour of Groceries.",
+        "web_evidence_id": "web-014",
+        "status": "reported",
+        "values": {
+          "consensus_gm_clothing_decline_expected_pct": -1.3
+        },
+        "confidence": 0.85,
+        "period": "16 weeks to 20 Jun 2026"
+      }
+    },
+    {
+      "claim_id": "claim-033",
+      "change": "added",
+      "old": null,
+      "new": {
+        "id": "claim-033",
+        "category": "demand_activity",
+        "classification": "reported_fact",
+        "claim_text": "Ahead of the release, analyst consensus for FY total underlying operating profit stood at \u00a31.061 billion -- directly comparable to management's own trajectory figure in claim-011.",
+        "quote": "analyst consensus sitting at \u00a31.061 billion for total underlying operating profit",
+        "web_evidence_id": "web-010",
+        "status": "reported",
+        "values": {
+          "consensus_fy_profit_billions": 1.061
+        },
+        "confidence": 0.85
+      }
+    },
+    {
+      "claim_id": "claim-034",
+      "change": "added",
+      "old": null,
+      "new": {
+        "id": "claim-034",
+        "category": "risk",
+        "classification": "reported_fact",
+        "claim_text": "Management said inflation had actually stepped back somewhat in Q1 versus Q4.",
+        "quote": "the reality is inflation actually stepped back a bit in the First Quarter compared to Quarter Four.",
+        "segment_id": "seg-0015",
+        "speaker": "Simon Roberts",
+        "status": "reported",
+        "values": {},
+        "confidence": 0.85
+      }
+    },
+    {
+      "claim_id": "claim-035",
+      "change": "added",
+      "old": null,
+      "new": {
+        "id": "claim-035",
+        "category": "risk",
+        "classification": "management_opinion",
+        "claim_text": "Management said inflation would likely not reach the higher levels some industry bodies had earlier forecast.",
+        "quote": "won\u2019t reach some of the higher levels of forecasted inflation perhaps that were suggested earlier in the year by some of the industry bodies.",
+        "segment_id": "seg-0064",
+        "speaker": "Simon Roberts",
+        "status": "forward_looking",
+        "values": {},
+        "confidence": 0.8
+      }
+    }
+  ],
+  "affected_brief_sections": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    10
+  ],
+  "auto_escalated": true,
+  "auto_escalation_reason": "10 claims changed, over the 3 threshold; claim-009: period or values changed; conclusion-bearing section(s) [1, 5, 6, 7] cite a changed claim; outlook-brief.md text changed since the last round -- review-diff only diffs claims.json, not brief prose, so a narrative-only correction cannot be safely assessed from the diff alone"
+}

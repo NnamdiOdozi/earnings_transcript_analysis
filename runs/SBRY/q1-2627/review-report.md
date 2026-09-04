@@ -1,0 +1,70 @@
+# Review Report: SBRY — q1-2627
+
+**Verdict:** pass_with_warnings
+**Review mode:** full
+**Reviewed at (agent-reported):** 2026-09-04T12:00:00Z (model: opus)
+**Checked at (system clock):** 2026-09-04T09:54:11Z
+**Claims SHA-256:** `c2f6dc037a5fee5925224aa338fb884dad233140df0e92da1a09cd86f176c37c`
+**Outlook brief SHA-256:** `ff1fef856cae2ab33bd514dd2111db086740036e294e1b16ce5859e5b9b5527e`
+**Review diff SHA-256:** `f2e07ac94ff3889e0c3ef6828911ced4a9bf0dbb53077ccb7486e130c2d067ab`
+
+## Summary
+Pass with warnings. The four cited web sources were opened in full and are authentic and correctly dated, the transcript quotes behind every cited claim match their segments verbatim, the injection scan is genuinely clean, and the deterministic stages all passed and are present. Every claim-### citation in the brief was opened; the wrong-citation risk surfaced in one place only. Three warnings. First, claim-033's claim_text asserts its £1.061bn consensus is 'directly comparable' to management's £1,045m Retail-profit figure, a comparability the brief's own section 9 explicitly disclaims and the source never makes. Second, section 4 cites claim-023 for the assertion that management 'explicitly ties' Nectar participation to retail media growth; claim-023 is about the £100m profit commitment and contains no such tie, which does exist in seg-0002 but was never extracted. Third, the brief presents grocery growth as a beat and a durable structural lever without anywhere noting that group, grocery and like-for-like growth are all the weakest of the last five quarters on the very table it cites, with the validated like-for-like claim left uncited. Two low findings cover a dropped same-breath qualifier in the inflation claims and two phrases quoted non-verbatim from claim-022. Numerical direction, units and periods are otherwise handled correctly, and the sector language is grocery, general merchandise, loyalty and retail media throughout, with no metric borrowed from another industry.
+
+## Source checks
+- **[info]** evidence/web/web-013.md: 'First Quarter Trading Statement for the 16 weeks to 20 June 2026'
+  - Evidence: Opened in full. Genuine reproduction of the LSE RNS trading statement, header '30 Jun 2026 07:00', RNS Number 2616K. The sales table reproduces verbatim the six figures behind claim-001 to claim-006 (3.1%/8,041; 3.6%/7,603; (3.7)%/438; (0.5)%/1,114; 2.7%/9,153; 2.1%), and the strategic-highlights section carries the 'General Merchandise sales down (6.3) per cent, primarily reflecting an ongoing programme...' line behind claim-030. Share-chat and newsletter boilerplate is present on the page but is not used by any claim.
+  - Recommendation: None.
+- **[info]** evidence/web/web-014.md: 'General Merchandise and Clothing sales declined 3.7% (-1.3% expected) in the period due to a soft clothing market and reduced in-store space allocation in favour of Groceries.'
+  - Evidence: Opened in full. Genuine Hargreaves Lansdown research note by Aarin Chiekrie, 'Published Jun 30, 2026', matching web-evidence.jsonl. Both sentences used by claim-031 and claim-032 appear verbatim. Note that web-evidence.jsonl labels it temporal_status 'pre_event' even though it is same-day post-release commentary; that label is wrong in itself but causes no temporal problem here, because the run's event IS the 30 June release and same-day analyst reaction is legitimately in scope.
+  - Recommendation: None.
+- **[info]** evidence/web/web-010.md: 'Black said he would be “surprised to see Sainsbury adjust its FY27 underlying EBIT profit guidance” of £975 million to £1.075 billion at this stage, with analyst consensus sitting at £1.061 billion for total underlying operating profit.'
+  - Evidence: Opened in full. Genuine AskTraders preview citing Shore Capital, published 2026-06-23, i.e. genuinely pre-release (it says the statement is due June 30). Contains verbatim the Shore Capital grocery and Argos forecasts (claim-024, claim-025) and the £1.061bn consensus (claim-033). The surrounding sentence confirms the consensus is stated on the same 'total underlying operating profit' basis as the guidance range, which is what outlook-brief.md sections 2, 8 and 9 rely on.
+  - Recommendation: None.
+- **[info]** evidence/web/web-011.md: 'We expect to generate more than £500 million of retail free cash flow in 2026/27'
+  - Evidence: Opened in full. Sainsbury's own 2026/27 guidance document. The quotes behind claim-008, claim-009 and claim-010 all appear verbatim and in the guidance context the claims describe. The document states '2026/27' without an explicit year-end date, which supports the removal of the invented period from claim-009 and the caveat recorded in outlook-brief.md section 9.
+  - Recommendation: None.
+- **[info]** evidence/web-evidence.jsonl: 'temporal_status'
+  - Evidence: Temporal-integrity read of the four cited web sources: web-010 (23 Jun) and web-011 (undated guidance doc) are pre-release; web-013 and web-014 are the 30 June release itself and same-day analyst reaction. Nothing in the cited evidence references facts that could only be known after the 30 June event, so no post-event contamination of the pre-results outlook. The transcript quotes used all come from the call itself.
+  - Recommendation: None.
+
+## Claim findings
+- **[medium]** claims.json#claim-033: "Ahead of the release, analyst consensus for FY total underlying operating profit stood at £1.061 billion -- directly comparable to management's own trajectory figure in claim-011."
+  - Evidence: The source (web-010) sets the £1.061bn consensus against the guidance range ('FY27 underlying EBIT profit guidance of £975 million to £1.075 billion ... with analyst consensus sitting at £1.061 billion'). It never compares it to management's £1,045m figure. That £1,045m figure is 'Retail operating profit' plus a Financial Services contribution (seg-0021 and seg-0086: 'The £1,025 million outturn last year plus Financial Services gets us to around £1,045 million'), and outlook-brief.md section 9 states explicitly that its comparability to the Total underlying operating profit basis 'is not established in this run's evidence'. The claim therefore asserts a comparability the run's own brief disclaims.
+  - Recommendation: Rewrite claim-033's claim_text to state the consensus is on the same 'total underlying operating profit' basis as the guidance range in claim-008, and delete the assertion of direct comparability with claim-011.
+- **[low]** claims.json#claim-034: 'Management said inflation had actually stepped back somewhat in Q1 versus Q4.'
+  - Evidence: Read in full segment context. In seg-0015 the sentence is immediately followed by 'There's definitely pressure in the system. I guess the question is to what extent will we see inflation tick up over the months ahead.' The parallel claim-035 has the same shape: in seg-0064 management says 'still a lot of pressure in the system, so we'll have to see where that comes through. But I think importantly, won't reach some of the higher levels...'. Both claims record only the easing half of a two-sided remark. The effect is mitigated because outlook-brief.md section 6 cites claim-021 (mid-summer cost pressure) in the same sentence, so the brief does not read as one-sided, but the claims themselves are incomplete characterisations.
+  - Recommendation: Add the speaker's same-breath qualifier ('still pressure in the system') to the claim_text of claim-034 and claim-035, or reclassify them as the easing side of an explicitly two-sided answer.
+
+## Outlook findings
+- **[medium]** outlook-brief.md: 'almost a million net new digital Nectar users [claim-013] — a participation base management explicitly ties to its retail media growth [claim-023].'
+  - Evidence: claim-023's quote is 'We committed at the start of this plan to deliver an incremental £100 million profit. We're well on track with that.' (seg-0031, a Q&A answer about World Cup demand). It says nothing about Nectar participation driving retail media. The tie does exist in the transcript — seg-0002: 'this is the fuel that powers our Nectar360 retail media business ... this increased participation is also helping us to further accelerate growth there' — but no claim in claims.json captures it. This is a citation that resolves to a real claim which is topically adjacent but does not support the assertion made ('management explicitly ties').
+  - Recommendation: Extract the seg-0002 sentence linking Nectar participation to Nectar360 as a claim and cite that, or drop 'explicitly' and present the link as the author's synthesis of claim-013 and claim-023 rather than as management's stated position.
+- **[medium]** outlook-brief.md: 'Grocery sales grew 3.6% [claim-002], above the pre-event Shore Capital consensus range [claim-024][claim-026]'
+  - Evidence: The brief frames grocery as a beat and, in section 4, as evidence of 'a durable, structural lever', but never mentions that growth decelerated sharply. Its own primary source web-013 carries a five-quarter table: group total 4.9%, 5.5%, 4.9%, 4.3% then 3.1%; grocery 5.0%, 5.7%, 5.4%, 4.5% then 3.6%; like-for-like ex-fuel 4.6%, 4.3%, 3.4%, 3.1% then 2.1%. claim-006 (like-for-like ex-fuel 2.1%) is validated and present in claims.json but is cited nowhere in the brief. Management also said in the prepared remarks (seg-0002) 'Our outperformance narrowed a little this quarter'. Beating one broker's forecast while printing the weakest growth of the last five quarters is material counterevidence to the 'durable structural lever' reading and is absent.
+  - Recommendation: Add a sentence to section 2 or section 4 citing claim-006 that states the quarter's growth and like-for-like growth are the weakest of the last five quarters on the company's own table, and reconcile that with the beat-versus-consensus framing.
+- **[low]** outlook-brief.md: 'a guidance raise here would signal genuine management confidence beyond the cautious "only 16 weeks in" framing'
+  - Evidence: Two phrases are placed in quotation marks but are not verbatim in the claim cited beside them. claim-022's quote is 'we're only 16 weeks into the year', not 'only 16 weeks in'; and section 3's and section 8's '"flat year-on-year"' renders the quote 'profits flat year on year'. The substance is faithful in both cases, but quotation marks assert verbatim wording.
+  - Recommendation: Quote claim-022 verbatim or remove the quotation marks and paraphrase in the brief's own voice.
+
+## Process findings
+- **[info]** validation.json: 'n/a'
+  - Evidence: validation.json.ok == true, checked_claims 35, zero issues and zero warnings, validated 2026-09-04T09:48:31Z against claims.json c2f6dc03... Confirmed present, not re-derived.
+  - Recommendation: None.
+- **[info]** outlook-validation.json: 'n/a'
+  - Evidence: outlook-validation.json.ok == true with zero errors, carrying outlook_brief_sha256 ff1fef85... and claims_sha256 c2f6dc03..., both copied into this report. manifest.json is present with 62 hashed sources plus the transcript. outlook-brief.md and signal-card.md both exist. All 35 entries in claims.json carry a non-empty id (claim-001 through claim-035, no gaps).
+  - Recommendation: None.
+- **[info]** injection-scan.json: '"finding_count": 0'
+  - Evidence: The prompt-injection scan ran over 25 patterns and produced zero hits, so there was nothing to adjudicate as genuine-versus-innocent. Spot reading of the prepared remarks and Q&A segments found no instruction-like text aimed at the pipeline. Clean scan, explicitly noted rather than skipped.
+  - Recommendation: None.
+- **[info]** review-diff.json: '"auto_escalated": true'
+  - Evidence: This is round 2. review-diff.json reports 10 changed claims (claim-009 period removed, claim-012 reclassified, claim-028 to claim-035 added) and that outlook-brief.md's prose changed, so auto_escalated is true. review_mode is therefore 'full': the entire bundle was re-reviewed, and every claim-### citation in outlook-brief.md was opened and checked against its claim, not just the changed ones. review_diff_sha256 was copied verbatim from the review-diff.sha256 sidecar.
+  - Recommendation: None.
+- **[info]** _validation_history: 'n/a'
+  - Evidence: Six attempts recorded. Attempt 1 failed with claim_text_numeric 3 / numeric 2; attempt 3 failed with numeric 2 / claim_text_numeric 1; attempt 4 failed with claim_text_numeric 1; attempts 2, 5 and 6 passed. The recurring failures are all sign or unit-scale mismatches (a decline recorded as +3.7 or +1.3 against a source showing a negative, and £1.061 billion recorded as 1061 millions), which is the basis for the proposed lesson below.
+  - Recommendation: None.
+
+## Unverified items
+- evidence/financials.json is empty ({}), so there is no SEC/XBRL structured-filing cross-check available for any figure in this run; every number rests on the transcript, the RNS trading statement (web-013) and the company's guidance PDF (web-011). The brief discloses this in section 9.
+- Whether management's £1,045m 'Retail operating profit plus Financial Services' figure and the £975m-£1,075m 'Total underlying operating profit' guidance share a common basis cannot be resolved from this run's evidence; the analyst challenge in seg-0085 and management's answer in seg-0086 leave it open. The brief correctly declines to compute a position within the range.
+- web-001 to web-009, web-012 and web-015 were skimmed for provenance only, not read in full; no claim in this run cites them.

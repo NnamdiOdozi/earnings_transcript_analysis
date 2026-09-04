@@ -1,0 +1,154 @@
+{
+  "verdict": "fail",
+  "review_mode": "full",
+  "reviewed_at": "2026-09-04T00:00:00Z",
+  "model": "opus",
+  "claims_sha256": "2c5338a7d5276833e6ebd94d36f1a9525d9dd68cc955efeb41df6ee2ed751596",
+  "outlook_brief_sha256": "eb7d19f4655393c2bbe0870da8d15ca8b49463b09cf1cdce30bb2b652f835a02",
+  "review_diff_sha256": null,
+  "source_checks": [
+    {
+      "severity": "info",
+      "artifact": "evidence/web/web-013.md",
+      "passage": "First Quarter Trading Statement for the 16 weeks to 20 June 2026",
+      "evidence": "Opened in full. The file is a genuine reproduction of the LSE RNS trading statement dated 30 Jun 2026, not a 404 or an unrelated page. The sales table reproduces exactly the six figures used by claim-001 through claim-006 (3.1%/8,041; 3.6%/7,603; (3.7)%/438; (0.5)%/1,114; 2.7%/9,153; 2.1%). The page also carries unrelated share-chat and newsletter boilerplate, but that material is not used by any claim.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "evidence/web/web-010.md",
+      "passage": "Analyst Clive Black forecast grocery sales growth of approximately 2.75-3.25% in Q1",
+      "evidence": "Opened in full. Genuine AskTraders preview citing Shore Capital. web-evidence.jsonl records published_at 2026-06-23 and temporal_status pre_event, which is consistent with the article's own content (it forecasts a statement due on June 30). It is therefore a legitimate pre-event consensus source for claim-024 and claim-025.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "evidence/web/web-011.md",
+      "passage": "We expect to deliver Total underlying operating profit of between £975 million and £1,075 million",
+      "evidence": "Opened in full. This is Sainsbury's own 2026/27 guidance document. The quotes used by claim-008, claim-009 and claim-010 all appear verbatim and in the guidance context the claims describe.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "low",
+      "artifact": "evidence/web-evidence.jsonl",
+      "passage": "{\"id\":\"web-014\",...\"published_at\":\"2026-06-30T00:00:00.000Z\",\"temporal_status\":\"pre_event\"...}",
+      "evidence": "web-014 is Hargreaves Lansdown commentary written after the results were released on 30 Jun 2026 (it reports the actual Q1 numbers and the share price reaction), yet it is tagged temporal_status \"pre_event\". web-012 (Quartr event summary, same date) is tagged the same way. No claim cites either file, so nothing in claims.json or the brief is contaminated by this, but the routing label is wrong for same-day post-release content.",
+      "recommendation": "Treat same-day items as post_event or unchecked rather than pre_event when the published date equals the event date, so a future run cannot use post-release commentary as pre-event expectation evidence."
+    },
+    {
+      "severity": "info",
+      "artifact": "evidence/financials.json",
+      "passage": "{}",
+      "evidence": "The financials file is empty. manifest.json records \"SEC evidence: not_applicable\", consistent with SBRY being LSE-listed. outlook-brief.md section 9 discloses this openly. There is therefore no structured-filing cross-check available for the period labels on any claim in this run.",
+      "recommendation": "None; the limitation is correctly disclosed in the brief."
+    }
+  ],
+  "claim_findings": [
+    {
+      "severity": "medium",
+      "artifact": "claims.json#claim-019",
+      "passage": "CFO said margin will always be diluted by inflation, particularly fuel price inflation, flowing through the P&L this year.",
+      "evidence": "Read in the full segment context. Immediately before the quoted CFO remark, the CEO says in the same answer: \"Clearly, to deliver Retail operating profit growth year-on-year we expect to deliver a positive margin outcome\", and the CFO's own next sentence is \"we will make balanced choices as we travel\". The extracted claim isolates the dilution half of a two-sided answer, so a reader of claims.json alone sees only the negative margin signal. This is what the outlook brief then builds its base case on.",
+      "recommendation": "Extend claim_text to preserve the balancing statement (management expects a positive margin outcome despite inflation dilution), or add a companion claim capturing the positive-margin expectation from the same segment."
+    },
+    {
+      "severity": "medium",
+      "artifact": "claims.json#claim-003",
+      "passage": "General Merchandise + Clothing sales fell 3.7% YoY to £438m.",
+      "evidence": "The claim set records the GM+Clothing decline but never records management's own stated cause for it, even though it is stated twice in this run's evidence. The prepared remarks say GM \"sales were impacted by some seasonal weakness but more significantly by our ongoing and planned programme to tighten ranges and reduce space allocation in favour of food\", and web-013 says GM sales were \"down (6.3) per cent, primarily reflecting an ongoing programme to focus General Merchandise ranges more tightly and reduce space allocation in favour of food\". Neither statement, nor the separate GM (6.3)% and Tu Clothing (2.1)% split, is captured anywhere in claims.json. Its absence is the direct cause of the high-severity mischaracterisation in outlook-brief.md sections 1 and 4.",
+      "recommendation": "Add a claim from the prepared-remarks segment (and/or web-013) capturing management's primary stated attribution of the GM decline to the planned space-reduction programme, plus the GM-only (6.3)% figure."
+    },
+    {
+      "severity": "medium",
+      "artifact": "claims.json#claim-024",
+      "passage": "Ahead of the release, Shore Capital (Clive Black) forecast Q1 grocery sales growth of approximately 2.75-3.25%.",
+      "evidence": "Two decision-relevant pre-event expectation figures sitting in the same evidence files were not extracted. web-010 states \"analyst consensus sitting at £1.061 billion for total underlying operating profit\" -- directly comparable to the £1,045m trajectory figure in claim-011 and material to whether \"towards the upper end\" is actually above or below the market. web-014 states GM+Clothing was expected at -1.3% (actual -3.7%) and that ex-fuel sales growth of 2.7% was \"in line with market expectations\". Only the two figures that produce a beat (claim-024, claim-025) were extracted.",
+      "recommendation": "Extract the FY total underlying operating profit consensus from web-010 and the GM+Clothing expectation from web-014, so the brief has both the favourable and the unfavourable comparisons available."
+    },
+    {
+      "severity": "low",
+      "artifact": "claims.json#claim-009",
+      "passage": "\"period\": \"12 months to 28 Feb 2027\"",
+      "evidence": "The quoted source (web-011) says only \"in 2026/27\"; no document in this run's evidence states the 2026/27 financial year-end date. The period label is therefore an assumption, and Sainsbury's reports on a 52/53-week retail year, so an exact 28 Feb 2027 end date is not safe to assert. It also directly contradicts outlook-brief.md section 9, which states \"The precise FY2026/27 year-end date is not established in this run's evidence ... so no claim in this run asserts one\".",
+      "recommendation": "Either remove the period from claim-009 (matching claim-008 and claim-010, which correctly omit it) or ground it in a source that states the year-end date; and reconcile the section 9 statement with whatever the claim ends up saying."
+    },
+    {
+      "severity": "low",
+      "artifact": "claims.json#claim-012",
+      "passage": "\"classification\": \"reported_fact\"",
+      "evidence": "The claim text is \"Management said the business continues to expect to outperform the grocery market by around 1% this year\" and its status is forward_looking. That is forward guidance, not a reported fact. signal-card.md renders the mismatch visibly as \"**forward_looking** [reported_fact]\" under Demand Activity, and outlook-brief.md correctly files the same content under section 3 \"Management guidance\".",
+      "recommendation": "Reclassify claim-012 as management_guidance so classification, status and the card's own rendering agree."
+    }
+  ],
+  "outlook_findings": [
+    {
+      "severity": "high",
+      "artifact": "outlook-brief.md",
+      "passage": "a distinction management's own framing on the call blurred by attributing GM softness mainly to \"seasonal weakness\" [claim-002] before disclosing the space-reallocation programme only later, in Q&A [claim-018]",
+      "evidence": "Three separate problems in one sentence, and the same error is repeated in section 1 (\"a sharper decline than management's framing on the call (\\\"some seasonal weakness\\\" [claim-002]) suggested in isolation\"). First, the citation is wrong: claim-002 is \"Grocery sales grew 3.6% YoY to £7,603m\", quote \"| Grocery | 3.6% | 7,603 |\" -- it contains no reference to seasonal weakness at all, so a quoted phrase is attached to a claim id that does not carry it. Second, the factual assertion is contradicted by the transcript: in the prepared remarks, before any Q&A, the CEO says GM \"sales were impacted by some seasonal weakness but more significantly by our ongoing and planned programme to tighten ranges and reduce space allocation in favour of food\" -- management named the space programme as the larger driver, in the opening statement, not \"only later, in Q&A\". Third, web-013 in this run's own evidence pack says GM sales were down \"(6.3) per cent, primarily reflecting an ongoing programme to ... reduce space allocation in favour of food\", so the same-day results release also led with the space programme. The brief therefore levels a disclosure-quality criticism at management that its own cited evidence refutes.",
+      "recommendation": "Delete the claim that management blurred the distinction or disclosed the space programme only in Q&A. Replace it with the accurate reading (management attributed the GM decline primarily to the planned space reduction in both the prepared remarks and the results release), cite a claim that actually carries that attribution once one exists, and remove the [claim-002] citation from both sections."
+    },
+    {
+      "severity": "medium",
+      "artifact": "outlook-brief.md",
+      "passage": "both segments beat the pre-event Shore Capital consensus range [claim-026][claim-027], a clean positive surprise on the headline volume story",
+      "evidence": "The two beats are real, but the framing is one-sided against evidence sitting in this run's own pack. web-014 (Hargreaves Lansdown, same day) records GM+Clothing at -3.7% against -1.3% expected -- a miss roughly as large as the Argos beat -- and describes ex-fuel sales growth of 2.7% as \"in line with market expectations\", i.e. the headline was not a surprise at all. web-013's own five-quarter table shows total Sainsbury's growth decelerating 4.9% -> 5.5% -> 4.9% -> 4.3% -> 3.1% and like-for-like ex-fuel decelerating 4.6% -> 4.3% -> 3.4% -> 3.1% -> 2.1%, the slowest in five quarters. claim-005 (2.7% total retail ex-fuel) and claim-006 (2.1% LFL) exist in claims.json and are never cited anywhere in the brief.",
+      "recommendation": "Qualify the \"clean positive surprise\" framing: state that the two segment beats sat alongside a GM+Clothing miss and an in-line, five-quarter-low headline growth rate, and cite claim-005 and claim-006 where the headline is discussed."
+    },
+    {
+      "severity": "medium",
+      "artifact": "outlook-brief.md",
+      "passage": "plausible given inflation already \"stepped back\" in Q1 versus Q4 and management noted trade bodies \"adjusting down\" their own inflation estimates during the call",
+      "evidence": "The upside case rests on three direct quotations from the call -- \"stepped back\", \"adjusting down\", and later \"the higher levels... suggested earlier in the year\" -- none of which carries a claim citation. I confirmed all three phrases do appear in raw/transcript.txt, so they are not fabricated, but they were never extracted into claims.json and therefore never passed the exact-quote gate that every other quotation in this pipeline goes through. The load-bearing evidence for the entire upside case is the least verified material in the document.",
+      "recommendation": "Extract the inflation-trajectory commentary (Q1 inflation stepping back versus Q4, trade bodies adjusting estimates down) as claims and cite them, or drop the direct quotations and state the point in the brief's own words as author interpretation."
+    },
+    {
+      "severity": "medium",
+      "artifact": "outlook-brief.md",
+      "passage": "enough to keep the FY profit outcome inside the guided range but closer to the middle than the \"upper end\" language in claim-011 implies",
+      "evidence": "Two problems. First, this is a positioning judgment about where the outcome falls inside £975m-£1,075m, which section 9 of the same document explicitly refuses to make: \"This brief does not treat these as the same metric or compute where £1,045m sits within £975m-£1,075m\". The base case does exactly what section 9 disclaims. Second, the cited support (claim-019, claim-021) is entirely qualitative -- neither quantifies any margin impact -- so nothing in the evidence sizes the headwind well enough to move the outcome from \"upper end\" to \"middle\". Counterevidence in the same transcript segment as claim-019, where the CEO says \"to deliver Retail operating profit growth year-on-year we expect to deliver a positive margin outcome\", is not surfaced or rebutted.",
+      "recommendation": "Either state the base case as directional (margin headwinds temper the upper-end framing) without asserting a position within the range, or remove the section 9 disclaimer and argue the positioning explicitly with evidence that sizes the headwind. Also surface management's positive-margin expectation as the counterargument."
+    }
+  ],
+  "process_findings": [
+    {
+      "severity": "info",
+      "artifact": "validation.json",
+      "passage": "n/a",
+      "evidence": "validation.json.ok == true, checked_claims 27, issues [] and warnings [] -- confirmed present, not re-derived. All 27 claims in claims.json carry non-empty ids (claim-001 through claim-027).",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "outlook-validation.json",
+      "passage": "n/a",
+      "evidence": "outlook-validation.json exists with ok == true and records both hash bindings (outlook_brief_sha256 eb7d19f4..., claims_sha256 2c5338a7...). outlook-brief.md and signal-card.md both exist. The claims hash matches validation.json's input hash for claims.json, so the brief was validated against the same claim bytes I reviewed.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "manifest.json",
+      "passage": "\"Prompt-injection scan: clean (no configured patterns matched).\"",
+      "evidence": "manifest.json is present and hashes 61 sources (transcript, 40 raw web hits, 15 extracted web evidence files). injection-scan.json shows pattern_count 25 and finding_count 0 with an empty findings list, so there is nothing for me to adjudicate -- the scan is genuinely clean rather than a set of false positives I waved through. segmentation-report.json records 104 segments and one omission, the bare \"Question and Answer Session\" heading, which carries no substantive content.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "_validation_history/attempt-0001_20260904T090722Z/receipt.json",
+      "passage": "\"issue_counts\": {\"claim_text_numeric\": 3, \"numeric\": 2}",
+      "evidence": "Two attempts in this run. Attempt 1 failed on 3 claim_text_numeric and 2 numeric issues; attempt 2 passed with no issues. No check type failed across two or more attempts, so this is a single corrective retry rather than a recurring pattern, and it does not by itself justify a lesson.",
+      "recommendation": "None."
+    }
+  ],
+  "unverified_items": [
+    "The 2026/27 financial year-end date could not be verified from any file in this run's evidence pack, so the period label on claim-009 could be neither confirmed nor refuted, only flagged as unsourced.",
+    "Whether the roughly 1% market outperformance in claim-012 is a volume measure or a sales measure is ambiguous: the segment quoted says only \"outperform the market by around 1%\", while elsewhere in the transcript management says \"volume outperformance of around 1%\". The brief's section 3 wording (\"around 1 percentage point above the grocery market\") does not resolve it.",
+    "evidence/financials.json is empty, so no claim's period label could be cross-checked against a structured filing."
+  ],
+  "summary": "Fail, on one high-severity finding. Outlook-brief.md sections 1 and 4 accuse management of blurring the cause of the General Merchandise decline and of disclosing the space-reallocation programme \"only later, in Q&A\". Both the transcript's prepared remarks and web-013 in this run's own evidence pack show management named the planned space reduction as the more significant driver up front, and the quoted phrase \"seasonal weakness\" is cited to claim-002, which is the grocery sales figure and contains no such wording. Three medium outlook findings follow a common thread: the brief is more confident than its evidence in both directions -- a one-sided \"clean positive surprise\" framing that ignores the GM+Clothing miss and the five-quarter-low headline growth visible in its own cited source, an upside case resting on three uncited direct quotations that never passed the quote gate, and a base-case positioning judgment that the brief's own section 9 disclaims. On the claims side, the extraction captured the beats but not the misses, and isolated the dilution half of a two-sided CFO answer on margin. Deterministic stages all passed and are confirmed present; the injection scan is genuinely clean; sources opened were authentic and correctly dated. Sector language is appropriate throughout -- grocery, general merchandise, loyalty and retail media, with no template metrics borrowed from another industry.",
+  "proposed_lessons": [
+    "Every quoted phrase in the outlook brief must appear in the quote of the claim cited beside it; never attach a transcript quotation to a claim id that does not contain it.",
+    "Before describing a segment's decline as demand weakness or criticising how management framed it, check the prepared remarks and the results release for management's own primary stated cause and extract it as a claim.",
+    "When extracting pre-event expectations, capture the metrics the company missed as well as the ones it beat, so the brief cannot present a selective beat as a clean surprise."
+  ]
+}

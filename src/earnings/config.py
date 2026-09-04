@@ -131,6 +131,29 @@ QA_TRANSITION_PHRASES = tuple(
 )
 SEGMENT_ID_PREFIX = "seg"
 SEGMENT_ID_WIDTH = 4
+SPEAKER_NAME_PARTICLES = frozenset(
+    p.lower()
+    for p in _get(
+        "segmentation",
+        "speaker_name_particles",
+        ["van", "der", "von", "de", "den", "del", "di", "af", "av", "le", "la"],
+    )
+)
+SPEAKER_DENYLIST_PATTERNS = list(
+    _get(
+        "segmentation",
+        "speaker_denylist_patterns",
+        [
+            "forward.looking statements?",
+            "safe harbor( statement)?",
+            "non.gaap reconciliation",
+            "important notice",
+            "disclaimer",
+            "legal notice",
+            "cautionary statement",
+        ],
+    )
+)
 
 # --- Prompt-injection flag (config.toml [sanitisation]) ---
 # Best-effort regex FLAG over the sanitised transcript -- not a classifier, not a gate.

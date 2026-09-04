@@ -125,7 +125,8 @@
     "values": {
       "free_cash_flow_min_millions": 500
     },
-    "confidence": 0.9
+    "confidence": 0.9,
+    "period": "12 months to 28 Feb 2027"
   },
   {
     "id": "claim-010",
@@ -160,7 +161,7 @@
   {
     "id": "claim-012",
     "category": "demand_activity",
-    "classification": "management_guidance",
+    "classification": "reported_fact",
     "claim_text": "Management said the business continues to expect to outperform the grocery market by around 1% this year.",
     "quote": "we continue to expect to outperform the market by around 1% this year.",
     "segment_id": "seg-0002",
@@ -375,106 +376,5 @@
       "claim-004",
       "claim-025"
     ]
-  },
-  {
-    "id": "claim-028",
-    "category": "costs_margins_efficiency",
-    "classification": "management_guidance",
-    "claim_text": "CEO said the company expects to deliver a positive margin outcome in order to grow Retail operating profit year-on-year -- the balancing statement to the margin-dilution point in claim-019, from the same Q&A exchange.",
-    "quote": "Clearly, to deliver Retail operating profit growth year-on-year we expect to deliver a positive margin outcome.",
-    "segment_id": "seg-0086",
-    "speaker": "Simon Roberts",
-    "status": "forward_looking",
-    "values": {},
-    "confidence": 0.85
-  },
-  {
-    "id": "claim-029",
-    "category": "costs_margins_efficiency",
-    "classification": "reported_fact",
-    "claim_text": "Management's own stated primary cause of the GM+Clothing decline was the planned space reallocation to food, named ahead of seasonal weakness, in the prepared remarks -- before any Q&A question was asked.",
-    "quote": "General Merchandise sales were impacted by some seasonal weakness but more significantly by our ongoing and planned programme to tighten ranges and reduce space allocation in favour of food.",
-    "segment_id": "seg-0002",
-    "speaker": "Simon Roberts",
-    "status": "reported",
-    "values": {},
-    "confidence": 0.9
-  },
-  {
-    "id": "claim-030",
-    "category": "reported_financial_performance",
-    "classification": "reported_fact",
-    "claim_text": "General Merchandise alone (excluding Clothing) sales fell 6.3% YoY, per the same-day results release, again primarily attributed to the space-reallocation programme.",
-    "quote": "General Merchandise sales down (6.3) per cent, primarily reflecting an ongoing programme to focus General",
-    "web_evidence_id": "web-013",
-    "status": "reported",
-    "values": {
-      "decline_pct": 6.3
-    },
-    "confidence": 0.85,
-    "period": "16 weeks to 20 Jun 2026"
-  },
-  {
-    "id": "claim-031",
-    "category": "reported_financial_performance",
-    "classification": "reported_fact",
-    "claim_text": "Per a same-day sell-side note, total sales growth of 2.7% (excluding fuel) was in line with market expectations -- not a surprise on the headline number.",
-    "quote": "Sainsbury’s first-quarter sales rose 2.7% to £9.2bn, excluding fuel, which was in line with market expectations.",
-    "web_evidence_id": "web-014",
-    "status": "reported",
-    "values": {},
-    "confidence": 0.85,
-    "period": "16 weeks to 20 Jun 2026"
-  },
-  {
-    "id": "claim-032",
-    "category": "demand_activity",
-    "classification": "reported_fact",
-    "claim_text": "Per the same source, General Merchandise and Clothing's 3.7% decline was worse than the -1.3% that had been expected.",
-    "quote": "General Merchandise and Clothing sales declined 3.7% (-1.3% expected) in the period due to a soft clothing market and reduced in-store space allocation in favour of Groceries.",
-    "web_evidence_id": "web-014",
-    "status": "reported",
-    "values": {
-      "consensus_gm_clothing_decline_expected_pct": -1.3
-    },
-    "confidence": 0.85,
-    "period": "16 weeks to 20 Jun 2026"
-  },
-  {
-    "id": "claim-033",
-    "category": "demand_activity",
-    "classification": "reported_fact",
-    "claim_text": "Ahead of the release, analyst consensus for FY total underlying operating profit stood at £1.061 billion -- directly comparable to management's own trajectory figure in claim-011.",
-    "quote": "analyst consensus sitting at £1.061 billion for total underlying operating profit",
-    "web_evidence_id": "web-010",
-    "status": "reported",
-    "values": {
-      "consensus_fy_profit_billions": 1.061
-    },
-    "confidence": 0.85
-  },
-  {
-    "id": "claim-034",
-    "category": "risk",
-    "classification": "reported_fact",
-    "claim_text": "Management said inflation had actually stepped back somewhat in Q1 versus Q4.",
-    "quote": "the reality is inflation actually stepped back a bit in the First Quarter compared to Quarter Four.",
-    "segment_id": "seg-0015",
-    "speaker": "Simon Roberts",
-    "status": "reported",
-    "values": {},
-    "confidence": 0.85
-  },
-  {
-    "id": "claim-035",
-    "category": "risk",
-    "classification": "management_opinion",
-    "claim_text": "Management said inflation would likely not reach the higher levels some industry bodies had earlier forecast.",
-    "quote": "won’t reach some of the higher levels of forecasted inflation perhaps that were suggested earlier in the year by some of the industry bodies.",
-    "segment_id": "seg-0064",
-    "speaker": "Simon Roberts",
-    "status": "forward_looking",
-    "values": {},
-    "confidence": 0.8
   }
 ]

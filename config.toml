@@ -29,6 +29,26 @@ qa_transition_phrases = [
     "q&a session commences",
     "begin the question-and-answer session",
 ]
+# Lowercase nobiliary/connector particles allowed between capitalized words in a
+# speaker name (e.g. "Wouter van der Vorst") -- matched case-insensitively, only in
+# non-leading position (the first word of a name must still start with a capital).
+speaker_name_particles = [
+    "van", "der", "von", "de", "den", "del", "di", "af", "av", "le", "la",
+]
+# Phrases that look speaker-shaped (Title-Case words ending in a colon) but are known
+# document/section headers, not a person -- matched case-insensitively against the
+# candidate name. Confirmed live (regex audit, 2026-09-04): "Forward Looking
+# Statements:" or "Non-GAAP Reconciliation:" would otherwise be accepted as a
+# fabricated speaker, silently absorbing real content under a name nobody said.
+speaker_denylist_patterns = [
+    "forward.looking statements?",
+    "safe harbor( statement)?",
+    "non.gaap reconciliation",
+    "important notice",
+    "disclaimer",
+    "legal notice",
+    "cautionary statement",
+]
 
 [sanitisation]
 # Best-effort prompt-injection FLAG (not a classifier, not a gate). After the

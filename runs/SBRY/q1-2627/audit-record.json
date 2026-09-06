@@ -1,0 +1,69 @@
+{
+  "run_id": "SBRY:q1-2627",
+  "ticker": "SBRY",
+  "event_id": "q1-2627",
+  "status": "accepted",
+  "final_review_round": 2,
+  "generated_at": "2026-09-06T08:55:11Z",
+  "decision": {
+    "verdict": "pass_with_warnings",
+    "summary": "Pass with warnings. The four cited web sources were opened in full and are authentic and correctly dated, the transcript quotes behind every cited claim match their segments verbatim, the injection scan is genuinely clean, and the deterministic stages all passed and are present. Every claim-### citation in the brief was opened; the wrong-citation risk surfaced in one place only. Three warnings. First, claim-033's claim_text asserts its \u00a31.061bn consensus is 'directly comparable' to management's \u00a31,045m Retail-profit figure, a comparability the brief's own section 9 explicitly disclaims and the source never makes. Second, section 4 cites claim-023 for the assertion that management 'explicitly ties' Nectar participation to retail media growth; claim-023 is about the \u00a3100m profit commitment and contains no such tie, which does exist in seg-0002 but was never extracted. Third, the brief presents grocery growth as a beat and a durable structural lever without anywhere noting that group, grocery and like-for-like growth are all the weakest of the last five quarters on the very table it cites, with the validated like-for-like claim left uncited. Two low findings cover a dropped same-breath qualifier in the inflation claims and two phrases quoted non-verbatim from claim-022. Numerical direction, units and periods are otherwise handled correctly, and the sector language is grocery, general merchandise, loyalty and retail media throughout, with no metric borrowed from another industry.",
+    "finding_counts": {
+      "critical": 0,
+      "high": 0,
+      "medium": 3,
+      "low": 2,
+      "info": 10
+    }
+  },
+  "trace_summary": "Analysis drew on 56 recorded source(s) (transcript, SEC/web evidence). 6 claim-validation attempt(s) were made, 3 with issues, before passing. Review ran 2 round(s): round 1 fail with 1 high, 6 medium, 3 low, 8 info finding(s); round 2 pass_with_warnings with 3 medium, 2 low, 10 info finding(s).",
+  "workflow_trace": [
+    {
+      "stage": "claim_validation",
+      "attempts": 6,
+      "status": "passed"
+    },
+    {
+      "stage": "outlook_validation",
+      "status": "passed"
+    },
+    {
+      "stage": "review",
+      "round": 1,
+      "status": "fail"
+    },
+    {
+      "stage": "review",
+      "round": 2,
+      "status": "pass_with_warnings"
+    }
+  ],
+  "review_history_summary": {
+    "review_rounds": 2,
+    "failed_review_rounds": 1,
+    "historical_findings": {
+      "critical": 0,
+      "high": 1,
+      "medium": 9,
+      "low": 5,
+      "info": 18
+    }
+  },
+  "guardrail_summary": {
+    "validation_retries": 5,
+    "validation_rejections": 3,
+    "review_rejections": 1,
+    "escalations": 0
+  },
+  "hashes": {
+    "transcript_sha256": "9b7cf010f36daaa519bc02f76c7413e0f7eb24c7c30cb8b7e5b3d916d2d1a7ca",
+    "manifest_sha256": "4a14998867520b1edace2f4c8edb9be60343c6cad1ffff4a12a49cc7b256afbc",
+    "claims_sha256": "c2f6dc037a5fee5925224aa338fb884dad233140df0e92da1a09cd86f176c37c",
+    "outlook_brief_sha256": "ff1fef856cae2ab33bd514dd2111db086740036e294e1b16ce5859e5b9b5527e",
+    "review_report_sha256": "0797bdb516d4d035898d782c852fcca607e3c155285eaa1775e7b02bfef7bec7"
+  },
+  "evidence_summary": {
+    "source_count": 56
+  },
+  "reviewer_model": "opus"
+}

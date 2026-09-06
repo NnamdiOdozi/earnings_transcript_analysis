@@ -269,6 +269,7 @@ runs/<ticker>/<event-id>/
   review-report.md            # rendered from review-report.json, never hand-written
   review-diff.json            # round 2+: what changed since the last round (Python-built)
   _review_history/round-<N>/  # per-round snapshot of claims/brief/report, for diffing
+  audit-record.json           # written once, only on a final pass/pass_with_warnings verdict
   _archive/<timestamp>/       # a prior run's files, if this ticker/event was prepared before
 ```
 
@@ -293,6 +294,7 @@ is which when deciding how much to trust a number:
 | `outlook-validation.json` | Python | Real-clock record of when the brief was last checked (the brief itself carries no timestamp). |
 | `review-report.json` | **Agent** (fresh-context reviewer) | Judgment Python cannot make, bound to the exact claims/brief/mode/diff hashes. |
 | `review-report.md` | Python, from `review-report.json` | Never hand-written, so it can't drift from the structured verdict. |
+| `audit-record.json` | Python, compiled from all of the above | The one-file summary for a human approver — see `docs/AUDITABILITY.md` §10. Written once, only on a final (non-`fail`) verdict. |
 
 ### Cross-run processing log
 

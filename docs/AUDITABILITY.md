@@ -252,6 +252,51 @@ A failure at any gate halts the process. That is what "governance" means here in
 a report written afterwards, but controls wired into the workflow so that an unverified result
 *cannot* move forward.
 
+## 10. One file for a human to open: `audit-record.json`
+
+Everything above lives in several files, each doing one job well. That's the right way to
+*build* the system, but it's the wrong shape for a human approver who just wants to know "what
+happened on this run, and was it approved" without reconstructing the story from `manifest.json`,
+`_validation_history/`, `_review_history/`, and `review-report.json` separately.
+
+`check-review` writes exactly one `audit-record.json` at the top of the run directory, and only
+once the reviewer's verdict is genuinely final — `pass` or `pass_with_warnings`, never `fail`
+or an escalated diff round (those aren't done; their own record already lives in
+`_validation_history/`/`_review_history/`). It is **entirely Python-compiled from files that
+already exist** — the agent never reads or writes it — and it is a summary, not a duplicate: a
+`manifest_sha256` stands in for the (often dozens of) individual source hashes `manifest.json`
+already carries, the same indirection `manifest.json` itself already uses for `raw/web/*`.
+
+It holds:
+
+- **`decision`** — the reviewer's final verdict, summary, and finding counts by severity (final
+  round only).
+- **`trace_summary`** — a short, deterministically templated sentence or two (not a second LLM
+  call) stating how many sources were used, how many claim-validation attempts it took, and a
+  one-line outcome per review round (e.g. "round 1 fail with 1 high finding(s); round 2
+  pass_with_warnings with 3 medium finding(s)"). Plain and formulaic by design, not polished
+  narrative.
+- **`workflow_trace`** — a coarse, ordered list of stages/rounds and their status (claim
+  validation, outlook validation, one entry per review round) — a stage count with an ordering,
+  not a claim of full execution tracing with timings or tool-call spans, which this project
+  doesn't record.
+- **`review_history_summary`** — what review rounds turned up, cumulative across *every* round
+  this run went through (not just the final one): round count, failed-round count, and
+  `historical_findings` by severity. This is a review-outcome rollup, not a record of
+  deterministic interventions — see `guardrail_summary` for that.
+- **`guardrail_summary`** — counts of deterministic-control events the run actually triggered:
+  `validation_retries` (claim-validation attempts beyond the first — a resubmission count, not
+  a proven retry-after-rejection causal link), `validation_rejections` (attempts that failed the
+  deterministic checks), `review_rejections` (review rounds that failed), and `escalations`
+  (rounds where the reviewer set `escalate_full_review`, forcing a full re-review because a
+  diff-only review couldn't be judged responsibly).
+- **`hashes`** — five, not dozens: the transcript, the manifest (standing in for every source
+  it lists), the validated claims, the outlook brief, and the review report itself.
+
+This is a summary package, not a new log: nothing here is written until the run is actually
+finished, and the underlying per-attempt/per-round records it was compiled from are never
+deleted or superseded by it.
+
 ---
 
 *In short: sources are fingerprinted, every run is logged, every claim is anchored to an exact

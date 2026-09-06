@@ -1562,3 +1562,142 @@ def test_snapshot_review_round_is_idempotent_on_unchanged_report(isolated_runs_d
     main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"])
     assert _review_round_count(run_dir) == 1
     assert not (run_dir / config.REVIEW_HISTORY_SUBDIR / "round-2").exists()
+
+
+# --- audit-record.json: one-time final summary, written only on a terminal verdict ---
+
+def test_check_review_writes_audit_record_on_pass(isolated_runs_dir):
+    run_dir = _seed_reviewed_run(isolated_runs_dir, verdict="pass")
+    audit_path = run_dir / config.AUDIT_RECORD_FILENAME
+    assert audit_path.exists()
+    record = json.loads(audit_path.read_text())
+    assert record["run_id"] == "ACME:2026-q2"
+    assert record["status"] == "accepted"
+    assert record["final_review_round"] == 1
+    assert record["decision"]["verdict"] == "pass"
+    assert record["review_history_summary"]["review_rounds"] == 1
+    assert record["review_history_summary"]["failed_review_rounds"] == 0
+    assert record["workflow_trace"][0]["stage"] == "claim_validation"
+    assert record["workflow_trace"][0]["attempts"] >= 1
+    assert record["guardrail_summary"]["review_rejections"] == 0
+    assert record["guardrail_summary"]["escalations"] == 0
+    assert record["hashes"]["manifest_sha256"]
+    assert record["hashes"]["claims_sha256"]
+    assert record["hashes"]["outlook_brief_sha256"]
+    assert record["hashes"]["review_report_sha256"]
+    assert record["reviewer_model"] == "opus"
+
+
+def test_check_review_does_not_write_audit_record_on_fail(isolated_runs_dir):
+    run_dir = _seed_validated_run(isolated_runs_dir)
+    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text(
+        "# Outlook\n\nStrong [claim-001].\n"
+    )
+    assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
+    review_report = {
+        "verdict": "fail", "reviewed_at": "2026-08-27T00:00:00Z", "model": "opus",
+        "source_checks": [], "claim_findings": [_finding("high")], "outlook_findings": [],
+        "process_findings": [], "unverified_items": [], "summary": "Needs a fix.",
+        "escalate_full_review": False,
+    }
+    _write_review_report(run_dir, review_report)
+    assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 2
+    assert not (run_dir / config.AUDIT_RECORD_FILENAME).exists()
+
+
+def test_check_review_audit_record_aggregates_across_rounds(isolated_runs_dir):
+    """A round-1 fail followed by a round-2 pass_with_warnings must still produce
+    exactly one audit-record.json, reflecting round 2 as final but counting the
+    round-1 failure and its finding severities in the cumulative guardrail summary."""
+    run_dir = _seed_validated_run(isolated_runs_dir)
+    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text(
+        "# Outlook Brief\n\n## 1. Outlook in brief\n\nStrong quarter.\n\n"
+        "## 2. Q&A highlights\n\nRevenue grew steadily [claim-001].\n\n"
+        "## 5. Base case\n\nContinued momentum expected.\n"
+    )
+    assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
+
+    round1_report = {
+        "verdict": "fail", "reviewed_at": "2026-08-27T00:00:00Z", "model": "opus",
+        "source_checks": [_finding("info")], "claim_findings": [_finding("high")],
+        "outlook_findings": [], "process_findings": [_finding("info")],
+        "unverified_items": [], "summary": "One high finding.", "escalate_full_review": False,
+    }
+    _write_review_report(run_dir, round1_report)
+    assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 2
+    assert not (run_dir / config.AUDIT_RECORD_FILENAME).exists()
+
+    assert main(["review-diff", "--ticker", "ACME", "--event-id", "2026-q2"]) in (0, 3)
+    round2_report = {
+        "verdict": "pass_with_warnings", "reviewed_at": "2026-08-28T00:00:00Z", "model": "opus",
+        "source_checks": [_finding("info")], "claim_findings": [_finding("medium"), _finding("medium"), _finding("medium")],
+        "outlook_findings": [], "process_findings": [_finding("info")],
+        "unverified_items": [], "summary": "Fixed; three medium warnings remain.",
+        "escalate_full_review": False, "review_mode": "diff",
+    }
+    _write_review_report(run_dir, round2_report, review_mode="diff")
+    assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 1
+
+    record = json.loads((run_dir / config.AUDIT_RECORD_FILENAME).read_text())
+    assert record["final_review_round"] == 2
+    assert record["decision"]["verdict"] == "pass_with_warnings"
+    assert record["decision"]["finding_counts"]["medium"] == 3
+    assert record["review_history_summary"]["review_rounds"] == 2
+    assert record["review_history_summary"]["failed_review_rounds"] == 1
+    assert record["review_history_summary"]["historical_findings"]["high"] == 1
+    assert record["review_history_summary"]["historical_findings"]["medium"] == 3
+    assert record["guardrail_summary"]["review_rejections"] == 1
+    assert record["guardrail_summary"]["escalations"] == 0
+    assert [t["status"] for t in record["workflow_trace"] if t["stage"] == "review"] == ["fail", "pass_with_warnings"]
+    assert "2 round" in record["trace_summary"]
+    assert "round 1 fail" in record["trace_summary"]
+    assert "round 2 pass_with_warnings" in record["trace_summary"]
+
+
+def test_check_review_audit_record_counts_historical_escalation(isolated_runs_dir):
+    """A round that escalates (forces a full re-review) is snapshotted into
+    _review_history like any other round but never gets its own audit-record.json
+    (escalation isn't terminal). Once a later round passes cleanly, the final
+    audit record's guardrail_summary must still show that escalation happened."""
+    run_dir = _seed_validated_run(isolated_runs_dir)
+    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text(
+        "# Outlook Brief\n\n## 1. Outlook in brief\n\nStrong quarter.\n\n"
+        "## 2. Q&A highlights\n\nRevenue grew steadily [claim-001].\n\n"
+        "## 5. Base case\n\nContinued momentum expected.\n"
+    )
+    assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
+
+    round1_report = {
+        "verdict": "fail", "reviewed_at": "2026-08-27T00:00:00Z", "model": "opus",
+        "source_checks": [], "claim_findings": [_finding("high")], "outlook_findings": [],
+        "process_findings": [], "unverified_items": [], "summary": "One high finding.",
+        "escalate_full_review": False,
+    }
+    _write_review_report(run_dir, round1_report)
+    assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 2
+
+    assert main(["review-diff", "--ticker", "ACME", "--event-id", "2026-q2"]) in (0, 3)
+    round2_report = {
+        "verdict": "pass_with_warnings", "reviewed_at": "2026-08-28T00:00:00Z", "model": "opus",
+        "source_checks": [], "claim_findings": [_finding("low")], "outlook_findings": [], "process_findings": [],
+        "unverified_items": [], "summary": "Diff too thin to judge; escalating.",
+        "escalate_full_review": True, "review_mode": "diff",
+    }
+    _write_review_report(run_dir, round2_report, review_mode="diff")
+    assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 3
+    assert not (run_dir / config.AUDIT_RECORD_FILENAME).exists()
+
+    assert main(["review-diff", "--ticker", "ACME", "--event-id", "2026-q2"]) in (0, 3)
+    round3_report = {
+        "verdict": "pass", "reviewed_at": "2026-08-29T00:00:00Z", "model": "opus",
+        "source_checks": [], "claim_findings": [], "outlook_findings": [], "process_findings": [],
+        "unverified_items": [], "summary": "Clean on full re-review.", "escalate_full_review": False,
+    }
+    _write_review_report(run_dir, round3_report, review_mode="full")
+    assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
+
+    record = json.loads((run_dir / config.AUDIT_RECORD_FILENAME).read_text())
+    assert record["final_review_round"] == 3
+    assert record["review_history_summary"]["review_rounds"] == 3
+    assert record["guardrail_summary"]["escalations"] == 1
+    assert record["guardrail_summary"]["review_rejections"] == 1

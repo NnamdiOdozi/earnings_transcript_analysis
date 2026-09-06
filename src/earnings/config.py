@@ -74,6 +74,12 @@ REVIEW_DIFF_FILENAME = "review-diff.json"  # Python-authored context for every r
 # (unlike claims_sha256/outlook_brief_sha256, which it already copies from
 # outlook-validation.json). See cli.cmd_review_diff.
 REVIEW_DIFF_SHA256_FILENAME = "review-diff.sha256"
+# Python-only, written once check-review accepts a non-fail verdict (never
+# re-written per fail round) -- the single deterministic summary of a completed
+# run: decision, a templated trace summary, workflow/guardrail counts, and the
+# handful of hashes that stand in for the full evidence set. Never agent-authored.
+# See cli._build_audit_record.
+AUDIT_RECORD_FILENAME = "audit-record.json"
 
 # --- Cross-run processing log (repo root, not per-run -- see cli._append_processing_log) ---
 LOGS_DIR = Path("logs")

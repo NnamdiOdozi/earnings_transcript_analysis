@@ -131,7 +131,10 @@ holding:
 - a forward-looking outlook brief (`outlook-brief.md`) — base/upside/downside
   scenarios;
 - deterministic validation receipts for every check that ran;
-- an independent review trail, including any correction rounds.
+- an independent review trail, including any correction rounds;
+- `audit-record.json` — one Python-compiled summary file, written once a run
+  reaches a final verdict, for a human approver who just wants the outcome
+  without reconstructing it from the files above.
 
 See [docs/WORKFLOW.md](docs/WORKFLOW.md#run-output-layout) for the exact file
 layout and what writes each file.

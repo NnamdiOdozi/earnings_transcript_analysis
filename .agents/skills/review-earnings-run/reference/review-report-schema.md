@@ -4,7 +4,7 @@ Matches `earnings.models.ReviewReport`. This is the only file the reviewer
 writes, regardless of how it was dispatched — `review-report.md` is rendered
 deterministically from it by `earnings check-review`, never written by hand.
 Shared by both the Claude Code `outlook-reviewer` subagent and Codex's
-`review-outlook-brief` in-session pass — one copy, not two independently
+`review-earnings-run-codex` in-session pass — one copy, not two independently
 drifting ones (see `reviewer-judgment-remit.md` in this same directory for
 why that matters).
 

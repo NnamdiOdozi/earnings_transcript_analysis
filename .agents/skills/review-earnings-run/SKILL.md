@@ -130,7 +130,7 @@ material omitted.
 
 - `reference/reviewer-judgment-remit.md` — the canonical judgment contract the
   `outlook-reviewer` subagent reads (what to judge, run bundle, diff-based
-  re-review, output rules). Shared with Codex's `review-outlook-brief` skill —
+  re-review, output rules). Shared with Codex's `review-earnings-run-codex` skill —
   one copy, not two independently drifting ones.
 - `reference/review-report-schema.md` — the `ReviewReport`/`ReviewFinding` JSON
   shape and severity guidance, for both the reviewer subagent and anyone reading

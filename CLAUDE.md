@@ -11,7 +11,7 @@ limitations; don't duplicate its content here.
 
 - `.agents/skills/<name>/SKILL.md` — Codex/any-agent skills, run in order:
   `build-earnings-source-pack`, `produce-earnings-signal-card`,
-  `review-earnings-run` (Claude Code) / `review-outlook-brief` (Codex).
+  `review-earnings-run` (Claude Code) / `review-earnings-run-codex` (Codex).
 - `.claude/agents/outlook-reviewer.md` — Claude Code subagent for the final
   semantic review (fresh context, dispatched after `validate-outlook` passes).
 - `src/earnings/` — all deterministic logic (`cli.py`, `sources.py`,

@@ -165,7 +165,7 @@ Python structurally can't: fair reading of quotes, narrative balance, material
 omissions. In Claude Code this is the dedicated `outlook-reviewer` subagent
 (`.agents/skills/review-earnings-run/SKILL.md`); elsewhere (Codex) the same
 agent runs the review itself as a deliberate final pass
-(`.agents/skills/review-outlook-brief/SKILL.md`). Either way, the reviewer
+(`.agents/skills/review-earnings-run-codex/SKILL.md`). Either way, the reviewer
 writes `review-report.json`.
 
 ```bash
@@ -311,7 +311,7 @@ Three repo-scoped skills live under `.agents/skills/`, used in order:
 - **`build-earnings-source-pack`** — steps 1–2 above.
 - **`produce-earnings-signal-card`** — steps 3–4 above (Stage 1: claims and
   `analyze`; Stage 2: the outlook brief and `validate-outlook`).
-- **`review-earnings-run`** (Claude Code) or **`review-outlook-brief`**
+- **`review-earnings-run`** (Claude Code) or **`review-earnings-run-codex`**
   (Codex/other environments) — step 5 above.
 
 Point your agent at this repo; it discovers each skill under

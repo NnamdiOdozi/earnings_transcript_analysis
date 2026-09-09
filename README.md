@@ -104,15 +104,35 @@ A representative run looks like:
 
 ```bash
 uv run earnings discover-peers --ticker MSFT --company-name "Microsoft"
+# -> searches for MSFT's peer group, writes candidate pages to read and pick
+#    ~4 real peers from
+
 uv run earnings prepare --ticker MSFT --event-id 2026-q2 \
   --transcript path/or/url --company-name "Microsoft" --event-date 2026-07-29 \
   --peers "Alphabet" "Amazon" "Oracle" "Apple"
-# agent writes claims.json, then:
+# -> fetches, sanitises, segments and hashes the transcript; pulls SEC
+#    financials; runs web-search queries for analyst consensus and the named
+#    peers' results -- all archived and hashed into manifest.json
+
+# agent reads the prepared evidence, writes claims.json, then:
 uv run earnings analyze --ticker MSFT --event-id 2026-q2
-# agent writes outlook-brief.md, then:
+# -> GATE 1: Python checks claims.json (exact quotes, numbers, calculations);
+#    fails non-zero and stops here on a bad claim. Only on success does it
+#    write signal-card.md automatically
+
+# agent writes outlook-brief.md from the validated claims, then:
 uv run earnings validate-outlook --ticker MSFT --event-id 2026-q2
-# agent runs the independent review, then:
+# -> GATE 2: Python checks every claim id the brief cites resolves, and
+#    every material number it states is grounded in a cited claim; fails
+#    non-zero and stops here otherwise
+
+# a fresh-context reviewer subagent (Outlook_Reviewer, Opus) audits the brief
+# and writes review-report.json -- a real file, not held in memory -- then:
 uv run earnings check-review --ticker MSFT --event-id 2026-q2
+# -> GATE 3: Python validates that file and gates the verdict. This is often
+#    more than one round: a "fail" sends the agent back to revise and
+#    re-review (see docs/WORKFLOW.md); only a clean/warned verdict finishes
+#    the run
 ```
 
 Point your agent at this repo and it will discover the skills under

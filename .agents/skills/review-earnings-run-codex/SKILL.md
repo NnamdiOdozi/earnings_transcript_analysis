@@ -1,9 +1,9 @@
 ---
-name: review-outlook-brief
+name: review-earnings-run-codex
 description: Codex-side final semantic audit of a completed run's outlook brief, using a fresh subagent when available or a deliberate in-session review pass otherwise. Use only after earnings validate-outlook has already passed.
 ---
 
-# Review Outlook Brief (Codex / non-Claude-Code environments)
+# Review Earnings Run (Codex / non-Claude-Code environments)
 
 Claude Code uses its custom `outlook-reviewer` subagent. In Codex, dispatch a
 fresh review subagent when the host exposes that capability. Otherwise apply the

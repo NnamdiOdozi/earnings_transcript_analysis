@@ -25,21 +25,3 @@ $373.64
 JPMorgan Chase & Co. (JPM) has 10 identified peers for comparison in the Financial Services sector. Peers include BAC, BMO, BNS, C, CM, HSBC and others.
 
 JPM has a market capitalization of $967.2B, compared to an average peer market cap of $224.98B. JPM is significantly larger than its average peer.
-
-## Peers & Similar Companies — JPM
-
-BAC
-
-Bank of America Corporation
-
- $63.89 -0.93% $453.4B 
-
- $185.28 -0.29% $129.77B 
-
- $14.74 -3.22% $71.39B 
-
- $124.34 -0.01% $210.07B 
-
- $87.55 -1.43% $264.75B 
-
-## People Also View

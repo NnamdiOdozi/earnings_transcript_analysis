@@ -1,12 +1,12 @@
 {
-  "url": "https://www.reuters.com/business/finance/bank-america-profit-rises-trading-boost-2026-07-14/",
-  "title": "BofA rides market whiplash to trading records, deal activity ...",
+  "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-bank-of-america-tops-q2-2026-estimates-as-profit-jumps-93CH-4791110",
+  "title": "Earnings call transcript: Bank of America tops Q2 2026 estimates as profit jumps By Investing.com",
   "score": null,
-  "published_date": "2026-07-14T00:00:00.000Z",
+  "published_date": null,
   "_class": "peer",
   "_select_key": "peer:Bank of America",
-  "_temporal_status": "pre_event",
+  "_temporal_status": "undated",
   "_provider": "exa",
   "_query": "Bank of America 2026-q2 earnings guidance outlook",
-  "_retrieved_at": "2026-09-01T12:06:24Z"
+  "_retrieved_at": "2026-09-09T16:19:17Z"
 }

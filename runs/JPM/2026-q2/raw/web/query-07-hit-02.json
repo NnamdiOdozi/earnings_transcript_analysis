@@ -1,12 +1,12 @@
 {
-  "url": "https://capedge.com/filing/19617/0001628280-26-029344/JPM-10Q-2026Q1",
-  "title": "JPMorgan Chase & Co. 10-Q Filing | JPM | CapEdge",
+  "url": "https://www.tipranks.com/news/jpm-vs-bac-vs-c-vs-wfc-vs-gs-bank-earnings-crush-estimates-as-jpmorgan-posts-record-profit",
+  "title": "",
   "score": null,
-  "published_date": "2026-05-01T00:00:00.000Z",
+  "published_date": null,
   "_class": "peer",
   "_select_key": "peer:Bank of America",
-  "_temporal_status": "pre_event",
+  "_temporal_status": "undated",
   "_provider": "exa",
   "_query": "Bank of America quarterly results versus JPMorgan Chase JPM",
-  "_retrieved_at": "2026-09-01T12:06:23Z"
+  "_retrieved_at": "2026-09-09T16:19:15Z"
 }

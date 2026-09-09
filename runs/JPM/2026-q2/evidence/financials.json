@@ -1,4 +1,16 @@
 {
+  "Revenues": {
+    "value": 182447000000,
+    "start": "2025-01-01",
+    "end": "2025-12-31",
+    "duration_days": 364,
+    "period_type": "full_year",
+    "unit": "USD",
+    "form": "10-K",
+    "fy": 2025,
+    "filed": "2026-02-13",
+    "accn": "0001628280-26-008131"
+  },
   "NetIncomeLoss": {
     "value": 37649000000,
     "start": "2026-01-01",

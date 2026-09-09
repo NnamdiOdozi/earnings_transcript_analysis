@@ -1,10 +1,11 @@
 {
-  "url": "https://www.morningstar.com/stocks/one-wall-streets-highest-quality-stocks-is-becoming-more-interesting",
-  "title": "One of Wall Street's Highest-Quality Stocks Is Becoming ...",
+  "url": "https://investor.wedbush.com/wedbush/article/finterra-2026-4-14-the-fortress-and-the-future-an-in-depth-research-report-on-jpmorgan-chase-and-co-jpm",
+  "title": "The Fortress and the Future: An In-Depth Research Report on JPMorgan Chase & Co. (JPM)",
   "score": null,
-  "published_date": "2026-06-11T00:00:00.000Z",
+  "published_date": "2026-04-14T00:00:00.000Z",
   "_class": "peer_group",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
   "_query": "JPMorgan Chase JPM closest competitors comparable stocks analysts",
-  "_retrieved_at": "2026-08-27T20:08:05Z"
+  "_retrieved_at": "2026-09-09T16:18:37Z"
 }

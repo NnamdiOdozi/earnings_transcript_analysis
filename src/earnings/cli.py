@@ -264,6 +264,36 @@ def _snapshot_review_round(run_dir: Path, round_number: int) -> None:
         src = run_dir / filename
         if src.exists():
             shutil.copy2(src, dest / filename)
+    _write_review_round_receipt(dest)
+
+
+def _write_review_round_receipt(round_dir: Path) -> None:
+    """Write a small receipt.json alongside this round's snapshotted review-report.json:
+    verdict and finding counts by severity only, no finding text -- so a human (or the
+    next agent) can see how a round went at a glance, without opening the full report or
+    waiting for audit-record.json, which is only written once the whole run is accepted.
+    Mirrors _validation_history/attempt-NNNN/receipt.json's role for Stage 1.
+    """
+    report_path = round_dir / config.REVIEW_REPORT_JSON_FILENAME
+    if not report_path.is_file():
+        return
+    report = json.loads(report_path.read_text(encoding="utf-8"))
+    severities = ("critical", "high", "medium", "low", "info")
+    finding_counts = {sev: 0 for sev in severities}
+    for key in ("source_checks", "claim_findings", "outlook_findings", "process_findings"):
+        for finding in report.get(key, []):
+            sev = finding.get("severity")
+            if sev in finding_counts:
+                finding_counts[sev] += 1
+    receipt = {
+        "round": int(round_dir.name.split("-")[1]),
+        "verdict": report.get("verdict"),
+        "reviewed_at": report.get("reviewed_at"),
+        "review_mode": report.get("review_mode"),
+        "escalate_full_review": report.get("escalate_full_review", False),
+        "finding_counts": finding_counts,
+    }
+    _write_json(round_dir / config.REVIEW_ROUND_RECEIPT_FILENAME, receipt)
 
 
 def _unclosed_review_report(run_dir: Path) -> bool:

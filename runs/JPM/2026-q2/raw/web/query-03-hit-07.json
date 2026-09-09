@@ -1,12 +1,12 @@
 {
-  "url": "https://news.alphastreet.com/jpmorgan-chase-jpm-q2-2026-preview-eps-est-5-67-reports-july-14/",
-  "title": "JPMorgan Chase (JPM) Q2 2026 Preview: EPS Est. $5.67; Reports July 14 - Alphastreet",
+  "url": "https://kaplio.com/ticker/JPM/estimates",
+  "title": "JPMorgan Chase & Co. (JPM) Analyst Estimates | Price Target & Consensus",
   "score": null,
-  "published_date": "2026-07-09T00:00:00.000Z",
+  "published_date": null,
   "_class": "consensus",
   "_select_key": "consensus",
-  "_temporal_status": "pre_event",
+  "_temporal_status": "undated",
   "_provider": "exa",
   "_query": "JPMorgan Chase JPM Wall Street consensus estimates ahead of earnings",
-  "_retrieved_at": "2026-09-01T12:06:18Z"
+  "_retrieved_at": "2026-09-09T16:19:09Z"
 }

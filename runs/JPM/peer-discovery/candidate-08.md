@@ -1,299 +1,89 @@
----
-title: JPMorgan Chase & Co. (JPM) vs. Competitors: Compare Ratings, Earnings & Price - TipRanks.com
-image: https://tr-cdn.tipranks.com/static/v2/static/images/logo/tipranks/og_image.jpg
-description: Find JPMorgan Chase & Co. Stock competitors. Compare other Stocks that are similar to JPM in performance, different metrics, and ratios.
----
+JPM vs. Peers — At a Glance
 
-[![tipranks](https://tr-cdn.tipranks.com/static/v2/static/images/logo/tipranks/black-trust.svg)![tipranks](https://tr-cdn.tipranks.com/static/v2/static/images/logo/tipranks/tipranks_small.svg)](https://www.tipranks.com/)
+Against 5 peers, JPM scores 71/100 on composite health — within a few points of the group median. On valuation, JPM screens cheaper than peers on EV/EBITDA (19.4x vs. 23.2x median).
 
-JPMorgan Chase & Co. (JPM)
-
-NYSE:JPM 
-
-JPM
-
-JPMorgan Chase 
-
-More
-
-RESEARCH TOOLSreports
-
-Download JPM Report
-
-Want to see JPM full AI Analyst Report?
-
-Download
-
-# Compare JPMorgan Chase (JPM) vs. Competitors
-
-Download JPM Report
-
-Follow
-
-25,849 Followers
-
-## Comparison Results
-
-Select Columns
-
-Name
-
-Price
-
-Market Cap
-
-P/E Ratio
-
-Yearly Gain
-
-Analyst Consensus
-
-Analyst Price Target
-
-Compare
-
-Top Analysts' Price Target
-
-Smart Score
-
-Follow
-
-[JPM](https://www.tipranks.com/stocks/jpm/forecast "See JPM stock ratings, alongside predictions by top financial experts")
-
-JPMorgan Chase
-
-$353.21
-
-$950.35B
-
-15.47
-
-24.60%
-
-10 Buy
-
-6 Hold
-
-0 Sell
-
-Moderate Buy
-
-[xxxxxxxxxxxxx](https://lp.tipranks.com/go-pro-v2?custom18=stocks%5F%5Fticker%5Fsimilar%5Fstocks&llf=table-column-priceTargetUpSideDownSide)
-
-[JPM](https://www.tipranks.com/compare-stocks/custom?ticker=JPM)
-
-[xxxxxxxxxxxxx](https://lp.tipranks.com/go-pro-v2?custom18=stocks%5F%5Fticker%5Fsimilar%5Fstocks&llf=table-column-bestPriceTargetUpSideDownSide)
-
-[BAC](https://www.tipranks.com/stocks/bac/forecast "See BAC stock ratings, alongside predictions by top financial experts")
-
-Bank of America
-
-$62.05
-
-$441.73B
-
-14.48
-
-38.80%
-
-14 Buy
-
-3 Hold
-
-0 Sell
-
-Strong Buy
-
-[xxxxxxxxxxxxx](https://lp.tipranks.com/go-pro-v2?custom18=stocks%5F%5Fticker%5Fsimilar%5Fstocks&llf=table-column-priceTargetUpSideDownSide)
-
-[JPM vs BAC](https://www.tipranks.com/compare-stocks/custom?ticker=JPM&ticker=BAC)
-
-[xxxxxxxxxxxxx](https://lp.tipranks.com/go-pro-v2?custom18=stocks%5F%5Fticker%5Fsimilar%5Fstocks&llf=table-column-bestPriceTargetUpSideDownSide)
-
-[C](https://www.tipranks.com/stocks/c/forecast "See C stock ratings, alongside predictions by top financial experts")
-
-Citigroup
-
-$132.19
-
-$226.45B
-
-14.34
-
-45.82%
-
-11 Buy
-
-4 Hold
-
-0 Sell
-
-Moderate Buy
-
-[xxxxxxxxxxxxx](https://lp.tipranks.com/go-pro-v2?custom18=stocks%5F%5Fticker%5Fsimilar%5Fstocks&llf=table-column-priceTargetUpSideDownSide)
-
-[JPM vs C](https://www.tipranks.com/compare-stocks/custom?ticker=JPM&ticker=C)
-
-[xxxxxxxxxxxxx](https://lp.tipranks.com/go-pro-v2?custom18=stocks%5F%5Fticker%5Fsimilar%5Fstocks&llf=table-column-bestPriceTargetUpSideDownSide)
-
-[MS](https://www.tipranks.com/stocks/ms/forecast "See MS stock ratings, alongside predictions by top financial experts")
-
-Morgan Stanley
-
-$214.48
-
-$339.76B
-
-17.30
-
-50.39%
-
-9 Buy
-
-6 Hold
-
-1 Sell
-
-Moderate Buy
-
-[xxxxxxxxxxxxx](https://lp.tipranks.com/go-pro-v2?custom18=stocks%5F%5Fticker%5Fsimilar%5Fstocks&llf=table-column-priceTargetUpSideDownSide)
-
-[JPM vs MS](https://www.tipranks.com/compare-stocks/custom?ticker=JPM&ticker=MS)
-
-[xxxxxxxxxxxxx](https://lp.tipranks.com/go-pro-v2?custom18=stocks%5F%5Fticker%5Fsimilar%5Fstocks&llf=table-column-bestPriceTargetUpSideDownSide)
-
-[WFC](https://www.tipranks.com/stocks/wfc/forecast "See WFC stock ratings, alongside predictions by top financial experts")
-
-Wells Fargo
-
-$86.31
-
-$263.84B
-
-12.49
-
-12.42%
-
-9 Buy
-
-6 Hold
-
-0 Sell
-
-Moderate Buy
-
-[xxxxxxxxxxxxx](https://lp.tipranks.com/go-pro-v2?custom18=stocks%5F%5Fticker%5Fsimilar%5Fstocks&llf=table-column-priceTargetUpSideDownSide)
-
-[JPM vs WFC](https://www.tipranks.com/compare-stocks/custom?ticker=JPM&ticker=WFC)
-
-[xxxxxxxxxxxxx](https://lp.tipranks.com/go-pro-v2?custom18=stocks%5F%5Fticker%5Fsimilar%5Fstocks&llf=table-column-bestPriceTargetUpSideDownSide)
-
-[GS](https://www.tipranks.com/stocks/gs/forecast "See GS stock ratings, alongside predictions by top financial experts")
-
-Goldman Sachs Group
-
-$1061.23
-
-$302.70B
-
-15.76
-
-43.43%
-
-6 Buy
-
-8 Hold
-
-1 Sell
-
-Moderate Buy
-
-[xxxxxxxxxxxxx](https://lp.tipranks.com/go-pro-v2?custom18=stocks%5F%5Fticker%5Fsimilar%5Fstocks&llf=table-column-priceTargetUpSideDownSide)
-
-[JPM vs GS](https://www.tipranks.com/compare-stocks/custom?ticker=JPM&ticker=GS)
-
-[xxxxxxxxxxxxx](https://lp.tipranks.com/go-pro-v2?custom18=stocks%5F%5Fticker%5Fsimilar%5Fstocks&llf=table-column-bestPriceTargetUpSideDownSide)
-
-## Performance Comparison
-
-3m6m1yYTD3y5y
-
-Ticker
-
-Company Name
-
-Price
-
-Change
-
-% Change
-
-JPM
-
-JPMorgan Chase
-
-359.79
-
-75.67
-
-26.63%
-
-BAC
-
-Bank of America
-
-63.86
-
-18.69
-
-41.36%
+Composite Health vs. Peers
 
 C
 
-Citigroup
+76
 
-135.22
+BAC
 
-44.82
-
-49.58%
-
-MS
-
-Morgan Stanley
-
-215.33
-
-74.64
-
-53.05%
-
-WFC
-
-Wells Fargo
-
-87.52
-
-11.59
-
-15.26%
+76
 
 GS
 
-Goldman Sachs Group
+76
 
-1,034.51
+JPM
 
-329.46
+71
 
-46.73%
+WFC
 
-Compare key indicators and discover each stock’s average analyst price target, as well as the latest recommendations by top Wall Street experts
+71
 
-[Compare More Stocks >](https://www.tipranks.com/compare-stocks/custom?ticker=JPM&ticker=BAC&ticker=C&ticker=MS&ticker=WFC&ticker=GS)
+MS
 
-```json
-{"@context":"http://schema.org","@type":"WebPage","name":"JPMorgan Chase & Co. (JPM) vs. Competitors: Compare Ratings, Earnings & Price","description":"Find JPMorgan Chase & Co. Stock competitors. Compare other Stocks that are similar to JPM in performance, different metrics, and ratios.","keywords":["JPMorgan Chase Similar Stocks"],"inLanguage":"en-US","dateModified":"Aug 11, 2026","url":"/stocks/jpm/similar-stocks","publisher":{"@context":"http://www.schema.org","@type":"Organization","name":"tipranks","url":"https://www.tipranks.com/","logo":"https://www.tipranks.com/new-images/home3/logo.png","email":"support@tipranks.com","description":"TipRanks is a multi-award-winning fintech company that was founded in 2012. It offers simplified research and analysis for investors.  Its unique datasets are based on analyst ratings, blogger opinion, news sentiment, insider activity,  and hedge fund transactions. It ranks the performance of anyone giving financial advice.","contactPoint":{"@type":"ContactPoint","telephone":"1.866.388.7782","email":"support@tipranks.com","contactType":"Customer Support"},"sameAs":["https://en.wikipedia.org/wiki/TipRanks"]},"about":{"@type":"http://schema.org/Corporation","aggregateRating":{"@type":"AggregateRating","ratingValue":"4","ratingCount":"15975","worstRating":0,"bestRating":5,"itemReviewed":{"@type":"http://schema.org/Corporation","name":"JPMorgan Chase & Co.","tickerSymbol":"JPM"}}}}
-{"@context":"http://schema.org ","@type":"ItemList","itemListElement":[{"@type":"SiteNavigationElement","position":1,"name":"Overview","url":"https://www.tipranks.com/stocks/jpm"},{"@type":"SiteNavigationElement","position":2,"name":"Analysts","url":"https://www.tipranks.com/stocks/jpm/forecast"},{"@type":"SiteNavigationElement","position":3,"name":"aianalyst","url":"https://www.tipranks.com/stocks/jpm/stock-analysis"},{"@type":"SiteNavigationElement","position":4,"name":"Dividends","url":"https://www.tipranks.com/stocks/jpm/dividends"},{"@type":"SiteNavigationElement","position":5,"name":"Calendar Earnings","url":"https://www.tipranks.com/stocks/jpm/earnings"},{"@type":"SiteNavigationElement","position":6,"name":"Ownership","url":"https://www.tipranks.com/stocks/jpm/ownership"},{"@type":"SiteNavigationElement","position":7,"name":"Financials","url":"https://www.tipranks.com/stocks/jpm/financials"},{"@type":"SiteNavigationElement","position":8,"name":"Community","url":"https://www.tipranks.com/stocks/jpm/community"},{"@type":"SiteNavigationElement","position":9,"name":"statistics","url":"https://www.tipranks.com/stocks/jpm/statistics"},{"@type":"SiteNavigationElement","position":10,"name":"Technical Analysis","url":"https://www.tipranks.com/stocks/jpm/technical-analysis"},{"@type":"SiteNavigationElement","position":11,"name":"Historical Prices","url":"https://www.tipranks.com/stocks/jpm/historical-prices"},{"@type":"SiteNavigationElement","position":12,"name":"News","url":"https://www.tipranks.com/stocks/jpm/stock-news"},{"@type":"SiteNavigationElement","position":13,"name":"Charts","url":"https://www.tipranks.com/stocks/jpm/stock-charts"},{"@type":"SiteNavigationElement","position":14,"name":"Similar","url":"https://www.tipranks.com/stocks/jpm/similar-stocks"},{"@type":"SiteNavigationElement","position":15,"name":"buyBack","url":"https://www.tipranks.com/stocks/jpm/buybacks"},{"@type":"SiteNavigationElement","position":16,"name":"Options","url":"https://www.tipranks.com/stocks/jpm/options-chain"},{"@type":"SiteNavigationElement","position":17,"name":"Risk Factors","url":"https://www.tipranks.com/stocks/jpm/risk-factors"},{"@type":"SiteNavigationElement","position":18,"name":"Insiders","url":"https://www.tipranks.com/stocks/jpm/insider-trading"},{"@type":"SiteNavigationElement","position":19,"name":"Hedge Funds","url":"https://www.tipranks.com/stocks/jpm/hedge-funds"},{"@type":"SiteNavigationElement","position":20,"name":"Investors","url":"https://www.tipranks.com/stocks/jpm/stock-investors"},{"@type":"SiteNavigationElement","position":21,"name":"Politicians","url":"https://www.tipranks.com/stocks/jpm/politicians"},{"@type":"SiteNavigationElement","position":22,"name":"Bloggers","url":"https://www.tipranks.com/stocks/jpm/bloggers"},{"@type":"SiteNavigationElement","position":23,"name":"exposure","url":"https://www.tipranks.com/stocks/jpm/etf-exposure"}]}
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"TipRanks","item":"https://www.tipranks.com/"},{"@type":"ListItem","position":2,"name":"Stocks","item":"https://www.tipranks.com/stocks"},{"@type":"ListItem","position":3,"name":"JPMorgan Chase (JPM)","item":"https://www.tipranks.com/stocks/jpm"},{"@type":"ListItem","position":4,"name":"Similar Stocks","item":"https://www.tipranks.com/stocks/jpm/similar-stocks"}]}
-```
+71
+
+Market Cap?$1.0t P/E? 16.5 ROE? 15.8% Div Yield? 1.81% F-Score? 4/9 Health? 71/100
+
+Valuation vs. Quality
+
+Fundamentals
+
+| Metric | JPM | C | WFC | MS | BAC | GS | Avg |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Profitability | | | | | | | |
+| Return on Equity? | 15.8% | 7.0% | 12.0% | 15.3% | 10.7% | 16.3% | 12.8% |
+| Return on Assets? | 1.2% | 0.5% | 0.9% | 1.1% | 0.9% | 0.9% | 0.9% |
+| ROIC? | 2.9% | 1.2% | 2.4% | 2.3% | 2.1% | 1.7% | 2.1% |
+| Earnings Yield? | 5.02% | 3.40% | 6.03% | 3.67% | 4.76% | 3.59% | 4.41% |
+| Cash ROIC? | — | — | — | — | — | — | — |
+| Sloan Accrual? | +0.046 | +0.031 | +0.009 | +0.025 | +0.005 | +0.034 | +0.025 |
+| Leverage & Liquidity | | | | | | | |
+| Debt / Equity? | 1.42 | 1.80 | 1.15 | 3.42 | 1.33 | 4.02 | 2.19 |
+| Current Ratio? | 43.64 | 24.65 | 45.42 | — | 32.09 | 17.77 | 32.71 |
+| Quick Ratio? | 43.64 | 24.65 | 45.42 | — | 32.09 | 17.77 | 32.71 |
+| Cash Ratio? | 0.32 | 0.33 | 1.68 | — | 0.47 | 2.08 | 0.98 |
+| Quality Scores | | | | | | | |
+| Piotroski F-Score? | 4/9 | 5/9 | 4/9 | 4/9 | 5/9 | 5/9 | 5/9 |
+| Altman Z-Score? | 4.35 | 4.46 | 3.68 | 5.15 | 4.03 | 5.22 | 4.48 |
+| Beneish M-Score? | -2.40 | -2.50 | -2.56 | -2.27 | -2.66 | -2.34 | -2.46 |
+| Mohanram G-Score? | — | — | — | — | — | — | — |
+
+Valuation
+
+| Metric | JPM | C | WFC | MS | BAC | GS | Avg |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Price Multiples | | | | | | | |
+| P/E (TTM)? | 16.5x | 15.4x | 12.2x | 19.4x | 13.7x | 15.1x | 15.4x |
+| P/S? | 3.33x | 1.32x | 2.05x | 2.75x | 2.26x | 2.24x | 2.32x |
+| P/B? | 2.61x | 1.07x | 1.46x | 2.98x | 1.47x | 2.47x | 2.01x |
+| P/CF? | — | — | 13.8x | 19.2x | 4.7x | — | 12.5x |
+| P/FCF? | — | — | — | 23.0x | — | — | 23.0x |
+| Enterprise Multiples | | | | | | | |
+| EV/EBITDA? | 19.4x | 26.6x | 15.6x | 25.5x | 18.6x | 23.2x | 21.5x |
+| EV/Sales? | 5.07x | 3.40x | 3.33x | 4.83x | 4.17x | 4.51x | 4.22x |
+| Income | | | | | | | |
+| Dividend Yield? | 1.81% | 2.39% | 2.49% | 1.97% | 2.21% | 2.03% | 2.15% |
+
+Price Performance
+
+About This Comparison
+
+Peer Group is sourced from the related-companies engine, which surfaces tickers that share news coverage and return correlations with the target stock. This catches non-obvious peer relationships that rigid GICS sector classifications often miss.
+
+Composite Health Score is a 0–100 blended quality score combining the Piotroski F-Score (operational quality), Altman Z-zone (solvency), Beneish manipulation safety, Cash ROIC (cash quality), and Mohanram G-Score (growth quality). Weights redistribute when components are missing so the score remains comparable across peers.
+
+Piotroski F-Score is a 9-point screen developed by accounting professor Joseph Piotroski. It evaluates profitability (ROA, operating cash flow, accruals), leverage and liquidity (debt ratio, current ratio, share dilution), and operating efficiency (gross margin, asset turnover). Scores of 7–9 indicate strong fundamentals; 0–3 suggest weakness.
+
+Altman Z-Score is a bankruptcy distress predictor developed by professor Edward Altman. It combines five financial ratios — working capital, retained earnings, EBIT, market capitalization, and revenue — all relative to total assets. Above 2.99 suggests safety; below 1.81 indicates distress. The Z-Score is not applicable to financial-sector companies.
+
+Beneish M-Score is an earnings-manipulation detector built from eight financial ratios covering accruals, margin trends, and asset quality. More negative is cleaner — below −2.22 is a normal range; above −1.78 enters the suspect zone. The model is famous for being able to flag Enron-style accounting issues years in advance.
+
+Mohanram G-Score is an 8-point growth-quality screen designed for high-multiple companies. It tests profitability stability, R&D and capex intensity, and cash-flow consistency against industry peers. Scores of 6–8 indicate the strongest growth-quality foundation.
+
+Sloan Accrual Ratio measures how much of reported earnings come from accruals rather than cash. High positive values are an earnings-quality red flag — accruals tend to revert and reported earnings unsupported by cash flow are less durable. Cash ROIC divides operating cash flow by invested capital — the cash-based version of ROIC, harder to manipulate than the accrual version. Magic Formula Rank is Joel Greenblatt's combined ranking on earnings yield (cheapness) and ROIC (capital efficiency); a lower rank means a better combination of value and quality across the universe.

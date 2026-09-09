@@ -1,36 +1,133 @@
-JPMorgan Chase & Co. Peer Companies Stock — Comparisons | AssetNext
+Companies Like JPMorgan Chase & Co. (JPM) — Similar Stocks · AssetNext
 
-Home› Compare› JPM
+Home› Similar Companies› JPM
 
-Peer Analysis
+Structural Similarity · Functional Peers
 
-# JPMorgan Chase & Co. — Peer Companies & Stock Comparisons
+# Companies Similar to JPMorgan Chase & Co.
 
-JPMorgan Chase & Co.'s functional peer companies ranked by peer score — growth, valuation, profitability and stability compared.
+Stocks with a similar structural profile to JPMorgan Chase & Co. (JPM) — identified by trajectory similarity across revenue dynamics, margin structure, and capital efficiency patterns. Not based on sector labels alone.
 
-Compare JPM with peers
+10 similar companies · Updated 2026-06-21 · JPM full analysis → peer cluster →
 
-| Comparison | JPM peer score | |
-| --- | --- | --- |
-| JPM vs BAC JPMorgan Chase & Co. vs Bank of America Corporation | 59 | Compare → |
-| JPM vs WFC JPMorgan Chase & Co. vs Wells Fargo & Company | 50 | Compare → |
-| JPM vs INGA.AS JPMorgan Chase & Co. vs ING Groep N.V. | 46 | Compare → |
-| JPM vs UBSG.SW JPMorgan Chase & Co. vs UBS Group AG | 45 | Compare → |
-| JPM vs BBVA.MC JPMorgan Chase & Co. vs Banco Bilbao Vizcaya Argentaria, S.A. | 68 | Compare → |
-| JPM vs HSBA.L JPMorgan Chase & Co. vs HSBC Holdings plc | 58 | Compare → |
-| JPM vs SHB-A.ST JPMorgan Chase & Co. vs Svenska Handelsbanken AB (publ) | 57 | Compare → |
-| JPM vs STAN.L JPMorgan Chase & Co. vs Standard Chartered PLC | 61 | Compare → |
-| JPM vs BARC.L JPMorgan Chase & Co. vs Barclays PLC | 46 | Compare → |
-| JPM vs C JPMorgan Chase & Co. vs Citigroup Inc. | 51 | Compare → |
-| JPM vs ABN.AS JPMorgan Chase & Co. vs ABN AMRO Bank N.V. | 55 | Compare → |
+Companies similar to JPMorgan Chase & Co. cluster around comparable structural characteristics, with the strongest visible overlap typically appearing in quality. Examples in this group include Bank of America Corporation, Wells Fargo & Company, ING Groep N.V..
 
-### Full JPM analysis in AssetNext
+Structurally similar companies — ranked by functional peer similarity
 
-View the complete JPMorgan Chase & Co. report including all peer dimensions.
+Bank of America Corporation
 
-Open in AssetNext →
+BAC similar → peers →
 
-JPM Analysis Similar to JPM All Comparisons Industry Comparisons
+45
+
+34
+
+79
+
+Wells Fargo & Company
+
+WFC similar → peers →
+
+17
+
+8
+
+83
+
+INGA.AS similar → peers →
+
+51
+
+35
+
+75
+
+UBSG.SW similar → peers →
+
+97
+
+0
+
+56
+
+Banco Bilbao Vizcaya Argentaria, S.A.
+
+BBVA.MC similar → peers →
+
+69
+
+76
+
+80
+
+HSBA.L similar → peers →
+
+41
+
+66
+
+66
+
+STAN.L similar → peers →
+
+82
+
+41
+
+77
+
+BARC.L similar → peers →
+
+49
+
+35
+
+81
+
+C similar → peers →
+
+87
+
+36
+
+77
+
+ABN AMRO Bank N.V.
+
+ABN.AS similar → peers →
+
+64
+
+45
+
+72
+
+| # | Company | Growth | Quality | Valuation |
+| --- | --- | --- | --- | --- |
+| #1 | JPM vs BAC |
+| #2 | JPM vs WFC |
+| #3 | JPM vs INGA.AS |
+| #4 | JPM vs UBSG.SW |
+| #5 | JPM vs BBVA.MC |
+| #6 | JPM vs HSBA.L |
+| #7 | JPM vs STAN.L |
+| #8 | JPM vs BARC.L |
+| #9 | JPM vs C |
+| #10 | JPM vs ABN.AS |
+
+Direct comparisons — JPM vs each similar company
+
+### Full peer analysis for JPM in AssetNext
+
+Interactive similarity view, compare tool and portfolio context for JPMorgan Chase & Co..
+
+Explore JPM in AssetNext →
+
+Explore similar companies for each peer
+
+Each company above has its own structural peer group. Explore the network:
+
+Similarity is rule-based and descriptive only. Based on trajectory analysis of revenue dynamics, margin structure and capital efficiency patterns over time. Not investment advice. Not based on sector classification alone.
 
 ## How AssetNext Peer Scores Work
 

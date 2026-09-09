@@ -1,0 +1,14 @@
+{
+  "round": 1,
+  "verdict": "fail",
+  "reviewed_at": "2026-09-09T17:30:00Z",
+  "review_mode": "full",
+  "escalate_full_review": false,
+  "finding_counts": {
+    "critical": 0,
+    "high": 2,
+    "medium": 4,
+    "low": 4,
+    "info": 7
+  }
+}

@@ -269,6 +269,7 @@ runs/<ticker>/<event-id>/
   review-report.md            # rendered from review-report.json, never hand-written
   review-diff.json            # round 2+: what changed since the last round (Python-built)
   _review_history/round-<N>/  # per-round snapshot of claims/brief/report, for diffing
+    receipt.json               # that round's verdict + finding counts by severity only, no finding text
   audit-record.json           # written once, only on a final pass/pass_with_warnings verdict
   _archive/<timestamp>/       # a prior run's files, if this ticker/event was prepared before
 ```

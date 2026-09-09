@@ -1,12 +1,12 @@
 {
-  "url": "https://newsroom.bankofamerica.com/content/newsroom/press-releases/2026/07/bank-of-america-reports-second-quarter-2026-financial-results.html",
-  "title": "Bank of America Reports Second Quarter 2026 Financial ...",
+  "url": "https://investor.bankofamerica.com/regulatory-and-other-filings/select-sec-filings/content/0000070858-26-000353/bac06302026ex991.htm",
+  "title": "July 14, 2026 - THE PRESS RELEASE - 8-K: Current report | Bank of America Corporation (BAC)",
   "score": null,
-  "published_date": "2026-07-14T00:00:00.000Z",
+  "published_date": null,
   "_class": "peer",
   "_select_key": "peer:Bank of America",
-  "_temporal_status": "pre_event",
+  "_temporal_status": "undated",
   "_provider": "exa",
   "_query": "Bank of America 2026-q2 earnings results revenue growth",
-  "_retrieved_at": "2026-09-01T12:06:21Z"
+  "_retrieved_at": "2026-09-09T16:19:14Z"
 }

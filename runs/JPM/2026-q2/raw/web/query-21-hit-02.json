@@ -1,12 +1,12 @@
 {
-  "url": "https://www.reuters.com/legal/transactional/goldmans-profit-jumps-trading-surge-corporate-deal-spree-2026-07-14/",
-  "title": "Goldman Sachs profit tops estimates on trading boom, ...",
+  "url": "https://www.opencapital.sh/filings/0000886982-26-000294",
+  "title": "Goldman Sachs Group (GS) Form 8-K SEC Filing - Jul 14, 2026",
   "score": null,
-  "published_date": "2026-07-14T00:00:00.000Z",
+  "published_date": null,
   "_class": "peer",
   "_select_key": "peer:Goldman Sachs",
-  "_temporal_status": "pre_event",
+  "_temporal_status": "undated",
   "_provider": "exa",
   "_query": "Goldman Sachs 2026-q2 earnings results revenue growth",
-  "_retrieved_at": "2026-09-01T12:06:38Z"
+  "_retrieved_at": "2026-09-09T16:19:36Z"
 }

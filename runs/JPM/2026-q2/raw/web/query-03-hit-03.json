@@ -1,12 +1,12 @@
 {
-  "url": "https://www.barchart.com/story/news/947288/jpmorgan-chase-earnings-preview-what-to-expect",
-  "title": "JPMorgan Chase Earnings Preview: What to Expect",
+  "url": "https://thewhispernumber.com/ticker/jpm",
+  "title": "JPM Whisper Number & Earnings Estimates - JPMorgan Chase & Company | The Whisper Number",
   "score": null,
-  "published_date": "2026-03-25T00:00:00.000Z",
+  "published_date": null,
   "_class": "consensus",
   "_select_key": "consensus",
-  "_temporal_status": "pre_event",
+  "_temporal_status": "undated",
   "_provider": "exa",
   "_query": "JPMorgan Chase JPM Wall Street consensus estimates ahead of earnings",
-  "_retrieved_at": "2026-09-01T12:06:18Z"
+  "_retrieved_at": "2026-09-09T16:19:09Z"
 }

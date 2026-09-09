@@ -2,268 +2,77 @@
 
 ## 1. Outlook in brief
 
-The headline results cover the 3 months to 30 Jun 2026. JPMorgan delivered net
-income of \$16.9 billion and EPS of \$6.14, comfortably ahead of the \$5.52 Wall
-Street consensus set ahead of the print [claim-001][claim-024][claim-025]. But
-the composition of the beat matters more than its size: growth was
-overwhelmingly a capital-markets story — CIB revenue up 27% and Equities up
-86% year-on-year — while core Consumer & Community Banking revenue grew a far
-more modest 8% [claim-008][claim-009][claim-007]. Management itself flagged
-that part of this quarter's Investment Banking strength was pull-forward and
-that the specific mix behind the Equities surge is unlikely to repeat
-[claim-015][claim-016] — but in the same breath also said the pipeline
-remains quite robust and activity levels are expected to stay healthy
-[claim-030], so the caution was about degree, not direction. The outlook is
-therefore best read as dependent on how much of an exceptional capital-markets
-quarter persists, rather than on broad-based franchise momentum — a
-distinction the full-year guidance revision below does not by itself resolve.
+For the 3 months to 30 Jun 2026, JPMorganChase delivered net income of \$16.9 billion and EPS of \$6.14, an ROTCE of 23% [claim-001], comfortably ahead of pre-event Wall Street consensus, which had clustered around \$5.50-\$5.67 [claim-034][claim-035][claim-036]. The quarter was broad-based rather than carried by one business: CIB revenue was up 27% [claim-010], AWM revenue up 19% with AUM up 18% year-on-year [claim-014][claim-015], and CCB revenue up 8% on resilient consumer spend [claim-008][claim-009]. Management itself flagged the least repeatable piece of this strength -- the 86% year-on-year surge in Equities trading [claim-012] -- as unlikely to recur in the same combination [claim-013][claim-033], though peers reported similarly large Equities gains this quarter (Citi +45% [claim-038], Bank of America +70% [claim-043]), which tempers how JPM-specific that framing really is -- see section 5. Over the next reported quarter, the outlook is for continued strength in net interest income and investment banking, but a normalization in the extraordinary Markets contribution, with full-year guidance already raised to reflect the H1 outperformance [claim-016][claim-017][claim-018][claim-019].
 
 ## 2. What changed
 
-- Full-year NII guidance raised: NII ex. Markets to about \$96.5 billion and
-  total NII to approximately \$105.5 billion, with Markets NII increasing to
-  about \$9 billion [claim-012].
-- Full-year adjusted expense outlook raised to about \$107.5 billion
-  [claim-013].
-- Full-year Card net charge-off rate guidance lowered to approximately 3.2%,
-  reflecting better-than-expected consumer credit performance [claim-014].
-- Reported EPS of \$6.14 [claim-001] came in above both pre-print consensus
-  figures this run captured — Zacks' \$5.52 [claim-024][claim-025] and
-  AlphaStreet's higher, wider 14-analyst estimate of \$5.67 (range
-  \$5.09-\$6.56) [claim-032] — an earnings beat under either vendor's
-  number, though driven by the capital-markets mix described above rather
-  than uniformly across segments.
-- The standardized CET1 ratio fell 20 basis points to 14.1% versus the prior
-  quarter, as net income was more than offset by higher RWA and capital
-  distributions [claim-005].
+Full-year NII ex. Markets guidance was raised from \$95 billion to \$96.5 billion, with total NII guided to approximately \$105.5 billion [claim-017][claim-016]. The adjusted expense outlook rose to about \$107.5 billion, a \$2.5 billion increase [claim-018], of which \$1.5 billion is already booked in H1 and tied directly to the capital-markets complex outperforming the company's own prior expectations by \$6.5 billion [claim-019]. The Card net charge-off rate outlook improved to approximately 3.2%, reflecting better-than-expected consumer credit performance [claim-016]. The quarterly dividend is set to rise to \$1.65 per share from Q3 [claim-007].
 
 ## 3. Management guidance
 
-| Metric | Guidance | Status |
-|---|---|---|
-| Total NII (FY2026) | ~\$105.5 billion | Raised [claim-012] |
-| NII ex. Markets (FY2026) | ~\$96.5 billion | Raised [claim-012] |
-| Adjusted expenses (FY2026) | ~\$107.5 billion | Raised [claim-013] |
-| Card net charge-off rate (FY2026) | ~3.2% | Lowered (improved) [claim-014] |
-| Consumer deposit growth (FY2026) | Low-to-mid single digit | Reaffirmed, unchanged [claim-017] |
-| Quarterly dividend | \$1.65/share, effective Q3 | Raised [claim-006] |
-| Capital deployment | ~\$40 billion at a 17% target return | Reaffirmed [claim-018][claim-019] |
+Management's FY2026 guidance now stands at: NII ex. Markets ~\$96.5 billion, total NII ~\$105.5 billion (Markets NII ~\$9 billion), adjusted expenses ~\$107.5 billion, and a Card net charge-off rate of ~3.2% [claim-016]. Management still frames roughly \$40 billion as excess capital -- explicitly distinct from buyback capacity -- that it now believes it can deploy organically over time, against a stated target of deploying capital at a 17% return [claim-028][claim-029]. Management gave no hard M&A target but said it remains open-minded on inorganic opportunities, while noting mixed results from this year's deals so far [claim-042].
 
 ## 4. Business drivers
 
-The evidence suggests this quarter's strength was substantially a
-capital-markets-wide phenomenon rather than unique to JPMorgan's own
-execution. Every large peer with a markets/investment-banking business posted
-similarly outsized results this quarter: Goldman Sachs' EPS of \$20.98 and
-23.5% annualized ROE [claim-026], Citigroup's CEO describing 45% net income
-growth and its best quarterly revenue in a decade [claim-028], and Bank of
-America's investment banking fees jumping 50% [claim-029]. Notably, even
-Wells Fargo — a bank with a smaller markets/investment-banking footprint than
-the other names here — posted diluted EPS growth of 25% year-on-year
-[claim-033], with its own Corporate and Investment Banking segment reporting
-Banking revenue up 20% and Markets revenue up 24% [claim-034], a similar
-capital-markets-driven pattern to JPMorgan's. That reach into a comparatively
-smaller markets franchise strengthens, rather than undercuts, the read that
-this was a favorable capital-markets cycle broad enough to lift banks of
-different scale and mix, not solely a JPMorgan-specific result — though it
-does not rule out JPMorgan-specific execution within that cycle
-[claim-008][claim-009].
-
-Within JPMorgan, CCB's more modest 8% revenue growth [claim-007], driven by
-card NII and deposit/lease income rather than capital-markets activity, is the
-better read on the "core franchise" trend, and it is decelerating relative to
-the CIB/Markets pace. AWM's 19% revenue growth and healthy AUM/client-asset
-growth [claim-010][claim-011] sit between the two — a steadier, fee-based
-driver less exposed to trading-desk volatility. Separately, management
-pointed to a broader AI-driven capital-expenditure cycle (total U.S. CapEx of
-roughly \$4 trillion a year, with AI CapEx rising from \$400 billion to \$700
-billion year-on-year) as a macro backdrop touching commercial lending demand
-[claim-021], while separately cautioning, on the specific question of
-commercial lending, that loan growth not superficially AI-related might still
-be AI-driven in non-obvious ways, so attributing any specific loan growth to
-AI is often not clean-cut [claim-031].
+Investment Banking fees rose 30% year-on-year on double-digit growth across all products, led by equity underwriting, with large ECM deals and accelerated M&A closures contributing this quarter but a pipeline management still describes as robust [claim-010][claim-011]. Markets strength was uneven: Fixed Income grew a more modest 6%, while Equities grew 86%, driven by major IPOs, index rebalancing, unusually complex Korean equity market dynamics, and broad client activity across regions [claim-012][claim-033]. On the consumer side, deposit growth (3% YoY, 2% QoQ) was underpinned by net new checking account growth of over 500,000 accounts, and management's own data does not support a "K-shaped" consumer divergence narrative -- delinquencies are running a little better than expected fairly broadly across FICO bands [claim-009][claim-027]. Capital markets outperformance is also the direct driver of this year's expense increase: \$1.5 billion of the \$2.5 billion guidance increase is a booked consequence of \$6.5 billion of H1 revenue outperformance, not a discretionary spending decision [claim-018][claim-019].
 
 ## 5. Base case
 
-If capital-markets activity moderates from this quarter's unusually strong
-level — consistent with management's own characterization that conditions are
-"close to as good as it gets" and that the specific combination behind this
-quarter's Equities strength is unlikely to repeat [claim-022][claim-016], while
-still noting the IB pipeline itself remains robust and activity levels are
-expected to stay healthy [claim-030] — then CIB/Markets growth normalizes
-toward a still-elevated but less exceptional run-rate, while CCB and AWM
-continue their steadier, high-single to high-teens growth
-[claim-007][claim-010][claim-011]. The consequence is
-that the raised full-year NII and expense guidance are met roughly as stated
-[claim-012][claim-013], but total revenue growth decelerates from this
-quarter's 15% pace [claim-002] as the capital-markets contribution normalizes.
-Observable indicators: next quarter's IB fee growth rate relative to this
-quarter's 30% [claim-008], and whether CCB revenue growth holds near 8%
-[claim-007].
+If the current mix of strong capital-markets activity and resilient consumer credit performance persists through the second half [claim-011][claim-027] but the exceptional Equities contribution normalizes toward a more typical level as management itself expects [claim-013][claim-033], then full-year results should land close to the newly raised guidance: NII ex. Markets near \$96.5 billion, total NII near \$105.5 billion, and adjusted expenses near \$107.5 billion [claim-016], with CIB and AWM remaining the primary growth engines [claim-010][claim-014] while CCB continues its high-single-digit revenue growth [claim-008]. Observable indicators: quarterly Markets revenue reverting toward, but not collapsing to, historical Fixed-Income-led composition; continued net new checking account growth in CCB; Card net charge-off rate tracking at or below the guided ~3.2%.
+
+The strongest evidence against the "Equities strength is idiosyncratic and fading" half of this base case is that it wasn't idiosyncratic to JPM: Citigroup's Equities revenue was also up 45% and Bank of America's Global Markets Equities revenue was up 70% in the same quarter [claim-038][claim-043]. That pattern is more consistent with a market-wide capital-markets cycle than a JPM-specific, one-off combination of deals, and a market-wide cycle is plausibly less likely to simply "normalize" on JPM's own timetable than management's framing (which discusses only its own deal mix) implies.
 
 ## 6. Upside case
 
-If capital-markets activity does not moderate — pipeline conversion continues
-and the sector-wide strength seen across Goldman Sachs, Citigroup, Bank of
-America, and even Wells Fargo persists [claim-026][claim-028][claim-029]
-[claim-034] — then fee income stays elevated for longer than the base case
-assumes, sustaining ROTCE closer to this quarter's 23% [claim-001] than a
-moderating scenario would. Separately, if JPMorgan also deploys more of its
-targeted \$40 billion of excess capital toward its stated 17% return goal
-[claim-018][claim-019], that is a distinct lever: deploying capital at a 17%
-target return would be dilutive to a 23% ROTCE, not additive to it, so this
-would support per-share growth and capital efficiency over time rather than
-lift the ROTCE figure itself — and management was explicit that increased
-capital deployment "has consequences" [claim-018], not a costless lever.
-Observable indicators: continued double-digit investment-banking fee growth
-industry-wide, and visible acceleration in the pace of buybacks or capital
-deployment.
+If the IB pipeline management describes as "quite robust" [claim-011] continues converting at this quarter's pace, and the broader risk-on market backdrop management describes [claim-012] persists longer than Dimon's own "getting close to as good as it gets" framing implies [claim-046], then CIB and Markets could keep contributing at an elevated run rate through year-end rather than normalizing in H2, pushing full-year NII and fee results above the newly raised guidance. Observable indicators: a Q3 IB fee print that does not show a sequential pullback despite this quarter's pull-forward effect; equity markets sustaining current volume and volatility levels; deposit betas continuing to outperform JPMorgan's model as they have so far this cycle [claim-021].
 
 ## 7. Downside case
 
-If the pull-forward that management itself flagged in Investment Banking
-[claim-015] turns out to have borrowed materially from future quarters'
-activity, and the exceptional Equities performance genuinely fails to repeat
-as management suggested [claim-016], then capital-markets revenue could
-revert sharply while the expense base built up this quarter — guided higher
-to about \$107.5 billion [claim-013] — does not fall in step. This is not a
-hypothetical tension: an analyst on the call specifically noted that adjusted
-operating leverage was already negative year-to-date despite the strong
-revenue environment [claim-023], which is the same dynamic this downside case
-would extend. The consequence is that operating leverage deteriorates further
-and the beat versus consensus seen this quarter [claim-025] is not repeated.
-Observable indicators: a sequential decline in CIB/Markets revenue growth
-rates, and expense growth continuing at or above this quarter's 15% pace
-[claim-003] without a matching revenue tailwind.
+Management's own stress-testing lens is the most credible source of downside risk here: if rates move enough to trigger a genuine regime change, negative convexity in consumer deposit pricing could accelerate the rate paid on deposits beyond what current earnings-at-risk models assume, compressing NII more than guided [claim-021]. Separately, management flagged a mild but real loosening in competitors' underwriting standards -- weaker covenants, more PIK, more aggressive revenue assumptions, concentrated in some lenders more than others -- which is the kind of dynamic management explicitly says produces uneven outlier losses in the next credit cycle rather than a smooth downturn [claim-022]. Observable indicators: a step-up in reported rate-paid on interest-bearing deposits beyond modeled sensitivity; credit-cost guidance revisions concentrated in specific sectors (e.g. data-center or NBFI lending) rather than broad-based; a sequential slowdown in CIB fee conversion without a corresponding pickup in Markets.
 
 ## 8. What to monitor
 
-- Whether CIB/Markets fee growth decelerates toward more normal historical
-  rates, or the current pace persists [claim-008][claim-009].
-- Whether adjusted operating leverage turns positive as the year progresses,
-  given it was negative year-to-date at the time of this call [claim-023].
-- Realized full-year NII and expenses against the raised guidance of ~\$105.5
-  billion and ~\$107.5 billion respectively [claim-012][claim-013].
-- The Card net charge-off rate trend against the 3.2% full-year outlook
-  [claim-014].
-- The pace and scale of capital deployment against the ~\$40 billion/17%
-  target [claim-018][claim-019].
+Card net charge-off rate versus the newly lowered ~3.2% guide [claim-016]; whether Q3 IB fees hold up without this quarter's specific large-deal tailwinds [claim-011]; the pace of deposit repricing if rates move materially [claim-021]; any broadening of underwriting-standard softness beyond the "some players" management currently describes [claim-022]; and the succession timeline, since Jamie Dimon reiterated no change to a multi-year horizon following the CEO Co-President elevation [claim-023][claim-024].
 
 ## 9. Uncertainties and missing evidence
 
-Management was explicit that its own view of Investment Banking sustainability
-is uncertain — describing the assessment as partly "guessing" about how much
-of the quarter's pipeline conversion was pulled forward [claim-015]. This
-brief treats that self-assessed uncertainty as a genuine constraint on the
-base case rather than resolving it either way.
-
-No pre-print consensus figure was available for full-year 2026 metrics — only
-quarterly EPS/revenue consensus estimates were captured [claim-024][claim-032]
-— so this brief cannot assess whether the *raised* full-year guidance itself
-beats or merely matches revised Street expectations, only that it represents
-an increase from management's own prior guidance.
-
-The two quarterly consensus estimates this run captured disagree with each
-other: Zacks' \$5.52 EPS estimate [claim-024] versus AlphaStreet's
-14-analyst \$5.67 estimate spanning a \$5.09-\$6.56 range [claim-032]. This
-brief does not attempt to resolve which vendor's estimate was more
-representative of the broader Street view; the size of the reported beat
-depends on which one is used as the baseline.
-
-Separately, this run's SEC/XBRL evidence (`evidence/financials.json`) returned
-half-year cumulative figures for the period ending 30 Jun 2026, not the
-standalone quarter the call discusses, so quarterly figures in this brief are
-grounded against the transcript's own statements rather than cross-checked
-against an independent XBRL figure for the same period. This is a property of
-this run's evidence pack, not a correction to any claim above.
+Management gave no quantitative M&A guidance despite acknowledging active interest in inorganic opportunities [claim-042]. The magnitude of AI-driven headcount reduction is disclosed only for "discrete areas" (30-40% in those areas), with no company-wide figure given [claim-025][claim-026], making it hard to size the efficiency opportunity management itself says is coming. All five peer/consensus sources used in this brief (Goldman Sachs, Citigroup, Bank of America, Wells Fargo, and the two pre-event consensus estimates) were cleanly citable this run [claim-037][claim-038][claim-039][claim-040][claim-041][claim-043][claim-044][claim-045]; the one piece of peer evidence that could not be used with confidence was a second Wells Fargo source (a chart-only investor-deck extract) whose axis labels could not be resolved reliably enough to cite -- an extraction limitation of that specific page, not a gap in the peer picture overall, since Wells Fargo's headline results were independently available from a separate, clean press-release page.
 
 ## 10. Evidence appendix
 
-- [claim-001] "the Firm delivered net income of \$16.9 billion, EPS of \$6.14
-  and an ROTCE of 23%" — segment seg-0003
-- [claim-002] "revenue was up 15% year-on-year, predominantly driven by
-  Markets revenue, higher asset management fees in AWM and CCB, higher
-  Investment Banking revenue, and higher deposit and loan balances, partially
-  offset by the impact of lower rates" — segment seg-0003
-- [claim-003] "Expenses of \$27.3 billion were up 15% year-on-year, largely
-  driven by volume and revenue-related expense, as well as growth in front
-  office hiring and labor inflation" — segment seg-0003
-- [claim-005] "we ended the quarter with a standardized CET1 ratio of 14.1%,
-  down 20 basis points versus the prior quarter, as net income was more than
-  offset by higher RWA and capital distributions" — segment seg-0003
-- [claim-006] "the Board intends to increase the quarterly dividend to \$1.65
-  per share effective in the third quarter" — segment seg-0003
-- [claim-007] "CCB reported net income of \$5.3 billion. Revenue of \$20.3
-  billion was up 8% year-on-year, predominantly driven by higher Card NII,
-  largely on higher revolving balances, as well as higher operating lease
-  income in Auto and asset management fees in Wealth Management" — segment
-  seg-0003
-- [claim-008] "the CIB reported net income of \$9.7 billion. Revenue of
-  \$24.9 billion was up 27% year-on-year, driven by strong performance across
-  the businesses. IB fees were up 30% year-on-year, reflecting double-digit
-  growth across all products, with particularly strong performance in equity
-  underwriting" — segment seg-0003
-- [claim-009] "The equities business delivered an exceptionally strong
-  quarter, with revenue up 86% year-on-year, reflecting the highly dynamic
-  market conditions" — segment seg-0003
-- [claim-010] "AWM reported net income of \$2 billion, with pre-tax margin of
-  38%. Revenue of \$6.9 billion was up 19% year-on-year..." — segment seg-0003
-- [claim-011] "AUM of \$5.1 trillion was up 18% year-on-year and client assets
-  of \$7.7 trillion were up 19% year-on-year..." — segment seg-0003
-- [claim-012] "we now expect NII ex. Markets to be about \$96.5 billion and
-  total NII to be approximately \$105.5 billion as a function of Markets NII
-  increasing to about \$9 billion" — segment seg-0003
-- [claim-013] "the new adjusted expense outlook is about \$107.5 billion" —
-  segment seg-0003
-- [claim-014] "we now expect Card net charge-off rate to be approximately
-  3.2%, reflecting better-than-expected consumer credit performance" —
-  segment seg-0003
-- [claim-015] "clearly, there was some pull forward, and clearly, the large
-  deals contributed meaningfully to this quarter's results" — segment
-  seg-0008
-- [claim-016] "it's a little bit hard to imagine that being repeated, but the
-  background environment is quite supportive" — segment seg-0008
-- [claim-017] "we talked about expecting low (sic) [low-to-mid-] single digit
-  growth this year, and that expectation is still in effect, it's unchanged"
-  — segment seg-0013
-- [claim-018] "We still think the number – use just approximately \$40
-  billion, and I think we now think we could actually deploy that over time."
-  — segment seg-0079
-- [claim-019] "the goal is to deploy our capital at a 17% return. That is the
-  goal, which we think we can do over time." — segment seg-0079
-- [claim-021] "I think CapEx is about \$4 trillion a year, and AI went from
-  \$400 billion last year to \$700 billion this year" — segment seg-0075
-- [claim-022] "It's getting close to as good as it gets. We just don't know
-  how long it's going to last." — segment seg-0040
-- [claim-023] "if we look at year-to-date results, it's been a strong revenue
-  environment, but I think operating leverage on an adjusted basis was
-  negative" — segment seg-0031
-- [claim-024] "Wall Street analysts forecast that JPMorgan Chase & Co. (JPM)
-  will report quarterly earnings of \$5.52 per share..." — web-011
-- [claim-025] "Wall Street analysts forecast that JPMorgan Chase & Co. (JPM)
-  will report quarterly earnings of \$5.52 per share..." — web-011
-  (inferred from claim-001, claim-024)
-- [claim-026] "The Goldman Sachs Group, Inc. (NYSE: GS) today reported net
-  revenues of \$20.34 billion and net earnings of \$6.63 billion..." —
-  web-005
-- [claim-027] "Wells Fargo Reports Second Quarter 2026 Net Income of \$6.4
-  billion, or \$2.00 per Diluted Share" — web-003
-- [claim-028] "With net income up 45%, this was Citi's best quarterly revenue
-  in a decade with double-digit revenue growth for the firm and in four out
-  of our five businesses." — web-004
-- [claim-029] "Investment banking fees jump 50% in Q2" — web-012
-- [claim-030] "the pipeline remains quite robust and the current activity
-  levels seem to be encouraging more activity. As a result, while conversion
-  will obviously be dependent on market conditions, we expect activity levels
-  to remain healthy." — segment seg-0003
-- [claim-031] "We do see some decent kind of CapEx and associated loan growth
-  across the franchise, and at least on the surface, some of that does not
-  appear to be AI-related. However, I would be a little reluctant to draw
-  that conclusion too strongly" — segment seg-0074
-- [claim-032] "The consensus among 14 analysts calls for earnings of \$5.67
-  per share on revenue of \$50.54 billion..." — web-001
-- [claim-033] "diluted earnings per share growing to \$2.00, up 25% from a
-  year ago." — web-003
-- [claim-034] "In Corporate and Investment Banking we had strong results with
-  Banking revenue increasing 20% and Markets revenue up 24% from a year ago"
-  — web-003
+- [claim-001] "Including (sic) [Excluding] the significant items noted on the page, the Firm delivered net income of \$16.9 billion, EPS of \$6.14 and an ROTCE of 23%." — segment seg-0003
+- [claim-007] "the Board intends to increase the quarterly dividend to \$1.65 per share effective in the third quarter." — segment seg-0003
+- [claim-008] "CCB reported net income of \$5.3 billion. Revenue of \$20.3 billion was up 8% year-on-year..." — segment seg-0003
+- [claim-009] "average deposits were up 3% year-on-year and 2% quarter-on-quarter, driven by strong net new checking account growth of over 500,000 accounts this quarter." — segment seg-0003
+- [claim-010] "the CIB reported net income of \$9.7 billion. Revenue of \$24.9 billion was up 27% year-on-year..." — segment seg-0003
+- [claim-011] "While this quarter's performance was supported by both some large ECM deals and the acceleration of the closure of some M&A transactions, the pipeline remains quite robust..." — segment seg-0003
+- [claim-012] "In Markets, Fixed Income was up 6% year-on-year... The equities business delivered an exceptionally strong quarter, with revenue up 86% year-on-year..." — segment seg-0003
+- [claim-013] "I just think like statistically, it seems improbable that that particular combination of effects could repeat itself. But it obviously could." — segment seg-0069
+- [claim-014] "AWM reported net income of \$2 billion, with pre-tax margin of 38%. Revenue of \$6.9 billion was up 19% year-on-year..." — segment seg-0003
+- [claim-016] "we now expect NII ex. Markets to be about \$96.5 billion and total NII to be approximately \$105.5 billion..." — segment seg-0003
+- [claim-017] "revising up from \$95 billion to \$96.5 billion for the full year" — segment seg-0019
+- [claim-018] "we did revise up this year's expense guidance by \$2.5 billion, which is not a trivial number" — segment seg-0054
+- [claim-019] "in the first half of this year, the capital markets complex has outperformed our then expectations by \$6.5 billion, and we have booked in the first half of the year \$1.5 billion of additional expenses associated with that." — segment seg-0054
+- [claim-021] "at what point do you have that kind of like acceleration in rate paid as a result of that type of environment." — segment seg-0041
+- [claim-022] "assumptions on revenue growth or add-back of expenses, more PIK, some weaker... Some weaker covenants. Some people taking more rollover risk." — segment seg-0091
+- [claim-023] "the Board made a decision to go ahead with making two Co-Presidents... hasn't changed the timetable or anything" — segment seg-0006
+- [claim-024] "Several years. You can use a few years. You can use plus or minus. Obviously, it's totally up to the Board, not up to me." — segment seg-0028
+- [claim-025] "I think there's almost 1,000 use cases today, though I would say that the really important ones are 50..." — segment seg-0067
+- [claim-026] "we have had discrete areas where we did reduce jobs by 30% or 40%. And most of those people were offered jobs elsewhere." — segment seg-0067
+- [claim-027] "there's not like that much there in terms to support the K-shaped narrative" — segment seg-0076
+- [claim-028] "We still think the number – use just approximately \$40 billion, and I think we now think we could actually deploy that over time." — segment seg-0079
+- [claim-029] "the goal is to deploy our capital at a 17% return." — segment seg-0079
+- [claim-033] "we had some major IPOs. We had some major index rebalancing. We had some very complicated dynamics in the Korean equity market. There's been a lot of activity in Asia." — segment seg-0069
+- [claim-034] "The consensus among 14 analysts calls for earnings of \$5.67 per share on revenue of \$50.54 billion." — web-001
+- [claim-035] "The consensus estimate before earnings release is EPS of \$5.50 to \$5.59..." — web-011
+- [claim-036] analytical inference: reported EPS exceeded both consensus ranges — segment seg-0003 (see claim-034, claim-035)
+- [claim-037] "The Goldman Sachs Group, Inc. (NYSE: GS) today reported net revenues of \$20.34 billion and net earnings of \$6.63 billion..." — web-005
+- [claim-038] "With net income up 45%, this was Citi's best quarterly revenue in a decade..." — web-004
+- [claim-039] "we have launched our \$30 billion buyback plan" — web-004
+- [claim-040] "Net income of \$3.3 billion" — web-002
+- [claim-041] "Revenue of \$11.3 billion, up 5%" — web-002
+- [claim-042] "we've done a bunch of deals this year, as you know. Most were good. A couple weren't particularly good. And we're going to be looking, and we're open-minded." — segment seg-0079
+- [claim-043] "Global Markets • Net income of \$2.6 billion • ... Equities revenue up 70% to \$3.6 billion..." — web-002
+- [claim-044] "Wells Fargo Reports Second Quarter 2026 Net Income of \$6.4 billion, or \$2.00 per Diluted Share" — web-003
+- [claim-045] "Total revenue \$ 22,622 20,822 ... Net income 6,407 5,494 ... Diluted earnings per common share 2.00 1.60" — web-003
+- [claim-046] "It's getting close to as good as it gets. We just don't know how long it's going to last." — segment seg-0040

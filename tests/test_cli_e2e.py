@@ -1022,6 +1022,22 @@ def test_snapshot_review_round_copies_all_three_files(isolated_runs_dir):
         assert (round_dir / filename).exists()
 
 
+def test_snapshot_review_round_writes_severity_count_receipt(isolated_runs_dir):
+    """receipt.json mirrors _validation_history's per-attempt receipt for Stage 1: a
+    human (or the next agent) should be able to see how a round went -- verdict and
+    finding counts by severity -- without opening the full review-report.json or
+    waiting for audit-record.json, which is only written once the whole run passes."""
+    run_dir = _seed_reviewed_run(isolated_runs_dir)
+    receipt = json.loads((run_dir / config.REVIEW_HISTORY_SUBDIR / "round-1" / config.REVIEW_ROUND_RECEIPT_FILENAME).read_text())
+    assert receipt["round"] == 1
+    assert receipt["verdict"] == "pass"
+    assert receipt["escalate_full_review"] is False
+    # _write_review_report auto-fills one info-severity placeholder each into
+    # source_checks/process_findings when the caller leaves them empty (they're
+    # required non-empty by validate_review_report), hence info: 2 here.
+    assert receipt["finding_counts"] == {"critical": 0, "high": 0, "medium": 0, "low": 0, "info": 2}
+
+
 def test_review_diff_with_zero_completed_rounds_errors(isolated_runs_dir):
     run_dir = _seed_validated_run(isolated_runs_dir)
     (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text("# Outlook\n\nStrong [claim-001].\n")

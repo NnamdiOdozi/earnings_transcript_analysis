@@ -1,0 +1,74 @@
+{
+  "run_id": "JPM:2026-q2",
+  "ticker": "JPM",
+  "event_id": "2026-q2",
+  "status": "accepted",
+  "final_review_round": 3,
+  "generated_at": "2026-09-09T16:50:12Z",
+  "decision": {
+    "verdict": "pass_with_warnings",
+    "summary": "Round 3, escalated to a full review because review-diff.json reported auto_escalated true. No blocking findings. The three changed claims are sound: claim-047 and claim-048 are verbatim in seg-0091 and seg-0019 with correct speakers and fair characterisations, and claim-028's values key now names the $40 billion figure as excess capital rather than buyback capacity, which is what Dimon actually says in seg-0079. Section 7's outlier-losses sentence now cites claim-047, which does contain the statement. All six web sources cited in the brief were opened and each is what it claims to be. Temporal integrity holds: every cited source is dated on or before the 14 July 2026 event, and the two undated peer releases are same-morning Q2 results with no post-event knowledge. Deterministic gates all passed with 48 claims and zero issues, the injection scan was clean, period labelling is unambiguous and agrees with the SEC half-year facts, and the prose is bank-specific throughout. One medium finding: the evidence appendix attributes to claim-027 a sentence that is not claim-027's stored quote. It is genuine text from the same segment and speaker so the substance is unaffected, but appendix quotes are not machine-checked and a standing extractor lesson already forbids exactly this. Six low findings follow: the appendix omits entries for claim-005, claim-006 and claim-015 although all three are cited in the body; the headline sentence drops the 'excluding significant items' qualifier that claim-001 carries; the word 'organically' in section 3 is not in either cited claim; the trailing clause of section 9 attributes a forward-looking efficiency statement to management that neither cited claim contains; the brief never surfaces that headline revenue and headline expenses both grew 15% year-on-year, which is the most obvious counterpoint to its operating-leverage framing; and claim-022's 'broad-based' wording sits awkwardly against Dimon's explicit 'this is not across the board'.",
+    "finding_counts": {
+      "critical": 0,
+      "high": 0,
+      "medium": 1,
+      "low": 6,
+      "info": 12
+    }
+  },
+  "trace_summary": "Analysis drew on 216 recorded source(s) (transcript, SEC/web evidence). 5 claim-validation attempt(s) were made, 1 with issues, before passing. Review ran 3 round(s): round 1 fail with 2 high, 4 medium, 4 low, 7 info finding(s); round 2 pass_with_warnings with 1 medium, 7 low, 13 info finding(s); round 3 pass_with_warnings with 1 medium, 6 low, 12 info finding(s).",
+  "workflow_trace": [
+    {
+      "stage": "claim_validation",
+      "attempts": 5,
+      "status": "passed"
+    },
+    {
+      "stage": "outlook_validation",
+      "status": "passed"
+    },
+    {
+      "stage": "review",
+      "round": 1,
+      "status": "fail"
+    },
+    {
+      "stage": "review",
+      "round": 2,
+      "status": "pass_with_warnings"
+    },
+    {
+      "stage": "review",
+      "round": 3,
+      "status": "pass_with_warnings"
+    }
+  ],
+  "review_history_summary": {
+    "review_rounds": 3,
+    "failed_review_rounds": 1,
+    "historical_findings": {
+      "critical": 0,
+      "high": 2,
+      "medium": 6,
+      "low": 17,
+      "info": 32
+    }
+  },
+  "guardrail_summary": {
+    "validation_retries": 4,
+    "validation_rejections": 1,
+    "review_rejections": 1,
+    "escalations": 0
+  },
+  "hashes": {
+    "transcript_sha256": "fd0d2a77bdd6f2de88a65d0ace5edc9c8a085da3982781c26938b354d4f61fca",
+    "manifest_sha256": "4f3828217a235eb5ca739bc106e262f270dc26755900c43c53c2c63a0c02749e",
+    "claims_sha256": "650c648bff79cec96f0c80d27fca102381e5ba3763eedaa610a52f8dc49cdc2e",
+    "outlook_brief_sha256": "7cf698e5ed882f15852683b1ffb4f7c7522f3ff91c64b274d0eb4b8a73d948fc",
+    "review_report_sha256": "99a855b68a83ab323c4e8c3309687f2365e0c1c33c9f60b28016f891eb5ceb01"
+  },
+  "evidence_summary": {
+    "source_count": 216
+  },
+  "reviewer_model": "opus"
+}

@@ -51,6 +51,7 @@ NORMALIZED_SUBDIR = "normalized"
 EVIDENCE_SUBDIR = "evidence"
 ARCHIVE_SUBDIR = "_archive"  # a prior run's files, moved here (timestamped) instead of overwritten
 REVIEW_HISTORY_SUBDIR = "_review_history"  # per-round snapshots of claims.json/outlook-brief.md/review-report.json, for diffing
+REVIEW_ROUND_RECEIPT_FILENAME = "receipt.json"  # per-round finding-severity counts only, no finding text -- mirrors _validation_history's receipt.json
 VALIDATION_HISTORY_SUBDIR = "_validation_history"  # append-only snapshots of every deterministic analyze attempt
 MANIFEST_FILENAME = "manifest.json"
 TRANSCRIPT_FILENAME = "transcript.jsonl"

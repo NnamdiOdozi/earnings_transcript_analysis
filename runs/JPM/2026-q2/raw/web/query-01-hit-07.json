@@ -1,6 +1,6 @@
 {
-  "url": "https://www.chartmill.com/stock/quote/JPM/analyst-ratings",
-  "title": "JPM Forecast, Price Target & Analyst Ratings | ChartMill.com",
+  "url": "https://kaplio.com/ticker/JPM/estimates",
+  "title": "JPMorgan Chase & Co. (JPM) Analyst Estimates | Price Target & Consensus",
   "score": null,
   "published_date": null,
   "_class": "consensus",
@@ -8,5 +8,5 @@
   "_temporal_status": "undated",
   "_provider": "exa",
   "_query": "JPMorgan Chase JPM 2026-q2 analyst consensus estimate revenue EPS",
-  "_retrieved_at": "2026-09-01T12:06:14Z"
+  "_retrieved_at": "2026-09-09T16:19:07Z"
 }

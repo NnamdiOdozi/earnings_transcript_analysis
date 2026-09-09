@@ -1,12 +1,12 @@
 {
-  "url": "https://www.opencapital.sh/filings/0000886982-26-000294",
-  "title": "Goldman Sachs Group (GS) Form 8-K SEC Filing - Jul 14, 2026",
+  "url": "https://theadvisertimes.com/markets/goldman-sachs-group-q2-2026-20-98-eps-tops-estimates-deep-dive/",
+  "title": "Goldman Sachs Group Q2 2026: $20.98 EPS Tops Estimates \u2014 Deep Dive - theadvisertimes.com",
   "score": null,
-  "published_date": null,
+  "published_date": "2026-07-14T00:00:00.000Z",
   "_class": "peer",
   "_select_key": "peer:Goldman Sachs",
-  "_temporal_status": "undated",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
   "_query": "Goldman Sachs 2026-q2 earnings guidance outlook",
-  "_retrieved_at": "2026-09-01T12:06:40Z"
+  "_retrieved_at": "2026-09-09T16:19:39Z"
 }

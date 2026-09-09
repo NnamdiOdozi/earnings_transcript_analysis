@@ -1,12 +1,12 @@
 {
-  "url": "https://www.opencapital.sh/filings/0000886982-26-000294",
-  "title": "Goldman Sachs Group (GS) Form 8-K SEC Filing - Jul 14, 2026",
+  "url": "https://qz.com/goldman-sachs-q2-2026-earnings-record-equities-trading-071426",
+  "title": "Goldman Sachs posts Q2 2026 earnings beat on record stock trading",
   "score": null,
-  "published_date": null,
+  "published_date": "2026-07-14T00:00:00.000Z",
   "_class": "peer",
   "_select_key": "peer:Goldman Sachs",
-  "_temporal_status": "undated",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
   "_query": "Goldman Sachs 2026-q2 earnings results revenue growth",
-  "_retrieved_at": "2026-09-01T12:06:38Z"
+  "_retrieved_at": "2026-09-09T16:19:36Z"
 }

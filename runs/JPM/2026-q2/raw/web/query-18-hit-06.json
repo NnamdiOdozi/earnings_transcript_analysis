@@ -1,12 +1,12 @@
 {
-  "url": "https://www.citigroup.com/rcs/citigpa/storage/public/Earnings/Q22026/2q2026-citigroup-at-a-glance.pdf",
-  "title": "2Q 2026 Citigroup At a Glance",
+  "url": "https://finance.yahoo.com/markets/stocks/articles/citigroup-inc-q2-2026-earnings-204846813.html",
+  "title": "Citigroup Inc. Q2 2026 Earnings Call Summary - Yahoo Finance",
   "score": null,
-  "published_date": null,
+  "published_date": "2026-07-14T00:00:00.000Z",
   "_class": "peer",
   "_select_key": "peer:Citigroup",
-  "_temporal_status": "undated",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
   "_query": "Citigroup 2026-q2 earnings guidance outlook",
-  "_retrieved_at": "2026-09-01T12:06:35Z"
+  "_retrieved_at": "2026-09-09T16:19:33Z"
 }

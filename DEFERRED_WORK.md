@@ -8,6 +8,35 @@ was resolved); don't let finished work accumulate here as dead weight.
 
 ## Open
 
+### [2026-09-11] Confidence labels for outlook-brief judgments
+- **Scope:** while the existing authoring agent writes `outlook-brief.md`, label
+  each material judgment or reasoning proposition with `high`, `medium`, or
+  `low` confidence. Factual statements copied from the validated claims do not
+  need a separate label. This belongs inside the current signal-card-to-outlook
+  step, not in a new agent, artifact, or workflow stage.
+- **Placement:** keep the label directly in `outlook-brief.md`, immediately
+  after the sentence or paragraph containing the relevant proposition. One
+  label may cover several sentences when they form a single analytical
+  proposition. Do not create a separate confidence file or assign one score to
+  the whole document; both approaches would obscure which judgment the label
+  describes and could drift out of sync with the prose.
+- **Values:** use only `High`, `Medium`, or `Low`. Two levels would be too
+  coarse: `Medium` captures a reasonable conclusion that still depends on
+  meaningful assumptions. A simple visible form such as `**Confidence:
+  Medium**` is sufficient. Do not require a second written rationale because
+  the proposition and its existing claim citations already provide the review
+  context.
+- **Why:** the brief adds interpretation beyond the factual signal card. The
+  label should make the author's own uncertainty visible without duplicating
+  the existing claim citations or adding another assessment system. Treat it
+  as a routing aid, not proof of correctness; low-confidence propositions
+  should always be surfaced to the final human reviewer. High and medium
+  confidence remain the authoring agent's self-assessment and do not prove that
+  the reasoning is correct.
+- **Status:** idea only, not started. Keep the implementation deliberately
+  small. When this work is taken up, decide only how low-confidence items are
+  gathered for human review and whether a missing label should fail validation.
+
 ### [2026-09-09] `--company-name`/`--event-date` are unvalidated free text
 - **Scope:** `cli.py:811-812` takes `--company-name` and `--event-date` as
   whatever string is typed on the command line (falling back to `--ticker`/

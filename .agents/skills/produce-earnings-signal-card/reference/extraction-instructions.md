@@ -75,6 +75,40 @@ the exact-quote requirement.
 - `inferred_from` is only populated (and only meaningful) when
   `classification == "analytical_inference"`.
 
+### Linking an analytical inference to its supporting claims
+
+`inferred_from` is the evidence trail for the agent's own conclusion. It contains
+the IDs of the claims that were compared or combined to reach that conclusion. It
+does not contain segment IDs or web-evidence IDs.
+
+For example, suppose the file already contains:
+
+- `claim-001`: reported EPS was $6.14.
+- `claim-034`: pre-event consensus EPS was $5.67.
+- `claim-035`: a second pre-event consensus range was $5.50-$5.59.
+
+The conclusion that EPS clearly beat consensus was not stated directly by any one
+source. Record it as a separate claim. The abridged example shows the relevant
+fields; the complete entry must still contain every field in the template above:
+
+```json
+{
+  "id": "claim-036",
+  "classification": "analytical_inference",
+  "claim_text": "Reported EPS clearly exceeded both pre-event consensus estimates.",
+  "inferred_from": ["claim-001", "claim-034", "claim-035"]
+}
+```
+
+Use an empty list for every claim that is not an `analytical_inference`. For an
+`analytical_inference`, include every claim needed to follow the reasoning. Each ID
+must exist in the same `claims.json`, and a claim must never cite itself.
+
+This field serves a different purpose from the direct evidence reference:
+
+- `segment_id` or `web_evidence_id` identifies where the claim's quote came from.
+- `inferred_from` identifies the already-extracted claims supporting the analysis.
+
 ### Stating an unambiguous `period`
 
 For any `reported_financial_performance`, `operational_performance`, or

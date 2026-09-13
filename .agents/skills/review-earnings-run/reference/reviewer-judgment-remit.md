@@ -88,12 +88,31 @@ Things structurally outside what a deterministic check can evaluate:
    but-resolving citation as a finding of the same severity as if the id
    didn't resolve at all.
 
-4. **Numerical correctness (direction/units/periods, not recomputation).** Python
-   already checked that numbers exist and calculations recompute correctly. You
-   check the things that check can't: is a percentage described with the right
-   sign (growth vs. decline), the right unit (bps vs. %), the right period
-   (sequential vs. year-over-year) -- mismatches that are numerically "grounded"
-   (the number appears somewhere) but semantically wrong in context.
+4. **Numerical correctness (exhaustive semantic review, not recomputation).**
+   Inspect **every claim containing a numeric entry in `values`**, including every
+   operand and result inside a `calculation` block. This is not part of the sampled
+   claim review in item 2. Python already checked that the numbers exist and that
+   calculations recompute correctly. You must check what Python cannot: does each
+   number actually represent the quantity and operand role assigned to it?
+
+   For each numeric value, verify its metric, unit/basis, period/comparison basis,
+   entity, segment and scope against the cited evidence in full context. For a
+   calculation, also verify that `current`, `prior`, `numerator`, `denominator`, or
+   other operands play the roles implied by the formula and `claim_text`. Catch,
+   for example, cost used as prior-period revenue, a divisional figure used as a
+   group figure, adjusted compared with reported results, or a quarterly value
+   compared with a year-to-date value. A number appearing somewhere in the source
+   does not establish that it is the right number for that field.
+
+   Example: evidence says revenue was 110 versus 100 and costs were 70 versus 60.
+   A claim saying revenue grew 57.1%, calculated with `current=110` and `prior=70`,
+   may pass numeric grounding and arithmetic recomputation. You must reject it:
+   70 is cost, not prior-period revenue. Do not redo the arithmetic; judge the
+   operands' meaning.
+
+   Also check whether a percentage has the right sign (growth vs. decline), unit
+   (bps vs. %), and comparison basis (sequential vs. year-over-year). These
+   mismatches can be numerically grounded while remaining semantically wrong.
 
    Also check period-labeling correctness specifically, since Python cannot judge
    this (a spoken transcript sentence has no structured period tag): where a claim
@@ -207,6 +226,10 @@ Given a run directory (e.g. `runs/MSFT/2026-q2/`), read:
 - For each changed/added claim, re-apply the FULL judgment remit above (source
   correctness, fair reading, numerical correctness, temporal integrity, etc.) --
   the diff tells you WHERE to look, it doesn't replace the judgment itself.
+- Item 4's numeric semantic review remains exhaustive on **every** review round,
+  including a diff review: inspect every claim containing numeric `values`, not
+  only changed or added claims. This prevents a semantically wrong but grounded
+  operand accepted in an earlier round from remaining outside the diff scope.
 - You may still read any other file in the run bundle if something in the diff
   looks ambiguous or if you suspect the change has knock-on effects the diff
   doesn't show (e.g. a claim removed from one section but a stale reference to it

@@ -117,6 +117,15 @@ claim — a paraphrased quote, a fabricated number, a wrong derived
 calculation, an `analytical_inference` with no cited source claim, a `Metric`
 with no `source_claim_ids` — blocks the card and exits non-zero.
 
+This pass proves that numbers are grounded and derived calculations recompute.
+It does **not** prove that a grounded number has the semantic role assigned to
+it. For example, both a revenue figure and a cost figure can occur in the same
+segment while the cost figure is incorrectly used as prior-period revenue.
+The final reviewer therefore inspects every numeric claim for the correct
+metric, operand role, unit/basis, period, entity, segment and scope. That is an
+agent judgment and remains subject to human review; it is not a deterministic
+guarantee.
+
 **Correction loop:** if `analyze` fails, the agent rewrites the offending
 claim(s) in `claims.json` and reruns `analyze`. Every invocation is preserved
 under `_validation_history/attempt-<N>_<timestamp>/` (the submitted claims,

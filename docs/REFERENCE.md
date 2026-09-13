@@ -179,6 +179,16 @@ types.
   quarterly, year-to-date, etc. — remains an agent reading-comprehension
   judgment from context cues ("this quarter" vs. "year-to-date"), not
   something Python can derive; see `extraction-instructions.md`.
+- **Numeric grounding does not prove numeric meaning.** Python verifies that a
+  value occurs in the cited evidence and that declared calculations recompute,
+  but it does not know whether the value is the correct metric, operand role,
+  unit/basis, period, entity, segment or scope. Evidence could say revenue was
+  110 versus 100 and costs were 70 versus 60, while a claim calculates revenue
+  growth using 110 and 70; both operands are grounded and the arithmetic can be
+  correct, but 70 is cost rather than prior-period revenue. The final reviewer
+  exhaustively checks every numeric claim for these semantic mismatches. This
+  agent review reduces the risk but is not a deterministic guarantee, so the
+  finished output still requires human review.
 - **Parenthetical-negative accounting notation** (`(50) million` meaning
   -\$50M) is not recognized by `extract_numbers`'s number regex — it would be
   read as positive 50. Deliberately not implemented: earnings-call *spoken*

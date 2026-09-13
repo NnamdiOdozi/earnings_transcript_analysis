@@ -11,3 +11,4 @@ Process guidance only, proposed by the outlook-reviewer and persisted by `earnin
 - When peer or competitor evidence is extracted, use it in the section whose judgment it actually bears on, rather than mentioning it only in the uncertainties section.
 - When the brief attributes a statement to management, the cited claim must itself contain that statement; extract a new claim for it rather than citing a topically adjacent claim from the same part of the call.
 - Every claim id cited in the brief body must also have its own entry in the evidence appendix, so no conclusion is left without a quote trail.
+- For every derived claim, verify that each calculation operand has the same metric, scope, unit, basis, and intended period role before accepting mathematically valid arithmetic.

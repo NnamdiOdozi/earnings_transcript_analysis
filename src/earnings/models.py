@@ -145,6 +145,22 @@ class ValidationIssue(BaseModel):
     message: str
 
 
+PriceLookupDecisionValue = Literal["used", "not_used", "attempted_failed"]
+
+
+class PriceLookupDecision(BaseModel):
+    """Record why the extractor did or did not request market-price data."""
+
+    decision: PriceLookupDecisionValue
+    reason: str
+
+
+class ToolDecisions(BaseModel):
+    """Agent decisions that Python checks against observable tool receipts."""
+
+    price_lookup: PriceLookupDecision
+
+
 class ValidationResult(BaseModel):
     ok: bool
     checked_claims: int
@@ -157,6 +173,9 @@ class ValidationResult(BaseModel):
     # validate_claims() itself, so that function stays pure/args-only and testable
     # without touching the clock (see module docstring in validate.py).
     validated_at: Optional[str] = None
+    # The extractor supplies the reason; Python verifies the declared outcome
+    # against the run-local price log before preserving it as a receipt.
+    tool_decisions: ToolDecisions | None = None
     # SHA-256 of the exact input bytes this result was computed from (filename -> hash:
     # claims.json, transcript.jsonl, financials.json, metrics.json when present). Set by
     # cli._write_validation. Lets a downstream stage prove the validation still belongs to

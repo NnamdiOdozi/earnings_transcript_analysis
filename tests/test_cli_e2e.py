@@ -7,10 +7,25 @@ from pathlib import Path
 import pytest
 
 from earnings import config, ingest, sources
-from earnings.cli import _escape_currency, _review_round_count, main
+from earnings.cli import _escape_currency, _price_decision_issues, _review_round_count
+from earnings.cli import main as _cli_main
+from earnings.models import PriceLookupDecision
 from earnings.process import sha256_hex
 
 FIXTURES = Path(__file__).parent / "fixtures"
+
+
+def main(args: list[str]) -> int:
+    """Run the CLI with the default no-price decision used by existing fixtures."""
+    if args and args[0] == "analyze" and "--price-decision" not in args:
+        args = [
+            *args,
+            "--price-decision",
+            "not_used",
+            "--price-reason",
+            "Fixture does not require market-price evidence",
+        ]
+    return _cli_main(args)
 
 
 def _validation_attempt_dirs(run_dir: Path) -> list[Path]:
@@ -59,6 +74,64 @@ def test_prepare_then_analyze_empty_transcript_yields_zero_segments_and_passes(i
     assert validation["ok"] is True
     assert validation["checked_claims"] == 0
     assert validation["validated_at"]  # real-clock stamp, not agent-authored
+    assert validation["tool_decisions"] == {
+        "price_lookup": {
+            "decision": "not_used",
+            "reason": "Fixture does not require market-price evidence",
+        }
+    }
+
+
+@pytest.mark.parametrize(
+    ("decision", "records", "expected_issue"),
+    [
+        ("not_used", [], False),
+        ("used", [{"ticker": "ACME", "status": "ok"}], False),
+        ("attempted_failed", [{"ticker": "ACME", "status": "error"}], False),
+        ("not_used", [{"ticker": "ACME", "status": "ok"}], True),
+        ("used", [], True),
+        ("attempted_failed", [{"ticker": "ACME", "status": "ok"}], True),
+    ],
+)
+def test_price_decision_matches_run_local_receipts(tmp_path, decision, records, expected_issue):
+    for record in records:
+        with (tmp_path / config.PRICE_LOOKUP_LOG_FILENAME).open("a", encoding="utf-8") as fh:
+            fh.write(json.dumps(record) + "\n")
+
+    issues = _price_decision_issues(
+        tmp_path,
+        "ACME",
+        PriceLookupDecision(decision=decision, reason="Test decision"),
+    )
+
+    assert bool(issues) is expected_issue
+
+
+def test_analyze_requires_explicit_price_decision():
+    with pytest.raises(SystemExit) as exc_info:
+        _cli_main(["analyze", "--ticker", "ACME", "--event-id", "2026-q2"])
+
+    assert exc_info.value.code == 2
+
+
+def test_late_price_lookup_invalidates_not_used_decision(isolated_runs_dir, tmp_path):
+    transcript = tmp_path / "transcript.txt"
+    transcript.write_text("Operator: Welcome to the call.", encoding="utf-8")
+    assert main(
+        ["prepare", "--ticker", "ACME", "--event-id", "2026-q2", "--transcript", str(transcript)]
+    ) == 0
+
+    run_dir = isolated_runs_dir / "ACME" / "2026-q2"
+    (run_dir / config.CLAIMS_FILENAME).write_text("[]", encoding="utf-8")
+    assert main(["analyze", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
+
+    price_record = {"ticker": "ACME", "status": "ok"}
+    (run_dir / config.PRICE_LOOKUP_LOG_FILENAME).write_text(
+        json.dumps(price_record) + "\n", encoding="utf-8"
+    )
+    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text("No material outlook.", encoding="utf-8")
+
+    assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 1
 
 
 def test_prepare_archives_segmentation_omission_receipt(isolated_runs_dir):
@@ -1602,6 +1675,12 @@ def test_check_review_writes_audit_record_on_pass(isolated_runs_dir):
     assert record["hashes"]["outlook_brief_sha256"]
     assert record["hashes"]["review_report_sha256"]
     assert record["reviewer_model"] == "opus"
+    assert record["tool_decisions"] == {
+        "price_lookup": {
+            "decision": "not_used",
+            "reason": "Fixture does not require market-price evidence",
+        }
+    }
 
 
 def test_check_review_does_not_write_audit_record_on_fail(isolated_runs_dir):

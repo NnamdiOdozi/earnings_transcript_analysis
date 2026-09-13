@@ -115,7 +115,8 @@ uv run earnings prepare --ticker MSFT --event-id 2026-q2 \
 #    peers' results -- all archived and hashed into manifest.json
 
 # agent reads the prepared evidence, writes claims.json, then:
-uv run earnings analyze --ticker MSFT --event-id 2026-q2
+uv run earnings analyze --ticker MSFT --event-id 2026-q2 \
+  --price-decision not_used --price-reason "No market-price evidence was needed"
 # -> GATE 1: Python checks claims.json (exact quotes, numbers, calculations);
 #    fails non-zero and stops here on a bad claim. Only on success does it
 #    write signal-card.md automatically

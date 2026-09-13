@@ -106,7 +106,8 @@ metrics). See
 for exactly what a claim needs.
 
 ```bash
-uv run earnings analyze --ticker ACME --event-id 2026-q2
+uv run earnings analyze --ticker ACME --event-id 2026-q2 \
+  --price-decision not_used --price-reason "No market-price evidence was needed"
 ```
 
 This runs every deterministic validator (exact-quote, numeric, calculation,

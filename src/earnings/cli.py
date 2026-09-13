@@ -29,10 +29,12 @@ from .models import (
     Manifest,
     Metric,
     OutlookValidation,
+    PriceLookupDecision,
     ReviewDiff,
     ReviewReport,
     SourceRecord,
     TemporalStatus,
+    ToolDecisions,
     ValidationIssue,
     ValidationResult,
     WebEvidence,
@@ -93,6 +95,7 @@ def _input_hashes(run_dir: Path) -> dict[str, str]:
         config.FINANCIALS_FILENAME: run_dir / config.EVIDENCE_SUBDIR / config.FINANCIALS_FILENAME,
         config.METRICS_FILENAME: run_dir / config.METRICS_FILENAME,
         config.MANIFEST_FILENAME: run_dir / config.MANIFEST_FILENAME,
+        config.PRICE_LOOKUP_LOG_FILENAME: run_dir / config.PRICE_LOOKUP_LOG_FILENAME,
         f"{config.EVIDENCE_SUBDIR}/{config.WEB_EVIDENCE_FILENAME}": (
             run_dir / config.EVIDENCE_SUBDIR / config.WEB_EVIDENCE_FILENAME
         ),
@@ -173,6 +176,7 @@ def _validation_inputs_current(run_dir: Path, validation: ValidationResult) -> b
         config.FINANCIALS_FILENAME: run_dir / config.EVIDENCE_SUBDIR / config.FINANCIALS_FILENAME,
         config.METRICS_FILENAME: run_dir / config.METRICS_FILENAME,
         config.MANIFEST_FILENAME: run_dir / config.MANIFEST_FILENAME,
+        config.PRICE_LOOKUP_LOG_FILENAME: run_dir / config.PRICE_LOOKUP_LOG_FILENAME,
         f"{config.EVIDENCE_SUBDIR}/{config.WEB_EVIDENCE_FILENAME}": (
             run_dir / config.EVIDENCE_SUBDIR / config.WEB_EVIDENCE_FILENAME
         ),
@@ -188,6 +192,14 @@ def _validation_inputs_current(run_dir: Path, validation: ValidationResult) -> b
     web_index = f"{config.EVIDENCE_SUBDIR}/{config.WEB_EVIDENCE_FILENAME}"
     if locations[web_index].is_file():
         required.add(web_index)
+    if validation.tool_decisions is None:
+        return False
+    if _price_decision_issues(
+        run_dir, manifest.ticker, validation.tool_decisions.price_lookup
+    ):
+        return False
+    if locations[config.PRICE_LOOKUP_LOG_FILENAME].is_file():
+        required.add(config.PRICE_LOOKUP_LOG_FILENAME)
     if not required.issubset(validation.input_hashes):
         return False
     return all(
@@ -197,6 +209,77 @@ def _validation_inputs_current(run_dir: Path, validation: ValidationResult) -> b
         )
         for name, recorded_hash in validation.input_hashes.items()
     )
+
+
+def _price_decision_issues(
+    run_dir: Path, ticker: str, decision: PriceLookupDecision
+) -> list[ValidationIssue]:
+    """Check the declared price-tool decision against its run-local receipts."""
+    issues: list[ValidationIssue] = []
+    if not decision.reason.strip():
+        issues.append(
+            ValidationIssue(
+                claim_index=-1,
+                check="price_decision",
+                message="price lookup decision requires a non-empty reason",
+            )
+        )
+
+    log_path = run_dir / config.PRICE_LOOKUP_LOG_FILENAME
+    records: list[dict] = []
+    if log_path.is_file():
+        for line_number, line in enumerate(
+            log_path.read_text(encoding="utf-8").splitlines(), 1
+        ):
+            if not line.strip():
+                continue
+            try:
+                record = json.loads(line)
+            except json.JSONDecodeError:
+                issues.append(
+                    ValidationIssue(
+                        claim_index=-1,
+                        check="price_decision",
+                        message=f"{config.PRICE_LOOKUP_LOG_FILENAME} line {line_number} is invalid JSON",
+                    )
+                )
+                continue
+            records.append(record)
+            if record.get("ticker") != ticker.upper():
+                issues.append(
+                    ValidationIssue(
+                        claim_index=-1,
+                        check="price_decision",
+                        message=f"price lookup line {line_number} belongs to a different ticker",
+                    )
+                )
+
+    successful = any(record.get("status") == "ok" for record in records)
+    if decision.decision == "used" and not successful:
+        issues.append(
+            ValidationIssue(
+                claim_index=-1,
+                check="price_decision",
+                message="decision is 'used' but no successful run-local price lookup exists",
+            )
+        )
+    elif decision.decision == "attempted_failed" and (not records or successful):
+        issues.append(
+            ValidationIssue(
+                claim_index=-1,
+                check="price_decision",
+                message="decision is 'attempted_failed' but receipts are absent or include a success",
+            )
+        )
+    elif decision.decision == "not_used" and records:
+        issues.append(
+            ValidationIssue(
+                claim_index=-1,
+                check="price_decision",
+                message="decision is 'not_used' but run-local price lookup receipts exist",
+            )
+        )
+    return issues
 
 
 def _write_validation(run_dir: Path, result: ValidationResult) -> None:
@@ -1043,6 +1126,12 @@ def cmd_prepare(args: argparse.Namespace) -> int:
 
 def cmd_analyze(args: argparse.Namespace) -> int:
     run_dir = config.run_dir(args.ticker, args.event_id)
+    tool_decisions = ToolDecisions(
+        price_lookup=PriceLookupDecision(decision=args.price_decision, reason=args.price_reason)
+    )
+    price_decision_issues = _price_decision_issues(
+        run_dir, args.ticker, tool_decisions.price_lookup
+    )
     attempt = ValidationAttempt.start(run_dir, _input_hashes(run_dir))
     blocked = _block_if_unclosed_review_report(run_dir)
     if blocked is not None:
@@ -1115,7 +1204,9 @@ def cmd_analyze(args: argparse.Namespace) -> int:
         result = ValidationResult(
             ok=False,
             checked_claims=0,
-            issues=[ValidationIssue(claim_index=-1, check="schema", message=f"Could not parse {config.CLAIMS_FILENAME}: {exc}")],
+            issues=[ValidationIssue(claim_index=-1, check="schema", message=f"Could not parse {config.CLAIMS_FILENAME}: {exc}")]
+            + price_decision_issues,
+            tool_decisions=tool_decisions,
         )
         _write_validation(run_dir, result)
         attempt.finish("failed", 1, result, validation_path=run_dir / config.VALIDATION_FILENAME)
@@ -1123,6 +1214,9 @@ def cmd_analyze(args: argparse.Namespace) -> int:
         return 1
 
     result = validate_claims(claims, segments_by_id, financials, web_evidence_texts, web_evidence_statuses)
+    result.tool_decisions = tool_decisions
+    result.issues.extend(price_decision_issues)
+    result.ok = not result.issues
 
     metrics_path = run_dir / config.METRICS_FILENAME
     if metrics_path.exists():
@@ -1147,6 +1241,7 @@ def cmd_analyze(args: argparse.Namespace) -> int:
                 checked_claims=result.checked_claims,
                 issues=result.issues + metric_issues,
                 warnings=result.warnings,
+                tool_decisions=tool_decisions,
             )
 
     _write_validation(run_dir, result)
@@ -1300,6 +1395,7 @@ def _build_audit_record(
     )
 
     outlook_validation = _load_validated_json(run_dir / config.OUTLOOK_VALIDATION_FILENAME, OutlookValidation)
+    validation = _load_validated_json(run_dir / config.VALIDATION_FILENAME, ValidationResult)
     report_path = run_dir / config.REVIEW_REPORT_JSON_FILENAME
 
     attempt_dirs = sorted((run_dir / config.VALIDATION_HISTORY_SUBDIR).glob("attempt-*"))
@@ -1394,6 +1490,11 @@ def _build_audit_record(
             "review_rejections": failed_rounds,
             "escalations": escalations,
         },
+        "tool_decisions": (
+            validation.tool_decisions.model_dump()
+            if validation and validation.tool_decisions
+            else None
+        ),
         "hashes": {
             "transcript_sha256": transcript_source["sha256"] if transcript_source else None,
             "manifest_sha256": sha256_hex(manifest_path.read_bytes()),
@@ -1762,6 +1863,17 @@ def build_parser() -> argparse.ArgumentParser:
     analyze = sub.add_parser("analyze", help="Validate claims.json and produce signal-card.md")
     analyze.add_argument("--ticker", required=True)
     analyze.add_argument("--event-id", required=True)
+    analyze.add_argument(
+        "--price-decision",
+        required=True,
+        choices=("used", "not_used", "attempted_failed"),
+        help="Whether this extraction used, skipped, or unsuccessfully attempted the price tool",
+    )
+    analyze.add_argument(
+        "--price-reason",
+        required=True,
+        help="Concise reason for the price-tool decision",
+    )
     analyze.set_defaults(func=cmd_analyze)
 
     validate_outlook = sub.add_parser(

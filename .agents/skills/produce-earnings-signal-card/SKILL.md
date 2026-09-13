@@ -75,7 +75,7 @@ guaranteed before proceeding.
    `reference/extraction-instructions.md`'s Metric section — every metric must cite
    at least one real claim id.
 
-5. **Self-check before validating.** Reread your own `claims.json` once, end to
+5. **Self-check and record the price-tool decision.** Reread your own `claims.json` once, end to
    end, before running `earnings analyze`. This is a cheap self-critique pass, not
    a re-extraction: look specifically for
    - speaker attribution errors (an analyst's question misattributed as a
@@ -114,10 +114,17 @@ guaranteed before proceeding.
    a period-specific one: it applies to any fix made during this step, not only
    period corrections.
 
+   Decide whether the discretionary price tool was `used`, `not_used`, or
+   `attempted_failed`. Give one concise reason. This is an operational receipt,
+   not private chain-of-thought. Python will compare the decision with this run's
+   `price_lookups.jsonl` and reject a contradiction.
+
 6. **Validate.** Run:
 
    ```bash
-   uv run earnings analyze --ticker <TICKER> --event-id <EVENT_ID>
+   uv run earnings analyze --ticker <TICKER> --event-id <EVENT_ID> \
+     --price-decision <used|not_used|attempted_failed> \
+     --price-reason "<concise reason>"
    ```
 
    This runs Python's deterministic validators (exact-quote, numeric, calculation,

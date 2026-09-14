@@ -1,12 +1,12 @@
 {
-  "url": "https://tickeron.com/blogs/jpmorgan-chase-jpm-q2-2026-earnings-preview-analysts-project-9-7-eps-growth-14648/",
-  "title": "JPMorgan Chase (JPM) Q2 2026 Earnings Preview: Analysts Project +9.7% EPS Growth",
+  "url": "https://tickerleague.com/companies/JPM/estimates",
+  "title": "JPM Q2 2026 earnings estimate \u2014 revenue & EPS",
   "score": null,
-  "published_date": "2026-07-13T00:00:00.000Z",
+  "published_date": null,
   "_class": "consensus",
   "_select_key": "consensus",
-  "_temporal_status": "pre_event",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "JPMorgan Chase JPM Wall Street consensus estimates ahead of earnings",
-  "_retrieved_at": "2026-09-09T16:19:09Z"
+  "_query": "JPMorganChase JPM Wall Street consensus estimates ahead of earnings",
+  "_retrieved_at": "2026-09-14T13:11:13Z"
 }

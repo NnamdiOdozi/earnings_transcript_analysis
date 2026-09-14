@@ -1,94 +1,124 @@
 {
-  "generated_at": "2026-09-09T16:43:17Z",
-  "round_number": 3,
-  "since_round": 2,
+  "generated_at": "2026-09-14T13:46:41Z",
+  "round_number": 2,
+  "since_round": 1,
   "previous_verdict": "pass_with_warnings",
-  "previous_summary": "No blocking findings. The high-severity problem from the previous round is genuinely fixed rather than merely narrated as fixed: web-003 was opened and is a clean Wells Fargo press release matching claim-044 and claim-045 verbatim, the second Wells Fargo source (web-008) really is an unlabelled chart deck exactly as section 9 now describes, and both Wells Fargo results are cited in the brief. The $40 billion capital point in claim-028 and section 3 now matches what Dimon actually said in seg-0079, where he explicitly separates deploying capital from buying back stock. Section 5 now carries a counterevidence paragraph setting Citigroup's 45% and Bank of America's 70% Equities gains against management's own not-repeatable framing, and the 'as good as it gets' quotation is grounded in claim-046. One medium finding remains: section 7 attributes to management a statement about uneven outlier losses in the next credit cycle and cites claim-022, which contains no such statement. The sentence is true of the transcript, but the underlying words in seg-0069's neighbouring segment were never extracted, so the citation resolves to an adjacent claim that does not establish it. Five low findings follow, covering a miscount of peer sources in section 9, a 'risk-on' gloss on management's 'highly dynamic' wording, an unsupported trailing clause about realized deposit betas, a stale values key on claim-028, and the brief never surfacing the quarter's CET1 decline and risk-weighted-asset growth while discussing capital deployment. Deterministic gates all passed with 46 claims and zero issues, the injection scan was clean, period labelling is unambiguous and consistent with the SEC half-year facts, temporal integrity holds across all cited evidence, and the prose is appropriately bank-specific throughout.",
-  "previous_finding_count": 21,
-  "claims_sha256": "650c648bff79cec96f0c80d27fca102381e5ba3763eedaa610a52f8dc49cdc2e",
-  "outlook_brief_sha256": "7cf698e5ed882f15852683b1ffb4f7c7522f3ff91c64b274d0eb4b8a73d948fc",
+  "previous_summary": "Two medium findings, both in outlook-brief.md. First, the brief reads the quarter's capital position one-sidedly: it heads a section \"Capital was consumed, not accumulated\" and makes CET1 rebuild a monitor item, while never citing claim-043 and claim-044, in which management states it still has roughly $40 billion of excess capital and intends to deploy it at a 17% return. Second, the upside case rests on the premise that investment banking fees \"were not at peak\", cited to claim-012 and claim-016, neither of which establishes that; the supporting statement exists in seg-0008 but was never extracted as a claim. Four low findings concern qualifiers dropped between transcript and brief (claim-054's materiality, claim-038's regime-change threshold, claim-048's not-a-meaningful-driver disclaimer) and claim-053 being placed inside a capital-consumption paragraph although it describes an internal reallocation. Against that, the run is strong where it matters most: every claim-### citation in the brief resolves to the correct claim, the exhaustive numeric semantic review over all 44 value-bearing claims found no operand, unit, sign or period error, the (sic) \"Including/Excluding\" transcript correction was handled correctly and is corroborated by the SEC 10-Q facts, and the temporal-integrity guard worked, excluding two post-event web captures that provider metadata had mislabelled pre_event. Both deterministic gates passed with zero issues across two attempts and the injection scan is clean. The run can proceed with the warnings surfaced.",
+  "previous_finding_count": 20,
+  "claims_sha256": "5e411642c029a03679ceca33809b1014065dc0fbaf1c03b97913908bebdb86bc",
+  "outlook_brief_sha256": "caa5007ed7cb53a3da3ecf57e6184dc581ad56c1437fa45379fb72d7e0c9ca0b",
   "claims_changed": [
     {
-      "claim_id": "claim-028",
+      "claim_id": "claim-048",
       "change": "changed",
       "old": {
-        "id": "claim-028",
-        "category": "cash_flow_capital_allocation",
+        "id": "claim-048",
+        "category": "costs_margins_efficiency",
         "classification": "management_guidance",
-        "claim_text": "Dimon frames the ~$40 billion figure as excess capital JPMorgan now believes it can actually deploy over time, explicitly distinguishing that from buying back stock.",
-        "quote": "We still think the number \u2013 use just approximately $40 billion, and I think we now think we could actually deploy that over time.",
-        "segment_id": "seg-0079",
-        "speaker": "Jamie Dimon",
-        "status": "forward_looking",
-        "values": {
-          "buyback_capacity_billions": 40
-        },
-        "confidence": 0.8,
-        "inferred_from": [],
-        "period": null
-      },
-      "new": {
-        "id": "claim-028",
-        "category": "cash_flow_capital_allocation",
-        "classification": "management_guidance",
-        "claim_text": "Dimon frames the ~$40 billion figure as excess capital JPMorgan now believes it can actually deploy over time, explicitly distinguishing that from buying back stock.",
-        "quote": "We still think the number \u2013 use just approximately $40 billion, and I think we now think we could actually deploy that over time.",
-        "segment_id": "seg-0079",
-        "speaker": "Jamie Dimon",
-        "status": "forward_looking",
-        "values": {
-          "excess_capital_billions": 40
-        },
-        "confidence": 0.8,
-        "inferred_from": [],
-        "period": null
-      }
-    },
-    {
-      "claim_id": "claim-047",
-      "change": "added",
-      "old": null,
-      "new": {
-        "id": "claim-047",
-        "category": "risk",
-        "classification": "management_opinion",
-        "claim_text": "Dimon says he does not expect a smooth, bell-curve-shaped distribution of performance in the next credit cycle, but rather some outlier losses, as happened in the Great Financial Crisis.",
-        "quote": "I don't think it's going to be like a bell curve of performance. I think there'll be some outliers out there, just like there were, by the way, in the Great Financial Crisis.",
-        "segment_id": "seg-0091",
-        "speaker": "Jamie Dimon",
+        "claim_text": "Management said token expense is a trivial number for the first half, is forecast to accelerate meaningfully in the second half, and remains trivial for the full year.",
+        "quote": "So, just for the avoidance of doubt, it is a trivial number for the first half of the year. We are forecasting some meaningful acceleration in that number for the second half of the year. But still nonetheless, the full year contribution of that is still trivial",
+        "speaker": "Jeremy Barnum",
         "status": "forward_looking",
         "values": {},
-        "confidence": 0.85,
+        "confidence": 0.9,
         "inferred_from": [],
-        "period": null
+        "segment_id": "seg-0101",
+        "period": "12 months to 31 Dec 2026"
+      },
+      "new": {
+        "id": "claim-048",
+        "category": "costs_margins_efficiency",
+        "classification": "management_guidance",
+        "claim_text": "Management said token expense is a trivial number for the first half and is forecast to accelerate meaningfully in the second half, but remains trivial for the full year and is not in any way a meaningful driver of the current outlook or of the revision to it.",
+        "quote": "So, just for the avoidance of doubt, it is a trivial number for the first half of the year. We are forecasting some meaningful acceleration in that number for the second half of the year. But still nonetheless, the full year contribution of that is still trivial, and obviously, we had budgeted some of that. So, it's not in any way a meaningful driver of the current outlook or to the revision in the outlook.",
+        "speaker": "Jeremy Barnum",
+        "status": "forward_looking",
+        "values": {},
+        "confidence": 0.9,
+        "inferred_from": [],
+        "segment_id": "seg-0101",
+        "period": "12 months to 31 Dec 2026"
       }
     },
     {
-      "claim_id": "claim-048",
+      "claim_id": "claim-054",
+      "change": "changed",
+      "old": {
+        "id": "claim-054",
+        "category": "current_guidance",
+        "classification": "management_guidance",
+        "claim_text": "Management said roughly $150 million of the increase in Markets NII is not expected to be offset in the bottom line.",
+        "quote": "This piece, which to be fair is quite small, it's probably like $150 million, is a part of the increase that we would not expect to be offset in the bottom line, all else equal.",
+        "speaker": "Jeremy Barnum",
+        "status": "forward_looking",
+        "values": {
+          "markets_nii_not_offset_millions": 150
+        },
+        "confidence": 0.85,
+        "inferred_from": [],
+        "segment_id": "seg-0021"
+      },
+      "new": {
+        "id": "claim-054",
+        "category": "current_guidance",
+        "classification": "management_guidance",
+        "claim_text": "Management said roughly $150 million of the increase in Markets NII is not expected to be offset in the bottom line, while describing the amount as quite small and, at the level of the company, left pocket to right pocket.",
+        "quote": "This piece, which to be fair is quite small, it's probably like $150 million, is a part of the increase that we would not expect to be offset in the bottom line, all else equal. And so, obviously, it's left pocket, right pocket at the level of the company.",
+        "speaker": "Jeremy Barnum",
+        "status": "forward_looking",
+        "values": {
+          "markets_nii_not_offset_millions": 150
+        },
+        "confidence": 0.85,
+        "inferred_from": [],
+        "segment_id": "seg-0021"
+      }
+    },
+    {
+      "claim_id": "claim-076",
       "change": "added",
       "old": null,
       "new": {
-        "id": "claim-048",
-        "category": "risk",
+        "id": "claim-076",
+        "category": "demand_activity",
         "classification": "management_opinion",
-        "claim_text": "Barnum attributes part of the NII sensitivity difference to consumer deposit betas having outperformed (been less rate-sensitive than) the company's model so far.",
-        "quote": "because of the outperformance of the consumer betas relative to the model",
-        "segment_id": "seg-0019",
+        "claim_text": "Management said that by historical standards investment banking fees were fine but not at super peak levels, so they had some room to come up.",
+        "quote": "by historical standards, investment banking fees were fine, but they weren't at sort of super peak levels. So, they had some room to come up a little bit.",
         "speaker": "Jeremy Barnum",
         "status": "reported",
         "values": {},
-        "confidence": 0.8,
+        "confidence": 0.9,
         "inferred_from": [],
-        "period": null
+        "segment_id": "seg-0008",
+        "period": "3 months to 30 Jun 2026"
+      }
+    },
+    {
+      "claim_id": "claim-077",
+      "change": "added",
+      "old": null,
+      "new": {
+        "id": "claim-077",
+        "category": "costs_margins_efficiency",
+        "classification": "management_opinion",
+        "claim_text": "Management said token expense is an important question for the firm going into next year and the subsequent years.",
+        "quote": "But it is an important question for us as we go into next year and the subsequent years.",
+        "speaker": "Jeremy Barnum",
+        "status": "forward_looking",
+        "values": {},
+        "confidence": 0.9,
+        "inferred_from": [],
+        "segment_id": "seg-0101"
       }
     }
   ],
   "affected_brief_sections": [
     3,
+    4,
     6,
-    7,
+    8,
     10
   ],
   "auto_escalated": true,
-  "auto_escalation_reason": "claim-028: period or values changed; conclusion-bearing section(s) [6, 7] cite a changed claim; outlook-brief.md text changed since the last round -- review-diff only diffs claims.json, not brief prose, so a narrative-only correction cannot be safely assessed from the diff alone"
+  "auto_escalation_reason": "4 claims changed, over the 3 threshold; conclusion-bearing section(s) [6] cite a changed claim; outlook-brief.md text changed since the last round -- review-diff only diffs claims.json, not brief prose, so a narrative-only correction cannot be safely assessed from the diff alone"
 }

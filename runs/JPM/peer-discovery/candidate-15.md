@@ -1,174 +1,84 @@
-Companies Like Bank of America Corporation (BAC) — Similar Stocks · AssetNext
+Similar Stocks to JPMorgan Chase | Competitors & Alternatives | Obermatt
 
-Home› Similar Companies› BAC
+# Similar Stocks: JPMorgan Chase
 
-Structural Similarity · Functional Peers
+Don't invest in isolation. Our peer-based algorithms show you where JPMorgan Chase stands compared with alternatives in the same or similar industry sectors. See if there are competitors that offer better upside potential.
 
-# Companies Similar to Bank of America Corporation
+### Is there a better alternative to JPMorgan Chase?
 
-Stocks with a similar structural profile to Bank of America Corporation (BAC) — identified by trajectory similarity across revenue dynamics, margin structure, and capital efficiency patterns. Not based on sector labels alone.
+See how this specific competitor performs against JPMorgan Chase.
 
-12 similar companies · Updated 2026-07-05 · BAC full analysis → peer cluster →
+JPMorgan Chase
 
-Companies similar to Bank of America Corporation cluster around comparable structural characteristics, with the strongest visible overlap typically appearing in valuation. Examples in this group include Wells Fargo & Company, JPMorgan Chase & Co., ING Groep N.V..
+ 76 360° View 
 
-Structurally similar companies — ranked by functional peer similarity
+- Best rank: Value
+- Worst rank: Profit Growth
 
-Wells Fargo & Company
+VS
 
-WFC similar → peers →
+THE CHALLENGER
 
-13
+Global Payments
 
-7
+ 100 360° View 
 
-85
+- Best rank: Analyst Opinions
+- Worst rank: 360° View
 
-JPMorgan Chase & Co.
+## Top Ranked Alternatives to JPMorgan Chase
 
-JPM similar → peers →
+Our selection includes the stock peers with the best 360° View. See how they compare against JPMorgan Chase.
 
-40
+| Name | 360° View | Sentiment | Combined | Value | Growth | Safety |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1. Global Payments XL • Other Financial Services | 100 | 14 | 20 | 14 | 67 | 45 |
+| 2. Franklin Resources XL • Asset Management & Custody | 75 | 14 | 20 | 14 | 67 | 45 |
+| 3. PayPal XL • Other Financial Services | 77 | 14 | 20 | 14 | 67 | 45 |
+| 4. LPL Financial XL • Investment Banking & Brokerage | 94 | 14 | 20 | 14 | 67 | 45 |
+| 5. Fidelity National Information Services XL • Other Financial Services | 82 | 14 | 20 | 14 | 67 | 45 |
+| 6. KKR & Co XL • Asset Management & Custody | 65 | 14 | 20 | 14 | 67 | 45 |
+| 7. Federal Home Loan Mortgage XL • Consumer Finance | 82 | 14 | 20 | 14 | 67 | 45 |
+| 8. Robinhood Markets XL • Investment Banking & Brokerage | 44 | 14 | 20 | 14 | 67 | 45 |
+| 9. Jefferies Financial Group XL • Investment Banking & Brokerage | 19 | 14 | 20 | 14 | 67 | 45 |
+| 10. Block XL • Other Financial Services | 49 | 14 | 20 | 14 | 67 | 45 |
 
-100
+1.
 
-77
+## Frequently Asked Questions
 
-ING Groep N.V.
+We compare JPMorgan Chase against the Diversified Banks sector. Obermatt analyzes companies with similar market capitalizations and operational structures to ensure a fair comparison. Our goal is to help you find companies that may offer better Value, Growth, or Safety profiles than your current selection.
 
-INGA.AS similar → peers →
+The list above displays the closest peers based on financial fundamentals. Review the "Combined Rank" to see which competitors are currently outperforming JPMorgan Chase.
 
-47
+JPMorgan Chase currently holds a 360° Rank of 76. Stocks with ranks above 50 are performing better than average. Compare this against the alternatives in the table above to make a data-driven decision.
 
-30
+### Don't settle for JPMorgan Chase's performance.
 
-76
+# Make Sense of the Ranks
 
-UBS Group AG
+The higher, the better. For every stock, we judge its performance against its peers and rank it on a scale of 1 to 100. These ranks are percentiles: a rank of 75 means the company outperforms 75% of its peers in that specific area. The higher the rank, the better the stock stacks up against its peers.
 
-UBSG.SW similar → peers →
+Value
 
-95
+Identifies how good a value the stock is. Good Value Expensive 
 
-0
+Combined
 
-58
+Consolidated view across Value, Growth, and Safety. Good Tread Carefully 
 
-HSBC Holdings plc
+Growth
 
-HSBA.L similar → peers →
+Shows a company's growth potential. High Growth Tough Times 
 
-32
+Sentiment
 
-66
+Shows what the market thinks of a stock. Positive Sentiment Skepticism 
 
-67
+Safety
 
-Banco Bilbao Vizcaya Argentaria, S.A.
+Assesses how financially secure a company is. Well-Financed High Leverage 
 
-BBVA.MC similar → peers →
+360° View
 
-72
-
-76
-
-80
-
-Svenska Handelsbanken AB (publ)
-
-SHB-A.ST similar → peers →
-
-20
-
-65
-
-82
-
-Standard Chartered PLC
-
-STAN.L similar → peers →
-
-77
-
-46
-
-75
-
-C similar → peers →
-
-92
-
-38
-
-77
-
-BARC.L similar → peers →
-
-42
-
-35
-
-82
-
-Bank of New York Mellon Corp
-
-BK similar → peers →
-
-59
-
-60
-
-79
-
-ABN AMRO Bank N.V.
-
-ABN.AS similar → peers →
-
-65
-
-50
-
-75
-
-| # | Company | Growth | Quality | Valuation |
-| --- | --- | --- | --- | --- |
-| #1 | BAC vs WFC |
-| #2 | BAC vs JPM |
-| #3 | BAC vs INGA.AS |
-| #4 | BAC vs UBSG.SW |
-| #5 | BAC vs HSBA.L |
-| #6 | BAC vs BBVA.MC |
-| #7 | BAC vs SHB-A.ST |
-| #8 | BAC vs STAN.L |
-| #9 | BAC vs C |
-| #10 | BAC vs BARC.L |
-| #11 | BAC vs BK |
-| #12 | BAC vs ABN.AS |
-
-Direct comparisons — BAC vs each similar company
-
-BAC vs WFC BAC vs JPM BAC vs INGA.AS BAC vs UBSG.SW BAC vs HSBA.L BAC vs BBVA.MC BAC vs SHB-A.ST BAC vs STAN.L BAC vs C BAC vs BARC.L BAC vs BK BAC vs ABN.AS
-
-### Full peer analysis for BAC in AssetNext
-
-Interactive similarity view, compare tool and portfolio context for Bank of America Corporation.
-
-Explore BAC in AssetNext →
-
-Explore similar companies for each peer
-
-Each company above has its own structural peer group. Explore the network:
-
-Similar to WFC Similar to JPM Similar to INGA.AS Similar to UBSG.SW Similar to HSBA.L Similar to BBVA.MC Similar to SHB-A.ST Similar to STAN.L Similar to C Similar to BARC.L
-
-Similarity is rule-based and descriptive only. Based on trajectory analysis of revenue dynamics, margin structure and capital efficiency patterns over time. Not investment advice. Not based on sector classification alone.
-
-## How AssetNext Peer Scores Work
-
-AssetNext scores reflect each company's structural position within its functional peer group — not a ranking against all stocks simultaneously. Peers are identified by similarity across eight financial dimensions, including revenue growth trajectory, margin structure, capital intensity, and earnings stability. A score of 75 means the company ranks in the top quartile within its own peer group, not the entire market.
-
-Four dimension scores drive the overall peer score: Growth (revenue trajectory and expansion dynamics), Quality (margin structure and capital efficiency), Valuation (peer-relative pricing on standard multiples), and Stability (earnings consistency and financial predictability). Each dimension is scored 0–100 relative to the peer group, then combined into an overall peer score using equal weighting.
-
-Because scores are peer-relative, the same company can have slightly different scores in different index universes. On comparison pages, both companies are shown within their shared peer universe wherever possible — so the scores are directly comparable. The peer basis is stated on each score card.
-
-Scores are recalculated periodically as underlying financial data is updated. All analysis is descriptive and rule-based — AssetNext describes structural realities and never issues buy, sell or hold recommendations.
+Holistic stock analysis: all key non-/financial metrics Good Watch Out

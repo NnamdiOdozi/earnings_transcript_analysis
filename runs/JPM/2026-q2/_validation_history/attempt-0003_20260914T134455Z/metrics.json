@@ -1,0 +1,65 @@
+[
+  {
+    "name": "ROTCE (excluding significant items)",
+    "value": 23.0,
+    "unit": "percent",
+    "period": "3 months to 30 Jun 2026",
+    "definition": "Return on tangible common equity as reported by the firm for the quarter, excluding the significant items noted in the presentation.",
+    "source_claim_ids": ["claim-001"],
+    "source": "agent_derived_from_transcript"
+  },
+  {
+    "name": "Standardized CET1 ratio",
+    "value": 14.1,
+    "unit": "percent",
+    "period": "as of 30 Jun 2026",
+    "definition": "Standardized common equity tier 1 capital ratio at quarter end, as stated on the call.",
+    "source_claim_ids": ["claim-005"],
+    "source": "agent_derived_from_transcript"
+  },
+  {
+    "name": "NII excluding Markets outlook",
+    "value": 96.5,
+    "unit": "USD billions",
+    "period": "12 months to 31 Dec 2026",
+    "definition": "Full-year 2026 net interest income excluding Markets, as guided on the call; raised from $95 billion.",
+    "source_claim_ids": ["claim-021", "claim-024"],
+    "source": "agent_derived_from_transcript"
+  },
+  {
+    "name": "Adjusted expense outlook",
+    "value": 107.5,
+    "unit": "USD billions",
+    "period": "12 months to 31 Dec 2026",
+    "definition": "Full-year 2026 adjusted expense outlook as guided on the call, raised by $2.5 billion during the quarter.",
+    "source_claim_ids": ["claim-022", "claim-026"],
+    "source": "agent_derived_from_transcript"
+  },
+  {
+    "name": "Card net charge-off rate outlook",
+    "value": 3.2,
+    "unit": "percent",
+    "period": "12 months to 31 Dec 2026",
+    "definition": "Full-year 2026 Card Services net charge-off rate the firm now expects, reflecting better-than-expected consumer credit performance.",
+    "source_claim_ids": ["claim-023"],
+    "source": "agent_derived_from_transcript"
+  },
+  {
+    "name": "AWM long-term net inflows",
+    "value": 50.0,
+    "unit": "USD billions",
+    "period": "3 months to 30 Jun 2026",
+    "definition": "Long-term net inflows into Asset & Wealth Management during the quarter, as stated on the call.",
+    "source_claim_ids": ["claim-018"],
+    "source": "agent_derived_from_transcript"
+  },
+  {
+    "name": "Assets under management",
+    "value": 5.1,
+    "unit": "USD trillions",
+    "period": "as of 30 Jun 2026",
+    "definition": "Asset & Wealth Management assets under management at quarter end, as stated on the call.",
+    "source_claim_ids": ["claim-019"],
+    "source": "agent_derived_from_transcript"
+  }
+]

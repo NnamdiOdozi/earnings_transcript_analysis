@@ -1,12 +1,12 @@
 {
-  "url": "https://www.sec.gov/Archives/edgar/data/19617/000162828026048078/a2q26erfexhibit991narrative.htm",
-  "title": "Document",
+  "url": "https://www.jpmorganchase.com/content/dam/jpmc/jpmorgan-chase-and-co/investor-relations/documents/quarterly-earnings/2026/2nd-quarter/corp-q2-2026.pdf",
+  "title": "[PDF] CORP Q2 2026 - JPMorgan Chase",
   "score": null,
-  "published_date": null,
+  "published_date": "2026-02-15T00:00:00.000Z",
   "_class": "consensus",
   "_select_key": "consensus",
-  "_temporal_status": "undated",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "JPMorgan Chase JPM 2026-q2 analyst earnings reaction results",
-  "_retrieved_at": "2026-09-09T16:19:13Z"
+  "_query": "JPMorganChase JPM 2026-q2 analyst earnings reaction results",
+  "_retrieved_at": "2026-09-14T13:11:16Z"
 }

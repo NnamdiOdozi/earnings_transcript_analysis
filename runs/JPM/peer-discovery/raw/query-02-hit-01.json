@@ -4,8 +4,8 @@
   "score": null,
   "published_date": null,
   "_class": "peer_group",
-  "_temporal_status": "undated",
+  "_temporal_status": "unchecked",
   "_provider": "exa",
-  "_query": "JPMorgan Chase JPM closest competitors comparable stocks analysts",
-  "_retrieved_at": "2026-09-09T16:18:37Z"
+  "_query": "JPMorganChase JPM closest competitors comparable stocks analysts",
+  "_retrieved_at": "2026-09-14T13:10:36Z"
 }

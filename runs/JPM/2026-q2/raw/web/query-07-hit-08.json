@@ -1,12 +1,12 @@
 {
-  "url": "https://news.alphastreet.com/jpmorgan-chase-posts-27-revenue-jump-in-q2-2026-beats-on-eps/",
-  "title": "JPMorgan Chase Posts 27% Revenue Jump in Q2 2026, Beats on EPS - Alphastreet",
+  "url": "https://finance.yahoo.com/markets/article/jpmorgan-notches-record-quarter-as-ceo-jamie-dimon-calls-the-banking-environment-close-to-as-good-as-it-gets-110031854.html",
+  "title": "JPMorgan notches record quarter as CEO Jamie Dimon calls the ...",
   "score": null,
   "published_date": "2026-07-14T00:00:00.000Z",
   "_class": "peer",
   "_select_key": "peer:Bank of America",
   "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "Bank of America quarterly results versus JPMorgan Chase JPM",
-  "_retrieved_at": "2026-09-09T16:19:15Z"
+  "_query": "Bank of America quarterly results versus JPMorganChase JPM",
+  "_retrieved_at": "2026-09-14T13:11:18Z"
 }

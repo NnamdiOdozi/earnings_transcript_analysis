@@ -1,11 +1,11 @@
 {
-  "url": "https://stockmarketwatch.com/stock/JPM/vs-peers",
-  "title": "JPMorgan Chase & (JPM) \u2014 vs. Peers",
+  "url": "https://trendlyne.com/us/fundamentals/peer-group/1403963/JPM/jpmorgan-chase-co/",
+  "title": "JPMC - Competitors/Peers Analysis",
   "score": null,
   "published_date": null,
   "_class": "peer_group",
-  "_temporal_status": "undated",
+  "_temporal_status": "unchecked",
   "_provider": "exa",
-  "_query": "JPMorgan Chase JPM peer group comparable companies",
-  "_retrieved_at": "2026-09-09T16:18:35Z"
+  "_query": "JPMorganChase JPM peer group comparable companies",
+  "_retrieved_at": "2026-09-14T13:10:35Z"
 }

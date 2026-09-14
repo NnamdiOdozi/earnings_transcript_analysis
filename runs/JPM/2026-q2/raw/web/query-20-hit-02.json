@@ -1,12 +1,12 @@
 {
-  "url": "https://www.citigroup.com/rcs/citigpa/storage/public/Earnings/Q22026/2q2026-citigroup-at-a-glance.pdf",
-  "title": "2Q 2026 Citigroup At a Glance",
+  "url": "https://www.citigroup.com/rcs/citigpa/storage/public/Earnings/Q22026/2026presoqtr2rslt.pdf",
+  "title": "[PDF] Earnings Results Presentation Second Quarter 2026 - Citi",
   "score": null,
-  "published_date": null,
+  "published_date": "2026-07-14T00:00:00.000Z",
   "_class": "peer",
   "_select_key": "peer:Citigroup",
-  "_temporal_status": "undated",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
   "_query": "Citigroup earnings call key trends 2026-q2",
-  "_retrieved_at": "2026-09-09T16:19:35Z"
+  "_retrieved_at": "2026-09-14T13:11:35Z"
 }

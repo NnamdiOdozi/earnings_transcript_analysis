@@ -1,12 +1,12 @@
 {
-  "url": "https://www.theglobeandmail.com/investing/markets/stocks/GS/pressreleases/3390838/goldman-sachs-gs-q2-2026-earnings-call-transcript/",
-  "title": "Goldman Sachs (GS) Q2 2026 Earnings Call Transcript - The Globe and Mail",
+  "url": "https://finance.yahoo.com/markets/stocks/articles/goldman-sachs-nyse-gs-reports-114404263.html",
+  "title": "Goldman Sachs (NYSE:GS) Reports Bullish Q2 CY2026",
   "score": null,
-  "published_date": null,
+  "published_date": "2026-07-14T00:00:00.000Z",
   "_class": "peer",
   "_select_key": "peer:Goldman Sachs",
-  "_temporal_status": "undated",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
   "_query": "Goldman Sachs 2026-q2 earnings results revenue growth",
-  "_retrieved_at": "2026-09-09T16:19:36Z"
+  "_retrieved_at": "2026-09-14T13:11:36Z"
 }

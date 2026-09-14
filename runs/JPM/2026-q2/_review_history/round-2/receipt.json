@@ -1,14 +1,14 @@
 {
   "round": 2,
-  "verdict": "pass_with_warnings",
-  "reviewed_at": "2026-09-09T17:05:00Z",
+  "verdict": "pass",
+  "reviewed_at": "2026-09-14T14:05:00Z",
   "review_mode": "full",
   "escalate_full_review": false,
   "finding_counts": {
     "critical": 0,
     "high": 0,
-    "medium": 1,
-    "low": 7,
-    "info": 13
+    "medium": 0,
+    "low": 5,
+    "info": 12
   }
 }

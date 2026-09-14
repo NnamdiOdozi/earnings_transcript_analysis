@@ -1,12 +1,12 @@
 {
-  "url": "https://earningscall.biz/e/nyse/s/gs/y/2026/q/q2",
-  "title": "EarningsCall \u00b7 GS Q2 2026",
+  "url": "https://quartr.com/companies/the-goldman-sachs-group-inc_4954",
+  "title": "The Goldman Sachs Group (GS) Investor Relations, Earnings Summary & Outlook",
   "score": null,
-  "published_date": null,
+  "published_date": "2024-03-14T00:00:00.000Z",
   "_class": "peer",
   "_select_key": "peer:Goldman Sachs",
-  "_temporal_status": "undated",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
   "_query": "Goldman Sachs 2026-q2 earnings guidance outlook",
-  "_retrieved_at": "2026-09-09T16:19:39Z"
+  "_retrieved_at": "2026-09-14T13:11:40Z"
 }

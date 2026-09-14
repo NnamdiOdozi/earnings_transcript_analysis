@@ -1,242 +1,187 @@
-Is JPM Overvalued? JPMorgan Chase & Co. Peer Valuation Check 2026 | VCP Scanner
+JPM Peer Comaparison By Fundamentals JPMorgan Chase
+
+JPM MENU
+
+JPM MENU
+
+❌ CLOSE
+
+- COMPANY INFO
+- About
+- Similar Stocks
+
+- NEWS
+- Headline News (12)
+- Press Releases
+- Posts
+
+- LINKS
+- Company Website
+- SEC Filings
+
+# Compare JPM to Other Companies
+
+?
 
-# JPMorgan Chase & Co. (JPM)
+Compare the fundamental data of JPM with symbols that are considered similar or are in the same peer group.
 
-Relative Valuation• Peer multiples, competitive benchmarking & quality-adjusted fair value
+▲ Close
 
-# JPMorgan Chase & Co. is currently slightly expensive versus peers
+For Premium Members Only
 
-The market is pricing JPMorgan Chase & Co. at a 17.16% premium to its peer-implied fair value.
+To compare peers you must have a subscription.
 
-Current Price
+7-Day Free Trial
 
-$357.62
+Income Statement·Performance·Valuation
 
-Fair Value
+Notional·% Revenue·% YoY Growth·% Market Cap
 
-$296.25
+| JPM | Median of Peers |
+| --- | --- |
+| Market Cap | 839.3 B | - |
+| Revenue | 182.4 B | - |
+| Cost of Revenue | 0.0 | - |
+| Gross Profit | 0.0 | - |
+| Operating Expense | 0.0 | - |
+| Selling and General Admin | 60.4 B | - |
+| Selling and Marketing | 5.5 B | - |
+| Research and Development | 0.0 | - |
+| Operating Income | 0.0 | - |
+| Net Income to Shareholders | 55.7 B | - |
 
-Relative Downside
+| JPM | Median of Peers |
+| --- | --- |
+| Market Cap | 839.3 B | - |
+| Revenue | 100.0% | - |
+| Cost of Revenue | 0.0% | - |
+| Gross Profit | 0.0% | - |
+| Operating Expense | 0.0% | - |
+| Selling and General Admin | 33.1% | - |
+| Selling and Marketing | 3.0% | - |
+| Research and Development | 0.0% | - |
+| Operating Income | 0.0% | - |
+| Net Income to Shareholders | 30.5% | - |
 
--17.16%
+| JPM | Median of Peers |
+| --- | --- |
+| Market Cap | 839.3 B | - |
+| Revenue | 2.8% | - |
+| Cost of Revenue | - | - |
+| Gross Profit | - | - |
+| Operating Expense | - | - |
+| Selling and General Admin | 6.7% | - |
+| Selling and Marketing | 11.2% | - |
+| Research and Development | - | - |
+| Operating Income | - | - |
+| Net Income to Shareholders | -2.1% | - |
 
-Peer Premium Status
+| JPM | Median of Peers |
+| --- | --- |
+| Market Cap | 839.3 B | - |
+| Revenue | 21.7% | - |
+| Cost of Revenue | 0.0% | - |
+| Gross Profit | 0.0% | - |
+| Operating Expense | 0.0% | - |
+| Selling and General Admin | 7.2% | - |
+| Selling and Marketing | 0.7% | - |
+| Research and Development | 0.0% | - |
+| Operating Income | 0.0% | - |
+| Net Income to Shareholders | 6.6% | - |
 
-Unjustified
+Total Return over time For JPM, including dividends
 
-## Peer Set
+| Duration | JPM | Median of Peers |
+| --- | --- | --- |
+| Today | +1.3% | - |
+| 2 Week | +2.4% | - |
+| 1 Month | +11.3% | - |
+| 3 Month | +2.7% | - |
+| 6 Month | +3.5% | - |
+| 1 Year | +30.5% | - |
+| YTD | -1.9% | - |
+| 3 Year | +137.5% | - |
+| 5 Year | +116.7% | - |
 
-7 curated peers matched by business model, revenue composition, and market position
+P/E Ratio:
 
-| Ticker | Company | Market Cap | P/E | EV/EBITDA |
-| --- | --- | --- | --- | --- |
-| BAC | Bank of America Corporation | $442.26B | 16.31x | 14.4x |
-| WFC | Wells Fargo & Company | $265.26B | 13.72x | 17.61x |
-| C | Citigroup Inc. | $227.81B | 19x | 25.72x |
-| GS | The Goldman Sachs Group, Inc. | $318.47B | 20.15x | 31.78x |
-| MS | Morgan Stanley | $338.75B | 21.06x | 26.4x |
-| USB | U.S. Bancorp | $97.31B | 13.55x | 12.47x |
-| TFC | Truist Financial Corporation | $62.83B | 13.2x | 13.65x |
+Ratio Price/Earnings. Common valuation ratio measures the price of the stock relative to how much earnings the company generates per share.
 
-## Multiples Comparison
+P/E Normalized EPS:
 
-3 valuation metrics · peer-median based
+Price/TTM normalized diluted earnings per share. This calculation reverses the effects of extraordinary income or charges on Net Income, by adding back (extraordinary expense) or subtracting (extraordinary income) the value from Net Income
 
-3/3 multiples indicate overvaluation
+Price/Sales:
 
-| Multiple | Current | Peer Median | vs Peers | Implied Price |
-| --- | --- | --- | --- | --- |
-| Forward P/E Price paid for next year's expected earnings. | 14.4x | 11.97x | Premium +20.37% | $297.10 |
-| P/E Price paid for current earnings. | 17.84x | 16.31x | Premium +9.33% | $343.95 |
-| P/B Market value versus book equity. | 2.76x | 1.52x | Premium +80.93% | $197.66 |
+Ratio Price/Revenue
 
-### Fair Value Formulation
+Price/Book Value:
 
-How the model derives the final fair value from peer baselines and quality metrics
+Ratio Price/Book Value. Book Value is Common Shareholder’s Equity / Diluted Shares Outstanding.
 
-1
+Price/Tangible Book Value:
 
-Peer Baselineⓘ
+Ratio price/Tangible book value. Tangible Book Value is The company’s total book value less the value of any intangible assets dividend by number of shares.
 
-$276.35
+PEG Ratio:
 
-Peer-Implied Value
+Forward PE Ratio / Long-term Average Earning Growth Rate. Peg ratio is a version of a P/E ratio using an estimated forward earnings taking into consideration earnings growth estimates.
 
-2
+Price/Free Cash Flow:
 
-Quality Premiumⓘ
+Ratio Price/Free Cash Flow. Free Cash Flow is Cash Flow Operations plus Capital Expenditures. Free cash flow is the cash from operations left over after the company pays for its operating and capital expenses.
 
-+$19.90 (+7.2%)
+Price/Ebitda:
 
-Adjusted for 3y eps growth, roe
+Ratio Price/Ebitda. Ebitda is Earnings minus expenses (excluding interest, tax, depreciation, and amortization expenses).
 
-=→
+Price/Ebit:
 
-3
+Ratio Price/Ebit. Ebit is Earnings minus expenses (excluding interest and tax expenses).
 
-Fair Valueⓘ
+Price/Working Capital:
 
-$296.25
+Ratio Price/Working Capital. Working Capital is Current Assets minus Current Liabilities.
 
-Quality-Adjusted Fair Value
+Forward PE Ratio:
 
-Current Price
+1 / ForwardEarningYield. Forward Yield: Estimated Earnings Per Share / Price. EPS is estimated for next year.
 
-$357.62
+PEG Pay Back:
 
-Active market quote
+The number of years it would take for a company's cumulative earnings to equal the stock's current trading price, assuming that the company continues to increase its annual earnings at the growth rate used to calculate the PEG ratio.
 
-OVERVALUED
+Price/CFO:
 
-$357.62$296.25
+Ratio Price/Cash Flow from Operations: Cash Flow from Operations is the amount of money a company generates on a regular basis from its business activity. Excludes any one time activity.
 
-Valuation Gap
+EV to EBITDA:
 
-17.16% Premium
+Ratio Enterprise Value/Earnings Before Interest, Taxes and depreciation and amortization.
 
-Trading at a 20.72% premium
+| Valuation Ratios | JPM | Median of Peers |
+| --- | --- | --- |
+| 14.80 | - |
+| 14.99 | - |
+| 4.63 | - |
+| 2.44 | - |
+| 3.00 | - |
+| 1.64 | - |
+| Price/Cash: | 1.24 | - |
+| - |
+| - |
+| - |
+| - |
+| 14.12 | - |
+| 8.63 | - |
+| - |
+| - |
 
-Premium: The stock is trading at a 20.72% premium to its quality-adjusted fair value of $296.25. The market is pricing the stock 17.16% above our model's estimate.
+---
 
-## Quality Adjustment
+Change Comparison Set: By Industry Group: Financial Services - Banks By Industry: Banks - Diversified By SIC: National Commercial Banks By NAICS: Commercial Banking
 
-Quality metrics are stronger than the peer group, justifying a premium.
+| Symbol | Name | CurrentPrice | Current% Chg | Market Cap | About |
+| --- | --- | --- | --- | --- | --- |
 
-+7.2% adjustment
-
-### Growth CAGR Metrics
-
-3Y EPS Growth Strength
-
-This Stock
-
-18.4%
-
-Peer Median
-
-7.7%
-
-### Profitability & Returns
-
-ROE (TTM) Strength
-
-This Stock
-
-16.3%
-
-Peer Median
-
-11.9%
-
-Net Interest Margin In-line
-
-This Stock
-
-2.2%
-
-Peer Median
-
-2.2%
-
-Efficiency Ratio Strength
-
-This Stock
-
-34%
-
-Peer Median
-
-38%
-
-### Balance Sheet & Financial Health
-
-8.2%
-
-Peer Median
-
-8.5%
-
-Quality adjustments are capped at ±15% (up to ±20% for financial services) to prevent runaway premiums. Based on trailing twelve months and multi-year CAGR data where available.
-
-## Historical Context
-
-How current multiples rank vs 8 years of the stock’s own history
-
-| Multiple | Current | Historical Median | Percentile | Status |
-| --- | --- | --- | --- | --- |
-| P/E 8 years of data | 17.84x | 11.61x | 100th | Above historical norm |
-| P/B 8 years of data | 2.76x | 1.58x | 100th | Above historical norm |
-
-JPMorgan Chase & Co. currently trades near the highest valuation levels observed during the last 8 years.
-
-## Analyst Consensus
-
-Wall Street target prices — 61 analysts
-
-Consensus Target$373.64+4.48% upside to target
-
-Median Target$370.00
-
-Our Model vs Street-20.71% Model estimates lower than analyst consensus
-
-### Price Target Spectrum vs. Current & Model
-
-Our Model: $296.25
-
-Current: $357.62
-
-Median: $370.00
-
-Consensus: $373.64
-
-## Risk Factors
-
-Model-identified caveats to consider
-
-P/E is high versus the stock's own history.
-
-## What This Means for Investors
-
-JPM looks slightly expensive versus peers using curated peers, with relative upside of -17.2%.
-
-### Business Quality
-
-JPMorgan Chase & Co. is a high-quality business with competitive advantages over peers.
-
-Conclusion
-
-### Valuation & Price
-
-The current valuation implies a significant premium above peers, with 3/3 multiples indicating overvaluation (17.16% above fair value). The stock also trades at elevated levels versus its own history.
-
-### Investor Outlook
-
-Future returns may depend more on sustained earnings growth than on further multiple expansion.
-
-## Frequently Asked Questions
-
-Answers to common questions about JPM's relative valuation and our methodology.
-
-### What does "fair value" mean in this analysis?
-
-JPMorgan Chase & Co.'s fair value of $296.25 is the price at which the stock would trade if valued at the same multiples as its 7-company peer group, adjusted for differences in business quality. At $357.62, the stock trades at a -17.16% premium to fair value. This is a reference point, not a price target.
-
-### How were these peers selected?
-
-The 7 peers shown were selected based on business model similarity, revenue composition, and market position. Each peer was matched for comparable operations, not just industry label. Only companies with clean, usable financial data are included.
-
-### Why does JPMorgan Chase & Co. trade at a premium to fair value?
-
-JPMorgan Chase & Co. has strengths in 3y eps growth, roe, efficiency ratio, and a quality score that justifies a 7.2% premium relative to its peer group. The Quality Adjustment section breaks down each driver.
-
-### Is this analysis a buy or sell recommendation?
-
-No. This page provides an automated quantitative comparison of JPMorgan Chase & Co. against its peers. It is not investment advice, a recommendation, or a solicitation. Valuation is only one factor in an investment decision — it does not account for growth catalysts, management quality, regulatory risk, or your personal financial situation.
-
-### What should I look at beyond the fair value number?
-
-Look at the Historical Context to see where current multiples sit versus the stock's own history. Review the Risk Factors section for model-identified caveats. Compare the Analyst Consensus to our model output for another perspective. Valuation is only one dimension — growth trajectory, competitive position, and market conditions all matter.
-
-### How often is the data updated?
-
-Valuation data is refreshed weekly based on the latest financial filings, market prices, and analyst estimates. JPMorgan Chase & Co.'s fair value, peer multiples, and quality scores will shift over time as new earnings are reported and stock prices change.
+Market Data Delayed 15 Minutes

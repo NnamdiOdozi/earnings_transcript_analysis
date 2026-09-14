@@ -1,12 +1,12 @@
 {
-  "url": "https://finviz.com/news/366398/pre-earnings-check-in-with-jpmorgan-chase",
-  "title": "Pre-Earnings Check-In with JPMorgan Chase",
+  "url": "https://seekingalpha.com/article/4920947-jpmorgan-chase-buy-ahead-of-q2-report-on-credit-market-and-profits",
+  "title": "JPMorgan Chase: Buy Ahead Of Q2 Report On Credit Market And ...",
   "score": null,
-  "published_date": null,
+  "published_date": "2026-07-09T00:00:00.000Z",
   "_class": "consensus",
   "_select_key": "consensus",
-  "_temporal_status": "undated",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "JPMorgan Chase JPM 2026-q2 earnings preview expectations forecast",
-  "_retrieved_at": "2026-09-09T16:19:08Z"
+  "_query": "JPMorganChase JPM 2026-q2 earnings preview expectations forecast",
+  "_retrieved_at": "2026-09-14T13:11:11Z"
 }

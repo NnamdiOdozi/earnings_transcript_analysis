@@ -1,12 +1,12 @@
 {
-  "url": "https://www.metatrader.com/en/symbols/nyse/jpm/documents/1537865-quarterly-report-q2-fy2026",
-  "title": "JPMORGAN CHASE & CO quarterly report, Q2 FY2026 (NYSE:JPM) | MetaTrader",
+  "url": "https://www.jpmorganchase.com/ir/quarterly-earnings",
+  "title": "Quarterly Earnings | JPMorganChase",
   "score": null,
-  "published_date": null,
+  "published_date": "2020-03-31T00:00:00.000Z",
   "_class": "consensus",
   "_select_key": "consensus",
-  "_temporal_status": "undated",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "JPMorgan Chase JPM 2026-q2 earnings guidance outlook estimates",
-  "_retrieved_at": "2026-09-09T16:19:11Z"
+  "_query": "JPMorganChase JPM 2026-q2 earnings guidance outlook estimates",
+  "_retrieved_at": "2026-09-14T13:11:14Z"
 }

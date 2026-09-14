@@ -1,22 +1,10 @@
 {
-  "Revenues": {
-    "value": 182447000000,
-    "start": "2025-01-01",
-    "end": "2025-12-31",
-    "duration_days": 364,
-    "period_type": "full_year",
-    "unit": "USD",
-    "form": "10-K",
-    "fy": 2025,
-    "filed": "2026-02-13",
-    "accn": "0001628280-26-008131"
-  },
   "NetIncomeLoss": {
-    "value": 37649000000,
-    "start": "2026-01-01",
+    "value": 21155000000,
+    "start": "2026-04-01",
     "end": "2026-06-30",
-    "duration_days": 180,
-    "period_type": "half_year",
+    "duration_days": 90,
+    "period_type": "quarter",
     "unit": "USD",
     "form": "10-Q",
     "fy": 2026,
@@ -24,11 +12,11 @@
     "accn": "0001628280-26-054343"
   },
   "EarningsPerShareDiluted": {
-    "value": 13.63,
-    "start": "2026-01-01",
+    "value": 7.7,
+    "start": "2026-04-01",
     "end": "2026-06-30",
-    "duration_days": 180,
-    "period_type": "half_year",
+    "duration_days": 90,
+    "period_type": "quarter",
     "unit": "USD/shares",
     "form": "10-Q",
     "fy": 2026,

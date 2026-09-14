@@ -1,11 +1,11 @@
 {
-  "url": "https://stockti.com/stock/JPM/peers",
-  "title": "JPM Peer Comparison: Banking Stocks | StockTi",
+  "url": "https://www.marketbeat.com/stocks/NYSE/JPM/competitors-and-alternatives/",
+  "title": "Top JPMorgan Chase & Co. (JPM) Competitors 2026",
   "score": null,
   "published_date": null,
   "_class": "peer_group",
-  "_temporal_status": "undated",
+  "_temporal_status": "unchecked",
   "_provider": "exa",
-  "_query": "JPMorgan Chase JPM peer group comparable companies",
-  "_retrieved_at": "2026-09-09T16:18:35Z"
+  "_query": "JPMorganChase JPM peer group comparable companies",
+  "_retrieved_at": "2026-09-14T13:10:35Z"
 }

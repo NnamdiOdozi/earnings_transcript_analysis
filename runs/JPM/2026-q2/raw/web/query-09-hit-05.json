@@ -1,12 +1,12 @@
 {
-  "url": "https://www.marketbeat.com/earnings/reports/2026-7-14-bank-of-america-co-stock/",
-  "title": "",
+  "url": "https://qz.com/bank-of-america-earnings-record-equities-trading-investment-banking-071426",
+  "title": "Bank of America Q2 2026 earnings: Record equities trading ... - Quartz",
   "score": null,
-  "published_date": null,
+  "published_date": "2026-07-14T00:00:00.000Z",
   "_class": "peer",
   "_select_key": "peer:Bank of America",
-  "_temporal_status": "undated",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
   "_query": "Bank of America 2026-q2 analyst earnings reaction results",
-  "_retrieved_at": "2026-09-09T16:19:18Z"
+  "_retrieved_at": "2026-09-14T13:11:20Z"
 }

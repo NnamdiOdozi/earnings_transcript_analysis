@@ -1,11 +1,11 @@
 {
-  "url": "https://www.macroaxis.com/competition/JPM",
-  "title": "JPMorgan Chase's (JPM) Competition & Correlation Matrix | Macroaxis",
+  "url": "https://stockti.com/stock/JPM/peers",
+  "title": "JPM Peer Comparison: Banking Stocks | StockTi",
   "score": null,
   "published_date": null,
   "_class": "peer_group",
-  "_temporal_status": "undated",
+  "_temporal_status": "unchecked",
   "_provider": "exa",
-  "_query": "JPMorgan Chase JPM peer group comparable companies",
-  "_retrieved_at": "2026-09-09T16:18:35Z"
+  "_query": "JPMorganChase JPM peer group comparable companies",
+  "_retrieved_at": "2026-09-14T13:10:35Z"
 }

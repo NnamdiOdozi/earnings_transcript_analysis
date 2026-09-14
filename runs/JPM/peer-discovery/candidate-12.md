@@ -1,81 +1,90 @@
-JPMorgan Chase Trades at a Big Premium to Bank of America. Is It Worth the Difference? | The Motley Fool
+Similar Stocks to JPMorgan Chase | Competitors & Alternatives | Obermatt
 
-JPMorgan Chase (JPM -0.95%) is a driving force of the broader economy. And the gigantic bank has been a huge winner thanks to strong fundamental performance. During the past decade, its shares have generated a total return of 527% (as of June 8). That gain comes up well ahead of smaller rival Bank of America (BAC -0.06%), whose shares delivered a total return of 369% during the same time.
+# Similar Stocks: JPMorgan Chase
 
-From the market's perspective, investors might struggle to find differences between these two companies. After all, they each have a meaningful presence in different areas of the financial services sector. 
+Don't invest in isolation. Our peer-based algorithms show you where JPMorgan Chase stands compared with alternatives in the same or similar industry sectors. See if there are competitors that offer better upside potential.
 
-But JPMorgan Chase trades at a price-to-book (P/B) ratio of 2.4, representing a sizable 71% premium to Bank of America's 1.4 multiple. What's causing this large valuation gap? And does it tell us anything about the investment implications of these two financial stocks?
+### Is there a better alternative to JPMorgan Chase?
 
-Image source: JPMorgan Chase.
+See how this specific competitor performs against JPMorgan Chase.
 
-## The key performance metrics paint a clear picture
+JPMorgan Chase
 
-There are numerous variables investors can examine to understand why the market values JPMorgan Chase at a significant premium to its banking counterpart. Let's start with some key financial metrics.
+ 77 360° View 
 
-JPMorgan Chase's return on tangible common equity (23%), efficiency ratio (54%), and net profit margin (33%) in the first quarter were all better than what Bank of America reported. 
+- Best rank: Value
+- Worst rank: Safety
 
-JPMorgan Chase has a stronger market position in areas that generate non-interest fee income, adding stability. It collects much greater revenue from activities like investment banking and asset management.
+VS
 
-To Bank of America's credit, it has the leading market share in the U.S. consumer deposit market. But JPMorgan Chase's total deposit base of $2.7 trillion is larger in an absolute sense. Nonetheless, the spread between what it earns on interest-bearing assets and what it pays on interest-bearing liabilities of 2.01% is 46% higher than Bank of America's 1.38%. This supports a cost advantage.
+THE CHALLENGER
 
-## Leadership has an impact
+Global Payments
 
-These are no doubt important metrics to pay attention to, and they highlight the superior operations of JPMorgan Chase. But investors will also want to take a closer look at their management teams, specifically the chief executive officers (CEO).
+ 94 360° View 
 
-Jamie Dimon has been the CEO of JPMorgan Chase since 2006. He gets a lot of credit for successfully navigating the business through the 2008 financial crisis, which decimated the entire industry, without needing a government bailout. This sharpened the company's stringent risk management practices.
+- Best rank: Analyst Opinions
+- Worst rank: Value
 
-He also managed through acquisitions and directed technology investments to make JPMorgan Chase the biggest bank in the U.S. Dimon is one of the most highly regarded corporate leaders in the world.
+## Top Ranked Alternatives to JPMorgan Chase
 
-Brian Moynihan deserves praise as well, having been the CEO of Bank of America since 2010, when it was in a troubled state. He turned the company into a highly profitable and tech-forward financial institution.
+Our selection includes the stock peers with the best 360° View. See how they compare against JPMorgan Chase.
 
-However, he doesn't have the same public visibility and investor appreciation that Dimon does, which might also be a contributing factor to his stock's valuation.
+| Name | 360° View | Sentiment | Combined | Value | Growth | Safety |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1. Global Payments • | 94 | 14 | 20 | 14 | 67 | 45 |
+| 2. Franklin Resources • | 34 | 14 | 20 | 14 | 67 | 45 |
+| 3. Fidelity National Information Services • | 97 | 14 | 20 | 14 | 67 | 45 |
+| 4. Block • | 75 | 14 | 20 | 14 | 67 | 45 |
+| 5. PayPal • | 37 | 14 | 20 | 14 | 67 | 45 |
+| 6. Goldman Sachs • | 16 | 14 | 20 | 14 | 67 | 45 |
+| 7. Federal Home Loan Mortgage • | 82 | 14 | 20 | 14 | 67 | 45 |
+| 8. KKR & Co • | 65 | 14 | 20 | 14 | 67 | 45 |
+| 9. Intercontinental Exchange • | 81 | 14 | 20 | 14 | 67 | 45 |
+| 10. Berkshire Hathaway • | 15 | 14 | 20 | 14 | 67 | 45 |
 
-Today's Change (-0.95%) $-3.42 Current Price $358.64
+1.
 
-### Key Data Points
+Global Payments
 
-Market Cap
+Intercontinental Exchange
 
-$953B Market cap calculation methodology Market cap calculated using publicly traded shares outstanding only. Does not include unlisted, private, or dual-class non-traded shares. Implied market cap may vary.
+Berkshire Hathaway
 
-Day's Range
+## Frequently Asked Questions
 
-$355.20 - $362.86
+We compare JPMorgan Chase against the sector. Obermatt analyzes companies with similar market capitalizations and operational structures to ensure a fair comparison. Our goal is to help you find companies that may offer better Value, Growth, or Safety profiles than your current selection.
 
-52wk Range
+The list above displays the closest peers based on financial fundamentals. Review the "Combined Rank" to see which competitors are currently outperforming JPMorgan Chase.
 
-$279.10 - $366.50
+JPMorgan Chase currently holds a 360° Rank of 77. Stocks with ranks above 50 are performing better than average. Compare this against the alternatives in the table above to make a data-driven decision.
 
-Volume
+### Don't settle for JPMorgan Chase's performance.
 
-4.9M
+# Make Sense of the Ranks
 
-Avg Vol
+The higher, the better. For every stock, we judge its performance against its peers and rank it on a scale of 1 to 100. These ranks are percentiles: a rank of 75 means the company outperforms 75% of its peers in that specific area. The higher the rank, the better the stock stacks up against its peers.
 
-8.2M
+Value
 
-Dividend Yield
+Identifies how good a value the stock is. Good Value Expensive 
 
-1.67%
+Combined
 
-## What's the opportunity for investors?
+Consolidated view across Value, Growth, and Safety. Good Tread Carefully 
 
-In addition to JPMorgan Chase's more favorable financial metrics, its profit gains also stand out. During the past decade, the company's diluted earnings per share climbed at a compound annual rate of 12.8%. That's faster than Bank of America's yearly clip of 11.3%.
+Growth
 
-Taking everything into account, it makes sense why JPMorgan Chase trades at a notable premium to its industry peer. Any rational investor would conclude that it's deserving of the valuation. Its robust position in non-interest and fee-generating activities, greater scale, and better profits support this view.
+Shows a company's growth potential. High Growth Tough Times 
 
-But does Bank of America's discount mean that there's a buying opportunity here? Not necessarily, because the market isn't automatically going to bid up this bank stock's valuation to match JPMorgan Chase's P/B ratio. 
+Sentiment
 
-For investors seeking adequate exposure to the financial services industry as part of a diversified portfolio, owning both companies is a reasonable approach.
+Shows what the market thinks of a stock. Positive Sentiment Skepticism 
 
-# JPMorgan Chase Trades at a Big Premium to Bank of America. Is It Worth the Difference?
+Safety
 
-There is more than meets the eye with these enormous banks.
+Assesses how financially secure a company is. Well-Financed High Leverage 
 
-By Neil Patel – Jun 9, 2026 at 6:30AM EST
+360° View
 
-## Key Points
-
-- JPMorgan Chase stock trades at a price-to-book ratio that’s 71% more than Bank of America’s valuation multiple. 
-- Key financial data reported by JPMorgan Chase last quarter came in better than its smaller rival. 
-- If investors want exposure to the financial services industry, it makes sense to own both of these companies.
+Holistic stock analysis: all key non-/financial metrics Good Watch Out

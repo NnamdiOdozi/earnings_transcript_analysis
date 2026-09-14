@@ -1,106 +1,85 @@
 {
-  "verdict": "pass_with_warnings",
+  "verdict": "pass",
   "review_mode": "full",
-  "reviewed_at": "2026-09-09T17:15:00Z",
+  "reviewed_at": "2026-09-14T14:05:00Z",
   "model": "opus",
-  "claims_sha256": "650c648bff79cec96f0c80d27fca102381e5ba3763eedaa610a52f8dc49cdc2e",
-  "outlook_brief_sha256": "7cf698e5ed882f15852683b1ffb4f7c7522f3ff91c64b274d0eb4b8a73d948fc",
-  "review_diff_sha256": "7d4ee3e9eaf9abb5835acdbb98b2a3b76a4447cf4643f199fd3c0e33d411fd55",
+  "claims_sha256": "5e411642c029a03679ceca33809b1014065dc0fbaf1c03b97913908bebdb86bc",
+  "outlook_brief_sha256": "caa5007ed7cb53a3da3ecf57e6184dc581ad56c1437fa45379fb72d7e0c9ca0b",
+  "review_diff_sha256": "180f9065e82321e542f8b8beb4c68d2eebd5b413948007babaa512c6a76af991",
   "source_checks": [
     {
       "severity": "info",
-      "artifact": "evidence/web/web-003.md",
-      "passage": "Wells Fargo Reports Second Quarter 2026 Net Income of $6.4 billion, or $2.00 per Diluted Share",
-      "evidence": "Opened the file. It is a genuine Wells Fargo news release dated July 14, 2026. The headline and the income-statement table (Total revenue 22,622 vs 20,822; Net income 6,407 vs 5,494; Diluted EPS 2.00 vs 1.60) match claim-044 and claim-045 word for word. Not a 404 page or an unrelated article.",
-      "recommendation": "None."
-    },
-    {
-      "severity": "info",
       "artifact": "evidence/web/web-002.md",
-      "passage": "Net income of $3.3 billion",
-      "evidence": "Opened the file. It is Bank of America's Q2 2026 earnings release exhibit, marked 'Published on July 14, 2026'. The Consumer Banking page shows Total revenue $11,336 million and Net income $3,281 million with the bullets 'Net income of $3.3 billion' and 'Revenue of $11.3 billion, up 5%', so claim-040 and claim-041 are attached to the correct segment. The Global Markets page shows Net income $2,626 million and 'Equities revenue increased 70% to $3.6 billion', matching claim-043.",
+      "passage": "Total Corporation investment banking fees (excl. self-led) of $2.1 billion increased 50%, reflecting strength across debt underwriting, advisory and equity underwriting",
+      "evidence": "Opened the file in full. It is a genuine Bank of America 2Q26 earnings press release (8-K exhibit), not a 404 or an unrelated article. Every figure claims 062, 063, 064 and 065 draw from it is present verbatim: net income $9.1bn, EPS $1.21 up 34%, revenue net of interest expense $31.6bn up 15%, equities revenue up 70% to $3.6bn, IB fees excl. self-led $2.1bn up 50%. The file's own body states 'Published on July 14, 2026' even though web-evidence.jsonl carries published_at: null and temporal_status: undated.",
       "recommendation": "None."
     },
     {
       "severity": "info",
-      "artifact": "evidence/web/web-001.md, evidence/web/web-011.md",
+      "artifact": "evidence/web/web-001.md",
       "passage": "The consensus among 14 analysts calls for earnings of $5.67 per share on revenue of $50.54 billion.",
-      "evidence": "Both consensus sources were opened and both quotes are verbatim. web-001 is an AlphaStreet preview published 2026-07-09 and web-011 is a TradingKey preview published 2026-07-14 before the 7:00 a.m. ET print. Both are genuinely pre-event, so the beat comparison in section 1 rests on pre-event expectations rather than hindsight.",
-      "recommendation": "None."
-    },
-    {
-      "severity": "info",
-      "artifact": "evidence/web/web-008.md",
-      "passage": "213 197 / Headcount / 2Q25 2Q26",
-      "evidence": "Section 9 says one Wells Fargo source was a chart-only investor-deck extract whose axis labels could not be resolved. Opening web-008 confirms this: it is the '2Q26 Financial Results' slide deck and the extracted text is bare number pairs sitting next to chart titles with no units. Section 9's description of this source is accurate, and the same company's headline numbers were taken from the clean press release (web-003) instead.",
-      "recommendation": "None."
-    },
-    {
-      "severity": "info",
-      "artifact": "evidence/web-evidence.jsonl",
-      "passage": "temporal_status: undated (web-002, web-004)",
-      "evidence": "Temporal integrity check. The event date is 14 July 2026. Every web source cited in the brief is dated on or before that date, and the two cited sources carrying temporal_status 'undated' (web-002 Bank of America, web-004 Citigroup) were read directly: both are same-morning peer earnings releases containing only Q2 2026 results, with no fact that could only be known after the JPM call. Dimon himself refers to reading Goldman's numbers 'this morning' in seg-0079, which corroborates that peer results were public before the call ended. No post-event content is used to characterise management's stated position.",
+      "evidence": "The only consensus source used is an AlphaStreet preview dated 9 July 2026, five days before the 14 July event. Content is a genuine pre-event preview with no actuals. All of claims 055, 056, 057, 058 and 059 match its text exactly, including the $5.09-$6.56 EPS range and the prior-year $4.96 EPS and $14.99bn net income.",
       "recommendation": "None."
     },
     {
       "severity": "info",
       "artifact": "evidence/financials.json",
-      "passage": "NetIncomeLoss: 37649000000, period_type half_year, 2026-01-01 to 2026-06-30",
-      "evidence": "Period-labelling check against the SEC-derived facts. The brief's headline period is stated unambiguously as '3 months to 30 Jun 2026' and the quarterly claims carry that same period string, while claim-019 (the H1 capital-markets outperformance) correctly carries '6 months to 30 Jun 2026' matching the transcript's own 'in the first half of this year'. No claim labelled '3 months' is grounded against the half_year SEC fact, so the quarter-versus-year-to-date confusion this field guards against does not appear here.",
+      "passage": "EarningsPerShareDiluted value 7.7, period_type quarter, start 2026-04-01, end 2026-06-30, form 10-Q",
+      "evidence": "The SEC-derived facts are a clean quarter (90 days) ending 30 Jun 2026. claim-071's period label '3 months to 30 Jun 2026' agrees with that period_type, so the ex-significant-items $6.14 versus statutory $7.70 contrast is struck on matching periods rather than a quarter-versus-half-year mismatch.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "evidence/web/web-011.md",
+      "passage": "Estimate Actual Surprise / Revenue BEAT 51.30B 82.46B +69.29% / EPS BEAT 5.59 6.14 +9.84%",
+      "evidence": "Temporal-integrity check on the two sources the brief says it excluded. web-011 carries temporal_status pre_event and published_at 2026-07-14, but its archived body contains post-event actuals for this very quarter. web-006 is a live Yahoo Finance estimates page whose 'Current Qtr.' column is Sep 2026, i.e. captured after Q2 reporting. Neither is cited by any claim. The brief's statement in section 9 that two archived sources were excluded on temporal grounds despite clean-looking provider metadata is accurate.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "raw/transcript.txt",
+      "passage": "Including (sic) [Excluding] the significant items noted on the page, the Firm delivered net income of $16.9 billion, EPS of $6.14 and an ROTCE of 23%.",
+      "evidence": "Read seg-0003 in full plus every Q&A segment cited by the brief (seg-0006, 0008, 0013, 0019, 0021, 0028, 0031, 0032, 0034, 0041, 0054, 0069, 0076, 0077, 0079, 0090, 0091, 0101). The transcript's own (sic) correction is resolved the right way in claim-001, which states 'Excluding significant items'. Speaker attributions were checked against the segment speakers, including the two analyst_question claims: claim-046 to Ebrahim H. Poonawala at seg-0077 and claim-047 to Jim Mitchell at seg-0031. Both are correct.",
       "recommendation": "None."
     }
   ],
   "claim_findings": [
     {
       "severity": "low",
-      "artifact": "claims.json#claim-022",
-      "passage": "Management describes a mild but broad-based loosening in competitors' credit underwriting standards",
-      "evidence": "Read seg-0091 in full. Dimon says the loosening is 'across several spectrum' meaning across several dimensions of underwriting, and then says explicitly 'this is not across the board, by the way. It's more some players than others.' The word 'broad-based' in claim_text reads naturally as broad across lenders, which is the reading the speaker directly denied. The trailing clause of claim_text partly repairs this, and the brief's own wording ('concentrated in some lenders more than others') is accurate, so the harm is contained to the claim record itself.",
-      "recommendation": "Reword claim-022's claim_text to 'mild loosening across several dimensions of underwriting, concentrated in some lenders rather than across the board', so the claim cannot be read as contradicting the speaker's own qualifier."
+      "artifact": "claims.json#claim-076",
+      "passage": "by historical standards, investment banking fees were fine, but they weren't at sort of super peak levels. So, they had some room to come up a little bit.",
+      "evidence": "The claim sets period '3 months to 30 Jun 2026' and status 'reported'. Read in the full seg-0008 context, the sentence is a comparison against historical standards with no period of its own, and the past tense ('were fine', 'had some room to come up') most plausibly describes the level entering the quarter, which is how Barnum explains why fees rose. Attaching a quarter-specific period to a purely comparative opinion fixes a period the quote does not fix, and it is the claim the upside case in section 6 leans on for forward headroom.",
+      "recommendation": "Drop the period field on this claim, or keep it and add a second claim capturing the sustainability framing of the surrounding answer so the upside case does not rest on a tense-ambiguous sentence alone."
     }
   ],
   "outlook_findings": [
     {
-      "severity": "medium",
+      "severity": "low",
       "artifact": "outlook-brief.md",
-      "passage": "- [claim-027] \"there's not like that much there in terms to support the K-shaped narrative\" — segment seg-0076",
-      "evidence": "The evidence appendix presents this sentence as claim-027's quote. It is not. claim-027's stored quote is 'Delinquencies are a little lower than we expected, and again, that's a better performance you see pretty much across the board by kind of FICO score. There's some of that economic heterogeneity data came out from the Fed recently, which also I think doesn't give a lot of support to the K-shaped narrative essentially.' The appendix text is a different sentence from later in seg-0076. It is genuine transcript text, from the same speaker and segment, and it says the same thing, so no reader is misled about the substance. But nothing in the pipeline machine-checks appendix quotes (the template says so explicitly), the appendix is the auditability backbone of the brief, and .agents/memory/extractor-lessons.md already carries the standing lesson 'Every quoted phrase in the outlook brief must appear in the quote of the claim cited beside it.' A quote attached to a claim id that does not contain it is exactly what that lesson forbids.",
-      "recommendation": "Replace the appendix text for claim-027 with a substring of claim-027's own quote, for example 'Delinquencies are a little lower than we expected... doesn't give a lot of support to the K-shaped narrative essentially.'"
+      "passage": "Separately, the firm increased the equity allocation to the CIB during the quarter [claim-053] — on management's own characterisation of that same passage, a movement of equity between pockets of the one company [claim-054] rather than a group capital outflow.",
+      "evidence": "claim-054's own claim_text attaches 'left pocket, right pocket at the level of the company' to the roughly $150 million of Markets NII that is not offset in the bottom line, not to the equity transfer itself. Reading seg-0021 in full, Barnum's 'left pocket, right pocket' does plausibly cover the whole internal reallocation, and the phrase is present in claim-054's quote, so the brief is not citing a claim that lacks the words. But the sentence the brief builds is about the equity movement, and the sentence in the transcript that actually states that ('the consequence of that is to move some equity essentially out of Corporate into the CIB') was never extracted as a claim.",
+      "recommendation": "Extract the 'move some equity essentially out of Corporate into the CIB' sentence from seg-0021 as its own claim and cite that here, or reword so the internal-reallocation reading is presented as the brief's own interpretation of claim-053 rather than as management's characterisation."
     },
     {
       "severity": "low",
       "artifact": "outlook-brief.md",
-      "passage": "That capital picture sits alongside a CET1 ratio that fell to 14.1%, down 20 basis points this quarter, on higher RWA and capital distributions [claim-005][claim-006]",
-      "evidence": "The evidence appendix in section 10 has no entry for claim-005, claim-006 or claim-015, yet all three are cited in the body (claim-015 in section 1 for the 18% AUM growth, claim-005 and claim-006 in section 3 for the CET1 decline and RWA growth). The template requires the appendix to link every conclusion above back to a claim id with its exact quote, so three conclusions currently have no appendix trail.",
-      "recommendation": "Add appendix entries for claim-005, claim-006 and claim-015, each quoting a substring of that claim's own stored quote."
+      "passage": "**Investment banking fee growth relative to peers** — JPMorganChase's 30% [claim-012] against Bank of America's 50% [claim-065] is the clearest competitive signal in this evidence [claim-073].",
+      "evidence": "The two growth rates are struck on very different bases. web-002 shows Bank of America's investment banking fees rising from $1.4 billion to $2.1 billion, while the call gives no dollar figure for JPMorganChase's investment banking fees at all, so this evidence cannot establish whether the absolute fee gain was larger or smaller. A growth-rate gap off unequal and partly unknown bases supports a weaker conclusion than 'the clearest competitive signal in this evidence'. Section 5 handles the same comparison more carefully, calling it 'genuinely awkward'; section 8 does not carry the caveat across.",
+      "recommendation": "Add the base-size caveat to the monitor bullet, noting that no dollar figure for the firm's own investment banking fees is available in this evidence, so the comparison is rate-only."
     },
     {
       "severity": "low",
       "artifact": "outlook-brief.md",
-      "passage": "For the 3 months to 30 Jun 2026, JPMorganChase delivered net income of \\$16.9 billion and EPS of \\$6.14, an ROTCE of 23% [claim-001], comfortably ahead of pre-event Wall Street consensus, which had clustered around \\$5.50-\\$5.67 [claim-034][claim-035][claim-036].",
-      "evidence": "claim-001 carries the qualifier 'excluding significant items', and the transcript sentence it quotes leads with that qualifier. The brief's headline sentence drops it, then compares the figure to analyst consensus without saying the reported number is an adjusted one. The direction of the beat is not flattered by this (the SEC half-year diluted EPS of 13.63 in evidence/financials.json implies the GAAP quarter was higher, not lower, than 6.14), so this is a transparency gap rather than an overstatement.",
-      "recommendation": "Add 'excluding significant items' to the headline sentence, matching the qualifier claim-001 already carries."
+      "passage": "**Peer results were same-day, not prior.** The four peer sources used here were published on the day of the call (each is dated 14 July 2026 in the archived source).",
+      "evidence": "Four peer sources are cited directly in the brief (web-002, web-003, web-004, web-005). But claim-073, which the brief cites twice, also rests on claim-061 for its assertion that 'Goldman Sachs reported faster fee growth still'. claim-061 comes from a fifth same-day source, a Reuters article, whose Goldman Sachs 55% fee-growth figure never appears in the brief body or the evidence appendix. So one leg of a cited comparison sits outside the provenance statement the reader is given.",
+      "recommendation": "Either state the Goldman Sachs fee-growth figure in the brief with claim-061 cited and its source listed in the appendix, or drop the 'Goldman Sachs reported faster fee growth still' leg from how claim-073 is used."
     },
     {
       "severity": "low",
       "artifact": "outlook-brief.md",
-      "passage": "Management still frames roughly \\$40 billion as excess capital -- explicitly distinct from buyback capacity -- that it now believes it can deploy organically over time, against a stated target of deploying capital at a 17% return [claim-028][claim-029].",
-      "evidence": "Neither cited claim contains the word 'organically' or restricts the deployment to organic growth. claim-028 says only 'deploy that over time'. Reading seg-0079 in full, Dimon does emphasise organic growth ('we have huge opportunities for organic growth in every single business we're in'), but in the same answer he says 'We should always be looking at inorganic' and 'we're going to be looking, and we're open-minded'. The single word narrows management's stated position more than the cited claims support, though the next sentence of the same paragraph does restore the M&A openness via claim-042.",
-      "recommendation": "Drop 'organically', or cite a claim that captures Dimon's organic-growth emphasis directly rather than leaving the word ungrounded in claim-028 and claim-029."
-    },
-    {
-      "severity": "low",
-      "artifact": "outlook-brief.md",
-      "passage": "The magnitude of AI-driven headcount reduction is disclosed only for \"discrete areas\" (30-40% in those areas), with no company-wide figure given [claim-025][claim-026], making it hard to size the efficiency opportunity management itself says is coming.",
-      "evidence": "The first half of the sentence is properly supported by claim-025 and claim-026. The trailing clause attributes a forward-looking statement to management ('the efficiency opportunity management itself says is coming') that neither cited claim contains: claim-025 counts current use cases and claim-026 describes past reductions, both backward-looking. The statement is true of the transcript, where Dimon says in seg-0067 'We fully expect it'll have huge efficiency in certain parts of the company', but those words were never extracted, so the citation resolves to adjacent claims that do not establish it.",
-      "recommendation": "Either extract Dimon's 'we fully expect it'll have huge efficiency' statement from seg-0067 as a claim and cite it, or drop the trailing clause."
-    },
-    {
-      "severity": "low",
-      "artifact": "outlook-brief.md",
-      "passage": "Capital markets outperformance is also the direct driver of this year's expense increase: \\$1.5 billion of the \\$2.5 billion guidance increase is a booked consequence of \\$6.5 billion of H1 revenue outperformance, not a discretionary spending decision [claim-018][claim-019].",
-      "evidence": "Completeness and balance. The brief presents the expense picture entirely through management's own framing of a happy consequence of revenue outperformance. Two validated claims that sit alongside this are never used anywhere in the brief: claim-002 (firm revenue up 15% year-on-year) and claim-003 (expenses of $27.3 billion, up 15% year-on-year). Reported revenue and reported expenses grew at the same rate this quarter, which is flat operating leverage on the headline numbers and is the most obvious available counterpoint to the section 4 framing. The brief does surface counterevidence elsewhere (the peer Equities comparison in section 5, the CET1 decline in section 3), so this is a gap rather than a pattern of cherry-picking.",
-      "recommendation": "Add one sentence noting that headline revenue and headline expenses both grew 15% year-on-year [claim-002][claim-003], so the marginal operating leverage management describes is not visible in the reported year-on-year comparison."
+      "passage": "The direction over the next reported period therefore depends less on whether the franchise is performing well — the evidence says it is — and more on how far capital-markets revenue normalises from a level management has explicitly described as hard to repeat [claim-030][claim-031].",
+      "evidence": "Completeness check. claim-032 ('It's getting close to as good as it gets. We just don't know how long it's going to last.') and claim-033 (the CEO describing a very healthy, active, exuberant market of unknown duration) are both extracted but cited nowhere in the brief. Those are the CEO's own statements about the durability of the whole environment, materially broader than the CFO's equities-specific caution in claims 030 and 031 that the brief does cite. They bear directly on the base case's normalisation premise and on the downside case's conditions. The omission does not distort direction, since both statements point the same way as the brief, but the strongest and most senior version of management's own caution is left unused.",
+      "recommendation": "Cite claim-032 alongside claims 030 and 031 in section 1 or in the downside case conditions, so the firm-wide version of the peak signal is on the record, not only the equities-specific one."
     }
   ],
   "process_findings": [
@@ -108,51 +87,60 @@
       "severity": "info",
       "artifact": "validation.json",
       "passage": "n/a",
-      "evidence": "Confirmed present, not re-derived: validation.json.ok == true, checked_claims 48, issues [] and warnings []. All 48 claims in claims.json carry non-empty ids running claim-001 to claim-048 with no gaps.",
+      "evidence": "validation.json.ok == true, checked_claims 77, issues [] and warnings [], validated_at 2026-09-14T13:44:55Z. Confirmed present; the exact-quote, numeric-grounding and calculation checks behind it were not re-derived. price_lookup is recorded as not_used with a stated reason.",
       "recommendation": "None."
     },
     {
       "severity": "info",
       "artifact": "outlook-validation.json",
       "passage": "n/a",
-      "evidence": "Confirmed present with ok == true and errors []. It records outlook_brief_sha256 7cf698e5... and claims_sha256 650c648b..., which are the two values copied into this report. outlook-brief.md exists and manifest.json exists with every source hashed (transcript, 200 raw web hits, and 15 evidence/web/*.md files).",
+      "evidence": "outlook-validation.json exists with ok == true, errors [], and carries both hash bindings (claims_sha256 5e411642..., outlook_brief_sha256 caa5007e...). Those are the two values copied into this report. outlook-brief.md exists. manifest.json exists and hashes every source, including raw/transcript.txt and all 15 evidence/web/*.md files. All 77 claims in claims.json have non-empty ids.",
       "recommendation": "None."
     },
     {
       "severity": "info",
       "artifact": "injection-scan.json",
       "passage": "n/a",
-      "evidence": "Prompt-injection scan judgment: the scan ran over 25 patterns and returned finding_count 0 with an empty findings list. There are no flagged hits to assess, so there is nothing here that could be a genuine hijack attempt or a false positive.",
-      "recommendation": "None."
-    },
-    {
-      "severity": "info",
-      "artifact": "_validation_history/attempt-0001_20260909T162451Z/receipt.json",
-      "passage": "n/a",
-      "evidence": "Five attempts are recorded. Only attempt 1 failed, with issue_counts claim_text_numeric 3 and numeric 1 (a sign problem on cet1_change_bps). Attempts 2 through 5 all passed with empty issue_counts as the claim count grew from 41 to 48. No check type failed across two or more attempts, so there is no repeated-then-fixed mechanical pattern that would justify a lesson from this source.",
-      "recommendation": "None."
-    },
-    {
-      "severity": "info",
-      "artifact": "outlook-brief.md",
-      "passage": "n/a",
-      "evidence": "Cross-sector appropriateness. The signal card and the brief are consistently bank-specific throughout: net interest income ex. Markets, CET1 and risk-weighted assets, Card net charge-off rate, consumer deposit betas and earnings-at-risk, investment banking fees, Equities and Fixed Income. No category or metric reads as a template imported from another industry.",
+      "evidence": "The scan ran over 25 patterns and returned finding_count 0 with an empty findings array. There is nothing to adjudicate: no flagged hit, genuine or false-positive, exists in this run.",
       "recommendation": "None."
     },
     {
       "severity": "info",
       "artifact": "review-diff.json",
       "passage": "auto_escalated: true",
-      "evidence": "This is round 3. review-diff.json was read first and reports auto_escalated true, so a full review was performed rather than a bounded diff review, and review_mode is set to 'full'. The three changed items were each re-checked against the transcript: claim-047 and claim-048 are verbatim in seg-0091 and seg-0019 respectively with correct speaker attribution and fair claim_text, and claim-028's values key rename from buyback_capacity_billions to excess_capital_billions now matches what Dimon actually said in seg-0079, where he separates deploying capital from buying back stock.",
+      "evidence": "This is round 2. review-diff.json was read first and reports auto_escalated true (four claims changed, a conclusion-bearing section citing a changed claim, and brief prose changed). review_mode is therefore set to full and the complete remit was applied across the whole bundle, not only the four diffed claims. review_diff_sha256 was copied verbatim from the review-diff.sha256 sidecar.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "claims.json",
+      "passage": "n/a",
+      "evidence": "Item 4 numeric semantic review, exhaustive rather than sampled. Every claim carrying a numeric entry in values was inspected against its cited evidence in full context: claims 001-012, 015-024, 026-028, 043, 044, 050, 054, 055-060, 062-069 and 071. No operand, unit, sign, scope or comparison-basis error was found. The one calculation block in the run, claim-058's eps_growth, uses current_eps 5.67 as the consensus estimate for the June 2026 quarter and prior_eps 4.96 as the actual for the June 2025 quarter. Both are earnings per share for the same entity on the same quarterly basis, so the operands play the roles the formula and claim_text imply. Period labels were checked against the transcript's own cues and, where the concept also appears in evidence/financials.json, against that fact's period_type: claim-027's first-half $6.5bn outperformance and $1.5bn booked expense are labelled '6 months to 30 Jun 2026' and the transcript says 'in the first half of this year'; claim-028's second-half $1bn is correctly carried inside a full-year guidance claim; claim-047 is labelled '6 months to 30 Jun 2026' matching the analyst's 'year-to-date'. No quarter-versus-year-to-date confusion was found.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "signal-card.md",
+      "passage": "n/a",
+      "evidence": "Cross-sector appropriateness check. Every category and metric in signal-card.md and outlook-brief.md is banking-native: net interest income, CET1 and risk-weighted assets, card net charge-off rate, investment banking fees, assets under management, deposit betas and convexity. No subscription, churn, bookings, same-store or other out-of-sector template language appears in either document.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "_validation_history/attempt-0003_20260914T134455Z/receipt.json",
+      "passage": "n/a",
+      "evidence": "All three attempts in this run have outcome 'passed' with empty issue_counts (74, 75 and 77 claims checked). There is no repeated-then-fixed mechanical failure of any check type across attempts, so no lesson is drawn from validation history.",
       "recommendation": "None."
     }
   ],
   "unverified_items": [
-    "Whether the Card net charge-off rate guide of approximately 3.2% was actually lowered from a higher prior figure. Section 2 says 'improved to' and section 8 says 'newly lowered', but no prior Card charge-off guidance figure exists anywhere in claims.json or the transcript. The characterisation is a reasonable inference from claim-016's 'reflecting better-than-expected consumer credit performance', but the size and direction of the change cannot be verified from this run's evidence.",
-    "The exact-quote string for claim-043 was not located in web-002 by direct reading. The file's Global Markets page renders the figure as 'Equities revenue increased 70% to $3.6 billion' while claim-043 quotes 'Equities revenue up 70% to $3.6 billion'. Both convey the same fact and validation.json's exact_quote check passed against the full file, so the string exists elsewhere in the document, but I did not read the page that contains it."
+    "The basis of the $5.67 consensus EPS in web-001 is not stated in the source, so whether it is struck on the same ex-significant-items basis as the $6.14 the firm reported cannot be settled from this evidence. The brief itself flags this in section 9; it is recorded here as a genuine limit on the surprise comparison, not as a defect.",
+    "claim-003 states expenses of $27.3 billion up 15% without the ex-significant-items qualifier that the transcript attaches to the revenue sentence immediately before it. Whether the two 15% growth rates are struck on the same basis cannot be determined from the archived evidence. The brief states this limitation explicitly in section 4 rather than asserting a like-for-like match.",
+    "In seg-0008 the tense of 'they had some room to come up a little bit' is ambiguous between describing the level entering the quarter and the level after the quarter's 30% rise. The surrounding answer is about forward sustainability, which favours the brief's reading, but the sentence alone does not settle it.",
+    "claim-066 (Bank of America's full-year NII growth guidance) is extracted from web-012 and is unused anywhere in the brief. The quoted phrase is present in the source, but the peer guidance context it could have supplied to the NII discussion was not consumed."
   ],
-  "summary": "Round 3, escalated to a full review because review-diff.json reported auto_escalated true. No blocking findings. The three changed claims are sound: claim-047 and claim-048 are verbatim in seg-0091 and seg-0019 with correct speakers and fair characterisations, and claim-028's values key now names the $40 billion figure as excess capital rather than buyback capacity, which is what Dimon actually says in seg-0079. Section 7's outlier-losses sentence now cites claim-047, which does contain the statement. All six web sources cited in the brief were opened and each is what it claims to be. Temporal integrity holds: every cited source is dated on or before the 14 July 2026 event, and the two undated peer releases are same-morning Q2 results with no post-event knowledge. Deterministic gates all passed with 48 claims and zero issues, the injection scan was clean, period labelling is unambiguous and agrees with the SEC half-year facts, and the prose is bank-specific throughout. One medium finding: the evidence appendix attributes to claim-027 a sentence that is not claim-027's stored quote. It is genuine text from the same segment and speaker so the substance is unaffected, but appendix quotes are not machine-checked and a standing extractor lesson already forbids exactly this. Six low findings follow: the appendix omits entries for claim-005, claim-006 and claim-015 although all three are cited in the body; the headline sentence drops the 'excluding significant items' qualifier that claim-001 carries; the word 'organically' in section 3 is not in either cited claim; the trailing clause of section 9 attributes a forward-looking efficiency statement to management that neither cited claim contains; the brief never surfaces that headline revenue and headline expenses both grew 15% year-on-year, which is the most obvious counterpoint to its operating-leverage framing; and claim-022's 'broad-based' wording sits awkwardly against Dimon's explicit 'this is not across the board'.",
+  "summary": "Full review, auto-escalated by review-diff.json. Four low findings, no medium or higher, so the run passes. The findings are: the section 4 sentence describing the CIB equity transfer as a movement 'between pockets of the one company' cites claim-054, whose own text attaches that phrase to the $150 million of Markets NII rather than to the equity transfer, and the transcript sentence that does state the equity transfer was never extracted; the section 8 peer bullet calls a 30%-versus-50% investment banking fee growth gap 'the clearest competitive signal in this evidence' without noting that the two rates sit on very different and partly unknown bases; section 9's statement that four peer sources were used omits a fifth same-day source that supplies the Goldman Sachs fee-growth leg of claim-073; and claim-032, the CEO's own 'getting close to as good as it gets' line, is extracted but cited nowhere, leaving the brief resting its normalisation premise on the narrower equities-specific caution in claims 030 and 031. Against that, the run is strong where it matters most. Every claim-### citation in the brief was opened and read, and each resolves to the right claim for its sentence; no adjacent-but-wrong citation was found. The exhaustive numeric semantic review over all value-bearing claims, including the single calculation block, found no operand, unit, sign, scope or period error, and the first-half versus full-year distinctions in the expense discussion are labelled correctly throughout. The transcript's '(sic) [Excluding]' correction is resolved the right way and is consistent with the SEC 10-Q facts. Temporal integrity holds: the only consensus source predates the event by five days, the two archived sources whose provider metadata looked clean but whose content contained post-event actuals were correctly excluded and that exclusion is disclosed, and the same-day nature of the peer results is stated rather than hidden. Both deterministic gates passed with zero issues across three attempts and the injection scan is clean.",
   "proposed_lessons": [
-    "Every claim id cited in the brief body must also have its own entry in the evidence appendix, so no conclusion is left without a quote trail."
+    "Give a period only to claims whose quote actually fixes one; a comparison against historical standards or a general characterisation should carry no period rather than inherit the reporting quarter's."
   ]
 }

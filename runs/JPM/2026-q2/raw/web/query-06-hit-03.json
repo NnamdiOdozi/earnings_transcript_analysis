@@ -1,12 +1,12 @@
 {
-  "url": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000353/bac06302026ex992.htm",
-  "title": "bac06302026ex992",
+  "url": "https://www.reuters.com/business/finance/bank-america-profit-rises-trading-boost-2026-07-14/",
+  "title": "BofA rides market whiplash to trading records, deal activity shines",
   "score": null,
-  "published_date": null,
+  "published_date": "2026-07-14T00:00:00.000Z",
   "_class": "peer",
   "_select_key": "peer:Bank of America",
-  "_temporal_status": "undated",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
   "_query": "Bank of America 2026-q2 earnings results revenue growth",
-  "_retrieved_at": "2026-09-09T16:19:14Z"
+  "_retrieved_at": "2026-09-14T13:11:17Z"
 }

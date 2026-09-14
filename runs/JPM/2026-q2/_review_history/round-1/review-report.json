@@ -1,99 +1,127 @@
 {
-  "verdict": "fail",
+  "verdict": "pass_with_warnings",
   "review_mode": "full",
-  "reviewed_at": "2026-09-09T17:30:00Z",
+  "reviewed_at": "2026-09-14T13:45:00Z",
   "model": "opus",
-  "claims_sha256": "11d033fd7a342070367abfd8d8e2d0216843166d25a3e5bf7a0039126afa935a",
-  "outlook_brief_sha256": "aeffb461bb313d975f39dc7ab48f08ab3cf8df0b6a81a10ff62fb1958c763877",
+  "claims_sha256": "dc75ab33b58dfbbad2717fc357c22e87734dd34e9b24f8014194e4fd7cc5979f",
+  "outlook_brief_sha256": "e4a7b2e1bc12067a39565f66816241eab241ea18b263a748de038489b3278d44",
   "review_diff_sha256": null,
   "source_checks": [
     {
-      "severity": "high",
-      "artifact": "evidence/web/web-003.md",
-      "passage": "News Release | July 14, 2026 Wells Fargo Reports Second Quarter 2026 Net Income of $6.4 billion, or $2.00 per Diluted Share",
-      "evidence": "web-003 is a complete, cleanly extracted text version of the Wells Fargo Q2 2026 press release. It contains unambiguous, directly quotable figures: net income $6,407m, diluted EPS $2.00, total revenue $22,622m (up 9%), ROTCE 17.7%, CET1 10.3%, plus full segment tables. Only web-008 and web-013 are the unlabeled-chart deck. This directly contradicts outlook-brief.md section 9, which states the only extracted Wells Fargo page was an unreadable chart image.",
-      "recommendation": "Do not treat Wells Fargo as unavailable. Either extract claims from web-003 and include Wells Fargo in the peer picture, or, if it is deliberately excluded for another reason, state that reason accurately."
-    },
-    {
       "severity": "info",
-      "artifact": "evidence/web/web-002.md",
-      "passage": "Net income of $3.3 billion • Revenue of $11.3 billion,2 up 5%, driven primarily by higher NII",
-      "evidence": "Content is the genuine Bank of America 2Q26 press release. The figures behind claim-040 and claim-041 sit in the Consumer Banking segment section, and the segment table confirms them (revenue $11,336m, net income $3,281m). The claims correctly label these as segment figures, not group figures (group net income was $9.1bn). Citigroup (web-004) and Goldman Sachs (web-005) content likewise matches their titles and URLs.",
+      "artifact": "evidence/web/web-001.md",
+      "passage": "The consensus among 14 analysts calls for earnings of $5.67 per share on revenue of $50.54 billion.",
+      "evidence": "Opened the file. It is a genuine AlphaStreet JPM Q2 2026 preview dated 9 July 2026, five days before the 14 July event, and it is the only consensus source used. The $5.67 consensus, the $5.09-$6.56 EPS range, the $5.39/$5.36 prior estimates and the $4.96 prior-year EPS all appear verbatim in the body, matching claim-055, claim-056, claim-057 and claim-058. Publisher, URL and the 9 July 2026 published_at in web-evidence.jsonl are mutually consistent.",
       "recommendation": "None."
     },
     {
       "severity": "info",
-      "artifact": "evidence/web-evidence.jsonl",
-      "passage": "\"published_at\":\"2026-07-09T00:00:00.000Z\",\"temporal_status\":\"pre_event\"",
-      "evidence": "Temporal integrity check. The two consensus sources actually used (web-001, web-011) were read in full. Both are genuine pre-print previews: web-011 says 'JPMorgan will report Q2 2026 earnings at 7:00 a.m. ET today', and neither contains reported results. Peer releases dated 14 Jul 2026 are same-day publications of the peers' own results, not post-event commentary on JPM. No evidence dated after the call is used to characterise a pre-results position.",
+      "artifact": "evidence/web/web-002.md",
+      "passage": "Total Corporation investment banking fees (excl. self-led) of $2.1 billion increased 50%, reflecting strength across debt underwriting, advisory and equity underwriting",
+      "evidence": "Opened the file. It is the real Bank of America 2Q26 earnings press release, with full segment tables. The quoted sentence appears in the Global Banking section, and the 70%/$3.6bn equities line cited by claim-064 and claim-072 appears in the Global Markets section. The $9.1bn net income and $1.21 EPS headline used by claim-062 is the document title line. Nothing here is a 404 page or an unrelated article.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "evidence/web/web-005.md",
+      "passage": "today reported net revenues of $20.34 billion and net earnings of $6.63 billion for the second quarter ended June 30, 2026.",
+      "evidence": "Opened the file. It is the Goldman Sachs 2Q26 results press release, dated 14 July 2026 in both the body text and web-evidence.jsonl. All four figures in claim-060 appear in one sentence. Retrieval date 2026-09-14 and publication date 2026-07-14 are consistent with the manifest.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "low",
+      "artifact": "evidence/web/web-011.md",
+      "passage": "Estimate Actual Surprise | Revenue BEAT 51.30B 82.46B +69.29% | EPS BEAT 5.59 6.14 +9.84%",
+      "evidence": "web-evidence.jsonl records this file as temporal_status \"pre_event\" with published_at 2026-07-14, but the archived content contains post-event actuals for this very quarter, including the reported $6.14 EPS and a computed surprise. web-006 (Yahoo estimates, temporal_status \"undated\") is likewise a post-event capture: its \"Current Qtr.\" column is Sep 2026, which is only possible after the Q2 print. Neither file is used by any claim, and outlook-brief.md section 9 discloses both exclusions. The finding is therefore about provider metadata, not about a contaminated output: the pre_event flag was wrong and only content inspection caught it.",
+      "recommendation": "No change to this run. Keep treating temporal_status as a routing aid only; the README known-limitation note on unreliable provider date filters is confirmed again here."
+    },
+    {
+      "severity": "info",
+      "artifact": "raw/transcript.txt",
+      "passage": "Including (sic) [Excluding] the significant items noted on the page, the Firm delivered net income of $16.9 billion, EPS of $6.14 and an ROTCE of 23%.",
+      "evidence": "Read the normalized transcript segment seg-0003 in full. The transcript carries a (sic) correction turning \"Including\" into \"Excluding\", and claim-001 adopts the corrected reading. This is independently confirmed by evidence/financials.json: SEC NetIncomeLoss for 2026-04-01 to 2026-06-30 is $21.155bn against the call's $16.9bn, and EarningsPerShareDiluted is $7.70 against the call's $6.14; the two ratios (0.799 and 0.797) agree, which is what an ex-significant-items basis would produce. The correction is handled correctly.",
       "recommendation": "None."
     }
   ],
   "claim_findings": [
     {
-      "severity": "medium",
-      "artifact": "claims.json#claim-028",
-      "passage": "Management still frames roughly $40 billion as the relevant buyback capacity, now expecting it can actually be deployed over time, with a target of deploying capital at a 17% return.",
-      "evidence": "Read in full context (seg-0079), the $40 billion is excess capital, and Dimon's point is the opposite of buyback capacity. He says 'if we think we can deploy, it's very different than buying back stock', 'buying back stock is not returning money to shareholders. You're making an investment decision', and lists organic and inorganic uses. Labelling the number 'buyback capacity' and then saying it will be 'deployed' inverts the signal management gave.",
-      "recommendation": "Restate claim_text as excess or deployable capital of approximately $40 billion that management now expects to deploy over time, rather than buyback capacity."
+      "severity": "info",
+      "artifact": "claims.json",
+      "passage": "n/a",
+      "evidence": "Exhaustive numeric semantic review performed over every claim carrying a numeric entry in values (claims 001, 002, 003, 004, 005, 006, 007, 008, 009, 010, 011, 012, 015, 016, 017, 018, 019, 020, 021, 022, 023, 024, 026, 027, 028, 043, 044, 050, 054, 055, 056, 057, 058, 059, 060, 061, 062, 063, 064, 065, 066, 067, 069, 071), including the one calculation block in claim-058. Metric, unit, entity, segment and comparison basis match the cited evidence in every case. Spot checks that could have gone wrong and did not: claim-027's $6.5bn outperformance and $1.5bn booked expense are both first-half figures and are labelled \"6 months to 30 Jun 2026\"; claim-047's analyst point is year-to-date and is labelled \"6 months to 30 Jun 2026\" rather than quarterly; claim-006's $103bn RWA move is the quarterly increase, not a balance; claim-021/022/023 are full-year guidance and labelled \"12 months to 31 Dec 2026\"; claim-005's 20 basis point CET1 move is sequential, matching the quote's \"versus the prior quarter\"; stock measures (claim-005, claim-010, claim-019) use \"as of 30 Jun 2026\" rather than a duration. claim-058's operands (current_eps 5.67, prior_eps 4.96) are both EPS on the same consensus-versus-prior-year-actual basis stated in web-001, not a cost-for-revenue style substitution.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "claims.json#claim-071",
+      "passage": "The $6.14 EPS discussed on the call excludes significant items; the diluted EPS subsequently filed with the SEC for the same quarter was materially higher at $7.70, so the headline figure management framed the quarter around is not the statutory result.",
+      "evidence": "The value sec_filed_diluted_eps = 7.7 is not in the claim's transcript quote, but it is grounded in evidence/financials.json, whose EarningsPerShareDiluted fact has period_type \"quarter\", start 2026-04-01, end 2026-06-30, form 10-Q, filed 2026-08-06. The period the claim asserts (\"3 months to 30 Jun 2026\") agrees exactly with the SEC fact's period, so the quarter-versus-year-to-date confusion this field exists to catch is not present here.",
+      "recommendation": "None."
     },
     {
       "severity": "low",
-      "artifact": "claims.json#claim-022",
-      "passage": "Management describes a mild but broad-based loosening in competitors' credit underwriting standards",
-      "evidence": "The claim's own quote says the opposite of broad-based: 'and this is not across the board, by the way. It's more some players than others.' In the segment, 'it's across several spectrum' means across several dimensions of underwriting, not across the market. claim_text is internally contradictory with the quote it carries.",
-      "recommendation": "Replace 'broad-based' with wording that keeps the distinction: mild loosening across several dimensions of underwriting, concentrated in some lenders rather than market-wide."
+      "artifact": "claims.json#claim-054",
+      "passage": "Management said roughly $150 million of the increase in Markets NII is not expected to be offset in the bottom line.",
+      "evidence": "Read seg-0021 in full. The speaker attaches two materiality qualifiers in the same breath that claim_text drops: \"This piece, which to be fair is quite small\" and, at the end of the passage, \"obviously, it's left pocket, right pocket at the level of the company\". Stripped of those, the claim reads as a substantive earnings-quality exception rather than the internal-allocation footnote the speaker presented it as. outlook-brief.md then elevates it into one of only two named qualifications on the guidance section.",
+      "recommendation": "Restore the speaker's own materiality qualifier to claim_text (e.g. \"which management described as quite small and offsetting within the firm\"), so any downstream use inherits the qualification."
     },
     {
-      "severity": "low",
-      "artifact": "claims.json#claim-014",
-      "passage": "AWM reported net income of $2 billion with a 38% pre-tax margin; revenue of $6.9 billion was up 19% year-on-year; AUM of $5.1 trillion was up 18% year-on-year and client assets of $7.7 trillion were up 19% year-on-year.",
-      "evidence": "The AUM and client-asset figures are not in this claim's quote, which stops at the revenue driver sentence. They are true (seg-0003 states them) but they are the content of claim-015's quote. The same pattern appears in claim-025 (the 30-40% job-reduction detail belongs to claim-026's quote), claim-027 (the delinquency and FICO detail is in seg-0076 but not in the quote), claim-038 (Equities up 45% and Banking up 34% are in web-004 but not in the quote) and claim-039 (the 12% dividend increase is in web-004 but not in the quote). Every instance checks out against its underlying source, so this is an auditability weakness, not a factual error: a reader auditing the claim from its own quote cannot confirm the extra assertion.",
-      "recommendation": "Extend each quote to cover everything claim_text asserts, or move the extra assertion into the claim that already quotes it."
+      "severity": "info",
+      "artifact": "claims.json#claim-013",
+      "passage": "While this quarter's performance was supported by both some large ECM deals and the acceleration of the closure of some M&A transactions, the pipeline remains quite robust and the current activity levels seem to be encouraging more activity.",
+      "evidence": "Fair-reading sample check across claim-013, claim-025, claim-029, claim-030, claim-036, claim-037, claim-038, claim-041, claim-042, claim-048 and claim-051, each read against its whole segment (seg-0003, seg-0019, seg-0008, seg-0069, seg-0076, seg-0041, seg-0091, seg-0090, seg-0101, seg-0028). In every case claim_text preserves both sides of the speaker's statement, including the hedges: claim-029 keeps both the pull-forward admission and the robust-pipeline counterpoint; claim-031 keeps \"But it obviously could\"; claim-036 keeps \"some of that statistically is kind of always going to be true\"; claim-041 keeps \"very mild\" rather than upgrading it. No cherry-picking found in the sample.",
+      "recommendation": "None."
     }
   ],
   "outlook_findings": [
     {
-      "severity": "high",
+      "severity": "medium",
       "artifact": "outlook-brief.md",
-      "passage": "Wells Fargo's own quarter could not be reliably cited here: the only extracted page presented its results as an unlabeled chart image whose axis correspondence could not be determined with confidence, so no Wells Fargo figures appear in this brief -- a gap in the peer picture relative to Bank of America, Citigroup and Goldman Sachs, which all reported cleanly citable numbers",
-      "evidence": "This is false about this run's own evidence. Three Wells Fargo pages were archived: web-003, web-008 and web-013. web-008 and web-013 are indeed the unlabeled-chart deck, but web-003 is the full press release in clean prose, with net income of $6,407m, diluted EPS of $2.00, revenue of $22,622m up 9%, ROTCE of 17.7% and complete segment tables. The brief therefore asserts an evidence gap that does not exist, in the very section whose purpose is honest disclosure of gaps, and drops a peer whose returns profile is materially weaker than the one the brief builds its peer framing on.",
-      "recommendation": "Remove or correct this passage. Extract Wells Fargo figures from web-003 into claims.json and include Wells Fargo in the peer comparison, or state the actual reason for exclusion."
+      "passage": "**CET1 rebuild against RWA growth** — a further decline from 14.1% alongside continued RWA expansion would tighten the capital deployment story [claim-005][claim-006].",
+      "evidence": "This, and the section 4 heading \"**Capital was consumed, not accumulated.**\", present the quarter's capital picture one-sidedly. claims.json contains management's own directly contrary position, which the brief never cites anywhere: claim-043 records the CEO saying excess capital is still approximately $40 billion and that the firm now thinks it could actually deploy it over time, and claim-044 records the stated goal of deploying capital at a 17% return. On management's account the CET1 decline is deliberate deployment into client growth, not a constraint tightening. claim-046 (an analyst challenging the buyback at 3 times tangible book) is also available and unused. The remit treats an available claim that cuts the other way as a real finding, and this is the clearest instance in the run.",
+      "recommendation": "In section 4 or section 8, state management's $40 billion excess-capital and 17% deployment-return position with citations to claim-043 and claim-044, and frame the CET1 decline against it, so the monitor item reads as a two-sided test rather than a one-sided concern."
     },
     {
       "severity": "medium",
       "artifact": "outlook-brief.md",
-      "passage": "while CCB continues low-to-mid-single-digit-consistent growth [claim-009]",
-      "evidence": "Two problems in one clause. First, the citation is the wrong claim for the sentence: claim-009 is average deposit growth (3% year-on-year, 2% quarter-on-quarter), not CCB segment growth. The claim that reports CCB growth is claim-008. Second, the characterisation contradicts the only reported CCB figure: CCB revenue was up 8% year-on-year, which is not low-to-mid single digit. The base case therefore projects a CCB growth rate below what the quarter actually delivered, on a claim that does not measure it.",
-      "recommendation": "Cite claim-008 and describe CCB growth consistently with the reported 8%, or state explicitly that the base case assumes deceleration and say why."
-    },
-    {
-      "severity": "medium",
-      "artifact": "outlook-brief.md",
-      "passage": "and the broader risk-on market backdrop management describes [claim-011] persists longer than the \"as good as it gets\" framing offered in the call implies",
-      "evidence": "Two citation problems. claim-011 is about the investment-banking pipeline and deal conversion; it says nothing about a risk-on market backdrop. The claim that carries management's market-conditions language is claim-012 ('the highly dynamic market conditions'). Separately, the quoted phrase 'as good as it gets' is attributed to the call but appears in no claim: it comes from seg-0040 (Dimon: 'It's getting close to as good as it gets. We just don't know how long it's going to last') and seg-0060, neither of which was extracted. This repeats a lesson already recorded in .agents/memory/extractor-lessons.md about quoted phrases having to appear in the cited claim.",
-      "recommendation": "Cite claim-012 for the market backdrop, and either extract Dimon's 'as good as it gets' remark as a claim or drop the quotation."
-    },
-    {
-      "severity": "medium",
-      "artifact": "outlook-brief.md",
-      "passage": "Markets strength was uneven: Fixed Income grew a more modest 6%, while Equities grew 86%, driven by major IPOs, index rebalancing, unusually complex Korean equity market dynamics, and broad client activity across regions [claim-012][claim-033].",
-      "evidence": "Balance and use of available evidence. The brief's central judgment is that the Equities surge is the least repeatable part of the quarter. Validated peer claims in this run bear directly on that question and are never used: Citigroup's Equity markets revenue rose 45% (claim-038) and Bank of America's Equities revenue rose 70% (in web-002, extracted but not claimed). A market-wide equities surge is meaningfully different in forecasting terms from a JPM-specific one. The peer claims (claim-037 through claim-041) appear only in a passing aside in section 9 and are never brought to bear on the analysis they are most relevant to.",
-      "recommendation": "Use the peer claims where they matter: compare JPM's 86% Equities growth against the peers' own equities prints and say whether that strengthens or weakens the normalisation assumption in the base case."
+      "passage": "Investment banking fees, which grew more slowly than the trading line this quarter [claim-012][claim-016], have more headroom precisely because they were not at peak;",
+      "evidence": "This is the load-bearing mechanism of the entire upside case, and it is stated as fact with \"precisely because\". The two cited claims do not establish it. claim-012 says only that IB fees rose 30% year-on-year; claim-016 says only that equities revenue rose 86%. A lower growth rate does not establish that the absolute fee level is below peak. The proposition happens to be true in the source (seg-0008: \"by historical standards, investment banking fees were fine, but they weren't at sort of super peak levels. So, they had some room to come up a little bit\"), but no claim in claims.json captures that sentence, so a reader auditing the citation trail cannot verify the premise. The citations resolve while not supporting the sentence they sit under.",
+      "recommendation": "Either extract a new claim for the \"not at super peak levels\" statement in seg-0003/seg-0008 and cite it here, or rewrite the clause as an explicitly authorial inference from the growth-rate gap rather than a causal fact."
     },
     {
       "severity": "low",
       "artifact": "outlook-brief.md",
-      "passage": "AWM revenue up 19% with record AUM growth [claim-014]",
-      "evidence": "Nothing in claim-014, claim-015 or seg-0003 describes AUM growth as a record. The transcript says AUM of $5.1 trillion was up 18% year-on-year. 'Record' is an unsupported intensifier added by the brief.",
-      "recommendation": "Drop 'record' or replace with the stated 18% year-on-year AUM growth."
+      "passage": "The firm also increased the equity allocation to the CIB during the quarter [claim-053].",
+      "evidence": "This sentence closes the section 4 paragraph headed \"**Capital was consumed, not accumulated.**\", which places it in the capital-depletion narrative. Read in seg-0021, the equity allocation change is an internal reallocation from Corporate into the CIB, explicitly described by the speaker as moving equity between pockets of the same firm. It consumes no group capital and is not evidence for the paragraph's thesis.",
+      "recommendation": "Move the sentence out of the capital-consumption paragraph, or add a clause noting it is an internal reallocation rather than a group capital outflow."
     },
     {
       "severity": "low",
       "artifact": "outlook-brief.md",
-      "passage": "Buyback capacity remains framed at approximately \\$40 billion, which management now believes it can actually deploy over time, against a stated target of deploying capital at a 17% return [claim-028][claim-029].",
-      "evidence": "This inherits the mischaracterisation in claim-028 (see that finding). In seg-0079 the $40 billion is excess capital and the thrust of the answer is that management expects to deploy it into growth rather than repurchase stock. As written, the brief reads as if a $40 billion buyback is the plan.",
-      "recommendation": "Reword to excess or deployable capital, and note management's explicit preference for deployment over repurchase."
+      "passage": "if rates stay higher, the deposit convexity management warned about could force a repricing of the franchise [claim-038]",
+      "evidence": "claim-038 and its segment (seg-0041) set a materially higher trigger than \"rates stay higher\". The speaker frames the convexity risk around \"something that's like meaningfully different, that's a true stress test with an actual change in regime\", and illustrates it with a 7% rate environment; he also says the effect has not yet appeared in this cycle. The brief's own section 8 states the condition correctly (\"the convexity effect management said has not yet appeared but must eventually\"), so the section 7 wording is an internal inconsistency as well as a softening of the stated threshold.",
+      "recommendation": "Align the section 7 condition with section 8 and with claim-038's own framing, e.g. \"if rates move to a meaningfully higher regime rather than merely staying elevated\"."
+    },
+    {
+      "severity": "low",
+      "artifact": "outlook-brief.md",
+      "passage": "trivial for the full year on management's own account, but forecast to accelerate meaningfully in the second half and named as an important question for next year [claim-048]",
+      "evidence": "The first two limbs are supported by claim-048's quote. The third, \"named as an important question for next year\", is not in that quote; it comes from a later sentence of seg-0101 (\"it is an important question for us as we go into next year\") that was not extracted. The brief also omits the speaker's explicit disclaimer in the same segment that token expense \"is not in any way a meaningful driver of the current outlook or to the revision in the outlook\", which matters because this is promoted to one of eight monitor items.",
+      "recommendation": "Extract the \"important question for next year\" sentence as its own claim and cite it, or drop the clause; and add management's not-a-meaningful-driver qualifier to the bullet."
+    },
+    {
+      "severity": "info",
+      "artifact": "outlook-brief.md",
+      "passage": "**The headline basis is not the statutory basis.** The $6.14 EPS management framed the quarter around excludes significant items; the diluted EPS subsequently filed with the SEC for the same quarter was $7.70 [claim-071].",
+      "evidence": "Checked every claim-### citation in outlook-brief.md against claims.json content, not just resolution. All resolve and, with the exceptions recorded above, all are the correct claim for their sentence. The two cases that most invited a wrong-but-plausible citation are both handled correctly: this one cites claim-071 (which itself carries the $7.70 SEC value) rather than claim-001, and the peer-comparison bullet cites claim-012 for JPMorganChase's own 30% and claim-065 for Bank of America's 50%, with claim-073 for the comparative reading, rather than collapsing them. Fact-versus-interpretation separation is also explicit in the prose (\"Our interpretation is that...\", \"The counter-reading is set out in section 7\"). Section 9 discloses the ex-items basis problem, the absence of any stated total revenue figure, the same-day rather than prior publication of the peer sources, and the self-serving nature of management's own equities-repeat judgment.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "signal-card.md",
+      "passage": "n/a",
+      "evidence": "Cross-sector appropriateness check. Every category and metric in signal-card.md and outlook-brief.md is bank-appropriate and drawn from what was actually said: net interest income, CET1, risk-weighted assets, Card net charge-off rate, deposit betas and convexity, assets under management, investment banking fees. No imported template language (subscriptions, churn, bookings, same-store metrics) appears anywhere.",
+      "recommendation": "None."
     }
   ],
   "process_findings": [
@@ -101,46 +129,38 @@
       "severity": "info",
       "artifact": "validation.json",
       "passage": "n/a",
-      "evidence": "Deterministic gates confirmed present, not re-derived: validation.json has ok == true with 42 claims checked and zero issues; outlook-validation.json has ok == true and carries both binding hashes; manifest.json exists with all raw web hits and evidence files hashed; claims.json has 42 claims, all with non-empty ids; signal-card.md and outlook-brief.md exist. No review-diff.json is present, so this is round 1 and the review is full.",
+      "evidence": "Confirmed present with ok == true, checked_claims 75, empty issues and warnings, validated_at 2026-09-14T13:20:52Z. tool_decisions records price_lookup as not_used with a stated reason. Input hashes cover the transcript, financials, metrics, manifest, web-evidence index and all 200+ raw and extracted source files. Confirmed, not re-derived.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "outlook-validation.json",
+      "passage": "n/a",
+      "evidence": "Confirmed present with ok == true, empty errors, and both hash bindings recorded (outlook_brief_sha256 and claims_sha256). Those two values are copied verbatim into this report. manifest.json exists with every source hashed; claims.json has 75 entries, each with a non-empty id; signal-card.md and outlook-brief.md both exist and are non-empty. No hash was recomputed by the reviewer.",
       "recommendation": "None."
     },
     {
       "severity": "info",
       "artifact": "injection-scan.json",
-      "passage": "\"pattern_count\": 25, \"finding_count\": 0, \"findings\": []",
-      "evidence": "Prompt-injection scan ran across 25 patterns and returned zero hits, so there was nothing to adjudicate. Separately, seg-0069 contains an odd aside ('It's essentially what you would get from asking any of the commercial AI models this question') which the scan did not flag; read in context it is Barnum downplaying his own comment, not an instruction aimed at a model, and is not an injection attempt.",
-      "recommendation": "None."
-    },
-    {
-      "severity": "info",
-      "artifact": "signal-card.md",
       "passage": "n/a",
-      "evidence": "Cross-sector appropriateness check. Both signal-card.md and outlook-brief.md use categories and metrics native to a bank: net interest income, CET1, risk-weighted assets, Card net charge-off rate, deposit betas, investment-banking fees, assets under management. Nothing reads as a template imported from another industry.",
+      "evidence": "Scan ran at 2026-09-14T13:11:08Z over 25 patterns with finding_count 0 and an empty findings array. There is nothing to adjudicate: the scan is clean rather than full of false positives, so no hit was read in transcript context because none exists.",
       "recommendation": "None."
     },
     {
       "severity": "info",
-      "artifact": "_validation_history/attempt-0001_20260909T162451Z/receipt.json",
-      "passage": "\"outcome\": \"failed\", \"issue_counts\": {\"claim_text_numeric\": 3, \"numeric\": 1}",
-      "evidence": "Three validation attempts in this run. Attempt 1 failed on four mechanical issues; attempts 2 and 3 passed with empty issue_counts. No single check type failed across two or more attempts, so the within-run history does not on its own establish a recurring pattern.",
-      "recommendation": "None."
-    },
-    {
-      "severity": "info",
-      "artifact": "claims.json#claim-019",
-      "passage": "6 months to 30 Jun 2026",
-      "evidence": "Period-labelling check. Quarterly claims are labelled '3 months to 30 Jun 2026', the balance-sheet claims 'as of 30 Jun 2026', guidance claims '12 months to 31 Dec 2026', and claim-019 correctly uses '6 months to 30 Jun 2026' because the transcript says 'in the first half of this year'. All are unambiguous. financials.json carries only three SEC facts (FY2025 revenue, and half-year net income and diluted EPS to 30 Jun 2026); no claim is labelled quarterly while grounding against a half-year fact.",
+      "artifact": "_validation_history/attempt-0002_20260914T132052Z/receipt.json",
+      "passage": "n/a",
+      "evidence": "Two attempts in this run. attempt-0001 (74 claims) and attempt-0002 (75 claims) both have outcome \"passed\", exit_code 0 and an empty issue_counts object. No check type failed even once, so there is no repeated-then-fixed mechanical mistake for proposed_lessons to draw on. The only difference between attempts is one added claim.",
       "recommendation": "None."
     }
   ],
   "unverified_items": [
-    "claim-032 asserts that Mike Mayo's 77% marginal-margin figure was one 'management did not dispute'. Dimon's reply in seg-0061 opens 'No. No, I just think we're in a very healthy, active, exuberant market...', which on a fair reading answers Mayo's 'or are you just being conservative' rather than the arithmetic, but the transcript does not settle it either way. The claim is not used in the brief.",
-    "Whether the segmentation of seg-0040 is correct could not be settled. That segment is attributed to Jamie Dimon but contains Matt O'Connor's follow-up question inside it. This does not affect any claim in this run, since no claim cites seg-0040, but it means the brief's 'as good as it gets' attribution has no clean segment to point at."
+    "evidence/web/web-002.md was read only as far as line 39 of 47 (the file is large). Every passage cited by claim-062, claim-063, claim-064, claim-065, claim-072 and claim-073 was located and verified within the part read; the closing lines were not inspected.",
+    "evidence/web/web-003.md (Wells Fargo) and evidence/web/web-004.md (Citigroup) were not opened. claim-067 and claim-069, both cited in outlook-brief.md section 9, were checked only against their quotes as recorded in claims.json, signal-card.md and the URL/title/date metadata in evidence/web-evidence.jsonl.",
+    "evidence/web/web-007.md through web-010.md and web-012.md through web-014.md were not opened. Of these only web-012 grounds a claim (claim-066, Bank of America NII guidance), and that claim is not cited anywhere in outlook-brief.md.",
+    "manifest.json does not record the earnings event's own calendar date. Temporal integrity was assessed against 14 July 2026, inferred from web-001 (\"reports July 14\"), the 14 July 2026 publication dates on the peer sources, and claim-075 (the CEO having read Goldman Sachs' numbers that morning). The brief's title date, 30 June 2026, is the period end, not the event date.",
+    "The basis of the 15% expense growth in claim-003 could not be established from the transcript alone. seg-0003 states the ex-significant-items qualifier for revenue and then gives expenses without restating it, so outlook-brief.md's claim that expenses \"up 15%, matching revenue growth exactly\" may compare an ex-items revenue growth rate with a reported expense growth rate. The difference is not resolvable from the archived evidence."
   ],
-  "summary": "One high-severity finding blocks this run. outlook-brief.md section 9 states that Wells Fargo could not be cited because the only extracted page was an unlabeled chart image. That is false about this run's own evidence: web-003 is the full Wells Fargo press release in clean text, with net income, EPS, revenue, ROTCE and complete segment tables. The brief therefore reports a gap that does not exist and drops a peer on that basis. Four medium findings follow: claim-028 and section 3 recast Dimon's $40 billion of excess capital as buyback capacity when the point of his answer was that he expects to deploy it rather than repurchase stock; the base case describes CCB growth as low-to-mid single digit while citing the deposit-growth claim, when reported CCB revenue growth was 8%; the upside case cites the investment-banking pipeline claim for a market-backdrop statement and quotes 'as good as it gets' from the call although no claim contains it; and the validated peer claims are never brought to bear on the brief's central judgment that the 86% Equities surge is not repeatable, even though Citigroup's Equity markets revenue rose 45% and Bank of America's Equities revenue rose 70% in the same quarter. Lower-severity issues cover an unsupported 'record' intensifier and a recurring pattern of claim_text asserting figures that sit outside the claim's own quote. Deterministic gates all passed, the injection scan was clean, period labelling is unambiguous throughout, temporal integrity holds, and the prose is appropriately bank-specific.",
-  "proposed_lessons": [
-    "Before writing in the brief that a source could not be used, re-open every archived evidence file for that entity, since a second capture of the same report is often cleanly extracted even when another is an unreadable chart deck.",
-    "Keep each claim's quote self-sufficient: if claim_text asserts a figure or qualifier, that figure or qualifier must appear in the claim's own quote, not merely elsewhere in the same segment or page.",
-    "When peer or competitor evidence is extracted, use it in the section whose judgment it actually bears on, rather than mentioning it only in the uncertainties section."
-  ]
+  "summary": "Two medium findings, both in outlook-brief.md. First, the brief reads the quarter's capital position one-sidedly: it heads a section \"Capital was consumed, not accumulated\" and makes CET1 rebuild a monitor item, while never citing claim-043 and claim-044, in which management states it still has roughly $40 billion of excess capital and intends to deploy it at a 17% return. Second, the upside case rests on the premise that investment banking fees \"were not at peak\", cited to claim-012 and claim-016, neither of which establishes that; the supporting statement exists in seg-0008 but was never extracted as a claim. Four low findings concern qualifiers dropped between transcript and brief (claim-054's materiality, claim-038's regime-change threshold, claim-048's not-a-meaningful-driver disclaimer) and claim-053 being placed inside a capital-consumption paragraph although it describes an internal reallocation. Against that, the run is strong where it matters most: every claim-### citation in the brief resolves to the correct claim, the exhaustive numeric semantic review over all 44 value-bearing claims found no operand, unit, sign or period error, the (sic) \"Including/Excluding\" transcript correction was handled correctly and is corroborated by the SEC 10-Q facts, and the temporal-integrity guard worked, excluding two post-event web captures that provider metadata had mislabelled pre_event. Both deterministic gates passed with zero issues across two attempts and the injection scan is clean. The run can proceed with the warnings surfaced.",
+  "proposed_lessons": []
 }

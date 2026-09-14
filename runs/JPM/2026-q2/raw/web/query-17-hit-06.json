@@ -1,12 +1,12 @@
 {
-  "url": "https://www.aol.com/articles/citigroup-14-outperforming-other-bank-191853000.html",
-  "title": "Citigroup Is Up 14% This Year: Is It Outperforming Other Bank Stocks Like Wells Fargo and Bank of America? - AOL",
+  "url": "https://www.barrons.com/livecoverage/jpmorgan-chase-bofa-citigroup-wells-fargo-bank-earnings",
+  "title": "Bank Earnings Show Consumer Finances Are Holding Up - Barron's",
   "score": null,
-  "published_date": "2026-07-14T00:00:00.000Z",
+  "published_date": "2026-04-15T00:00:00.000Z",
   "_class": "peer",
   "_select_key": "peer:Citigroup",
   "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "Citigroup quarterly results versus JPMorgan Chase JPM",
-  "_retrieved_at": "2026-09-09T16:19:32Z"
+  "_query": "Citigroup quarterly results versus JPMorganChase JPM",
+  "_retrieved_at": "2026-09-14T13:11:31Z"
 }

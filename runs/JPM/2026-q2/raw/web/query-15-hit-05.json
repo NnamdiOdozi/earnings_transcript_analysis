@@ -1,12 +1,12 @@
 {
-  "url": "https://www.wellsfargo.com/assets/pdf/about/investor-relations/earnings/second-quarter-2026-earnings-supplement.pdf",
-  "title": "2Q26 Quarterly Supplement",
+  "url": "https://exa.ai/library/markets/stocks/WFC/earnings/FY2026/Q2/transcript",
+  "title": "WFC Earnings Call Transcript \u2014 Fiscal Q2 2026",
   "score": null,
-  "published_date": null,
+  "published_date": "2026-07-14T00:00:00.000Z",
   "_class": "peer",
   "_select_key": "peer:Wells Fargo",
-  "_temporal_status": "undated",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
   "_query": "Wells Fargo earnings call key trends 2026-q2",
-  "_retrieved_at": "2026-09-09T16:19:28Z"
+  "_retrieved_at": "2026-09-14T13:11:28Z"
 }

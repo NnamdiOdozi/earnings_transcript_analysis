@@ -1,12 +1,12 @@
 {
-  "url": "https://www.americanbanker.com/news/the-san-francisco-based-banking-giant-remains-on-track-to-hit-its-50-billion-spread-income-target-for-all-of-2026-ceo-charlie-scharf-told-analysts",
-  "title": "The San Francisco-based banking giant remains on track to hit its $50 billion spread income target for all of 2026, CEO Charlie Scharf told analysts. | American Banker",
+  "url": "https://www.wellsfargo.com/assets/pdf/about/investor-relations/earnings/second-quarter-2026-earnings.pdf",
+  "title": "Wells Fargo Reports Second Quarter 2026 Net Income of $6.4 billion, or $2.00 per Diluted Share",
   "score": null,
-  "published_date": "2026-07-14T00:00:00.000Z",
+  "published_date": null,
   "_class": "peer",
   "_select_key": "peer:Wells Fargo",
-  "_temporal_status": "pre_event",
+  "_temporal_status": "undated",
   "_provider": "exa",
   "_query": "Wells Fargo 2026-q2 analyst earnings reaction results",
-  "_retrieved_at": "2026-09-09T16:19:27Z"
+  "_retrieved_at": "2026-09-14T13:11:27Z"
 }

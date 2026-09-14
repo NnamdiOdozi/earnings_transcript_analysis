@@ -1,11 +1,11 @@
 {
-  "url": "https://vcpscanner.com/valuation/jpm/relative",
-  "title": "Is JPM Overvalued? JPMorgan Chase & Co. Peer Valuation Check 2026 | VCP Scanner",
+  "url": "https://marketchameleon.com/Overview/JPM/Peer-Comparison/",
+  "title": "JPM Peer Comaparison By Fundamentals JPMorgan Chase",
   "score": null,
   "published_date": null,
   "_class": "peer_group",
-  "_temporal_status": "undated",
+  "_temporal_status": "unchecked",
   "_provider": "exa",
-  "_query": "JPMorgan Chase JPM peer group comparable companies",
-  "_retrieved_at": "2026-09-09T16:18:35Z"
+  "_query": "JPMorganChase JPM peer group comparable companies",
+  "_retrieved_at": "2026-09-14T13:10:35Z"
 }

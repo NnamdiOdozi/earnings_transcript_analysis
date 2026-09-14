@@ -1,12 +1,12 @@
 {
-  "url": "https://app.dealroom.co/news/feed/big-banks-beat-q2-2026-earnings-but-jpmorgan-and-bank-of-america-outpace-wells-fargo-on-margins",
-  "title": "Big banks beat Q2 2026 earnings, but JPMorgan and Bank of America outpace Wells Fargo on margins | Dealroom.co",
+  "url": "https://www.marketscreener.com/news/wells-fargo-mpany-q2-2026-news-release-ce7f5edcd18bf522",
+  "title": "Wells Fargo mpany : Q2 2026 news release | MarketScreener",
   "score": null,
-  "published_date": null,
+  "published_date": "2026-07-14T00:00:00.000Z",
   "_class": "peer",
   "_select_key": "peer:Wells Fargo",
-  "_temporal_status": "undated",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "Wells Fargo quarterly results versus JPMorgan Chase JPM",
-  "_retrieved_at": "2026-09-09T16:19:23Z"
+  "_query": "Wells Fargo quarterly results versus JPMorganChase JPM",
+  "_retrieved_at": "2026-09-14T13:11:25Z"
 }

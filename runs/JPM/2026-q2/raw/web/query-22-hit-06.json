@@ -1,12 +1,12 @@
 {
-  "url": "https://www.tipranks.com/news/jpm-vs-bac-vs-c-vs-wfc-vs-gs-bank-earnings-crush-estimates-as-jpmorgan-posts-record-profit",
-  "title": "",
+  "url": "https://news.alphastreet.com/jpmorgan-chase-posts-27-revenue-jump-in-q2-2026-beats-on-eps/",
+  "title": "JPMorgan Chase Posts 27% Revenue Jump in Q2 2026, Beats on EPS - Alphastreet",
   "score": null,
-  "published_date": null,
+  "published_date": "2026-07-14T00:00:00.000Z",
   "_class": "peer",
   "_select_key": "peer:Goldman Sachs",
-  "_temporal_status": "undated",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "Goldman Sachs quarterly results versus JPMorgan Chase JPM",
-  "_retrieved_at": "2026-09-09T16:19:37Z"
+  "_query": "Goldman Sachs quarterly results versus JPMorganChase JPM",
+  "_retrieved_at": "2026-09-14T13:11:39Z"
 }

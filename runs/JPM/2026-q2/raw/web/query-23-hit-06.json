@@ -1,12 +1,12 @@
 {
-  "url": "https://news.alphastreet.com/goldman-sachs-group-delivers-45-q2-2026-eps-beat-revenue-up-39/",
-  "title": "Goldman Sachs Group Delivers 45% Q2 2026 EPS Beat, Revenue Up 39% - Alphastreet",
+  "url": "https://www.opencapital.sh/filings/0000886982-26-000294",
+  "title": "Goldman Sachs Group (GS) Form 8-K SEC Filing - Jul 14, 2026",
   "score": null,
-  "published_date": "2026-07-14T00:00:00.000Z",
+  "published_date": null,
   "_class": "peer",
   "_select_key": "peer:Goldman Sachs",
-  "_temporal_status": "pre_event",
+  "_temporal_status": "undated",
   "_provider": "exa",
   "_query": "Goldman Sachs 2026-q2 earnings guidance outlook",
-  "_retrieved_at": "2026-09-09T16:19:39Z"
+  "_retrieved_at": "2026-09-14T13:11:40Z"
 }

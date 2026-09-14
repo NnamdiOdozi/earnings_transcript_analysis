@@ -1,12 +1,12 @@
 {
-  "url": "https://tradingwhisperer.com/investing-news/bank-earnings-update-jpm-bofa-citi/",
-  "title": "Bank Earnings Update: JPM, BofA, Citi - Trading Whisperer",
+  "url": "https://www.investing.com/analysis/jpmorgan-citibank-earnings-preview-buybacks-capital-return-in-focus-200683763",
+  "title": "JPMorgan, Citibank Earnings Preview: Buybacks, Capital Return in Focus | Investing.com",
   "score": null,
-  "published_date": "2026-07-14T00:00:00.000Z",
+  "published_date": "2026-07-13T00:00:00.000Z",
   "_class": "peer",
   "_select_key": "peer:Citigroup",
   "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "Citigroup quarterly results versus JPMorgan Chase JPM",
-  "_retrieved_at": "2026-09-09T16:19:32Z"
+  "_query": "Citigroup quarterly results versus JPMorganChase JPM",
+  "_retrieved_at": "2026-09-14T13:11:31Z"
 }

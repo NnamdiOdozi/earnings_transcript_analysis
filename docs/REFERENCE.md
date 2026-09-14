@@ -101,8 +101,17 @@ outlook.
    `_temporal_status`/`temporal_status`: `pre_event`, `post_event`,
    `undated`, or `unchecked` when no cutoff was supplied.
 
-Net effect: a *dated* post-event source is reliably excluded. An *undated*
-one is labelled but remains eligible — a real gap, not a rounding error. This
+A third gap sits inside the label itself: the comparison is day-granular
+and strict (`published_date > cutoff`), so a hit published *on* the event
+date is labelled `pre_event` even when it was published after the results
+dropped. Confirmed live (JPM/2026-q2, cutoff 2026-07-14): two post-results
+articles and one page stating the reported EPS beat were all stamped
+`pre_event`. Read the label as "not dated after the event day", not as
+"predates the call".
+
+Net effect: a source dated a *later day* than the event is reliably
+excluded. An *undated* one is labelled but remains eligible, and a
+*same-day* one is mislabelled `pre_event` — a real gap, not a rounding error. This
 matters more now that web search targets **consensus** and **peer** results:
 a consensus page is often undated *and* living (the same URL shows the
 pre-event estimate before the call and the reported beat/miss after), so an

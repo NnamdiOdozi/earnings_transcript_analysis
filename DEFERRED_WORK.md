@@ -123,6 +123,30 @@ was resolved); don't let finished work accumulate here as dead weight.
 - **Do not remove or wire in without asking** — user wants them kept in case
   they're needed later.
 
+### [2026-09-14] `event_day` temporal status for same-day sources
+- **Scope:** add a fourth `TemporalStatus` value for the case
+  `published_date == event_cutoff`. Today `cli._classify_temporal_status` uses a
+  strict `>` at day granularity, so a hit published *on* the event date is labelled
+  `pre_event` by construction -- including everything published after the results
+  dropped, which for a pre-market reporter is most of that day's coverage. Touches
+  `models.TemporalStatus`, `cli._classify_temporal_status`, the selection filter,
+  `web-search-usage.md`, `docs/REFERENCE.md` and tests; roughly 50-60 lines.
+- **Why:** confirmed live (JPM/2026-q2, 2026-09-14, cutoff 2026-07-14). Articles
+  headlined "JPMorgan Chase posts 27% revenue jump in Q2 2026" and "Goldman Sachs
+  delivers 45% Q2 2026 EPS beat" were both stamped `pre_event`, as was `web-011`,
+  whose body reads `EPS BEAT 5.59 6.14`. The extracting agent caught all three by
+  reading content, but the label actively pointed the wrong way, and the operator
+  reviewing the run could not tell from the label why they had been excluded.
+- **Decision needed:** whether a same-day hit stays eligible for extraction (labelled
+  honestly, judged on content -- consistent with the `undated` treatment) or is
+  dropped from the selection pool. Dropping it would exclude genuine morning-of
+  previews, so eligible-but-labelled is the likelier answer.
+- **Status:** not started, 2026-09-14. The day's cheaper half was done instead:
+  `manifest.json` now records `event_date`, and the day-granularity caveat is
+  documented in `web-search-usage.md`, `extraction-instructions.md`,
+  `docs/REFERENCE.md` and the classifier's own docstring. Related:
+  [2026-08-30] full content-level temporal assessment, below.
+
 ### [2026-08-30] Full content-level temporal assessment system
 - **Scope:** an agent-authored assessment for each web page, exact dated passage,
   date meaning, evidence hash and a Python gate over that assessment.

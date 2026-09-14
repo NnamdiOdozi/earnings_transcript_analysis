@@ -590,7 +590,13 @@ def _filter_post_event(hits: list[dict], event_cutoff) -> tuple[list[dict], int]
 
 
 def _classify_temporal_status(published_date: str | None, event_cutoff) -> TemporalStatus:
-    """Classify provider publication metadata without interpreting page content."""
+    """Classify provider publication metadata without interpreting page content.
+
+    Day granularity only: a hit published ON the event date compares as not-after the
+    cutoff and so is labelled "pre_event", even when it was published after the results
+    dropped. "pre_event" therefore means "not dated after the event", never "known to
+    predate the call" -- see web-search-usage.md's causality guard section.
+    """
     if not event_cutoff:
         return "unchecked"
     if not published_date:
@@ -1081,6 +1087,7 @@ def cmd_prepare(args: argparse.Namespace) -> int:
         ticker=args.ticker.upper(),
         event_id=args.event_id,
         created_at=_now_iso(),
+        event_date=getattr(args, "event_date", None),
         sources=(
             ([pdf_source_record] if pdf_source_record else [])
             + [

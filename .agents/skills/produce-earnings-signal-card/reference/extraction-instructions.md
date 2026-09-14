@@ -174,7 +174,13 @@ Two causality cautions: only trust a consensus/peer source dated **before** the 
 `web-evidence.jsonl` still require you to judge the full content); and a peer that
 reported **after** this event was not knowable at the call, so don't treat its
 numbers as context management had. `pre_event` means only that provider metadata
-passed the cutoff. It does not prove that a mutable page contains no later edits.
+is not dated **after the event day** -- it does not prove a mutable page contains no
+later edits, and because the check is day-granular, a source published *on* the event
+date (i.e. after most companies report) is labelled `pre_event` too. So before citing
+anything as a **pre-event expectation**, open the content and confirm it does not
+already state this quarter's actuals; a page showing the reported beat is post-event
+whatever its label says. Confirmed live (JPM/2026-q2): `web-011` was labelled
+`pre_event` and its body read `EPS BEAT 5.59 6.14`.
 If `analyze` warns that web evidence was fetched but no claim cited any, that means
 these sources went unused — revisit whether a consensus/peer/surprise claim was missed.
 

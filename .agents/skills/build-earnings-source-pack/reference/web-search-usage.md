@@ -78,10 +78,23 @@ before relying on it:
    usable cutoff was supplied. A note is added to `manifest.json` for every hit
    this layer does manage to exclude.
 
-Net effect: the causality guard reliably catches and labels a *dated* post-event
-hit. It labels but cannot resolve an *undated* one that happens to reflect
-post-event information. Treat that status as a review prompt, not proof — see
-`README.md`'s "Known limitations".
+3. **The same-day blind spot — the one that actually bit.** The classifier
+   (`cli._classify_temporal_status`) compares dates at **day** granularity with a
+   strict `>`, so a hit published *on* the event date is labelled `pre_event` by
+   construction. Most companies report before the call, so same-day sources are
+   routinely post-results. Confirmed live (JPM/2026-q2, 2026-09-14, cutoff
+   2026-07-14): a results recap headlined "JPMorgan Chase posts 27% revenue jump in
+   Q2 2026" and a story headlined "Goldman Sachs delivers 45% Q2 2026 EPS beat"
+   were both stamped `pre_event`, as was `web-011`, whose body reads `EPS BEAT 5.59
+   6.14`. Nothing in the label distinguishes those from a genuine pre-event preview.
+
+Net effect: the causality guard reliably catches and labels a hit dated on a *later
+day* than the event. It labels but cannot resolve an *undated* one. And it does not
+catch a *same-day* one at all — it actively mislabels it `pre_event`. Read
+`pre_event` as "not dated after the event day", never as "known to predate the
+call": before citing any source as a **pre-event expectation**, open its content and
+check it does not already state this quarter's actuals. Treat every status as a
+review prompt, not proof — see `README.md`'s "Known limitations".
 
 ## Extract step: search hits become citable evidence
 

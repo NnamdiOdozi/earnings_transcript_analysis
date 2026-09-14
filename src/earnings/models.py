@@ -78,6 +78,11 @@ class Manifest(BaseModel):
     ticker: str
     event_id: str
     created_at: str  # ISO 8601 UTC timestamp
+    # The --event-date the run was prepared with, verbatim. Recorded because it is the
+    # cutoff every temporal_status on this run was judged against: without it an auditor
+    # has to infer the event date from the evidence itself to check that judgment.
+    # None means no cutoff was supplied, which is also why statuses read "unchecked".
+    event_date: Optional[str] = None
     sources: list[SourceRecord] = Field(default_factory=list)
     notes: list[str] = Field(default_factory=list)
     # The exact web-search queries sent (see the query builders in sources.py --

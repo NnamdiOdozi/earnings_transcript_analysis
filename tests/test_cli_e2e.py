@@ -152,6 +152,26 @@ def test_prepare_archives_segmentation_omission_receipt(isolated_runs_dir):
     assert any(config.SEGMENTATION_REPORT_FILENAME in note for note in manifest["notes"])
 
 
+def test_prepare_records_event_date_cutoff_in_manifest(isolated_runs_dir):
+    """The manifest must persist the --event-date every temporal_status was judged
+    against; without it an auditor has to infer the run's own cutoff from the evidence."""
+    transcript = str(FIXTURES / "normal_transcript.txt")
+    assert main(["prepare", "--ticker", "ACME", "--event-id", "2026-q2",
+                 "--transcript", transcript, "--event-date", "2026-07-14"]) == 0
+    manifest = json.loads(
+        (isolated_runs_dir / "ACME" / "2026-q2" / config.MANIFEST_FILENAME).read_text()
+    )
+    assert manifest["event_date"] == "2026-07-14"
+
+    # No cutoff supplied is a real state, not an error: it is why statuses read "unchecked".
+    assert main(["prepare", "--ticker", "ACME", "--event-id", "2026-q3",
+                 "--transcript", transcript]) == 0
+    no_date = json.loads(
+        (isolated_runs_dir / "ACME" / "2026-q3" / config.MANIFEST_FILENAME).read_text()
+    )
+    assert no_date["event_date"] is None
+
+
 def test_analyze_preserves_each_failed_and_passing_claims_attempt(isolated_runs_dir):
     transcript = str(FIXTURES / "normal_transcript.txt")
     assert main(["prepare", "--ticker", "ACME", "--event-id", "2026-q2", "--transcript", transcript]) == 0

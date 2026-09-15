@@ -69,6 +69,13 @@ Each deterministic claims check is also retained inside its own run. Every
 the validation report and a receipt containing the outcome and input hashes. This
 makes failed correction cycles visible instead of leaving only the final pass.
 
+The same rule applies to the outlook gate. Every `earnings validate-outlook`
+invocation creates a numbered, timestamped folder under
+`_outlook_validation_history/`. It preserves the submitted claims and brief, the
+outlook-validation result when validation ran, and a receipt recording whether the
+attempt passed, failed, or was blocked. The top-level `outlook-validation.json`
+remains the current result used by the next gate.
+
 ## 3. The heart of it: every claim is quote-anchored
 
 This is the single most important control. The AI is not allowed to *summarise loosely*. For
@@ -272,8 +279,8 @@ It holds:
 - **`decision`** — the reviewer's final verdict, summary, and finding counts by severity (final
   round only).
 - **`trace_summary`** — a short, deterministically templated sentence or two (not a second LLM
-  call) stating how many sources were used, how many claim-validation attempts it took, and a
-  one-line outcome per review round (e.g. "round 1 fail with 1 high finding(s); round 2
+  call) stating how many sources were used, how many claim and outlook-validation attempts
+  it took, and a one-line outcome per review round (e.g. "round 1 fail with 1 high finding(s); round 2
   pass_with_warnings with 3 medium finding(s)"). Plain and formulaic by design, not polished
   narrative.
 - **`workflow_trace`** — a coarse, ordered list of stages/rounds and their status (claim
@@ -287,7 +294,8 @@ It holds:
 - **`guardrail_summary`** — counts of deterministic-control events the run actually triggered:
   `validation_retries` (claim-validation attempts beyond the first — a resubmission count, not
   a proven retry-after-rejection causal link), `validation_rejections` (attempts that failed the
-  deterministic checks), `review_rejections` (review rounds that failed), and `escalations`
+  deterministic checks), the equivalent outlook-validation retry and rejection counts,
+  `review_rejections` (review rounds that failed), and `escalations`
   (rounds where the reviewer set `escalate_full_review`, forcing a full re-review because a
   diff-only review couldn't be judged responsibly).
 - **`hashes`** — five, not dozens: the transcript, the manifest (standing in for every source

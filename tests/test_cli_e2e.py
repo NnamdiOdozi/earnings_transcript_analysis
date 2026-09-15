@@ -7,7 +7,12 @@ from pathlib import Path
 import pytest
 
 from earnings import config, ingest, sources
-from earnings.cli import _escape_currency, _price_decision_issues, _review_round_count
+from earnings.cli import (
+    _escape_currency,
+    _price_decision_issues,
+    _review_bundle_matches_snapshot,
+    _review_round_count,
+)
 from earnings.cli import main as _cli_main
 from earnings.models import PriceLookupDecision
 from earnings.process import sha256_hex
@@ -30,6 +35,11 @@ def main(args: list[str]) -> int:
 
 def _validation_attempt_dirs(run_dir: Path) -> list[Path]:
     history_dir = run_dir / config.VALIDATION_HISTORY_SUBDIR
+    return sorted(path for path in history_dir.iterdir() if path.is_dir())
+
+
+def _outlook_validation_attempt_dirs(run_dir: Path) -> list[Path]:
+    history_dir = run_dir / config.OUTLOOK_VALIDATION_HISTORY_SUBDIR
     return sorted(path for path in history_dir.iterdir() if path.is_dir())
 
 
@@ -908,6 +918,75 @@ def test_validate_outlook_passes_with_real_citation(isolated_runs_dir):
     assert outlook_validation["errors"] == []
 
 
+def test_validate_outlook_history_records_failed_then_passed_attempts(isolated_runs_dir):
+    """Preserve each submitted brief and its own result when the top-level result changes."""
+    run_dir = _seed_validated_run(isolated_runs_dir)
+    claims_bytes = (run_dir / config.CLAIMS_FILENAME).read_bytes()
+
+    bad_brief = b"# Outlook\n\nUnsupported [claim-999].\n"
+    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_bytes(bad_brief)
+    assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 1
+
+    good_brief = b"# Outlook\n\nSupported [claim-001].\n"
+    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_bytes(good_brief)
+    assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
+
+    attempts = _outlook_validation_attempt_dirs(run_dir)
+    assert len(attempts) == 2
+    for number, attempt_dir in enumerate(attempts, start=1):
+        assert attempt_dir.name.startswith(f"attempt-{number:04d}_")
+        assert (attempt_dir / config.CLAIMS_FILENAME).read_bytes() == claims_bytes
+
+    first_result = json.loads((attempts[0] / config.OUTLOOK_VALIDATION_FILENAME).read_text())
+    second_result = json.loads((attempts[1] / config.OUTLOOK_VALIDATION_FILENAME).read_text())
+    first_receipt = json.loads(
+        (attempts[0] / config.OUTLOOK_VALIDATION_ATTEMPT_RECEIPT_FILENAME).read_text()
+    )
+    second_receipt = json.loads(
+        (attempts[1] / config.OUTLOOK_VALIDATION_ATTEMPT_RECEIPT_FILENAME).read_text()
+    )
+
+    assert (attempts[0] / config.OUTLOOK_BRIEF_FILENAME).read_bytes() == bad_brief
+    assert (attempts[1] / config.OUTLOOK_BRIEF_FILENAME).read_bytes() == good_brief
+    assert first_result["ok"] is False
+    assert second_result["ok"] is True
+    assert first_receipt["outcome"] == "failed"
+    assert first_receipt["exit_code"] == 1
+    assert first_receipt["error_count"] > 0
+    assert second_receipt["outcome"] == "passed"
+    assert second_receipt["exit_code"] == 0
+    assert second_receipt["error_count"] == 0
+    for receipt in (first_receipt, second_receipt):
+        assert receipt["started_at"]
+        assert receipt["finished_at"]
+    assert first_receipt["claims_sha256"] == sha256_hex(claims_bytes)
+    assert first_receipt["outlook_brief_sha256"] == sha256_hex(bad_brief)
+    assert second_receipt["outlook_brief_sha256"] == sha256_hex(good_brief)
+    assert json.loads((run_dir / config.OUTLOOK_VALIDATION_FILENAME).read_text()) == second_result
+
+
+def test_validate_outlook_history_records_blocked_attempt(isolated_runs_dir):
+    """Record an invocation even when the brief is absent and validation cannot run."""
+    run_dir = _seed_validated_run(isolated_runs_dir)
+    assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 2
+
+    attempts = _outlook_validation_attempt_dirs(run_dir)
+    assert len(attempts) == 1
+    attempt_dir = attempts[0]
+    receipt = json.loads(
+        (attempt_dir / config.OUTLOOK_VALIDATION_ATTEMPT_RECEIPT_FILENAME).read_text()
+    )
+    assert receipt["outcome"] == "blocked"
+    assert receipt["exit_code"] == 2
+    assert receipt["error_count"] == 0
+    assert receipt["claims_sha256"] == sha256_hex(
+        (attempt_dir / config.CLAIMS_FILENAME).read_bytes()
+    )
+    assert receipt["outlook_brief_sha256"] is None
+    assert not (attempt_dir / config.OUTLOOK_BRIEF_FILENAME).exists()
+    assert not (attempt_dir / config.OUTLOOK_VALIDATION_FILENAME).exists()
+
+
 def test_validate_outlook_fails_on_unescaped_dollar_signs(isolated_runs_dir):
     transcript = str(FIXTURES / "normal_transcript.txt")
     main(["prepare", "--ticker", "ACME", "--event-id", "2026-q2", "--transcript", transcript])
@@ -1107,12 +1186,18 @@ def _seed_reviewed_run(isolated_runs_dir, ticker="ACME", event="2026-q2", verdic
     return run_dir
 
 
-def test_snapshot_review_round_copies_all_three_files(isolated_runs_dir):
+def test_snapshot_review_round_copies_complete_review_bundle(isolated_runs_dir):
     run_dir = _seed_reviewed_run(isolated_runs_dir)
     round_dir = run_dir / config.REVIEW_HISTORY_SUBDIR / "round-1"
     assert round_dir.exists()
-    for filename in (config.CLAIMS_FILENAME, config.OUTLOOK_BRIEF_FILENAME, config.REVIEW_REPORT_JSON_FILENAME):
+    for filename in (
+        config.CLAIMS_FILENAME,
+        config.OUTLOOK_BRIEF_FILENAME,
+        config.OUTLOOK_VALIDATION_FILENAME,
+        config.REVIEW_REPORT_JSON_FILENAME,
+    ):
         assert (round_dir / filename).exists()
+        assert (round_dir / filename).read_bytes() == (run_dir / filename).read_bytes()
 
 
 def test_snapshot_review_round_writes_severity_count_receipt(isolated_runs_dir):
@@ -1673,6 +1758,19 @@ def test_snapshot_review_round_is_idempotent_on_unchanged_report(isolated_runs_d
     assert not (run_dir / config.REVIEW_HISTORY_SUBDIR / "round-2").exists()
 
 
+def test_review_snapshot_identity_includes_outlook_validation(isolated_runs_dir):
+    """Ignore a new timestamp but detect a meaningful change to the outlook gate."""
+    run_dir = _seed_reviewed_run(isolated_runs_dir)
+    assert _review_bundle_matches_snapshot(run_dir, 1) is True
+    assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
+    assert _review_bundle_matches_snapshot(run_dir, 1) is True
+    result_path = run_dir / config.OUTLOOK_VALIDATION_FILENAME
+    result = json.loads(result_path.read_text())
+    result["claims_sha256"] = "0" * 64
+    result_path.write_text(json.dumps(result))
+    assert _review_bundle_matches_snapshot(run_dir, 1) is False
+
+
 # --- audit-record.json: one-time final summary, written only on a terminal verdict ---
 
 def test_check_review_writes_audit_record_on_pass(isolated_runs_dir):
@@ -1688,6 +1786,13 @@ def test_check_review_writes_audit_record_on_pass(isolated_runs_dir):
     assert record["review_history_summary"]["failed_review_rounds"] == 0
     assert record["workflow_trace"][0]["stage"] == "claim_validation"
     assert record["workflow_trace"][0]["attempts"] >= 1
+    assert record["workflow_trace"][1] == {
+        "stage": "outlook_validation",
+        "attempts": 1,
+        "status": "passed",
+    }
+    assert record["guardrail_summary"]["outlook_validation_retries"] == 0
+    assert record["guardrail_summary"]["outlook_validation_rejections"] == 0
     assert record["guardrail_summary"]["review_rejections"] == 0
     assert record["guardrail_summary"]["escalations"] == 0
     assert record["hashes"]["manifest_sha256"]
@@ -1701,6 +1806,42 @@ def test_check_review_writes_audit_record_on_pass(isolated_runs_dir):
             "reason": "Fixture does not require market-price evidence",
         }
     }
+
+
+def test_audit_record_counts_outlook_validation_corrections(isolated_runs_dir):
+    """Expose a failed brief submission followed by a passing correction in the audit."""
+    run_dir = _seed_validated_run(isolated_runs_dir)
+    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text(
+        "# Outlook\n\nUnsupported [claim-999].\n"
+    )
+    assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 1
+    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text(
+        "# Outlook\n\nSupported [claim-001].\n"
+    )
+    assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
+    _write_review_report(
+        run_dir,
+        {
+            "verdict": "pass",
+            "reviewed_at": "2026-08-27T00:00:00Z",
+            "model": "opus",
+            "source_checks": [],
+            "claim_findings": [],
+            "outlook_findings": [],
+            "process_findings": [],
+            "unverified_items": [],
+            "summary": "Looks fine.",
+            "escalate_full_review": False,
+        },
+    )
+    assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
+
+    record = json.loads((run_dir / config.AUDIT_RECORD_FILENAME).read_text())
+    assert record["workflow_trace"][1]["attempts"] == 2
+    assert record["workflow_trace"][1]["status"] == "passed"
+    assert record["guardrail_summary"]["outlook_validation_retries"] == 1
+    assert record["guardrail_summary"]["outlook_validation_rejections"] == 1
+    assert "2 outlook-validation attempt(s)" in record["trace_summary"]
 
 
 def test_check_review_does_not_write_audit_record_on_fail(isolated_runs_dir):

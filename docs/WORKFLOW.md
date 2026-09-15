@@ -275,10 +275,12 @@ runs/<ticker>/<event-id>/
   signal-card.md               # written only after validation passes
   outlook-brief.md            # agent-authored forward-looking synthesis
   outlook-validation.json     # real-clock record of when validate-outlook last checked outlook-brief.md
+  _outlook_validation_history/
+    attempt-<N>_<timestamp>/  # claims/brief/outlook validation + receipt for every validate-outlook invocation
   review-report.json          # agent-written semantic review verdict
   review-report.md            # rendered from review-report.json, never hand-written
   review-diff.json            # round 2+: what changed since the last round (Python-built)
-  _review_history/round-<N>/  # per-round snapshot of claims/brief/report, for diffing
+  _review_history/round-<N>/  # per-round snapshot of claims/brief/outlook validation/report
     receipt.json               # that round's verdict + finding counts by severity only, no finding text
   audit-record.json           # written once, only on a final pass/pass_with_warnings verdict
   _archive/<timestamp>/       # a prior run's files, if this ticker/event was prepared before
@@ -302,7 +304,7 @@ is which when deciding how much to trust a number:
 | `claims.json`, `metrics.json` | **Agent** | Interpretive — the agent decides what's worth reporting. Python only checks it, never writes it. |
 | `validation.json`, `_validation_history/`, `signal-card.md` | Python | Deterministic result, append-only per-attempt snapshots, then a mechanical re-format of already-validated claims. |
 | `outlook-brief.md` | **Agent** | Fully interpretive synthesis. Python only validates that the claim ids it cites resolve. |
-| `outlook-validation.json` | Python | Real-clock record of when the brief was last checked (the brief itself carries no timestamp). |
+| `outlook-validation.json`, `_outlook_validation_history/` | Python | Current result plus append-only snapshots of every submitted brief, claims, result and receipt. |
 | `review-report.json` | **Agent** (fresh-context reviewer) | Judgment Python cannot make, bound to the exact claims/brief/mode/diff hashes. |
 | `review-report.md` | Python, from `review-report.json` | Never hand-written, so it can't drift from the structured verdict. |
 | `audit-record.json` | Python, compiled from all of the above | The one-file summary for a human approver — see `docs/AUDITABILITY.md` §10. Written once, only on a final (non-`fail`) verdict. |

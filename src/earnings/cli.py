@@ -53,7 +53,7 @@ from .validate import (
     validate_metrics,
     validate_review_report,
 )
-from .validation_history import ValidationAttempt
+from .validation_history import ValidationAttempt, _OutlookValidationAttempt
 
 
 def _now_iso() -> str:
@@ -318,20 +318,34 @@ def _review_round_count(run_dir: Path) -> int:
 
 
 def _review_bundle_matches_snapshot(run_dir: Path, round_number: int) -> bool:
-    """Whether claims, brief, and report still equal one accepted round exactly."""
+    """Whether the validated review bundle still equals one accepted round exactly."""
     prior_dir = run_dir / config.REVIEW_HISTORY_SUBDIR / f"round-{round_number}"
-    filenames = (config.CLAIMS_FILENAME, config.OUTLOOK_BRIEF_FILENAME, config.REVIEW_REPORT_JSON_FILENAME)
-    return all(
+    filenames = (
+        config.CLAIMS_FILENAME,
+        config.OUTLOOK_BRIEF_FILENAME,
+        config.REVIEW_REPORT_JSON_FILENAME,
+    )
+    if not all(
         (prior_dir / filename).is_file()
         and (run_dir / filename).is_file()
         and (prior_dir / filename).read_bytes() == (run_dir / filename).read_bytes()
         for filename in filenames
-    )
+    ):
+        return False
+
+    gate_filename = config.OUTLOOK_VALIDATION_FILENAME
+    if not (prior_dir / gate_filename).is_file() or not (run_dir / gate_filename).is_file():
+        return False
+    prior_gate = json.loads((prior_dir / gate_filename).read_text(encoding="utf-8"))
+    current_gate = json.loads((run_dir / gate_filename).read_text(encoding="utf-8"))
+    prior_gate.pop("validated_at", None)
+    current_gate.pop("validated_at", None)
+    return prior_gate == current_gate
 
 
 def _snapshot_review_round(run_dir: Path, round_number: int) -> None:
     """After a structurally-valid review-report.json is accepted (any verdict, or an
-    escalation), snapshot claims.json/outlook-brief.md/review-report.json under
+    escalation), snapshot the claims, brief, outlook gate result, and report under
     _review_history/round-<N>/ so the NEXT round's `review-diff` can diff against a
     known-good prior state. Called once per completed round, from cmd_check_review.
 
@@ -343,7 +357,12 @@ def _snapshot_review_round(run_dir: Path, round_number: int) -> None:
         return
     dest = run_dir / config.REVIEW_HISTORY_SUBDIR / f"round-{round_number}"
     dest.mkdir(parents=True, exist_ok=True)
-    for filename in (config.CLAIMS_FILENAME, config.OUTLOOK_BRIEF_FILENAME, config.REVIEW_REPORT_JSON_FILENAME):
+    for filename in (
+        config.CLAIMS_FILENAME,
+        config.OUTLOOK_BRIEF_FILENAME,
+        config.OUTLOOK_VALIDATION_FILENAME,
+        config.REVIEW_REPORT_JSON_FILENAME,
+    ):
         src = run_dir / filename
         if src.exists():
             shutil.copy2(src, dest / filename)
@@ -1278,8 +1297,15 @@ def cmd_validate_outlook(args: argparse.Namespace) -> int:
     claims already passed `analyze`, and every claim id the brief cites is real.
     """
     run_dir = config.run_dir(args.ticker, args.event_id)
+    input_hashes = {}
+    for filename in (config.CLAIMS_FILENAME, config.OUTLOOK_BRIEF_FILENAME):
+        path = run_dir / filename
+        if path.is_file():
+            input_hashes[filename] = sha256_hex(path.read_bytes())
+    attempt = _OutlookValidationAttempt.start(run_dir, input_hashes)
     blocked = _block_if_unclosed_review_report(run_dir)
     if blocked is not None:
+        attempt.finish("blocked", blocked)
         return blocked
     _clear_stale_review_report_md(run_dir)
     validation_path = run_dir / config.VALIDATION_FILENAME
@@ -1289,9 +1315,11 @@ def cmd_validate_outlook(args: argparse.Namespace) -> int:
     validation = _load_validated_json(validation_path, ValidationResult)
     if validation is None:
         print(f"error: {validation_path} not found or invalid. Run `earnings analyze` first.", file=sys.stderr)
+        attempt.finish("blocked", 2)
         return 2
     if not validation.ok:
         print("Outlook brief blocked: underlying claims have not passed validation.")
+        attempt.finish("blocked", 1)
         return 1
 
     # Recheck every input that analyze bound into validation.json. A later edit to
@@ -1302,10 +1330,12 @@ def cmd_validate_outlook(args: argparse.Namespace) -> int:
             "Outlook brief blocked: an analyze input changed, disappeared, or lacks a required hash. "
             "Re-run `earnings analyze`."
         )
+        attempt.finish("blocked", 1)
         return 1
 
     if not outlook_path.exists():
         print(f"error: {outlook_path} not found. Write {config.OUTLOOK_BRIEF_FILENAME} first (see skill).", file=sys.stderr)
+        attempt.finish("blocked", 2)
         return 2
 
     raw_claims = json.loads(claims_path.read_text(encoding="utf-8"))
@@ -1326,11 +1356,17 @@ def cmd_validate_outlook(args: argparse.Namespace) -> int:
     )
     _write_json(run_dir / config.OUTLOOK_VALIDATION_FILENAME, outlook_validation.model_dump())
     if errors:
+        attempt.finish(
+            "failed", 1, outlook_validation, validation_path=run_dir / config.OUTLOOK_VALIDATION_FILENAME
+        )
         print(f"Outlook brief validation FAILED: {len(errors)} issue(s).")
         for error in errors:
             print(f"  {error}")
         return 1
 
+    attempt.finish(
+        "passed", 0, outlook_validation, validation_path=run_dir / config.OUTLOOK_VALIDATION_FILENAME
+    )
     print(f"Outlook brief validated: all cited claim ids resolve. ({config.OUTLOOK_BRIEF_FILENAME})")
     return 0
 
@@ -1414,6 +1450,21 @@ def _build_audit_record(
         if receipt.get("outcome") != "passed":
             attempts_with_issues += 1
 
+    outlook_attempt_dirs = sorted(
+        (run_dir / config.OUTLOOK_VALIDATION_HISTORY_SUBDIR).glob("attempt-*")
+    )
+    outlook_attempts_with_issues = 0
+    last_outlook_attempt_outcome = None
+    for attempt_dir in outlook_attempt_dirs:
+        receipt = json.loads(
+            (attempt_dir / config.OUTLOOK_VALIDATION_ATTEMPT_RECEIPT_FILENAME).read_text(
+                encoding="utf-8"
+            )
+        )
+        last_outlook_attempt_outcome = receipt.get("outcome")
+        if receipt.get("outcome") != "passed":
+            outlook_attempts_with_issues += 1
+
     round_dirs = sorted(
         (run_dir / config.REVIEW_HISTORY_SUBDIR).glob("round-*"),
         key=lambda p: int(p.name.split("-")[1]),
@@ -1455,19 +1506,40 @@ def _build_audit_record(
     }
 
     claim_validation_status = "passed" if last_attempt_outcome == "passed" else "unknown"
+    outlook_validation_status = last_outlook_attempt_outcome or (
+        "passed" if outlook_validation and outlook_validation.ok else "unknown"
+    )
     workflow_trace = [
         {"stage": "claim_validation", "attempts": len(attempt_dirs), "status": claim_validation_status},
-        {"stage": "outlook_validation", "status": "passed" if outlook_validation and outlook_validation.ok else "unknown"},
+        {
+            "stage": "outlook_validation",
+            "attempts": len(outlook_attempt_dirs),
+            "status": outlook_validation_status,
+        },
         *round_traces,
     ]
 
     validation_retries = max(len(attempt_dirs) - 1, 0)
+    outlook_validation_retries = max(len(outlook_attempt_dirs) - 1, 0)
 
     trace_summary = (
         f"Analysis drew on {len(sources)} recorded source(s) (transcript, SEC/web evidence). "
         f"{len(attempt_dirs)} claim-validation attempt(s) were made"
         + (f", {attempts_with_issues} with issues," if attempts_with_issues else "")
         + " before passing."
+        + (
+            (
+                f" {len(outlook_attempt_dirs)} outlook-validation attempt(s) were made"
+                + (
+                    f", {outlook_attempts_with_issues} with issues or blocked,"
+                    if outlook_attempts_with_issues
+                    else ""
+                )
+                + " before passing."
+            )
+            if outlook_attempt_dirs
+            else ""
+        )
         + (f" Review ran {len(round_dirs)} round(s): " + "; ".join(round_descriptions) + "."
            if round_descriptions else "")
     )
@@ -1494,6 +1566,8 @@ def _build_audit_record(
         "guardrail_summary": {
             "validation_retries": validation_retries,
             "validation_rejections": attempts_with_issues,
+            "outlook_validation_retries": outlook_validation_retries,
+            "outlook_validation_rejections": outlook_attempts_with_issues,
             "review_rejections": failed_rounds,
             "escalations": escalations,
         },

@@ -106,13 +106,19 @@ was resolved); don't let finished work accumulate here as dead weight.
   real cycles that recurring agent judgement calls become visible (e.g. via
   repeated reviewer findings of the same shape across runs).
 
-### [2026-08-2x] cli.py structural refactor
-- **Scope:** split `cli.py` (1,231 lines) into `RunPaths`/`SearchQuery`/
-  `SearchHit` dataclasses plus separate storage/web/sec/research/render/
-  prepare/analyze modules. Blueprinted in-session but not started.
-- **Do not start without asking** — explicitly deferred pending user go-ahead.
-  A 2026-08-29 third-party audit independently flagged the same file for the
-  same reason; that's corroboration, not a second item.
+### [2026-09-16] prepare.py and review.py exceed the 500-line guideline
+- **Scope:** the cli.py split landed as a strictly behaviour-preserving move, which
+  left two modules over the project's 500-line guideline: `prepare.py` (528) and
+  `review.py` (516). Neither can be reduced by moving whole functions — `cmd_prepare`
+  is 363 lines on its own, so cutting it means restructuring its internals
+  (transcript ingest, SEC fetch, web search, extraction selection, manifest assembly
+  are all inline in one function).
+- **Why deferred:** decomposing `cmd_prepare` is a behavioural change, not a move,
+  and mixing it into the split would have made the diff unreviewable — every other
+  function in that change is byte-identical to its original, which is what made the
+  split verifiable at all.
+- **Status:** not started, 2026-09-16. Do this as its own scoped change with the
+  test suite green before and after, not bundled with anything else.
 
 ### [2026-08-29] Dead config: six settings defined but never read
 - **Scope:** `SEC_SUBMISSIONS_URL`, `SEC_FORMS`,

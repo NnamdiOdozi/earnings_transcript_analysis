@@ -14,15 +14,24 @@ limitations; don't duplicate its content here.
   `review-earnings-run` (Claude Code) / `review-earnings-run-codex` (Codex).
 - `.claude/agents/outlook-reviewer.md` — Claude Code subagent for the final
   semantic review (fresh context, dispatched after `validate-outlook` passes).
-- `src/earnings/` — all deterministic logic (`cli.py`, `sources.py`,
-  `validate.py`, `models.py`, `config.py`).
+- `src/earnings/` — all deterministic logic, one module per workflow stage:
+  `prepare.py`, `analysis.py`, `outlook.py`, `review.py`, `audit.py`. `cli.py` is
+  argparse wiring and dispatch only — put no logic there. Supporting modules:
+  `paths.py` (the ONLY place the run-directory layout is expressed — see below),
+  `provenance.py` (hashing/staleness gates), `rendering.py`, `research.py`,
+  `runio.py`, plus `sources.py`, `validate.py`, `process.py`, `models.py`,
+  `config.py`.
+- Run layout: a run declares `layout_version` in its `manifest.json`. 2 = staged
+  (`claims/`, `outlook/`, `review/`, each with its own `history/`); 1 = the older
+  flat root. Old runs are never migrated, so both shapes are live. Ask
+  `paths.RunPaths` for a path; never join `run_dir` with a filename yourself.
 
 ## Web search: two providers, one active at a time
 
 `config.toml [research] provider` = `"exa"` (default) or `"tavily"` — pure
 toggle, no fallback, no dual-run. Both dispatch through
 `sources.web_search`/`web_extract`; never call `tavily_search`/`exa_search`
-directly from `cli.py`. **Neither provider's date filter reliably excludes
+directly from `prepare.py`. **Neither provider's date filter reliably excludes
 post-event content** (live-tested both, 2026-08-26) — the client-side
 `published_date` check in `cmd_prepare` is the real (partial) guard; the
 `outlook-reviewer`'s temporal-integrity check is the backstop for undated hits.

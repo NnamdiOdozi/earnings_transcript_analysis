@@ -22,7 +22,7 @@ Web search and SEC lookup are both on by default
 **Exa is the default web research provider. Tavily is the supported
 backup/alternative.** Toggle with `config.toml [research] provider` (`"exa"`
 or `"tavily"`) — this is a pure switch: whichever is configured is the only
-one `earnings prepare` calls, no fallback, no dual-run. `cli.py` never calls
+one `earnings prepare` calls, no fallback, no dual-run. `prepare.py` never calls
 `tavily_search`/`exa_search` directly; both go through the provider-agnostic
 `sources.web_search()`/`web_extract()`.
 

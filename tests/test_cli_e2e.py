@@ -8,12 +8,9 @@ import pytest
 
 from earnings import config, ingest, sources
 from earnings.paths import RunPaths
-from earnings.cli import (
-    _escape_currency,
-    _price_decision_issues,
-    _review_bundle_matches_snapshot,
-    _review_round_count,
-)
+from earnings.rendering import _escape_currency
+from earnings.provenance import _price_decision_issues
+from earnings.review import _review_bundle_matches_snapshot, _review_round_count
 from earnings.cli import main as _cli_main
 from earnings.models import PriceLookupDecision
 from earnings.process import sha256_hex

@@ -16,7 +16,7 @@ you decide per run.
 
 ## What happens automatically
 
-`cmd_prepare` (`cli.py`) builds queries from two config-driven, industry-agnostic
+`cmd_prepare` (`prepare.py`) builds queries from two config-driven, industry-agnostic
 classes — targeting information the transcript does **not** already contain (the old
 official-document queries merely restated the call and were dropped):
 - **consensus** — `build_consensus_queries(...)` from `config.toml [research]
@@ -79,7 +79,7 @@ before relying on it:
    this layer does manage to exclude.
 
 3. **The same-day blind spot — the one that actually bit.** The classifier
-   (`cli._classify_temporal_status`) compares dates at **day** granularity with a
+   (`research._classify_temporal_status`) compares dates at **day** granularity with a
    strict `>`, so a hit published *on* the event date is labelled `pre_event` by
    construction. Most companies report before the call, so same-day sources are
    routinely post-results. Confirmed live (JPM/2026-q2, 2026-09-14, cutoff

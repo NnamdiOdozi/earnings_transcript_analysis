@@ -1,6 +1,6 @@
 # Signal card template
 
-`cli._render_signal_card` produces Markdown with this structure. This file documents
+`rendering._render_signal_card` produces Markdown with this structure. This file documents
 it for reference — you do not need to hand-author the card; it is generated only
 after all claims pass validation.
 

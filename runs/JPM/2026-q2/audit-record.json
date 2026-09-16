@@ -3,52 +3,57 @@
   "ticker": "JPM",
   "event_id": "2026-q2",
   "status": "accepted",
-  "final_review_round": 1,
-  "generated_at": "2026-09-16T15:59:04Z",
+  "final_review_round": 2,
+  "generated_at": "2026-09-16T22:23:14Z",
   "decision": {
-    "verdict": "pass_with_warnings",
-    "summary": "The outlook brief is balanced, bank-sector appropriate and well tied to the available evidence. Its base, upside and downside cases distinguish repeatable franchise drivers from exceptional capital-markets activity, and no material brief citation or inferential leap requires correction. Three medium claim-quality warnings remain: one mixed period label and two quotes that are not self-sufficient for every detail in their claim text. One unused web artifact is a generic homepage rather than the results source its title suggests. These issues do not alter the brief's conclusions, so the verdict is pass_with_warnings under the current review rules.",
+    "verdict": "pass",
+    "summary": "Full round-2 review passed. The three changed claims resolve the prior semantic warnings, and every citation in the unchanged brief remains fair against the current claims and source context. The brief is balanced, distinguishes exceptional trading conditions from repeatable franchise drivers, and presents evidence-linked base, upside and downside cases without unjustified confidence. One low-severity source-hygiene issue remains: an unused Wells Fargo artifact is a generic homepage rather than the results page suggested by its title. It does not affect any claim or conclusion.",
     "finding_counts": {
       "critical": 0,
       "high": 0,
-      "medium": 3,
+      "medium": 0,
       "low": 1,
-      "info": 6
+      "info": 12
     }
   },
-  "trace_summary": "Analysis drew on 216 recorded source(s) (transcript, SEC/web evidence). 2 claim-validation attempt(s) were made, 1 with issues, before passing. 1 outlook-validation attempt(s) were made before passing. Review ran 1 round(s): round 1 pass_with_warnings with 3 medium, 1 low, 6 info finding(s).",
+  "trace_summary": "Analysis drew on 216 recorded source(s) (transcript, SEC/web evidence). 3 claim-validation attempt(s) were made, 1 with issues, before passing. 2 outlook-validation attempt(s) were made before passing. Review ran 2 round(s): round 1 pass_with_warnings with 3 medium, 1 low, 6 info finding(s); round 2 pass with 1 low, 12 info finding(s).",
   "workflow_trace": [
     {
       "stage": "claim_validation",
-      "attempts": 2,
+      "attempts": 3,
       "status": "passed"
     },
     {
       "stage": "outlook_validation",
-      "attempts": 1,
+      "attempts": 2,
       "status": "passed"
     },
     {
       "stage": "review",
       "round": 1,
       "status": "pass_with_warnings"
+    },
+    {
+      "stage": "review",
+      "round": 2,
+      "status": "pass"
     }
   ],
   "review_history_summary": {
-    "review_rounds": 1,
+    "review_rounds": 2,
     "failed_review_rounds": 0,
     "historical_findings": {
       "critical": 0,
       "high": 0,
       "medium": 3,
-      "low": 1,
-      "info": 6
+      "low": 2,
+      "info": 18
     }
   },
   "guardrail_summary": {
-    "validation_retries": 1,
+    "validation_retries": 2,
     "validation_rejections": 1,
-    "outlook_validation_retries": 0,
+    "outlook_validation_retries": 1,
     "outlook_validation_rejections": 0,
     "review_rejections": 0,
     "escalations": 0
@@ -62,9 +67,9 @@
   "hashes": {
     "transcript_sha256": "fd0d2a77bdd6f2de88a65d0ace5edc9c8a085da3982781c26938b354d4f61fca",
     "manifest_sha256": "86189fc60d157b8780c93edc424832316e61b2ce5f25575289f4d104b864a43e",
-    "claims_sha256": "f9865cbf347890ef95ea8a5f232a8c491a61fa4ae08b8f648a33dcf37f0dc65f",
+    "claims_sha256": "cf1933c5fffb4fc73ef593da511720e509cb2f6e995ea6bc4b06756df43643f1",
     "outlook_brief_sha256": "ea8ae2ad2dff7d815eda518d78acf8e9cd57509acef5ae58c2414f7b4f3d32a7",
-    "review_report_sha256": "bd40053b8623e81961150d23a6ae6c37fed061149a03c1f88a1c2338b86ac522"
+    "review_report_sha256": "5a94af21389619609d312c85e8d161ee4b31c10b5e0cf18285d0fd07de7cbfb2"
   },
   "evidence_summary": {
     "source_count": 216

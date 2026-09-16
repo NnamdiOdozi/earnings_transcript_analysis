@@ -17,11 +17,11 @@ def _build_audit_record(
     """Compile the single, final audit-record.json for a run, once check-review
     accepts a non-fail verdict -- a deterministic summary package built entirely
     from artefacts that already exist (manifest.json, outlook-validation.json,
-    _validation_history/, _review_history/). Never agent-authored: the agent
+    the claims and review stage histories). Never agent-authored: the agent
     doesn't read or write this file at all.
 
     Not a live log and not a history file -- those already exist separately
-    (_validation_history/, _review_history/); this is the one-file answer to
+    (the claims and review stage histories); this is the one-file answer to
     "what happened on this run, and was it approved."
 
     `trace_summary` is deterministic templated prose, not a second LLM call --
@@ -29,7 +29,7 @@ def _build_audit_record(
     `workflow_trace` is a coarse stage/round list built from the same
     attempt-dir and round-dir counts, not a claim of full execution tracing.
     `review_history_summary` aggregates findings across every round in
-    _review_history (not just the final one), so it reflects how much scrutiny
+    review history (not just the final one), so it reflects how much scrutiny
     the run went through even where a later round fixed what was flagged --
     this is a review-outcome rollup, not a guardrail-intervention log.
     `guardrail_summary.validation_retries` is `attempts - 1` when there's more

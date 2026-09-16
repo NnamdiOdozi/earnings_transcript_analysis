@@ -21,7 +21,7 @@ from .validate import validate_review_report
 
 
 def _review_round_count(run_dir: Path) -> int:
-    """How many review rounds have completed (each a snapshot under _review_history/round-N/)."""
+    """How many review rounds have completed (each a snapshot in the run's review history)."""
     history_dir = RunPaths.at(run_dir).review_history
     if not history_dir.exists():
         return 0
@@ -57,7 +57,7 @@ def _review_bundle_matches_snapshot(run_dir: Path, round_number: int) -> bool:
 def _snapshot_review_round(run_dir: Path, round_number: int) -> None:
     """After a structurally-valid review-report.json is accepted (any verdict, or an
     escalation), snapshot the claims, brief, outlook gate result, and report under
-    _review_history/round-<N>/ so the NEXT round's `review-diff` can diff against a
+    the run's review history so the NEXT round's `review-diff` can diff against a
     known-good prior state. Called once per completed round, from cmd_check_review.
 
     Idempotent only when the complete reviewed bundle is byte-identical to the
@@ -85,7 +85,7 @@ def _write_review_round_receipt(round_dir: Path) -> None:
     verdict and finding counts by severity only, no finding text -- so a human (or the
     next agent) can see how a round went at a glance, without opening the full report or
     waiting for audit-record.json, which is only written once the whole run is accepted.
-    Mirrors _validation_history/attempt-NNNN/receipt.json's role for Stage 1.
+    Mirrors the Stage 1 attempt receipt's role in the claims history.
     """
     report_path = round_dir / config.REVIEW_REPORT_JSON_FILENAME
     if not report_path.is_file():
@@ -144,7 +144,7 @@ def _clear_stale_review_report_md(run_dir: Path) -> None:
     stops blocking analyze/validate-outlook (see its docstring) so a corrected bundle
     can still be produced -- but that leaves a seemingly-final review-report.md sitting
     next to files it no longer applies to. The accepted verdict is preserved unchanged
-    under _review_history/round-N/; only this top-level rendering is cleared. Safe to
+    inside the review history; only this top-level rendering is cleared. Safe to
     call any time: a no-op when there's no completed round or the bundle still matches
     the latest one.
     """
@@ -189,7 +189,8 @@ def cmd_review_diff(args: argparse.Namespace) -> int:
         print(
             f"Review round cap reached ({config.REVIEW_MAX_ROUNDS} max, see config.toml [review] "
             f"max_review_rounds). Not attempting round {round_number}. Surface the last "
-            f"accepted _review_history/round-{completed_rounds}/{config.REVIEW_REPORT_JSON_FILENAME} "
+            f"accepted {paths.review_round(completed_rounds).relative_to(run_dir)}/"
+            f"{config.REVIEW_REPORT_JSON_FILENAME} "
             "findings to the user -- do not loop further."
         )
         return 4  # distinct from 2 (schema/fail) -- "stop, don't correct" not "go fix it"
@@ -349,7 +350,8 @@ def cmd_check_review(args: argparse.Namespace) -> int:
         print(
             f"error: review round cap reached ({config.REVIEW_MAX_ROUNDS} max, see config.toml "
             f"[review] max_review_rounds). Refusing to accept round {round_number}. Surface the "
-            f"last accepted _review_history/round-{completed_rounds}/{config.REVIEW_REPORT_JSON_FILENAME} "
+            f"last accepted {paths.review_round(completed_rounds).relative_to(run_dir)}/"
+            f"{config.REVIEW_REPORT_JSON_FILENAME} "
             "findings to the user -- do not loop further.",
             file=sys.stderr,
         )

@@ -1,12 +1,12 @@
 {
-  "url": "https://www.ctol.digital/news/jpmorgan-vs-citi-q1-2026-earnings-jpm-clean-beat-citi-hidden-caveats/",
-  "title": "JPMorgan vs Citi Q1 2026 Earnings: Why JPM's Clean Beat Exposes Citi's Hidden Caveats - CTOL Digital Solutions",
+  "url": "https://app.edgar.tools/filing/19617/0001628280-26-048078/a2q26erfex992supplement.htm",
+  "title": "Document",
   "score": null,
   "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:Citigroup",
+  "_select_key": "peer:Wells Fargo",
   "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "Citigroup quarterly results versus JPMorganChase JPM",
-  "_retrieved_at": "2026-09-14T13:11:31Z"
+  "_query": "Wells Fargo quarterly results versus JPMorgan Chase & Co. JPM",
+  "_retrieved_at": "2026-09-16T15:45:03Z"
 }

@@ -1,0 +1,828 @@
+[
+  {
+    "segment_id": "seg-0001",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Document date banner; no company statement or analytical content."
+  },
+  {
+    "segment_id": "seg-0002",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Operator welcome, recording notice, disclaimer pointer and speaker introduction."
+  },
+  {
+    "segment_id": "seg-0003",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-001",
+      "claim-002",
+      "claim-003",
+      "claim-004",
+      "claim-005",
+      "claim-006",
+      "claim-007",
+      "claim-008",
+      "claim-009",
+      "claim-010",
+      "claim-011",
+      "claim-012",
+      "claim-013",
+      "claim-014",
+      "claim-015",
+      "claim-016",
+      "claim-017",
+      "claim-018",
+      "claim-019",
+      "claim-020",
+      "claim-021",
+      "claim-022",
+      "claim-076"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0004",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Operator queue instructions and introduction of the next analyst."
+  },
+  {
+    "segment_id": "seg-0005",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-077"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0006",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-023"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0007",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-078"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0008",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-024",
+      "claim-025",
+      "claim-026"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0009",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Operator asks whether the analyst has finished; no substantive content."
+  },
+  {
+    "segment_id": "seg-0010",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Analyst confirms completion and thanks management."
+  },
+  {
+    "segment_id": "seg-0011",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Operator introduces the next analyst."
+  },
+  {
+    "segment_id": "seg-0012",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-079"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0013",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-027",
+      "claim-028",
+      "claim-029",
+      "claim-030"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0014",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-080"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0015",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-031"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0016",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Analyst closing thanks only."
+  },
+  {
+    "segment_id": "seg-0017",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Operator introduces the next analyst."
+  },
+  {
+    "segment_id": "seg-0018",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-081"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0019",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-032",
+      "claim-033"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0020",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-082"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0021",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-034",
+      "claim-035"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0022",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Analyst acknowledges the answer and closes the exchange."
+  },
+  {
+    "segment_id": "seg-0023",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Operator introduces the next analyst."
+  },
+  {
+    "segment_id": "seg-0024",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-083"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0025",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-105"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0026",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-106"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0027",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Analyst acknowledgement only."
+  },
+  {
+    "segment_id": "seg-0028",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-036"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0029",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Analyst closing thanks only."
+  },
+  {
+    "segment_id": "seg-0030",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Operator introduces the next analyst."
+  },
+  {
+    "segment_id": "seg-0031",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-084"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0032",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-037",
+      "claim-038"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0033",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-085"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0034",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-039"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0035",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-040"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0036",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Analyst acknowledges the answer and offers thanks."
+  },
+  {
+    "segment_id": "seg-0037",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Management closing thanks only."
+  },
+  {
+    "segment_id": "seg-0038",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Operator introduces the next analyst."
+  },
+  {
+    "segment_id": "seg-0039",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-086"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0040",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-041"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0041",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-042"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0042",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Brief concurrence with the preceding modeled-deposit-risk answer; no new detail."
+  },
+  {
+    "segment_id": "seg-0043",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-087"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0044",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Analyst acknowledges the answer and offers thanks."
+  },
+  {
+    "segment_id": "seg-0045",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Operator introduces the next analyst."
+  },
+  {
+    "segment_id": "seg-0046",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-088"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0047",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Brief assertion repeated with fuller explanation in the following management turns."
+  },
+  {
+    "segment_id": "seg-0048",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Management acknowledgement while handing over the answer."
+  },
+  {
+    "segment_id": "seg-0049",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-089"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0050",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Interrupted handover fragment with no substantive statement."
+  },
+  {
+    "segment_id": "seg-0051",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-043"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0052",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Brief agreement with the preceding operating-leverage explanation."
+  },
+  {
+    "segment_id": "seg-0053",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-107"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0054",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-044",
+      "claim-045"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0055",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Analyst acknowledgement only."
+  },
+  {
+    "segment_id": "seg-0056",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-090"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0057",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-108"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0058",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Brief clarification that the speakers agree; no new information."
+  },
+  {
+    "segment_id": "seg-0059",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Brief agreement only."
+  },
+  {
+    "segment_id": "seg-0060",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-091"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0061",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-046"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0062",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-047",
+      "claim-092"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0063",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Humorous correction that the executive was an options rather than spot-FX trader; no analytical consequence."
+  },
+  {
+    "segment_id": "seg-0064",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Analyst closing thanks only."
+  },
+  {
+    "segment_id": "seg-0065",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Operator introduces the next analyst."
+  },
+  {
+    "segment_id": "seg-0066",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-093"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0067",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-048",
+      "claim-049",
+      "claim-050"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0068",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-094"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0069",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-051"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0070",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-095"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0071",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Analyst closing thanks only."
+  },
+  {
+    "segment_id": "seg-0072",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Management closing thanks only."
+  },
+  {
+    "segment_id": "seg-0073",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Operator introduces the next analyst."
+  },
+  {
+    "segment_id": "seg-0074",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-052",
+      "claim-096"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0075",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-053"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0076",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-054",
+      "claim-055",
+      "claim-056",
+      "claim-057"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0077",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-097"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0078",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Personal compliment and thanks before the substantive capital-allocation answer."
+  },
+  {
+    "segment_id": "seg-0079",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-058",
+      "claim-059",
+      "claim-060",
+      "claim-061"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0080",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Analyst personal aside and closing thanks."
+  },
+  {
+    "segment_id": "seg-0081",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Personal pleasantry only."
+  },
+  {
+    "segment_id": "seg-0082",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-098"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0083",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-062"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0084",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-109"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0085",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-099"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0086",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-100"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0087",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-063",
+      "claim-064"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0088",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Operator introduces the next analyst."
+  },
+  {
+    "segment_id": "seg-0089",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-101"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0090",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-065"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0091",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-066"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0092",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-102"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0093",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Speaker handover only."
+  },
+  {
+    "segment_id": "seg-0094",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-067"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0095",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-068"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0096",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Analyst agreement, thanks and handover only."
+  },
+  {
+    "segment_id": "seg-0097",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-110"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0098",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Closing agreement and thanks only."
+  },
+  {
+    "segment_id": "seg-0099",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Operator introduces the final analyst."
+  },
+  {
+    "segment_id": "seg-0100",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-103"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0101",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-069",
+      "claim-070"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0102",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-104"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0103",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-071",
+      "claim-072"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0104",
+    "outcome": "claims_extracted",
+    "claim_ids": [
+      "claim-073"
+    ],
+    "reason": null
+  },
+  {
+    "segment_id": "seg-0105",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Analyst closing thanks only."
+  },
+  {
+    "segment_id": "seg-0106",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Management closing thanks only."
+  },
+  {
+    "segment_id": "seg-0107",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Truncated operator closing fragment."
+  },
+  {
+    "segment_id": "seg-0108",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Management closing thanks only."
+  },
+  {
+    "segment_id": "seg-0109",
+    "outcome": "deliberately_immaterial",
+    "claim_ids": [],
+    "reason": "Operator sign-off followed by the standard forward-looking-statements disclaimer."
+  }
+]

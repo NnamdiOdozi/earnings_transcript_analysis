@@ -1,319 +1,321 @@
 {
   "ticker": "JPM",
   "event_id": "peer-discovery",
-  "created_at": "2026-09-14T13:10:41Z",
+  "created_at": "2026-09-16T15:44:21Z",
+  "layout_version": 1,
+  "event_date": null,
   "sources": [
     {
       "path": "raw/query-01-hit-01.json",
-      "origin": "https://vcpscanner.com/valuation/jpm/relative",
-      "retrieved_at": "2026-09-14T13:10:35Z",
+      "origin": "https://assetnext.app/peers/jpmorgan-chase-co",
+      "retrieved_at": "2026-09-16T15:44:14Z",
       "content_type": "application/json",
-      "sha256": "8862085aa80a588c1440b676c36c51cd11817063a6abf7221efe01c2715cc624",
-      "byte_length": 388
+      "sha256": "e005e5b4ba18699d317e1c55486fcd86cd9eb6fe05bc0c649ea233f9c065dc03",
+      "byte_length": 398
     },
     {
       "path": "raw/query-01-hit-02.json",
       "origin": "https://www.macroaxis.com/competition/JPM",
-      "retrieved_at": "2026-09-14T13:10:35Z",
+      "retrieved_at": "2026-09-16T15:44:14Z",
       "content_type": "application/json",
-      "sha256": "c3ff68e147ad0ebca7d534406bed905c79d1302c016eb11799ca0fcee7e49972",
-      "byte_length": 353
+      "sha256": "a485d944345b518632139cf5102e1e3f85d7a416d60c8c000ca7b8ea487313b2",
+      "byte_length": 379
     },
     {
       "path": "raw/query-01-hit-03.json",
-      "origin": "https://stockmarketwatch.com/stock/JPM/vs-peers",
-      "retrieved_at": "2026-09-14T13:10:35Z",
+      "origin": "https://vcpscanner.com/valuation/jpm/relative",
+      "retrieved_at": "2026-09-16T15:44:14Z",
       "content_type": "application/json",
-      "sha256": "1bf61087633be168acb131657fa7348caac8dd183f37fd0a54eaa70c06597d38",
-      "byte_length": 350
+      "sha256": "563d453286e1877abf3d5458f447fd3bfff3a0851d1048a43144bbb6ada3fc47",
+      "byte_length": 395
     },
     {
       "path": "raw/query-01-hit-04.json",
-      "origin": "https://www.hudson-labs.com/research/jpmorgan-chase-competitors-jpm-top-peers-2026",
-      "retrieved_at": "2026-09-14T13:10:35Z",
+      "origin": "https://stockmarketwatch.com/stock/JPM/vs-peers",
+      "retrieved_at": "2026-09-16T15:44:14Z",
       "content_type": "application/json",
-      "sha256": "199bbde8ed3f05a8e71431674f55afb3b020595f83e26904d24358a282ed7d20",
-      "byte_length": 414
+      "sha256": "a0ebd8dadbcb384fdd9c4690d58943f38998d5eb67bf9efeb2d17a12366a8d5e",
+      "byte_length": 357
     },
     {
       "path": "raw/query-01-hit-05.json",
-      "origin": "https://stockti.com/stock/JPM/peers",
-      "retrieved_at": "2026-09-14T13:10:35Z",
+      "origin": "https://www.marketbeat.com/stocks/NYSE/JPM/competitors-and-alternatives/",
+      "retrieved_at": "2026-09-16T15:44:14Z",
       "content_type": "application/json",
-      "sha256": "3ebf0ef34f0c6a1994a02fdf23b4e79cc28b1bbf8629e43e84273c856ccee1dc",
-      "byte_length": 344
+      "sha256": "42bba73962ecce4f8747a03acc604c7aafdc28e640867c9d3078481c06264738",
+      "byte_length": 381
     },
     {
       "path": "raw/query-01-hit-06.json",
-      "origin": "https://marketchameleon.com/Overview/JPM/Peer-Comparison/",
-      "retrieved_at": "2026-09-14T13:10:35Z",
+      "origin": "https://stockti.com/stock/JPM/peers",
+      "retrieved_at": "2026-09-16T15:44:14Z",
       "content_type": "application/json",
-      "sha256": "e664db3c861be8a85e52d70fa3d6ef02baa351e135b8d11f3d89c369468a2427",
-      "byte_length": 372
+      "sha256": "17d0ab5c40883c8b2edb6987e1930909e40aa7966ef4bd2d63d52de0d67417d8",
+      "byte_length": 351
     },
     {
       "path": "raw/query-01-hit-07.json",
-      "origin": "https://www.marketbeat.com/stocks/NYSE/JPM/competitors-and-alternatives/",
-      "retrieved_at": "2026-09-14T13:10:35Z",
+      "origin": "https://assetnext.app/compare/jpmorgan-chase-co",
+      "retrieved_at": "2026-09-16T15:44:14Z",
       "content_type": "application/json",
-      "sha256": "7e951cc6dca0d1850c3f19a49a9f208ab2966f53d282d19789c9ce81dd19e2b6",
-      "byte_length": 383
+      "sha256": "a4dbdb60ace6b51553d69bb1dc8040a66a0f65722238d804f0054bebb259dcb6",
+      "byte_length": 390
     },
     {
       "path": "raw/query-01-hit-08.json",
-      "origin": "https://trendlyne.com/us/fundamentals/peer-group/1403963/JPM/jpmorgan-chase-co/",
-      "retrieved_at": "2026-09-14T13:10:35Z",
+      "origin": "https://valuesense.io/ticker/jpm/compare",
+      "retrieved_at": "2026-09-16T15:44:14Z",
       "content_type": "application/json",
-      "sha256": "b7009a485cc95a2e2b00e92ba3bb3cf4077dca2ede4531710b95a9ad84225938",
-      "byte_length": 376
+      "sha256": "c0158906da68c2032c9dbdc57175a43af0ac4bfa94ffc44d6793b4820a7fd06d",
+      "byte_length": 374
     },
     {
       "path": "raw/query-02-hit-01.json",
       "origin": "https://www.tipranks.com/stocks/jpm/similar-stocks",
-      "retrieved_at": "2026-09-14T13:10:36Z",
+      "retrieved_at": "2026-09-16T15:44:16Z",
       "content_type": "application/json",
-      "sha256": "aac6e79215d9ccec3b2fba588e5ac28a4c0ab1351e4f123e0815132c8a50f5cc",
-      "byte_length": 421
+      "sha256": "56cd98ccbe11a557a64d704de3e266791c94c89b08dac9f021bb4ba97db532fb",
+      "byte_length": 428
     },
     {
       "path": "raw/query-02-hit-02.json",
-      "origin": "https://www.marketbeat.com/stocks/NYSE/JPM/competitors-and-alternatives/",
-      "retrieved_at": "2026-09-14T13:10:36Z",
+      "origin": "https://www.hudson-labs.com/research/jpmorgan-chase-competitors-jpm-top-peers-2026",
+      "retrieved_at": "2026-09-16T15:44:16Z",
       "content_type": "application/json",
-      "sha256": "e69830bf6b12fec0fba965bdcb06bb2cae7741a7fbd4a25af0782246acbe43eb",
-      "byte_length": 398
+      "sha256": "4b22f1d203a6040f1455b7f8a20a977be64e1e9b348393f7c6ae64cba29c5ffd",
+      "byte_length": 450
     },
     {
       "path": "raw/query-02-hit-03.json",
-      "origin": "https://www.macroaxis.com/competition/JPM",
-      "retrieved_at": "2026-09-14T13:10:36Z",
+      "origin": "https://www.marketbeat.com/stocks/NYSE/JPM/competitors-and-alternatives/",
+      "retrieved_at": "2026-09-16T15:44:16Z",
       "content_type": "application/json",
-      "sha256": "c5a82d458bdae0656f84e1b6967e34234e88c4f24ed236f7095d9f0ad2e6e701",
-      "byte_length": 368
+      "sha256": "58d0e195621df1fbb6efed862b41b83d9671e70c936706382b128490b525edbe",
+      "byte_length": 396
     },
     {
       "path": "raw/query-02-hit-04.json",
-      "origin": "https://www.hudson-labs.com/research/jpmorgan-chase-competitors-jpm-top-peers-2026",
-      "retrieved_at": "2026-09-14T13:10:36Z",
+      "origin": "https://www.macroaxis.com/competition/JPM",
+      "retrieved_at": "2026-09-16T15:44:16Z",
       "content_type": "application/json",
-      "sha256": "8ed027a1fdc905a2b5547bce25465b144636a297c4d536d08b11b9ef1ca48d8b",
-      "byte_length": 429
+      "sha256": "563b497148a728f0840269a3df716080fd1776205a0f1d820f0372daadd01335",
+      "byte_length": 394
     },
     {
       "path": "raw/query-02-hit-05.json",
-      "origin": "https://seekingalpha.com/symbol/JPM/peers/comparison",
-      "retrieved_at": "2026-09-14T13:10:36Z",
+      "origin": "https://www.financialcontent.com/article/finterra-2026-4-14-the-fortress-and-the-future-an-in-depth-research-report-on-jpmorgan-chase-and-co-jpm",
+      "retrieved_at": "2026-09-16T15:44:16Z",
       "content_type": "application/json",
-      "sha256": "aa27048a46cdd9757f2935971750a329cccaa6ec776036dde61139ea3ec3d6a0",
-      "byte_length": 389
+      "sha256": "2e76f8aeb217b8d634e15e8d83dd90151c356b4b43e9b2e5a268623914e453f1",
+      "byte_length": 557
     },
     {
       "path": "raw/query-02-hit-06.json",
-      "origin": "https://www.clearthesis.ai/thesis/JPM",
-      "retrieved_at": "2026-09-14T13:10:36Z",
+      "origin": "https://www.marketbeat.com/",
+      "retrieved_at": "2026-09-16T15:44:16Z",
       "content_type": "application/json",
-      "sha256": "30931dea3e9bf2526dde99a193034423ea66137a7545977e808945b36cf98117",
-      "byte_length": 406
+      "sha256": "9a1f202f98442fa4009cf0786e3dbff68ff0021ef8122bbe407c497a442b9f7a",
+      "byte_length": 360
     },
     {
       "path": "raw/query-02-hit-07.json",
-      "origin": "https://stockmarketwatch.com/stock/JPM/vs-peers",
-      "retrieved_at": "2026-09-14T13:10:36Z",
+      "origin": "https://www.clearthesis.ai/thesis/JPM",
+      "retrieved_at": "2026-09-16T15:44:16Z",
       "content_type": "application/json",
-      "sha256": "f2b7646ec5c9b9e203f3a28dc54051abc8fb480e07df4485b759c8af285fb731",
-      "byte_length": 365
+      "sha256": "bf8f21704bdc8c883355549e7427315d4316741f5c562de6f0ab0964d51db620",
+      "byte_length": 413
     },
     {
       "path": "raw/query-02-hit-08.json",
-      "origin": "https://www.obermatt.com/en-us/stocks/jpmorgan-chase-jpm/similar-stocks.html",
-      "retrieved_at": "2026-09-14T13:10:36Z",
+      "origin": "https://seekingalpha.com/",
+      "retrieved_at": "2026-09-16T15:44:16Z",
       "content_type": "application/json",
-      "sha256": "f40314794fee056fd1388ad610cd52e326c7ebb4b5ee70fc4be5c0b79de70ebc",
-      "byte_length": 416
+      "sha256": "95ebe380863f5b5f58ee90bb908377daf2b08ad18450216c132cea751d561099",
+      "byte_length": 369
     },
     {
       "path": "raw/query-03-hit-01.json",
-      "origin": "https://www.tipranks.com/stocks/jpm/similar-stocks",
-      "retrieved_at": "2026-09-14T13:10:37Z",
+      "origin": "https://assetnext.app/similar-companies/jpmorgan-chase-co",
+      "retrieved_at": "2026-09-16T15:44:17Z",
       "content_type": "application/json",
-      "sha256": "5c2fdadd90ceae498d1ceb87304cfa99dfe5daa3ba45c16d413e2b4db8474f31",
-      "byte_length": 334
+      "sha256": "3826ef025d8eaaa8b844355341ecd13f4cfaeb34321d37589806418a25b41cf2",
+      "byte_length": 399
     },
     {
       "path": "raw/query-03-hit-02.json",
-      "origin": "https://www.marketbeat.com/stocks/NYSE/JPM/competitors-and-alternatives/",
-      "retrieved_at": "2026-09-14T13:10:37Z",
+      "origin": "https://www.marketbeat.com/",
+      "retrieved_at": "2026-09-16T15:44:17Z",
       "content_type": "application/json",
-      "sha256": "e383ba4828265cad39045db9f7d73d88ec904a2242ba59aed1c323b8c031d7b4",
-      "byte_length": 374
+      "sha256": "850975ae97fc729919bdf3bd14fe343656b34826480d2d014ca3554f60dfacbd",
+      "byte_length": 336
     },
     {
       "path": "raw/query-03-hit-03.json",
-      "origin": "https://assetnext.app/similar-companies/jpmorgan-chase-co",
-      "retrieved_at": "2026-09-14T13:10:37Z",
+      "origin": "https://marketchameleon.com/",
+      "retrieved_at": "2026-09-16T15:44:17Z",
       "content_type": "application/json",
-      "sha256": "e6bdb090495ffc3ae2fc6f760d885479ace6464944e84c42be2ae48f0de7b7eb",
-      "byte_length": 392
+      "sha256": "938bddea70cfd2ea6928995cbeb325af750d27771461443b87adea68c6668c33",
+      "byte_length": 323
     },
     {
       "path": "raw/query-03-hit-04.json",
-      "origin": "https://marketchameleon.com/Overview/JPM/Similar/",
-      "retrieved_at": "2026-09-14T13:10:37Z",
+      "origin": "https://marketgenius.app/stocks/quotes/JPM:XNYS/statistics",
+      "retrieved_at": "2026-09-16T15:44:17Z",
       "content_type": "application/json",
-      "sha256": "7811226c7d59c72fcfeb9e8ff3ee3a12541dd4922d80410d17d737338c241540",
-      "byte_length": 337
+      "sha256": "b0ebb9a6da154e5fdda5165027cd492ec21d524c371992f2a455b7a0ce2beb28",
+      "byte_length": 377
     },
     {
       "path": "raw/query-03-hit-05.json",
-      "origin": "https://www.obermatt.com/en/stocks/jpmorgan-chase-jpm/similar-stocks.html",
-      "retrieved_at": "2026-09-14T13:10:37Z",
+      "origin": "https://walnutinvest.com/stocks/compare/jpm-vs-wfc",
+      "retrieved_at": "2026-09-16T15:44:17Z",
       "content_type": "application/json",
-      "sha256": "552204f0310a612c3d56bf1b447c4758177a57d8bc666479487415f6934894af",
-      "byte_length": 389
+      "sha256": "279caa498d7c4030bc153e8e427d80c1a97829689858fb582e441ea903617dda",
+      "byte_length": 403
     },
     {
       "path": "raw/query-03-hit-06.json",
-      "origin": "https://altindex.com/similar-stocks/bac",
-      "retrieved_at": "2026-09-14T13:10:37Z",
+      "origin": "https://stoxpulse.com/compare/jpm-vs-bac",
+      "retrieved_at": "2026-09-16T15:44:17Z",
       "content_type": "application/json",
-      "sha256": "f497350e88961e17cf4bb65c1430186e3266fb8e1c564da33ae619700a4a41c3",
-      "byte_length": 399
+      "sha256": "5cb651a6d16ffa30306574f918d03d596513cda89ce09bba252f7e8258273f87",
+      "byte_length": 358
     },
     {
       "path": "raw/query-03-hit-07.json",
-      "origin": "https://altindex.com/similar-stocks/wfc",
-      "retrieved_at": "2026-09-14T13:10:37Z",
+      "origin": "https://walnutinvest.com/stocks/compare/bac-vs-jpm",
+      "retrieved_at": "2026-09-16T15:44:17Z",
       "content_type": "application/json",
-      "sha256": "c7be4c9255f504a8238f00e02db54ca36236ef8450bcfdfa7d36d2761123e52b",
-      "byte_length": 399
+      "sha256": "9251dd14e416c209f4148565dfcc3e8126f62f6885cac215fdee2339765c137c",
+      "byte_length": 407
     },
     {
       "path": "raw/query-03-hit-08.json",
-      "origin": "https://altindex.com/similar-stocks/c",
-      "retrieved_at": "2026-09-14T13:10:37Z",
+      "origin": "https://businessquant.com/stocks/jpm-pk/",
+      "retrieved_at": "2026-09-16T15:44:17Z",
       "content_type": "application/json",
-      "sha256": "fd15f081aa8790ecf52290c255a062d4f694bce5d183611690e9e242391e6621",
-      "byte_length": 395
+      "sha256": "1ec9c5c196d40095f9ad026927ecd5fb88491a82d56b54158ba7ec9906d6e9b1",
+      "byte_length": 357
     },
     {
       "path": "candidate-01.md",
-      "origin": "https://vcpscanner.com/valuation/jpm/relative",
-      "retrieved_at": "2026-09-14T13:10:37Z",
+      "origin": "https://assetnext.app/peers/jpmorgan-chase-co",
+      "retrieved_at": "2026-09-16T15:44:17Z",
       "content_type": "text/markdown",
-      "sha256": "99611acece2eb1ab6f0087a151e7e4140b4ad64999cf1c66aa927df1cd6a47f4",
-      "byte_length": 6408
+      "sha256": "ae2276c614e84ffc415701c263e083ddc00744ca49d32bcf5c90071164001aa2",
+      "byte_length": 3870
     },
     {
       "path": "candidate-02.md",
       "origin": "https://www.macroaxis.com/competition/JPM",
-      "retrieved_at": "2026-09-14T13:10:38Z",
+      "retrieved_at": "2026-09-16T15:44:18Z",
       "content_type": "text/markdown",
       "sha256": "b6d9caa56e305ae5fc019eae40b29bd8312d922542914d23f5091be3b9778fc4",
       "byte_length": 15766
     },
     {
       "path": "candidate-03.md",
+      "origin": "https://vcpscanner.com/valuation/jpm/relative",
+      "retrieved_at": "2026-09-16T15:44:18Z",
+      "content_type": "text/markdown",
+      "sha256": "99611acece2eb1ab6f0087a151e7e4140b4ad64999cf1c66aa927df1cd6a47f4",
+      "byte_length": 6408
+    },
+    {
+      "path": "candidate-04.md",
       "origin": "https://stockmarketwatch.com/stock/JPM/vs-peers",
-      "retrieved_at": "2026-09-14T13:10:38Z",
+      "retrieved_at": "2026-09-16T15:44:18Z",
       "content_type": "text/markdown",
       "sha256": "d2fb55ee6c3bf1529d458dafb6d98e93005da329a4a04f7b84a591e3b1e0ead0",
       "byte_length": 4846
     },
     {
-      "path": "candidate-04.md",
-      "origin": "https://www.hudson-labs.com/research/jpmorgan-chase-competitors-jpm-top-peers-2026",
-      "retrieved_at": "2026-09-14T13:10:38Z",
-      "content_type": "text/markdown",
-      "sha256": "fe081f857f7d4c415604c01eedc388f8b2f4afbe53d2d5e10041e7413ff1dc1f",
-      "byte_length": 4849
-    },
-    {
       "path": "candidate-05.md",
-      "origin": "https://stockti.com/stock/JPM/peers",
-      "retrieved_at": "2026-09-14T13:10:38Z",
-      "content_type": "text/markdown",
-      "sha256": "04bcce70f06ef1b5baf41957e2a7ab94b09cf8e659465bbf0d66c45a3372c4f8",
-      "byte_length": 2873
-    },
-    {
-      "path": "candidate-06.md",
-      "origin": "https://marketchameleon.com/Overview/JPM/Peer-Comparison/",
-      "retrieved_at": "2026-09-14T13:10:39Z",
-      "content_type": "text/markdown",
-      "sha256": "49e863373f80f1ab5f62e6b8138a5827f8bb9df4c5f7e167089dead4127cf2a2",
-      "byte_length": 5161
-    },
-    {
-      "path": "candidate-07.md",
       "origin": "https://www.marketbeat.com/stocks/NYSE/JPM/competitors-and-alternatives/",
-      "retrieved_at": "2026-09-14T13:10:39Z",
+      "retrieved_at": "2026-09-16T15:44:18Z",
       "content_type": "text/markdown",
       "sha256": "fdd3172f096279be0586dca79ddafecdbe4d4b4b3b6c20abb7b54cdac2ae7f96",
       "byte_length": 61966
     },
     {
-      "path": "candidate-08.md",
-      "origin": "https://trendlyne.com/us/fundamentals/peer-group/1403963/JPM/jpmorgan-chase-co/",
-      "retrieved_at": "2026-09-14T13:10:39Z",
+      "path": "candidate-06.md",
+      "origin": "https://stockti.com/stock/JPM/peers",
+      "retrieved_at": "2026-09-16T15:44:19Z",
       "content_type": "text/markdown",
-      "sha256": "6f6f20fec3351a2a2df819f54056b79d14b34cdc2f280993fb32894956f621c7",
-      "byte_length": 508
+      "sha256": "04bcce70f06ef1b5baf41957e2a7ab94b09cf8e659465bbf0d66c45a3372c4f8",
+      "byte_length": 2873
+    },
+    {
+      "path": "candidate-07.md",
+      "origin": "https://assetnext.app/compare/jpmorgan-chase-co",
+      "retrieved_at": "2026-09-16T15:44:19Z",
+      "content_type": "text/markdown",
+      "sha256": "823ae236c672f1d5615667cf7a7feb00d803081f2607b6b795e7b62c0bd02b1f",
+      "byte_length": 2871
+    },
+    {
+      "path": "candidate-08.md",
+      "origin": "https://valuesense.io/ticker/jpm/compare",
+      "retrieved_at": "2026-09-16T15:44:19Z",
+      "content_type": "text/markdown",
+      "sha256": "0bd156e2f68bf1988ccb2fcac6f35854e733928712aad7b1d4640c6319d8eb1e",
+      "byte_length": 4904
     },
     {
       "path": "candidate-09.md",
       "origin": "https://www.tipranks.com/stocks/jpm/similar-stocks",
-      "retrieved_at": "2026-09-14T13:10:39Z",
+      "retrieved_at": "2026-09-16T15:44:19Z",
       "content_type": "text/markdown",
       "sha256": "f470d9d8fabd3d1cee1317d422bebffdc12a72298973d5d0369a0f38b9dbcda5",
       "byte_length": 1078
     },
     {
       "path": "candidate-10.md",
-      "origin": "https://seekingalpha.com/symbol/JPM/peers/comparison",
-      "retrieved_at": "2026-09-14T13:10:40Z",
+      "origin": "https://www.hudson-labs.com/research/jpmorgan-chase-competitors-jpm-top-peers-2026",
+      "retrieved_at": "2026-09-16T15:44:20Z",
       "content_type": "text/markdown",
-      "sha256": "8fc0865084439a4c319eac0550888d5a79198932cc925679f87837d4b666c147",
-      "byte_length": 4230
+      "sha256": "50ae1448d6901262f7d0e0ec93aa36ab04b82e15e5172f5f19fd66b0c7cfc12e",
+      "byte_length": 4754
     },
     {
       "path": "candidate-11.md",
+      "origin": "https://www.financialcontent.com/article/finterra-2026-4-14-the-fortress-and-the-future-an-in-depth-research-report-on-jpmorgan-chase-and-co-jpm",
+      "retrieved_at": "2026-09-16T15:44:20Z",
+      "content_type": "text/markdown",
+      "sha256": "a62025780a8c46caaa91f580247b732f78824162d293dcb59ce17da9ad6038ff",
+      "byte_length": 10044
+    },
+    {
+      "path": "candidate-12.md",
+      "origin": "https://www.marketbeat.com/",
+      "retrieved_at": "2026-09-16T15:44:20Z",
+      "content_type": "text/markdown",
+      "sha256": "47df4cad2153d61a7ab129c43748b608826d7493258fe78f45f8d6ba067c21c2",
+      "byte_length": 13170
+    },
+    {
+      "path": "candidate-13.md",
       "origin": "https://www.clearthesis.ai/thesis/JPM",
-      "retrieved_at": "2026-09-14T13:10:40Z",
+      "retrieved_at": "2026-09-16T15:44:20Z",
       "content_type": "text/markdown",
       "sha256": "48a4c065443de2d7cee22115bf19be6f3075600cf8ecd498c64dd88d2a92c100",
       "byte_length": 22012
     },
     {
-      "path": "candidate-12.md",
-      "origin": "https://www.obermatt.com/en-us/stocks/jpmorgan-chase-jpm/similar-stocks.html",
-      "retrieved_at": "2026-09-14T13:10:40Z",
-      "content_type": "text/markdown",
-      "sha256": "b067429923c3b4cab4c503f7ed741a74d36c06c5a356b3f26f1961d4a590b934",
-      "byte_length": 3124
-    },
-    {
-      "path": "candidate-13.md",
-      "origin": "https://assetnext.app/similar-companies/jpmorgan-chase-co",
-      "retrieved_at": "2026-09-14T13:10:40Z",
-      "content_type": "text/markdown",
-      "sha256": "a2a6c6979b15d64a7076dab77f91a3f0f65113076b2730865660609d1265ee42",
-      "byte_length": 3606
-    },
-    {
       "path": "candidate-14.md",
-      "origin": "https://marketchameleon.com/Overview/JPM/Similar/",
-      "retrieved_at": "2026-09-14T13:10:41Z",
+      "origin": "https://seekingalpha.com/",
+      "retrieved_at": "2026-09-16T15:44:21Z",
       "content_type": "text/markdown",
-      "sha256": "d110727aa16146e0fd00de062958d401f891984e7d4d55075b91ba1f01392b36",
-      "byte_length": 1579
+      "sha256": "81c241df1804043453b377e4268dedba9606d2de981a4667440976327efc361b",
+      "byte_length": 35700
     },
     {
       "path": "candidate-15.md",
-      "origin": "https://www.obermatt.com/en/stocks/jpmorgan-chase-jpm/similar-stocks.html",
-      "retrieved_at": "2026-09-14T13:10:41Z",
+      "origin": "https://assetnext.app/similar-companies/jpmorgan-chase-co",
+      "retrieved_at": "2026-09-16T15:44:21Z",
       "content_type": "text/markdown",
-      "sha256": "15aac51683b3b36306a1e8fbbb43eabef3926e220b7d9b7228db7d4dbb3bb46c",
-      "byte_length": 3385
+      "sha256": "a2a6c6979b15d64a7076dab77f91a3f0f65113076b2730865660609d1265ee42",
+      "byte_length": 3606
     }
   ],
   "notes": [
@@ -321,8 +323,8 @@
     "Extracted 15 candidate page(s) for the agent to read and pick ~4 peers."
   ],
   "queries": [
-    "JPMorganChase JPM peer group comparable companies",
-    "JPMorganChase JPM closest competitors comparable stocks analysts",
-    "stocks most similar to JPM JPMorganChase"
+    "JPMorgan Chase & Co. JPM peer group comparable companies",
+    "JPMorgan Chase & Co. JPM closest competitors comparable stocks analysts",
+    "stocks most similar to JPM JPMorgan Chase & Co."
   ]
 }

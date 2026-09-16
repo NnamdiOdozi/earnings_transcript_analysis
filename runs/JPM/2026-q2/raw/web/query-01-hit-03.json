@@ -1,12 +1,12 @@
 {
-  "url": "https://intellectia.ai/ai-earnings-calendar/JPM-earning-forecast-2026-07-14",
-  "title": "JPM Earnings - 2026Q2 AI Prediction - Intellectia AI\u2122",
+  "url": "https://ca.finance.yahoo.com/quote/JPM/analysis/",
+  "title": "JPMorgan Chase & Co. (JPM) Analyst Ratings, Estimates & Forecasts - Yahoo Finance",
   "score": null,
-  "published_date": "2026-07-14T00:00:00.000Z",
+  "published_date": null,
   "_class": "consensus",
   "_select_key": "consensus",
-  "_temporal_status": "pre_event",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "JPMorganChase JPM 2026-q2 analyst consensus estimate revenue EPS",
-  "_retrieved_at": "2026-09-14T13:11:10Z"
+  "_query": "JPMorgan Chase & Co. JPM 2026-q2 analyst consensus estimate revenue EPS",
+  "_retrieved_at": "2026-09-16T15:44:36Z"
 }

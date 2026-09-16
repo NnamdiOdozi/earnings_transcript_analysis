@@ -1,187 +1,59 @@
-JPM Peer Comaparison By Fundamentals JPMorgan Chase
+JPM Peer Comparison: Banking Stocks | StockTi
 
-JPM MENU
+# JPMorgan Chase & Co
 
-JPM MENU
+ S&P 500 Dow Jones Mega-Cap Stocks Blue Chip Stocks Bank & Financial Stocks Best Dividend Stocks 
 
-❌ CLOSE
+$356.23
 
-- COMPANY INFO
-- About
-- Similar Stocks
+ +2.67 (+0.76%) 
 
-- NEWS
-- Headline News (12)
-- Press Releases
-- Posts
+☆ Watch
 
-- LINKS
-- Company Website
-- SEC Filings
+As of Sep 12, 1:00 AM ET · 
 
-# Compare JPM to Other Companies
+JPM vs Banking Average
 
-?
+P/E Ratio
 
-Compare the fundamental data of JPM with symbols that are considered similar or are in the same peer group.
+ JPM 14.6 Avg 14.9 
 
-▲ Close
+Profit Margin
 
-For Premium Members Only
+ JPM 29.3% Avg 27.9% 
 
-To compare peers you must have a subscription.
+Rev Growth
 
-7-Day Free Trial
+ JPM +3.4% Avg +6.6% 
 
-Income Statement·Performance·Valuation
+Div Yield
 
-Notional·% Revenue·% YoY Growth·% Market Cap
+ JPM 2.74% Avg 4.71% 
 
-| JPM | Median of Peers |
-| --- | --- |
-| Market Cap | 839.3 B | - |
-| Revenue | 182.4 B | - |
-| Cost of Revenue | 0.0 | - |
-| Gross Profit | 0.0 | - |
-| Operating Expense | 0.0 | - |
-| Selling and General Admin | 60.4 B | - |
-| Selling and Marketing | 5.5 B | - |
-| Research and Development | 0.0 | - |
-| Operating Income | 0.0 | - |
-| Net Income to Shareholders | 55.7 B | - |
+## Banking Peers
 
-| JPM | Median of Peers |
-| --- | --- |
-| Market Cap | 839.3 B | - |
-| Revenue | 100.0% | - |
-| Cost of Revenue | 0.0% | - |
-| Gross Profit | 0.0% | - |
-| Operating Expense | 0.0% | - |
-| Selling and General Admin | 33.1% | - |
-| Selling and Marketing | 3.0% | - |
-| Research and Development | 0.0% | - |
-| Operating Income | 0.0% | - |
-| Net Income to Shareholders | 30.5% | - |
+775 stocks in sector
 
-| JPM | Median of Peers |
-| --- | --- |
-| Market Cap | 839.3 B | - |
-| Revenue | 2.8% | - |
-| Cost of Revenue | - | - |
-| Gross Profit | - | - |
-| Operating Expense | - | - |
-| Selling and General Admin | 6.7% | - |
-| Selling and Marketing | 11.2% | - |
-| Research and Development | - | - |
-| Operating Income | - | - |
-| Net Income to Shareholders | -2.1% | - |
-
-| JPM | Median of Peers |
-| --- | --- |
-| Market Cap | 839.3 B | - |
-| Revenue | 21.7% | - |
-| Cost of Revenue | 0.0% | - |
-| Gross Profit | 0.0% | - |
-| Operating Expense | 0.0% | - |
-| Selling and General Admin | 7.2% | - |
-| Selling and Marketing | 0.7% | - |
-| Research and Development | 0.0% | - |
-| Operating Income | 0.0% | - |
-| Net Income to Shareholders | 6.6% | - |
-
-Total Return over time For JPM, including dividends
-
-| Duration | JPM | Median of Peers |
-| --- | --- | --- |
-| Today | +1.3% | - |
-| 2 Week | +2.4% | - |
-| 1 Month | +11.3% | - |
-| 3 Month | +2.7% | - |
-| 6 Month | +3.5% | - |
-| 1 Year | +30.5% | - |
-| YTD | -1.9% | - |
-| 3 Year | +137.5% | - |
-| 5 Year | +116.7% | - |
-
-P/E Ratio:
-
-Ratio Price/Earnings. Common valuation ratio measures the price of the stock relative to how much earnings the company generates per share.
-
-P/E Normalized EPS:
-
-Price/TTM normalized diluted earnings per share. This calculation reverses the effects of extraordinary income or charges on Net Income, by adding back (extraordinary expense) or subtracting (extraordinary income) the value from Net Income
-
-Price/Sales:
-
-Ratio Price/Revenue
-
-Price/Book Value:
-
-Ratio Price/Book Value. Book Value is Common Shareholder’s Equity / Diluted Shares Outstanding.
-
-Price/Tangible Book Value:
-
-Ratio price/Tangible book value. Tangible Book Value is The company’s total book value less the value of any intangible assets dividend by number of shares.
-
-PEG Ratio:
-
-Forward PE Ratio / Long-term Average Earning Growth Rate. Peg ratio is a version of a P/E ratio using an estimated forward earnings taking into consideration earnings growth estimates.
-
-Price/Free Cash Flow:
-
-Ratio Price/Free Cash Flow. Free Cash Flow is Cash Flow Operations plus Capital Expenditures. Free cash flow is the cash from operations left over after the company pays for its operating and capital expenses.
-
-Price/Ebitda:
-
-Ratio Price/Ebitda. Ebitda is Earnings minus expenses (excluding interest, tax, depreciation, and amortization expenses).
-
-Price/Ebit:
-
-Ratio Price/Ebit. Ebit is Earnings minus expenses (excluding interest and tax expenses).
-
-Price/Working Capital:
-
-Ratio Price/Working Capital. Working Capital is Current Assets minus Current Liabilities.
-
-Forward PE Ratio:
-
-1 / ForwardEarningYield. Forward Yield: Estimated Earnings Per Share / Price. EPS is estimated for next year.
-
-PEG Pay Back:
-
-The number of years it would take for a company's cumulative earnings to equal the stock's current trading price, assuming that the company continues to increase its annual earnings at the growth rate used to calculate the PEG ratio.
-
-Price/CFO:
-
-Ratio Price/Cash Flow from Operations: Cash Flow from Operations is the amount of money a company generates on a regular basis from its business activity. Excludes any one time activity.
-
-EV to EBITDA:
-
-Ratio Enterprise Value/Earnings Before Interest, Taxes and depreciation and amortization.
-
-| Valuation Ratios | JPM | Median of Peers |
-| --- | --- | --- |
-| 14.80 | - |
-| 14.99 | - |
-| 4.63 | - |
-| 2.44 | - |
-| 3.00 | - |
-| 1.64 | - |
-| Price/Cash: | 1.24 | - |
-| - |
-| - |
-| - |
-| - |
-| 14.12 | - |
-| 8.63 | - |
-| - |
-| - |
-
----
-
-Change Comparison Set: By Industry Group: Financial Services - Banks By Industry: Banks - Diversified By SIC: National Commercial Banks By NAICS: Commercial Banking
-
-| Symbol | Name | CurrentPrice | Current% Chg | Market Cap | About |
-| --- | --- | --- | --- | --- | --- |
-
-Market Data Delayed 15 Minutes
+| Symbol | Name | Price | Change % | Market Cap | P/E | Margin | Growth | Div Yield | Analyst | |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| JPM | JPMorgan Chase & Co | $356.23 | +0.76% | 949.19B | 14.6 | 29.3% | +3.4% | 2.74% | Current | |
+| HDB | HDFC Bank Limited | $23.34 | +6.87% | 12.27T | 16.5 | 36.4% | +11.8% | 1.38% | Strong buy | Compare |
+| IBN | ICICI Bank Limited | $29.39 | +1.87% | 9.17T | 17.3 | 25.4% | +12.6% | 0.86% | Strong buy | Compare |
+| BAC | Bank of America Corp | $62.69 | +0.21% | 439.39B | 13.1 | 29.0% | +0.6% | 3.23% | Strong buy | Compare |
+| RY | Royal Bank Of Canada | $205.90 | -0.04% | 395.15B | 17.4 | 32.3% | -0.5% | 4.54% | Strong buy | Compare |
+| TD | Toronto-Dominion Bank | $120.97 | +0.69% | 280.98B | 17.4 | 33.5% | -0.8% | 4.61% | Buy | Compare |
+| WFC | Wells Fargo & Co | $90.29 | +0.94% | 270.50B | 12.0 | 17.5% | -6.5% | 2.27% | Buy | Compare |
+| C | Citigroup Inc | $138.82 | +0.23% | 233.06B | 13.1 | 20.1% | -0.9% | 4.69% | Strong buy | Compare |
+| BMO | Bank Of Montreal | $174.88 | +0.69% | 167.68B | 18.3 | 39.2% | +0.9% | 5.33% | Hold | Compare |
+| BNS | Bank Of Nova Scotia | $93.45 | +0.66% | 158.27B | 15.8 | 32.4% | +0.8% | 7.05% | Hold | Compare |
+| CM | Can Imperial Bk Of Commerce | $114.64 | +0.15% | 143.84B | 14.2 | 28.6% | +2.3% | 6.48% | Buy | Compare |
+| USB | Us Bancorp | $62.84 | +0.69% | 98.14B | 12.0 | 24.1% | +0.9% | 5.16% | Buy | Compare |
+| PNC | Pnc Financial Services Group | $244.24 | +0.52% | 97.71B | 12.8 | 28.9% | +3.9% | 4.82% | Buy | Compare |
+| NU | Nu Holdings Ltd/Cayman Isl-A | $14.62 | -2.66% | 70.62B | 19.6 | 18.2% | +48.8% | — | Strong buy | Compare |
+| TFC | Truist Financial Corp | $50.40 | +0.14% | 61.61B | 10.6 | 27.2% | +20.9% | 6.55% | Hold | Compare |
+| FITB | Fifth Third Bancorp | $54.72 | +0.53% | 49.47B | 22.8 | 29.2% | +1.7% | 5.14% | Buy | Compare |
+| MTB | M & T Bank Corp | $239.83 | +0.34% | 34.56B | 11.4 | 24.4% | +8.6% | 4.14% | Hold | Compare |
+| HBAN | Huntington Bancshares Inc | $16.86 | +0.78% | 34.12B | 14.2 | 31.0% | +12.4% | 5.70% | Buy | Compare |
+| BAP | Credicorp Ltd | $377.90 | -0.41% | 30.11B | 13.7 | 24.3% | +6.6% | 5.27% | Strong buy | Compare |
+| CFG | Citizens Financial Group | $70.48 | +1.22% | 29.33B | 13.8 | 25.8% | +4.5% | 6.25% | Strong buy | Compare |
+| RF | Regions Financial Corp | $30.13 | +0.60% | 25.65B | 11.5 | 31.1% | +3.2% | 5.98% | Hold | Compare |

@@ -1,12 +1,12 @@
 {
-  "url": "https://www.citigroup.com/rcs/citigpa/storage/public/Earnings/Q22026/2q2026-citigroup-at-a-glance.pdf",
-  "title": "2Q 2026 Citigroup At a Glance",
+  "url": "https://app.edgar.tools/filing/72971/0000072971-26-000288/wfc2qer07-14x26ex991xrelea.htm",
+  "title": "Document",
   "score": null,
   "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:Citigroup",
+  "_select_key": "peer:Wells Fargo",
   "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "Citigroup 2026-q2 earnings results revenue growth",
-  "_retrieved_at": "2026-09-14T13:11:30Z"
+  "_query": "Wells Fargo 2026-q2 earnings results revenue growth",
+  "_retrieved_at": "2026-09-16T15:45:01Z"
 }

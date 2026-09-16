@@ -71,6 +71,7 @@ def detect_layout(run_dir: Path) -> int:
 # round, copying an attempt's inputs) and so cannot name a property -- see RunPaths.resolve.
 _STAGE_OF_FILENAME = {
     config.CLAIMS_FILENAME: config.CLAIMS_STAGE_SUBDIR,
+    config.COVERAGE_RECEIPT_FILENAME: config.CLAIMS_STAGE_SUBDIR,
     config.METRICS_FILENAME: config.CLAIMS_STAGE_SUBDIR,
     config.VALIDATION_FILENAME: config.CLAIMS_STAGE_SUBDIR,
     config.SIGNAL_CARD_FILENAME: config.CLAIMS_STAGE_SUBDIR,
@@ -183,6 +184,10 @@ class RunPaths:
     @property
     def metrics(self) -> Path:
         return self._staged(config.CLAIMS_STAGE_SUBDIR, config.METRICS_FILENAME)
+
+    @property
+    def coverage_receipt(self) -> Path:
+        return self._staged(config.CLAIMS_STAGE_SUBDIR, config.COVERAGE_RECEIPT_FILENAME)
 
     @property
     def validation(self) -> Path:

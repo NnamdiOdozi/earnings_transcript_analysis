@@ -1,12 +1,12 @@
 {
-  "url": "https://www.citigroup.com/rcs/citigpa/storage/public/Earnings/Q22026/2026prqtr2rslt.pdf",
-  "title": "[PDF] SECOND QUARTER 2026 RESULTS AND KEY METRICS - Citi",
+  "url": "https://exa.ai/library/markets/stocks/WFC/earnings/FY2026/Q2/transcript",
+  "title": "WFC Earnings Call Transcript \u2014 Fiscal Q2 2026",
   "score": null,
   "published_date": "2026-07-14T00:00:00.000Z",
   "_class": "peer",
-  "_select_key": "peer:Citigroup",
+  "_select_key": "peer:Wells Fargo",
   "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "Citigroup earnings call key trends 2026-q2",
-  "_retrieved_at": "2026-09-14T13:11:35Z"
+  "_query": "Wells Fargo earnings call key trends 2026-q2",
+  "_retrieved_at": "2026-09-16T15:45:08Z"
 }

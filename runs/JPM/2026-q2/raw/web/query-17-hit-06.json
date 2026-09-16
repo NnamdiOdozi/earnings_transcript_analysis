@@ -1,12 +1,12 @@
 {
-  "url": "https://www.barrons.com/livecoverage/jpmorgan-chase-bofa-citigroup-wells-fargo-bank-earnings",
-  "title": "Bank Earnings Show Consumer Finances Are Holding Up - Barron's",
+  "url": "https://www.sec.gov/Archives/edgar/data/72971/000007297126000288/ex993-wellsfargo2q26pres.htm",
+  "title": "ex993-wellsfargo2q26pres",
   "score": null,
-  "published_date": "2026-04-15T00:00:00.000Z",
+  "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:Citigroup",
-  "_temporal_status": "pre_event",
+  "_select_key": "peer:Wells Fargo",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "Citigroup quarterly results versus JPMorganChase JPM",
-  "_retrieved_at": "2026-09-14T13:11:31Z"
+  "_query": "Wells Fargo quarterly results versus JPMorgan Chase & Co. JPM",
+  "_retrieved_at": "2026-09-16T15:45:03Z"
 }

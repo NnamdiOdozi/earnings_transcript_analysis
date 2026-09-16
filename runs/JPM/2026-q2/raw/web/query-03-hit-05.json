@@ -1,12 +1,12 @@
 {
-  "url": "https://finance.yahoo.com/markets/stocks/articles/jpmorgan-chase-co-jpm-reports-140003501.html",
-  "title": "JPMorgan Chase & Co. (JPM) Reports Next Week - Yahoo Finance",
+  "url": "https://tickerleague.com/companies/JPM/estimates",
+  "title": "JPM Q2 2026 earnings estimate \u2014 revenue & EPS",
   "score": null,
-  "published_date": "2026-07-07T00:00:00.000Z",
+  "published_date": null,
   "_class": "consensus",
   "_select_key": "consensus",
-  "_temporal_status": "pre_event",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "JPMorganChase JPM Wall Street consensus estimates ahead of earnings",
-  "_retrieved_at": "2026-09-14T13:11:13Z"
+  "_query": "JPMorgan Chase & Co. JPM Wall Street consensus estimates ahead of earnings",
+  "_retrieved_at": "2026-09-16T15:44:39Z"
 }

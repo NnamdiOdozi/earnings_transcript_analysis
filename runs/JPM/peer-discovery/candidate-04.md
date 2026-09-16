@@ -1,99 +1,89 @@
-JPMorgan Chase Competitors: JPM Top Peers 2026 | Hudson Labs
+JPM vs. Peers — At a Glance
 
-No Hallucination Guarantee now live— Learn more
+Against 5 peers, JPM scores 71/100 on composite health — within a few points of the group median. On valuation, JPM screens cheaper than peers on EV/EBITDA (19.4x vs. 23.2x median).
 
-JPMorgan Chase & Co. (
+Composite Health vs. Peers
 
-JPM) is one of the world’s largest and most influential financial institutions, operating across a broad spectrum of banking, investment, and asset management services. As a global leader, JPMorgan Chase faces intense competition from a diverse set of peers, ranging from traditional banks to fintech disruptors and specialized asset managers. Understanding the competitive landscape is crucial for investors, clients, and industry observers alike.
+C
 
----
+76
 
-Major Competitors and Peers of JPMorgan Chase
+BAC
 
-Bank of America Corp. (
+76
 
-Goldman Sachs Group Inc. (
+GS
 
-Morgan Stanley (
+76
 
-PNC Financial Services Group Inc. (
+JPM
 
-Truist Financial Corp (
+71
 
-Charles Schwab Corp. (
+WFC
 
-US Bancorp (
+71
 
-Wells Fargo & Co. (
+MS
 
----
+71
 
-Competitive Landscape Table
+Market Cap?$1.0t P/E? 16.5 ROE? 15.8% Div Yield? 1.81% F-Score? 4/9 Health? 71/100
 
-| Ticker | Company Name | Market Cap ($B) | Subsector |
-| --- | --- | --- | --- |
-| JPM | JPMorgan Chase & Co. | 780.74 | Banks - Diversified |
-| BAC | Bank of America Corp. | 349.07 | Banks - Diversified |
-| $C | Citigroup Inc. | 186.35 | Banks - Diversified |
-| GS | Goldman Sachs Group Inc. | 253.28 | Capital Markets |
-| MS | Morgan Stanley | 254.49 | Capital Markets |
-| PNC | PNC Financial Services Group Inc. | 83.14 | Banks - Regional |
-| TFC | Truist Financial Corp | 58.07 | Banks - Regional |
-| SCHW | Charles Schwab Corp. | 166.86 | Capital Markets |
-| $BK | Bank of New York Mellon Corp. | 79.30 | Asset Management |
-| USB | US Bancorp | 81.37 | Banks - Regional |
-| WFC | Wells Fargo & Co. | 248.15 | Banks - Diversified |
+Valuation vs. Quality
 
----
+Fundamentals
 
-JPMorgan Chase vs. Major Competitors
+| Metric | JPM | C | WFC | MS | BAC | GS | Avg |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Profitability | | | | | | | |
+| Return on Equity? | 15.8% | 7.0% | 12.0% | 15.3% | 10.7% | 16.3% | 12.8% |
+| Return on Assets? | 1.2% | 0.5% | 0.9% | 1.1% | 0.9% | 0.9% | 0.9% |
+| ROIC? | 2.9% | 1.2% | 2.4% | 2.3% | 2.1% | 1.7% | 2.1% |
+| Earnings Yield? | 5.02% | 3.40% | 6.03% | 3.67% | 4.76% | 3.59% | 4.41% |
+| Cash ROIC? | — | — | — | — | — | — | — |
+| Sloan Accrual? | +0.046 | +0.031 | +0.009 | +0.025 | +0.005 | +0.034 | +0.025 |
+| Leverage & Liquidity | | | | | | | |
+| Debt / Equity? | 1.42 | 1.80 | 1.15 | 3.42 | 1.33 | 4.02 | 2.19 |
+| Current Ratio? | 43.64 | 24.65 | 45.42 | — | 32.09 | 17.77 | 32.71 |
+| Quick Ratio? | 43.64 | 24.65 | 45.42 | — | 32.09 | 17.77 | 32.71 |
+| Cash Ratio? | 0.32 | 0.33 | 1.68 | — | 0.47 | 2.08 | 0.98 |
+| Quality Scores | | | | | | | |
+| Piotroski F-Score? | 4/9 | 5/9 | 4/9 | 4/9 | 5/9 | 5/9 | 5/9 |
+| Altman Z-Score? | 4.35 | 4.46 | 3.68 | 5.15 | 4.03 | 5.22 | 4.48 |
+| Beneish M-Score? | -2.40 | -2.50 | -2.56 | -2.27 | -2.66 | -2.34 | -2.46 |
+| Mohanram G-Score? | — | — | — | — | — | — | — |
 
-JPMorgan Chase vs. Bank of America (
+Valuation
 
-JPMorgan Chase vs. Citigroup ($C):
+| Metric | JPM | C | WFC | MS | BAC | GS | Avg |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Price Multiples | | | | | | | |
+| P/E (TTM)? | 16.5x | 15.4x | 12.2x | 19.4x | 13.7x | 15.1x | 15.4x |
+| P/S? | 3.33x | 1.32x | 2.05x | 2.75x | 2.26x | 2.24x | 2.32x |
+| P/B? | 2.61x | 1.07x | 1.46x | 2.98x | 1.47x | 2.47x | 2.01x |
+| P/CF? | — | — | 13.8x | 19.2x | 4.7x | — | 12.5x |
+| P/FCF? | — | — | — | 23.0x | — | — | 23.0x |
+| Enterprise Multiples | | | | | | | |
+| EV/EBITDA? | 19.4x | 26.6x | 15.6x | 25.5x | 18.6x | 23.2x | 21.5x |
+| EV/Sales? | 5.07x | 3.40x | 3.33x | 4.83x | 4.17x | 4.51x | 4.22x |
+| Income | | | | | | | |
+| Dividend Yield? | 1.81% | 2.39% | 2.49% | 1.97% | 2.21% | 2.03% | 2.15% |
 
-JPMorgan Chase vs. Goldman Sachs (
+Price Performance
 
-JPMorgan Chase vs. Morgan Stanley (
+About This Comparison
 
-JPMorgan Chase vs. Wells Fargo (
+Peer Group is sourced from the related-companies engine, which surfaces tickers that share news coverage and return correlations with the target stock. This catches non-obvious peer relationships that rigid GICS sector classifications often miss.
 
-JPMorgan Chase vs. Charles Schwab (
+Composite Health Score is a 0–100 blended quality score combining the Piotroski F-Score (operational quality), Altman Z-zone (solvency), Beneish manipulation safety, Cash ROIC (cash quality), and Mohanram G-Score (growth quality). Weights redistribute when components are missing so the score remains comparable across peers.
 
-JPMorgan Chase vs. Bank of New York Mellon ($BK):
+Piotroski F-Score is a 9-point screen developed by accounting professor Joseph Piotroski. It evaluates profitability (ROA, operating cash flow, accruals), leverage and liquidity (debt ratio, current ratio, share dilution), and operating efficiency (gross margin, asset turnover). Scores of 7–9 indicate strong fundamentals; 0–3 suggest weakness.
 
-JPMorgan Chase vs. Regional Banks (PNC, Truist, US Bancorp):
+Altman Z-Score is a bankruptcy distress predictor developed by professor Edward Altman. It combines five financial ratios — working capital, retained earnings, EBIT, market capitalization, and revenue — all relative to total assets. Above 2.99 suggests safety; below 1.81 indicates distress. The Z-Score is not applicable to financial-sector companies.
 
-- - Both are diversified banking giants with global reach, offering consumer banking, wealth management, investment banking, and markets businesses.
-- JPMorgan Chase has a significantly larger market cap and is often seen as the industry leader in innovation and technology investment.
-- Bank of America has a strong digital banking presence and a large U.S. retail footprint.
-- - Both operate globally, but Citigroup has a more pronounced international presence, especially in emerging markets.
-- JPMorgan Chase is larger and has a broader product suite, while Citigroup is undergoing simplification and transformation to focus on core strengths.
-- - Goldman Sachs is more focused on investment banking, trading, and asset management, with less emphasis on consumer banking.
-- JPMorgan Chase offers a more diversified business model, including a large consumer and community banking segment.
-- - Morgan Stanley is a leader in wealth and investment management, with a strong institutional securities business.
-- JPMorgan Chase’s scale and breadth across consumer, commercial, and investment banking give it a broader competitive base.
-- - Both are major U.S. banks with diversified operations, but Wells Fargo has faced regulatory and reputational challenges in recent years.
-- JPMorgan Chase is generally considered more innovative and has a stronger global investment banking presence.
-- - Charles Schwab is a leader in retail brokerage and wealth management, with a focus on digital platforms and low-cost investing.
-- JPMorgan Chase competes in wealth management but has a much broader banking and investment banking footprint.
-- - BNY Mellon specializes in custody, asset servicing, and investment management, with a massive global platform.
-- JPMorgan Chase offers similar services but as part of a much larger, diversified financial institution.
-- - These banks focus more on U.S. regional markets and have smaller market caps and narrower product ranges.
-- JPMorgan Chase’s national and international scale, technology investment, and product diversity set it apart.
+Beneish M-Score is an earnings-manipulation detector built from eight financial ratios covering accruals, margin trends, and asset quality. More negative is cleaner — below −2.22 is a normal range; above −1.78 enters the suspect zone. The model is famous for being able to flag Enron-style accounting issues years in advance.
 
----
+Mohanram G-Score is an 8-point growth-quality screen designed for high-multiple companies. It tests profitability stability, R&D and capex intensity, and cash-flow consistency against industry peers. Scores of 6–8 indicate the strongest growth-quality foundation.
 
-Conclusion
-
-JPMorgan Chase & Co. stands at the forefront of the global financial services industry, competing with a wide array of peers across banking, investment, and asset management. Its scale, innovation, and diversified business model provide significant competitive advantages, but the landscape is dynamic, with both traditional and non-traditional players vying for market share. As technology, regulation, and client expectations evolve, JPMorgan Chase’s ability to adapt and lead will be critical to maintaining its position as an industry leader.
-
-Share Share on X Share on LinkedIn
-
-## You might also like
-
-### Air Products Competitors: APD vs LIN, DOW in 2026
-
-### American Electric Power Competitors: AEP Peers 2026
-
-### Apollo Competitors: APO Top Peers Compared 2026
+Sloan Accrual Ratio measures how much of reported earnings come from accruals rather than cash. High positive values are an earnings-quality red flag — accruals tend to revert and reported earnings unsupported by cash flow are less durable. Cash ROIC divides operating cash flow by invested capital — the cash-based version of ROIC, harder to manipulate than the accrual version. Magic Formula Rank is Joel Greenblatt's combined ranking on earnings yield (cheapness) and ROIC (capital efficiency); a lower rank means a better combination of value and quality across the universe.

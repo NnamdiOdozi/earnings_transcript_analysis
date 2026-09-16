@@ -1061,6 +1061,46 @@ def test_validation_json_records_input_hashes(isolated_runs_dir):
     assert all(len(h) == 64 for h in v["input_hashes"].values())
 
 
+def test_analyze_warns_when_no_coverage_receipt_exists(isolated_runs_dir):
+    """Absence is advisory, not fatal: runs predating the receipt must stay analysable."""
+    run_dir = _seed_validated_run(isolated_runs_dir)
+    v = json.loads(RunPaths.at(run_dir).validation.read_text())
+    assert v["ok"] is True
+    assert any("completeness is unverifiable" in w for w in v["warnings"])
+
+
+def test_analyze_checks_a_present_coverage_receipt_without_metrics_json(isolated_runs_dir):
+    """A receipt that exists is checked hard -- and metrics.json is optional.
+
+    Regression: claim_ids was computed inside the metrics block, so a run with a
+    receipt and no metrics.json crashed with UnboundLocalError instead of validating.
+    Every test fixture happened to have no receipt, so nothing caught it; the real JPM
+    run did, immediately.
+    """
+    run_dir = _seed_validated_run(isolated_runs_dir)
+    paths = RunPaths.at(run_dir)
+    assert not paths.metrics.exists()
+    segment_ids = [json.loads(l)["id"] for l in paths.transcript.read_text().splitlines()]
+    claim_id = json.loads(paths.claims.read_text())[0]["id"]
+    paths.coverage_receipt.write_text(json.dumps({
+        "segments": [
+            {"segment_id": s, "outcome": "claims_extracted", "claim_ids": [claim_id]} if i == 0
+            else {"segment_id": s, "outcome": "deliberately_immaterial", "claim_ids": [], "reason": "operator"}
+            for i, s in enumerate(segment_ids)
+        ],
+        "web_evidence": [],
+    }))
+    assert main(["analyze", "--ticker", "ACME", "--event-id", "2026-q2",
+                 "--price-decision", "not_used", "--price-reason", "n/a"]) == 0
+
+    # and an incomplete one fails rather than passing quietly
+    paths.coverage_receipt.write_text(json.dumps({"segments": [], "web_evidence": []}))
+    assert main(["analyze", "--ticker", "ACME", "--event-id", "2026-q2",
+                 "--price-decision", "not_used", "--price-reason", "n/a"]) == 1
+    v = json.loads(paths.validation.read_text())
+    assert any(i["check"] == "coverage_receipt" for i in v["issues"])
+
+
 def test_validation_json_pins_manifest_not_every_source(isolated_runs_dir):
     """manifest.json is the provenance index. validation.json pins its hash and stops
     there, rather than restating a hash per archived source -- on a real run that
@@ -1674,6 +1714,32 @@ def test_analyze_clears_stale_review_report_md_after_cap_exhausted_bundle_edit(i
 
     assert not (RunPaths.at(run_dir).review_report_md).exists()
     assert (RunPaths.at(run_dir).review_round(1) / config.REVIEW_REPORT_JSON_FILENAME).exists()
+
+
+def test_analyze_clears_stale_audit_record_when_bundle_changes_after_acceptance(isolated_runs_dir):
+    """A stale audit-record.json is worse than none: it is the one file a human
+    approver reads on its own, and it states a verdict for a bundle that has moved on.
+
+    Confirmed live (JPM/2026-q2, 2026-09-16): accepted at round 1, three claims then
+    corrected and re-validated, review-diff escalated to a round 2 that was never
+    dispatched -- and audit-record.json still read "accepted" against claims.json it no
+    longer matched.
+    """
+    run_dir = _seed_reviewed_run(isolated_runs_dir)
+    paths = RunPaths.at(run_dir)
+    assert paths.audit_record.exists()          # written on the round-1 acceptance
+
+    # correct a claim and re-validate, exactly as a correction round does
+    claims = json.loads(paths.claims.read_text())
+    claims[0]["confidence"] = 0.8
+    paths.claims.write_text(json.dumps(claims))
+    assert main(["analyze", "--ticker", "ACME", "--event-id", "2026-q2",
+                 "--price-decision", "not_used", "--price-reason", "n/a"]) == 0
+
+    assert not paths.audit_record.exists(), "stale audit record survived a bundle change"
+    assert not paths.review_report_md.exists()
+    # the accepted verdict itself is preserved in history, not destroyed
+    assert (paths.review_round(1) / config.REVIEW_REPORT_JSON_FILENAME).exists()
 
 
 def test_validate_outlook_clears_stale_review_report_md_after_brief_edit(isolated_runs_dir):

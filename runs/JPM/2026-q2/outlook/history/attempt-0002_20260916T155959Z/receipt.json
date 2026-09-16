@@ -1,0 +1,10 @@
+{
+  "attempt": 2,
+  "started_at": "2026-09-16T15:59:59Z",
+  "finished_at": "2026-09-16T15:59:59Z",
+  "outcome": "passed",
+  "exit_code": 0,
+  "error_count": 0,
+  "claims_sha256": "cf1933c5fffb4fc73ef593da511720e509cb2f6e995ea6bc4b06756df43643f1",
+  "outlook_brief_sha256": "ea8ae2ad2dff7d815eda518d78acf8e9cd57509acef5ae58c2414f7b4f3d32a7"
+}

@@ -1,12 +1,12 @@
 {
-  "url": "https://www.wellsfargo.com/assets/pdf/about/investor-relations/earnings/second-quarter-2026-earnings-supplement.pdf",
-  "title": "2Q26 Quarterly Supplement",
+  "url": "https://www.jpmorganchase.com/content/dam/jpmc/jpmorgan-chase-and-co/investor-relations/documents/quarterly-earnings/2026/2nd-quarter/2Q26-earnings-transcript.pdf",
+  "title": "2Q26 Earnings Transcript",
   "score": null,
   "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:Wells Fargo",
+  "_select_key": "peer:Citigroup",
   "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "Wells Fargo quarterly results versus JPMorganChase JPM",
-  "_retrieved_at": "2026-09-14T13:11:25Z"
+  "_query": "Citigroup quarterly results versus JPMorgan Chase & Co. JPM",
+  "_retrieved_at": "2026-09-16T15:44:52Z"
 }

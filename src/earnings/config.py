@@ -65,6 +65,7 @@ MANIFEST_FILENAME = "manifest.json"
 TRANSCRIPT_FILENAME = "transcript.jsonl"
 FINANCIALS_FILENAME = "financials.json"
 CLAIMS_FILENAME = "claims.json"
+COVERAGE_RECEIPT_FILENAME = "coverage-receipt.json"  # agent-authored: what the source pack yielded, and what was judged immaterial
 METRICS_FILENAME = "metrics.json"  # optional: agent-authored, discovered per company (see models.Metric)
 WEB_SUBDIR = "web"  # under evidence/: extracted Tavily content, one .md per WebEvidence
 WEB_EVIDENCE_FILENAME = "web-evidence.jsonl"  # under evidence/

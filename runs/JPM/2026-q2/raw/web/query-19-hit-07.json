@@ -1,12 +1,12 @@
 {
-  "url": "https://www.citigroup.com/rcs/citigpa/storage/public/Earnings/Q22026/2026fsqtr2rslt.pdf",
-  "title": "Second Quarter 2026 Financial Supplement",
+  "url": "https://wtop.com/news/2026/07/wells-fargo-q2-earnings-snapshot/",
+  "title": "Wells Fargo: Q2 Earnings Snapshot \u2013 WTOP News",
   "score": null,
-  "published_date": null,
+  "published_date": "2026-07-14T00:00:00.000Z",
   "_class": "peer",
-  "_select_key": "peer:Citigroup",
-  "_temporal_status": "undated",
+  "_select_key": "peer:Wells Fargo",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "Citigroup 2026-q2 analyst earnings reaction results",
-  "_retrieved_at": "2026-09-14T13:11:34Z"
+  "_query": "Wells Fargo 2026-q2 analyst earnings reaction results",
+  "_retrieved_at": "2026-09-16T15:45:07Z"
 }

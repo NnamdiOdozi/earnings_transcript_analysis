@@ -1,12 +1,12 @@
 {
-  "url": "https://www.sfgate.com/business/article/wells-fargo-q2-earnings-snapshot-22344355.php",
-  "title": "Wells Fargo: Q2 Earnings Snapshot",
+  "url": "https://www.efinancialcareers.com/news/citi-q2-2026",
+  "title": "Citi hit a key profitability target early, but not everyone will ...",
   "score": null,
-  "published_date": "2026-07-14T00:00:00.000Z",
+  "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:Wells Fargo",
-  "_temporal_status": "pre_event",
+  "_select_key": "peer:Citigroup",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "Wells Fargo 2026-q2 analyst earnings reaction results",
-  "_retrieved_at": "2026-09-14T13:11:27Z"
+  "_query": "Citigroup 2026-q2 analyst earnings reaction results",
+  "_retrieved_at": "2026-09-16T15:44:58Z"
 }

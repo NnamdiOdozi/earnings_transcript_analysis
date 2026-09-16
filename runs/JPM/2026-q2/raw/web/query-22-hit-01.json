@@ -1,12 +1,12 @@
 {
-  "url": "https://app.edgar.tools/filing/886982/0000886982-26-000294/a2q26gsearningsresults.htm",
-  "title": "2Q26 GS Earnings Results",
+  "url": "https://www.cnbc.com/2026/07/14/goldman-sachs-and-jpmorgan-chase-are-emerging-as-ai-winners.html",
+  "title": "Goldman Sachs and JPMorgan Chase are emerging as AI winners",
   "score": null,
-  "published_date": null,
+  "published_date": "2026-07-14T00:00:00.000Z",
   "_class": "peer",
   "_select_key": "peer:Goldman Sachs",
-  "_temporal_status": "undated",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "Goldman Sachs quarterly results versus JPMorganChase JPM",
-  "_retrieved_at": "2026-09-14T13:11:39Z"
+  "_query": "Goldman Sachs quarterly results versus JPMorgan Chase & Co. JPM",
+  "_retrieved_at": "2026-09-16T15:45:15Z"
 }

@@ -1,12 +1,12 @@
 {
-  "url": "https://news.alphastreet.com/jpmorgan-chase-posts-27-revenue-jump-in-q2-2026-beats-on-eps/",
-  "title": "JPMorgan Chase Posts 27% Revenue Jump in Q2 2026, Beats on EPS - Alphastreet",
+  "url": "https://app.edgar.tools/filing/19617/0001628280-26-048078/a2q26erfex992supplement.htm",
+  "title": "Document",
   "score": null,
-  "published_date": "2026-07-14T00:00:00.000Z",
+  "published_date": null,
   "_class": "peer",
   "_select_key": "peer:Goldman Sachs",
-  "_temporal_status": "pre_event",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "Goldman Sachs quarterly results versus JPMorganChase JPM",
-  "_retrieved_at": "2026-09-14T13:11:39Z"
+  "_query": "Goldman Sachs quarterly results versus JPMorgan Chase & Co. JPM",
+  "_retrieved_at": "2026-09-16T15:45:15Z"
 }

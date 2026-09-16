@@ -1,12 +1,12 @@
 {
-  "url": "https://finance.yahoo.com/quote/GS/earnings/GS-Q2-2026-earnings_call-648779.html",
-  "title": "Goldman Sachs Group, Inc. (The) (GS) Q2 FY2026 earnings call ...",
+  "url": "https://earningscall.biz/e/nyse/s/gs/y/2026/q/q2",
+  "title": "EarningsCall \u00b7 GS Q2 2026",
   "score": null,
-  "published_date": "2026-07-14T00:00:00.000Z",
+  "published_date": null,
   "_class": "peer",
   "_select_key": "peer:Goldman Sachs",
-  "_temporal_status": "pre_event",
+  "_temporal_status": "undated",
   "_provider": "exa",
   "_query": "Goldman Sachs earnings call key trends 2026-q2",
-  "_retrieved_at": "2026-09-14T13:11:46Z"
+  "_retrieved_at": "2026-09-16T15:45:20Z"
 }

@@ -1,12 +1,12 @@
 {
-  "url": "https://www.americanbanker.com/news/the-san-francisco-based-banking-giant-remains-on-track-to-hit-its-50-billion-spread-income-target-for-all-of-2026-ceo-charlie-scharf-told-analysts",
-  "title": "The San Francisco-based banking giant remains on track to hit its $50 billion spread income target for all of 2026, CEO Charlie Scharf told analysts. | American Banker",
+  "url": "https://www.sec.gov/Archives/edgar/data/831001/000110465926083383/c-20260714xex99d1.htm",
+  "title": "",
   "score": null,
-  "published_date": "2026-07-14T00:00:00.000Z",
+  "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:Wells Fargo",
-  "_temporal_status": "pre_event",
+  "_select_key": "peer:Citigroup",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "Wells Fargo 2026-q2 earnings guidance outlook",
-  "_retrieved_at": "2026-09-14T13:11:26Z"
+  "_query": "Citigroup 2026-q2 earnings guidance outlook",
+  "_retrieved_at": "2026-09-16T15:44:57Z"
 }

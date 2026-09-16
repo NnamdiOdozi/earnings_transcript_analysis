@@ -1,12 +1,12 @@
 {
-  "url": "https://www.wellsfargo.com/assets/pdf/about/investor-relations/earnings/second-quarter-2026-financial-results.pdf",
-  "title": "[PDF] 2Q26 Financial Results - Wells Fargo",
+  "url": "https://www.citigroup.com/rcs/citigpa/storage/public/Earnings/Q22026/2026prqtr2rslt.pdf",
+  "title": "SECOND QUARTER 2026 RESULTS AND KEY METRICS",
   "score": null,
-  "published_date": "2026-07-14T00:00:00.000Z",
+  "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:Wells Fargo",
-  "_temporal_status": "pre_event",
+  "_select_key": "peer:Citigroup",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "Wells Fargo 2026-q2 earnings guidance outlook",
-  "_retrieved_at": "2026-09-14T13:11:26Z"
+  "_query": "Citigroup 2026-q2 earnings guidance outlook",
+  "_retrieved_at": "2026-09-16T15:44:57Z"
 }

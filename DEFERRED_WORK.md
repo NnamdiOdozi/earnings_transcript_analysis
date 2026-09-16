@@ -106,39 +106,23 @@ was resolved); don't let finished work accumulate here as dead weight.
   real cycles that recurring agent judgement calls become visible (e.g. via
   repeated reviewer findings of the same shape across runs).
 
-### [2026-09-16] Nothing enforces the coverage receipt
-- **Scope:** `coverage-receipt.json` is now required by
-  `produce-earnings-signal-card` and specified in `extraction-instructions.md`, but no
-  Python reads it and no reviewer audits it. Two separable pieces of enforcement are
-  missing, and they are NOT equally hard:
-  - **Structural completeness is deterministic and cheap.** `analyze` can check that
-    the receipt exists, that its `segments` ids are exactly the set in
-    `normalized/transcript.jsonl` and its `web_evidence` ids exactly the set in
-    `evidence/web-evidence.jsonl`, with none missing or invented, that every
-    `claim_ids` entry resolves in `claims.json`, that `claims_extracted` entries are
-    non-empty and `deliberately_immaterial` entries carry a reason. That converts "did
-    the agent account for the whole source pack?" from unverifiable to proven, and
-    would have caught the JPM under-extraction at the gate. Roughly a validator
-    function plus a `RunPaths` property plus a config filename constant.
-    Partially addressed 2026-09-16: `validate_claims` now warns when the cited
-    fraction of extracted web evidence falls to or below
-    `config.toml [validation] web_evidence_min_cited_ratio`. That is an advisory on
-    one half of the receipt's job, not the structural check described above.
-  - **Materiality judgement is semantic and is not.** No deterministic check can tell
-    a correct `deliberately_immaterial` from a wrong one. That belongs to the
-    `outlook-reviewer`'s remit -- give it the receipt and ask it to sample the
-    segments marked immaterial -- and even then it is a judgement, not a proof.
-- **Why it matters:** confirmed live (JPM/2026-q2, 2026-09-16). A desktop agent
-  working from a partial read of the skill produced roughly a quarter of the material
-  claims the same source pack supports, and every gate passed cleanly. Validation
-  proves submitted claims are grounded; it is structurally blind to claims never
-  written, so no existing check could have caught it.
-- **Status:** 2026-09-16. The rule, the receipt schema (now covering web evidence as
-  well as transcript segments) and the immateriality standard are written, and the
-  uncited-web-evidence advisory is implemented. The structural receipt check and the
-  reviewer-side materiality audit are not started. Until the
-  structural check lands, a passing run says nothing about extraction completeness --
-  say so plainly rather than implying the receipt is a control.
+### [2026-09-16] Coverage receipt: absence is still only a warning
+- **Scope:** `analyze` now hard-fails a coverage receipt that exists but does not
+  account for the source pack, and warns when none exists. Absence should eventually
+  fail too, but cannot yet: runs prepared before the receipt was specified have none,
+  and failing them would make an old run unre-analysable for a rule it predates.
+  Promote to a failure once every live run produces one.
+- **Also still open — the semantic half.** No deterministic check can tell a correct
+  `deliberately_immaterial` from a wrong one. A receipt can pass every structural check
+  and still hide a material segment behind a plausible reason. That belongs in the
+  `outlook-reviewer`'s remit: give it the receipt and have it sample the segments and
+  web sources marked immaterial. Not started, and it is a judgement even then, not a
+  proof.
+- **Why:** confirmed live twice. JPM/2026-q2 (2026-09-16) produced a structurally
+  perfect receipt over all 109 transcript segments and cited 2 of 15 web sources, all
+  four peers unused; the new check fails that run on the missing `web_evidence` array.
+  Earlier, a desktop agent produced roughly a quarter of the material claims with no
+  receipt at all and every gate passed.
 
 ### [2026-09-16] prepare.py and review.py exceed the 500-line guideline
 - **Scope:** the cli.py split landed as a strictly behaviour-preserving move, which

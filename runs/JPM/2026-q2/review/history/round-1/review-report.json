@@ -1,0 +1,92 @@
+{
+  "verdict": "pass_with_warnings",
+  "review_mode": "full",
+  "reviewed_at": "2026-09-16T15:58:18Z",
+  "model": "gpt-5",
+  "claims_sha256": "f9865cbf347890ef95ea8a5f232a8c491a61fa4ae08b8f648a33dcf37f0dc65f",
+  "outlook_brief_sha256": "ea8ae2ad2dff7d815eda518d78acf8e9cd57509acef5ae58c2414f7b4f3d32a7",
+  "review_diff_sha256": null,
+  "source_checks": [
+    {
+      "severity": "info",
+      "artifact": "raw/transcript.txt",
+      "passage": "JPMorganChase's Second Quarter 2026 Earnings Call",
+      "evidence": "The transcript identifies the company, quarter and speakers expected for this run. Important prepared-remarks and Q&A passages sampled in full context match the claims reviewed. The two web sources used for pre-release consensus are about this company and quarter: web-001 displays a 9 July 2026 preview date, while web-006 describes an upcoming release even though its publication date is absent from the evidence metadata.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "low",
+      "artifact": "evidence/web/web-009.md",
+      "passage": "Wells Fargo Bank | Financial Services & Online Banking",
+      "evidence": "The archived body is a generic Wells Fargo homepage, not the second-quarter results page suggested by its evidence title. No claim or outlook conclusion cites this artifact, so it does not affect the brief's conclusions.",
+      "recommendation": "Mark this evidence item unusable or improve extraction selection so a generic landing page is not retained as a results source."
+    },
+    {
+      "severity": "info",
+      "artifact": "evidence/financials.json",
+      "passage": "period_type: half_year",
+      "evidence": "The SEC evidence contains half-year net-income and diluted-EPS facts filed after the call. The claims and brief do not misuse those cumulative facts as quarterly figures or as pre-event evidence.",
+      "recommendation": "None."
+    }
+  ],
+  "claim_findings": [
+    {
+      "severity": "medium",
+      "artifact": "claims.json#claim-018",
+      "passage": "Long-term net inflows were $50 billion; assets under management reached $5.1 trillion, up 18%, and client assets reached $7.7 trillion, up 19% year on year.",
+      "evidence": "The claim assigns one period, 'as of 30 Jun 2026', to unlike measures. Assets under management and client assets are point-in-time balances, but long-term net inflows are a flow over a period. The transcript presents them together but does not make the inflow an as-of balance. The outlook uses the inflow as evidence of operating momentum, so the period metadata should not blur that distinction.",
+      "recommendation": "Split the inflow from the balance measures, or give the inflow an explicit flow period and retain the as-of date only for assets under management and client assets."
+    },
+    {
+      "severity": "medium",
+      "artifact": "claims.json#claim-062",
+      "passage": "The Smart Cash product remained a test focused on a narrow account segment, with customer tests planned and an initial launch expected during 2026.",
+      "evidence": "The claim's own quote supports the test status, narrow segment and planned tests, but it does not support an initial launch during 2026. That timing appears only in the later exchange captured separately by claim-109 and claim-099. The outlook does not cite claim-062, so this does not change its conclusions.",
+      "recommendation": "Remove the 2026-launch clause from this claim and leave that timing to claim-099, or make the claim an explicit inference from the additional cited claim."
+    },
+    {
+      "severity": "medium",
+      "artifact": "claims.json#claim-066",
+      "passage": "Management observed mild weakening in underwriting through aggressive revenue assumptions, expense add-backs, payment-in-kind structures, covenants and rollover risk, and expects performance to diverge in a future credit cycle.",
+      "evidence": "The full transcript segment supports this characterization, but the stored quote begins only with 'it is across that spectrum' and omits the preceding sentences that name revenue assumptions, expense add-backs, payment-in-kind structures, covenants and rollover risk. The outlook cites this claim only for mild weakening and future-cycle risk, which the stored quote does support.",
+      "recommendation": "Extend the quote to include the preceding list of underwriting weaknesses, or narrow claim_text to the details contained in the current quote."
+    }
+  ],
+  "outlook_findings": [],
+  "process_findings": [
+    {
+      "severity": "info",
+      "artifact": "claims/validation.json",
+      "passage": "ok: true",
+      "evidence": "The claims validation artifact exists and records a passing result. The staged manifest exists with hashed sources, all 110 claims have non-empty ids, and the signal card is present. These facts confirm artifact presence and gate status; they do not prove semantic completeness.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "outlook/outlook-validation.json",
+      "passage": "ok: true",
+      "evidence": "The hash-binding outlook validation exists and records a passing result for the exact claims and brief hashes bound to this report. The outlook brief exists, and all 51 distinct claim ids cited in it were opened and checked against their claim text and quote.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "injection-scan.json",
+      "passage": "finding_count: 0",
+      "evidence": "The configured transcript scan reported no flagged prompt-injection phrases, so there were no hits requiring contextual classification.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "claims/coverage-receipt.json",
+      "passage": "109 segment receipts",
+      "evidence": "The receipt accounts for every normalized transcript segment exactly once, with no missing or invented segment ids. Immaterial segments were read and their reasons were consistent with operator instructions, acknowledgements, handovers, pleasantries or the standard disclaimer. This independent review is a semantic check, not an enforced deterministic gate.",
+      "recommendation": "Implement the already-deferred structural validator so future runs do not rely on reviewer inspection for basic receipt completeness."
+    }
+  ],
+  "unverified_items": [
+    "The exact publication date of evidence/web/web-006.md could not be verified from the archived metadata. Its text is clearly framed as a forecast for an upcoming release, so it supports a pre-release expectation, but not a precise as-of timestamp."
+  ],
+  "summary": "The outlook brief is balanced, bank-sector appropriate and well tied to the available evidence. Its base, upside and downside cases distinguish repeatable franchise drivers from exceptional capital-markets activity, and no material brief citation or inferential leap requires correction. Three medium claim-quality warnings remain: one mixed period label and two quotes that are not self-sufficient for every detail in their claim text. One unused web artifact is a generic homepage rather than the results source its title suggests. These issues do not alter the brief's conclusions, so the verdict is pass_with_warnings under the current review rules.",
+  "escalate_full_review": false,
+  "proposed_lessons": []
+}

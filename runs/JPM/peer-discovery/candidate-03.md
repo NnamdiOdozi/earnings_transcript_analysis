@@ -1,89 +1,242 @@
-JPM vs. Peers — At a Glance
+Is JPM Overvalued? JPMorgan Chase & Co. Peer Valuation Check 2026 | VCP Scanner
 
-Against 5 peers, JPM scores 71/100 on composite health — within a few points of the group median. On valuation, JPM screens cheaper than peers on EV/EBITDA (19.4x vs. 23.2x median).
+# JPMorgan Chase & Co. (JPM)
 
-Composite Health vs. Peers
+Relative Valuation• Peer multiples, competitive benchmarking & quality-adjusted fair value
 
-C
+# JPMorgan Chase & Co. is currently slightly expensive versus peers
 
-76
+The market is pricing JPMorgan Chase & Co. at a 17.16% premium to its peer-implied fair value.
 
-BAC
+Current Price
 
-76
+$357.62
 
-GS
+Fair Value
 
-76
+$296.25
 
-JPM
+Relative Downside
 
-71
+-17.16%
 
-WFC
+Peer Premium Status
 
-71
+Unjustified
 
-MS
+## Peer Set
 
-71
+7 curated peers matched by business model, revenue composition, and market position
 
-Market Cap?$1.0t P/E? 16.5 ROE? 15.8% Div Yield? 1.81% F-Score? 4/9 Health? 71/100
+| Ticker | Company | Market Cap | P/E | EV/EBITDA |
+| --- | --- | --- | --- | --- |
+| BAC | Bank of America Corporation | $442.26B | 16.31x | 14.4x |
+| WFC | Wells Fargo & Company | $265.26B | 13.72x | 17.61x |
+| C | Citigroup Inc. | $227.81B | 19x | 25.72x |
+| GS | The Goldman Sachs Group, Inc. | $318.47B | 20.15x | 31.78x |
+| MS | Morgan Stanley | $338.75B | 21.06x | 26.4x |
+| USB | U.S. Bancorp | $97.31B | 13.55x | 12.47x |
+| TFC | Truist Financial Corporation | $62.83B | 13.2x | 13.65x |
 
-Valuation vs. Quality
+## Multiples Comparison
 
-Fundamentals
+3 valuation metrics · peer-median based
 
-| Metric | JPM | C | WFC | MS | BAC | GS | Avg |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| Profitability | | | | | | | |
-| Return on Equity? | 15.8% | 7.0% | 12.0% | 15.3% | 10.7% | 16.3% | 12.8% |
-| Return on Assets? | 1.2% | 0.5% | 0.9% | 1.1% | 0.9% | 0.9% | 0.9% |
-| ROIC? | 2.9% | 1.2% | 2.4% | 2.3% | 2.1% | 1.7% | 2.1% |
-| Earnings Yield? | 5.02% | 3.40% | 6.03% | 3.67% | 4.76% | 3.59% | 4.41% |
-| Cash ROIC? | — | — | — | — | — | — | — |
-| Sloan Accrual? | +0.046 | +0.031 | +0.009 | +0.025 | +0.005 | +0.034 | +0.025 |
-| Leverage & Liquidity | | | | | | | |
-| Debt / Equity? | 1.42 | 1.80 | 1.15 | 3.42 | 1.33 | 4.02 | 2.19 |
-| Current Ratio? | 43.64 | 24.65 | 45.42 | — | 32.09 | 17.77 | 32.71 |
-| Quick Ratio? | 43.64 | 24.65 | 45.42 | — | 32.09 | 17.77 | 32.71 |
-| Cash Ratio? | 0.32 | 0.33 | 1.68 | — | 0.47 | 2.08 | 0.98 |
-| Quality Scores | | | | | | | |
-| Piotroski F-Score? | 4/9 | 5/9 | 4/9 | 4/9 | 5/9 | 5/9 | 5/9 |
-| Altman Z-Score? | 4.35 | 4.46 | 3.68 | 5.15 | 4.03 | 5.22 | 4.48 |
-| Beneish M-Score? | -2.40 | -2.50 | -2.56 | -2.27 | -2.66 | -2.34 | -2.46 |
-| Mohanram G-Score? | — | — | — | — | — | — | — |
+3/3 multiples indicate overvaluation
 
-Valuation
+| Multiple | Current | Peer Median | vs Peers | Implied Price |
+| --- | --- | --- | --- | --- |
+| Forward P/E Price paid for next year's expected earnings. | 14.4x | 11.97x | Premium +20.37% | $297.10 |
+| P/E Price paid for current earnings. | 17.84x | 16.31x | Premium +9.33% | $343.95 |
+| P/B Market value versus book equity. | 2.76x | 1.52x | Premium +80.93% | $197.66 |
 
-| Metric | JPM | C | WFC | MS | BAC | GS | Avg |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| Price Multiples | | | | | | | |
-| P/E (TTM)? | 16.5x | 15.4x | 12.2x | 19.4x | 13.7x | 15.1x | 15.4x |
-| P/S? | 3.33x | 1.32x | 2.05x | 2.75x | 2.26x | 2.24x | 2.32x |
-| P/B? | 2.61x | 1.07x | 1.46x | 2.98x | 1.47x | 2.47x | 2.01x |
-| P/CF? | — | — | 13.8x | 19.2x | 4.7x | — | 12.5x |
-| P/FCF? | — | — | — | 23.0x | — | — | 23.0x |
-| Enterprise Multiples | | | | | | | |
-| EV/EBITDA? | 19.4x | 26.6x | 15.6x | 25.5x | 18.6x | 23.2x | 21.5x |
-| EV/Sales? | 5.07x | 3.40x | 3.33x | 4.83x | 4.17x | 4.51x | 4.22x |
-| Income | | | | | | | |
-| Dividend Yield? | 1.81% | 2.39% | 2.49% | 1.97% | 2.21% | 2.03% | 2.15% |
+### Fair Value Formulation
 
-Price Performance
+How the model derives the final fair value from peer baselines and quality metrics
 
-About This Comparison
+1
 
-Peer Group is sourced from the related-companies engine, which surfaces tickers that share news coverage and return correlations with the target stock. This catches non-obvious peer relationships that rigid GICS sector classifications often miss.
+Peer Baselineⓘ
 
-Composite Health Score is a 0–100 blended quality score combining the Piotroski F-Score (operational quality), Altman Z-zone (solvency), Beneish manipulation safety, Cash ROIC (cash quality), and Mohanram G-Score (growth quality). Weights redistribute when components are missing so the score remains comparable across peers.
+$276.35
 
-Piotroski F-Score is a 9-point screen developed by accounting professor Joseph Piotroski. It evaluates profitability (ROA, operating cash flow, accruals), leverage and liquidity (debt ratio, current ratio, share dilution), and operating efficiency (gross margin, asset turnover). Scores of 7–9 indicate strong fundamentals; 0–3 suggest weakness.
+Peer-Implied Value
 
-Altman Z-Score is a bankruptcy distress predictor developed by professor Edward Altman. It combines five financial ratios — working capital, retained earnings, EBIT, market capitalization, and revenue — all relative to total assets. Above 2.99 suggests safety; below 1.81 indicates distress. The Z-Score is not applicable to financial-sector companies.
+2
 
-Beneish M-Score is an earnings-manipulation detector built from eight financial ratios covering accruals, margin trends, and asset quality. More negative is cleaner — below −2.22 is a normal range; above −1.78 enters the suspect zone. The model is famous for being able to flag Enron-style accounting issues years in advance.
+Quality Premiumⓘ
 
-Mohanram G-Score is an 8-point growth-quality screen designed for high-multiple companies. It tests profitability stability, R&D and capex intensity, and cash-flow consistency against industry peers. Scores of 6–8 indicate the strongest growth-quality foundation.
++$19.90 (+7.2%)
 
-Sloan Accrual Ratio measures how much of reported earnings come from accruals rather than cash. High positive values are an earnings-quality red flag — accruals tend to revert and reported earnings unsupported by cash flow are less durable. Cash ROIC divides operating cash flow by invested capital — the cash-based version of ROIC, harder to manipulate than the accrual version. Magic Formula Rank is Joel Greenblatt's combined ranking on earnings yield (cheapness) and ROIC (capital efficiency); a lower rank means a better combination of value and quality across the universe.
+Adjusted for 3y eps growth, roe
+
+=→
+
+3
+
+Fair Valueⓘ
+
+$296.25
+
+Quality-Adjusted Fair Value
+
+Current Price
+
+$357.62
+
+Active market quote
+
+OVERVALUED
+
+$357.62$296.25
+
+Valuation Gap
+
+17.16% Premium
+
+Trading at a 20.72% premium
+
+Premium: The stock is trading at a 20.72% premium to its quality-adjusted fair value of $296.25. The market is pricing the stock 17.16% above our model's estimate.
+
+## Quality Adjustment
+
+Quality metrics are stronger than the peer group, justifying a premium.
+
++7.2% adjustment
+
+### Growth CAGR Metrics
+
+3Y EPS Growth Strength
+
+This Stock
+
+18.4%
+
+Peer Median
+
+7.7%
+
+### Profitability & Returns
+
+ROE (TTM) Strength
+
+This Stock
+
+16.3%
+
+Peer Median
+
+11.9%
+
+Net Interest Margin In-line
+
+This Stock
+
+2.2%
+
+Peer Median
+
+2.2%
+
+Efficiency Ratio Strength
+
+This Stock
+
+34%
+
+Peer Median
+
+38%
+
+### Balance Sheet & Financial Health
+
+8.2%
+
+Peer Median
+
+8.5%
+
+Quality adjustments are capped at ±15% (up to ±20% for financial services) to prevent runaway premiums. Based on trailing twelve months and multi-year CAGR data where available.
+
+## Historical Context
+
+How current multiples rank vs 8 years of the stock’s own history
+
+| Multiple | Current | Historical Median | Percentile | Status |
+| --- | --- | --- | --- | --- |
+| P/E 8 years of data | 17.84x | 11.61x | 100th | Above historical norm |
+| P/B 8 years of data | 2.76x | 1.58x | 100th | Above historical norm |
+
+JPMorgan Chase & Co. currently trades near the highest valuation levels observed during the last 8 years.
+
+## Analyst Consensus
+
+Wall Street target prices — 61 analysts
+
+Consensus Target$373.64+4.48% upside to target
+
+Median Target$370.00
+
+Our Model vs Street-20.71% Model estimates lower than analyst consensus
+
+### Price Target Spectrum vs. Current & Model
+
+Our Model: $296.25
+
+Current: $357.62
+
+Median: $370.00
+
+Consensus: $373.64
+
+## Risk Factors
+
+Model-identified caveats to consider
+
+P/E is high versus the stock's own history.
+
+## What This Means for Investors
+
+JPM looks slightly expensive versus peers using curated peers, with relative upside of -17.2%.
+
+### Business Quality
+
+JPMorgan Chase & Co. is a high-quality business with competitive advantages over peers.
+
+Conclusion
+
+### Valuation & Price
+
+The current valuation implies a significant premium above peers, with 3/3 multiples indicating overvaluation (17.16% above fair value). The stock also trades at elevated levels versus its own history.
+
+### Investor Outlook
+
+Future returns may depend more on sustained earnings growth than on further multiple expansion.
+
+## Frequently Asked Questions
+
+Answers to common questions about JPM's relative valuation and our methodology.
+
+### What does "fair value" mean in this analysis?
+
+JPMorgan Chase & Co.'s fair value of $296.25 is the price at which the stock would trade if valued at the same multiples as its 7-company peer group, adjusted for differences in business quality. At $357.62, the stock trades at a -17.16% premium to fair value. This is a reference point, not a price target.
+
+### How were these peers selected?
+
+The 7 peers shown were selected based on business model similarity, revenue composition, and market position. Each peer was matched for comparable operations, not just industry label. Only companies with clean, usable financial data are included.
+
+### Why does JPMorgan Chase & Co. trade at a premium to fair value?
+
+JPMorgan Chase & Co. has strengths in 3y eps growth, roe, efficiency ratio, and a quality score that justifies a 7.2% premium relative to its peer group. The Quality Adjustment section breaks down each driver.
+
+### Is this analysis a buy or sell recommendation?
+
+No. This page provides an automated quantitative comparison of JPMorgan Chase & Co. against its peers. It is not investment advice, a recommendation, or a solicitation. Valuation is only one factor in an investment decision — it does not account for growth catalysts, management quality, regulatory risk, or your personal financial situation.
+
+### What should I look at beyond the fair value number?
+
+Look at the Historical Context to see where current multiples sit versus the stock's own history. Review the Risk Factors section for model-identified caveats. Compare the Analyst Consensus to our model output for another perspective. Valuation is only one dimension — growth trajectory, competitive position, and market conditions all matter.
+
+### How often is the data updated?
+
+Valuation data is refreshed weekly based on the latest financial filings, market prices, and analyst estimates. JPMorgan Chase & Co.'s fair value, peer multiples, and quality scores will shift over time as new earnings are reported and stock prices change.

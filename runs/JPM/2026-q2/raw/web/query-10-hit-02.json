@@ -1,12 +1,12 @@
 {
-  "url": "https://finance.yahoo.com/markets/stocks/articles/bank-america-corp-bac-q2-210021245.html",
-  "title": "Bank of America Corp (BAC) Q2 2026 Earnings Call Highlights",
+  "url": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000353/bac06302026ex992.htm",
+  "title": "bac06302026ex992",
   "score": null,
-  "published_date": "2026-07-14T00:00:00.000Z",
+  "published_date": null,
   "_class": "peer",
   "_select_key": "peer:Bank of America",
-  "_temporal_status": "pre_event",
+  "_temporal_status": "undated",
   "_provider": "exa",
   "_query": "Bank of America earnings call key trends 2026-q2",
-  "_retrieved_at": "2026-09-14T13:11:21Z"
+  "_retrieved_at": "2026-09-16T15:44:49Z"
 }

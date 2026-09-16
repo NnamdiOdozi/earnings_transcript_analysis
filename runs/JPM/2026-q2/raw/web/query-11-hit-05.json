@@ -1,12 +1,12 @@
 {
-  "url": "https://finance.yahoo.com/markets/stocks/articles/wells-fargo-q2-2026-earnings-111157789.html",
-  "title": "Wells Fargo Q2 2026 earnings beat on wealth, investment banking",
+  "url": "https://www.citigroup.com/rcs/citigpa/storage/public/Earnings/Q22026/2q2026-citigroup-at-a-glance.pdf",
+  "title": "2Q 2026 Citigroup At a Glance",
   "score": null,
-  "published_date": "2026-07-14T00:00:00.000Z",
+  "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:Wells Fargo",
-  "_temporal_status": "pre_event",
+  "_select_key": "peer:Citigroup",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "Wells Fargo 2026-q2 earnings results revenue growth",
-  "_retrieved_at": "2026-09-14T13:11:22Z"
+  "_query": "Citigroup 2026-q2 earnings results revenue growth",
+  "_retrieved_at": "2026-09-16T15:44:51Z"
 }

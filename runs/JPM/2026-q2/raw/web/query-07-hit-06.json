@@ -1,12 +1,12 @@
 {
-  "url": "https://app.edgar.tools/filing/70858/0000070858-26-000353/bac-06302026ex993.htm",
-  "title": "Document",
+  "url": "https://tradingwhisperer.com/investing-news/bank-earnings-update-jpm-bofa-citi/",
+  "title": "Bank Earnings Update: JPM, BofA, Citi - Trading Whisperer",
   "score": null,
-  "published_date": null,
+  "published_date": "2026-07-14T00:00:00.000Z",
   "_class": "peer",
   "_select_key": "peer:Bank of America",
-  "_temporal_status": "undated",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "Bank of America quarterly results versus JPMorganChase JPM",
-  "_retrieved_at": "2026-09-14T13:11:18Z"
+  "_query": "Bank of America quarterly results versus JPMorgan Chase & Co. JPM",
+  "_retrieved_at": "2026-09-16T15:44:46Z"
 }

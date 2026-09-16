@@ -1,0 +1,46 @@
+{
+  "ok": false,
+  "checked_claims": 110,
+  "issues": [
+    {
+      "claim_index": 0,
+      "check": "exact_quote",
+      "message": "Quote does not occur exactly in seg-0003"
+    },
+    {
+      "claim_index": 33,
+      "check": "exact_quote",
+      "message": "Quote does not occur exactly in seg-0021"
+    },
+    {
+      "claim_index": 46,
+      "check": "exact_quote",
+      "message": "Quote does not occur exactly in seg-0062"
+    },
+    {
+      "claim_index": 64,
+      "check": "exact_quote",
+      "message": "Quote does not occur exactly in seg-0090"
+    },
+    {
+      "claim_index": 75,
+      "check": "claim_text_numeric",
+      "message": "Number 5.67 in claim_text not found in seg-0003, financials evidence, or claim.values"
+    }
+  ],
+  "warnings": [],
+  "validated_at": "2026-09-16T15:52:34Z",
+  "tool_decisions": {
+    "price_lookup": {
+      "decision": "not_used",
+      "reason": "The transcript, SEC evidence and archived pre-event consensus sources were sufficient; no market-price claim was needed."
+    }
+  },
+  "input_hashes": {
+    "claims.json": "3dbc241c28ee7e94214f699d0b3d56e4f8f7825a46adfa53f8a65d1237d362cf",
+    "transcript.jsonl": "cdd9a8e9664d532fa2fb819f58736b258aa444064f91facb1fb1c9b050edecc8",
+    "financials.json": "417117037bd5843f2deed1d23e78ecbc45c7ac3265d98beb2b0e584eaf9ddd08",
+    "manifest.json": "86189fc60d157b8780c93edc424832316e61b2ce5f25575289f4d104b864a43e",
+    "evidence/web-evidence.jsonl": "3ca142609c59debdc801486f8840660e4bf7e675f9fb3e4cfd5447dc194ab178"
+  }
+}

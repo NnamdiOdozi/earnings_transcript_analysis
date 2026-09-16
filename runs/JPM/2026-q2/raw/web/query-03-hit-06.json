@@ -1,12 +1,12 @@
 {
-  "url": "https://www.chartmill.com/stock/quote/JPM/analyst-ratings",
-  "title": "JPM Forecast, Price Target & Analyst Ratings | ChartMill.com",
+  "url": "https://www.earningstoday.com/stocks/JPM",
+  "title": "JPMorgan Chase & Co (JPM) earnings history, price reaction, & fundamentals | Earnings Today",
   "score": null,
-  "published_date": "2023-02-02T00:00:00.000Z",
+  "published_date": null,
   "_class": "consensus",
   "_select_key": "consensus",
-  "_temporal_status": "pre_event",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "JPMorganChase JPM Wall Street consensus estimates ahead of earnings",
-  "_retrieved_at": "2026-09-14T13:11:13Z"
+  "_query": "JPMorgan Chase & Co. JPM Wall Street consensus estimates ahead of earnings",
+  "_retrieved_at": "2026-09-16T15:44:39Z"
 }

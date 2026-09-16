@@ -139,21 +139,34 @@ def _unclosed_review_report(run_dir: Path) -> bool:
 
 
 def _clear_stale_review_report_md(run_dir: Path) -> None:
-    """Delete the top-level review-report.md if it no longer describes the current
-    bundle. Once the round cap is exhausted, `_unclosed_review_report` deliberately
-    stops blocking analyze/validate-outlook (see its docstring) so a corrected bundle
-    can still be produced -- but that leaves a seemingly-final review-report.md sitting
-    next to files it no longer applies to. The accepted verdict is preserved unchanged
-    inside the review history; only this top-level rendering is cleared. Safe to
-    call any time: a no-op when there's no completed round or the bundle still matches
-    the latest one.
+    """Delete the top-level review-report.md AND audit-record.json if they no longer
+    describe the current bundle. Once the round cap is exhausted,
+    `_unclosed_review_report` deliberately stops blocking analyze/validate-outlook (see
+    its docstring) so a corrected bundle can still be produced -- but that leaves a
+    seemingly-final rendering sitting next to files it no longer applies to. Both are
+    Python-rendered from files that remain on disk, and the accepted verdict is
+    preserved unchanged inside the review history; only these top-level renderings are
+    cleared. Safe to call any time: a no-op when there's no completed round or the
+    bundle still matches the latest one.
+
+    audit-record.json is included because it is the ONE file a human approver is meant
+    to be able to read on its own (see README). A stale one is worse than a missing
+    one: it states a verdict and a round number for a bundle that has since changed.
+    Confirmed live (JPM/2026-q2, 2026-09-16): a run was accepted at round 1, three
+    claims were then corrected and re-validated, review-diff escalated to a full round
+    2 which was never dispatched -- and audit-record.json still read "accepted" against
+    claims.json it no longer matched. review-report.md was correctly cleared; the audit
+    record was not, because nothing cleared it.
     """
     completed = _review_round_count(run_dir)
     if not completed:
         return
-    md_path = RunPaths.at(run_dir).review_report_md
-    if md_path.exists() and not _review_bundle_matches_snapshot(run_dir, completed):
-        md_path.unlink()
+    paths = RunPaths.at(run_dir)
+    if _review_bundle_matches_snapshot(run_dir, completed):
+        return
+    for stale in (paths.review_report_md, paths.audit_record):
+        if stale.exists():
+            stale.unlink()
 
 
 def _block_if_unclosed_review_report(run_dir: Path) -> int | None:

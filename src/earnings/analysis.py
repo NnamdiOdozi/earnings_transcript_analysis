@@ -28,7 +28,7 @@ from .provenance import (
 )
 from .rendering import _render_signal_card
 from .review import _block_if_unclosed_review_report, _clear_stale_review_report_md
-from .validate import validate_claims, validate_metrics
+from .validate import validate_claims, validate_coverage_receipt, validate_metrics
 from .validation_history import ValidationAttempt
 
 
@@ -127,9 +127,13 @@ def cmd_analyze(args: argparse.Namespace) -> int:
     result.issues.extend(price_decision_issues)
     result.ok = not result.issues
 
+    # Hoisted out of the metrics block: the coverage receipt check needs it too, and
+    # metrics.json is optional, so leaving it in there left claim_ids unbound on any run
+    # with a receipt and no metrics -- which is most of them.
+    claim_ids = {c.id for c in claims if c.id}
+
     metrics_path = paths.metrics
     if metrics_path.exists():
-        claim_ids = {c.id for c in claims if c.id}
         try:
             raw_metrics = json.loads(metrics_path.read_text(encoding="utf-8"))
             metrics = [Metric.model_validate(m) for m in raw_metrics]
@@ -149,6 +153,48 @@ def cmd_analyze(args: argparse.Namespace) -> int:
                 ok=False,
                 checked_claims=result.checked_claims,
                 issues=result.issues + metric_issues,
+                warnings=result.warnings,
+                tool_decisions=tool_decisions,
+            )
+
+    # Coverage receipt. Absence is a WARNING, not a failure: runs prepared before the
+    # receipt was specified have none, and failing them would make old runs
+    # unre-analysable for a rule they predate. A receipt that EXISTS but does not
+    # account for the source pack is a hard failure -- it asserts coverage it does not
+    # have, which is worse than making no assertion at all. Promoting absence to a
+    # failure is the natural next step once every live run produces one; see
+    # DEFERRED_WORK.md.
+    receipt_path = paths.coverage_receipt
+    if not receipt_path.exists():
+        result.warnings.append(
+            f"no {config.COVERAGE_RECEIPT_FILENAME} beside {config.CLAIMS_FILENAME}; extraction "
+            "completeness is unverifiable. Validation proves the claims you wrote are grounded, "
+            "never that you wrote the ones you should have."
+        )
+    else:
+        try:
+            receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError as exc:
+            print(f"Validation FAILED: could not parse {config.COVERAGE_RECEIPT_FILENAME}: {exc}")
+            result = ValidationResult(
+                ok=False, checked_claims=result.checked_claims,
+                issues=result.issues + [
+                    ValidationIssue(claim_index=-1, check="coverage_receipt",
+                                    message=f"could not parse {config.COVERAGE_RECEIPT_FILENAME}: {exc}")
+                ],
+                warnings=result.warnings, tool_decisions=tool_decisions,
+            )
+            _write_validation(run_dir, result)
+            attempt.finish("failed", 1, result, validation_path=paths.validation)
+            return 1
+        coverage_issues = validate_coverage_receipt(
+            receipt, set(segments_by_id), set(web_evidence_texts), claim_ids
+        )
+        if coverage_issues:
+            result = ValidationResult(
+                ok=False,
+                checked_claims=result.checked_claims,
+                issues=result.issues + coverage_issues,
                 warnings=result.warnings,
                 tool_decisions=tool_decisions,
             )

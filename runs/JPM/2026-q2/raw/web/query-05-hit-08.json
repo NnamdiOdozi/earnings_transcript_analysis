@@ -1,12 +1,12 @@
 {
-  "url": "https://public.com/stocks/jpm/earnings",
-  "title": "JPM Earnings: Latest Report, Earnings Call & Financials",
+  "url": "https://finance.biggo.com/news/US_JPM_2026-07-14",
+  "title": "[JPMorgan Chase & Co. Q2 2026 Earnings Call] Equities Revenue Soars 86%, Driving 23% ROTCE as JPMorgan Raises Full-Year Guidance",
   "score": null,
   "published_date": "2026-07-14T00:00:00.000Z",
   "_class": "consensus",
   "_select_key": "consensus",
   "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "JPMorganChase JPM 2026-q2 analyst earnings reaction results",
-  "_retrieved_at": "2026-09-14T13:11:16Z"
+  "_query": "JPMorgan Chase & Co. JPM 2026-q2 analyst earnings reaction results",
+  "_retrieved_at": "2026-09-16T15:44:43Z"
 }

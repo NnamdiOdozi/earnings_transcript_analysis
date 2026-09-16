@@ -1,12 +1,12 @@
 {
-  "url": "https://www.investing.com/analysis/jpmorgan-citibank-earnings-preview-buybacks-capital-return-in-focus-200683763",
-  "title": "JPMorgan, Citibank Earnings Preview: Buybacks, Capital Return in Focus | Investing.com",
+  "url": "https://app.edgar.tools/filing/72971/0000072971-26-000288/wfc2qer07-14x26ex991xrelea.htm",
+  "title": "Document",
   "score": null,
-  "published_date": "2026-07-13T00:00:00.000Z",
+  "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:Citigroup",
-  "_temporal_status": "pre_event",
+  "_select_key": "peer:Wells Fargo",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "Citigroup quarterly results versus JPMorganChase JPM",
-  "_retrieved_at": "2026-09-14T13:11:31Z"
+  "_query": "Wells Fargo quarterly results versus JPMorgan Chase & Co. JPM",
+  "_retrieved_at": "2026-09-16T15:45:03Z"
 }

@@ -3,73 +3,71 @@
   "ticker": "JPM",
   "event_id": "2026-q2",
   "status": "accepted",
-  "final_review_round": 2,
-  "generated_at": "2026-09-14T13:52:39Z",
+  "final_review_round": 1,
+  "generated_at": "2026-09-16T15:59:04Z",
   "decision": {
-    "verdict": "pass",
-    "summary": "Full review, auto-escalated by review-diff.json. Four low findings, no medium or higher, so the run passes. The findings are: the section 4 sentence describing the CIB equity transfer as a movement 'between pockets of the one company' cites claim-054, whose own text attaches that phrase to the $150 million of Markets NII rather than to the equity transfer, and the transcript sentence that does state the equity transfer was never extracted; the section 8 peer bullet calls a 30%-versus-50% investment banking fee growth gap 'the clearest competitive signal in this evidence' without noting that the two rates sit on very different and partly unknown bases; section 9's statement that four peer sources were used omits a fifth same-day source that supplies the Goldman Sachs fee-growth leg of claim-073; and claim-032, the CEO's own 'getting close to as good as it gets' line, is extracted but cited nowhere, leaving the brief resting its normalisation premise on the narrower equities-specific caution in claims 030 and 031. Against that, the run is strong where it matters most. Every claim-### citation in the brief was opened and read, and each resolves to the right claim for its sentence; no adjacent-but-wrong citation was found. The exhaustive numeric semantic review over all value-bearing claims, including the single calculation block, found no operand, unit, sign, scope or period error, and the first-half versus full-year distinctions in the expense discussion are labelled correctly throughout. The transcript's '(sic) [Excluding]' correction is resolved the right way and is consistent with the SEC 10-Q facts. Temporal integrity holds: the only consensus source predates the event by five days, the two archived sources whose provider metadata looked clean but whose content contained post-event actuals were correctly excluded and that exclusion is disclosed, and the same-day nature of the peer results is stated rather than hidden. Both deterministic gates passed with zero issues across three attempts and the injection scan is clean.",
+    "verdict": "pass_with_warnings",
+    "summary": "The outlook brief is balanced, bank-sector appropriate and well tied to the available evidence. Its base, upside and downside cases distinguish repeatable franchise drivers from exceptional capital-markets activity, and no material brief citation or inferential leap requires correction. Three medium claim-quality warnings remain: one mixed period label and two quotes that are not self-sufficient for every detail in their claim text. One unused web artifact is a generic homepage rather than the results source its title suggests. These issues do not alter the brief's conclusions, so the verdict is pass_with_warnings under the current review rules.",
     "finding_counts": {
       "critical": 0,
       "high": 0,
-      "medium": 0,
-      "low": 5,
-      "info": 12
+      "medium": 3,
+      "low": 1,
+      "info": 6
     }
   },
-  "trace_summary": "Analysis drew on 216 recorded source(s) (transcript, SEC/web evidence). 3 claim-validation attempt(s) were made before passing. Review ran 2 round(s): round 1 pass_with_warnings with 2 medium, 5 low, 13 info finding(s); round 2 pass with 5 low, 12 info finding(s).",
+  "trace_summary": "Analysis drew on 216 recorded source(s) (transcript, SEC/web evidence). 2 claim-validation attempt(s) were made, 1 with issues, before passing. 1 outlook-validation attempt(s) were made before passing. Review ran 1 round(s): round 1 pass_with_warnings with 3 medium, 1 low, 6 info finding(s).",
   "workflow_trace": [
     {
       "stage": "claim_validation",
-      "attempts": 3,
+      "attempts": 2,
       "status": "passed"
     },
     {
       "stage": "outlook_validation",
+      "attempts": 1,
       "status": "passed"
     },
     {
       "stage": "review",
       "round": 1,
       "status": "pass_with_warnings"
-    },
-    {
-      "stage": "review",
-      "round": 2,
-      "status": "pass"
     }
   ],
   "review_history_summary": {
-    "review_rounds": 2,
+    "review_rounds": 1,
     "failed_review_rounds": 0,
     "historical_findings": {
       "critical": 0,
       "high": 0,
-      "medium": 2,
-      "low": 10,
-      "info": 25
+      "medium": 3,
+      "low": 1,
+      "info": 6
     }
   },
   "guardrail_summary": {
-    "validation_retries": 2,
-    "validation_rejections": 0,
+    "validation_retries": 1,
+    "validation_rejections": 1,
+    "outlook_validation_retries": 0,
+    "outlook_validation_rejections": 0,
     "review_rejections": 0,
     "escalations": 0
   },
   "tool_decisions": {
     "price_lookup": {
       "decision": "not_used",
-      "reason": "No market-price evidence was needed: every claim is grounded in the transcript, SEC XBRL facts, or extracted web evidence, and no claim depends on a share-price or market-cap series."
+      "reason": "The transcript, SEC evidence and archived pre-event consensus sources were sufficient; no market-price claim was needed."
     }
   },
   "hashes": {
     "transcript_sha256": "fd0d2a77bdd6f2de88a65d0ace5edc9c8a085da3982781c26938b354d4f61fca",
-    "manifest_sha256": "67126d327ecbc100988855c1dcc650c37ec997a3abe38a41329838a370f17226",
-    "claims_sha256": "5e411642c029a03679ceca33809b1014065dc0fbaf1c03b97913908bebdb86bc",
-    "outlook_brief_sha256": "caa5007ed7cb53a3da3ecf57e6184dc581ad56c1437fa45379fb72d7e0c9ca0b",
-    "review_report_sha256": "0e2716aef866852c6fedcecda6306f91d5ea87941dc04c6390c929f3248a0725"
+    "manifest_sha256": "86189fc60d157b8780c93edc424832316e61b2ce5f25575289f4d104b864a43e",
+    "claims_sha256": "f9865cbf347890ef95ea8a5f232a8c491a61fa4ae08b8f648a33dcf37f0dc65f",
+    "outlook_brief_sha256": "ea8ae2ad2dff7d815eda518d78acf8e9cd57509acef5ae58c2414f7b4f3d32a7",
+    "review_report_sha256": "bd40053b8623e81961150d23a6ae6c37fed061149a03c1f88a1c2338b86ac522"
   },
   "evidence_summary": {
     "source_count": 216
   },
-  "reviewer_model": "opus"
+  "reviewer_model": "gpt-5"
 }

@@ -1,12 +1,12 @@
 {
-  "url": "https://seekingalpha.com/article/4920947-jpmorgan-chase-buy-ahead-of-q2-report-on-credit-market-and-profits",
-  "title": "JPMorgan Chase: Buy Ahead Of Q2 Report On Credit Market And ...",
+  "url": "https://finance.yahoo.com/",
+  "title": "JPMorgan Chase (JPM) Q2 Earnings Report Preview",
   "score": null,
-  "published_date": "2026-07-09T00:00:00.000Z",
+  "published_date": null,
   "_class": "consensus",
   "_select_key": "consensus",
-  "_temporal_status": "pre_event",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "JPMorganChase JPM 2026-q2 earnings preview expectations forecast",
-  "_retrieved_at": "2026-09-14T13:11:11Z"
+  "_query": "JPMorgan Chase & Co. JPM 2026-q2 earnings preview expectations forecast",
+  "_retrieved_at": "2026-09-16T15:44:38Z"
 }

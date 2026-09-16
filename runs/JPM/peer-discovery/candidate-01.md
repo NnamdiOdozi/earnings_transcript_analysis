@@ -1,242 +1,141 @@
-Is JPM Overvalued? JPMorgan Chase & Co. Peer Valuation Check 2026 | VCP Scanner
+Companies Like JPMorgan Chase & Co. (JPM) — Structural Peers · AssetNext
 
-# JPMorgan Chase & Co. (JPM)
+Home› Companies› JPM› Similar companies
 
-Relative Valuation• Peer multiples, competitive benchmarking & quality-adjusted fair value
+Peer Cluster · Structural similarity
 
-# JPMorgan Chase & Co. is currently slightly expensive versus peers
+# Companies with a Similar Profile to JPMorgan Chase & Co.
 
-The market is pricing JPMorgan Chase & Co. at a 17.16% premium to its peer-implied fair value.
+11 companies structurally similar to JPMorgan Chase & Co. (JPM) — identified by peer analysis across revenue dynamics, margin profile, capital efficiency and growth patterns. Not based on sector labels alone.
 
-Current Price
+Updated 2026-06-30 · JPM full analysis →
 
-$357.62
+Companies similar to JPMorgan Chase & Co. cluster around comparable structural characteristics, with the strongest visible overlap typically appearing in quality. Examples in this group include Bank of America Corporation, Wells Fargo & Company, ING Groep N.V..
 
-Fair Value
+Reference company
 
-$296.25
+JPM
 
-Relative Downside
+JPMorgan Chase & Co.
 
--17.16%
+Peer score: 74
 
-Peer Premium Status
+Dimension scores
 
-Unjustified
+Growth
 
-## Peer Set
+40
 
-7 curated peers matched by business model, revenue composition, and market position
+Quality
 
-| Ticker | Company | Market Cap | P/E | EV/EBITDA |
-| --- | --- | --- | --- | --- |
-| BAC | Bank of America Corporation | $442.26B | 16.31x | 14.4x |
-| WFC | Wells Fargo & Company | $265.26B | 13.72x | 17.61x |
-| C | Citigroup Inc. | $227.81B | 19x | 25.72x |
-| GS | The Goldman Sachs Group, Inc. | $318.47B | 20.15x | 31.78x |
-| MS | Morgan Stanley | $338.75B | 21.06x | 26.4x |
-| USB | U.S. Bancorp | $97.31B | 13.55x | 12.47x |
-| TFC | Truist Financial Corporation | $62.83B | 13.2x | 13.65x |
+100
 
-## Multiples Comparison
+Valuation
 
-3 valuation metrics · peer-median based
+77
 
-3/3 multiples indicate overvaluation
+Stability
 
-| Multiple | Current | Peer Median | vs Peers | Implied Price |
-| --- | --- | --- | --- | --- |
-| Forward P/E Price paid for next year's expected earnings. | 14.4x | 11.97x | Premium +20.37% | $297.10 |
-| P/E Price paid for current earnings. | 17.84x | 16.31x | Premium +9.33% | $343.95 |
-| P/B Market value versus book equity. | 2.76x | 1.52x | Premium +80.93% | $197.66 |
+67
 
-### Fair Value Formulation
+Functionally similar companies — ranked by peer score
 
-How the model derives the final fair value from peer baselines and quality metrics
+Bank of America Corporation
 
-1
+BAC · Financial Services
 
-Peer Baselineⓘ
+52
 
-$276.35
+Wells Fargo & Company
 
-Peer-Implied Value
+WFC · Financial Services
 
-2
+39
 
-Quality Premiumⓘ
+ING Groep N.V.
 
-+$19.90 (+7.2%)
+INGA.AS · Financial Services
 
-Adjusted for 3y eps growth, roe
+49
 
-=→
+UBS Group AG
 
-3
+UBSG.SW · Financial Services
 
-Fair Valueⓘ
+46
 
-$296.25
+Banco Bilbao Vizcaya Argentaria, S.A.
 
-Quality-Adjusted Fair Value
+BBVA.MC · Financial Services
 
-Current Price
+70
 
-$357.62
+HSBC Holdings plc
 
-Active market quote
+HSBA.L · Financial Services
 
-OVERVALUED
+58
 
-$357.62$296.25
+Svenska Handelsbanken AB (publ)
 
-Valuation Gap
+SHB-A.ST · Financial Services
 
-17.16% Premium
+64
 
-Trading at a 20.72% premium
+Standard Chartered PLC
 
-Premium: The stock is trading at a 20.72% premium to its quality-adjusted fair value of $296.25. The market is pricing the stock 17.16% above our model's estimate.
+STAN.L · Financial Services
 
-## Quality Adjustment
+61
 
-Quality metrics are stronger than the peer group, justifying a premium.
+BARC.L · Financial Services
 
-+7.2% adjustment
+48
 
-### Growth CAGR Metrics
+ABN AMRO Bank N.V.
 
-3Y EPS Growth Strength
+ABN.AS · Financial Services
 
-This Stock
+61
 
-18.4%
+C · Financial Services
 
-Peer Median
+58
 
-7.7%
+| # | Company | Peer score |
+| --- | --- | --- |
+| #1 | Analysis JPM vs BAC |
+| #2 | Analysis JPM vs WFC |
+| #3 | Analysis JPM vs INGA.AS |
+| #4 | Analysis JPM vs UBSG.SW |
+| #5 | Analysis JPM vs BBVA.MC |
+| #6 | Analysis JPM vs HSBA.L |
+| #7 | Analysis JPM vs SHB-A.ST |
+| #8 | Analysis JPM vs STAN.L |
+| #9 | Analysis JPM vs BARC.L |
+| #10 | Analysis JPM vs ABN.AS |
+| #11 | Analysis JPM vs C |
 
-### Profitability & Returns
+Direct comparisons — JPM vs peers
 
-ROE (TTM) Strength
+Peer-relative comparison across valuation, quality, growth and stability.
 
-This Stock
+JPM vs BAC JPM vs WFC JPM vs INGA.AS JPM vs UBSG.SW JPM vs BBVA.MC JPM vs HSBA.L JPM vs SHB-A.ST JPM vs STAN.L JPM vs BARC.L JPM vs ABN.AS
 
-16.3%
+### Explore JPM peers in AssetNext
 
-Peer Median
+Full interactive peer view with similarity scores, compare tool and portfolio integration.
 
-11.9%
+Explore JPM peers →
 
-Net Interest Margin In-line
+Peer similarity is rule-based and descriptive only. Based on structural analysis of revenue, margins, capital intensity and growth patterns. Not investment advice.
 
-This Stock
+## How AssetNext Peer Scores Work
 
-2.2%
+AssetNext scores reflect each company's structural position within its functional peer group — not a ranking against all stocks simultaneously. Peers are identified by similarity across eight financial dimensions, including revenue growth trajectory, margin structure, capital intensity, and earnings stability. A score of 75 means the company ranks in the top quartile within its own peer group, not the entire market.
 
-Peer Median
+Four dimension scores drive the overall peer score: Growth (revenue trajectory and expansion dynamics), Quality (margin structure and capital efficiency), Valuation (peer-relative pricing on standard multiples), and Stability (earnings consistency and financial predictability). Each dimension is scored 0–100 relative to the peer group, then combined into an overall peer score using equal weighting.
 
-2.2%
+Because scores are peer-relative, the same company can have slightly different scores in different index universes. On comparison pages, both companies are shown within their shared peer universe wherever possible — so the scores are directly comparable. The peer basis is stated on each score card.
 
-Efficiency Ratio Strength
-
-This Stock
-
-34%
-
-Peer Median
-
-38%
-
-### Balance Sheet & Financial Health
-
-8.2%
-
-Peer Median
-
-8.5%
-
-Quality adjustments are capped at ±15% (up to ±20% for financial services) to prevent runaway premiums. Based on trailing twelve months and multi-year CAGR data where available.
-
-## Historical Context
-
-How current multiples rank vs 8 years of the stock’s own history
-
-| Multiple | Current | Historical Median | Percentile | Status |
-| --- | --- | --- | --- | --- |
-| P/E 8 years of data | 17.84x | 11.61x | 100th | Above historical norm |
-| P/B 8 years of data | 2.76x | 1.58x | 100th | Above historical norm |
-
-JPMorgan Chase & Co. currently trades near the highest valuation levels observed during the last 8 years.
-
-## Analyst Consensus
-
-Wall Street target prices — 61 analysts
-
-Consensus Target$373.64+4.48% upside to target
-
-Median Target$370.00
-
-Our Model vs Street-20.71% Model estimates lower than analyst consensus
-
-### Price Target Spectrum vs. Current & Model
-
-Our Model: $296.25
-
-Current: $357.62
-
-Median: $370.00
-
-Consensus: $373.64
-
-## Risk Factors
-
-Model-identified caveats to consider
-
-P/E is high versus the stock's own history.
-
-## What This Means for Investors
-
-JPM looks slightly expensive versus peers using curated peers, with relative upside of -17.2%.
-
-### Business Quality
-
-JPMorgan Chase & Co. is a high-quality business with competitive advantages over peers.
-
-Conclusion
-
-### Valuation & Price
-
-The current valuation implies a significant premium above peers, with 3/3 multiples indicating overvaluation (17.16% above fair value). The stock also trades at elevated levels versus its own history.
-
-### Investor Outlook
-
-Future returns may depend more on sustained earnings growth than on further multiple expansion.
-
-## Frequently Asked Questions
-
-Answers to common questions about JPM's relative valuation and our methodology.
-
-### What does "fair value" mean in this analysis?
-
-JPMorgan Chase & Co.'s fair value of $296.25 is the price at which the stock would trade if valued at the same multiples as its 7-company peer group, adjusted for differences in business quality. At $357.62, the stock trades at a -17.16% premium to fair value. This is a reference point, not a price target.
-
-### How were these peers selected?
-
-The 7 peers shown were selected based on business model similarity, revenue composition, and market position. Each peer was matched for comparable operations, not just industry label. Only companies with clean, usable financial data are included.
-
-### Why does JPMorgan Chase & Co. trade at a premium to fair value?
-
-JPMorgan Chase & Co. has strengths in 3y eps growth, roe, efficiency ratio, and a quality score that justifies a 7.2% premium relative to its peer group. The Quality Adjustment section breaks down each driver.
-
-### Is this analysis a buy or sell recommendation?
-
-No. This page provides an automated quantitative comparison of JPMorgan Chase & Co. against its peers. It is not investment advice, a recommendation, or a solicitation. Valuation is only one factor in an investment decision — it does not account for growth catalysts, management quality, regulatory risk, or your personal financial situation.
-
-### What should I look at beyond the fair value number?
-
-Look at the Historical Context to see where current multiples sit versus the stock's own history. Review the Risk Factors section for model-identified caveats. Compare the Analyst Consensus to our model output for another perspective. Valuation is only one dimension — growth trajectory, competitive position, and market conditions all matter.
-
-### How often is the data updated?
-
-Valuation data is refreshed weekly based on the latest financial filings, market prices, and analyst estimates. JPMorgan Chase & Co.'s fair value, peer multiples, and quality scores will shift over time as new earnings are reported and stock prices change.
+Scores are recalculated periodically as underlying financial data is updated. All analysis is descriptive and rule-based — AssetNext describes structural realities and never issues buy, sell or hold recommendations.

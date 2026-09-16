@@ -8,6 +8,7 @@ from pydantic import ValidationError
 from earnings.models import Claim, ReviewFinding, ReviewReport, Segment
 from earnings.process import normalize_whitespace
 from earnings.validate import (
+    validate_coverage_receipt,
     check_calculation_inputs,
     check_calculations,
     check_claim_text_numbers,
@@ -1340,3 +1341,81 @@ def test_validate_review_report_catches_fabricated_id_in_evidence_and_recommenda
     assert len(issues) == 1
     assert "claim-999" in issues[0].message
     assert "claim-998" in issues[0].message
+
+
+# --- coverage receipt: the deterministic half of "did you extract enough?" ----------
+
+SEGS = {"seg-0001", "seg-0002"}
+WEBS = {"web-001"}
+CIDS = {"claim-001"}
+
+
+def _receipt(segments, web=None):
+    return {"segments": segments, "web_evidence": web if web is not None else [
+        {"web_evidence_id": "web-001", "outcome": "claims_extracted", "claim_ids": ["claim-001"]}]}
+
+
+def test_complete_coverage_receipt_passes():
+    receipt = _receipt([
+        {"segment_id": "seg-0001", "outcome": "claims_extracted", "claim_ids": ["claim-001"]},
+        {"segment_id": "seg-0002", "outcome": "deliberately_immaterial", "claim_ids": [],
+         "reason": "Operator reading the dial-in instructions."},
+    ])
+    assert validate_coverage_receipt(receipt, SEGS, WEBS, CIDS) == []
+
+
+def test_receipt_missing_a_segment_fails():
+    """The whole point: a segment nobody accounted for is the shape of under-extraction."""
+    receipt = _receipt([{"segment_id": "seg-0001", "outcome": "claims_extracted", "claim_ids": ["claim-001"]}])
+    issues = validate_coverage_receipt(receipt, SEGS, WEBS, CIDS)
+    assert [i.check for i in issues] == ["coverage_receipt"]
+    assert "does not account for segment_id 'seg-0002'" in issues[0].message
+
+
+def test_receipt_ignoring_web_evidence_fails():
+    """Bare-list (pre-web) receipts parse as segments-only and then fail on the missing
+    web coverage -- the accurate answer, not a free pass for predating the rule."""
+    issues = validate_coverage_receipt(
+        [{"segment_id": s, "outcome": "deliberately_immaterial", "claim_ids": [], "reason": "x"} for s in sorted(SEGS)],
+        SEGS, WEBS, CIDS,
+    )
+    assert any("missing its 'web_evidence' array" in i.message for i in issues)
+
+
+def test_receipt_immaterial_without_reason_fails():
+    receipt = _receipt([
+        {"segment_id": "seg-0001", "outcome": "claims_extracted", "claim_ids": ["claim-001"]},
+        {"segment_id": "seg-0002", "outcome": "deliberately_immaterial", "claim_ids": [], "reason": "   "},
+    ])
+    issues = validate_coverage_receipt(receipt, SEGS, WEBS, CIDS)
+    assert any("immaterial without a reason" in i.message for i in issues)
+
+
+def test_receipt_with_unresolvable_or_invented_ids_fails():
+    receipt = _receipt([
+        {"segment_id": "seg-0001", "outcome": "claims_extracted", "claim_ids": ["claim-999"]},
+        {"segment_id": "seg-0002", "outcome": "deliberately_immaterial", "claim_ids": [], "reason": "x"},
+        {"segment_id": "seg-0404", "outcome": "deliberately_immaterial", "claim_ids": [], "reason": "x"},
+    ])
+    msgs = " ".join(i.message for i in validate_coverage_receipt(receipt, SEGS, WEBS, CIDS))
+    assert "'claim-999', which is not in claims.json" in msgs
+    assert "'seg-0404', which does not exist in this run" in msgs
+
+
+def test_receipt_rejects_a_third_outcome_state():
+    """'skipped' or 'not reviewed' must not be expressible -- every item was judged."""
+    receipt = _receipt([
+        {"segment_id": "seg-0001", "outcome": "claims_extracted", "claim_ids": ["claim-001"]},
+        {"segment_id": "seg-0002", "outcome": "skipped", "claim_ids": []},
+    ])
+    issues = validate_coverage_receipt(receipt, SEGS, WEBS, CIDS)
+    assert any("there is no third state" in i.message for i in issues)
+
+
+def test_receipt_not_required_when_run_has_no_web_evidence():
+    """A run with no web evidence has nothing to account for on that axis."""
+    receipt = {"segments": [
+        {"segment_id": "seg-0001", "outcome": "claims_extracted", "claim_ids": ["claim-001"]},
+        {"segment_id": "seg-0002", "outcome": "deliberately_immaterial", "claim_ids": [], "reason": "x"},
+    ]}
+    assert validate_coverage_receipt(receipt, SEGS, set(), CIDS) == []

@@ -303,6 +303,86 @@ def check_inference_citations(claim: Claim, claim_ids: set[str]) -> str | None:
     return None
 
 
+def validate_coverage_receipt(
+    receipt: Any,
+    segment_ids: set[str],
+    web_evidence_ids: set[str],
+    claim_ids: set[str],
+) -> list[ValidationIssue]:
+    """Prove the coverage receipt accounts for the whole source pack.
+
+    This is the deterministic half of the completeness problem. Validation elsewhere
+    proves the claims that WERE submitted are grounded; it is structurally blind to
+    claims never written, so a claims file covering a fraction of the call passes every
+    other check exactly as cleanly as a complete one. What Python can prove is that the
+    agent said something about every piece of evidence it was given.
+
+    What this does NOT prove: that a `deliberately_immaterial` judgement was correct.
+    That is semantic and belongs to the outlook-reviewer. A receipt can be perfectly
+    valid here and still hide a material segment behind a plausible reason.
+
+    Accepts the older bare-list form as segments-only, so a receipt written before the
+    web_evidence array was specified still parses -- and then fails on the missing web
+    coverage, which is the accurate answer rather than a free pass.
+    """
+    issues: list[ValidationIssue] = []
+
+    def problem(message: str) -> None:
+        issues.append(ValidationIssue(claim_index=-1, check="coverage_receipt", message=message))
+
+    if isinstance(receipt, list):
+        # a bare list genuinely carries no web_evidence array; say that once rather
+        # than emitting one "unaccounted for" line per web source
+        sections = {"segments": receipt, "web_evidence": None}
+    elif isinstance(receipt, dict):
+        sections = {"segments": receipt.get("segments"), "web_evidence": receipt.get("web_evidence")}
+    else:
+        problem("coverage-receipt.json must be an object with 'segments' and 'web_evidence' arrays")
+        return issues
+
+    expected = {"segments": ("segment_id", segment_ids), "web_evidence": ("web_evidence_id", web_evidence_ids)}
+    for section, rows in sections.items():
+        key, universe = expected[section]
+        if not universe:
+            continue  # nothing of this kind in the run, so nothing to account for
+        if not isinstance(rows, list):
+            problem(f"coverage-receipt.json is missing its '{section}' array, so {len(universe)} {section} are unaccounted for")
+            continue
+        seen: set[str] = set()
+        for row in rows:
+            if not isinstance(row, dict):
+                problem(f"coverage-receipt.json '{section}' contains a non-object entry")
+                continue
+            ident = row.get(key)
+            if not isinstance(ident, str):
+                problem(f"coverage-receipt.json '{section}' entry is missing '{key}'")
+                continue
+            seen.add(ident)
+            if ident not in universe:
+                problem(f"coverage-receipt.json names {key} {ident!r}, which does not exist in this run")
+            outcome = row.get("outcome")
+            listed = row.get("claim_ids") or []
+            if outcome == "claims_extracted":
+                if not listed:
+                    problem(f"coverage-receipt.json marks {ident!r} as claims_extracted but lists no claim_ids")
+            elif outcome == "deliberately_immaterial":
+                if listed:
+                    problem(f"coverage-receipt.json marks {ident!r} immaterial but still lists claim_ids")
+                if not str(row.get("reason") or "").strip():
+                    problem(f"coverage-receipt.json marks {ident!r} immaterial without a reason")
+            else:
+                problem(
+                    f"coverage-receipt.json entry {ident!r} has outcome {outcome!r}; expected "
+                    "'claims_extracted' or 'deliberately_immaterial' -- there is no third state"
+                )
+            for cid in listed:
+                if cid not in claim_ids:
+                    problem(f"coverage-receipt.json entry {ident!r} cites {cid!r}, which is not in claims.json")
+        for missing in sorted(universe - seen):
+            problem(f"coverage-receipt.json does not account for {key} {missing!r}")
+    return issues
+
+
 def validate_metrics(metrics: list[Metric], claim_ids: set[str]) -> list[ValidationIssue]:
     """Every discovered Metric must trace back to at least one real, cited claim id --
     a metric with no source_claim_ids (or a fabricated one) is exactly the kind of

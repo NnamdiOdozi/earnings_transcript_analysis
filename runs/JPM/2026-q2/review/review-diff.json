@@ -1,0 +1,112 @@
+{
+  "generated_at": "2026-09-16T15:59:59Z",
+  "round_number": 2,
+  "since_round": 1,
+  "previous_verdict": "pass_with_warnings",
+  "previous_summary": "The outlook brief is balanced, bank-sector appropriate and well tied to the available evidence. Its base, upside and downside cases distinguish repeatable franchise drivers from exceptional capital-markets activity, and no material brief citation or inferential leap requires correction. Three medium claim-quality warnings remain: one mixed period label and two quotes that are not self-sufficient for every detail in their claim text. One unused web artifact is a generic homepage rather than the results source its title suggests. These issues do not alter the brief's conclusions, so the verdict is pass_with_warnings under the current review rules.",
+  "previous_finding_count": 10,
+  "claims_sha256": "cf1933c5fffb4fc73ef593da511720e509cb2f6e995ea6bc4b06756df43643f1",
+  "outlook_brief_sha256": "ea8ae2ad2dff7d815eda518d78acf8e9cd57509acef5ae58c2414f7b4f3d32a7",
+  "claims_changed": [
+    {
+      "claim_id": "claim-018",
+      "change": "changed",
+      "old": {
+        "id": "claim-018",
+        "category": "operational_performance",
+        "classification": "reported_fact",
+        "claim_text": "Long-term net inflows were $50 billion; assets under management reached $5.1 trillion, up 18%, and client assets reached $7.7 trillion, up 19% year on year.",
+        "quote": "Long-term net inflows were $50 billion, with continued strength across Fixed Income and Equity. AUM of $5.1 trillion was up 18% year-on-year and client assets of $7.7 trillion were up 19% year-on-year",
+        "segment_id": "seg-0003",
+        "speaker": "Jeremy Barnum",
+        "status": "reported",
+        "values": {},
+        "confidence": 0.99,
+        "inferred_from": [],
+        "period": "as of 30 Jun 2026"
+      },
+      "new": {
+        "id": "claim-018",
+        "category": "operational_performance",
+        "classification": "reported_fact",
+        "claim_text": "Long-term net inflows were $50 billion; assets under management reached $5.1 trillion, up 18%, and client assets reached $7.7 trillion, up 19% year on year.",
+        "quote": "Long-term net inflows were $50 billion, with continued strength across Fixed Income and Equity. AUM of $5.1 trillion was up 18% year-on-year and client assets of $7.7 trillion were up 19% year-on-year",
+        "segment_id": "seg-0003",
+        "speaker": "Jeremy Barnum",
+        "status": "reported",
+        "values": {},
+        "confidence": 0.99,
+        "inferred_from": []
+      }
+    },
+    {
+      "claim_id": "claim-062",
+      "change": "changed",
+      "old": {
+        "id": "claim-062",
+        "category": "current_guidance",
+        "classification": "management_guidance",
+        "claim_text": "The Smart Cash product remained a test focused on a narrow account segment, with customer tests planned and an initial launch expected during 2026.",
+        "quote": "this is still a test case. Banks \u2013 people are in different position. And if you actually look at accounts, these don't relate to every account. They relate to a narrow segment of accounts and where you're competing for their investment business and their deposit business. So, what you're going to see is certain tests coming out",
+        "segment_id": "seg-0083",
+        "speaker": "Jamie Dimon",
+        "status": "forward_looking",
+        "values": {},
+        "confidence": 0.96,
+        "inferred_from": []
+      },
+      "new": {
+        "id": "claim-062",
+        "category": "current_guidance",
+        "classification": "management_guidance",
+        "claim_text": "The Smart Cash product remained a test focused on a narrow account segment, with customer tests planned.",
+        "quote": "this is still a test case. Banks \u2013 people are in different position. And if you actually look at accounts, these don't relate to every account. They relate to a narrow segment of accounts and where you're competing for their investment business and their deposit business. So, what you're going to see is certain tests coming out",
+        "segment_id": "seg-0083",
+        "speaker": "Jamie Dimon",
+        "status": "forward_looking",
+        "values": {},
+        "confidence": 0.96,
+        "inferred_from": []
+      }
+    },
+    {
+      "claim_id": "claim-066",
+      "change": "changed",
+      "old": {
+        "id": "claim-066",
+        "category": "risk",
+        "classification": "management_opinion",
+        "claim_text": "Management observed mild weakening in underwriting through aggressive revenue assumptions, expense add-backs, payment-in-kind structures, covenants and rollover risk, and expects performance to diverge in a future credit cycle.",
+        "quote": "it is across that spectrum, you've seen a little bit of weakness. And the only point we're always trying to make is when there's a credit cycle, and there will be a credit cycle, how will everybody perform. And I don't think it's going to be like a bell curve of performance. I think there'll be some outliers out there",
+        "segment_id": "seg-0091",
+        "speaker": "Jamie Dimon",
+        "status": "forward_looking",
+        "values": {},
+        "confidence": 0.97,
+        "inferred_from": []
+      },
+      "new": {
+        "id": "claim-066",
+        "category": "risk",
+        "classification": "management_opinion",
+        "claim_text": "Management observed mild weakening in underwriting through aggressive revenue assumptions, expense add-backs, payment-in-kind structures, covenants and rollover risk, and expects performance to diverge in a future credit cycle.",
+        "quote": "assumptions on revenue growth or add-back of expenses, more PIK, some weaker \u2013 and this is not across the board, by the way. It's more some players than others. Some weaker covenants. Some people taking more rollover risk. And by that, I mean, if rates go up, how much interest rate exposure you're taking as opposed to underwriting exposure, and it's just things like that. But it is across that spectrum, you've seen a little bit of weakness. And the only point we're always trying to make is when there's a credit cycle, and there will be a credit cycle, how will everybody perform. And I don't think it's going to be like a bell curve of performance. I think there'll be some outliers out there",
+        "segment_id": "seg-0091",
+        "speaker": "Jamie Dimon",
+        "status": "forward_looking",
+        "values": {},
+        "confidence": 0.97,
+        "inferred_from": []
+      }
+    }
+  ],
+  "affected_brief_sections": [
+    1,
+    5,
+    6,
+    7,
+    10
+  ],
+  "auto_escalated": true,
+  "auto_escalation_reason": "claim-018: period or values changed; conclusion-bearing section(s) [1, 5, 6, 7] cite a changed claim"
+}

@@ -200,14 +200,24 @@ Given a run directory (e.g. `runs/MSFT/2026-q2/`), read:
 - `manifest.json`, `raw/transcript.*`, `raw/web/*.json`
 - `evidence/financials.json`, `evidence/web-evidence.jsonl` and its referenced
   `evidence/web/*.md` files
-- `claims.json`, `validation.json`, `outlook-validation.json`, `metrics.json` (if
-  present), `injection-scan.json` (if present)
-- `_validation_history/attempt-NNNN_*/receipt.json` for every attempt in this run
+- `claims/claims.json`, `claims/validation.json`, `claims/metrics.json` (if
+  present), `outlook/outlook-validation.json`, `injection-scan.json` (if present)
+- `claims/history/attempt-NNNN_*/receipt.json` for every attempt in this run
   (their `issue_counts` are enough — no need to reopen each attempt's `claims.json`)
   — this is what "Proposed lessons" below draws its second source from
-- `signal-card.md`, `outlook-brief.md`
-- From round 2 on: `review-diff.json` and its sidecar `review-diff.sha256` (see
-  "Diff-based re-review" below)
+- `claims/signal-card.md`, `outlook/outlook-brief.md`
+- From round 2 on: `review/review-diff.json` and its sidecar
+  `review/review-diff.sha256` (see "Diff-based re-review" below)
+
+**Two run layouts exist, and you must read whichever one is actually on disk.** The
+paths above are the staged layout, which a run declares as `"layout_version": 2` in
+its `manifest.json`: a shared source pack at the root, then `claims/`, `outlook/` and
+`review/`, each holding its own artifacts and its own `history/`. A run prepared
+before that change declares no `layout_version` and keeps every artifact flat at the
+run root, with `_validation_history/`, `_outlook_validation_history/` and
+`_review_history/` beside them. Older runs are deliberately never migrated, so both
+shapes are valid. Check the manifest, or simply list the directory, before concluding
+a file is missing.
 - `config.toml` at the repo root (for context on what checks/thresholds applied)
 - `.agents/memory/extractor-lessons.md` at the repo root, if present (so you don't
   propose a lesson that's already there — see "Proposed lessons" below)
@@ -321,7 +331,7 @@ ambiguous) in `unverified_items` rather than guessing.
 1. **A finding of yours reflects a generalizable extraction mistake** — one likely
    to recur on a different company/quarter, not a one-off slip specific to this
    run.
-2. **This run's `_validation_history/` shows a repeated-then-fixed mechanical
+2. **This run's `claims/history/` shows a repeated-then-fixed mechanical
    mistake** — the SAME `check` type (e.g. `exact_quote`, `numeric`,
    `inference_citation`) failed across two or more attempts before finally
    passing. The extractor's own within-run self-check (see

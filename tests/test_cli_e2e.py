@@ -7,6 +7,7 @@ from pathlib import Path
 import pytest
 
 from earnings import config, ingest, sources
+from earnings.paths import RunPaths
 from earnings.cli import (
     _escape_currency,
     _price_decision_issues,
@@ -34,12 +35,12 @@ def main(args: list[str]) -> int:
 
 
 def _validation_attempt_dirs(run_dir: Path) -> list[Path]:
-    history_dir = run_dir / config.VALIDATION_HISTORY_SUBDIR
+    history_dir = RunPaths.at(run_dir).validation_history
     return sorted(path for path in history_dir.iterdir() if path.is_dir())
 
 
 def _outlook_validation_attempt_dirs(run_dir: Path) -> list[Path]:
-    history_dir = run_dir / config.OUTLOOK_VALIDATION_HISTORY_SUBDIR
+    history_dir = RunPaths.at(run_dir).outlook_validation_history
     return sorted(path for path in history_dir.iterdir() if path.is_dir())
 
 
@@ -68,19 +69,19 @@ def test_prepare_then_analyze_empty_transcript_yields_zero_segments_and_passes(i
     assert rc == 0
 
     run_dir = isolated_runs_dir / "ACME" / "2026-empty"
-    segment_lines = (run_dir / config.NORMALIZED_SUBDIR / config.TRANSCRIPT_FILENAME).read_text().splitlines()
+    segment_lines = (RunPaths.at(run_dir).transcript).read_text().splitlines()
     assert segment_lines == []
 
     # Web search is disabled by this fixture -- queries must be an empty list, not
     # crash on an undefined variable (it's only assigned inside the enabled branch).
-    manifest = json.loads((run_dir / config.MANIFEST_FILENAME).read_text())
+    manifest = json.loads((RunPaths.at(run_dir).manifest).read_text())
     assert manifest["queries"] == []
 
-    (run_dir / config.CLAIMS_FILENAME).write_text("[]")
+    (RunPaths.at(run_dir).claims).write_text("[]")
     rc = main(["analyze", "--ticker", "ACME", "--event-id", "2026-empty"])
     assert rc == 0
 
-    validation = json.loads((run_dir / config.VALIDATION_FILENAME).read_text())
+    validation = json.loads((RunPaths.at(run_dir).validation).read_text())
     assert validation["ok"] is True
     assert validation["checked_claims"] == 0
     assert validation["validated_at"]  # real-clock stamp, not agent-authored
@@ -132,14 +133,14 @@ def test_late_price_lookup_invalidates_not_used_decision(isolated_runs_dir, tmp_
     ) == 0
 
     run_dir = isolated_runs_dir / "ACME" / "2026-q2"
-    (run_dir / config.CLAIMS_FILENAME).write_text("[]", encoding="utf-8")
+    (RunPaths.at(run_dir).claims).write_text("[]", encoding="utf-8")
     assert main(["analyze", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
 
     price_record = {"ticker": "ACME", "status": "ok"}
-    (run_dir / config.PRICE_LOOKUP_LOG_FILENAME).write_text(
+    (RunPaths.at(run_dir).price_lookup_log).write_text(
         json.dumps(price_record) + "\n", encoding="utf-8"
     )
-    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text("No material outlook.", encoding="utf-8")
+    (RunPaths.at(run_dir).outlook_brief).write_text("No material outlook.", encoding="utf-8")
 
     assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 1
 
@@ -149,7 +150,7 @@ def test_prepare_archives_segmentation_omission_receipt(isolated_runs_dir):
     assert main(["prepare", "--ticker", "LLOY", "--event-id", "2026-h1", "--transcript", transcript]) == 0
 
     run_dir = isolated_runs_dir / "LLOY" / "2026-h1"
-    report = json.loads((run_dir / config.SEGMENTATION_REPORT_FILENAME).read_text())
+    report = json.loads((RunPaths.at(run_dir).segmentation_report).read_text())
     assert report["created_at"]
     assert len(report["sanitized_input_sha256"]) == 64
     assert report["segment_count"] > 0
@@ -158,7 +159,7 @@ def test_prepare_archives_segmentation_omission_receipt(isolated_runs_dir):
         {"text": "QUESTION AND ANSWER SESSION", "reason": "qa_heading"}
     ]
 
-    manifest = json.loads((run_dir / config.MANIFEST_FILENAME).read_text())
+    manifest = json.loads((RunPaths.at(run_dir).manifest).read_text())
     assert any(config.SEGMENTATION_REPORT_FILENAME in note for note in manifest["notes"])
 
 
@@ -188,11 +189,11 @@ def test_analyze_preserves_each_failed_and_passing_claims_attempt(isolated_runs_
     run_dir = isolated_runs_dir / "ACME" / "2026-q2"
 
     malformed_claims = b'[{"id": "claim-broken"'
-    (run_dir / config.CLAIMS_FILENAME).write_bytes(malformed_claims)
+    (RunPaths.at(run_dir).claims).write_bytes(malformed_claims)
     assert main(["analyze", "--ticker", "ACME", "--event-id", "2026-q2"]) == 1
 
-    (run_dir / config.CLAIMS_FILENAME).write_text("[]", encoding="utf-8")
-    (run_dir / config.METRICS_FILENAME).write_text("[]", encoding="utf-8")
+    (RunPaths.at(run_dir).claims).write_text("[]", encoding="utf-8")
+    (RunPaths.at(run_dir).metrics).write_text("[]", encoding="utf-8")
     assert main(["analyze", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
 
     attempts = _validation_attempt_dirs(run_dir)
@@ -262,15 +263,15 @@ def test_prepare_then_analyze_valid_claims_produces_signal_card(isolated_runs_di
     assert rc == 0
 
     run_dir = isolated_runs_dir / "ACME" / "2026-q2"
-    assert (run_dir / config.MANIFEST_FILENAME).exists()
-    assert (run_dir / config.NORMALIZED_SUBDIR / config.TRANSCRIPT_FILENAME).exists()
+    assert (RunPaths.at(run_dir).manifest).exists()
+    assert (RunPaths.at(run_dir).transcript).exists()
 
-    manifest = json.loads((run_dir / config.MANIFEST_FILENAME).read_text())
+    manifest = json.loads((RunPaths.at(run_dir).manifest).read_text())
     assert manifest["ticker"] == "ACME"
     assert len(manifest["sources"]) == 1
     assert len(manifest["sources"][0]["sha256"]) == 64
 
-    segment_lines = (run_dir / config.NORMALIZED_SUBDIR / config.TRANSCRIPT_FILENAME).read_text().splitlines()
+    segment_lines = (RunPaths.at(run_dir).transcript).read_text().splitlines()
     segments = [json.loads(line) for line in segment_lines]
     revenue_segment = next(s for s in segments if "110 million" in s["text"])
 
@@ -294,15 +295,15 @@ def test_prepare_then_analyze_valid_claims_produces_signal_card(isolated_runs_di
             "confidence": 0.9,
         }
     ]
-    (run_dir / config.CLAIMS_FILENAME).write_text(json.dumps(claims, indent=2))
+    (RunPaths.at(run_dir).claims).write_text(json.dumps(claims, indent=2))
 
     rc = main(["analyze", "--ticker", "ACME", "--event-id", "2026-q2"])
     assert rc == 0
 
-    validation = json.loads((run_dir / config.VALIDATION_FILENAME).read_text())
+    validation = json.loads((RunPaths.at(run_dir).validation).read_text())
     assert validation["ok"] is True
 
-    card = (run_dir / config.SIGNAL_CARD_FILENAME).read_text()
+    card = (RunPaths.at(run_dir).signal_card).read_text()
     assert "ACME" in card
     assert "110 million" in card
     assert "_Generated:" in card
@@ -317,7 +318,7 @@ def test_analyze_blocks_signal_card_when_claim_has_paraphrased_quote(isolated_ru
     main(["prepare", "--ticker", "ACME", "--event-id", "2026-q2", "--transcript", transcript])
 
     run_dir = isolated_runs_dir / "ACME" / "2026-q2"
-    segment_lines = (run_dir / config.NORMALIZED_SUBDIR / config.TRANSCRIPT_FILENAME).read_text().splitlines()
+    segment_lines = (RunPaths.at(run_dir).transcript).read_text().splitlines()
     segments = [json.loads(line) for line in segment_lines]
     revenue_segment = next(s for s in segments if "110 million" in s["text"])
 
@@ -333,14 +334,14 @@ def test_analyze_blocks_signal_card_when_claim_has_paraphrased_quote(isolated_ru
             "confidence": 0.7,
         }
     ]
-    (run_dir / config.CLAIMS_FILENAME).write_text(json.dumps(claims, indent=2))
+    (RunPaths.at(run_dir).claims).write_text(json.dumps(claims, indent=2))
 
     rc = main(["analyze", "--ticker", "ACME", "--event-id", "2026-q2"])
     assert rc == 1  # non-zero exit blocks the pipeline
 
-    validation = json.loads((run_dir / config.VALIDATION_FILENAME).read_text())
+    validation = json.loads((RunPaths.at(run_dir).validation).read_text())
     assert validation["ok"] is False
-    assert not (run_dir / config.SIGNAL_CARD_FILENAME).exists()
+    assert not (RunPaths.at(run_dir).signal_card).exists()
 
 
 def test_analyze_handles_malformed_claims_json_without_traceback(isolated_runs_dir):
@@ -348,12 +349,12 @@ def test_analyze_handles_malformed_claims_json_without_traceback(isolated_runs_d
     main(["prepare", "--ticker", "ACME", "--event-id", "2026-q2", "--transcript", transcript])
 
     run_dir = isolated_runs_dir / "ACME" / "2026-q2"
-    (run_dir / config.CLAIMS_FILENAME).write_text("{not valid json")
+    (RunPaths.at(run_dir).claims).write_text("{not valid json")
 
     rc = main(["analyze", "--ticker", "ACME", "--event-id", "2026-q2"])
     assert rc == 1
 
-    validation = json.loads((run_dir / config.VALIDATION_FILENAME).read_text())
+    validation = json.loads((RunPaths.at(run_dir).validation).read_text())
     assert validation["ok"] is False
     assert validation["issues"][0]["check"] == "schema"
 
@@ -363,7 +364,7 @@ def test_analyze_handles_malformed_metrics_json_without_traceback(isolated_runs_
     main(["prepare", "--ticker", "ACME", "--event-id", "2026-q2", "--transcript", transcript])
 
     run_dir = isolated_runs_dir / "ACME" / "2026-q2"
-    segment_lines = (run_dir / config.NORMALIZED_SUBDIR / config.TRANSCRIPT_FILENAME).read_text().splitlines()
+    segment_lines = (RunPaths.at(run_dir).transcript).read_text().splitlines()
     segments = [json.loads(line) for line in segment_lines]
     revenue_segment = next(s for s in segments if "110 million" in s["text"])
 
@@ -380,13 +381,13 @@ def test_analyze_handles_malformed_metrics_json_without_traceback(isolated_runs_
             "confidence": 0.9,
         }
     ]
-    (run_dir / config.CLAIMS_FILENAME).write_text(json.dumps(claims))
-    (run_dir / config.METRICS_FILENAME).write_text("{not valid json")
+    (RunPaths.at(run_dir).claims).write_text(json.dumps(claims))
+    (RunPaths.at(run_dir).metrics).write_text("{not valid json")
 
     rc = main(["analyze", "--ticker", "ACME", "--event-id", "2026-q2"])
     assert rc == 1
 
-    validation = json.loads((run_dir / config.VALIDATION_FILENAME).read_text())
+    validation = json.loads((RunPaths.at(run_dir).validation).read_text())
     assert validation["ok"] is False
     assert validation["issues"][0]["check"] == "schema"
 
@@ -396,7 +397,7 @@ def test_analyze_removes_stale_signal_card_after_later_failing_run(isolated_runs
     main(["prepare", "--ticker", "ACME", "--event-id", "2026-q2", "--transcript", transcript])
 
     run_dir = isolated_runs_dir / "ACME" / "2026-q2"
-    segment_lines = (run_dir / config.NORMALIZED_SUBDIR / config.TRANSCRIPT_FILENAME).read_text().splitlines()
+    segment_lines = (RunPaths.at(run_dir).transcript).read_text().splitlines()
     segments = [json.loads(line) for line in segment_lines]
     revenue_segment = next(s for s in segments if "110 million" in s["text"])
 
@@ -413,9 +414,9 @@ def test_analyze_removes_stale_signal_card_after_later_failing_run(isolated_runs
             "confidence": 0.9,
         }
     ]
-    (run_dir / config.CLAIMS_FILENAME).write_text(json.dumps(passing_claims))
+    (RunPaths.at(run_dir).claims).write_text(json.dumps(passing_claims))
     assert main(["analyze", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
-    assert (run_dir / config.SIGNAL_CARD_FILENAME).exists()
+    assert (RunPaths.at(run_dir).signal_card).exists()
 
     # Edit claims to something that now fails validation -- the stale card from the
     # prior passing run must not survive being mistaken for the current result.
@@ -432,9 +433,9 @@ def test_analyze_removes_stale_signal_card_after_later_failing_run(isolated_runs
             "confidence": 0.9,
         }
     ]
-    (run_dir / config.CLAIMS_FILENAME).write_text(json.dumps(failing_claims))
+    (RunPaths.at(run_dir).claims).write_text(json.dumps(failing_claims))
     assert main(["analyze", "--ticker", "ACME", "--event-id", "2026-q2"]) == 1
-    assert not (run_dir / config.SIGNAL_CARD_FILENAME).exists()
+    assert not (RunPaths.at(run_dir).signal_card).exists()
 
 
 @pytest.mark.parametrize("provider", ["exa", "tavily"])
@@ -484,7 +485,7 @@ def test_prepare_calls_web_search_by_default_and_archives_hits(isolated_runs_dir
     assert any("2026-q2" in q for q in calls)  # event_id fills the period placeholder
 
     run_dir = isolated_runs_dir / "ACME" / "2026-q2"
-    archived = sorted((run_dir / config.RAW_SUBDIR / "web").glob("*.json"))
+    archived = sorted((RunPaths.at(run_dir).raw / "web").glob("*.json"))
     assert len(archived) == 5  # one hit archived per query, per the fake
     # Fetch time embedded in the file itself, not just cross-referenced via manifest.
     assert all(json.loads(f.read_text())["_retrieved_at"] for f in archived)
@@ -497,7 +498,7 @@ def test_prepare_calls_web_search_by_default_and_archives_hits(isolated_runs_dir
     archived_queries = [json.loads(f.read_text())["_query"] for f in archived]
     assert all("Acme Corp" in q and "ACME" in q for q in archived_queries)
 
-    manifest = json.loads((run_dir / config.MANIFEST_FILENAME).read_text())
+    manifest = json.loads((RunPaths.at(run_dir).manifest).read_text())
     assert any(f"Web search evidence ({provider}): ok" in note for note in manifest["notes"])
     assert any("Web evidence (extracted, citable): 5 source(s)" in note for note in manifest["notes"])
     # The full query set is also recorded once at the manifest level, in order --
@@ -508,11 +509,11 @@ def test_prepare_calls_web_search_by_default_and_archives_hits(isolated_runs_dir
     # max_extracted_sources (15, default), so all 5 are selected here.
     assert len(extract_calls) == 5
 
-    extracted_files = sorted((run_dir / config.EVIDENCE_SUBDIR / config.WEB_SUBDIR).glob("*.md"))
+    extracted_files = sorted((RunPaths.at(run_dir).web_evidence_dir).glob("*.md"))
     assert len(extracted_files) == 5
     assert "Full extracted content" in extracted_files[0].read_text()
 
-    web_evidence_lines = (run_dir / config.EVIDENCE_SUBDIR / config.WEB_EVIDENCE_FILENAME).read_text().strip().splitlines()
+    web_evidence_lines = (RunPaths.at(run_dir).web_evidence).read_text().strip().splitlines()
     assert len(web_evidence_lines) == 5
 
     # transcript source + 5 search-hit sources + 5 extracted web-evidence sources
@@ -551,7 +552,7 @@ def test_prepare_peer_queries_run_and_are_class_tagged(isolated_runs_dir, monkey
     assert any("Amazon" in q for q in calls) and any("Google" in q for q in calls)
 
     run_dir = isolated_runs_dir / "ACME" / "2026-q2"
-    archived = [json.loads(f.read_text()) for f in sorted((run_dir / config.RAW_SUBDIR / "web").glob("*.json"))]
+    archived = [json.loads(f.read_text()) for f in sorted((RunPaths.at(run_dir).raw / "web").glob("*.json"))]
     classes = [a["_class"] for a in archived]
     assert classes.count("consensus") == 5
     assert classes.count("peer") == 10
@@ -571,9 +572,9 @@ def test_prepare_flags_prompt_injection_in_manifest_and_scan_file(isolated_runs_
     assert rc == 0  # never blocks
 
     run_dir = isolated_runs_dir / "WIDG" / "2026-q1"
-    scan = json.loads((run_dir / config.INJECTION_SCAN_FILENAME).read_text())
+    scan = json.loads((RunPaths.at(run_dir).injection_scan).read_text())
     assert scan["finding_count"] >= 1
-    manifest = json.loads((run_dir / config.MANIFEST_FILENAME).read_text())
+    manifest = json.loads((RunPaths.at(run_dir).manifest).read_text())
     assert any("Prompt-injection scan" in n and "flagged" in n for n in manifest["notes"])
 
 
@@ -584,8 +585,8 @@ def test_prepare_injection_scan_can_be_disabled(isolated_runs_dir, monkeypatch):
     rc = main(["prepare", "--ticker", "WIDG", "--event-id", "2026-q1", "--transcript", transcript])
     assert rc == 0
     run_dir = isolated_runs_dir / "WIDG" / "2026-q1"
-    assert not (run_dir / config.INJECTION_SCAN_FILENAME).exists()
-    manifest = json.loads((run_dir / config.MANIFEST_FILENAME).read_text())
+    assert not (RunPaths.at(run_dir).injection_scan).exists()
+    manifest = json.loads((RunPaths.at(run_dir).manifest).read_text())
     assert any("Prompt-injection scan: disabled" in n for n in manifest["notes"])
 
 
@@ -629,7 +630,7 @@ def test_prepare_extraction_round_robins_so_consensus_never_starves_peers(isolat
     # represented (old code: 10 consensus, 0 peer) AND both peers represented (the
     # sub-class-by-peer fix): 3 buckets drawn in turn until the cap is hit mid-round.
     run_dir = isolated_runs_dir / "ACME" / "2026-q2"
-    archived = {a["url"]: a for f in (run_dir / config.RAW_SUBDIR / "web").glob("*.json")
+    archived = {a["url"]: a for f in (RunPaths.at(run_dir).raw / "web").glob("*.json")
                 for a in [json.loads(f.read_text())]}
     extracted_classes = [archived[url]["_class"] for url in extracted]
     extracted_keys = [archived[url]["_select_key"] for url in extracted]
@@ -760,10 +761,10 @@ def test_prepare_excludes_web_evidence_published_after_event_date(isolated_runs_
     assert extract_calls == ["https://example.com/before"]
 
     run_dir = isolated_runs_dir / "ACME" / "2026-q2"
-    manifest = json.loads((run_dir / config.MANIFEST_FILENAME).read_text())
+    manifest = json.loads((RunPaths.at(run_dir).manifest).read_text())
     assert any("causality guard" in note for note in manifest["notes"])
 
-    web_evidence_lines = (run_dir / config.EVIDENCE_SUBDIR / config.WEB_EVIDENCE_FILENAME).read_text().strip().splitlines()
+    web_evidence_lines = (RunPaths.at(run_dir).web_evidence).read_text().strip().splitlines()
     assert len(web_evidence_lines) == 1
     web_evidence = json.loads(web_evidence_lines[0])
     assert "before" in web_evidence["url"]
@@ -771,7 +772,7 @@ def test_prepare_excludes_web_evidence_published_after_event_date(isolated_runs_
 
     # still archived under raw/web/ for audit (both hits, all 5 consensus queries -> 10
     # files), just never extracted as citable evidence.
-    assert len(list((run_dir / config.RAW_SUBDIR / "web").glob("*.json"))) == 10
+    assert len(list((RunPaths.at(run_dir).raw / "web").glob("*.json"))) == 10
 
 
 def test_prepare_extraction_selection_preserves_order_when_score_is_none(isolated_runs_dir, monkeypatch):
@@ -799,7 +800,7 @@ def test_prepare_extraction_selection_preserves_order_when_score_is_none(isolate
     assert rc == 0
 
     run_dir = isolated_runs_dir / "ACME" / "2026-q2"
-    web_evidence_lines = (run_dir / config.EVIDENCE_SUBDIR / config.WEB_EVIDENCE_FILENAME).read_text().strip().splitlines()
+    web_evidence_lines = (RunPaths.at(run_dir).web_evidence).read_text().strip().splitlines()
     first_two_evidence = [json.loads(line) for line in web_evidence_lines[:2]]
     first_two = [evidence["url"] for evidence in first_two_evidence]
     assert first_two == ["https://example.com/first", "https://example.com/second"]
@@ -831,13 +832,13 @@ def test_prepare_archives_prior_run_instead_of_overwriting(isolated_runs_dir):
     run_dir = isolated_runs_dir / "ACME" / "2026-q2"
 
     assert main(["prepare", "--ticker", "ACME", "--event-id", "2026-q2", "--transcript", transcript]) == 0
-    first_manifest = json.loads((run_dir / config.MANIFEST_FILENAME).read_text())
+    first_manifest = json.loads((RunPaths.at(run_dir).manifest).read_text())
 
     # Rerun for the same ticker/event -- must not silently clobber the first run.
     assert main(["prepare", "--ticker", "ACME", "--event-id", "2026-q2", "--transcript", transcript]) == 0
-    second_manifest = json.loads((run_dir / config.MANIFEST_FILENAME).read_text())
+    second_manifest = json.loads((RunPaths.at(run_dir).manifest).read_text())
 
-    archive_dir = run_dir / config.ARCHIVE_SUBDIR
+    archive_dir = RunPaths.at(run_dir).archive
     assert archive_dir.is_dir()
     archived_runs = list(archive_dir.iterdir())
     assert len(archived_runs) == 1
@@ -851,7 +852,7 @@ def test_validate_outlook_fails_on_unknown_claim_id(isolated_runs_dir):
     main(["prepare", "--ticker", "ACME", "--event-id", "2026-q2", "--transcript", transcript])
 
     run_dir = isolated_runs_dir / "ACME" / "2026-q2"
-    segment_lines = (run_dir / config.NORMALIZED_SUBDIR / config.TRANSCRIPT_FILENAME).read_text().splitlines()
+    segment_lines = (RunPaths.at(run_dir).transcript).read_text().splitlines()
     segments = [json.loads(line) for line in segment_lines]
     revenue_segment = next(s for s in segments if "110 million" in s["text"])
 
@@ -868,15 +869,15 @@ def test_validate_outlook_fails_on_unknown_claim_id(isolated_runs_dir):
             "confidence": 0.9,
         }
     ]
-    (run_dir / config.CLAIMS_FILENAME).write_text(json.dumps(claims))
+    (RunPaths.at(run_dir).claims).write_text(json.dumps(claims))
     assert main(["analyze", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
 
-    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text(
+    (RunPaths.at(run_dir).outlook_brief).write_text(
         "# Outlook Brief\n\nRevenue growth looks strong [claim-999].\n"
     )
     assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 1
 
-    outlook_validation = json.loads((run_dir / config.OUTLOOK_VALIDATION_FILENAME).read_text())
+    outlook_validation = json.loads((RunPaths.at(run_dir).outlook_validation).read_text())
     assert outlook_validation["ok"] is False
     assert outlook_validation["validated_at"]
     assert outlook_validation["errors"]
@@ -887,7 +888,7 @@ def test_validate_outlook_passes_with_real_citation(isolated_runs_dir):
     main(["prepare", "--ticker", "ACME", "--event-id", "2026-q2", "--transcript", transcript])
 
     run_dir = isolated_runs_dir / "ACME" / "2026-q2"
-    segment_lines = (run_dir / config.NORMALIZED_SUBDIR / config.TRANSCRIPT_FILENAME).read_text().splitlines()
+    segment_lines = (RunPaths.at(run_dir).transcript).read_text().splitlines()
     segments = [json.loads(line) for line in segment_lines]
     revenue_segment = next(s for s in segments if "110 million" in s["text"])
 
@@ -904,15 +905,15 @@ def test_validate_outlook_passes_with_real_citation(isolated_runs_dir):
             "confidence": 0.9,
         }
     ]
-    (run_dir / config.CLAIMS_FILENAME).write_text(json.dumps(claims))
+    (RunPaths.at(run_dir).claims).write_text(json.dumps(claims))
     assert main(["analyze", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
 
-    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text(
+    (RunPaths.at(run_dir).outlook_brief).write_text(
         "# Outlook Brief\n\nRevenue growth looks strong [claim-001].\n"
     )
     assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
 
-    outlook_validation = json.loads((run_dir / config.OUTLOOK_VALIDATION_FILENAME).read_text())
+    outlook_validation = json.loads((RunPaths.at(run_dir).outlook_validation).read_text())
     assert outlook_validation["ok"] is True
     assert outlook_validation["validated_at"]
     assert outlook_validation["errors"] == []
@@ -921,14 +922,14 @@ def test_validate_outlook_passes_with_real_citation(isolated_runs_dir):
 def test_validate_outlook_history_records_failed_then_passed_attempts(isolated_runs_dir):
     """Preserve each submitted brief and its own result when the top-level result changes."""
     run_dir = _seed_validated_run(isolated_runs_dir)
-    claims_bytes = (run_dir / config.CLAIMS_FILENAME).read_bytes()
+    claims_bytes = (RunPaths.at(run_dir).claims).read_bytes()
 
     bad_brief = b"# Outlook\n\nUnsupported [claim-999].\n"
-    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_bytes(bad_brief)
+    (RunPaths.at(run_dir).outlook_brief).write_bytes(bad_brief)
     assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 1
 
     good_brief = b"# Outlook\n\nSupported [claim-001].\n"
-    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_bytes(good_brief)
+    (RunPaths.at(run_dir).outlook_brief).write_bytes(good_brief)
     assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
 
     attempts = _outlook_validation_attempt_dirs(run_dir)
@@ -962,7 +963,7 @@ def test_validate_outlook_history_records_failed_then_passed_attempts(isolated_r
     assert first_receipt["claims_sha256"] == sha256_hex(claims_bytes)
     assert first_receipt["outlook_brief_sha256"] == sha256_hex(bad_brief)
     assert second_receipt["outlook_brief_sha256"] == sha256_hex(good_brief)
-    assert json.loads((run_dir / config.OUTLOOK_VALIDATION_FILENAME).read_text()) == second_result
+    assert json.loads((RunPaths.at(run_dir).outlook_validation).read_text()) == second_result
 
 
 def test_validate_outlook_history_records_blocked_attempt(isolated_runs_dir):
@@ -992,7 +993,7 @@ def test_validate_outlook_fails_on_unescaped_dollar_signs(isolated_runs_dir):
     main(["prepare", "--ticker", "ACME", "--event-id", "2026-q2", "--transcript", transcript])
 
     run_dir = isolated_runs_dir / "ACME" / "2026-q2"
-    segment_lines = (run_dir / config.NORMALIZED_SUBDIR / config.TRANSCRIPT_FILENAME).read_text().splitlines()
+    segment_lines = (RunPaths.at(run_dir).transcript).read_text().splitlines()
     segments = [json.loads(line) for line in segment_lines]
     revenue_segment = next(s for s in segments if "110 million" in s["text"])
 
@@ -1009,17 +1010,17 @@ def test_validate_outlook_fails_on_unescaped_dollar_signs(isolated_runs_dir):
             "confidence": 0.9,
         }
     ]
-    (run_dir / config.CLAIMS_FILENAME).write_text(json.dumps(claims))
+    (RunPaths.at(run_dir).claims).write_text(json.dumps(claims))
     assert main(["analyze", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
 
     # Two unescaped '$' -- exactly the shape that corrupts under KaTeX/MathJax preview
     # rendering -- must fail the gate even though claim-001's citation resolves fine.
-    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text(
+    (RunPaths.at(run_dir).outlook_brief).write_text(
         "# Outlook Brief\n\nRevenue was $110 million, ahead of the prior $100 million [claim-001].\n"
     )
     assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 1
 
-    outlook_validation = json.loads((run_dir / config.OUTLOOK_VALIDATION_FILENAME).read_text())
+    outlook_validation = json.loads((RunPaths.at(run_dir).outlook_validation).read_text())
     assert outlook_validation["ok"] is False
     assert "unescaped" in outlook_validation["errors"][0]
 
@@ -1040,7 +1041,7 @@ def _seed_validated_run(isolated_runs_dir, ticker="ACME", event="2026-q2"):
     transcript = str(FIXTURES / "normal_transcript.txt")
     main(["prepare", "--ticker", ticker, "--event-id", event, "--transcript", transcript])
     run_dir = isolated_runs_dir / ticker / event
-    segments = [json.loads(l) for l in (run_dir / config.NORMALIZED_SUBDIR / config.TRANSCRIPT_FILENAME).read_text().splitlines()]
+    segments = [json.loads(l) for l in (RunPaths.at(run_dir).transcript).read_text().splitlines()]
     rev = next(s for s in segments if "110 million" in s["text"])
     claims = [{
         "id": "claim-001", "category": "reported_financial_performance", "classification": "reported_fact",
@@ -1048,7 +1049,7 @@ def _seed_validated_run(isolated_runs_dir, ticker="ACME", event="2026-q2"):
         "quote": "Revenue for the quarter was $110 million, up from $100 million a year ago.",
         "segment_id": rev["id"], "status": "reported", "values": {"revenue_millions": 110}, "confidence": 0.9,
     }]
-    (run_dir / config.CLAIMS_FILENAME).write_text(json.dumps(claims))
+    (RunPaths.at(run_dir).claims).write_text(json.dumps(claims))
     assert main(["analyze", "--ticker", ticker, "--event-id", event]) == 0
     return run_dir
 
@@ -1057,7 +1058,7 @@ def test_validation_json_records_input_hashes(isolated_runs_dir):
     """analyze binds validation.json to the exact bytes it validated, so staleness is
     later detectable (claims.json + transcript.jsonl at minimum)."""
     run_dir = _seed_validated_run(isolated_runs_dir)
-    v = json.loads((run_dir / config.VALIDATION_FILENAME).read_text())
+    v = json.loads((RunPaths.at(run_dir).validation).read_text())
     assert config.CLAIMS_FILENAME in v["input_hashes"]
     assert config.TRANSCRIPT_FILENAME in v["input_hashes"]
     assert all(len(h) == 64 for h in v["input_hashes"].values())
@@ -1068,10 +1069,10 @@ def test_validation_json_pins_manifest_not_every_source(isolated_runs_dir):
     there, rather than restating a hash per archived source -- on a real run that
     restatement was 96% of the file's bytes and was copied into every attempt receipt."""
     run_dir = _seed_validated_run(isolated_runs_dir)
-    v = json.loads((run_dir / config.VALIDATION_FILENAME).read_text())
+    v = json.loads((RunPaths.at(run_dir).validation).read_text())
     assert config.MANIFEST_FILENAME in v["input_hashes"]
     assert [k for k in v["input_hashes"] if k.startswith("source:")] == []
-    receipt_dirs = sorted((run_dir / config.VALIDATION_HISTORY_SUBDIR).glob("attempt-*"))
+    receipt_dirs = sorted((RunPaths.at(run_dir).validation_history).glob("attempt-*"))
     receipt = json.loads((receipt_dirs[-1] / config.VALIDATION_ATTEMPT_RECEIPT_FILENAME).read_text())
     assert [k for k in receipt["input_hashes"] if k.startswith("source:")] == []
 
@@ -1084,10 +1085,10 @@ def test_later_gates_still_detect_an_edited_archived_source(isolated_runs_dir, c
     analyze passed -- silently, with no test failing. This is that regression test.
     """
     run_dir = _seed_validated_run(isolated_runs_dir)
-    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text("# Outlook\n\nStrong [claim-001].\n")
+    (RunPaths.at(run_dir).outlook_brief).write_text("# Outlook\n\nStrong [claim-001].\n")
     assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
 
-    manifest = json.loads((run_dir / config.MANIFEST_FILENAME).read_text())
+    manifest = json.loads((RunPaths.at(run_dir).manifest).read_text())
     archived = run_dir / manifest["sources"][0]["path"]
     archived.write_bytes(archived.read_bytes() + b"\ntampered after analyze\n")
 
@@ -1102,11 +1103,11 @@ def test_validate_outlook_blocks_when_claims_changed_since_analyze(isolated_runs
     """If claims.json is edited after analyze, its recorded hash no longer matches, so the
     'ok' is stale -- validate-outlook must refuse rather than validate against unvalidated claims."""
     run_dir = _seed_validated_run(isolated_runs_dir)
-    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text("# Outlook\n\nStrong [claim-001].\n")
+    (RunPaths.at(run_dir).outlook_brief).write_text("# Outlook\n\nStrong [claim-001].\n")
     # edit claims.json bytes WITHOUT re-running analyze (claim-001 still present -> not a citation failure)
-    claims = json.loads((run_dir / config.CLAIMS_FILENAME).read_text())
+    claims = json.loads((RunPaths.at(run_dir).claims).read_text())
     claims[0]["confidence"] = 0.8
-    (run_dir / config.CLAIMS_FILENAME).write_text(json.dumps(claims))
+    (RunPaths.at(run_dir).claims).write_text(json.dumps(claims))
     assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 1
 
 
@@ -1114,7 +1115,7 @@ def test_check_review_requires_passing_outlook_validation(isolated_runs_dir):
     """The review gate must require validate-outlook to have actually passed. Previously it
     only checked outlook-brief.md existed, so the stage could be skipped entirely."""
     run_dir = _seed_validated_run(isolated_runs_dir)
-    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text("# Outlook\n\nStrong [claim-001].\n")
+    (RunPaths.at(run_dir).outlook_brief).write_text("# Outlook\n\nStrong [claim-001].\n")
     # deliberately do NOT run validate-outlook -> no outlook-validation.json
     assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 2
 
@@ -1123,10 +1124,10 @@ def test_check_review_blocks_when_outlook_edited_after_validation(isolated_runs_
     """Even after a passing validate-outlook, editing the brief must invalidate the review
     gate -- the reviewed bytes must be the validated bytes."""
     run_dir = _seed_validated_run(isolated_runs_dir)
-    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text("# Outlook\n\nStrong [claim-001].\n")
+    (RunPaths.at(run_dir).outlook_brief).write_text("# Outlook\n\nStrong [claim-001].\n")
     assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
     # tamper with the brief after it passed
-    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text("# Outlook\n\nStrong [claim-001]. Edited afterwards.\n")
+    (RunPaths.at(run_dir).outlook_brief).write_text("# Outlook\n\nStrong [claim-001]. Edited afterwards.\n")
     assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 2
 
 
@@ -1178,15 +1179,15 @@ def test_prepare_pdf_with_unrecognised_layout_fails_loudly(isolated_runs_dir, tm
 def _write_review_report(run_dir, report, review_mode="full"):
     """Add the exact artifact receipt required of a semantic reviewer."""
     report["review_mode"] = review_mode
-    report["claims_sha256"] = sha256_hex((run_dir / config.CLAIMS_FILENAME).read_bytes())
-    report["outlook_brief_sha256"] = sha256_hex((run_dir / config.OUTLOOK_BRIEF_FILENAME).read_bytes())
-    diff_path = run_dir / config.REVIEW_DIFF_FILENAME
+    report["claims_sha256"] = sha256_hex((RunPaths.at(run_dir).claims).read_bytes())
+    report["outlook_brief_sha256"] = sha256_hex((RunPaths.at(run_dir).outlook_brief).read_bytes())
+    diff_path = RunPaths.at(run_dir).review_diff
     report["review_diff_sha256"] = sha256_hex(diff_path.read_bytes()) if diff_path.exists() else None
     if not report.get("source_checks"):
         report["source_checks"] = [_finding("info", "manifest.json")]
     if not report.get("process_findings"):
         report["process_findings"] = [_finding("info", "validation.json")]
-    (run_dir / config.REVIEW_REPORT_JSON_FILENAME).write_text(json.dumps(report))
+    (RunPaths.at(run_dir).review_report_json).write_text(json.dumps(report))
 
 
 def _seed_reviewed_run(isolated_runs_dir, ticker="ACME", event="2026-q2", verdict="pass", escalate=False):
@@ -1197,7 +1198,7 @@ def _seed_reviewed_run(isolated_runs_dir, ticker="ACME", event="2026-q2", verdic
     # claim-001 is cited only in a non-conclusion section (## 2) so a plain text-only
     # edit to claim-001 does not, by itself, trip the conclusion-section escalation
     # rule -- the conclusion-section test below adds its own citation in ## 5.
-    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text(
+    (RunPaths.at(run_dir).outlook_brief).write_text(
         "# Outlook Brief\n\n## 1. Outlook in brief\n\nStrong quarter.\n\n"
         "## 2. Q&A highlights\n\nRevenue grew steadily [claim-001].\n\n"
         "## 5. Base case\n\nContinued momentum expected.\n"
@@ -1223,7 +1224,7 @@ def _seed_reviewed_run(isolated_runs_dir, ticker="ACME", event="2026-q2", verdic
 
 def test_snapshot_review_round_copies_complete_review_bundle(isolated_runs_dir):
     run_dir = _seed_reviewed_run(isolated_runs_dir)
-    round_dir = run_dir / config.REVIEW_HISTORY_SUBDIR / "round-1"
+    round_dir = RunPaths.at(run_dir).review_round(1)
     assert round_dir.exists()
     for filename in (
         config.CLAIMS_FILENAME,
@@ -1232,7 +1233,8 @@ def test_snapshot_review_round_copies_complete_review_bundle(isolated_runs_dir):
         config.REVIEW_REPORT_JSON_FILENAME,
     ):
         assert (round_dir / filename).exists()
-        assert (round_dir / filename).read_bytes() == (run_dir / filename).read_bytes()
+        # A snapshot holds its files flat inside itself, whatever layout the run uses.
+        assert (round_dir / filename).read_bytes() == RunPaths.at(run_dir).resolve(filename).read_bytes()
 
 
 def test_snapshot_review_round_writes_severity_count_receipt(isolated_runs_dir):
@@ -1241,7 +1243,7 @@ def test_snapshot_review_round_writes_severity_count_receipt(isolated_runs_dir):
     finding counts by severity -- without opening the full review-report.json or
     waiting for audit-record.json, which is only written once the whole run passes."""
     run_dir = _seed_reviewed_run(isolated_runs_dir)
-    receipt = json.loads((run_dir / config.REVIEW_HISTORY_SUBDIR / "round-1" / config.REVIEW_ROUND_RECEIPT_FILENAME).read_text())
+    receipt = json.loads((RunPaths.at(run_dir).review_round(1) / config.REVIEW_ROUND_RECEIPT_FILENAME).read_text())
     assert receipt["round"] == 1
     assert receipt["verdict"] == "pass"
     assert receipt["escalate_full_review"] is False
@@ -1253,7 +1255,7 @@ def test_snapshot_review_round_writes_severity_count_receipt(isolated_runs_dir):
 
 def test_review_diff_with_zero_completed_rounds_errors(isolated_runs_dir):
     run_dir = _seed_validated_run(isolated_runs_dir)
-    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text("# Outlook\n\nStrong [claim-001].\n")
+    (RunPaths.at(run_dir).outlook_brief).write_text("# Outlook\n\nStrong [claim-001].\n")
     assert main(["review-diff", "--ticker", "ACME", "--event-id", "2026-q2"]) == 2
 
 
@@ -1261,7 +1263,7 @@ def test_review_diff_unchanged_claims_produces_empty_diff(isolated_runs_dir):
     _seed_reviewed_run(isolated_runs_dir)
     assert main(["review-diff", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
     run_dir = isolated_runs_dir / "ACME" / "2026-q2"
-    diff = json.loads((run_dir / "review-diff.json").read_text())
+    diff = json.loads(RunPaths.at(run_dir).review_diff.read_text())
     assert diff["claims_changed"] == []
     assert diff["auto_escalated"] is False
     assert diff["round_number"] == 2
@@ -1276,18 +1278,18 @@ def test_review_diff_writes_readable_sha256_sidecar(isolated_runs_dir):
     _seed_reviewed_run(isolated_runs_dir)
     assert main(["review-diff", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
     run_dir = isolated_runs_dir / "ACME" / "2026-q2"
-    recorded = (run_dir / config.REVIEW_DIFF_SHA256_FILENAME).read_text(encoding="utf-8")
-    actual = sha256_hex((run_dir / config.REVIEW_DIFF_FILENAME).read_bytes())
+    recorded = (RunPaths.at(run_dir).review_diff_sha256).read_text(encoding="utf-8")
+    actual = sha256_hex((RunPaths.at(run_dir).review_diff).read_bytes())
     assert recorded == actual
 
 
 def test_review_diff_text_only_change_under_threshold_not_escalated(isolated_runs_dir):
     run_dir = _seed_reviewed_run(isolated_runs_dir)
-    claims = json.loads((run_dir / config.CLAIMS_FILENAME).read_text())
+    claims = json.loads((RunPaths.at(run_dir).claims).read_text())
     claims[0]["claim_text"] = "Revenue came in at $110 million."
-    (run_dir / config.CLAIMS_FILENAME).write_text(json.dumps(claims))
+    (RunPaths.at(run_dir).claims).write_text(json.dumps(claims))
     assert main(["review-diff", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
-    diff = json.loads((run_dir / "review-diff.json").read_text())
+    diff = json.loads(RunPaths.at(run_dir).review_diff.read_text())
     assert diff["auto_escalated"] is False
     assert len(diff["claims_changed"]) == 1
     assert diff["claims_changed"][0]["claim_id"] == "claim-001"
@@ -1297,38 +1299,38 @@ def test_review_diff_text_only_change_under_threshold_not_escalated(isolated_run
 def test_review_diff_escalates_when_too_many_claims_changed(isolated_runs_dir, monkeypatch):
     monkeypatch.setattr(config, "REVIEW_DIFF_MAX_CLAIMS_CHANGED", 1)
     run_dir = _seed_reviewed_run(isolated_runs_dir)
-    claims = json.loads((run_dir / config.CLAIMS_FILENAME).read_text())
+    claims = json.loads((RunPaths.at(run_dir).claims).read_text())
     claims[0]["claim_text"] = "Revenue came in at $110 million."
     claims.append(dict(claims[0], id="claim-002", claim_text="Second claim added."))
-    (run_dir / config.CLAIMS_FILENAME).write_text(json.dumps(claims))
+    (RunPaths.at(run_dir).claims).write_text(json.dumps(claims))
     assert main(["review-diff", "--ticker", "ACME", "--event-id", "2026-q2"]) == 3
-    diff = json.loads((run_dir / "review-diff.json").read_text())
+    diff = json.loads(RunPaths.at(run_dir).review_diff.read_text())
     assert diff["auto_escalated"] is True
 
 
 def test_review_diff_escalates_when_period_changes(isolated_runs_dir):
     run_dir = _seed_reviewed_run(isolated_runs_dir)
-    claims = json.loads((run_dir / config.CLAIMS_FILENAME).read_text())
+    claims = json.loads((RunPaths.at(run_dir).claims).read_text())
     claims[0]["period"] = "3 months to 30 Jun 2026"
-    (run_dir / config.CLAIMS_FILENAME).write_text(json.dumps(claims))
+    (RunPaths.at(run_dir).claims).write_text(json.dumps(claims))
     assert main(["review-diff", "--ticker", "ACME", "--event-id", "2026-q2"]) == 3
-    diff = json.loads((run_dir / "review-diff.json").read_text())
+    diff = json.loads(RunPaths.at(run_dir).review_diff.read_text())
     assert diff["auto_escalated"] is True
 
 
 def test_review_diff_escalates_when_conclusion_section_cites_changed_claim(isolated_runs_dir):
     run_dir = _seed_reviewed_run(isolated_runs_dir)
     # Now also cite claim-001 from the ## 5 Base case (conclusion-bearing) section.
-    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text(
+    (RunPaths.at(run_dir).outlook_brief).write_text(
         "# Outlook Brief\n\n## 1. Outlook in brief\n\nStrong quarter.\n\n"
         "## 2. Q&A highlights\n\nRevenue grew steadily [claim-001].\n\n"
         "## 5. Base case\n\nContinued momentum expected [claim-001].\n"
     )
-    claims = json.loads((run_dir / config.CLAIMS_FILENAME).read_text())
+    claims = json.loads((RunPaths.at(run_dir).claims).read_text())
     claims[0]["claim_text"] = "Revenue came in at $110 million, a touch higher."
-    (run_dir / config.CLAIMS_FILENAME).write_text(json.dumps(claims))
+    (RunPaths.at(run_dir).claims).write_text(json.dumps(claims))
     assert main(["review-diff", "--ticker", "ACME", "--event-id", "2026-q2"]) == 3
-    diff = json.loads((run_dir / "review-diff.json").read_text())
+    diff = json.loads(RunPaths.at(run_dir).review_diff.read_text())
     assert 5 in diff["affected_brief_sections"]
     assert diff["auto_escalated"] is True
 
@@ -1336,7 +1338,7 @@ def test_review_diff_escalates_when_conclusion_section_cites_changed_claim(isola
 def test_review_diff_blocked_when_round_cap_reached(isolated_runs_dir, monkeypatch):
     monkeypatch.setattr(config, "REVIEW_MAX_ROUNDS", 1)
     run_dir = _seed_reviewed_run(isolated_runs_dir)
-    diff_path = run_dir / "review-diff.json"
+    diff_path = RunPaths.at(run_dir).review_diff
     assert not diff_path.exists()
     assert main(["review-diff", "--ticker", "ACME", "--event-id", "2026-q2"]) == 4
     assert not diff_path.exists()
@@ -1344,7 +1346,7 @@ def test_review_diff_blocked_when_round_cap_reached(isolated_runs_dir, monkeypat
 
 def test_check_review_escalate_full_review_returns_3_regardless_of_verdict(isolated_runs_dir):
     run_dir = _seed_validated_run(isolated_runs_dir)
-    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text("# Outlook\n\nStrong [claim-001].\n")
+    (RunPaths.at(run_dir).outlook_brief).write_text("# Outlook\n\nStrong [claim-001].\n")
     assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
     review_report = {
         "verdict": "pass",
@@ -1360,14 +1362,14 @@ def test_check_review_escalate_full_review_returns_3_regardless_of_verdict(isola
     }
     _write_review_report(run_dir, review_report)
     assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 3
-    assert (run_dir / config.REVIEW_REPORT_MD_FILENAME).exists()
+    assert (RunPaths.at(run_dir).review_report_md).exists()
 
 
 def test_check_review_persists_proposed_lessons_deduplicated(isolated_runs_dir):
     """proposed_lessons on an accepted review-report.json land in the repo-root
     extractor-lessons memory file, appended once and deduplicated across runs."""
     run_dir = _seed_validated_run(isolated_runs_dir)
-    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text("# Outlook\n\nStrong [claim-001].\n")
+    (RunPaths.at(run_dir).outlook_brief).write_text("# Outlook\n\nStrong [claim-001].\n")
     assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
     review_report = {
         "verdict": "pass",
@@ -1392,7 +1394,7 @@ def test_check_review_persists_proposed_lessons_deduplicated(isolated_runs_dir):
 
     # A second run proposing the same lesson (plus a new one) must not duplicate the first.
     run_dir_2 = _seed_validated_run(isolated_runs_dir, ticker="MSFT")
-    (run_dir_2 / config.OUTLOOK_BRIEF_FILENAME).write_text("# Outlook\n\nStrong [claim-001].\n")
+    RunPaths.at(run_dir_2).outlook_brief.write_text("# Outlook\n\nStrong [claim-001].\n")
     assert main(["validate-outlook", "--ticker", "MSFT", "--event-id", "2026-q2"]) == 0
     review_report_2 = dict(review_report)
     review_report_2["proposed_lessons"] = [
@@ -1414,7 +1416,7 @@ def test_analyze_blocked_by_unclosed_review_report(isolated_runs_dir):
     pre-correction verdict). analyze must refuse to run until check-review closes the
     outstanding round."""
     run_dir = _seed_validated_run(isolated_runs_dir)
-    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text("# Outlook\n\nStrong [claim-001].\n")
+    (RunPaths.at(run_dir).outlook_brief).write_text("# Outlook\n\nStrong [claim-001].\n")
     assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
     review_report = {
         "verdict": "fail", "reviewed_at": "2026-08-27T00:00:00Z", "model": "opus",
@@ -1424,7 +1426,7 @@ def test_analyze_blocked_by_unclosed_review_report(isolated_runs_dir):
     _write_review_report(run_dir, review_report)
     # Dispatch happened, review-report.json exists -- but check-review was never run.
     # Correcting now, before closing the round, must be blocked.
-    claims_path = run_dir / config.CLAIMS_FILENAME
+    claims_path = RunPaths.at(run_dir).claims
     original_claims_bytes = claims_path.read_bytes()
     claims = json.loads(original_claims_bytes)
     claims[0]["claim_text"] = "Revenue was $110 million, corrected."
@@ -1453,13 +1455,13 @@ def test_review_diff_escalates_on_brief_prose_change_alone(isolated_runs_dir):
     so this produced an empty claims_changed diff and auto_escalated stayed False."""
     run_dir = _seed_reviewed_run(isolated_runs_dir)
     # claims.json is untouched (byte-identical to round 1); only the brief's prose changes.
-    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text(
+    (RunPaths.at(run_dir).outlook_brief).write_text(
         "# Outlook Brief\n\n## 1. Outlook in brief\n\nActually a weak quarter, revise down.\n\n"
         "## 2. Q&A highlights\n\nRevenue grew steadily [claim-001].\n\n"
         "## 5. Base case\n\nContinued momentum expected.\n"
     )
     assert main(["review-diff", "--ticker", "ACME", "--event-id", "2026-q2"]) == 3
-    diff = json.loads((run_dir / "review-diff.json").read_text())
+    diff = json.loads(RunPaths.at(run_dir).review_diff.read_text())
     assert diff["claims_changed"] == []
     assert diff["auto_escalated"] is True
 
@@ -1467,7 +1469,7 @@ def test_review_diff_escalates_on_brief_prose_change_alone(isolated_runs_dir):
 def test_check_review_requires_diff_and_current_bundle_receipt_after_round_one(isolated_runs_dir):
     """A changed brief cannot inherit round 1's verdict by skipping review-diff."""
     run_dir = _seed_reviewed_run(isolated_runs_dir)
-    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text(
+    (RunPaths.at(run_dir).outlook_brief).write_text(
         "# Outlook Brief\n\n## 1. Outlook in brief\n\nWeak quarter.\n\n"
         "## 2. Q&A highlights\n\nRevenue grew [claim-001].\n"
     )
@@ -1479,26 +1481,26 @@ def test_check_review_requires_diff_and_current_bundle_receipt_after_round_one(i
     }
     _write_review_report(run_dir, copied_verdict, review_mode="full")
     assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 2
-    assert not (run_dir / config.REVIEW_HISTORY_SUBDIR / "round-2").exists()
+    assert not (RunPaths.at(run_dir).review_round(2)).exists()
 
     assert main(["review-diff", "--ticker", "ACME", "--event-id", "2026-q2"]) == 3
     _write_review_report(run_dir, copied_verdict, review_mode="full")
     assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
-    assert (run_dir / config.REVIEW_HISTORY_SUBDIR / "round-2").exists()
+    assert (RunPaths.at(run_dir).review_round(2)).exists()
 
 
 def test_validate_outlook_blocks_when_an_archived_source_changed_after_analyze(isolated_runs_dir):
     run_dir = _seed_validated_run(isolated_runs_dir)
-    manifest = json.loads((run_dir / config.MANIFEST_FILENAME).read_text())
+    manifest = json.loads((RunPaths.at(run_dir).manifest).read_text())
     source_path = run_dir / manifest["sources"][0]["path"]
     source_path.write_bytes(source_path.read_bytes() + b"\nchanged after validation")
-    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text("# Outlook\n\nStrong [claim-001].\n")
+    (RunPaths.at(run_dir).outlook_brief).write_text("# Outlook\n\nStrong [claim-001].\n")
     assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 1
 
 
 def test_repeated_check_review_rechecks_sources_before_returning_accepted_verdict(isolated_runs_dir):
     run_dir = _seed_reviewed_run(isolated_runs_dir)
-    manifest = json.loads((run_dir / config.MANIFEST_FILENAME).read_text())
+    manifest = json.loads((RunPaths.at(run_dir).manifest).read_text())
     source_path = run_dir / manifest["sources"][0]["path"]
     source_path.write_bytes(source_path.read_bytes() + b"\nchanged after accepted review")
     assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 2
@@ -1506,9 +1508,9 @@ def test_repeated_check_review_rechecks_sources_before_returning_accepted_verdic
 
 def test_check_review_fails_cleanly_when_hashed_claims_file_is_missing(isolated_runs_dir):
     run_dir = _seed_validated_run(isolated_runs_dir)
-    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text("# Outlook\n\nStrong [claim-001].\n")
+    (RunPaths.at(run_dir).outlook_brief).write_text("# Outlook\n\nStrong [claim-001].\n")
     assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
-    (run_dir / config.CLAIMS_FILENAME).unlink()
+    (RunPaths.at(run_dir).claims).unlink()
     assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 2
 
 
@@ -1517,12 +1519,12 @@ def test_check_review_blocks_when_claims_edited_after_validate_outlook(isolated_
     was never checked by check-review -- claims.json could be edited afterwards, leaving
     the brief untouched, and this gate previously missed it entirely."""
     run_dir = _seed_validated_run(isolated_runs_dir)
-    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text("# Outlook\n\nStrong [claim-001].\n")
+    (RunPaths.at(run_dir).outlook_brief).write_text("# Outlook\n\nStrong [claim-001].\n")
     assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
     # Edit claims.json in place (leave outlook-brief.md untouched).
-    claims = json.loads((run_dir / config.CLAIMS_FILENAME).read_text())
+    claims = json.loads((RunPaths.at(run_dir).claims).read_text())
     claims[0]["confidence"] = 0.5
-    (run_dir / config.CLAIMS_FILENAME).write_text(json.dumps(claims))
+    (RunPaths.at(run_dir).claims).write_text(json.dumps(claims))
     assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 2
 
 
@@ -1532,8 +1534,8 @@ def test_validate_outlook_rejects_hand_written_validation_json_without_hashes(is
     validation rejects it outright -- it never reaches the hash gate at all.
     Previously json.loads()+.get() let this sail straight through."""
     run_dir = _seed_validated_run(isolated_runs_dir)
-    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text("# Outlook\n\nStrong [claim-001].\n")
-    (run_dir / config.VALIDATION_FILENAME).write_text(json.dumps({"ok": True}))
+    (RunPaths.at(run_dir).outlook_brief).write_text("# Outlook\n\nStrong [claim-001].\n")
+    (RunPaths.at(run_dir).validation).write_text(json.dumps({"ok": True}))
     assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) != 0
 
 
@@ -1543,11 +1545,11 @@ def test_validate_outlook_rejects_schema_valid_validation_json_missing_claims_ha
     -- e.g. hand-constructed, or from a tool that didn't know to include it. Must be
     rejected: a missing recorded hash fails this gate, it doesn't pass by default."""
     run_dir = _seed_validated_run(isolated_runs_dir)
-    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text("# Outlook\n\nStrong [claim-001].\n")
-    validation = json.loads((run_dir / config.VALIDATION_FILENAME).read_text())
+    (RunPaths.at(run_dir).outlook_brief).write_text("# Outlook\n\nStrong [claim-001].\n")
+    validation = json.loads((RunPaths.at(run_dir).validation).read_text())
     assert config.CLAIMS_FILENAME in validation["input_hashes"]  # sanity: it's really there normally
     del validation["input_hashes"][config.CLAIMS_FILENAME]
-    (run_dir / config.VALIDATION_FILENAME).write_text(json.dumps(validation))
+    (RunPaths.at(run_dir).validation).write_text(json.dumps(validation))
     assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 1
 
 
@@ -1571,7 +1573,7 @@ def test_check_review_enforces_round_cap_even_when_review_diff_skipped(isolated_
     }
     _write_review_report(run_dir, review_report)
     assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 4
-    assert not (run_dir / config.REVIEW_HISTORY_SUBDIR / "round-2").exists()
+    assert not (RunPaths.at(run_dir).review_round(2)).exists()
 
 
 def test_check_review_cap_refusal_does_not_write_report_md_or_deadlock(isolated_runs_dir, monkeypatch):
@@ -1582,7 +1584,7 @@ def test_check_review_cap_refusal_does_not_write_report_md_or_deadlock(isolated_
     check-review and review-diff all refused, with no CLI path to recover."""
     monkeypatch.setattr(config, "REVIEW_MAX_ROUNDS", 1)
     run_dir = _seed_reviewed_run(isolated_runs_dir)  # round 1 already closed
-    original_md = (run_dir / config.REVIEW_REPORT_MD_FILENAME).read_text()
+    original_md = (RunPaths.at(run_dir).review_report_md).read_text()
     review_report = {
         "verdict": "pass", "reviewed_at": "2026-08-27T00:00:00Z", "model": "opus",
         "source_checks": [], "claim_findings": [], "outlook_findings": [], "process_findings": [],
@@ -1592,8 +1594,8 @@ def test_check_review_cap_refusal_does_not_write_report_md_or_deadlock(isolated_
 
     assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 4
     # review-report.md must NOT have been overwritten with the refused round's content.
-    assert (run_dir / config.REVIEW_REPORT_MD_FILENAME).read_text() == original_md
-    assert not (run_dir / config.REVIEW_HISTORY_SUBDIR / "round-2").exists()
+    assert (RunPaths.at(run_dir).review_report_md).read_text() == original_md
+    assert not (RunPaths.at(run_dir).review_round(2)).exists()
 
     # The cap is a terminal policy state, but it must not lock unrelated commands.
     assert main(["analyze", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
@@ -1604,7 +1606,7 @@ def test_check_review_cap_refusal_does_not_write_report_md_or_deadlock(isolated_
     assert main(["review-diff", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
     _write_review_report(run_dir, review_report, review_mode="diff")
     assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) not in (2, 4)
-    assert (run_dir / config.REVIEW_HISTORY_SUBDIR / "round-2").exists()
+    assert (RunPaths.at(run_dir).review_round(2)).exists()
 
 
 def test_check_review_rejects_round_two_without_review_diff_when_cap_not_reached(isolated_runs_dir):
@@ -1626,7 +1628,7 @@ def test_check_review_rejects_round_two_without_review_diff_when_cap_not_reached
     _write_review_report(run_dir, review_report)  # review_diff_sha256 -> None, no review-diff.json exists
     exit_code = main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"])
     assert exit_code == 2  # NOT 4 -- this is a missing-diff rejection, not a cap rejection
-    assert not (run_dir / config.REVIEW_HISTORY_SUBDIR / "round-2").exists()
+    assert not (RunPaths.at(run_dir).review_round(2)).exists()
 
 
 def test_check_review_refuses_mutated_bundle_after_cap_exhausted(isolated_runs_dir, monkeypatch):
@@ -1638,9 +1640,9 @@ def test_check_review_refuses_mutated_bundle_after_cap_exhausted(isolated_runs_d
     monkeypatch.setattr(config, "REVIEW_MAX_ROUNDS", 1)
     run_dir = _seed_reviewed_run(isolated_runs_dir)  # round 1 already closed, cap exhausted
 
-    claims = json.loads((run_dir / config.CLAIMS_FILENAME).read_text())
+    claims = json.loads((RunPaths.at(run_dir).claims).read_text())
     claims[0]["confidence"] = 0.5
-    (run_dir / config.CLAIMS_FILENAME).write_text(json.dumps(claims))
+    (RunPaths.at(run_dir).claims).write_text(json.dumps(claims))
     assert main(["analyze", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
     assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
 
@@ -1655,7 +1657,7 @@ def test_check_review_refuses_mutated_bundle_after_cap_exhausted(isolated_runs_d
     _write_review_report(run_dir, review_report)
     exit_code = main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"])
     assert exit_code == 4  # refused -- the mutated bundle is NOT treated as the accepted round-1 repeat
-    assert not (run_dir / config.REVIEW_HISTORY_SUBDIR / "round-2").exists()
+    assert not (RunPaths.at(run_dir).review_round(2)).exists()
 
 
 def test_analyze_clears_stale_review_report_md_after_cap_exhausted_bundle_edit(isolated_runs_dir, monkeypatch):
@@ -1666,15 +1668,15 @@ def test_analyze_clears_stale_review_report_md_after_cap_exhausted_bundle_edit(i
     _review_history/round-1/."""
     monkeypatch.setattr(config, "REVIEW_MAX_ROUNDS", 1)
     run_dir = _seed_reviewed_run(isolated_runs_dir)
-    assert (run_dir / config.REVIEW_REPORT_MD_FILENAME).exists()
+    assert (RunPaths.at(run_dir).review_report_md).exists()
 
-    claims = json.loads((run_dir / config.CLAIMS_FILENAME).read_text())
+    claims = json.loads((RunPaths.at(run_dir).claims).read_text())
     claims[0]["confidence"] = 0.5
-    (run_dir / config.CLAIMS_FILENAME).write_text(json.dumps(claims))
+    (RunPaths.at(run_dir).claims).write_text(json.dumps(claims))
     assert main(["analyze", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
 
-    assert not (run_dir / config.REVIEW_REPORT_MD_FILENAME).exists()
-    assert (run_dir / config.REVIEW_HISTORY_SUBDIR / "round-1" / config.REVIEW_REPORT_JSON_FILENAME).exists()
+    assert not (RunPaths.at(run_dir).review_report_md).exists()
+    assert (RunPaths.at(run_dir).review_round(1) / config.REVIEW_REPORT_JSON_FILENAME).exists()
 
 
 def test_validate_outlook_clears_stale_review_report_md_after_brief_edit(isolated_runs_dir):
@@ -1682,26 +1684,26 @@ def test_validate_outlook_clears_stale_review_report_md_after_brief_edit(isolate
     instead of a claims edit, and without the cap being exhausted -- this is also the
     ordinary round-2 workflow, not just the post-cap edge case."""
     run_dir = _seed_reviewed_run(isolated_runs_dir)
-    assert (run_dir / config.REVIEW_REPORT_MD_FILENAME).exists()
+    assert (RunPaths.at(run_dir).review_report_md).exists()
 
-    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text(
+    (RunPaths.at(run_dir).outlook_brief).write_text(
         "# Outlook Brief\n\n## 1. Outlook in brief\n\nRevised after round 1 findings.\n\n"
         "## 2. Q&A highlights\n\nRevenue grew steadily [claim-001].\n\n"
         "## 5. Base case\n\nContinued momentum expected.\n"
     )
     assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
 
-    assert not (run_dir / config.REVIEW_REPORT_MD_FILENAME).exists()
-    assert (run_dir / config.REVIEW_HISTORY_SUBDIR / "round-1" / config.REVIEW_REPORT_JSON_FILENAME).exists()
+    assert not (RunPaths.at(run_dir).review_report_md).exists()
+    assert (RunPaths.at(run_dir).review_round(1) / config.REVIEW_REPORT_JSON_FILENAME).exists()
 
 
 def test_analyze_preserves_review_report_md_when_bundle_unchanged(isolated_runs_dir):
     """The cleanup must not fire on a no-op re-run: the round-1 bundle still matches
     its snapshot, so the rendered review-report.md is still an accurate receipt."""
     run_dir = _seed_reviewed_run(isolated_runs_dir)
-    assert (run_dir / config.REVIEW_REPORT_MD_FILENAME).exists()
+    assert (RunPaths.at(run_dir).review_report_md).exists()
     assert main(["analyze", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
-    assert (run_dir / config.REVIEW_REPORT_MD_FILENAME).exists()
+    assert (RunPaths.at(run_dir).review_report_md).exists()
 
 
 def _finding(severity, artifact="claims.json#claim-001"):
@@ -1718,7 +1720,7 @@ def test_check_review_blocks_pass_verdict_with_medium_severity_finding(isolated_
     """verdict: 'pass' must be internally consistent with the reviewer's own assigned
     severities -- 'pass' requires nothing above 'low'."""
     run_dir = _seed_validated_run(isolated_runs_dir)
-    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text("# Outlook\n\nStrong [claim-001].\n")
+    (RunPaths.at(run_dir).outlook_brief).write_text("# Outlook\n\nStrong [claim-001].\n")
     assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
     review_report = {
         "verdict": "pass",
@@ -1740,7 +1742,7 @@ def test_check_review_blocks_pass_with_warnings_verdict_with_critical_severity_f
     """verdict: 'pass_with_warnings' must not co-exist with a 'critical' finding -- that
     combination should have been verdict: 'fail'."""
     run_dir = _seed_validated_run(isolated_runs_dir)
-    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text("# Outlook\n\nStrong [claim-001].\n")
+    (RunPaths.at(run_dir).outlook_brief).write_text("# Outlook\n\nStrong [claim-001].\n")
     assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
     review_report = {
         "verdict": "pass_with_warnings",
@@ -1764,8 +1766,8 @@ def test_analyze_requires_manifest_json(isolated_runs_dir):
     transcript = str(FIXTURES / "normal_transcript.txt")
     main(["prepare", "--ticker", "ACME", "--event-id", "2026-q2", "--transcript", transcript])
     run_dir = isolated_runs_dir / "ACME" / "2026-q2"
-    (run_dir / config.CLAIMS_FILENAME).write_text("[]")
-    (run_dir / config.MANIFEST_FILENAME).unlink()
+    (RunPaths.at(run_dir).claims).write_text("[]")
+    (RunPaths.at(run_dir).manifest).unlink()
     assert main(["analyze", "--ticker", "ACME", "--event-id", "2026-q2"]) == 2
 
 
@@ -1773,10 +1775,10 @@ def test_analyze_rejects_manifest_source_hash_mismatch(isolated_runs_dir):
     transcript = str(FIXTURES / "normal_transcript.txt")
     main(["prepare", "--ticker", "ACME", "--event-id", "2026-q2", "--transcript", transcript])
     run_dir = isolated_runs_dir / "ACME" / "2026-q2"
-    (run_dir / config.CLAIMS_FILENAME).write_text("[]")
-    manifest = json.loads((run_dir / config.MANIFEST_FILENAME).read_text())
+    (RunPaths.at(run_dir).claims).write_text("[]")
+    manifest = json.loads((RunPaths.at(run_dir).manifest).read_text())
     manifest["sources"][0]["sha256"] = "0" * 64
-    (run_dir / config.MANIFEST_FILENAME).write_text(json.dumps(manifest))
+    (RunPaths.at(run_dir).manifest).write_text(json.dumps(manifest))
     assert main(["analyze", "--ticker", "ACME", "--event-id", "2026-q2"]) == 2
 
 
@@ -1790,7 +1792,7 @@ def test_snapshot_review_round_is_idempotent_on_unchanged_report(isolated_runs_d
     # were accidentally invoked twice with no new dispatch in between).
     main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"])
     assert _review_round_count(run_dir) == 1
-    assert not (run_dir / config.REVIEW_HISTORY_SUBDIR / "round-2").exists()
+    assert not (RunPaths.at(run_dir).review_round(2)).exists()
 
 
 def test_review_snapshot_identity_includes_outlook_validation(isolated_runs_dir):
@@ -1799,7 +1801,7 @@ def test_review_snapshot_identity_includes_outlook_validation(isolated_runs_dir)
     assert _review_bundle_matches_snapshot(run_dir, 1) is True
     assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
     assert _review_bundle_matches_snapshot(run_dir, 1) is True
-    result_path = run_dir / config.OUTLOOK_VALIDATION_FILENAME
+    result_path = RunPaths.at(run_dir).outlook_validation
     result = json.loads(result_path.read_text())
     result["claims_sha256"] = "0" * 64
     result_path.write_text(json.dumps(result))
@@ -1810,7 +1812,7 @@ def test_review_snapshot_identity_includes_outlook_validation(isolated_runs_dir)
 
 def test_check_review_writes_audit_record_on_pass(isolated_runs_dir):
     run_dir = _seed_reviewed_run(isolated_runs_dir, verdict="pass")
-    audit_path = run_dir / config.AUDIT_RECORD_FILENAME
+    audit_path = RunPaths.at(run_dir).audit_record
     assert audit_path.exists()
     record = json.loads(audit_path.read_text())
     assert record["run_id"] == "ACME:2026-q2"
@@ -1846,11 +1848,11 @@ def test_check_review_writes_audit_record_on_pass(isolated_runs_dir):
 def test_audit_record_counts_outlook_validation_corrections(isolated_runs_dir):
     """Expose a failed brief submission followed by a passing correction in the audit."""
     run_dir = _seed_validated_run(isolated_runs_dir)
-    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text(
+    (RunPaths.at(run_dir).outlook_brief).write_text(
         "# Outlook\n\nUnsupported [claim-999].\n"
     )
     assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 1
-    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text(
+    (RunPaths.at(run_dir).outlook_brief).write_text(
         "# Outlook\n\nSupported [claim-001].\n"
     )
     assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
@@ -1871,7 +1873,7 @@ def test_audit_record_counts_outlook_validation_corrections(isolated_runs_dir):
     )
     assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
 
-    record = json.loads((run_dir / config.AUDIT_RECORD_FILENAME).read_text())
+    record = json.loads((RunPaths.at(run_dir).audit_record).read_text())
     assert record["workflow_trace"][1]["attempts"] == 2
     assert record["workflow_trace"][1]["status"] == "passed"
     assert record["guardrail_summary"]["outlook_validation_retries"] == 1
@@ -1881,7 +1883,7 @@ def test_audit_record_counts_outlook_validation_corrections(isolated_runs_dir):
 
 def test_check_review_does_not_write_audit_record_on_fail(isolated_runs_dir):
     run_dir = _seed_validated_run(isolated_runs_dir)
-    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text(
+    (RunPaths.at(run_dir).outlook_brief).write_text(
         "# Outlook\n\nStrong [claim-001].\n"
     )
     assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
@@ -1893,7 +1895,7 @@ def test_check_review_does_not_write_audit_record_on_fail(isolated_runs_dir):
     }
     _write_review_report(run_dir, review_report)
     assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 2
-    assert not (run_dir / config.AUDIT_RECORD_FILENAME).exists()
+    assert not (RunPaths.at(run_dir).audit_record).exists()
 
 
 def test_check_review_audit_record_aggregates_across_rounds(isolated_runs_dir):
@@ -1901,7 +1903,7 @@ def test_check_review_audit_record_aggregates_across_rounds(isolated_runs_dir):
     exactly one audit-record.json, reflecting round 2 as final but counting the
     round-1 failure and its finding severities in the cumulative guardrail summary."""
     run_dir = _seed_validated_run(isolated_runs_dir)
-    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text(
+    (RunPaths.at(run_dir).outlook_brief).write_text(
         "# Outlook Brief\n\n## 1. Outlook in brief\n\nStrong quarter.\n\n"
         "## 2. Q&A highlights\n\nRevenue grew steadily [claim-001].\n\n"
         "## 5. Base case\n\nContinued momentum expected.\n"
@@ -1916,7 +1918,7 @@ def test_check_review_audit_record_aggregates_across_rounds(isolated_runs_dir):
     }
     _write_review_report(run_dir, round1_report)
     assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 2
-    assert not (run_dir / config.AUDIT_RECORD_FILENAME).exists()
+    assert not (RunPaths.at(run_dir).audit_record).exists()
 
     assert main(["review-diff", "--ticker", "ACME", "--event-id", "2026-q2"]) in (0, 3)
     round2_report = {
@@ -1929,7 +1931,7 @@ def test_check_review_audit_record_aggregates_across_rounds(isolated_runs_dir):
     _write_review_report(run_dir, round2_report, review_mode="diff")
     assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 1
 
-    record = json.loads((run_dir / config.AUDIT_RECORD_FILENAME).read_text())
+    record = json.loads((RunPaths.at(run_dir).audit_record).read_text())
     assert record["final_review_round"] == 2
     assert record["decision"]["verdict"] == "pass_with_warnings"
     assert record["decision"]["finding_counts"]["medium"] == 3
@@ -1951,7 +1953,7 @@ def test_check_review_audit_record_counts_historical_escalation(isolated_runs_di
     (escalation isn't terminal). Once a later round passes cleanly, the final
     audit record's guardrail_summary must still show that escalation happened."""
     run_dir = _seed_validated_run(isolated_runs_dir)
-    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text(
+    (RunPaths.at(run_dir).outlook_brief).write_text(
         "# Outlook Brief\n\n## 1. Outlook in brief\n\nStrong quarter.\n\n"
         "## 2. Q&A highlights\n\nRevenue grew steadily [claim-001].\n\n"
         "## 5. Base case\n\nContinued momentum expected.\n"
@@ -1976,7 +1978,7 @@ def test_check_review_audit_record_counts_historical_escalation(isolated_runs_di
     }
     _write_review_report(run_dir, round2_report, review_mode="diff")
     assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 3
-    assert not (run_dir / config.AUDIT_RECORD_FILENAME).exists()
+    assert not (RunPaths.at(run_dir).audit_record).exists()
 
     assert main(["review-diff", "--ticker", "ACME", "--event-id", "2026-q2"]) in (0, 3)
     round3_report = {
@@ -1987,7 +1989,7 @@ def test_check_review_audit_record_counts_historical_escalation(isolated_runs_di
     _write_review_report(run_dir, round3_report, review_mode="full")
     assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
 
-    record = json.loads((run_dir / config.AUDIT_RECORD_FILENAME).read_text())
+    record = json.loads((RunPaths.at(run_dir).audit_record).read_text())
     assert record["final_review_round"] == 3
     assert record["review_history_summary"]["review_rounds"] == 3
     assert record["guardrail_summary"]["escalations"] == 1

@@ -226,7 +226,7 @@ and identify what it repeatedly emphasises: principal segments, revenue model,
 metrics guidance is given for, operational measures raised in Q&A, capital/liquidity
 measures, and any sector-specific measure *the company itself defines*.
 
-For each one, write a `Metric` entry to `runs/<TICKER>/<EVENT_ID>/metrics.json`:
+For each one, write a `Metric` entry to `runs/<TICKER>/<EVENT_ID>/claims/metrics.json`:
 
 ```json
 {

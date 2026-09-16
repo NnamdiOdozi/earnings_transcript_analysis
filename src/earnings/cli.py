@@ -39,7 +39,7 @@ from .models import (
     ValidationResult,
     WebEvidence,
 )
-from .paths import RunPaths
+from .paths import CURRENT_LAYOUT, RunPaths
 from .process import (
     sanitize,
     scan_for_injection,
@@ -337,17 +337,17 @@ def _review_bundle_matches_snapshot(run_dir: Path, round_number: int) -> bool:
     )
     if not all(
         (prior_dir / filename).is_file()
-        and (run_dir / filename).is_file()
-        and (prior_dir / filename).read_bytes() == (run_dir / filename).read_bytes()
+        and RunPaths.at(run_dir).resolve(filename).is_file()
+        and (prior_dir / filename).read_bytes() == RunPaths.at(run_dir).resolve(filename).read_bytes()
         for filename in filenames
     ):
         return False
 
     gate_filename = config.OUTLOOK_VALIDATION_FILENAME
-    if not (prior_dir / gate_filename).is_file() or not (run_dir / gate_filename).is_file():
+    if not (prior_dir / gate_filename).is_file() or not RunPaths.at(run_dir).resolve(gate_filename).is_file():
         return False
     prior_gate = json.loads((prior_dir / gate_filename).read_text(encoding="utf-8"))
-    current_gate = json.loads((run_dir / gate_filename).read_text(encoding="utf-8"))
+    current_gate = json.loads(RunPaths.at(run_dir).resolve(gate_filename).read_text(encoding="utf-8"))
     prior_gate.pop("validated_at", None)
     current_gate.pop("validated_at", None)
     return prior_gate == current_gate
@@ -373,7 +373,7 @@ def _snapshot_review_round(run_dir: Path, round_number: int) -> None:
         config.OUTLOOK_VALIDATION_FILENAME,
         config.REVIEW_REPORT_JSON_FILENAME,
     ):
-        src = run_dir / filename
+        src = RunPaths.at(run_dir).resolve(filename)
         if src.exists():
             shutil.copy2(src, dest / filename)
     _write_review_round_receipt(dest)
@@ -804,12 +804,15 @@ def cmd_discover_peers(args: argparse.Namespace) -> int:
 
 def cmd_prepare(args: argparse.Namespace) -> int:
     run_dir = config.run_dir(args.ticker, args.event_id)
-    paths = RunPaths.at(run_dir)
+    # State the layout rather than detect it: this run's manifest does not exist yet, and
+    # a prior run's manifest may still be sitting here declaring the OLD layout until
+    # _archive_existing_run moves it. Every run prepared from now on is CURRENT_LAYOUT.
+    paths = RunPaths.at(run_dir, CURRENT_LAYOUT)
     _archive_existing_run(run_dir)
     raw_dir = paths.raw
     normalized_dir = paths.normalized
     evidence_dir = paths.evidence
-    for d in (raw_dir, normalized_dir, evidence_dir):
+    for d in (raw_dir, normalized_dir, evidence_dir, *paths.stage_dirs):
         d.mkdir(parents=True, exist_ok=True)
 
     loaded = load_transcript(args.transcript)
@@ -1119,6 +1122,7 @@ def cmd_prepare(args: argparse.Namespace) -> int:
         ticker=args.ticker.upper(),
         event_id=args.event_id,
         created_at=_now_iso(),
+        layout_version=paths.layout,
         event_date=getattr(args, "event_date", None),
         sources=(
             ([pdf_source_record] if pdf_source_record else [])
@@ -1314,7 +1318,7 @@ def cmd_validate_outlook(args: argparse.Namespace) -> int:
     paths = RunPaths.at(run_dir)
     input_hashes = {}
     for filename in (config.CLAIMS_FILENAME, config.OUTLOOK_BRIEF_FILENAME):
-        path = run_dir / filename
+        path = RunPaths.at(run_dir).resolve(filename)
         if path.is_file():
             input_hashes[filename] = sha256_hex(path.read_bytes())
     attempt = _OutlookValidationAttempt.start(run_dir, input_hashes)

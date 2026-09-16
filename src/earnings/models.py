@@ -78,6 +78,13 @@ class Manifest(BaseModel):
     ticker: str
     event_id: str
     created_at: str  # ISO 8601 UTC timestamp
+    # Which run-directory arrangement this run was written in; see paths.RunPaths.
+    # 1 = flat (every artifact at the run root, three _*_history dirs beside them).
+    # 2 = staged (claims/, outlook/, review/, each with its own history/).
+    # Recorded rather than inferred: a run is detected as layout 1 only because it
+    # predates the field, never because a stage directory happens to be missing --
+    # a freshly prepared layout-2 run has no claims/ content until analyze runs.
+    layout_version: int = 1
     # The --event-date the run was prepared with, verbatim. Recorded because it is the
     # cutoff every temporal_status on this run was judged against: without it an auditor
     # has to infer the event date from the evidence itself to check that judgment.

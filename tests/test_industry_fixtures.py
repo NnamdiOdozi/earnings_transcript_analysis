@@ -9,6 +9,7 @@ from pathlib import Path
 import pytest
 
 from earnings import config
+from earnings.paths import RunPaths
 from earnings.cli import main as _cli_main
 
 FIXTURES = Path(__file__).parent / "fixtures"
@@ -86,7 +87,7 @@ def test_pipeline_discovers_company_specific_metrics_generically(isolated_runs_d
     assert rc == 0
 
     run_dir = isolated_runs_dir / case["ticker"] / "2026-q2"
-    segment_lines = (run_dir / config.NORMALIZED_SUBDIR / config.TRANSCRIPT_FILENAME).read_text().splitlines()
+    segment_lines = (RunPaths.at(run_dir).transcript).read_text().splitlines()
     segments = [json.loads(line) for line in segment_lines]
     segment = next(s for s in segments if case["segment_needle"] in s["text"])
 
@@ -104,7 +105,7 @@ def test_pipeline_discovers_company_specific_metrics_generically(isolated_runs_d
             "confidence": 0.9,
         }
     ]
-    (run_dir / config.CLAIMS_FILENAME).write_text(json.dumps(claims))
+    (RunPaths.at(run_dir).claims).write_text(json.dumps(claims))
 
     metrics = [
         {
@@ -116,15 +117,15 @@ def test_pipeline_discovers_company_specific_metrics_generically(isolated_runs_d
             "source_claim_ids": ["claim-001"],
         }
     ]
-    (run_dir / config.METRICS_FILENAME).write_text(json.dumps(metrics))
+    (RunPaths.at(run_dir).metrics).write_text(json.dumps(metrics))
 
     rc = main(["analyze", "--ticker", case["ticker"], "--event-id", "2026-q2"])
     assert rc == 0
 
-    validation = json.loads((run_dir / config.VALIDATION_FILENAME).read_text())
+    validation = json.loads((RunPaths.at(run_dir).validation).read_text())
     assert validation["ok"] is True
 
-    card = (run_dir / config.SIGNAL_CARD_FILENAME).read_text()
+    card = (RunPaths.at(run_dir).signal_card).read_text()
     assert case["sector_term"] in card
     for foreign_term in case["foreign_terms"]:
         assert foreign_term not in card, f"{case['name']} card leaked unrelated sector term {foreign_term!r}"
@@ -138,7 +139,7 @@ def test_metric_with_no_source_claim_ids_fails_validation(isolated_runs_dir):
     main(["prepare", "--ticker", case["ticker"], "--event-id", "2026-q2", "--transcript", transcript])
 
     run_dir = isolated_runs_dir / case["ticker"] / "2026-q2"
-    segment_lines = (run_dir / config.NORMALIZED_SUBDIR / config.TRANSCRIPT_FILENAME).read_text().splitlines()
+    segment_lines = (RunPaths.at(run_dir).transcript).read_text().splitlines()
     segments = [json.loads(line) for line in segment_lines]
     segment = next(s for s in segments if case["segment_needle"] in s["text"])
 
@@ -155,7 +156,7 @@ def test_metric_with_no_source_claim_ids_fails_validation(isolated_runs_dir):
             "confidence": 0.9,
         }
     ]
-    (run_dir / config.CLAIMS_FILENAME).write_text(json.dumps(claims))
+    (RunPaths.at(run_dir).claims).write_text(json.dumps(claims))
 
     metrics = [
         {
@@ -167,11 +168,11 @@ def test_metric_with_no_source_claim_ids_fails_validation(isolated_runs_dir):
             "source_claim_ids": [],  # no citation -- must fail
         }
     ]
-    (run_dir / config.METRICS_FILENAME).write_text(json.dumps(metrics))
+    (RunPaths.at(run_dir).metrics).write_text(json.dumps(metrics))
 
     rc = main(["analyze", "--ticker", case["ticker"], "--event-id", "2026-q2"])
     assert rc == 1
 
-    validation = json.loads((run_dir / config.VALIDATION_FILENAME).read_text())
+    validation = json.loads((RunPaths.at(run_dir).validation).read_text())
     assert validation["ok"] is False
     assert any(issue["check"] == "metric_provenance" for issue in validation["issues"])

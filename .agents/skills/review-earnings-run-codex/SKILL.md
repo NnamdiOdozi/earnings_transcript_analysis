@@ -26,13 +26,13 @@ different about running as Codex -- the steps below.
 
 ## Steps
 
-1. **Confirm the prerequisite passed.** `run_dir/validation.json` must have
-   `"ok": true`, `run_dir/outlook-validation.json` must have `"ok": true` (the
+1. **Confirm the prerequisite passed.** `run_dir/claims/validation.json` must have
+   `"ok": true`, `run_dir/outlook/outlook-validation.json` must have `"ok": true` (the
    hash-binding gate `earnings validate-outlook` writes), and
-   `run_dir/outlook-brief.md` must exist. If any is missing, stop and go back
+   `run_dir/outlook/outlook-brief.md` must exist. If any is missing, stop and go back
    to `produce-earnings-signal-card` first.
 
-2. **Determine the review round.** Check whether `run_dir/_review_history/`
+2. **Determine the review round.** Check whether `run_dir/review/history/`
    contains any `round-*` snapshots.
    - **None exist:** this is round 1 -- a full review. Proceed to step 3.
    - **Any exist:** this is a re-review. Run
@@ -49,7 +49,7 @@ different about running as Codex -- the steps below.
      - **Exit 4:** the review round cap (`config.toml [review]
        max_review_rounds`) is reached. **Stop here.** Do not draft another
        review-report.json. Report to the user that the cap was hit and restate
-       the findings from the last accepted `_review_history/round-N/review-report.json` (whatever its
+       the findings from the last accepted `review/history/round-N/review-report.json` (whatever its
        verdict) -- never claim the run is complete, never drop the findings
        silently.
 
@@ -82,7 +82,7 @@ different about running as Codex -- the steps below.
    This validates the schema, checks every claim id cited against `claims.json`,
    cross-checks your declared `verdict` against your findings' severities, and
    -- only if that passes -- renders `review-report.md` and snapshots this
-   round under `_review_history/round-<N>/` for any future diff-review.
+   round under `review/history/round-<N>/` for any future diff-review.
 
 6. **Report the verdict to the user.**
    - Exit 0 (`pass`): report clean, no action needed.

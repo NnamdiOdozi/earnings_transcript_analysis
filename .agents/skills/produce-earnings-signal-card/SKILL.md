@@ -14,7 +14,7 @@ Use this skill on a source pack already built by `build-earnings-source-pack`. D
 Starting work on a newly prepared source pack means extracting and synthesising
 from that pack from scratch. Do not read, copy, adapt, remap, or use as a draft any
 prior `claims.json`, `metrics.json`, `signal-card.md`, or `outlook-brief.md` from
-`_archive/`, `_review_history/`, another event directory, or an earlier run. The
+`_archive/`, `review/history/`, another event directory, or an earlier run. The
 fact that the company or earnings event is unchanged is not permission to reuse
 agent-authored work.
 
@@ -46,7 +46,7 @@ guaranteed before proceeding.
 3. **Extract claims.** Follow `reference/extraction-instructions.md` for the generic
    (industry-agnostic) categories, classification taxonomy, and how to write exact
    quotes and calculation blocks. Write the result as
-   `runs/<TICKER>/<EVENT_ID>/claims.json`, an array of claim objects matching
+   `runs/<TICKER>/<EVENT_ID>/claims/claims.json`, an array of claim objects matching
    `earnings.models.Claim`, each with a unique `id`. Every claim cites exactly one
    evidence source and a `quote` that is an exact substring of it: normally a
    transcript `segment_id`, but **when the run has web evidence
@@ -71,7 +71,7 @@ guaranteed before proceeding.
    `logs/price_lookups.jsonl`.
 
 4. **Optionally discover company-defined metrics.** If the transcript supports it,
-   also write `runs/<TICKER>/<EVENT_ID>/metrics.json` per
+   also write `runs/<TICKER>/<EVENT_ID>/claims/metrics.json` per
    `reference/extraction-instructions.md`'s Metric section — every metric must cite
    at least one real claim id.
 
@@ -130,7 +130,7 @@ guaranteed before proceeding.
    This runs Python's deterministic validators (exact-quote, numeric, calculation,
    inference-citation, metric-provenance, schema) and writes `validation.json`.
    Every invocation also creates a numbered, timestamped folder under
-   `_validation_history/`, preserving that attempt's exact `claims.json`, optional
+   `claims/history/`, preserving that attempt's exact `claims.json`, optional
    `metrics.json`, validation result, and receipt. Do not delete or rewrite an old
    attempt when correcting the current files.
 
@@ -143,7 +143,7 @@ guaranteed before proceeding.
 
    **Before resubmitting, check this run's own attempt history, not just the
    latest failure.** If this is attempt 2 or later, read every earlier attempt's
-   `_validation_history/attempt-NNNN_*/receipt.json` in this run (their
+   `claims/history/attempt-NNNN_*/receipt.json` in this run (their
    `issue_counts` are enough — no need to reopen the old `claims.json` unless a
    count alone is ambiguous) before re-running `earnings analyze`. Confirm your
    fix for the current failure doesn't reintroduce a `check` type an earlier

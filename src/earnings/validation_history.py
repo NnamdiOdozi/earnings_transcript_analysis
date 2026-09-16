@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Literal
 
 from . import config
+from .paths import RunPaths
 from .models import OutlookValidation, ValidationResult
 
 ValidationAttemptOutcome = Literal["passed", "failed", "blocked"]
@@ -27,8 +28,12 @@ def _directory_timestamp(timestamp: str) -> str:
     return timestamp.replace("-", "").replace(":", "")
 
 
-def _start_attempt_dir(run_dir: Path, history_subdir: str) -> tuple[int, Path, str]:
-    history_dir = run_dir / history_subdir
+def _start_attempt_dir(history_dir: Path) -> tuple[int, Path, str]:
+    """Open the next numbered attempt directory inside `history_dir`.
+
+    Takes the resolved directory rather than a subdirectory name: under the staged
+    layout a stage's history lives at claims/history, not at a fixed run-root name.
+    """
     history_dir.mkdir(parents=True, exist_ok=True)
     numbers = [
         int(match.group(1))
@@ -84,10 +89,11 @@ class ValidationAttempt(_AttemptRecord):
         ValidationAttempt
             Open attempt that must be finished for an expected command outcome.
         """
-        number, attempt_dir, started_at = _start_attempt_dir(run_dir, config.VALIDATION_HISTORY_SUBDIR)
+        paths = RunPaths.at(run_dir)
+        number, attempt_dir, started_at = _start_attempt_dir(paths.validation_history)
 
         for filename in (config.CLAIMS_FILENAME, config.METRICS_FILENAME):
-            source = run_dir / filename
+            source = paths.resolve(filename)
             if source.is_file():
                 shutil.copyfile(source, attempt_dir / filename)
 
@@ -143,11 +149,10 @@ class _OutlookValidationAttempt(_AttemptRecord):
 
     @classmethod
     def start(cls, run_dir: Path, input_hashes: dict[str, str]) -> _OutlookValidationAttempt:
-        number, attempt_dir, started_at = _start_attempt_dir(
-            run_dir, config.OUTLOOK_VALIDATION_HISTORY_SUBDIR
-        )
+        paths = RunPaths.at(run_dir)
+        number, attempt_dir, started_at = _start_attempt_dir(paths.outlook_validation_history)
         for filename in (config.CLAIMS_FILENAME, config.OUTLOOK_BRIEF_FILENAME):
-            source = run_dir / filename
+            source = paths.resolve(filename)
             if source.is_file():
                 shutil.copyfile(source, attempt_dir / filename)
         return cls(number, attempt_dir, started_at, dict(input_hashes))

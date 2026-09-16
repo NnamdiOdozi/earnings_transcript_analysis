@@ -54,6 +54,13 @@ REVIEW_HISTORY_SUBDIR = "_review_history"  # per-round snapshots of the validate
 REVIEW_ROUND_RECEIPT_FILENAME = "receipt.json"  # per-round finding-severity counts only, no finding text -- mirrors _validation_history's receipt.json
 VALIDATION_HISTORY_SUBDIR = "_validation_history"  # append-only snapshots of every deterministic analyze attempt
 OUTLOOK_VALIDATION_HISTORY_SUBDIR = "_outlook_validation_history"  # append-only validate-outlook attempts
+# Stage folders (layout 2). A run reads source pack -> claims -> outlook -> review, and
+# the directory says so. Each stage keeps its own attempt history beside the artifacts
+# it belongs to, instead of three _*_history directories at the run root.
+CLAIMS_STAGE_SUBDIR = "claims"
+OUTLOOK_STAGE_SUBDIR = "outlook"
+REVIEW_STAGE_SUBDIR = "review"
+STAGE_HISTORY_SUBDIR = "history"  # under each stage folder, in layout 2 only
 MANIFEST_FILENAME = "manifest.json"
 TRANSCRIPT_FILENAME = "transcript.jsonl"
 FINANCIALS_FILENAME = "financials.json"

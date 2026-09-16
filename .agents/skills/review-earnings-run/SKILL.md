@@ -12,16 +12,16 @@ material omitted.
 
 ## Steps
 
-1. **Confirm the prerequisite passed.** `run_dir/validation.json` must have
-   `"ok": true`, `run_dir/outlook-validation.json` must have `"ok": true` (the
+1. **Confirm the prerequisite passed.** `run_dir/claims/validation.json` must have
+   `"ok": true`, `run_dir/outlook/outlook-validation.json` must have `"ok": true` (the
    gate `earnings validate-outlook` writes -- it hash-binds
    `outlook_brief_sha256`/`claims_sha256` to the current files, so a stale or
-   hand-edited brief/claims fails here), and `run_dir/outlook-brief.md` must
+   hand-edited brief/claims fails here), and `run_dir/outlook/outlook-brief.md` must
    exist. If any is missing, stop and go back to `produce-earnings-signal-card`
    first — do not dispatch the reviewer against an unvalidated run.
 
 2. **Determine the review round.** Check whether
-   `run_dir/_review_history/` has any `round-*` snapshots.
+   `run_dir/review/history/` has any `round-*` snapshots.
    - **None exist:** this is round 1. Proceed exactly as step 3 below (full
      review) — nothing else changes.
    - **Any exist:** run
@@ -44,7 +44,7 @@ material omitted.
      - **Exit 4:** the review round cap (`config.toml [review]
        max_review_rounds`) has been reached. **Stop. Do not dispatch anything
        further.** Report to the user that the cap was reached, and surface the
-       findings from the last accepted `_review_history/round-N/review-report.json` (whatever its verdict) —
+       findings from the last accepted `review/history/round-N/review-report.json` (whatever its verdict) —
        never claim the run is complete, never silently drop the findings.
 
 3. **Dispatch the subagent with a minimal prompt — path only.** Use the `Agent`
@@ -80,7 +80,7 @@ material omitted.
 
 5. **Run the deterministic gate IMMEDIATELY — before touching claims.json or
    outlook-brief.md for any correction.** This step snapshots the round under
-   `_review_history/round-<N>/` for the next `review-diff`. Run it out of order
+   `review/history/round-<N>/` for the next `review-diff`. Run it out of order
    (correcting first, running this after) and the snapshot captures your
    *corrected* files against the *old* verdict, silently corrupting round
    history for every future diff-review on this run — the diff will show no
@@ -96,7 +96,7 @@ material omitted.
    `"pass_with_warnings"` requires no `high`/`critical`), enforces the round cap
    even if `review-diff` was somehow skipped, and — only if all of that passes —
    renders `review-report.md` deterministically from the validated JSON, then
-   snapshots this round under `_review_history/round-<N>/` for any future
+   snapshots this round under `review/history/round-<N>/` for any future
    diff-review.
 
 6. **Report the verdict to the user.**

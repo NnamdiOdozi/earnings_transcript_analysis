@@ -93,9 +93,33 @@ Each of these is one or two CLI commands plus an agent step; see
 [docs/WORKFLOW.md](docs/WORKFLOW.md) for the full manual sequence, exit
 codes, and file-by-file detail.
 
-## Quick start
+## If you are an agent running this pipeline, start here
 
-Any agents wor
+Read the `SKILL.md` for the stage you are about to perform, and every reference file
+it names, **in full** before running anything. If the output is truncated, keep
+reading in chunks until the end. This README explains what the project is; it does not
+contain the rules for executing a stage, and starting from it alone is not enough.
+
+Two things about Stage 1 in particular, because this is where the pipeline fails most
+quietly:
+
+- **Extraction is exhaustive, not selective.** Write one claim for every material
+  reported fact, guidance statement, management explanation, stated risk and
+  substantive Q&A insight the source pack supports — not only the ones you expect the
+  outlook brief to cite. Those are very different sets, and picking the smaller one
+  first is the failure mode.
+- **Passing validation does not mean you extracted enough.** The deterministic checks
+  prove that the claims you submitted are grounded in the evidence. They are blind to
+  claims you never wrote. A file covering a quarter of the call passes every gate
+  exactly as cleanly as a complete one. This has happened on a real run.
+
+So that the gap is at least visible to a human, record a `coverage-receipt.json`
+beside `claims.json` listing every transcript segment and whether it produced claims
+or was deliberately judged immaterial, with a reason. Be aware of what that receipt
+does and does not buy you: it makes under-extraction *inspectable*, and nothing
+currently enforces it or checks that an "immaterial" judgement was correct.
+
+## Quick start
 
 ```bash
 uv sync --extra dev

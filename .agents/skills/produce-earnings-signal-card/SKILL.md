@@ -5,6 +5,23 @@ description: Read an existing earnings source pack, extract quote-anchored claim
 
 # Produce Earnings Signal Card
 
+> **Read this file and every reference file it names IN FULL before running any
+> command or writing any artifact.** If the output is truncated, continue reading in
+> numbered chunks until you reach the end. Do not infer the rest from a partial read.
+> The reference files are not optional background: `extraction-instructions.md`
+> carries the claim schema, the period rules, the exact-quote rule and the coverage
+> receipt, and none of them are restated here.
+
+> **Stage 1 is exhaustive, not selective.** Extract one claim for every material
+> reported fact, guidance statement, management explanation, stated risk and
+> substantive Q&A insight the source pack supports — NOT only the claims you expect
+> to cite in the outlook brief. Those are very different sets and the second is far
+> smaller. Deterministic validation proves the claims you submitted are grounded; it
+> is structurally blind to the ones you never wrote, so a thin claims file passes
+> every gate exactly as cleanly as a complete one. Confirmed live (JPM/2026-q2): an
+> agent working from a partial read of this skill produced roughly a quarter of the
+> material claims the same pack supports, and every gate passed.
+
 Use this skill on a source pack already built by `build-earnings-source-pack`. Do
 **not** browse the web or fetch new sources in this skill — work only from
 `normalized/transcript.jsonl` and `evidence/financials.json` already on disk.
@@ -25,7 +42,7 @@ disclose that provenance in the final report.
 
 Correcting the current run's `claims.json` or `metrics.json` after a failed
 deterministic validation is not prior-run reuse; it is the normal attempt loop in
-steps 6–7 below. If prior outputs have already been exposed in the active agent's
+steps 7–8 below. If prior outputs have already been exposed in the active agent's
 context and the user requires an independent fresh extraction, use a fresh-context
 agent when available. Otherwise, disclose that strict independence cannot be
 guaranteed before proceeding.
@@ -43,7 +60,14 @@ guaranteed before proceeding.
    (one JSON segment per line: `id`, `section`, `speaker`, `text`) and
    `evidence/financials.json` if present.
 
-3. **Extract claims.** Follow `reference/extraction-instructions.md` for the generic
+3. **Extract claims — over every segment, not a sample.** Work through
+   `normalized/transcript.jsonl` from the first segment to the last. For each one,
+   either extract the claim(s) it supports or consciously judge it immaterial; do not
+   skim for the highlights and stop. Prepared remarks are usually one long segment
+   carrying many separate reportable facts — a single claim for the whole of it is
+   under-extraction, not summary. Q&A answers routinely contain guidance, an
+   explanation and a risk in the same turn; each is its own claim.
+   Follow `reference/extraction-instructions.md` for the generic
    (industry-agnostic) categories, classification taxonomy, and how to write exact
    quotes and calculation blocks. Write the result as
    `runs/<TICKER>/<EVENT_ID>/claims/claims.json`, an array of claim objects matching
@@ -70,12 +94,22 @@ guaranteed before proceeding.
    `price_lookups.jsonl`, not just the cross-run
    `logs/price_lookups.jsonl`.
 
-4. **Optionally discover company-defined metrics.** If the transcript supports it,
+4. **Write the coverage receipt.** Record `coverage-receipt.json` beside
+   `claims.json`, listing every segment id in `normalized/transcript.jsonl` and
+   whether it produced claims or was deliberately judged immaterial, with a one-line
+   reason for each immaterial call. See `reference/extraction-instructions.md`'s
+   "Coverage receipt" section for the exact fields and for what counts as immaterial.
+   Write it from the segment list, not from memory of what you extracted — building it
+   the other way round reproduces whatever you already missed. Nothing in the pipeline
+   currently validates this file; it exists so a human can see the shape of your
+   coverage at a glance, which no other artifact reveals.
+
+5. **Optionally discover company-defined metrics.** If the transcript supports it,
    also write `runs/<TICKER>/<EVENT_ID>/claims/metrics.json` per
    `reference/extraction-instructions.md`'s Metric section — every metric must cite
    at least one real claim id.
 
-5. **Self-check and record the price-tool decision.** Reread your own `claims.json` once, end to
+6. **Self-check and record the price-tool decision.** Reread your own `claims.json` once, end to
    end, before running `earnings analyze`. This is a cheap self-critique pass, not
    a re-extraction: look specifically for
    - speaker attribution errors (an analyst's question misattributed as a
@@ -119,7 +153,7 @@ guaranteed before proceeding.
    not private chain-of-thought. Python will compare the decision with this run's
    `price_lookups.jsonl` and reject a contradiction.
 
-6. **Validate.** Run:
+7. **Validate.** Run:
 
    ```bash
    uv run earnings analyze --ticker <TICKER> --event-id <EVENT_ID> \
@@ -134,10 +168,10 @@ guaranteed before proceeding.
    `metrics.json`, validation result, and receipt. Do not delete or rewrite an old
    attempt when correcting the current files.
 
-7. **If validation fails:** the command exits non-zero and does **not** write
+8. **If validation fails:** the command exits non-zero and does **not** write
    `signal-card.md`. Read `validation.json`, fix the offending claims/metrics
    (correct the quote, drop an unsupported number, fix a calculation block, add a
-   missing citation), and re-run step 6. Do not hand-edit `signal-card.md` directly
+   missing citation), and re-run step 7. Do not hand-edit `signal-card.md` directly
    and do not bypass a failed validation by writing the card yourself. The rerun
    becomes the next attempt folder; prior failures remain available for analysis.
 
@@ -154,14 +188,14 @@ guaranteed before proceeding.
    against attempt N-2's, and a multi-attempt correction loop can otherwise
    cycle between the same two mistakes without anyone noticing.
 
-8. **If validation passes:** `signal-card.md` is written automatically, grouped by
+9. **If validation passes:** `signal-card.md` is written automatically, grouped by
    category, following `reference/signal-card-template.md`.
 
 ## Stage 2: outlook synthesis
 
 Only start this stage once Stage 1's `earnings analyze` has passed.
 
-9. **Write `outlook-brief.md`.** Follow `reference/outlook-brief-template.md`'s
+10. **Write `outlook-brief.md`.** Follow `reference/outlook-brief-template.md`'s
    default structure and freedom envelope. This is interpretive synthesis
    (base/upside/downside cases, what to monitor) — you write it directly, Python
    does not generate it, and you're expected to rank, compare, and draw new
@@ -169,7 +203,7 @@ Only start this stage once Stage 1's `earnings analyze` has passed.
    id you cite must exist in this run's `claims.json`, and every material number you
    introduce must be grounded in a claim cited alongside it.
 
-10. **Self-check the brief before validating.** `earnings validate-outlook` (next
+11. **Self-check the brief before validating.** `earnings validate-outlook` (next
     step) only confirms a cited claim id *resolves* — it cannot tell a correct
     citation from a plausible-looking wrong one, and neither can you rely on it to
     catch an overstated factual claim. Before running it, reread every `[claim-###]`
@@ -190,10 +224,10 @@ Only start this stage once Stage 1's `earnings analyze` has passed.
       transcript passage before writing the sentence, and neither is something
       `validate-outlook` can check.
 
-    Fix anything you find, and re-verify the fix landed (see step 5's note on
+    Fix anything you find, and re-verify the fix landed (see step 6's note on
     verifying fixes, same discipline applies here).
 
-11. **Validate the brief.** Run:
+12. **Validate the brief.** Run:
 
    ```bash
    uv run earnings validate-outlook --ticker <TICKER> --event-id <EVENT_ID>
@@ -203,7 +237,7 @@ Only start this stage once Stage 1's `earnings analyze` has passed.
    doesn't resolve, or if a material number isn't grounded in a claim cited
    alongside it. Fix and re-run until it passes.
 
-12. **Report back to the user** the run directory path and a brief summary of both
+13. **Report back to the user** the run directory path and a brief summary of both
     `signal-card.md` (evidence appendix) and `outlook-brief.md` (the forward-looking
     read).
 

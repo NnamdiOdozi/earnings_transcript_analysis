@@ -106,6 +106,33 @@ was resolved); don't let finished work accumulate here as dead weight.
   real cycles that recurring agent judgement calls become visible (e.g. via
   repeated reviewer findings of the same shape across runs).
 
+### [2026-09-16] Nothing enforces the coverage receipt
+- **Scope:** `coverage-receipt.json` is now required by
+  `produce-earnings-signal-card` and specified in `extraction-instructions.md`, but no
+  Python reads it and no reviewer audits it. Two separable pieces of enforcement are
+  missing, and they are NOT equally hard:
+  - **Structural completeness is deterministic and cheap.** `analyze` can check that
+    the receipt exists, that its segment ids are exactly the set in
+    `normalized/transcript.jsonl` with none missing or invented, that every
+    `claim_ids` entry resolves in `claims.json`, that `claims_extracted` entries are
+    non-empty and `deliberately_immaterial` entries carry a reason. That converts "did
+    the agent account for the whole transcript?" from unverifiable to proven, and
+    would have caught the JPM under-extraction at the gate. Roughly a validator
+    function plus a `RunPaths` property plus a config filename constant.
+  - **Materiality judgement is semantic and is not.** No deterministic check can tell
+    a correct `deliberately_immaterial` from a wrong one. That belongs to the
+    `outlook-reviewer`'s remit -- give it the receipt and ask it to sample the
+    segments marked immaterial -- and even then it is a judgement, not a proof.
+- **Why it matters:** confirmed live (JPM/2026-q2, 2026-09-16). A desktop agent
+  working from a partial read of the skill produced roughly a quarter of the material
+  claims the same source pack supports, and every gate passed cleanly. Validation
+  proves submitted claims are grounded; it is structurally blind to claims never
+  written, so no existing check could have caught it.
+- **Status:** documentation only, 2026-09-16. The rule, the receipt schema and the
+  immateriality standard are written; the enforcement above is not started. Until the
+  structural check lands, a passing run says nothing about extraction completeness --
+  say so plainly rather than implying the receipt is a control.
+
 ### [2026-09-16] prepare.py and review.py exceed the 500-line guideline
 - **Scope:** the cli.py split landed as a strictly behaviour-preserving move, which
   left two modules over the project's 500-line guideline: `prepare.py` (528) and

@@ -7,6 +7,19 @@ brief, and the final review are agent-authored, via `.agents/skills/`. See
 `README.md` first — it's the source of truth for architecture/commands/known
 limitations; don't duplicate its content here.
 
+## Mandatory agent entry condition
+
+Before running a command or authoring any artifact, read the SKILL.md for the stage
+you are performing and every reference file it requires, **in full** -- continuing
+through truncation in numbered chunks rather than inferring from a partial read. This
+file is an orientation summary; it is not sufficient to run a stage from.
+
+Stage 1 extraction is **exhaustive, not selective**: one claim per material reportable
+fact, guidance statement, explanation, risk and substantive Q&A insight in the source
+pack, not just the ones the outlook brief will cite. Validation proves submitted
+claims are grounded; it cannot detect claims you never wrote. See `AGENTS.md` and
+`produce-earnings-signal-card/reference/extraction-instructions.md`.
+
 ## Entry points
 
 - `.agents/skills/<name>/SKILL.md` — Codex/any-agent skills, run in order:

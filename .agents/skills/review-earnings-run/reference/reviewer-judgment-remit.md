@@ -335,7 +335,7 @@ ambiguous) in `unverified_items` rather than guessing.
    mistake** — the SAME `check` type (e.g. `exact_quote`, `numeric`,
    `inference_citation`) failed across two or more attempts before finally
    passing. The extractor's own within-run self-check (see
-   `produce-earnings-signal-card/SKILL.md` step 7) only compares each new attempt
+   `produce-earnings-signal-card/SKILL.md` step 8) only compares each new attempt
    against earlier attempts IN THIS SAME RUN; it has no visibility into whether
    this is a recurring pattern ACROSS runs. You do, because you're dispatched
    fresh each time and can see whether this multi-attempt struggle plausibly

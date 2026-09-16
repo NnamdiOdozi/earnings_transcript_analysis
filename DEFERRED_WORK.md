@@ -112,13 +112,18 @@ was resolved); don't let finished work accumulate here as dead weight.
   Python reads it and no reviewer audits it. Two separable pieces of enforcement are
   missing, and they are NOT equally hard:
   - **Structural completeness is deterministic and cheap.** `analyze` can check that
-    the receipt exists, that its segment ids are exactly the set in
-    `normalized/transcript.jsonl` with none missing or invented, that every
+    the receipt exists, that its `segments` ids are exactly the set in
+    `normalized/transcript.jsonl` and its `web_evidence` ids exactly the set in
+    `evidence/web-evidence.jsonl`, with none missing or invented, that every
     `claim_ids` entry resolves in `claims.json`, that `claims_extracted` entries are
     non-empty and `deliberately_immaterial` entries carry a reason. That converts "did
-    the agent account for the whole transcript?" from unverifiable to proven, and
+    the agent account for the whole source pack?" from unverifiable to proven, and
     would have caught the JPM under-extraction at the gate. Roughly a validator
     function plus a `RunPaths` property plus a config filename constant.
+    Partially addressed 2026-09-16: `validate_claims` now warns when the cited
+    fraction of extracted web evidence falls to or below
+    `config.toml [validation] web_evidence_min_cited_ratio`. That is an advisory on
+    one half of the receipt's job, not the structural check described above.
   - **Materiality judgement is semantic and is not.** No deterministic check can tell
     a correct `deliberately_immaterial` from a wrong one. That belongs to the
     `outlook-reviewer`'s remit -- give it the receipt and ask it to sample the
@@ -128,8 +133,10 @@ was resolved); don't let finished work accumulate here as dead weight.
   claims the same source pack supports, and every gate passed cleanly. Validation
   proves submitted claims are grounded; it is structurally blind to claims never
   written, so no existing check could have caught it.
-- **Status:** documentation only, 2026-09-16. The rule, the receipt schema and the
-  immateriality standard are written; the enforcement above is not started. Until the
+- **Status:** 2026-09-16. The rule, the receipt schema (now covering web evidence as
+  well as transcript segments) and the immateriality standard are written, and the
+  uncited-web-evidence advisory is implemented. The structural receipt check and the
+  reviewer-side materiality audit are not started. Until the
   structural check lands, a passing run says nothing about extraction completeness --
   say so plainly rather than implying the receipt is a control.
 

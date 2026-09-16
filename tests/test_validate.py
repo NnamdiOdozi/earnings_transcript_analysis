@@ -792,6 +792,68 @@ def test_warns_when_web_evidence_fetched_but_uncited(revenue_segment, financials
     assert result.warnings[0].startswith("1 web evidence source(s)")
 
 
+def test_warns_when_most_web_evidence_is_left_uncited(revenue_segment, financials):
+    """A single citation must not silence the advisory.
+
+    The earlier check was `not any(claim.web_evidence_id ...)`, so one citation
+    satisfied it. Confirmed live (JPM/2026-q2, 2026-09-16): 2 of 15 sources cited,
+    all four peers fetched and never used, no peer named anywhere in the outlook
+    brief, and the run passed with no warning at all.
+    """
+    segments_by_id = {"seg-0001": revenue_segment}
+    claims = [
+        Claim(
+            id="claim-test-020",
+            category="reported_financial_performance",
+            classification="reported_fact",
+            claim_text="Consensus was $105 million.",
+            quote="Analyst consensus was $105 million ahead of the print.",
+            web_evidence_id="web-001",
+            status="reported",
+            values={},
+            confidence=0.9,
+        ),
+    ]
+    web_evidence_texts = {
+        "web-001": "Analyst consensus was $105 million ahead of the print.",
+        "web-002": "Peer A reported revenue growth of 12%.",
+        "web-003": "Peer B reported revenue growth of 9%.",
+        "web-004": "Peer C reported a record quarter.",
+    }
+    result = validate_claims(claims, segments_by_id, financials, web_evidence_texts=web_evidence_texts)
+    assert result.ok is True          # advisory only, never fails the run
+    assert result.issues == []
+    assert len(result.warnings) == 1
+    warning = result.warnings[0]
+    assert "only 1 of 4" in warning
+    # names the sources that went to waste, so the gap is actionable not just flagged
+    assert "web-002, web-003, web-004" in warning
+    assert "no claim cites any" not in warning   # the zero-citation wording is a different case
+
+
+def test_no_warning_when_most_web_evidence_is_cited(revenue_segment, financials):
+    """A run that genuinely used its web evidence must stay quiet."""
+    segments_by_id = {"seg-0001": revenue_segment}
+    claims = [
+        Claim(
+            id=f"claim-test-02{n}",
+            category="reported_financial_performance",
+            classification="reported_fact",
+            claim_text="Consensus figure.",
+            quote=f"Source {n} text.",
+            web_evidence_id=f"web-00{n}",
+            status="reported",
+            values={},
+            confidence=0.9,
+        )
+        for n in (1, 2, 3)
+    ]
+    web_evidence_texts = {f"web-00{n}": f"Source {n} text." for n in (1, 2, 3, 4)}
+    result = validate_claims(claims, segments_by_id, financials, web_evidence_texts=web_evidence_texts)
+    assert result.ok is True
+    assert result.warnings == []
+
+
 def test_validate_claims_fails_for_unknown_web_evidence_id():
     claims = [
         Claim(

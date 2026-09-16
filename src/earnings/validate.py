@@ -9,7 +9,7 @@ import re
 from typing import Any
 
 from .calculations import recompute
-from .config import NUMERIC_MATCH_TOLERANCE
+from .config import NUMERIC_MATCH_TOLERANCE, WEB_EVIDENCE_MIN_CITED_RATIO
 from .models import (
     Claim,
     Metric,
@@ -584,17 +584,34 @@ def validate_claims(
         if calc_input_error:
             issues.append(ValidationIssue(claim_index=idx, check="calculation_inputs", message=calc_input_error))
 
-    # Non-failing advisory: web evidence was fetched but no claim cited any. This is
-    # the exact "downloaded but unconsumed" gap this pipeline hit before (all claims
-    # anchored to transcript segments, the Exa/Tavily download went to waste). Surfaced
-    # as a warning, not a failure -- a run with nothing worth citing from the web is
+    # Non-failing advisory: web evidence was fetched and then largely ignored. This is
+    # the "downloaded but unconsumed" gap this pipeline hit before (all claims anchored
+    # to transcript segments, the Exa/Tavily download going to waste). Surfaced as a
+    # warning, not a failure -- a run with nothing worth citing from the web is
     # legitimate; a run that silently ignored available web evidence should be visible.
+    #
+    # Measured as a RATIO, not as "did anything get cited". The `any()` form it replaced
+    # was satisfied by a single citation: on JPM/2026-q2 (2026-09-16) two of fifteen
+    # sources were cited, every peer went unused, no peer appeared anywhere in the
+    # outlook brief, and nothing warned. `any()` asks whether the agent touched the web
+    # evidence; what matters is whether it left most of it on the floor.
     warnings: list[str] = []
-    if web_evidence_texts and not any(claim.web_evidence_id for claim in claims):
-        warnings.append(
-            f"{len(web_evidence_texts)} web evidence source(s) were fetched but no claim cites any "
-            "(web_evidence_id); the web search contributed nothing to this run's claims."
-        )
+    if web_evidence_texts:
+        cited_ids = {claim.web_evidence_id for claim in claims if claim.web_evidence_id}
+        uncited = sorted(set(web_evidence_texts) - cited_ids)
+        ratio = len(cited_ids & set(web_evidence_texts)) / len(web_evidence_texts)
+        if not cited_ids:
+            warnings.append(
+                f"{len(web_evidence_texts)} web evidence source(s) were fetched but no claim cites any "
+                "(web_evidence_id); the web search contributed nothing to this run's claims."
+            )
+        elif ratio <= WEB_EVIDENCE_MIN_CITED_RATIO:
+            warnings.append(
+                f"only {len(cited_ids & set(web_evidence_texts))} of {len(web_evidence_texts)} web evidence "
+                f"source(s) are cited by a claim ({ratio:.0%}); the rest were fetched, hashed and then "
+                f"unused: {', '.join(uncited)}. Consensus and peer sources exist precisely to be cited "
+                "-- check whether a surprise or peer-comparison claim was missed."
+            )
 
     return ValidationResult(ok=not issues, checked_claims=len(claims), issues=issues, warnings=warnings)
 

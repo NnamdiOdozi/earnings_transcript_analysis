@@ -261,6 +261,15 @@ call passes every check exactly as cleanly as a complete one. The coverage recei
 exists to make that second question *visible to a human*, since no other artifact in
 the run reveals it.
 
+The receipt is an object with two arrays, because the source pack has two kinds of
+evidence and both can be silently under-used:
+
+```json
+{ "segments": [ ... ], "web_evidence": [ ... ] }
+```
+
+### `segments`
+
 Write one entry per segment id in `normalized/transcript.jsonl`, in order, covering
 every segment with no gaps:
 
@@ -291,6 +300,35 @@ every segment with no gaps:
   actually contains, not merely that it was unimportant. "No substantive content" on
   its own is not a reason; "operator reading the dial-in instructions" is.
 
+### `web_evidence`
+
+Write one entry per id in `evidence/web-evidence.jsonl`, same shape, same rules:
+
+```json
+{
+  "web_evidence_id": "web-004",
+  "outcome": "claims_extracted",
+  "claim_ids": ["claim-061"],
+  "reason": null
+}
+```
+
+A web source marked `deliberately_immaterial` needs a reason that says what the page
+turned out to be — "extraction returned a chart deck with no readable figures", or
+"duplicate of web-003, same press release". "Not needed for the outlook" is NOT a
+reason: the outlook is written after extraction and does not get to decide what
+counts as evidence.
+
+**Consensus and peer sources exist specifically to be cited.** They were searched for
+and extracted because the transcript does not contain them. A run that fetches four
+peers' results and cites none of them has thrown away the only evidence that can place
+this company's quarter against its competitors'. Confirmed live (JPM/2026-q2,
+2026-09-16): 110 claims were extracted with excellent transcript coverage, all four
+peer sources went uncited, and no peer was named anywhere in the outlook brief. The
+claims were all valid. The analysis was still missing its whole comparative dimension.
+`earnings analyze` now warns when most extracted web evidence goes uncited, but the
+warning is advisory and does not fail the run.
+
 **Build it from the segment list, not from your claims.** Iterating your claims and
 recording where each came from reproduces exactly the gaps you already have, because a
 segment you never read cannot appear. Iterate `transcript.jsonl` instead and force
@@ -316,7 +354,7 @@ that pattern is far more likely to be under-extraction than a genuinely thin cal
 ### What this receipt does and does not prove
 
 It proves nothing on its own. Nothing in the pipeline currently reads or validates it:
-Python does not check that every segment appears, and no reviewer is instructed to
+Python does not check that every segment or web source appears, and no reviewer is instructed to
 audit your materiality judgements. It is an honesty artifact that makes the shape of
 your coverage inspectable by a human who would otherwise have no way to see it. A
 wrong `deliberately_immaterial` call will not be caught by any gate. Write it as if

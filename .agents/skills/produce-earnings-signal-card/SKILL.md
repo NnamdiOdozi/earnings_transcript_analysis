@@ -12,10 +12,14 @@ description: Read an existing earnings source pack, extract quote-anchored claim
 > carries the claim schema, the period rules, the exact-quote rule and the coverage
 > receipt, and none of them are restated here.
 
-> **Stage 1 is exhaustive, not selective.** Extract one claim for every material
-> reported fact, guidance statement, management explanation, stated risk and
-> substantive Q&A insight the source pack supports — NOT only the claims you expect
-> to cite in the outlook brief. Those are very different sets and the second is far
+> **Stage 1 is exhaustive, not selective, over the WHOLE source pack.** Extract one
+> claim for every material reported fact, guidance statement, management explanation,
+> stated risk and substantive Q&A insight the source pack supports — NOT only the
+> claims you expect to cite in the outlook brief. "Source pack" means the transcript
+> **and** `evidence/financials.json` **and** `evidence/web-evidence.jsonl`. Working
+> the transcript exhaustively and then stopping is a real and observed failure: the
+> consensus and peer sources were fetched precisely because the call does not contain
+> them, so nothing in the transcript will ever prompt you to use them. Those are very different sets and the second is far
 > smaller. Deterministic validation proves the claims you submitted are grounded; it
 > is structurally blind to the ones you never wrote, so a thin claims file passes
 > every gate exactly as cleanly as a complete one. Confirmed live (JPM/2026-q2): an
@@ -67,6 +71,12 @@ guaranteed before proceeding.
    carrying many separate reportable facts — a single claim for the whole of it is
    under-extraction, not summary. Q&A answers routinely contain guidance, an
    explanation and a risk in the same turn; each is its own claim.
+   Then do the same for `evidence/web-evidence.jsonl`, which no transcript segment
+   will ever point you at. Those sources are the pre-event consensus and the peer
+   results, and they exist to support the two claim types the call cannot: the
+   **surprise** (reported actual versus what was expected) and **peer comparison**
+   (how this quarter reads against competitors reporting the same period). If you
+   finish extraction having cited none of the peers, you have not finished.
    Follow `reference/extraction-instructions.md` for the generic
    (industry-agnostic) categories, classification taxonomy, and how to write exact
    quotes and calculation blocks. Write the result as
@@ -95,9 +105,10 @@ guaranteed before proceeding.
    `logs/price_lookups.jsonl`.
 
 4. **Write the coverage receipt.** Record `coverage-receipt.json` beside
-   `claims.json`, listing every segment id in `normalized/transcript.jsonl` and
-   whether it produced claims or was deliberately judged immaterial, with a one-line
-   reason for each immaterial call. See `reference/extraction-instructions.md`'s
+   `claims.json`, accounting for every segment id in `normalized/transcript.jsonl`
+   **and** every id in `evidence/web-evidence.jsonl` — each either produced claims or
+   was deliberately judged immaterial, with a one-line reason for each immaterial
+   call. See `reference/extraction-instructions.md`'s
    "Coverage receipt" section for the exact fields and for what counts as immaterial.
    Write it from the segment list, not from memory of what you extracted — building it
    the other way round reproduces whatever you already missed. Nothing in the pipeline

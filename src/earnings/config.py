@@ -189,6 +189,7 @@ PDF_FACTSET_BANNER_PATTERNS = list(_get("pdf_ingestion", "factset_banner_pattern
 # --- Validation tolerances (config.toml [validation]) ---
 CALC_RELATIVE_TOLERANCE = float(_get("validation", "calc_relative_tolerance", 0.01))
 CALC_ABSOLUTE_TOLERANCE = float(_get("validation", "calc_absolute_tolerance", 0.005))
+WEB_EVIDENCE_MIN_CITED_RATIO = float(_get("validation", "web_evidence_min_cited_ratio", 0.5))
 NUMERIC_MATCH_TOLERANCE = float(_get("validation", "numeric_match_tolerance", 1e-6))
 
 # --- Review rounds (config.toml [review]) ---

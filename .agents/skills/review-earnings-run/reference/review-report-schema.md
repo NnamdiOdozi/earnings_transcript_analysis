@@ -13,7 +13,8 @@ why that matters).
   "verdict": "pass_with_warnings",
   "review_mode": "full",
   "reviewed_at": "2026-08-25T12:00:00Z",
-  "model": "opus",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
   "claims_sha256": "<64 lowercase hexadecimal characters>",
   "outlook_brief_sha256": "<64 lowercase hexadecimal characters>",
   "review_diff_sha256": null,
@@ -70,9 +71,12 @@ why that matters).
   `outlook_brief_sha256` from `outlook-validation.json` and, from round 2 on,
   `review_diff_sha256` from the `review-diff.sha256` sidecar Python writes next
   to `review-diff.json` (see `reviewer-judgment-remit.md`).
-- `model`: record the actual model/reasoning tier used for this pass (e.g.
-  `"opus"`, `"gpt-5.6-medium"`), not a placeholder -- this field is provenance,
-  same as everything else in this pipeline.
+- `model`: record the actual model identifier reported by the host for this pass
+  (for example, `"gpt-5.6-sol"`). Do not fold effort into this string.
+- `reasoning_effort`: one of `none`, `minimal`, `low`, `medium`, `high`, `xhigh`,
+  `max`, `ultra`, `adaptive`, `not_applicable`, or `unknown`. Record the dispatched
+  value when known. Use `unknown` rather than guessing. Both identity fields are
+  agent-declared unless the host provides a separate attestation.
 - `severity`: `"info"` | `"low"` | `"medium"` | `"high"` | `"critical"`. Use `info`
   for confirmations (e.g. "process compliance: validation.json.ok == true"), not
   just problems — a review with zero `source_checks`/`process_findings` entries

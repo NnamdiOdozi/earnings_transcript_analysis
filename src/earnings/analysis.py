@@ -8,6 +8,7 @@ from pydantic import ValidationError
 
 from . import config
 from .models import (
+    AgentProvenance,
     Claim,
     Manifest,
     Metric,
@@ -37,6 +38,10 @@ def cmd_analyze(args: argparse.Namespace) -> int:
     paths = RunPaths.at(run_dir)
     tool_decisions = ToolDecisions(
         price_lookup=PriceLookupDecision(decision=args.price_decision, reason=args.price_reason)
+    )
+    agent_provenance = AgentProvenance(
+        model=args.extractor_model,
+        reasoning_effort=args.extractor_reasoning_effort,
     )
     price_decision_issues = _price_decision_issues(
         run_dir, args.ticker, tool_decisions.price_lookup
@@ -116,6 +121,7 @@ def cmd_analyze(args: argparse.Namespace) -> int:
             issues=[ValidationIssue(claim_index=-1, check="schema", message=f"Could not parse {config.CLAIMS_FILENAME}: {exc}")]
             + price_decision_issues,
             tool_decisions=tool_decisions,
+            agent_provenance=agent_provenance,
         )
         _write_validation(run_dir, result)
         attempt.finish("failed", 1, result, validation_path=paths.validation)
@@ -124,6 +130,7 @@ def cmd_analyze(args: argparse.Namespace) -> int:
 
     result = validate_claims(claims, segments_by_id, financials, web_evidence_texts, web_evidence_statuses)
     result.tool_decisions = tool_decisions
+    result.agent_provenance = agent_provenance
     result.issues.extend(price_decision_issues)
     result.ok = not result.issues
 
@@ -142,6 +149,7 @@ def cmd_analyze(args: argparse.Namespace) -> int:
                 ok=False,
                 checked_claims=0,
                 issues=[ValidationIssue(claim_index=-1, check="schema", message=f"Could not parse {config.METRICS_FILENAME}: {exc}")],
+                agent_provenance=agent_provenance,
             )
             _write_validation(run_dir, result)
             attempt.finish("failed", 1, result, validation_path=paths.validation)
@@ -155,6 +163,7 @@ def cmd_analyze(args: argparse.Namespace) -> int:
                 issues=result.issues + metric_issues,
                 warnings=result.warnings,
                 tool_decisions=tool_decisions,
+                agent_provenance=agent_provenance,
             )
 
     # Coverage receipt. Absence is a WARNING, not a failure: runs prepared before the
@@ -183,6 +192,7 @@ def cmd_analyze(args: argparse.Namespace) -> int:
                                     message=f"could not parse {config.COVERAGE_RECEIPT_FILENAME}: {exc}")
                 ],
                 warnings=result.warnings, tool_decisions=tool_decisions,
+                agent_provenance=agent_provenance,
             )
             _write_validation(run_dir, result)
             attempt.finish("failed", 1, result, validation_path=paths.validation)
@@ -197,6 +207,7 @@ def cmd_analyze(args: argparse.Namespace) -> int:
                 issues=result.issues + coverage_issues,
                 warnings=result.warnings,
                 tool_decisions=tool_decisions,
+                agent_provenance=agent_provenance,
             )
 
     _write_validation(run_dir, result)

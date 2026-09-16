@@ -17,14 +17,19 @@ FIXTURES = Path(__file__).parent / "fixtures"
 
 def main(args: list[str]) -> int:
     """Run the CLI with the default no-price decision used by these fixtures."""
-    if args and args[0] == "analyze" and "--price-decision" not in args:
-        args = [
-            *args,
-            "--price-decision",
-            "not_used",
-            "--price-reason",
-            "Fixture does not require market-price evidence",
-        ]
+    if args and args[0] == "analyze":
+        if "--price-decision" not in args:
+            args = [
+                *args,
+                "--price-decision", "not_used",
+                "--price-reason", "Fixture does not require market-price evidence",
+            ]
+        if "--extractor-model" not in args:
+            args = [
+                *args,
+                "--extractor-model", "fixture-extractor",
+                "--extractor-reasoning-effort", "medium",
+            ]
     return _cli_main(args)
 
 

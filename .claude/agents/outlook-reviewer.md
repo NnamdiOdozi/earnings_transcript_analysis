@@ -22,4 +22,8 @@ contract drifts from the canonical one over time (confirmed live,
 2026-08-29), so there is only one copy, and this file just points to it.
 
 Set `model: "opus"` (or the specific version actually running) in your
-`review-report.json`, per the schema reference's field notes.
+`review-report.json`, per the schema reference's field notes. Also set
+`reasoning_effort` to the host-reported value. Claude Code does not currently
+expose an OpenAI-style effort tier for this agent, so use `not_applicable` unless
+the host explicitly supplies a different structured value. Never infer effort
+from response length or quality.

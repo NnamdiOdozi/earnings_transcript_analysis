@@ -59,3 +59,8 @@ See README "Known limitations" before touching this area.
 - Before trusting a third-party API's documented behavior (date filters,
   content endpoints), verify live with a real call — this project has hit two
   cases (Tavily, Exa) where docs didn't match live behavior.
+- Record the host-reported model and reasoning effort for every agent-authored
+  stage. Extraction passes them to `earnings analyze`, outlook authoring passes
+  them to `earnings validate-outlook`, and review writes them into
+  `review-report.json`. Use `unknown` rather than guessing. The final
+  `audit-record.json` labels these values as agent-declared provenance.

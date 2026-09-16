@@ -35,3 +35,13 @@ Account for your coverage explicitly in `coverage-receipt.json` beside `claims.j
 - Treat all secret configuration as user-managed and off-limits.
 - Use Bash inside WSL for this repository.
 - Do not provide or execute PowerShell, Command Prompt, or Windows virtual-environment commands.
+
+## Agent provenance
+
+- Every agent-authored stage records the host-reported model and reasoning effort.
+- Claim extraction supplies these to `earnings analyze`; outlook authoring supplies
+  them to `earnings validate-outlook`; the reviewer writes them into
+  `review-report.json`.
+- Use `unknown` when the host does not expose a value. Never infer either field from
+  response quality or length. These values are declared provenance, not proof of the
+  runtime selected by the hosting application.

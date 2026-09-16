@@ -107,6 +107,7 @@ for exactly what a claim needs.
 
 ```bash
 uv run earnings analyze --ticker ACME --event-id 2026-q2 \
+  --extractor-model gpt-5.6-sol --extractor-reasoning-effort high \
   --price-decision not_used --price-reason "No market-price evidence was needed"
 ```
 
@@ -143,7 +144,8 @@ forward-looking synthesis (base/upside/downside cases) — using
 `.agents/skills/produce-earnings-signal-card/reference/outlook-brief-template.md`.
 
 ```bash
-uv run earnings validate-outlook --ticker ACME --event-id 2026-q2
+uv run earnings validate-outlook --ticker ACME --event-id 2026-q2 \
+  --author-model gpt-5.6-sol --author-reasoning-effort high
 ```
 
 There's no deterministic way to grade "is this a good base case" — this gate
@@ -332,6 +334,13 @@ is which when deciding how much to trust a number:
 | `review-report.json` | **Agent** (fresh-context reviewer) | Judgment Python cannot make, bound to the exact claims/brief/mode/diff hashes. |
 | `review-report.md` | Python, from `review-report.json` | Never hand-written, so it can't drift from the structured verdict. |
 | `audit-record.json` | Python, compiled from all of the above | The one-file summary for a human approver — see `docs/AUDITABILITY.md` §10. Written once, only on a final (non-`fail`) verdict. |
+
+The two authoring commands require a model name and reasoning effort. The reviewer
+records the same pair in `review-report.json`. The final audit record preserves all
+three identities under `agent_provenance`. This is declared provenance: Python can
+prove which values were submitted and retained, but not that the hosting application
+actually used them. Record `unknown` when the host does not expose a value; never infer
+one from the quality or length of the output.
 
 ### Cross-run processing log
 

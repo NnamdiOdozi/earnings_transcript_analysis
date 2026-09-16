@@ -196,6 +196,9 @@ logs/
 embedding_logs/
 embedding_logs
 
+# Agent-only probes and generated inspection caches
+scratch/
+
 # output
 output/
 

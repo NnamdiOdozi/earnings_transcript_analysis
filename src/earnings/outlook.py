@@ -5,7 +5,7 @@ import json
 import sys
 
 from . import config
-from .models import Claim, OutlookValidation, ValidationResult
+from .models import AgentProvenance, Claim, OutlookValidation, ValidationResult
 from .paths import RunPaths
 from .process import sha256_hex
 from .provenance import _load_validated_json, _validation_inputs_current
@@ -82,6 +82,10 @@ def cmd_validate_outlook(args: argparse.Namespace) -> int:
         errors=errors,
         outlook_brief_sha256=sha256_hex(outlook_path.read_bytes()),
         claims_sha256=sha256_hex(claims_path.read_bytes()),
+        agent_provenance=AgentProvenance(
+            model=args.author_model,
+            reasoning_effort=args.author_reasoning_effort,
+        ),
     )
     _write_json(paths.outlook_validation, outlook_validation.model_dump())
     if errors:

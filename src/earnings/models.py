@@ -8,6 +8,17 @@ from pydantic import BaseModel, Field
 Section = Literal["prepared", "qa"]
 ClaimStatus = Literal["reported", "forward_looking"]
 TemporalStatus = Literal["pre_event", "post_event", "undated", "unchecked"]
+ReasoningEffort = Literal[
+    "none", "minimal", "low", "medium", "high", "xhigh", "max", "ultra",
+    "adaptive", "not_applicable", "unknown",
+]
+
+
+class AgentProvenance(BaseModel):
+    """Agent identity declared when an agent-authored stage is validated."""
+
+    model: str
+    reasoning_effort: ReasoningEffort
 
 # Generic evidence categories -- deliberately industry-agnostic. No category names a
 # sector-specific metric (e.g. no "cloud_revenue" or "same_store_sales"); those live in
@@ -188,6 +199,7 @@ class ValidationResult(BaseModel):
     # The extractor supplies the reason; Python verifies the declared outcome
     # against the run-local price log before preserving it as a receipt.
     tool_decisions: ToolDecisions | None = None
+    agent_provenance: AgentProvenance | None = None
     # SHA-256 of the exact input bytes this result was computed from (filename -> hash:
     # claims.json, transcript.jsonl, financials.json, metrics.json when present). Set by
     # cli._write_validation. Lets a downstream stage prove the validation still belongs to
@@ -210,6 +222,7 @@ class OutlookValidation(BaseModel):
     # pins the claims the brief was validated against.
     outlook_brief_sha256: Optional[str] = None
     claims_sha256: Optional[str] = None
+    agent_provenance: AgentProvenance | None = None
 
 
 # Final semantic-audit stage (Outlook_Reviewer subagent, Opus). Judges what
@@ -239,6 +252,7 @@ class ReviewReport(BaseModel):
     review_mode: ReviewMode
     reviewed_at: str  # ISO 8601 UTC timestamp
     model: str = "opus"
+    reasoning_effort: ReasoningEffort = "unknown"
     # Mechanically verified receipt binding this judgment to the current artifacts.
     # Hash agreement proves version identity, not semantic comprehension.
     claims_sha256: str

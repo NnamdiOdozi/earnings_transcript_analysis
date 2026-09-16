@@ -302,6 +302,13 @@ attempt to compute or guess a hash yourself; either is a schema violation
 bindings against the actual files regardless of what you copied, and rejects
 stale or copied-from-elsewhere verdicts.
 
+Record the exact model identifier and reasoning effort reported by the host as
+separate `model` and `reasoning_effort` fields. Do not compress both into a vague
+label such as `gpt-5`, and do not infer either value from the result. Use `unknown`
+when the host does not reveal a value, or `not_applicable` when that host has no
+reasoning-effort concept. These are declared provenance fields, not a host-signed
+attestation of what runtime executed.
+
 Include at least one substantive `source_checks` entry and one
 `process_findings` entry. These are content-dependent coverage evidence. They do
 not independently prove comprehension, so describe what was actually checked

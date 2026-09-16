@@ -71,3 +71,19 @@ def test_review_report_escalate_full_review_defaults_false():
     assert report.escalate_full_review is False
     restored = ReviewReport.model_validate_json(report.model_dump_json())
     assert restored.escalate_full_review is False
+
+
+def test_review_report_preserves_reasoning_effort():
+    report = ReviewReport(
+        verdict="pass",
+        review_mode="full",
+        reviewed_at="2026-09-16T00:00:00Z",
+        model="gpt-5.6-sol",
+        reasoning_effort="medium",
+        claims_sha256="a" * 64,
+        outlook_brief_sha256="b" * 64,
+        summary="ok",
+    )
+    restored = ReviewReport.model_validate_json(report.model_dump_json())
+    assert restored.model == "gpt-5.6-sol"
+    assert restored.reasoning_effort == "medium"

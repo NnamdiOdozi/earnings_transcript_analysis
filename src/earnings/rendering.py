@@ -35,7 +35,10 @@ def _render_review_report(ticker: str, event_id: str, report: ReviewReport) -> s
         "",
         f"**Verdict:** {report.verdict}",
         f"**Review mode:** {report.review_mode}",
-        f"**Reviewed at (agent-reported):** {report.reviewed_at} (model: {report.model})",
+        (
+            f"**Reviewed at (agent-reported):** {report.reviewed_at} "
+            f"(model: {report.model}; reasoning effort: {report.reasoning_effort})"
+        ),
         f"**Checked at (system clock):** {_now_iso()}",
         f"**Claims SHA-256:** `{report.claims_sha256}`",
         f"**Outlook brief SHA-256:** `{report.outlook_brief_sha256}`",

@@ -66,7 +66,9 @@ different about running as Codex -- the steps below.
 4. **Write `review-report.json`**, per the canonical file's "Output" section
    and `reference/review-report-schema.md` (in
    `.agents/skills/review-earnings-run/reference/`, shared with the Claude
-   Code path) for the exact shape. Include the required current artifact hashes;
+   Code path) for the exact shape. Record the actual dispatched model and reasoning
+   effort as separate fields; use `unknown` rather than guessing either value.
+   Include the required current artifact hashes;
    `check-review` rejects a report copied from another artifact version or round.
 
 5. **Run the deterministic gate IMMEDIATELY -- before touching claims.json or

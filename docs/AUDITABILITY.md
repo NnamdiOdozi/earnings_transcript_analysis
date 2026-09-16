@@ -300,6 +300,12 @@ It holds:
   diff-only review couldn't be judged responsibly).
 - **`hashes`** — five, not dozens: the transcript, the manifest (standing in for every source
   it lists), the validated claims, the outlook brief, and the review report itself.
+- **`agent_provenance`** — the declared model and reasoning effort for the claim extractor,
+  outlook author and independent reviewer. Python carries these values from the stage records
+  into the final summary without reinterpretation. It proves what identity was declared and
+  retained, not what the hosting application actually executed. A host-signed runtime receipt
+  would be needed for independent attestation. When the host exposes no value, the stage records
+  `unknown` rather than guessing.
 
 This is a summary package, not a new log: nothing here is written until the run is actually
 finished, and the underlying per-attempt/per-round records it was compiled from are never

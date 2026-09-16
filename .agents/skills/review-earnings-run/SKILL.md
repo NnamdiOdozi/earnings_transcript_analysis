@@ -77,6 +77,9 @@ material omitted.
    returns without writing the file, treat that as a failed dispatch and retry once
    before escalating to the user. The report must contain the current claims,
    brief, and later-round diff hashes described by the canonical remit.
+   It must also record the host-reported model and reasoning effort as separate
+   fields. For Claude Code's reviewer, use `not_applicable` for effort unless the
+   host explicitly exposes a structured effort value; never guess from the output.
 
 5. **Run the deterministic gate IMMEDIATELY — before touching claims.json or
    outlook-brief.md for any correction.** This step snapshots the round under

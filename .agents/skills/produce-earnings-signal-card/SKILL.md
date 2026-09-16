@@ -168,9 +168,15 @@ guaranteed before proceeding.
 
    ```bash
    uv run earnings analyze --ticker <TICKER> --event-id <EVENT_ID> \
+     --extractor-model <actual-model-or-unknown> \
+     --extractor-reasoning-effort <actual-effort-or-unknown> \
      --price-decision <used|not_used|attempted_failed> \
      --price-reason "<concise reason>"
    ```
+
+   Record the model identifier and reasoning effort reported by the host for this
+   extraction. Do not infer either from output quality. If the host does not expose
+   one, pass `unknown`; this is declared provenance, not independent runtime attestation.
 
    This runs Python's deterministic validators (exact-quote, numeric, calculation,
    inference-citation, metric-provenance, schema) and writes `validation.json`.
@@ -241,8 +247,13 @@ Only start this stage once Stage 1's `earnings analyze` has passed.
 12. **Validate the brief.** Run:
 
    ```bash
-   uv run earnings validate-outlook --ticker <TICKER> --event-id <EVENT_ID>
+   uv run earnings validate-outlook --ticker <TICKER> --event-id <EVENT_ID> \
+     --author-model <actual-model-or-unknown> \
+     --author-reasoning-effort <actual-effort-or-unknown>
    ```
+
+   Use the identity of the agent that authored the current brief. It may differ from
+   the extractor. Again, record `unknown` rather than guessing.
 
    Fails if the underlying claims haven't passed `analyze`, if any cited claim id
    doesn't resolve, or if a material number isn't grounded in a claim cited

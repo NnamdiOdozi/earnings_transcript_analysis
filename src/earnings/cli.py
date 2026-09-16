@@ -94,6 +94,12 @@ def build_parser() -> argparse.ArgumentParser:
     analyze = sub.add_parser("analyze", help="Validate claims.json and produce signal-card.md")
     analyze.add_argument("--ticker", required=True)
     analyze.add_argument("--event-id", required=True)
+    analyze.add_argument("--extractor-model", required=True)
+    analyze.add_argument(
+        "--extractor-reasoning-effort",
+        required=True,
+        choices=("none", "minimal", "low", "medium", "high", "xhigh", "max", "ultra", "adaptive", "not_applicable", "unknown"),
+    )
     analyze.add_argument(
         "--price-decision",
         required=True,
@@ -112,6 +118,12 @@ def build_parser() -> argparse.ArgumentParser:
     )
     validate_outlook.add_argument("--ticker", required=True)
     validate_outlook.add_argument("--event-id", required=True)
+    validate_outlook.add_argument("--author-model", required=True)
+    validate_outlook.add_argument(
+        "--author-reasoning-effort",
+        required=True,
+        choices=("none", "minimal", "low", "medium", "high", "xhigh", "max", "ultra", "adaptive", "not_applicable", "unknown"),
+    )
     validate_outlook.set_defaults(func=cmd_validate_outlook)
 
     check_review = sub.add_parser(

@@ -198,4 +198,19 @@ def _build_audit_record(
         },
         "evidence_summary": {"source_count": len(sources)},
         "reviewer_model": report.model,
+        "agent_provenance": {
+            "extractor": (
+                validation.agent_provenance.model_dump()
+                if validation and validation.agent_provenance else None
+            ),
+            "outlook_author": (
+                outlook_validation.agent_provenance.model_dump()
+                if outlook_validation and outlook_validation.agent_provenance else None
+            ),
+            "reviewer": {
+                "model": report.model,
+                "reasoning_effort": report.reasoning_effort,
+            },
+            "basis": "agent_declared",
+        },
     }

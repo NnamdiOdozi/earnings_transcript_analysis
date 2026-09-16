@@ -20,13 +20,24 @@ FIXTURES = Path(__file__).parent / "fixtures"
 
 def main(args: list[str]) -> int:
     """Run the CLI with the default no-price decision used by existing fixtures."""
-    if args and args[0] == "analyze" and "--price-decision" not in args:
+    if args and args[0] == "analyze":
+        if "--price-decision" not in args:
+            args = [
+                *args,
+                "--price-decision", "not_used",
+                "--price-reason", "Fixture does not require market-price evidence",
+            ]
+        if "--extractor-model" not in args:
+            args = [
+                *args,
+                "--extractor-model", "fixture-extractor",
+                "--extractor-reasoning-effort", "medium",
+            ]
+    if args and args[0] == "validate-outlook" and "--author-model" not in args:
         args = [
             *args,
-            "--price-decision",
-            "not_used",
-            "--price-reason",
-            "Fixture does not require market-price evidence",
+            "--author-model", "fixture-author",
+            "--author-reasoning-effort", "high",
         ]
     return _cli_main(args)
 
@@ -1900,6 +1911,12 @@ def test_check_review_writes_audit_record_on_pass(isolated_runs_dir):
     assert record["hashes"]["outlook_brief_sha256"]
     assert record["hashes"]["review_report_sha256"]
     assert record["reviewer_model"] == "opus"
+    assert record["agent_provenance"] == {
+        "extractor": {"model": "fixture-extractor", "reasoning_effort": "medium"},
+        "outlook_author": {"model": "fixture-author", "reasoning_effort": "high"},
+        "reviewer": {"model": "opus", "reasoning_effort": "unknown"},
+        "basis": "agent_declared",
+    }
     assert record["tool_decisions"] == {
         "price_lookup": {
             "decision": "not_used",

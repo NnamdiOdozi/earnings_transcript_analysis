@@ -39,6 +39,7 @@ from .models import (
     ValidationResult,
     WebEvidence,
 )
+from .paths import RunPaths
 from .process import (
     sanitize,
     scan_for_injection,
@@ -88,29 +89,26 @@ def _append_processing_log(ticker: str, event_id: str, loaded, raw_bytes: bytes,
 def _input_hashes(run_dir: Path) -> dict[str, str]:
     """SHA-256 of each validation input file that exists, keyed by filename. Binds a
     validation record to the exact bytes it was computed from so staleness is detectable
-    downstream (see ValidationResult.input_hashes / _stale)."""
+    downstream (see ValidationResult.input_hashes / _stale).
+
+    Archived sources are deliberately NOT listed individually. manifest.json is the
+    provenance index and already carries a sha256 per source; pinning the manifest's own
+    hash here makes that a verifiable chain (see _validation_inputs_current, which walks
+    it via _manifest_source_errors). Restating every source made this a second, redundant
+    provenance index: on a 216-source run it was 96% of validation.json's bytes, copied
+    again into every attempt receipt, and read by the reviewer subagent each round."""
+    paths = RunPaths.at(run_dir)
     candidates = {
-        config.CLAIMS_FILENAME: run_dir / config.CLAIMS_FILENAME,
-        config.TRANSCRIPT_FILENAME: run_dir / config.NORMALIZED_SUBDIR / config.TRANSCRIPT_FILENAME,
-        config.FINANCIALS_FILENAME: run_dir / config.EVIDENCE_SUBDIR / config.FINANCIALS_FILENAME,
-        config.METRICS_FILENAME: run_dir / config.METRICS_FILENAME,
-        config.MANIFEST_FILENAME: run_dir / config.MANIFEST_FILENAME,
-        config.PRICE_LOOKUP_LOG_FILENAME: run_dir / config.PRICE_LOOKUP_LOG_FILENAME,
+        config.CLAIMS_FILENAME: paths.claims,
+        config.TRANSCRIPT_FILENAME: paths.transcript,
+        config.FINANCIALS_FILENAME: paths.financials,
+        config.METRICS_FILENAME: paths.metrics,
+        config.MANIFEST_FILENAME: paths.manifest,
+        config.PRICE_LOOKUP_LOG_FILENAME: paths.price_lookup_log,
         f"{config.EVIDENCE_SUBDIR}/{config.WEB_EVIDENCE_FILENAME}": (
-            run_dir / config.EVIDENCE_SUBDIR / config.WEB_EVIDENCE_FILENAME
+            paths.web_evidence
         ),
     }
-    manifest_path = run_dir / config.MANIFEST_FILENAME
-    if manifest_path.is_file():
-        try:
-            manifest = Manifest.model_validate_json(manifest_path.read_text(encoding="utf-8"))
-            root = run_dir.resolve()
-            for source in manifest.sources:
-                source_path = (run_dir / source.path).resolve()
-                if source.path and source_path.is_relative_to(root):
-                    candidates[f"source:{source.path}"] = source_path
-        except ValidationError:
-            pass
     return {name: sha256_hex(path.read_bytes()) for name, path in candidates.items() if path.exists()}
 
 
@@ -170,22 +168,30 @@ def _manifest_source_errors(run_dir: Path, manifest: Manifest) -> list[str]:
 
 def _validation_inputs_current(run_dir: Path, validation: ValidationResult) -> bool:
     """Fail closed unless every hashed analyze input still exists and matches."""
+    paths = RunPaths.at(run_dir)
     locations = {
-        config.CLAIMS_FILENAME: run_dir / config.CLAIMS_FILENAME,
-        config.TRANSCRIPT_FILENAME: run_dir / config.NORMALIZED_SUBDIR / config.TRANSCRIPT_FILENAME,
-        config.FINANCIALS_FILENAME: run_dir / config.EVIDENCE_SUBDIR / config.FINANCIALS_FILENAME,
-        config.METRICS_FILENAME: run_dir / config.METRICS_FILENAME,
-        config.MANIFEST_FILENAME: run_dir / config.MANIFEST_FILENAME,
-        config.PRICE_LOOKUP_LOG_FILENAME: run_dir / config.PRICE_LOOKUP_LOG_FILENAME,
+        config.CLAIMS_FILENAME: paths.claims,
+        config.TRANSCRIPT_FILENAME: paths.transcript,
+        config.FINANCIALS_FILENAME: paths.financials,
+        config.METRICS_FILENAME: paths.metrics,
+        config.MANIFEST_FILENAME: paths.manifest,
+        config.PRICE_LOOKUP_LOG_FILENAME: paths.price_lookup_log,
         f"{config.EVIDENCE_SUBDIR}/{config.WEB_EVIDENCE_FILENAME}": (
-            run_dir / config.EVIDENCE_SUBDIR / config.WEB_EVIDENCE_FILENAME
+            paths.web_evidence
         ),
     }
     required = {config.CLAIMS_FILENAME, config.TRANSCRIPT_FILENAME, config.MANIFEST_FILENAME}
-    manifest = _load_validated_json(run_dir / config.MANIFEST_FILENAME, Manifest)
+    manifest = _load_validated_json(paths.manifest, Manifest)
     if manifest is None:
         return False
-    required.update(f"source:{source.path}" for source in manifest.sources)
+    # Walk the provenance chain rather than re-listing it. validation.json pins
+    # manifest.json's own hash (checked in the _hash_gate_ok sweep below) and the
+    # manifest pins every archived source, so verifying the sources against the manifest
+    # here gives validate-outlook and check-review the same tamper detection they had
+    # when validation.json restated all N source hashes. Deleting the restatement WITHOUT
+    # this call would silently stop those two gates from noticing an edited evidence file.
+    if _manifest_source_errors(run_dir, manifest):
+        return False
     for optional in (config.FINANCIALS_FILENAME, config.METRICS_FILENAME):
         if locations[optional].is_file():
             required.add(optional)
@@ -202,6 +208,9 @@ def _validation_inputs_current(run_dir: Path, validation: ValidationResult) -> b
         required.add(config.PRICE_LOOKUP_LOG_FILENAME)
     if not required.issubset(validation.input_hashes):
         return False
+    # `source:` keys are no longer written (see _input_hashes), but a validation.json
+    # from before that change still carries them -- keep resolving the prefix so an
+    # older run is checked exactly as strictly as it was when it was produced.
     return all(
         _hash_gate_ok(
             recorded_hash,
@@ -225,7 +234,7 @@ def _price_decision_issues(
             )
         )
 
-    log_path = run_dir / config.PRICE_LOOKUP_LOG_FILENAME
+    log_path = RunPaths.at(run_dir).price_lookup_log
     records: list[dict] = []
     if log_path.is_file():
         for line_number, line in enumerate(
@@ -290,7 +299,7 @@ def _write_validation(run_dir: Path, result: ValidationResult) -> None:
     """
     result.validated_at = _now_iso()
     result.input_hashes = _input_hashes(run_dir)
-    _write_json(run_dir / config.VALIDATION_FILENAME, result.model_dump())
+    _write_json(RunPaths.at(run_dir).validation, result.model_dump())
 
 
 def _archive_existing_run(run_dir: Path) -> None:
@@ -298,10 +307,11 @@ def _archive_existing_run(run_dir: Path) -> None:
     entire contents under run_dir/_archive/<timestamp>/ before writing fresh output --
     a rerun for the same ticker/event must never silently overwrite prior evidence.
     """
-    if not (run_dir / config.MANIFEST_FILENAME).exists():
+    paths = RunPaths.at(run_dir)
+    if not (paths.manifest).exists():
         return
     stamp = _now_iso().replace(":", "").rstrip("Z")
-    dest = run_dir / config.ARCHIVE_SUBDIR / stamp
+    dest = paths.archive / stamp
     dest.mkdir(parents=True, exist_ok=True)
     for item in run_dir.iterdir():
         if item.name == config.ARCHIVE_SUBDIR:
@@ -311,7 +321,7 @@ def _archive_existing_run(run_dir: Path) -> None:
 
 def _review_round_count(run_dir: Path) -> int:
     """How many review rounds have completed (each a snapshot under _review_history/round-N/)."""
-    history_dir = run_dir / config.REVIEW_HISTORY_SUBDIR
+    history_dir = RunPaths.at(run_dir).review_history
     if not history_dir.exists():
         return 0
     return len([d for d in history_dir.iterdir() if d.is_dir() and d.name.startswith("round-")])
@@ -319,7 +329,7 @@ def _review_round_count(run_dir: Path) -> int:
 
 def _review_bundle_matches_snapshot(run_dir: Path, round_number: int) -> bool:
     """Whether the validated review bundle still equals one accepted round exactly."""
-    prior_dir = run_dir / config.REVIEW_HISTORY_SUBDIR / f"round-{round_number}"
+    prior_dir = RunPaths.at(run_dir).review_round(round_number)
     filenames = (
         config.CLAIMS_FILENAME,
         config.OUTLOOK_BRIEF_FILENAME,
@@ -355,7 +365,7 @@ def _snapshot_review_round(run_dir: Path, round_number: int) -> None:
     """
     if round_number > 1 and _review_bundle_matches_snapshot(run_dir, round_number - 1):
         return
-    dest = run_dir / config.REVIEW_HISTORY_SUBDIR / f"round-{round_number}"
+    dest = RunPaths.at(run_dir).review_round(round_number)
     dest.mkdir(parents=True, exist_ok=True)
     for filename in (
         config.CLAIMS_FILENAME,
@@ -410,7 +420,8 @@ def _unclosed_review_report(run_dir: Path) -> bool:
     the "no exceptions" warning into the skill itself -- prose alone doesn't hold
     under the pull of "fix the findings now". This is the mechanical backstop.
     """
-    report_path = run_dir / config.REVIEW_REPORT_JSON_FILENAME
+    paths = RunPaths.at(run_dir)
+    report_path = paths.review_report_json
     if not report_path.exists():
         return False
     completed = _review_round_count(run_dir)
@@ -420,7 +431,7 @@ def _unclosed_review_report(run_dir: Path) -> bool:
         return False
     if completed == 0:
         return True  # a report exists but round 1 was never closed
-    latest_snapshot = run_dir / config.REVIEW_HISTORY_SUBDIR / f"round-{completed}" / config.REVIEW_REPORT_JSON_FILENAME
+    latest_snapshot = paths.review_round(completed) / config.REVIEW_REPORT_JSON_FILENAME
     if not latest_snapshot.exists():
         return True
     return report_path.read_bytes() != latest_snapshot.read_bytes()
@@ -439,7 +450,7 @@ def _clear_stale_review_report_md(run_dir: Path) -> None:
     completed = _review_round_count(run_dir)
     if not completed:
         return
-    md_path = run_dir / config.REVIEW_REPORT_MD_FILENAME
+    md_path = RunPaths.at(run_dir).review_report_md
     if md_path.exists() and not _review_bundle_matches_snapshot(run_dir, completed):
         md_path.unlink()
 
@@ -465,6 +476,7 @@ def cmd_review_diff(args: argparse.Namespace) -> int:
     auto-escalation check. Never touches claims.json/outlook-brief.md -- read-only.
     """
     run_dir = config.run_dir(args.ticker, args.event_id)
+    paths = RunPaths.at(run_dir)
 
     completed_rounds = _review_round_count(run_dir)
     round_number = completed_rounds + 1
@@ -482,11 +494,11 @@ def cmd_review_diff(args: argparse.Namespace) -> int:
         return 4  # distinct from 2 (schema/fail) -- "stop, don't correct" not "go fix it"
 
     since_round = completed_rounds
-    prior_dir = run_dir / config.REVIEW_HISTORY_SUBDIR / f"round-{since_round}"
+    prior_dir = paths.review_round(since_round)
     prior_claims = json.loads((prior_dir / config.CLAIMS_FILENAME).read_text(encoding="utf-8"))
     prior_report = json.loads((prior_dir / config.REVIEW_REPORT_JSON_FILENAME).read_text(encoding="utf-8"))
-    current_claims = json.loads((run_dir / config.CLAIMS_FILENAME).read_text(encoding="utf-8"))
-    current_brief = (run_dir / config.OUTLOOK_BRIEF_FILENAME).read_text(encoding="utf-8")
+    current_claims = json.loads((paths.claims).read_text(encoding="utf-8"))
+    current_brief = (paths.outlook_brief).read_text(encoding="utf-8")
     prior_brief_path = prior_dir / config.OUTLOOK_BRIEF_FILENAME
     prior_brief = prior_brief_path.read_text(encoding="utf-8") if prior_brief_path.exists() else None
 
@@ -557,19 +569,19 @@ def cmd_review_diff(args: argparse.Namespace) -> int:
             len(prior_report.get(k, []))
             for k in ("source_checks", "claim_findings", "outlook_findings", "process_findings")
         ),
-        claims_sha256=sha256_hex((run_dir / config.CLAIMS_FILENAME).read_bytes()),
-        outlook_brief_sha256=sha256_hex((run_dir / config.OUTLOOK_BRIEF_FILENAME).read_bytes()),
+        claims_sha256=sha256_hex((paths.claims).read_bytes()),
+        outlook_brief_sha256=sha256_hex((paths.outlook_brief).read_bytes()),
         claims_changed=diff_entries,
         affected_brief_sections=sorted(affected_sections),
         auto_escalated=auto_escalated,
         auto_escalation_reason="; ".join(reasons) if reasons else None,
     )
-    diff_path = run_dir / config.REVIEW_DIFF_FILENAME
+    diff_path = paths.review_diff
     _write_json(diff_path, review_diff.model_dump())
     # The reviewer has no execution tool, so it cannot hash this file itself (unlike
     # claims_sha256/outlook_brief_sha256, which it already copies from
     # outlook-validation.json) -- write the digest as a sidecar it can just Read.
-    (run_dir / config.REVIEW_DIFF_SHA256_FILENAME).write_text(sha256_hex(diff_path.read_bytes()), encoding="utf-8")
+    (paths.review_diff_sha256).write_text(sha256_hex(diff_path.read_bytes()), encoding="utf-8")
 
     if auto_escalated:
         print(f"Auto-escalated to full review: {'; '.join(reasons)}")
@@ -792,10 +804,11 @@ def cmd_discover_peers(args: argparse.Namespace) -> int:
 
 def cmd_prepare(args: argparse.Namespace) -> int:
     run_dir = config.run_dir(args.ticker, args.event_id)
+    paths = RunPaths.at(run_dir)
     _archive_existing_run(run_dir)
-    raw_dir = run_dir / config.RAW_SUBDIR
-    normalized_dir = run_dir / config.NORMALIZED_SUBDIR
-    evidence_dir = run_dir / config.EVIDENCE_SUBDIR
+    raw_dir = paths.raw
+    normalized_dir = paths.normalized
+    evidence_dir = paths.evidence
     for d in (raw_dir, normalized_dir, evidence_dir):
         d.mkdir(parents=True, exist_ok=True)
 
@@ -853,7 +866,7 @@ def cmd_prepare(args: argparse.Namespace) -> int:
         for seg in segments:
             fh.write(seg.model_dump_json() + "\n")
     _write_json(
-        run_dir / config.SEGMENTATION_REPORT_FILENAME,
+        paths.segmentation_report,
         {
             "created_at": _now_iso(),
             "sanitized_input_sha256": sha256_hex(sanitized.encode("utf-8")),
@@ -877,7 +890,7 @@ def cmd_prepare(args: argparse.Namespace) -> int:
     if config.SANITISATION_INJECTION_SCAN_ENABLED:
         injection_findings = scan_for_injection(sanitized, config.SANITISATION_INJECTION_PATTERNS)
         _write_json(
-            run_dir / config.INJECTION_SCAN_FILENAME,
+            paths.injection_scan,
             {
                 "scanned_at": _now_iso(),
                 "pattern_count": len(config.SANITISATION_INJECTION_PATTERNS),
@@ -1144,7 +1157,7 @@ def cmd_prepare(args: argparse.Namespace) -> int:
         + ([pdf_reformat_note] if pdf_reformat_note else [])
         + web_evidence_notes,
     )
-    _write_json(run_dir / config.MANIFEST_FILENAME, manifest.model_dump())
+    _write_json(paths.manifest, manifest.model_dump())
 
     print(f"Prepared source pack at {run_dir} ({len(segments)} segments).")
     return 0
@@ -1152,6 +1165,7 @@ def cmd_prepare(args: argparse.Namespace) -> int:
 
 def cmd_analyze(args: argparse.Namespace) -> int:
     run_dir = config.run_dir(args.ticker, args.event_id)
+    paths = RunPaths.at(run_dir)
     tool_decisions = ToolDecisions(
         price_lookup=PriceLookupDecision(decision=args.price_decision, reason=args.price_reason)
     )
@@ -1164,11 +1178,11 @@ def cmd_analyze(args: argparse.Namespace) -> int:
         attempt.finish("blocked", blocked)
         return blocked
     _clear_stale_review_report_md(run_dir)
-    claims_path = run_dir / config.CLAIMS_FILENAME
-    transcript_path = run_dir / config.NORMALIZED_SUBDIR / config.TRANSCRIPT_FILENAME
-    financials_path = run_dir / config.EVIDENCE_SUBDIR / config.FINANCIALS_FILENAME
+    claims_path = paths.claims
+    transcript_path = paths.transcript
+    financials_path = paths.financials
 
-    card_path = run_dir / config.SIGNAL_CARD_FILENAME
+    card_path = paths.signal_card
     card_path.unlink(missing_ok=True)  # clear any stale card from a prior passing run before (re)validating
 
     if not claims_path.exists():
@@ -1176,7 +1190,7 @@ def cmd_analyze(args: argparse.Namespace) -> int:
         attempt.finish("blocked", 2)
         return 2
 
-    manifest_path = run_dir / config.MANIFEST_FILENAME
+    manifest_path = paths.manifest
     # manifest.json is prepare's own provenance record (source hashes, retrieval
     # timestamps) -- analyze was never checking it existed at all, so claims could
     # validate against a run with no source manifest. Schema-validated, not just
@@ -1213,7 +1227,7 @@ def cmd_analyze(args: argparse.Namespace) -> int:
 
     financials = json.loads(financials_path.read_text(encoding="utf-8")) if financials_path.exists() else {}
 
-    web_evidence_path = run_dir / config.EVIDENCE_SUBDIR / config.WEB_EVIDENCE_FILENAME
+    web_evidence_path = paths.web_evidence
     web_evidence_texts: dict[str, str] = {}
     web_evidence_statuses: dict[str, TemporalStatus] = {}
     if web_evidence_path.exists():
@@ -1235,7 +1249,7 @@ def cmd_analyze(args: argparse.Namespace) -> int:
             tool_decisions=tool_decisions,
         )
         _write_validation(run_dir, result)
-        attempt.finish("failed", 1, result, validation_path=run_dir / config.VALIDATION_FILENAME)
+        attempt.finish("failed", 1, result, validation_path=paths.validation)
         print(f"Validation FAILED: could not parse {config.CLAIMS_FILENAME}: {exc}")
         return 1
 
@@ -1244,7 +1258,7 @@ def cmd_analyze(args: argparse.Namespace) -> int:
     result.issues.extend(price_decision_issues)
     result.ok = not result.issues
 
-    metrics_path = run_dir / config.METRICS_FILENAME
+    metrics_path = paths.metrics
     if metrics_path.exists():
         claim_ids = {c.id for c in claims if c.id}
         try:
@@ -1257,7 +1271,7 @@ def cmd_analyze(args: argparse.Namespace) -> int:
                 issues=[ValidationIssue(claim_index=-1, check="schema", message=f"Could not parse {config.METRICS_FILENAME}: {exc}")],
             )
             _write_validation(run_dir, result)
-            attempt.finish("failed", 1, result, validation_path=run_dir / config.VALIDATION_FILENAME)
+            attempt.finish("failed", 1, result, validation_path=paths.validation)
             print(f"Validation FAILED: could not parse {config.METRICS_FILENAME}: {exc}")
             return 1
         metric_issues = validate_metrics(metrics, claim_ids)
@@ -1278,15 +1292,15 @@ def cmd_analyze(args: argparse.Namespace) -> int:
         print(f"  WARNING: {warning}")
 
     if not result.ok:
-        attempt.finish("failed", 1, result, validation_path=run_dir / config.VALIDATION_FILENAME)
+        attempt.finish("failed", 1, result, validation_path=paths.validation)
         print(f"Validation FAILED: {len(result.issues)} issue(s). See {config.VALIDATION_FILENAME}.")
         for issue in result.issues:
             print(f"  claim[{issue.claim_index}] {issue.check}: {issue.message}")
         return 1
 
     card = _render_signal_card(args.ticker, args.event_id, claims, segments_by_id)
-    (run_dir / config.SIGNAL_CARD_FILENAME).write_text(card, encoding="utf-8")
-    attempt.finish("passed", 0, result, validation_path=run_dir / config.VALIDATION_FILENAME)
+    (paths.signal_card).write_text(card, encoding="utf-8")
+    attempt.finish("passed", 0, result, validation_path=paths.validation)
     print(f"Validation passed ({result.checked_claims} claims). Wrote {config.SIGNAL_CARD_FILENAME}.")
     return 0
 
@@ -1297,6 +1311,7 @@ def cmd_validate_outlook(args: argparse.Namespace) -> int:
     claims already passed `analyze`, and every claim id the brief cites is real.
     """
     run_dir = config.run_dir(args.ticker, args.event_id)
+    paths = RunPaths.at(run_dir)
     input_hashes = {}
     for filename in (config.CLAIMS_FILENAME, config.OUTLOOK_BRIEF_FILENAME):
         path = run_dir / filename
@@ -1308,9 +1323,9 @@ def cmd_validate_outlook(args: argparse.Namespace) -> int:
         attempt.finish("blocked", blocked)
         return blocked
     _clear_stale_review_report_md(run_dir)
-    validation_path = run_dir / config.VALIDATION_FILENAME
-    outlook_path = run_dir / config.OUTLOOK_BRIEF_FILENAME
-    claims_path = run_dir / config.CLAIMS_FILENAME
+    validation_path = paths.validation
+    outlook_path = paths.outlook_brief
+    claims_path = paths.claims
 
     validation = _load_validated_json(validation_path, ValidationResult)
     if validation is None:
@@ -1354,10 +1369,10 @@ def cmd_validate_outlook(args: argparse.Namespace) -> int:
         outlook_brief_sha256=sha256_hex(outlook_path.read_bytes()),
         claims_sha256=sha256_hex(claims_path.read_bytes()),
     )
-    _write_json(run_dir / config.OUTLOOK_VALIDATION_FILENAME, outlook_validation.model_dump())
+    _write_json(paths.outlook_validation, outlook_validation.model_dump())
     if errors:
         attempt.finish(
-            "failed", 1, outlook_validation, validation_path=run_dir / config.OUTLOOK_VALIDATION_FILENAME
+            "failed", 1, outlook_validation, validation_path=paths.outlook_validation
         )
         print(f"Outlook brief validation FAILED: {len(errors)} issue(s).")
         for error in errors:
@@ -1365,7 +1380,7 @@ def cmd_validate_outlook(args: argparse.Namespace) -> int:
         return 1
 
     attempt.finish(
-        "passed", 0, outlook_validation, validation_path=run_dir / config.OUTLOOK_VALIDATION_FILENAME
+        "passed", 0, outlook_validation, validation_path=paths.outlook_validation
     )
     print(f"Outlook brief validated: all cited claim ids resolve. ({config.OUTLOOK_BRIEF_FILENAME})")
     return 0
@@ -1428,7 +1443,8 @@ def _build_audit_record(
     `escalate_full_review` (models.ReviewReport) -- forced a full re-review
     because a diff-only review couldn't be judged responsibly.
     """
-    manifest_path = run_dir / config.MANIFEST_FILENAME
+    paths = RunPaths.at(run_dir)
+    manifest_path = paths.manifest
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     sources = manifest.get("sources", [])
     transcript_candidates = [s for s in sources if s.get("path", "").startswith("raw/transcript")]
@@ -1437,11 +1453,11 @@ def _build_audit_record(
         transcript_candidates[0] if transcript_candidates else None,
     )
 
-    outlook_validation = _load_validated_json(run_dir / config.OUTLOOK_VALIDATION_FILENAME, OutlookValidation)
-    validation = _load_validated_json(run_dir / config.VALIDATION_FILENAME, ValidationResult)
-    report_path = run_dir / config.REVIEW_REPORT_JSON_FILENAME
+    outlook_validation = _load_validated_json(paths.outlook_validation, OutlookValidation)
+    validation = _load_validated_json(paths.validation, ValidationResult)
+    report_path = paths.review_report_json
 
-    attempt_dirs = sorted((run_dir / config.VALIDATION_HISTORY_SUBDIR).glob("attempt-*"))
+    attempt_dirs = sorted((paths.validation_history).glob("attempt-*"))
     attempts_with_issues = 0
     last_attempt_outcome = None
     for attempt_dir in attempt_dirs:
@@ -1451,7 +1467,7 @@ def _build_audit_record(
             attempts_with_issues += 1
 
     outlook_attempt_dirs = sorted(
-        (run_dir / config.OUTLOOK_VALIDATION_HISTORY_SUBDIR).glob("attempt-*")
+        (paths.outlook_validation_history).glob("attempt-*")
     )
     outlook_attempts_with_issues = 0
     last_outlook_attempt_outcome = None
@@ -1466,7 +1482,7 @@ def _build_audit_record(
             outlook_attempts_with_issues += 1
 
     round_dirs = sorted(
-        (run_dir / config.REVIEW_HISTORY_SUBDIR).glob("round-*"),
+        (paths.review_history).glob("round-*"),
         key=lambda p: int(p.name.split("-")[1]),
     )
     severities = ("critical", "high", "medium", "low", "info")
@@ -1597,6 +1613,7 @@ def cmd_check_review(args: argparse.Namespace) -> int:
     validated JSON (never trusts agent-authored markdown to match its own JSON).
     """
     run_dir = config.run_dir(args.ticker, args.event_id)
+    paths = RunPaths.at(run_dir)
 
     completed_rounds = _review_round_count(run_dir)
     repeated_accepted_bundle = bool(
@@ -1623,10 +1640,10 @@ def cmd_check_review(args: argparse.Namespace) -> int:
         )
         return 4
 
-    validation_path = run_dir / config.VALIDATION_FILENAME
-    outlook_path = run_dir / config.OUTLOOK_BRIEF_FILENAME
-    claims_path = run_dir / config.CLAIMS_FILENAME
-    report_path = run_dir / config.REVIEW_REPORT_JSON_FILENAME
+    validation_path = paths.validation
+    outlook_path = paths.outlook_brief
+    claims_path = paths.claims
+    report_path = paths.review_report_json
 
     validation = _load_validated_json(validation_path, ValidationResult)
     if validation is None:
@@ -1647,7 +1664,7 @@ def cmd_check_review(args: argparse.Namespace) -> int:
     # this command only checked that outlook-brief.md existed, so the whole
     # validate-outlook stage could be skipped (or its brief edited afterwards) and review
     # would still proceed. Require a passing outlook-validation.json bound to these bytes.
-    outlook_validation_path = run_dir / config.OUTLOOK_VALIDATION_FILENAME
+    outlook_validation_path = paths.outlook_validation
     if not outlook_validation_path.exists():
         print(f"error: {outlook_validation_path} not found. Run `earnings validate-outlook` first.", file=sys.stderr)
         return 2
@@ -1703,7 +1720,7 @@ def cmd_check_review(args: argparse.Namespace) -> int:
     else:
         # Every later round must pass through the deterministic diff command, even
         # when that command decides the semantic work must be a full review.
-        diff_path = run_dir / config.REVIEW_DIFF_FILENAME
+        diff_path = paths.review_diff
         review_diff = _load_validated_json(diff_path, ReviewDiff)
         if review_diff is None:
             print(f"Review blocked: run `earnings review-diff` before round {round_number}.")
@@ -1749,7 +1766,7 @@ def cmd_check_review(args: argparse.Namespace) -> int:
         print(f"Review round {completed_rounds} was already accepted; no new snapshot written.")
         if not report.escalate_full_review and report.verdict != "fail":
             _write_json(
-                run_dir / config.AUDIT_RECORD_FILENAME,
+                paths.audit_record,
                 _build_audit_record(args.ticker, args.event_id, run_dir, round_number, report),
             )
         if report.escalate_full_review:
@@ -1761,14 +1778,14 @@ def cmd_check_review(args: argparse.Namespace) -> int:
         return 0
 
     md = _render_review_report(args.ticker, args.event_id, report)
-    (run_dir / config.REVIEW_REPORT_MD_FILENAME).write_text(md, encoding="utf-8")
+    (paths.review_report_md).write_text(md, encoding="utf-8")
     print(f"Review verdict: {report.verdict}. Wrote {config.REVIEW_REPORT_MD_FILENAME}.")
 
     _snapshot_review_round(run_dir, round_number)
 
     if not report.escalate_full_review and report.verdict != "fail":
         _write_json(
-            run_dir / config.AUDIT_RECORD_FILENAME,
+            paths.audit_record,
             _build_audit_record(args.ticker, args.event_id, run_dir, round_number, report),
         )
         print(f"Wrote {config.AUDIT_RECORD_FILENAME} (run accepted).")

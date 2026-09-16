@@ -1063,6 +1063,41 @@ def test_validation_json_records_input_hashes(isolated_runs_dir):
     assert all(len(h) == 64 for h in v["input_hashes"].values())
 
 
+def test_validation_json_pins_manifest_not_every_source(isolated_runs_dir):
+    """manifest.json is the provenance index. validation.json pins its hash and stops
+    there, rather than restating a hash per archived source -- on a real run that
+    restatement was 96% of the file's bytes and was copied into every attempt receipt."""
+    run_dir = _seed_validated_run(isolated_runs_dir)
+    v = json.loads((run_dir / config.VALIDATION_FILENAME).read_text())
+    assert config.MANIFEST_FILENAME in v["input_hashes"]
+    assert [k for k in v["input_hashes"] if k.startswith("source:")] == []
+    receipt_dirs = sorted((run_dir / config.VALIDATION_HISTORY_SUBDIR).glob("attempt-*"))
+    receipt = json.loads((receipt_dirs[-1] / config.VALIDATION_ATTEMPT_RECEIPT_FILENAME).read_text())
+    assert [k for k in receipt["input_hashes"] if k.startswith("source:")] == []
+
+
+def test_later_gates_still_detect_an_edited_archived_source(isolated_runs_dir, capsys):
+    """The teeth removed from validation.json must still bite via the manifest chain.
+
+    Dropping the per-source hashes without relocating this check would leave
+    validate-outlook and check-review unable to notice an evidence file edited after
+    analyze passed -- silently, with no test failing. This is that regression test.
+    """
+    run_dir = _seed_validated_run(isolated_runs_dir)
+    (run_dir / config.OUTLOOK_BRIEF_FILENAME).write_text("# Outlook\n\nStrong [claim-001].\n")
+    assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
+
+    manifest = json.loads((run_dir / config.MANIFEST_FILENAME).read_text())
+    archived = run_dir / manifest["sources"][0]["path"]
+    archived.write_bytes(archived.read_bytes() + b"\ntampered after analyze\n")
+
+    capsys.readouterr()
+    assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 1
+    assert "an analyze input changed" in capsys.readouterr().out
+    assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 2
+    assert "an analyze input changed" in capsys.readouterr().out
+
+
 def test_validate_outlook_blocks_when_claims_changed_since_analyze(isolated_runs_dir):
     """If claims.json is edited after analyze, its recorded hash no longer matches, so the
     'ok' is stale -- validate-outlook must refuse rather than validate against unvalidated claims."""

@@ -129,7 +129,7 @@ guarantee.
 
 **Correction loop:** if `analyze` fails, the agent rewrites the offending
 claim(s) in `claims.json` and reruns `analyze`. Every invocation is preserved
-under `_validation_history/attempt-<N>_<timestamp>/` (the submitted claims,
+under `claims/history/attempt-<N>_<timestamp>/` (the submitted claims,
 optional metrics, the validation report, and a receipt), so failed attempts
 stay visible instead of being overwritten. There's no cap on this loop — keep
 iterating until validation passes.
@@ -261,30 +261,54 @@ practice.
 
 ```text
 runs/<ticker>/<event-id>/
-  manifest.json               # source URLs/paths, timestamps, sha256 hashes, provider status, queries sent
-  raw/                        # verbatim archived source, before sanitisation
-  normalized/transcript.jsonl # sanitised, segmented, speaker-labelled transcript
-  segmentation-report.json    # receipt for deliberately omitted structural lines
-  evidence/financials.json    # SEC/XBRL evidence, if a CIK was resolved
-  evidence/web-evidence.jsonl # extracted, citable web evidence (+ evidence/web/*.md)
-  claims.json                 # quote-anchored claims (agent-written)
-  metrics.json                # optional: company-defined metrics (agent-written)
-  validation.json             # per-claim / per-metric pass/fail detail + real-clock validated_at
-  _validation_history/
-    attempt-<N>_<timestamp>/  # claims/optional metrics/validation + receipt for every analyze invocation
-  signal-card.md               # written only after validation passes
-  outlook-brief.md            # agent-authored forward-looking synthesis
-  outlook-validation.json     # real-clock record of when validate-outlook last checked outlook-brief.md
-  _outlook_validation_history/
-    attempt-<N>_<timestamp>/  # claims/brief/outlook validation + receipt for every validate-outlook invocation
-  review-report.json          # agent-written semantic review verdict
-  review-report.md            # rendered from review-report.json, never hand-written
-  review-diff.json            # round 2+: what changed since the last round (Python-built)
-  _review_history/round-<N>/  # per-round snapshot of claims/brief/outlook validation/report
-    receipt.json               # that round's verdict + finding counts by severity only, no finding text
-  audit-record.json           # written once, only on a final pass/pass_with_warnings verdict
-  _archive/<timestamp>/       # a prior run's files, if this ticker/event was prepared before
+  manifest.json                 # source URLs/paths, timestamps, sha256 hashes, provider status, queries sent, layout_version
+  raw/                          # verbatim archived source, before sanitisation
+  normalized/transcript.jsonl   # sanitised, segmented, speaker-labelled transcript
+  segmentation-report.json      # receipt for deliberately omitted structural lines
+  injection-scan.json           # advisory prompt-injection flag results
+  evidence/financials.json      # SEC/XBRL evidence, if a CIK was resolved
+  evidence/web-evidence.jsonl   # extracted, citable web evidence (+ evidence/web/*.md)
+
+  claims/                       # STAGE 1
+    claims.json                 # quote-anchored claims (agent-written)
+    metrics.json                # optional: company-defined metrics (agent-written)
+    validation.json             # per-claim / per-metric pass/fail detail + real-clock validated_at
+    signal-card.md              # written only after validation passes
+    history/
+      attempt-<N>_<timestamp>/  # claims/optional metrics/validation + receipt for every analyze invocation
+
+  outlook/                      # STAGE 2
+    outlook-brief.md            # agent-authored forward-looking synthesis
+    outlook-validation.json     # real-clock record of when validate-outlook last checked outlook-brief.md
+    history/
+      attempt-<N>_<timestamp>/  # claims/brief/outlook validation + receipt for every validate-outlook invocation
+
+  review/                       # STAGE 3
+    review-report.json          # agent-written semantic review verdict
+    review-report.md            # rendered from review-report.json, never hand-written
+    review-diff.json            # round 2+: what changed since the last round (Python-built)
+    review-diff.sha256          # sidecar digest the reviewer reads, having no execution tool
+    history/round-<N>/          # per-round snapshot of claims/brief/outlook validation/report
+      receipt.json              # that round's verdict + finding counts by severity only, no finding text
+
+  audit-record.json             # written once, only on a final pass/pass_with_warnings verdict
+  _archive/<timestamp>/         # a prior run's files, if this ticker/event was prepared before
 ```
+
+The three stage folders exist so the directory tells you the order of work:
+**source pack -> claims -> outlook -> review -> audit**. Each stage keeps its own
+attempt history beside the artifacts that history belongs to, rather than in a
+separate directory at the run root. `audit-record.json` stays at the root because it
+summarises the whole run rather than any one stage.
+
+**Runs prepared before this grouping are not migrated and keep the older flat
+layout**, with every artifact at the run root and three history directories
+(`_validation_history/`, `_outlook_validation_history/`, `_review_history/`) beside
+them. A run records which arrangement it uses as `layout_version` in its
+`manifest.json` (1 = flat, 2 = the tree above), and `earnings.paths.RunPaths` reads
+that field, so both shapes keep working. Not migrating is deliberate: the review
+reports and audit records already inside an old run quote concrete paths, and those
+stay true only if the run is left alone.
 
 `discover-peers` writes separately to `runs/<ticker>/peer-discovery/`
 (`candidate-*.md` + its own hashed `manifest.json`) — company-level, shared
@@ -302,9 +326,9 @@ is which when deciding how much to trust a number:
 | `evidence/financials.json` | Python (SEC XBRL API) | Self-documenting — carries its own filing accession number. |
 | `evidence/web-evidence.jsonl` | Python (provider extract API) | Full extracted content, so it's quote-checkable, not just a search snippet. Each entry records a mechanical `temporal_status`. |
 | `claims.json`, `metrics.json` | **Agent** | Interpretive — the agent decides what's worth reporting. Python only checks it, never writes it. |
-| `validation.json`, `_validation_history/`, `signal-card.md` | Python | Deterministic result, append-only per-attempt snapshots, then a mechanical re-format of already-validated claims. |
+| `claims/validation.json`, `claims/history/`, `claims/signal-card.md` | Python | Deterministic result, append-only per-attempt snapshots, then a mechanical re-format of already-validated claims. |
 | `outlook-brief.md` | **Agent** | Fully interpretive synthesis. Python only validates that the claim ids it cites resolve. |
-| `outlook-validation.json`, `_outlook_validation_history/` | Python | Current result plus append-only snapshots of every submitted brief, claims, result and receipt. |
+| `outlook/outlook-validation.json`, `outlook/history/` | Python | Current result plus append-only snapshots of every submitted brief, claims, result and receipt. |
 | `review-report.json` | **Agent** (fresh-context reviewer) | Judgment Python cannot make, bound to the exact claims/brief/mode/diff hashes. |
 | `review-report.md` | Python, from `review-report.json` | Never hand-written, so it can't drift from the structured verdict. |
 | `audit-record.json` | Python, compiled from all of the above | The one-file summary for a human approver — see `docs/AUDITABILITY.md` §10. Written once, only on a final (non-`fail`) verdict. |

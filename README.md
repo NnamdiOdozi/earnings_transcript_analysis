@@ -95,6 +95,8 @@ codes, and file-by-file detail.
 
 ## Quick start
 
+Any agents wor
+
 ```bash
 uv sync --extra dev
 uv run earnings --help
@@ -142,20 +144,27 @@ this in manually. Full command reference: `uv run earnings <command> --help`.
 
 ## What the project produces
 
-For each ticker/event, a run directory under `runs/<ticker>/<event-id>/`
-holding:
+For each ticker/event, a run directory under `runs/<ticker>/<event-id>/`. It is
+arranged so the folder itself tells you the order of work — shared evidence first,
+then one folder per stage:
 
-- prepared and archived evidence (the transcript, SEC financials, extracted
-  web content — all hashed and timestamped);
-- validated, quote-anchored claims;
-- a signal card (`signal-card.md`) — the checked, structured factual base;
-- a forward-looking outlook brief (`outlook-brief.md`) — base/upside/downside
-  scenarios;
-- deterministic validation receipts for every check that ran;
-- an independent review trail, including any correction rounds;
-- `audit-record.json` — one Python-compiled summary file, written once a run
-  reaches a final verdict, for a human approver who just wants the outcome
+- the prepared, archived evidence at the top (`raw/`, `normalized/`, `evidence/`,
+  `manifest.json`) — the transcript, SEC financials and extracted web content, all
+  hashed and timestamped. Every later stage rests on it, so it belongs to none of them;
+- `claims/` — validated, quote-anchored claims, the deterministic validation result,
+  and a signal card (`claims/signal-card.md`) that is the checked, structured factual
+  base;
+- `outlook/` — the forward-looking brief (`outlook/outlook-brief.md`) with
+  base/upside/downside scenarios, and its own validation result;
+- `review/` — the independent review trail, including every correction round;
+- `audit-record.json` at the root — one Python-compiled summary file, written once a
+  run reaches a final verdict, for a human approver who just wants the outcome
   without reconstructing it from the files above.
+
+Each stage folder keeps its own `history/` of every attempt, beside the artifacts
+that history is about. Runs prepared before this grouping keep the older flat layout
+and are deliberately never migrated; each run records which arrangement it uses in
+its `manifest.json`.
 
 See [docs/WORKFLOW.md](docs/WORKFLOW.md#run-output-layout) for the exact file
 layout and what writes each file.

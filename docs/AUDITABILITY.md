@@ -65,13 +65,13 @@ without needing to open any individual run.
 
 Each deterministic claims check is also retained inside its own run. Every
 `earnings analyze` invocation creates a numbered, timestamped folder under
-`_validation_history/`. It preserves the exact claims submitted, optional metrics,
+`claims/history/`. It preserves the exact claims submitted, optional metrics,
 the validation report and a receipt containing the outcome and input hashes. This
 makes failed correction cycles visible instead of leaving only the final pass.
 
 The same rule applies to the outlook gate. Every `earnings validate-outlook`
 invocation creates a numbered, timestamped folder under
-`_outlook_validation_history/`. It preserves the submitted claims and brief, the
+`outlook/history/`. It preserves the submitted claims and brief, the
 outlook-validation result when validation ran, and a receipt recording whether the
 attempt passed, failed, or was blocked. The top-level `outlook-validation.json`
 remains the current result used by the next gate.
@@ -264,12 +264,12 @@ a report written afterwards, but controls wired into the workflow so that an unv
 Everything above lives in several files, each doing one job well. That's the right way to
 *build* the system, but it's the wrong shape for a human approver who just wants to know "what
 happened on this run, and was it approved" without reconstructing the story from `manifest.json`,
-`_validation_history/`, `_review_history/`, and `review-report.json` separately.
+`claims/history/`, `review/history/`, and `review/review-report.json` separately.
 
 `check-review` writes exactly one `audit-record.json` at the top of the run directory, and only
 once the reviewer's verdict is genuinely final — `pass` or `pass_with_warnings`, never `fail`
 or an escalated diff round (those aren't done; their own record already lives in
-`_validation_history/`/`_review_history/`). It is **entirely Python-compiled from files that
+`claims/history/`/`review/history/`). It is **entirely Python-compiled from files that
 already exist** — the agent never reads or writes it — and it is a summary, not a duplicate: a
 `manifest_sha256` stands in for the (often dozens of) individual source hashes `manifest.json`
 already carries, the same indirection `manifest.json` itself already uses for `raw/web/*`.

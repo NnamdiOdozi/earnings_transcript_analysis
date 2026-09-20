@@ -1,0 +1,17 @@
+{
+  "attempt": 3,
+  "started_at": "2026-09-19T18:06:03Z",
+  "finished_at": "2026-09-19T18:06:03Z",
+  "outcome": "passed",
+  "exit_code": 0,
+  "checked_claims": 203,
+  "issue_counts": {},
+  "input_hashes": {
+    "claims.json": "9ce3ebc817f1879ad4bac21ad587c432628d2e27c11307339c06c801e404084b",
+    "transcript.jsonl": "cdd9a8e9664d532fa2fb819f58736b258aa444064f91facb1fb1c9b050edecc8",
+    "financials.json": "417117037bd5843f2deed1d23e78ecbc45c7ac3265d98beb2b0e584eaf9ddd08",
+    "metrics.json": "d8874b95a128b0e307e70fa9acdc4893885eb51bd4c15773e945e8381d372379",
+    "manifest.json": "c1f2d689c8c6f08ee34a4d5b388bdfbda19517d54c9dd7c77e32af9f15129563",
+    "evidence/web-evidence.jsonl": "3ca142609c59debdc801486f8840660e4bf7e675f9fb3e4cfd5447dc194ab178"
+  }
+}

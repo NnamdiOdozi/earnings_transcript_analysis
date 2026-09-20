@@ -50,6 +50,33 @@ post-event content** (live-tested both, 2026-08-26) — the client-side
 `outlook-reviewer`'s temporal-integrity check is the backstop for undated hits.
 See README "Known limitations" before touching this area.
 
+## Jev / TypeSafe claim auditing
+
+Before any Jev work, invoke the `typesafe:typesafe-ai` skill and read
+`docs/JEV_CHECKS.md`. The skill is a plugin; only its one-line description is in
+context by default, so it will not load itself. `docs/JEV_CHECKS.md` carries the
+payload schema, the four question-design mistakes that cost real runs, and what Jev
+provably cannot check.
+
+Jev is an investigative tool, never a gate: it blocks nothing, and probabilities move
+between runs (0.81 vs 0.76 on the same question). Use it to discover a defect class,
+then write the deterministic check in `validate.py`. Tool: `scripts/jev_check.py`,
+`--mode claims`, `--mode citations`, or `--mode coverage` (audits the coverage
+receipt's `deliberately_immaterial` calls -- the one completeness question
+`validate_coverage_receipt` explicitly cannot answer; always run its
+`--coverage-scope extracted` control, since a question that can never say "material"
+produces the same clean result as a perfect receipt). Every call is logged to `logs/jev_checks.jsonl`.
+
+The answers do not stop at the log. The tool writes `jev-triage.json` beside the
+stage's artifacts: a two-tier list of answers worth revisiting, where `defect` means
+Jev's best reading disagrees with the record and `check` means the expected answer
+won weakly — a losing option holding real probability, which is usually a lost
+qualifier ("in excess of $2bn" extracted as `2.0`). The extractor answers each defect
+in `jev-dispositions.json`; `earnings analyze` warns (never fails) on undisposed
+ones; a claim whose figure is right but qualified carries a `caveats` sentence that
+the brief author must honour and the reviewer checks. Nothing machine-checks the
+honouring — that is a hand-off between three agents, not a validator.
+
 ## Conventions specific to this repo
 
 - No provider SDKs in `sources.py` — raw `httpx` for Tavily/Exa/SEC alike.

@@ -197,3 +197,28 @@ type = "auto"                     # Exa /search "type": auto | neural | keyword 
 num_results = 8                   # search hits per query -- cheap candidates, filtered well before extraction
 max_extracted_sources = 15        # cap across all queries combined; selected by score when the
                                    # provider gives one, otherwise by the provider's own result order
+
+[jev]
+# TypeSafe System One claim auditing. NOT a pipeline gate -- a manual investigative
+# tool run against a finished claims.json. See docs/JEV_CHECKS.md.
+model = "typesafe/jev-1.13"
+endpoint = "https://openrouter.ai/api/alpha/decisions"
+auto_accept_threshold = 0.7       # was 0.8 (TypeSafe's cookbook default, "start high and
+                                   # lower it once measured"). Lowered 2026-09-19 after
+                                   # measuring on JPM/2026-q2-rerun's 156 real answers
+request_pause_seconds = 0.15      # gentle on the endpoint when auditing a few hundred claims
+
+# Triage thresholds: which Jev answers the extractor must look at again. Jev returns
+# three answer shapes and each needs its own rule -- see docs/JEV_CHECKS.md "Triage".
+alternative_probability_floor = 0.20   # a LOSING option holding at least this much is
+                                   # flagged even when the winning option is correct:
+                                   # "supports 0.60 / says_nothing 0.33" passes, but the
+                                   # 0.33 is exactly the signal worth a second look.
+                                   # Measured: 0.10 flagged 62 of 156 answers, which points
+                                   # at nothing; 0.20 flags 37 and keeps every near-coin-flip.
+                                   # Above 0.20 the total stops falling -- items migrate to
+                                   # the confidence rule below instead of disappearing.
+choice_confidence_floor = 0.60    # a winning option whose distribution is this diffuse is
+                                   # a coin toss dressed as a verdict
+score_shortfall_margin = 0.35     # how far below the top rung of a score ladder still counts
+                                   # as clean (2.98 of 3 is fine; 2.4 is not)

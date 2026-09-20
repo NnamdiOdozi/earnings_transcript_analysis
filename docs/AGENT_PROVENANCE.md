@@ -8,6 +8,12 @@ claim that a model name proves the analysis is correct.
 
 - [ ] Claim extraction, outlook authoring and independent review are three separate
   agent-authored stages. Each can use a different model or reasoning effort.
+- [ ] Each stage declares **two** identities, not one. `agent_name` is the harness
+  that ran the stage (`Claude Code`, `Codex`); `model` is what ran underneath it
+  (`claude-sonnet-5`, `gpt-5.6-sol`). The same agent can drive different models and
+  the same model can run under different agents, so one field cannot stand in for
+  the other. Extraction supplies `--extractor-agent`, outlook authoring supplies
+  `--author-agent`.
 - [ ] `claims/validation.json` records the extractor identity supplied to
   `earnings analyze`.
 - [ ] `outlook/outlook-validation.json` records the outlook author's identity

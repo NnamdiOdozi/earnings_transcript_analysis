@@ -107,6 +107,7 @@ for exactly what a claim needs.
 
 ```bash
 uv run earnings analyze --ticker ACME --event-id 2026-q2 \
+  --extractor-agent <agent-name-or-unknown> \
   --extractor-model gpt-5.6-sol --extractor-reasoning-effort high \
   --price-decision not_used --price-reason "No market-price evidence was needed"
 ```
@@ -145,6 +146,7 @@ forward-looking synthesis (base/upside/downside cases) — using
 
 ```bash
 uv run earnings validate-outlook --ticker ACME --event-id 2026-q2 \
+  --author-agent <agent-name-or-unknown> \
   --author-model gpt-5.6-sol --author-reasoning-effort high
 ```
 
@@ -167,6 +169,31 @@ Every conclusion in the brief must trace back to real, validated evidence — bu
 the agent is free to synthesise new qualitative conclusions from several
 validated claims at once; nothing requires every sentence to already exist
 verbatim as a claim.
+
+**Attempt history, and why the outlook's copy is a bundle:** every
+`validate-outlook` invocation is preserved under
+`outlook/history/attempt-<N>_<timestamp>/`, the same way `analyze` preserves
+`claims/history/`. The difference is what gets snapshotted. The outlook attempt
+stores **four** files: `outlook-brief.md`, the `claims.json` it was validated
+against, `outlook-validation.json`, and a receipt.
+
+Keeping the claims alongside the brief is the point. Gate 2 only proves the brief's
+citations resolve *against the claims as they stood at that moment*. If claims are
+later corrected, split or renumbered, an old brief on its own becomes unreadable —
+you cannot tell whether a citation was right when it was written. The paired copy
+lets you reconstruct exactly what the author was citing.
+
+Two things to know before relying on this folder:
+
+- **The newest attempt is not necessarily the one a reviewer saw.** A *blocked*
+  `analyze` still writes an attempt folder containing your edits. To find the
+  version an `outlook-reviewer` actually read, match `review-report.json`'s
+  `claims_sha256` and `outlook_brief_sha256` against the candidates rather than
+  taking the highest attempt number. Confirmed live (JPM/2026-q2-rerun, 2026-09-19).
+- **Never delete or rewrite an attempt folder.** Correcting a claim means editing
+  the live `claims.json` and rerunning; the history is the audit trail that makes a
+  correction legible as a correction.
+
 
 ## 5. Independent review — `earnings check-review`
 

@@ -91,5 +91,10 @@ def _render_signal_card(ticker: str, event_id: str, claims: list[Claim], segment
             )
             location = claim.segment_id or claim.web_evidence_id
             lines.append(f'  > "{_escape_currency(claim.quote)}" — {location}')
+            # A caveat says the figure is qualified in a way no check can see (a floor,
+            # an approximation). Rendered here because the card is the artifact a human
+            # reads: a caveat visible only inside claims.json is half a caveat.
+            for caveat in claim.caveats:
+                lines.append(f"  - *caveat:* {_escape_currency(caveat)}")
         lines.append("")
     return "\n".join(lines)

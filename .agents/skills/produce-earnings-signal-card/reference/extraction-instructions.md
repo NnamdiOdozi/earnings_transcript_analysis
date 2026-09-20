@@ -55,10 +55,11 @@ the exact-quote requirement.
   "segment_id": "seg-0003",
   "speaker": "Jane Smith",
   "status": "reported",
-  "values": {},
+  "values": {"revenue_usd_billion": 12.4, "growth_pct": 8},
   "confidence": 0.9,
   "inferred_from": [],
-  "period": "3 months to 31 Dec 2025"
+  "period": "3 months to 31 Dec 2025",
+  "caveats": []
 }
 ```
 
@@ -68,6 +69,9 @@ the exact-quote requirement.
 - A claim cites **exactly one** evidence source: either `segment_id` (a transcript
   segment) or `web_evidence_id` (extracted web content — see "Citing web
   evidence" below). Never set both, never set neither.
+- `caveats` is an optional list of plain sentences recording a qualification on this
+  claim's figures that no deterministic check can see. Usually empty. See "When a
+  figure is right but qualified" below.
 - `status` is `"reported"` for results already achieved, `"forward_looking"` for
   guidance/expectations.
 - `confidence` is your own calibrated 0–1 estimate of how clearly the transcript
@@ -196,6 +200,56 @@ number must appear either:
 Put such numbers in `values` as a flat key → number, e.g.
 `"values": {"revenue_millions": 110}`. Do not include numbers you cannot trace to
 one of these two sources — they will fail validation.
+
+**`values` is not optional when the claim states a figure.** If a claim is a
+`reported_fact` or `management_guidance` and its quote or `claim_text` carries a
+currency amount, a percentage, or a magnitude word (million/billion/bps), then
+`values` must not be empty — `check_values_present` fails the claim if it is. An
+empty `values` used to be the risk-free choice: nothing required it, and the numeric
+and calculation checks only examine values that exist, so they passed by inspecting
+nothing. Confirmed live (JPM/2026-q2): all 110 claims carried `"values": {}` and
+every numeric gate passed vacuously.
+
+Name each key for the metric it holds, and keep the qualifier honest: "over two
+billion" is a floor, not a measurement, so record it as
+`{"revenue_run_rate_usd_billion_min": 2}` rather than a bare `2` that reads as exact.
+
+## The quote must carry what claim_text asserts
+
+`check_claim_text_quote_traceable` fails a claim whose `claim_text` states a number
+that appears in neither the claim's own `quote` nor its `values`. Extending the quote
+to cover the figure is the fix; dropping the assertion is the fallback.
+
+This is about traceability, not fabrication. `signal-card.md` renders `claim_text`
+beside the quote and nothing else, so a figure with no quote behind it reaches a human
+reader with no way to check it. Confirmed live (JPM/2026-q2-rerun, 2026-09-19): three
+peer claims asserted a CET1 ratio or half-year EPS that sat elsewhere in the same
+filing but not in the quoted sentence. Every figure was accurate; none was checkable
+from the card. The older `check_claim_text_numbers` passed them because it grounds
+against the whole cited document.
+
+When the figure you need is contiguous with your quote in the source, extend the quote
+by copying the wider span. When it is in a table far from your prose sentence, drop the
+assertion rather than stretch the quote across unrelated text.
+
+## Claims about a whole set must cite every member
+
+If `claim_text` says "every", "all four", "none of" or "each of the", cite one
+supporting claim per member of the set, and check that each cited claim measures the
+metric your sentence actually asserts.
+
+Confirmed live (JPM/2026-q2-rerun, 2026-09-19): an `analytical_inference` asserted that
+every large-bank peer reported double-digit revenue growth. One of the four had not —
+its own results deck, in this run's evidence folder, showed single-digit revenue growth
+— and the claim's `inferred_from` cited that peer's *net income* growth in place of the
+revenue figure that did not exist. The false sentence reached the published signal card.
+
+`check_universal_quantifier` fails only the case Python can be certain about: a
+universal assertion citing fewer than two claims. **It cannot detect the metric
+substitution that caused the real failure** — recognising that a net-income figure was
+standing in for a revenue one is semantic, and belongs to you at extraction time and to
+the reviewer afterwards. Before writing a universal, name each member and the specific
+cited claim that carries the right metric for it.
 
 ## Calculations — Python recomputes, you do not assert freely
 
@@ -353,12 +407,26 @@ that pattern is far more likely to be under-extraction than a genuinely thin cal
 
 ### What this receipt does and does not prove
 
-It proves nothing on its own. Nothing in the pipeline currently reads or validates it:
-Python does not check that every segment or web source appears, and no reviewer is instructed to
-audit your materiality judgements. It is an honesty artifact that makes the shape of
-your coverage inspectable by a human who would otherwise have no way to see it. A
-wrong `deliberately_immaterial` call will not be caught by any gate. Write it as if
-someone will check it, because the only thing standing behind it is that.
+Two different things are checked, by two different means.
+
+**Python proves the receipt is complete.** `validate_coverage_receipt`, run inside
+`earnings analyze`, fails the run if any segment id or web evidence id is missing from
+the receipt, if a row names an id that does not exist, or if the `web_evidence` array
+is absent while the run holds web sources. You cannot pass by staying silent about a
+segment.
+
+**Python cannot prove an immaterial call was right.** That judgement is semantic. It is
+audited by `scripts/jev_check.py --mode coverage`, which re-reads every segment you
+marked `deliberately_immaterial` — without being shown your `outcome` or your `reason`,
+so it reads the segment rather than agreeing with you — and flags any it judges
+material. See step 7 of `SKILL.md`. That audit is optional and needs an API key, so a
+wrong call can still reach the run if it is skipped.
+
+Neither check touches the harder case the materiality rules above describe: a segment
+that contradicts or qualifies something said elsewhere on the call. Nothing judging one
+segment at a time can see that. It belongs to the reviewer, and to you.
+
+Write the receipt as if someone will check it, because now something does.
 
 ## What not to extract
 
@@ -372,3 +440,39 @@ someone will check it, because the only thing standing behind it is that.
   analysed. If you find yourself reaching for a term like "cloud revenue" or
   "same-store sales" and the company's own transcript never used it, don't use it
   either — describe the metric in the company's own words.
+
+
+## When a figure is right but qualified
+
+Some quotes state a number that is real but not exact. "Revenue in excess of \$2
+billion." "Roughly 400 basis points." "At least 15% growth." Extract the number as
+usual — `values["revenue_usd_billion"] = 2.0` — because a claim with no value is
+worse than one with a qualified value, and Python needs the number to ground the
+prose downstream.
+
+But recognise what has been lost. Every numeric check passes, because 2.0 genuinely
+appears in the quote. The exact-quote check passes, because the quote is verbatim.
+Nothing in the pipeline can tell the difference between "revenue was \$2 billion"
+and "revenue was more than \$2 billion", and the outlook brief two stages later will
+be written from the number, not from the quote.
+
+So record the qualification where a later agent will see it:
+
+```json
+"values": {"revenue_usd_billion": 2.0},
+"caveats": ["the quote says 'in excess of' — 2.0 is a floor, not an exact result"]
+```
+
+One sentence, in plain words, saying what the number really is. The brief author is
+instructed to honour it in the prose; the independent reviewer is instructed to check
+that it was honoured. Neither instruction is machine-enforced, which is the honest
+position: this is a hand-off between three agents, not a validator.
+
+Use a caveat for a lost qualifier, an approximation, a figure management gave on a
+non-standard basis, or a number whose metric name is the closest available fit rather
+than an exact match. Do not use it as a place to park doubt about whether the claim
+belongs in the run at all — a claim you do not trust should be fixed or dropped.
+
+The Jev audit in the skill's step 7 is good at surfacing this class. A `value__`
+question that comes back below the threshold, with the losing option holding real
+probability, is very often a lost qualifier rather than a wrong number.

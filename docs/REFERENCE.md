@@ -149,6 +149,40 @@ types.
 
 ## Known limitations
 
+### Empty `values` used to pass every numeric gate
+
+Confirmed live on JPM/2026-q2 (run 2026-09-16): all 110 claims carried
+`"values": {}`, and the run passed validation cleanly. Every older run in the repo
+populates `values` heavily (Lloyds 49 of 63, Microsoft 38 of 44), so this was a
+regression, not the normal shape.
+
+The cause was an incentive, not a bug in any single check. `check_numeric` iterates
+`claim.values` and grounds each number it finds; with an empty dict the loop body
+never runs and the check reports success. `check_claim_text_numbers` grounds figures
+written in prose against the evidence independently, so an empty `values` weakened
+nothing it could detect. Nothing anywhere required `values` to be populated.
+
+For an extracting agent, that made populating `values` pure downside: it can only
+ever cause a failure, never prevent one. Leaving it empty was the risk-free path to a
+passing run. The numeric-grounding and calculation-recompute checks — the strongest
+anti-hallucination machinery in the pipeline — therefore ran 110 times and examined
+nothing. A vacuous pass is indistinguishable from a real one in `validation.json`.
+
+`check_values_present` (2026-09-19) closes it: a `reported_fact` or
+`management_guidance` claim whose quote or `claim_text` carries a currency amount, a
+percentage, or a magnitude word must not have an empty `values`. Measured against
+every run in the repo before wiring it in: zero false alarms on the runs that
+populate `values`, one true positive on SBRY (a claim quoting 2.7% and £9.2bn with
+`values: {}`), and all 26 qualifying JPM claims caught.
+
+Two things it does not do. It does not check that the *right* figures were captured,
+only that something was — a claim could satisfy it with one value and omit three.
+And it says nothing about unit or scale correctness; `check_numeric`'s grounding is
+presence-only, so "over two billion" recorded as a bare `2` still passes both. That
+qualifier-loss case is real and was found by an LLM check, not by Python — see
+`docs/AUDITABILITY.md`.
+
+
 - **Speaker-label detection** is a line-start heuristic; unconventional
   transcript formatting may leave `speaker` as `null`. As of 2026-09-04, names may
   contain any word in any case-bearing script (Latin incl. Extended-A, Cyrillic,

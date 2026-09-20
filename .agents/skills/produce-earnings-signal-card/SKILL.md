@@ -78,8 +78,12 @@ guaranteed before proceeding.
    (how this quarter reads against competitors reporting the same period). If you
    finish extraction having cited none of the peers, you have not finished.
    Follow `reference/extraction-instructions.md` for the generic
-   (industry-agnostic) categories, classification taxonomy, and how to write exact
-   quotes and calculation blocks. Write the result as
+   (industry-agnostic) categories, classification taxonomy, how to write exact
+   quotes and calculation blocks, and **how to populate `values`**. Exhaustive
+   coverage is about claims AND their fields: a reported-fact or guidance claim that
+   quotes a financial figure must carry that figure in `values` as a flat
+   key -> number. Validation now fails such a claim if `values` is empty.
+   Write the result as
    `runs/<TICKER>/<EVENT_ID>/claims/claims.json`, an array of claim objects matching
    `earnings.models.Claim`, each with a unique `id`. Every claim cites exactly one
    evidence source and a `quote` that is an exact substring of it: normally a
@@ -111,9 +115,10 @@ guaranteed before proceeding.
    call. See `reference/extraction-instructions.md`'s
    "Coverage receipt" section for the exact fields and for what counts as immaterial.
    Write it from the segment list, not from memory of what you extracted — building it
-   the other way round reproduces whatever you already missed. Nothing in the pipeline
-   currently validates this file; it exists so a human can see the shape of your
-   coverage at a glance, which no other artifact reveals.
+   the other way round reproduces whatever you already missed. `earnings analyze`
+   checks this file and **fails** if any segment id or web evidence id is unaccounted
+   for, or if a row names an id that does not exist. What it cannot check is whether
+   a `deliberately_immaterial` call was *right* — that judgement is audited in step 7.
 
 5. **Optionally discover company-defined metrics.** If the transcript supports it,
    also write `runs/<TICKER>/<EVENT_ID>/claims/metrics.json` per
@@ -164,31 +169,115 @@ guaranteed before proceeding.
    not private chain-of-thought. Python will compare the decision with this run's
    `price_lookups.jsonl` and reject a contradiction.
 
-7. **Validate.** Run:
+7. **Audit the claims with Jev, then account for every finding.** Optional, and it
+   needs an OpenRouter key, but skipping it means the only reading of your claims
+   before validation is your own. Run:
+
+   ```bash
+   uv run python scripts/jev_check.py runs/<TICKER>/<EVENT_ID>
+   uv run python scripts/jev_check.py runs/<TICKER>/<EVENT_ID> --mode coverage
+   ```
+
+   Jev is a fast model that returns a probability for a bounded question rather than
+   prose. It is **never a gate** — it blocks nothing, and its numbers move a little
+   between runs. What it is good at is spotting the kind of defect a deterministic
+   check cannot: a figure that is right but attached to the wrong metric name, a
+   `claim_text` that asserts more than its own `quote` carries, a qualifier lost in
+   extraction.
+
+   The tool writes `claims/jev-triage.json`: the answers worth a second look, in two
+   tiers.
+
+   - **`defect`** — Jev's best reading disagrees with what you wrote. Every one of
+     these must be answered individually.
+   - **`check`** — the expected answer still won, but weakly: a losing option held
+     real probability, or the confidence was diffuse. Read these as a group. This
+     tier is where lost qualifiers surface. A quote saying "revenue in excess of
+     \$2 billion" extracted as `values["revenue_usd_billion"] = 2.0` passes every
+     numeric check — 2.0 genuinely appears — but the figure is a floor, not a
+     result, and Jev will hold probability on "false" for that value question.
+
+   Record what you did in `claims/jev-dispositions.json`, one entry per `defect`
+   item, using the `key` from the triage file verbatim:
+
+   ```json
+   {"dispositions": [
+     {"key": "claim-017::value__revenue_usd_billion",
+      "action": "caveat_added",
+      "note": "quote says 'in excess of'; 2.0 is a floor. Caveat added to claim-017."}
+   ]}
+   ```
+
+   `action` is one of `fixed` (the claim was corrected), `caveat_added` (the claim
+   is right but qualified — see below), or `rejected` (Jev is wrong here, and the
+   note says why). A rejection with no reason is not a disposition.
+
+   The `check` tier is closed with a single entry keyed `"check-tier"` saying what
+   you found when you read the group — it is one advisory, not sixty.
+
+   **When a figure is right but qualified, add a `caveats` entry to the claim
+   itself**, not only to the disposition file — one plain sentence, e.g. `"the quote
+   says 'in excess of' — 2.0 is a floor, not an exact result"`. The disposition file
+   is a record of this step; the caveat travels with the claim into the outlook brief
+   and the independent review. Nothing in Python can check that a caveat was
+   honoured, which is exactly why it has to be visible to the two agents downstream.
+
+   **The second command audits your coverage receipt**, and it answers the one
+   question no other check in this pipeline asks. `analyze` proves every segment is
+   accounted for; nothing proves a `deliberately_immaterial` call was correct, and a
+   material segment hidden behind a plausible reason is invisible to every gate in the
+   run. The audit sends only the segments you called immaterial, with your own
+   `outcome` and `reason` deliberately withheld so Jev reads the segment rather than
+   agreeing with you. Findings land in `claims/jev-coverage-triage.json` in the same
+   two tiers. Answer a `defect` by extracting what you missed; answer a `check` by
+   re-reading the segment and either extracting or leaving the call to stand. These
+   items go in `jev-dispositions.json` alongside the rest, keyed the same way.
+
+   On the first real run this flagged 0 of 43 and every one of those 43 was correct on
+   a hand check — so treat a clean sheet here as a genuine pass, not a formality. It
+   costs under a penny.
+
+   `earnings analyze` warns — it does not fail — when a triage file exists with
+   defect findings and no matching dispositions. That warning is there because this
+   already went wrong once: a JPM run reached the independent reviewer carrying
+   thirteen miscitations Jev had already flagged, because the flags sat in a log file
+   nobody read.
+
+8. **Validate.** Run:
 
    ```bash
    uv run earnings analyze --ticker <TICKER> --event-id <EVENT_ID> \
+     --extractor-agent <your-agent-name-or-unknown> \
      --extractor-model <actual-model-or-unknown> \
      --extractor-reasoning-effort <actual-effort-or-unknown> \
      --price-decision <used|not_used|attempted_failed> \
      --price-reason "<concise reason>"
    ```
 
-   Record the model identifier and reasoning effort reported by the host for this
-   extraction. Do not infer either from output quality. If the host does not expose
-   one, pass `unknown`; this is declared provenance, not independent runtime attestation.
+   Record your own agent/harness name (`--extractor-agent`, e.g. "Claude Code",
+   "Codex"), plus the model identifier and reasoning effort reported by the host for
+   this extraction. The agent name is who ran the stage; the model is what ran
+   underneath it, and they are not the same thing. Do not infer any of the three from
+   output quality. If the host does not expose one, pass `unknown`; this is declared
+   provenance, not independent runtime attestation.
 
-   This runs Python's deterministic validators (exact-quote, numeric, calculation,
+   This runs Python's deterministic validators (exact-quote, numeric, values-present,
+   claim-text-quote-traceability, universal-quantifier, calculation,
    inference-citation, metric-provenance, schema) and writes `validation.json`.
+
+   **A passing gate means the claims you submitted are grounded. It never means
+   the claims are complete, that a figure sits under the right metric name, or
+   that a sentence about a whole set is true.** Those are yours at extraction
+   time and the reviewer's afterwards.
    Every invocation also creates a numbered, timestamped folder under
    `claims/history/`, preserving that attempt's exact `claims.json`, optional
    `metrics.json`, validation result, and receipt. Do not delete or rewrite an old
    attempt when correcting the current files.
 
-8. **If validation fails:** the command exits non-zero and does **not** write
+9. **If validation fails:** the command exits non-zero and does **not** write
    `signal-card.md`. Read `validation.json`, fix the offending claims/metrics
    (correct the quote, drop an unsupported number, fix a calculation block, add a
-   missing citation), and re-run step 7. Do not hand-edit `signal-card.md` directly
+   missing citation), and re-run step 8. Do not hand-edit `signal-card.md` directly
    and do not bypass a failed validation by writing the card yourself. The rerun
    becomes the next attempt folder; prior failures remain available for analysis.
 
@@ -205,14 +294,14 @@ guaranteed before proceeding.
    against attempt N-2's, and a multi-attempt correction loop can otherwise
    cycle between the same two mistakes without anyone noticing.
 
-9. **If validation passes:** `signal-card.md` is written automatically, grouped by
+10. **If validation passes:** `signal-card.md` is written automatically, grouped by
    category, following `reference/signal-card-template.md`.
 
 ## Stage 2: outlook synthesis
 
 Only start this stage once Stage 1's `earnings analyze` has passed.
 
-10. **Write `outlook-brief.md`.** Follow `reference/outlook-brief-template.md`'s
+11. **Write `outlook-brief.md`.** Follow `reference/outlook-brief-template.md`'s
    default structure and freedom envelope. This is interpretive synthesis
    (base/upside/downside cases, what to monitor) — you write it directly, Python
    does not generate it, and you're expected to rank, compare, and draw new
@@ -220,7 +309,18 @@ Only start this stage once Stage 1's `earnings analyze` has passed.
    id you cite must exist in this run's `claims.json`, and every material number you
    introduce must be grounded in a claim cited alongside it.
 
-11. **Self-check the brief before validating.** `earnings validate-outlook` (next
+   **Honour the `caveats` on every claim you cite.** A caveat is a plain sentence
+   recorded at extraction saying a figure is qualified in a way no check can see —
+   most often that a number is a floor or an approximation rather than an exact
+   result. If a claim you are citing carries one, the prose must reflect it: write
+   "revenue of more than \$2 billion", not "revenue of \$2 billion". Python grounds
+   the number 2.0 either way and cannot tell the two sentences apart.
+
+   Before you start, read `claims/jev-triage.json` if the run has one, especially its
+   `check` tier. Those are the figures and claims another model found ambiguous, and
+   they are the ones most likely to harden into something overstated in your prose.
+
+12. **Self-check the brief before validating.** `earnings validate-outlook` (next
     step) only confirms a cited claim id *resolves* — it cannot tell a correct
     citation from a plausible-looking wrong one, and neither can you rely on it to
     catch an overstated factual claim. Before running it, reread every `[claim-###]`
@@ -244,10 +344,26 @@ Only start this stage once Stage 1's `earnings analyze` has passed.
     Fix anything you find, and re-verify the fix landed (see step 6's note on
     verifying fixes, same discipline applies here).
 
-12. **Validate the brief.** Run:
+    **Then audit the citations with Jev**, which reads each cited claim against the
+    passage that cites it — the one thing neither you nor `validate-outlook` does
+    independently:
+
+    ```bash
+    uv run python scripts/jev_check.py runs/<TICKER>/<EVENT_ID> --mode citations
+    ```
+
+    This writes `outlook/jev-triage.json` and takes dispositions in
+    `outlook/jev-dispositions.json`, same two tiers and same rules as step 7. A
+    `defect` here means Jev read the cited claim and found it says nothing about the
+    point your sentence uses it for. Measured on JPM/2026-q2-rerun: of 150 citations,
+    thirteen came back that way, and the one an independent reviewer later flagged by
+    hand was among them.
+
+13. **Validate the brief.** Run:
 
    ```bash
    uv run earnings validate-outlook --ticker <TICKER> --event-id <EVENT_ID> \
+     --author-agent <your-agent-name-or-unknown> \
      --author-model <actual-model-or-unknown> \
      --author-reasoning-effort <actual-effort-or-unknown>
    ```
@@ -259,7 +375,7 @@ Only start this stage once Stage 1's `earnings analyze` has passed.
    doesn't resolve, or if a material number isn't grounded in a claim cited
    alongside it. Fix and re-run until it passes.
 
-13. **Report back to the user** the run directory path and a brief summary of both
+14. **Report back to the user** the run directory path and a brief summary of both
     `signal-card.md` (evidence appendix) and `outlook-brief.md` (the forward-looking
     read).
 

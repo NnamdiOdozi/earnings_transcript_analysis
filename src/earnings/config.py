@@ -66,6 +66,12 @@ TRANSCRIPT_FILENAME = "transcript.jsonl"
 FINANCIALS_FILENAME = "financials.json"
 CLAIMS_FILENAME = "claims.json"
 COVERAGE_RECEIPT_FILENAME = "coverage-receipt.json"  # agent-authored: what the source pack yielded, and what was judged immaterial
+JEV_TRIAGE_FILENAME = "jev-triage.json"  # tool-written: Jev answers worth a second look
+JEV_DISPOSITIONS_FILENAME = "jev-dispositions.json"  # agent-written: what was done about each
+# Separate file from JEV_TRIAGE_FILENAME on purpose: the coverage audit asks about
+# SEGMENTS the receipt judged immaterial, not about claims, so one name cannot carry
+# both without the subject ids in it meaning two different things.
+JEV_COVERAGE_TRIAGE_FILENAME = "jev-coverage-triage.json"  # tool-written: immaterial calls worth re-reading
 METRICS_FILENAME = "metrics.json"  # optional: agent-authored, discovered per company (see models.Metric)
 WEB_SUBDIR = "web"  # under evidence/: extracted Tavily content, one .md per WebEvidence
 WEB_EVIDENCE_FILENAME = "web-evidence.jsonl"  # under evidence/
@@ -204,6 +210,15 @@ SEC_DEFAULT_USER_AGENT = str(_get("sec", "default_user_agent", "earnings-poc uns
 SEC_RESOLVE_CIK_FROM_TICKER = bool(_get("sec", "resolve_cik_from_ticker", True))
 SEC_REQUIRE_PERIOD_MATCH = bool(_get("sec", "require_period_match", True))
 SEC_FORMS = list(_get("sec", "forms", ["8-K", "10-Q", "10-K", "20-F", "6-K"]))
+
+# --- Jev claim auditing (config.toml [jev]) -- investigative tool, not a gate ---
+JEV_MODEL = str(_get("jev", "model", "typesafe/jev-1.13"))
+JEV_ENDPOINT = str(_get("jev", "endpoint", "https://openrouter.ai/api/alpha/decisions"))
+JEV_AUTO_ACCEPT_THRESHOLD = float(_get("jev", "auto_accept_threshold", 0.8))
+JEV_REQUEST_PAUSE_SECONDS = float(_get("jev", "request_pause_seconds", 0.15))
+JEV_ALTERNATIVE_PROBABILITY_FLOOR = float(_get("jev", "alternative_probability_floor", 0.10))
+JEV_CHOICE_CONFIDENCE_FLOOR = float(_get("jev", "choice_confidence_floor", 0.70))
+JEV_SCORE_SHORTFALL_MARGIN = float(_get("jev", "score_shortfall_margin", 0.35))
 
 # --- Research toggles (config.toml [research]) ---
 RESEARCH_SEC_ENABLED = bool(_get("research", "sec_enabled", True))

@@ -56,7 +56,7 @@ different about running as Codex -- the steps below.
 3. **Deliberately switch role, then apply the canonical judgment remit.**
    Re-read the run bundle fresh, as if you had not drafted it -- see the
    canonical file's "Run bundle to read" and "What you ARE here to judge"
-   sections for the full file list and the eleven checks. Do not rely on your
+   sections for the full file list and the twelve checks. Do not rely on your
    memory of why an earlier drafting decision was made -- judge the finished
    artifact on its own merits. If `review-diff.json` exists, follow the
    canonical file's "Diff-based re-review" section for how to use it,

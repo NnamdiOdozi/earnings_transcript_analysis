@@ -29,7 +29,7 @@ from .provenance import (
 )
 from .rendering import _render_signal_card
 from .review import _block_if_unclosed_review_report, _clear_stale_review_report_md
-from .validate import validate_claims, validate_coverage_receipt, validate_metrics
+from .validate import jev_triage_warnings, validate_claims, validate_coverage_receipt, validate_metrics
 from .validation_history import ValidationAttempt
 
 
@@ -40,6 +40,7 @@ def cmd_analyze(args: argparse.Namespace) -> int:
         price_lookup=PriceLookupDecision(decision=args.price_decision, reason=args.price_reason)
     )
     agent_provenance = AgentProvenance(
+        agent_name=args.extractor_agent,
         model=args.extractor_model,
         reasoning_effort=args.extractor_reasoning_effort,
     )
@@ -209,6 +210,10 @@ def cmd_analyze(args: argparse.Namespace) -> int:
                 tool_decisions=tool_decisions,
                 agent_provenance=agent_provenance,
             )
+
+    # Jev findings that nobody accounted for. Advisory only -- see
+    # validate.jev_triage_warnings for why this is a warning and not a gate.
+    result.warnings.extend(jev_triage_warnings(paths.jev_triage, paths.jev_dispositions))
 
     _write_validation(run_dir, result)
 

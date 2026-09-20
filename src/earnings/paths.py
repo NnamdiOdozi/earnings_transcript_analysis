@@ -69,6 +69,9 @@ def detect_layout(run_dir: Path) -> int:
 # Which stage folder each artifact filename belongs to under LAYOUT_STAGED. Needed
 # because several call sites iterate over a LIST of filenames (snapshotting a review
 # round, copying an attempt's inputs) and so cannot name a property -- see RunPaths.resolve.
+# The Jev triage/disposition filenames are deliberately absent: the same two names are
+# used under BOTH claims/ and outlook/, so a single stage here would be a lie. Reach them
+# through the named properties, which say which stage they mean.
 _STAGE_OF_FILENAME = {
     config.CLAIMS_FILENAME: config.CLAIMS_STAGE_SUBDIR,
     config.COVERAGE_RECEIPT_FILENAME: config.CLAIMS_STAGE_SUBDIR,
@@ -194,6 +197,30 @@ class RunPaths:
         return self._staged(config.CLAIMS_STAGE_SUBDIR, config.VALIDATION_FILENAME)
 
     @property
+    def jev_triage(self) -> Path:
+        """Jev answers on the CLAIMS that warrant a second look. Written by the tool."""
+        return self._staged(config.CLAIMS_STAGE_SUBDIR, config.JEV_TRIAGE_FILENAME)
+
+    @property
+    def jev_dispositions(self) -> Path:
+        """What the extractor did about each triage item. Written by the agent.
+
+        Kept separate from the triage file on purpose: re-running the check regenerates
+        the triage, and an agent's recorded reasoning must survive that.
+        """
+        return self._staged(config.CLAIMS_STAGE_SUBDIR, config.JEV_DISPOSITIONS_FILENAME)
+
+    @property
+    def jev_coverage_triage(self) -> Path:
+        """Segments the receipt called immaterial that Jev reads as material.
+
+        Answers the one completeness question validate_coverage_receipt explicitly
+        cannot: it proves every segment is ACCOUNTED FOR, never that an immaterial
+        judgement was right.
+        """
+        return self._staged(config.CLAIMS_STAGE_SUBDIR, config.JEV_COVERAGE_TRIAGE_FILENAME)
+
+    @property
     def signal_card(self) -> Path:
         return self._staged(config.CLAIMS_STAGE_SUBDIR, config.SIGNAL_CARD_FILENAME)
 
@@ -216,6 +243,24 @@ class RunPaths:
     @property
     def outlook_validation(self) -> Path:
         return self._staged(config.OUTLOOK_STAGE_SUBDIR, config.OUTLOOK_VALIDATION_FILENAME)
+
+    @property
+    def outlook_jev_triage(self) -> Path:
+        """Jev answers on the brief's CITATIONS that warrant a second look.
+
+        Under layout 1 there are no stage folders, so the claims-stage and outlook-stage
+        files would land on the same name. Prefixed here rather than left to collide.
+        """
+        return self._jev_outlook(config.JEV_TRIAGE_FILENAME)
+
+    @property
+    def outlook_jev_dispositions(self) -> Path:
+        return self._jev_outlook(config.JEV_DISPOSITIONS_FILENAME)
+
+    def _jev_outlook(self, filename: str) -> Path:
+        if self.layout == LAYOUT_FLAT:
+            return self.root / f"{config.OUTLOOK_STAGE_SUBDIR}-{filename}"
+        return self.root / config.OUTLOOK_STAGE_SUBDIR / filename
 
     @property
     def outlook_validation_history(self) -> Path:

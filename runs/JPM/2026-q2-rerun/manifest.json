@@ -1,0 +1,1773 @@
+{
+  "ticker": "JPM",
+  "event_id": "2026-q2-rerun",
+  "created_at": "2026-09-16T15:45:24Z",
+  "layout_version": 2,
+  "event_date": "2026-07-14",
+  "sources": [
+    {
+      "path": "raw/transcript.txt",
+      "origin": "scratch/jpm-2026-q2-e2e/transcript.txt",
+      "retrieved_at": "2026-09-16T15:45:24Z",
+      "content_type": "text/plain",
+      "sha256": "fd0d2a77bdd6f2de88a65d0ace5edc9c8a085da3982781c26938b354d4f61fca",
+      "byte_length": 73926
+    },
+    {
+      "path": "raw/web/query-01-hit-01.json",
+      "origin": "https://news.alphastreet.com/jpmorgan-chase-jpm-q2-2026-preview-eps-est-5-67-reports-july-14/",
+      "retrieved_at": "2026-09-16T15:44:36Z",
+      "content_type": "application/json",
+      "sha256": "0e0ffaccb8adaef3cece0137eba2fa633ba2f27760fd4aaf163f381c0e8ac313",
+      "byte_length": 513
+    },
+    {
+      "path": "raw/web/query-01-hit-02.json",
+      "origin": "https://sg.finance.yahoo.com/news/unveiling-jpmorgan-chase-co-jpm-131502438.html",
+      "retrieved_at": "2026-09-16T15:44:36Z",
+      "content_type": "application/json",
+      "sha256": "1060eed15f507af415f9c6d2473f9a15f1f67979868b01effd002f4659a28542",
+      "byte_length": 479
+    },
+    {
+      "path": "raw/web/query-01-hit-03.json",
+      "origin": "https://ca.finance.yahoo.com/quote/JPM/analysis/",
+      "retrieved_at": "2026-09-16T15:44:36Z",
+      "content_type": "application/json",
+      "sha256": "92297ab544bd8a86022e4cbe8ad1774deb41ac23531b1fe3999f6d772f4d85fc",
+      "byte_length": 442
+    },
+    {
+      "path": "raw/web/query-01-hit-04.json",
+      "origin": "https://www.financecalendar.com/event/jpm-earnings-july-2026/",
+      "retrieved_at": "2026-09-16T15:44:36Z",
+      "content_type": "application/json",
+      "sha256": "f8c8f2b19f2afe9346ffea531e06e5e7cbbe56c43792eef1d91c9fc1b287f191",
+      "byte_length": 482
+    },
+    {
+      "path": "raw/web/query-01-hit-05.json",
+      "origin": "https://kaplio.com/ticker/JPM/estimates",
+      "retrieved_at": "2026-09-16T15:44:36Z",
+      "content_type": "application/json",
+      "sha256": "3ca5e95dabaf48d05ddd2f32d00e83c8924db2c2d769ad93305c3e6b7111db1a",
+      "byte_length": 423
+    },
+    {
+      "path": "raw/web/query-01-hit-06.json",
+      "origin": "https://www.chartmill.com/stock/quote/JPM/analyst-ratings",
+      "retrieved_at": "2026-09-16T15:44:36Z",
+      "content_type": "application/json",
+      "sha256": "85bfac434c76478b23dca389880e48050473cb13b6f800589e3b4cb03333b361",
+      "byte_length": 430
+    },
+    {
+      "path": "raw/web/query-01-hit-07.json",
+      "origin": "https://www.tradingkey.com/analysis/stocks/us-stocks/262028637-jpmorgan-jpm-q2-2026-earnings-preview-nii-guidance-338-tradingkey",
+      "retrieved_at": "2026-09-16T15:44:36Z",
+      "content_type": "application/json",
+      "sha256": "9fca1c94ca25c14912f02524cbb0965a131dc02e1d099d6274c78dece4a49e11",
+      "byte_length": 570
+    },
+    {
+      "path": "raw/web/query-01-hit-08.json",
+      "origin": "https://intellectia.ai/ai-earnings-calendar/JPM-earning-forecast-2026-07-14",
+      "retrieved_at": "2026-09-16T15:44:36Z",
+      "content_type": "application/json",
+      "sha256": "ccbbcb7bfe9949a0cc2508c1bbd0a38f0cd03a2a8aa3a74d7e201efa4486d109",
+      "byte_length": 470
+    },
+    {
+      "path": "raw/web/query-02-hit-01.json",
+      "origin": "https://news.alphastreet.com/jpmorgan-chase-jpm-q2-2026-preview-eps-est-5-67-reports-july-14/",
+      "retrieved_at": "2026-09-16T15:44:38Z",
+      "content_type": "application/json",
+      "sha256": "dde2916a46d579a726ef35bfad4df71a436d957810668e3e9f74832e6b8729dd",
+      "byte_length": 513
+    },
+    {
+      "path": "raw/web/query-02-hit-02.json",
+      "origin": "https://www.tradingkey.com/analysis/stocks/us-stocks/262028637-jpmorgan-jpm-q2-2026-earnings-preview-nii-guidance-338-tradingkey",
+      "retrieved_at": "2026-09-16T15:44:38Z",
+      "content_type": "application/json",
+      "sha256": "f0977f002157ef43379d9ba59337103cbc3840e6d73be72cebcebf82dde38b89",
+      "byte_length": 570
+    },
+    {
+      "path": "raw/web/query-02-hit-03.json",
+      "origin": "https://www.barchart.com/story/news/2644246/jpmorgan-chases-q2-2026-earnings-what-to-expect",
+      "retrieved_at": "2026-09-16T15:44:38Z",
+      "content_type": "application/json",
+      "sha256": "3d1a518d5912571cf09e6207e5abebef64d3c75b14b909b8f0c5120feb0c928c",
+      "byte_length": 482
+    },
+    {
+      "path": "raw/web/query-02-hit-04.json",
+      "origin": "https://finance.yahoo.com/",
+      "retrieved_at": "2026-09-16T15:44:38Z",
+      "content_type": "application/json",
+      "sha256": "7b9baaa7dda854c7543c3a8a8817bfd696d51b4655efae7b3f69c7a8fd96625a",
+      "byte_length": 386
+    },
+    {
+      "path": "raw/web/query-02-hit-05.json",
+      "origin": "https://stockminded.com/2026/07/12/jpmorgan-stock-earnings-expectations-q2/",
+      "retrieved_at": "2026-09-16T15:44:38Z",
+      "content_type": "application/json",
+      "sha256": "afcd03502ce5f523e03c9cf6a7cc51f6bcfb2a3892fa67dffd989b1daf96335c",
+      "byte_length": 507
+    },
+    {
+      "path": "raw/web/query-02-hit-06.json",
+      "origin": "https://www.bitget.com/news/detail/12560605501923",
+      "retrieved_at": "2026-09-16T15:44:38Z",
+      "content_type": "application/json",
+      "sha256": "2e7c5e55bfc4cbbe3a0a0f5ee06ab642ed2882e39fdef1924e7c8a7f9a0ab5f9",
+      "byte_length": 501
+    },
+    {
+      "path": "raw/web/query-02-hit-07.json",
+      "origin": "https://www.hudson-labs.com/research/jpm-q2-2026-earnings",
+      "retrieved_at": "2026-09-16T15:44:38Z",
+      "content_type": "application/json",
+      "sha256": "7615828d430431ead597c4dccc7e447610d8bafbc1cb125ca7a9cb037c17de64",
+      "byte_length": 473
+    },
+    {
+      "path": "raw/web/query-02-hit-08.json",
+      "origin": "https://thebull.com.au/us-news/jpm-q2-earnings-preview/",
+      "retrieved_at": "2026-09-16T15:44:38Z",
+      "content_type": "application/json",
+      "sha256": "2d2326f0c305160676fbbcd33a55bebdb1164b940c10c6f304421b721461f311",
+      "byte_length": 453
+    },
+    {
+      "path": "raw/web/query-03-hit-01.json",
+      "origin": "https://ca.finance.yahoo.com/quote/JPM/analysis/",
+      "retrieved_at": "2026-09-16T15:44:39Z",
+      "content_type": "application/json",
+      "sha256": "ee1bcfd718b03e3b57c9cc0c37e428ae64677e7cea13ba1ad9b791aa7840afe4",
+      "byte_length": 445
+    },
+    {
+      "path": "raw/web/query-03-hit-02.json",
+      "origin": "https://www.barchart.com/stocks/quotes/JPM/earnings-estimates",
+      "retrieved_at": "2026-09-16T15:44:39Z",
+      "content_type": "application/json",
+      "sha256": "4cde5f58ae4f7e24ada66dd5a2e8278f623fd30cec34d8272803997bf116b5c2",
+      "byte_length": 450
+    },
+    {
+      "path": "raw/web/query-03-hit-03.json",
+      "origin": "https://beta.earningswhispers.com/stocks/JPM",
+      "retrieved_at": "2026-09-16T15:44:39Z",
+      "content_type": "application/json",
+      "sha256": "ad987743f0a82f1d6c1837268b57560fb8cabda8a354fd3a6fa153437e80dcfe",
+      "byte_length": 447
+    },
+    {
+      "path": "raw/web/query-03-hit-04.json",
+      "origin": "https://thewhispernumber.com/ticker/jpm",
+      "retrieved_at": "2026-09-16T15:44:39Z",
+      "content_type": "application/json",
+      "sha256": "0a35035a16c4d6e3dc4ab31e1e7c75d90dfdf3878c7ffec16f8f2454d5495c78",
+      "byte_length": 442
+    },
+    {
+      "path": "raw/web/query-03-hit-05.json",
+      "origin": "https://tickerleague.com/companies/JPM/estimates",
+      "retrieved_at": "2026-09-16T15:44:39Z",
+      "content_type": "application/json",
+      "sha256": "b0e5d5b828b9f93763498fd2e6f8635f0d82ee0d792adf11e316456c69ff7161",
+      "byte_length": 414
+    },
+    {
+      "path": "raw/web/query-03-hit-06.json",
+      "origin": "https://www.earningstoday.com/stocks/JPM",
+      "retrieved_at": "2026-09-16T15:44:39Z",
+      "content_type": "application/json",
+      "sha256": "66a3f5d5c2bc547cef9060c2fcc09f0ff9aad05bb1313be87b7843f3201c1ea1",
+      "byte_length": 447
+    },
+    {
+      "path": "raw/web/query-03-hit-07.json",
+      "origin": "https://marketfairvalue.com/earnings/jpm/",
+      "retrieved_at": "2026-09-16T15:44:39Z",
+      "content_type": "application/json",
+      "sha256": "840accc951a8b2ce7f829b27d5a3c4960bee9bec3c8f16411d6e9cf41b71a6c5",
+      "byte_length": 425
+    },
+    {
+      "path": "raw/web/query-03-hit-08.json",
+      "origin": "https://kaplio.com/ticker/JPM/estimates",
+      "retrieved_at": "2026-09-16T15:44:39Z",
+      "content_type": "application/json",
+      "sha256": "5297328642d11ef8b71b2a29450e5ce5b5fca3625099a1c0dadbf33bdf40fccc",
+      "byte_length": 426
+    },
+    {
+      "path": "raw/web/query-04-hit-01.json",
+      "origin": "https://www.jpmorganchase.com/content/dam/jpmc/jpmorgan-chase-and-co/investor-relations/documents/quarterly-earnings/2026/2nd-quarter/2Q26-earnings-transcript.pdf",
+      "retrieved_at": "2026-09-16T15:44:41Z",
+      "content_type": "application/json",
+      "sha256": "d996181bed8fa22d5ed126dd72aaebc01cfba319996a65535cd00c755a093ceb",
+      "byte_length": 496
+    },
+    {
+      "path": "raw/web/query-04-hit-02.json",
+      "origin": "https://www.jpmorganchase.com/content/dam/jpmc/jpmorgan-chase-and-co/investor-relations/documents/quarterly-earnings/2026/2nd-quarter/9e8f3cef-bd2a-4140-b50f-83c4fba3f23c.pdf",
+      "retrieved_at": "2026-09-16T15:44:41Z",
+      "content_type": "application/json",
+      "sha256": "1a9eee45d3624df1c77e218d647709c77acd6679f07b80eb5e132838debf0ebe",
+      "byte_length": 510
+    },
+    {
+      "path": "raw/web/query-04-hit-03.json",
+      "origin": "https://www.jpmorganchase.com/content/dam/jpmc/jpmorgan-chase-and-co/investor-relations/documents/quarterly-earnings/2026/2nd-quarter/6cded9fd-a164-4e6c-8cff-377357cf105c.pdf",
+      "retrieved_at": "2026-09-16T15:44:41Z",
+      "content_type": "application/json",
+      "sha256": "9a86bab6e4694c4f1413affe836c209fac90ac5fb90e1ad31e6421955e78ffc5",
+      "byte_length": 511
+    },
+    {
+      "path": "raw/web/query-04-hit-04.json",
+      "origin": "https://www.sec.gov/Archives/edgar/data/19617/000162828026048078/a2q26erfexhibit991narrative.htm",
+      "retrieved_at": "2026-09-16T15:44:41Z",
+      "content_type": "application/json",
+      "sha256": "22cbeabb42780b063994404a9b0f295e0f679876e8326e8e383e708cb9d86668",
+      "byte_length": 414
+    },
+    {
+      "path": "raw/web/query-04-hit-05.json",
+      "origin": "https://www.metatrader.com/en/symbols/nyse/jpm/documents/1537865-quarterly-report-q2-fy2026",
+      "retrieved_at": "2026-09-16T15:44:41Z",
+      "content_type": "application/json",
+      "sha256": "4e9a54bc5efa88bd3d72960a6e4dcb84996aa0a6c63e7f8ce55c4c54e92653aa",
+      "byte_length": 472
+    },
+    {
+      "path": "raw/web/query-04-hit-06.json",
+      "origin": "https://www.stocktitan.net/sec-filings/JPM/8-k-jpmorgan-chase-co-reports-material-event-1f2ddf4de037.html",
+      "retrieved_at": "2026-09-16T15:44:41Z",
+      "content_type": "application/json",
+      "sha256": "7dd14e6a4a843b3b8f36306b157ea63d214b8b5d1796390078119f0278c4f49e",
+      "byte_length": 501
+    },
+    {
+      "path": "raw/web/query-04-hit-07.json",
+      "origin": "https://vectorshift.ai/research/companies/jpmorgan-chase-co/earnings/2026-q2-summary",
+      "retrieved_at": "2026-09-16T15:44:41Z",
+      "content_type": "application/json",
+      "sha256": "f3e16c0b29722ad9848e0e6f9726f5f0da7943f363ee76c526baf5a6ff0138f6",
+      "byte_length": 505
+    },
+    {
+      "path": "raw/web/query-04-hit-08.json",
+      "origin": "https://stockanalysis.com/stocks/jpm/transcripts/649229-q2-2026/",
+      "retrieved_at": "2026-09-16T15:44:41Z",
+      "content_type": "application/json",
+      "sha256": "0482955ddda48e1224cc0c272f21f3a17515e9ccb2b3315e3b33d674500cfa0e",
+      "byte_length": 435
+    },
+    {
+      "path": "raw/web/query-05-hit-01.json",
+      "origin": "https://www.tradingview.com/news/zacks:3ead5a571094b:0-jpm-q2-earnings-beat-on-trading-ib-higher-cost-outlook-drags-stock/",
+      "retrieved_at": "2026-09-16T15:44:43Z",
+      "content_type": "application/json",
+      "sha256": "036e457f56617f4566fb2aa891558fccb9c777c8c2225586e5e325330d4062c2",
+      "byte_length": 547
+    },
+    {
+      "path": "raw/web/query-05-hit-02.json",
+      "origin": "https://www.jpmorganchase.com/content/dam/jpmc/jpmorgan-chase-and-co/investor-relations/documents/quarterly-earnings/2026/2nd-quarter/6cded9fd-a164-4e6c-8cff-377357cf105c.pdf",
+      "retrieved_at": "2026-09-16T15:44:43Z",
+      "content_type": "application/json",
+      "sha256": "2e42c1b5c791635d7e708823a1277702b1b2a0c9b18cfc306cbd9b11dc9be9a2",
+      "byte_length": 509
+    },
+    {
+      "path": "raw/web/query-05-hit-03.json",
+      "origin": "https://news.alphastreet.com/jpmorgan-chase-posts-27-revenue-jump-in-q2-2026-beats-on-eps/",
+      "retrieved_at": "2026-09-16T15:44:43Z",
+      "content_type": "application/json",
+      "sha256": "6d54a51943deb4d668feeb8034ec12c4603c9cb2e21198a313ba04e40fa0b840",
+      "byte_length": 498
+    },
+    {
+      "path": "raw/web/query-05-hit-04.json",
+      "origin": "https://247wallst.com/cards/jpmorgan-chase-q2-2026-earnings-jpm-01kxg3ah52arwjhmg8h3jx1yv9",
+      "retrieved_at": "2026-09-16T15:44:43Z",
+      "content_type": "application/json",
+      "sha256": "0e12a70a7298aae865453a9eed154f5545f01c8b628070a1cef306613d1a30ac",
+      "byte_length": 504
+    },
+    {
+      "path": "raw/web/query-05-hit-05.json",
+      "origin": "https://www.chartmill.com/news/JPM/Chartmill-50943-JPMorgan-Chase-NYSEJPM-Falls-on-Earnings-Beat-as-Market-Eyes-One-Time-Gains",
+      "retrieved_at": "2026-09-16T15:44:43Z",
+      "content_type": "application/json",
+      "sha256": "08849513867f95788325d9cc55cd2f2620109fee771cad1d5e2bec958e51ae8f",
+      "byte_length": 552
+    },
+    {
+      "path": "raw/web/query-05-hit-06.json",
+      "origin": "https://www.investing.com/",
+      "retrieved_at": "2026-09-16T15:44:43Z",
+      "content_type": "application/json",
+      "sha256": "5b015334d523c4b1e132c6dff28e406e2e7892e4c0da1eb93e977fd6a337c21f",
+      "byte_length": 391
+    },
+    {
+      "path": "raw/web/query-05-hit-07.json",
+      "origin": "https://www.jpmorganchase.com/content/dam/jpmc/jpmorgan-chase-and-co/investor-relations/documents/quarterly-earnings/2026/2nd-quarter/2Q26-earnings-transcript.pdf",
+      "retrieved_at": "2026-09-16T15:44:43Z",
+      "content_type": "application/json",
+      "sha256": "c4097f762a007fa5f0cecbfaee435f2525ab7b2325789f7fa2345e30c8d99c08",
+      "byte_length": 494
+    },
+    {
+      "path": "raw/web/query-05-hit-08.json",
+      "origin": "https://finance.biggo.com/news/US_JPM_2026-07-14",
+      "retrieved_at": "2026-09-16T15:44:43Z",
+      "content_type": "application/json",
+      "sha256": "8bfdf08a6743204d72fbf54525a23d0150aa21554b35fc901d2f5c0c3f1ee3f6",
+      "byte_length": 508
+    },
+    {
+      "path": "raw/web/query-06-hit-01.json",
+      "origin": "https://investor.bankofamerica.com/regulatory-and-other-filings/select-sec-filings/content/0000070858-26-000353/bac06302026ex991.htm",
+      "retrieved_at": "2026-09-16T15:44:45Z",
+      "content_type": "application/json",
+      "sha256": "7be90a4501e17ee94aa7d9789e82e917e5267482b648112ff4e9f946fd2f9ae2",
+      "byte_length": 526
+    },
+    {
+      "path": "raw/web/query-06-hit-02.json",
+      "origin": "https://investor.bankofamerica.com/regulatory-and-other-filings/select-sec-filings/content/0000070858-26-000394/bac-20260630.htm",
+      "retrieved_at": "2026-09-16T15:44:45Z",
+      "content_type": "application/json",
+      "sha256": "ad0f60b16308dd383e67290b0ca54ee35a1c60628d23c4581da389cf59a299a7",
+      "byte_length": 528
+    },
+    {
+      "path": "raw/web/query-06-hit-03.json",
+      "origin": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000353/bac06302026ex992.htm",
+      "retrieved_at": "2026-09-16T15:44:45Z",
+      "content_type": "application/json",
+      "sha256": "bdee05e8e6b51097dd5fb705c579e48cf9c8f9653889fb91f9bffd1bf3f7ca5b",
+      "byte_length": 404
+    },
+    {
+      "path": "raw/web/query-06-hit-04.json",
+      "origin": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000353/bac-06302026ex993.htm",
+      "retrieved_at": "2026-09-16T15:44:45Z",
+      "content_type": "application/json",
+      "sha256": "db376962b882ecd7c10d88ff37f2483aed57b6f80ced5efada4d1d01b01883f9",
+      "byte_length": 397
+    },
+    {
+      "path": "raw/web/query-06-hit-05.json",
+      "origin": "https://www.prnewswire.com/news-releases/bank-of-america-reports-second-quarter-2026-financial-results-302824919.html",
+      "retrieved_at": "2026-09-16T15:44:45Z",
+      "content_type": "application/json",
+      "sha256": "6c05e44d9a767b9360a0216d9bab04b0641f1778f197d502267c695c11d1dd44",
+      "byte_length": 505
+    },
+    {
+      "path": "raw/web/query-06-hit-06.json",
+      "origin": "https://www.marketscreener.com/news/bank-of-america-earnings-release-q2-2026-ce7f5edcd18bf727",
+      "retrieved_at": "2026-09-16T15:44:45Z",
+      "content_type": "application/json",
+      "sha256": "574bb754eea1c53445c85cdb0eb7dbc97d63411508e41c9f5f180ce5a9f72bf3",
+      "byte_length": 479
+    },
+    {
+      "path": "raw/web/query-06-hit-07.json",
+      "origin": "https://www.marketscreener.com/news/bank-of-america-presentation-q2-2026-ce7f5edcd18bf52d",
+      "retrieved_at": "2026-09-16T15:44:45Z",
+      "content_type": "application/json",
+      "sha256": "11ada8940f97ba6e8202ffffd09b6e44962575231ce615d9350886095df9e0ea",
+      "byte_length": 471
+    },
+    {
+      "path": "raw/web/query-06-hit-08.json",
+      "origin": "https://www.theglobeandmail.com/investing/markets/stocks/BAC/pressreleases/3390835/bank-of-america-bac-q2-2026-earnings-call-transcript/",
+      "retrieved_at": "2026-09-16T15:44:45Z",
+      "content_type": "application/json",
+      "sha256": "556f8c4d276c2b7a928897fba6bb6e5e4e7e37a71332279bffd68736683a2281",
+      "byte_length": 514
+    },
+    {
+      "path": "raw/web/query-07-hit-01.json",
+      "origin": "https://app.edgar.tools/filing/70858/0000070858-26-000353/bac06302026ex991.htm",
+      "retrieved_at": "2026-09-16T15:44:46Z",
+      "content_type": "application/json",
+      "sha256": "36fd9a052c628aebcc7eaf7db47815cb86877e272204daf6593b04531f94a819",
+      "byte_length": 407
+    },
+    {
+      "path": "raw/web/query-07-hit-02.json",
+      "origin": "https://www.sec.gov/Archives/edgar/data/19617/000162828026048078/a2q26erfexhibit991narrative.htm",
+      "retrieved_at": "2026-09-16T15:44:46Z",
+      "content_type": "application/json",
+      "sha256": "dfb09958c32930369bc981fcd42edd48141cf7d8ad5b83219ec815d2cb79976a",
+      "byte_length": 417
+    },
+    {
+      "path": "raw/web/query-07-hit-03.json",
+      "origin": "https://www.tipranks.com/news/jpm-vs-bac-vs-c-vs-wfc-vs-gs-bank-earnings-crush-estimates-as-jpmorgan-posts-record-profit",
+      "retrieved_at": "2026-09-16T15:44:46Z",
+      "content_type": "application/json",
+      "sha256": "484e1a414c6d5796e2685d952c8ebf0a6eb2cb46fd568126fac6cb17e7e9a128",
+      "byte_length": 433
+    },
+    {
+      "path": "raw/web/query-07-hit-04.json",
+      "origin": "https://app.edgar.tools/filing/70858/0000070858-26-000353/bac-06302026ex993.htm",
+      "retrieved_at": "2026-09-16T15:44:46Z",
+      "content_type": "application/json",
+      "sha256": "a38d0449e7c2a8f8855fd149b32b5d01d3f775e3a3351c9275bc003d1b8710cf",
+      "byte_length": 400
+    },
+    {
+      "path": "raw/web/query-07-hit-05.json",
+      "origin": "https://getfinancebrief.com/story/jpmorgan-record-profit-big-bank-q2-2026",
+      "retrieved_at": "2026-09-16T15:44:46Z",
+      "content_type": "application/json",
+      "sha256": "d8d129a002c31290d28c71554eb71f9e0d289e223984e8bfde2cad51818f495c",
+      "byte_length": 486
+    },
+    {
+      "path": "raw/web/query-07-hit-06.json",
+      "origin": "https://tradingwhisperer.com/investing-news/bank-earnings-update-jpm-bofa-citi/",
+      "retrieved_at": "2026-09-16T15:44:46Z",
+      "content_type": "application/json",
+      "sha256": "8c7e47127914661166192935ab0e283e71e22eac70ac966144bd816ca652996d",
+      "byte_length": 473
+    },
+    {
+      "path": "raw/web/query-07-hit-07.json",
+      "origin": "https://www.stocktitan.net/sec-filings/JPM/8-k-jpmorgan-chase-co-reports-material-event-1f2ddf4de037.html",
+      "retrieved_at": "2026-09-16T15:44:46Z",
+      "content_type": "application/json",
+      "sha256": "7329dc643250401d7e24e424f81510be89e3b8d5ec06a0d5ca6688b383bc3dba",
+      "byte_length": 504
+    },
+    {
+      "path": "raw/web/query-07-hit-08.json",
+      "origin": "https://www.barchart.com/story/news/1819121/jpmorgan-vs-bank-of-america-how-the-2-dividend-paying-bank-stocks-stack-up-in-2026",
+      "retrieved_at": "2026-09-16T15:44:46Z",
+      "content_type": "application/json",
+      "sha256": "35fd83c8291b78246fbceee776e05bf8b6151de59939826aaa85d105568689da",
+      "byte_length": 547
+    },
+    {
+      "path": "raw/web/query-08-hit-01.json",
+      "origin": "https://investor.bankofamerica.com/regulatory-and-other-filings/select-sec-filings/content/0000070858-26-000353/bac06302026ex991.htm",
+      "retrieved_at": "2026-09-16T15:44:47Z",
+      "content_type": "application/json",
+      "sha256": "95c836eddf3ebc53b3f7d174a3da235e15542b346115d14568bda0774251a4eb",
+      "byte_length": 520
+    },
+    {
+      "path": "raw/web/query-08-hit-02.json",
+      "origin": "https://www.investing.com/news/transcripts/earnings-call-transcript-bank-of-america-tops-q2-2026-estimates-as-profit-jumps-93CH-4791110",
+      "retrieved_at": "2026-09-16T15:44:47Z",
+      "content_type": "application/json",
+      "sha256": "8464e551ff13098018c0838f16adf4dd0ce97ce316039960d5fb7a3aebf5b765",
+      "byte_length": 529
+    },
+    {
+      "path": "raw/web/query-08-hit-03.json",
+      "origin": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000353/bac06302026ex992.htm",
+      "retrieved_at": "2026-09-16T15:44:47Z",
+      "content_type": "application/json",
+      "sha256": "9f9c1c3e47f70474449bf69c53221b69a3fde46102bbac640629d42d8f3df335",
+      "byte_length": 398
+    },
+    {
+      "path": "raw/web/query-08-hit-04.json",
+      "origin": "https://investor.bankofamerica.com/regulatory-and-other-filings/select-sec-filings/content/0000070858-26-000394/bac-20260630.htm",
+      "retrieved_at": "2026-09-16T15:44:47Z",
+      "content_type": "application/json",
+      "sha256": "f581c8bb92b828d2f9133111b65be5a78bdb2350eeb358d6089a4da23bebe73f",
+      "byte_length": 522
+    },
+    {
+      "path": "raw/web/query-08-hit-05.json",
+      "origin": "https://www.marketbeat.com/earnings/reports/2026-7-14-bank-of-america-co-stock/",
+      "retrieved_at": "2026-09-16T15:44:47Z",
+      "content_type": "application/json",
+      "sha256": "0fd021c67566c8e42614cb3c3b0b4d6a5e8bc9504fb2060dab18a29860397878",
+      "byte_length": 376
+    },
+    {
+      "path": "raw/web/query-08-hit-06.json",
+      "origin": "https://www.roic.ai/quote/BOFA.NE/transcripts/2026-year/2-quarter",
+      "retrieved_at": "2026-09-16T15:44:47Z",
+      "content_type": "application/json",
+      "sha256": "b2e68f32251f64ce434508f7c14a80ce7a44fedf38c6f41d502be504e8bfc8ab",
+      "byte_length": 484
+    },
+    {
+      "path": "raw/web/query-08-hit-07.json",
+      "origin": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000353/bac-06302026ex993.htm",
+      "retrieved_at": "2026-09-16T15:44:47Z",
+      "content_type": "application/json",
+      "sha256": "1a4bd91555324f769d7d3909098136d6ea2aa443278f45261009bc5514ba3d52",
+      "byte_length": 391
+    },
+    {
+      "path": "raw/web/query-08-hit-08.json",
+      "origin": "https://beta.earningswhispers.com/transcript/BAC/Q22026",
+      "retrieved_at": "2026-09-16T15:44:47Z",
+      "content_type": "application/json",
+      "sha256": "6f04fa347111eae7067b05c894cc4feb66798be7dfff3dca5d201cbbc95877ea",
+      "byte_length": 438
+    },
+    {
+      "path": "raw/web/query-09-hit-01.json",
+      "origin": "https://www.marketscreener.com/news/bank-of-america-profit-rises-on-record-trading-boost-ce7f5edcd18cf325",
+      "retrieved_at": "2026-09-16T15:44:48Z",
+      "content_type": "application/json",
+      "sha256": "73612453b8002b96e8fb7ce8c67fae952d562786b8386ae699b32fccd7304d31",
+      "byte_length": 518
+    },
+    {
+      "path": "raw/web/query-09-hit-02.json",
+      "origin": "https://www.tipranks.com/news/bac-earnings-bank-of-america-stock-slips-despite-q2-beat-on-banking-and-trading-profits",
+      "retrieved_at": "2026-09-16T15:44:48Z",
+      "content_type": "application/json",
+      "sha256": "63ec668dad07c391438d2adcbfee766ea0de0a357545172359f3434a235de552",
+      "byte_length": 422
+    },
+    {
+      "path": "raw/web/query-09-hit-03.json",
+      "origin": "https://r40.io/news/bac-q2-2026-earnings-analysis/",
+      "retrieved_at": "2026-09-16T15:44:48Z",
+      "content_type": "application/json",
+      "sha256": "73e88c55aa996ff5a5cb53b19876065313bf992466ce51e456f14c83299a78f3",
+      "byte_length": 468
+    },
+    {
+      "path": "raw/web/query-09-hit-04.json",
+      "origin": "https://scramnews.com/post/00ti51c0pjt3x/bank-of-america-q2-earnings-beat-revenue-jump-2026",
+      "retrieved_at": "2026-09-16T15:44:48Z",
+      "content_type": "application/json",
+      "sha256": "1d4a79d1b481bfebe9b59851cd9ac3fa6d078ced49647058b628e2cb950f4787",
+      "byte_length": 472
+    },
+    {
+      "path": "raw/web/query-09-hit-05.json",
+      "origin": "https://www.investing.com/news/transcripts/earnings-call-transcript-bank-of-america-tops-q2-2026-estimates-as-profit-jumps-93CH-4791110",
+      "retrieved_at": "2026-09-16T15:44:48Z",
+      "content_type": "application/json",
+      "sha256": "be4e80a03cb775e6271b5e24bc46cef03e63a3ec5af799d1b4141af889fe3923",
+      "byte_length": 537
+    },
+    {
+      "path": "raw/web/query-09-hit-06.json",
+      "origin": "https://app.edgar.tools/filing/70858/0000070858-26-000353/bac06302026ex991.htm",
+      "retrieved_at": "2026-09-16T15:44:48Z",
+      "content_type": "application/json",
+      "sha256": "b85aae53dcbe56a4312302741649fc62611b92915831f3cb565a31496fc2a6f4",
+      "byte_length": 399
+    },
+    {
+      "path": "raw/web/query-09-hit-07.json",
+      "origin": "https://www.marketbeat.com/earnings/reports/2026-7-14-bank-of-america-co-stock/",
+      "retrieved_at": "2026-09-16T15:44:48Z",
+      "content_type": "application/json",
+      "sha256": "155b9271df21dd4512d0df64dd180d6f3371ecdb2ad0310d246bc98059f9a565",
+      "byte_length": 384
+    },
+    {
+      "path": "raw/web/query-09-hit-08.json",
+      "origin": "https://mlq.ai/news/bank-of-america-beats-q2-eps-by-7-trading-revenue-jumps-33/",
+      "retrieved_at": "2026-09-16T15:44:48Z",
+      "content_type": "application/json",
+      "sha256": "e1c54945249d6050dfde907c1637d243401dc1190521629c97259468e7f4d461",
+      "byte_length": 480
+    },
+    {
+      "path": "raw/web/query-10-hit-01.json",
+      "origin": "https://seekingalpha.com/article/4921951-bank-of-america-corporation-bac-q2-2026-earnings-call-transcript",
+      "retrieved_at": "2026-09-16T15:44:49Z",
+      "content_type": "application/json",
+      "sha256": "38d86216b7715a87384fd3551a034904c1b4f96ccd6179471f79eae0f6d64373",
+      "byte_length": 507
+    },
+    {
+      "path": "raw/web/query-10-hit-02.json",
+      "origin": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000353/bac06302026ex992.htm",
+      "retrieved_at": "2026-09-16T15:44:49Z",
+      "content_type": "application/json",
+      "sha256": "27817d64df62e135fda8d1aba1606ee6301c1d69f2c119bf8efa05d99d4d125e",
+      "byte_length": 397
+    },
+    {
+      "path": "raw/web/query-10-hit-03.json",
+      "origin": "https://www.investing.com/news/transcripts/earnings-call-transcript-bank-of-america-tops-q2-2026-estimates-as-profit-jumps-93CH-4791110",
+      "retrieved_at": "2026-09-16T15:44:49Z",
+      "content_type": "application/json",
+      "sha256": "8c244e5063e1a01eeeffd62cef566f6dfa180ed636b8a6a6aa57cdc81e0ee6be",
+      "byte_length": 528
+    },
+    {
+      "path": "raw/web/query-10-hit-04.json",
+      "origin": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000353/bac-06302026ex993.htm",
+      "retrieved_at": "2026-09-16T15:44:49Z",
+      "content_type": "application/json",
+      "sha256": "6542dbdbb9cb9895fe573db5f0dcfd2d073c02417c46f6e7d4ecbb33ea851483",
+      "byte_length": 390
+    },
+    {
+      "path": "raw/web/query-10-hit-05.json",
+      "origin": "https://www.theglobeandmail.com/investing/markets/stocks/BAC/pressreleases/3390835/bank-of-america-bac-q2-2026-earnings-call-transcript/",
+      "retrieved_at": "2026-09-16T15:44:49Z",
+      "content_type": "application/json",
+      "sha256": "54087273999eb52229533875b2a4e055dc95a9f51046424583fadb4b4266d214",
+      "byte_length": 507
+    },
+    {
+      "path": "raw/web/query-10-hit-06.json",
+      "origin": "https://www.roic.ai/quote/BOFA.NE/transcripts/2026-year/2-quarter",
+      "retrieved_at": "2026-09-16T15:44:49Z",
+      "content_type": "application/json",
+      "sha256": "5123160d9858c2c513c70cab448e8c01bb70983fff57820f3c1c840e07b94fd2",
+      "byte_length": 483
+    },
+    {
+      "path": "raw/web/query-10-hit-07.json",
+      "origin": "https://www.marketscreener.com/news/bank-of-america-second-quarter-2026-earnings-presentation-ce7f5edcd18bf724",
+      "retrieved_at": "2026-09-16T15:44:49Z",
+      "content_type": "application/json",
+      "sha256": "1221b9e42a3ab6c66946001ab1eaf1a09b1616994c51964b1fcce5eee152c953",
+      "byte_length": 506
+    },
+    {
+      "path": "raw/web/query-10-hit-08.json",
+      "origin": "https://www.opencapital.sh/filings/0000070858-26-000353",
+      "retrieved_at": "2026-09-16T15:44:49Z",
+      "content_type": "application/json",
+      "sha256": "fcc579db5e656f8d3352f8c4e486ad496a393ceb08882d01a6e8924d92af735a",
+      "byte_length": 407
+    },
+    {
+      "path": "raw/web/query-11-hit-01.json",
+      "origin": "https://www.citigroup.com/rcs/citigpa/storage/public/Earnings/Q22026/2026prqtr2rslt.pdf",
+      "retrieved_at": "2026-09-16T15:44:51Z",
+      "content_type": "application/json",
+      "sha256": "fffefdf8f763011765e7a30819834c196ec7e29529ea3b1a09c70ef4bf329ef3",
+      "byte_length": 434
+    },
+    {
+      "path": "raw/web/query-11-hit-02.json",
+      "origin": "https://www.sec.gov/Archives/edgar/data/831001/000110465926083383/c-20260714xex99d1.htm",
+      "retrieved_at": "2026-09-16T15:44:51Z",
+      "content_type": "application/json",
+      "sha256": "b1019eeddc89a9d56158fc04ec36b41952bdce9cd0744c5f0281634816d4c9f2",
+      "byte_length": 378
+    },
+    {
+      "path": "raw/web/query-11-hit-03.json",
+      "origin": "https://www.citigroup.com/rcs/citigpa/storage/public/Earnings/Q22026/2026presoqtr2rslt.pdf",
+      "retrieved_at": "2026-09-16T15:44:51Z",
+      "content_type": "application/json",
+      "sha256": "70c09e9516edabb86db2fc10fb3a8659ba5bb6070ba38b0e96acccabba097cc3",
+      "byte_length": 443
+    },
+    {
+      "path": "raw/web/query-11-hit-04.json",
+      "origin": "https://www.citigroup.com/global/news/press-release/2026/second-quarter-2026-results-key-metrics",
+      "retrieved_at": "2026-09-16T15:44:51Z",
+      "content_type": "application/json",
+      "sha256": "924ffa4059a148d77cb2dbfaac1b3bd99df8b7923c17a4502720a79e37d1aefd",
+      "byte_length": 454
+    },
+    {
+      "path": "raw/web/query-11-hit-05.json",
+      "origin": "https://www.citigroup.com/rcs/citigpa/storage/public/Earnings/Q22026/2q2026-citigroup-at-a-glance.pdf",
+      "retrieved_at": "2026-09-16T15:44:51Z",
+      "content_type": "application/json",
+      "sha256": "037dec0059e24e4567c260666a84890c99f9504f6cd21a6e93e77a514abee959",
+      "byte_length": 421
+    },
+    {
+      "path": "raw/web/query-11-hit-06.json",
+      "origin": "https://www.citigroup.com/rcs/citigpa/storage/public/2026psqtr2-transcript.pdf",
+      "retrieved_at": "2026-09-16T15:44:51Z",
+      "content_type": "application/json",
+      "sha256": "14b0f0e03dd4f77a6e3af33fa195766751db3e7b2286dd0b78a9f086520e25bc",
+      "byte_length": 408
+    },
+    {
+      "path": "raw/web/query-11-hit-07.json",
+      "origin": "https://www.citigroup.com/rcs/citigpa/storage/public/Earnings/Q22026/2026fsqtr2rslt.pdf",
+      "retrieved_at": "2026-09-16T15:44:51Z",
+      "content_type": "application/json",
+      "sha256": "3c1f321aa0682326a5a22174f0f92632345921e9e9c9e808f5b8a24a866c1d0b",
+      "byte_length": 418
+    },
+    {
+      "path": "raw/web/query-11-hit-08.json",
+      "origin": "https://www.sec.gov/Archives/edgar/data/831001/000110465926083383/c-20260714xex99d2.htm",
+      "retrieved_at": "2026-09-16T15:44:51Z",
+      "content_type": "application/json",
+      "sha256": "9d21a262c273a202d92a614415b69b2ce9968c1e0f1f643d0f498348e843fdf2",
+      "byte_length": 378
+    },
+    {
+      "path": "raw/web/query-12-hit-01.json",
+      "origin": "https://www.jpmorganchase.com/content/dam/jpmc/jpmorgan-chase-and-co/investor-relations/documents/quarterly-earnings/2026/2nd-quarter/6cded9fd-a164-4e6c-8cff-377357cf105c.pdf",
+      "retrieved_at": "2026-09-16T15:44:52Z",
+      "content_type": "application/json",
+      "sha256": "a843997801473150a5256f0f07a8da35d1930c4c093fc79525bca3ad26330448",
+      "byte_length": 502
+    },
+    {
+      "path": "raw/web/query-12-hit-02.json",
+      "origin": "https://www.tipranks.com/news/jpm-vs-bac-vs-c-vs-wfc-vs-gs-bank-earnings-crush-estimates-as-jpmorgan-posts-record-profit",
+      "retrieved_at": "2026-09-16T15:44:52Z",
+      "content_type": "application/json",
+      "sha256": "00a8e7ef94c2bc35d1f375c7ccd139db354b5c247f404821a834747ec68c8e0f",
+      "byte_length": 421
+    },
+    {
+      "path": "raw/web/query-12-hit-03.json",
+      "origin": "https://tradingwhisperer.com/investing-news/bank-earnings-update-jpm-bofa-citi/",
+      "retrieved_at": "2026-09-16T15:44:52Z",
+      "content_type": "application/json",
+      "sha256": "dd5c6312d9464594318fab2861f70c886be314150aa326737bdd4cfd255c4d32",
+      "byte_length": 461
+    },
+    {
+      "path": "raw/web/query-12-hit-04.json",
+      "origin": "https://www.sec.gov/Archives/edgar/data/19617/000162828026048078/a2q26erfexhibit991narrative.htm",
+      "retrieved_at": "2026-09-16T15:44:52Z",
+      "content_type": "application/json",
+      "sha256": "8effa0f40ae48bc315fbf0f7de146b05cf00a49b4e49722ae78008587edba65d",
+      "byte_length": 405
+    },
+    {
+      "path": "raw/web/query-12-hit-05.json",
+      "origin": "https://www.aol.com/articles/citigroup-14-outperforming-other-bank-191853000.html",
+      "retrieved_at": "2026-09-16T15:44:52Z",
+      "content_type": "application/json",
+      "sha256": "1cd8e37974ac253f0fa085fbff85045c17cbc954c84e1ce76399a57ab80bf538",
+      "byte_length": 518
+    },
+    {
+      "path": "raw/web/query-12-hit-06.json",
+      "origin": "https://www.jpmorganchase.com/content/dam/jpmc/jpmorgan-chase-and-co/investor-relations/documents/quarterly-earnings/2026/2nd-quarter/2Q26-earnings-transcript.pdf",
+      "retrieved_at": "2026-09-16T15:44:52Z",
+      "content_type": "application/json",
+      "sha256": "b97df23f08edf83decae374861e3fd57e8d9c95cecfce8a79bad589a60e90013",
+      "byte_length": 487
+    },
+    {
+      "path": "raw/web/query-12-hit-07.json",
+      "origin": "https://news.alphastreet.com/jpmorgan-chase-posts-27-revenue-jump-in-q2-2026-beats-on-eps/",
+      "retrieved_at": "2026-09-16T15:44:52Z",
+      "content_type": "application/json",
+      "sha256": "9904534f5292e978054339c002b6d401124eb9a73253274548c5c62ba95ca684",
+      "byte_length": 491
+    },
+    {
+      "path": "raw/web/query-12-hit-08.json",
+      "origin": "https://www.investing.com/analysis/jpmorgan-citibank-earnings-preview-buybacks-capital-return-in-focus-200683763",
+      "retrieved_at": "2026-09-16T15:44:52Z",
+      "content_type": "application/json",
+      "sha256": "8ec1dc2a706b7ac94dfb4721c579d6c407df32cc374acf006a16843c2c907987",
+      "byte_length": 523
+    },
+    {
+      "path": "raw/web/query-13-hit-01.json",
+      "origin": "https://www.citigroup.com/rcs/citigpa/storage/public/2026psqtr2-transcript.pdf",
+      "retrieved_at": "2026-09-16T15:44:57Z",
+      "content_type": "application/json",
+      "sha256": "b894e9be0e08f1ba8c55872ef59822791191051c8c97ab6e61c7bf8a783d6bf7",
+      "byte_length": 402
+    },
+    {
+      "path": "raw/web/query-13-hit-02.json",
+      "origin": "https://www.citigroup.com/rcs/citigpa/storage/public/Earnings/Q22026/2026prqtr2rslt.pdf",
+      "retrieved_at": "2026-09-16T15:44:57Z",
+      "content_type": "application/json",
+      "sha256": "f53308c3173778d7bcfd874e65bd8ad0b246a29385f02457505904116ec05f1c",
+      "byte_length": 415
+    },
+    {
+      "path": "raw/web/query-13-hit-03.json",
+      "origin": "https://www.citigroup.com/",
+      "retrieved_at": "2026-09-16T15:44:57Z",
+      "content_type": "application/json",
+      "sha256": "82964c2eb6cc4db5582167796d2ee7a5ae1e4057acb6e4124dec9caf0d59c231",
+      "byte_length": 350
+    },
+    {
+      "path": "raw/web/query-13-hit-04.json",
+      "origin": "https://www.citigroup.com/global/news/press-release/2026/second-quarter-2026-results-key-metrics",
+      "retrieved_at": "2026-09-16T15:44:57Z",
+      "content_type": "application/json",
+      "sha256": "8941d7f21e5a389ac13ec5bbbcbafcedad2ff79c76c97381e253fcd0635b9588",
+      "byte_length": 448
+    },
+    {
+      "path": "raw/web/query-13-hit-05.json",
+      "origin": "https://www.citigroup.com/rcs/citigpa/storage/public/Earnings/Q22026/2026fsqtr2rslt.pdf",
+      "retrieved_at": "2026-09-16T15:44:57Z",
+      "content_type": "application/json",
+      "sha256": "e9d3122f9531a086c76b5d8eef568e9bccd6812f9d5dfd89355e1adf4538cb2f",
+      "byte_length": 412
+    },
+    {
+      "path": "raw/web/query-13-hit-06.json",
+      "origin": "https://www.sec.gov/Archives/edgar/data/831001/000110465926083383/c-20260714xex99d1.htm",
+      "retrieved_at": "2026-09-16T15:44:57Z",
+      "content_type": "application/json",
+      "sha256": "ce394d03bbde6ae696c3702606ee6c061acbe07a17a45da5e45a41ccb538fa49",
+      "byte_length": 372
+    },
+    {
+      "path": "raw/web/query-13-hit-07.json",
+      "origin": "https://finance.yahoo.com/",
+      "retrieved_at": "2026-09-16T15:44:57Z",
+      "content_type": "application/json",
+      "sha256": "977cf49edff25588deaa156ccac99ba25b1b3b9fe459e99b79d5f69f62149913",
+      "byte_length": 355
+    },
+    {
+      "path": "raw/web/query-13-hit-08.json",
+      "origin": "https://www.roic.ai/quote/C/transcripts/2026-year/2-quarter",
+      "retrieved_at": "2026-09-16T15:44:57Z",
+      "content_type": "application/json",
+      "sha256": "fa5b60a248f605a233daa250fb9f9ea2b1b79a6a4dc2642b11bc8de1266dd948",
+      "byte_length": 447
+    },
+    {
+      "path": "raw/web/query-14-hit-01.json",
+      "origin": "https://95kqds.com/2026/07/14/citi-profit-jumps-45-on-investment-banking-trading-strength/",
+      "retrieved_at": "2026-09-16T15:44:58Z",
+      "content_type": "application/json",
+      "sha256": "5e5001c29b6693e4b6c6d652c2c592d47b6ea71d572df5fb718c174869a6aaaf",
+      "byte_length": 492
+    },
+    {
+      "path": "raw/web/query-14-hit-02.json",
+      "origin": "https://ng.investing.com/news/company-news/citigroup-q2-2026-slides-record-revenue-market-eyes-spending-plans-93CH-2599321",
+      "retrieved_at": "2026-09-16T15:44:58Z",
+      "content_type": "application/json",
+      "sha256": "12b4a16507ba76886cb955c81a9de0b684e15b0b2febaf263019710e34cf31d7",
+      "byte_length": 500
+    },
+    {
+      "path": "raw/web/query-14-hit-03.json",
+      "origin": "https://www.investing.com/news/transcripts/earnings-call-transcript-citigroup-tops-q2-2026-estimates-shares-fall-93CH-4791387",
+      "retrieved_at": "2026-09-16T15:44:58Z",
+      "content_type": "application/json",
+      "sha256": "bb5b7860a5b1780ca0c99ec29cc76713a6afea00fb1a75f4b1b35152509ba554",
+      "byte_length": 481
+    },
+    {
+      "path": "raw/web/query-14-hit-04.json",
+      "origin": "https://www.sec.gov/Archives/edgar/data/831001/000110465926083383/c-20260714xex99d1.htm",
+      "retrieved_at": "2026-09-16T15:44:58Z",
+      "content_type": "application/json",
+      "sha256": "2c11b167ae72bd8b78553125affbf7d36927d8f2ee68023d7763c4e5e85581f4",
+      "byte_length": 380
+    },
+    {
+      "path": "raw/web/query-14-hit-05.json",
+      "origin": "https://finance.yahoo.com/markets/stocks/articles/citigroup-q2-2026-earnings-beat-141317222.html",
+      "retrieved_at": "2026-09-16T15:44:58Z",
+      "content_type": "application/json",
+      "sha256": "c503d16e0dab872059dfdff10b1f6379a87be900c02e0959a82a64bbbe2696ba",
+      "byte_length": 443
+    },
+    {
+      "path": "raw/web/query-14-hit-06.json",
+      "origin": "https://qz.com/citigroup-q2-2026-earnings-profit-beat-analyst-estimates-071426",
+      "retrieved_at": "2026-09-16T15:44:58Z",
+      "content_type": "application/json",
+      "sha256": "fdd8b3ac380933a7cc7fa165a75e44dd904035c9f56ced9516ff7ead7ca30a98",
+      "byte_length": 449
+    },
+    {
+      "path": "raw/web/query-14-hit-07.json",
+      "origin": "https://www.citigroup.com/rcs/citigpa/storage/public/Earnings/Q22026/2026fsqtr2rslt.pdf",
+      "retrieved_at": "2026-09-16T15:44:58Z",
+      "content_type": "application/json",
+      "sha256": "c8a58180cfb1c2d6972669b79dfd97578f1bdbf669af807c8adb5e6a17fdc6c5",
+      "byte_length": 420
+    },
+    {
+      "path": "raw/web/query-14-hit-08.json",
+      "origin": "https://www.efinancialcareers.com/news/citi-q2-2026",
+      "retrieved_at": "2026-09-16T15:44:58Z",
+      "content_type": "application/json",
+      "sha256": "3ded67b932d0019eaeac3b373a57c2cbdffc3a3c3b74e000195e2f40f63e6609",
+      "byte_length": 412
+    },
+    {
+      "path": "raw/web/query-15-hit-01.json",
+      "origin": "https://www.citigroup.com/rcs/citigpa/storage/public/2026psqtr2-transcript.pdf",
+      "retrieved_at": "2026-09-16T15:45:00Z",
+      "content_type": "application/json",
+      "sha256": "0e0cf9ad1aef9b05314e3726e7bd54a5ee8273549cbccf92ee526c5823751d39",
+      "byte_length": 401
+    },
+    {
+      "path": "raw/web/query-15-hit-02.json",
+      "origin": "https://www.citigroup.com/rcs/citigpa/storage/public/Earnings/Q22026/2q2026-citigroup-at-a-glance.pdf",
+      "retrieved_at": "2026-09-16T15:45:00Z",
+      "content_type": "application/json",
+      "sha256": "dbb49ab322b1303dc7ffde30873d2ab7ee989db211df4f4f20fa3558854dbb0b",
+      "byte_length": 414
+    },
+    {
+      "path": "raw/web/query-15-hit-03.json",
+      "origin": "https://www.citigroup.com/global/news/press-release/2026/second-quarter-2026-results-key-metrics",
+      "retrieved_at": "2026-09-16T15:45:00Z",
+      "content_type": "application/json",
+      "sha256": "b8faafa2724480430aa2c031d6cd4cd49aa49531c9a24e656e7e47258a1fc6f7",
+      "byte_length": 447
+    },
+    {
+      "path": "raw/web/query-15-hit-04.json",
+      "origin": "https://www.citigroup.com/rcs/citigpa/storage/public/Earnings/Q22026/2026fsqtr2rslt.pdf",
+      "retrieved_at": "2026-09-16T15:45:00Z",
+      "content_type": "application/json",
+      "sha256": "cc6c335718bb39ae94bd4df1b682c11f6eb71e6d4d37411b3610b3fc4fc2bad8",
+      "byte_length": 411
+    },
+    {
+      "path": "raw/web/query-15-hit-05.json",
+      "origin": "https://www.roic.ai/quote/C/transcripts/2026-year/2-quarter",
+      "retrieved_at": "2026-09-16T15:45:00Z",
+      "content_type": "application/json",
+      "sha256": "82aee8e697347730fdc7ac8e2b95cd27cb36cb8230655a6cd8e526281537c63c",
+      "byte_length": 446
+    },
+    {
+      "path": "raw/web/query-15-hit-06.json",
+      "origin": "https://seekingalpha.com/article/4922024-citigroup-inc-c-q2-2026-earnings-call-transcript",
+      "retrieved_at": "2026-09-16T15:45:00Z",
+      "content_type": "application/json",
+      "sha256": "33e3b509e61c8083100b141d44a663ec3d3a12a3db72c07ac8b643175442d757",
+      "byte_length": 464
+    },
+    {
+      "path": "raw/web/query-15-hit-07.json",
+      "origin": "https://capedge.com/company/831001/transcripts/2026/q2",
+      "retrieved_at": "2026-09-16T15:45:00Z",
+      "content_type": "application/json",
+      "sha256": "5948478a73f0a6294c1eb6d2c83a757bf77805da037cd1f3e51d12e04fc2a97f",
+      "byte_length": 399
+    },
+    {
+      "path": "raw/web/query-15-hit-08.json",
+      "origin": "https://www.sec.gov/Archives/edgar/data/831001/000110465926083383/c-20260714xex99d1.htm",
+      "retrieved_at": "2026-09-16T15:45:00Z",
+      "content_type": "application/json",
+      "sha256": "8ba1cd63d812333f68b64bc51172e8a3a45a254de3890892167f67275947c80d",
+      "byte_length": 371
+    },
+    {
+      "path": "raw/web/query-16-hit-01.json",
+      "origin": "https://www.wellsfargo.com/assets/pdf/about/investor-relations/earnings/second-quarter-2026-financial-results.pdf",
+      "retrieved_at": "2026-09-16T15:45:01Z",
+      "content_type": "application/json",
+      "sha256": "850eb9acb8d4f0e382560c79c492c5c9274d203a592175978b99b5be5962cc37",
+      "byte_length": 430
+    },
+    {
+      "path": "raw/web/query-16-hit-02.json",
+      "origin": "https://www.wellsfargo.com/",
+      "retrieved_at": "2026-09-16T15:45:01Z",
+      "content_type": "application/json",
+      "sha256": "45e28726d883b1870cb219e6d282f0633c1297ddc511a423a0a3bfb976b1a41c",
+      "byte_length": 379
+    },
+    {
+      "path": "raw/web/query-16-hit-03.json",
+      "origin": "https://www.sec.gov/Archives/edgar/data/72971/000007297126000288/wfc2qer07-14x26ex992xsuppl.htm",
+      "retrieved_at": "2026-09-16T15:45:01Z",
+      "content_type": "application/json",
+      "sha256": "8c9f2319bf5aa76906633d260e3169a745a3992d2a4c9efce96475486d0b8953",
+      "byte_length": 398
+    },
+    {
+      "path": "raw/web/query-16-hit-04.json",
+      "origin": "https://www.sec.gov/Archives/edgar/data/72971/000007297126000288/ex993-wellsfargo2q26pres.htm",
+      "retrieved_at": "2026-09-16T15:45:01Z",
+      "content_type": "application/json",
+      "sha256": "e97b4dc11b8e46b0ee763e2ee0e480f6444890d8ffb4eaab48864d7b3f7a66f3",
+      "byte_length": 412
+    },
+    {
+      "path": "raw/web/query-16-hit-05.json",
+      "origin": "https://app.edgar.tools/filing/72971/0000072971-26-000288/wfc2qer07-14x26ex991xrelea.htm",
+      "retrieved_at": "2026-09-16T15:45:01Z",
+      "content_type": "application/json",
+      "sha256": "e7976dbe9f072d08b1c92351d04bb8b0d2067e586c39fe40c2422f7a2541e363",
+      "byte_length": 391
+    },
+    {
+      "path": "raw/web/query-16-hit-06.json",
+      "origin": "https://finance.yahoo.com/",
+      "retrieved_at": "2026-09-16T15:45:01Z",
+      "content_type": "application/json",
+      "sha256": "bf72ca830e661da92fd7167698e9967e91ae523a4142a16960f08408411a4099",
+      "byte_length": 380
+    },
+    {
+      "path": "raw/web/query-16-hit-07.json",
+      "origin": "https://www.marketbeat.com/earnings/reports/2026-7-14-wells-fargo-company-stock/",
+      "retrieved_at": "2026-09-16T15:45:01Z",
+      "content_type": "application/json",
+      "sha256": "d287ea042230433b27c0d5d290d8d0d3011a445c5e1fbb70fbb92ab4acc3e969",
+      "byte_length": 420
+    },
+    {
+      "path": "raw/web/query-16-hit-08.json",
+      "origin": "https://www.investing.com/",
+      "retrieved_at": "2026-09-16T15:45:01Z",
+      "content_type": "application/json",
+      "sha256": "f8c1ff995dd0965be3aa3144d5b5b2f8262e3fc341d62211bdb8bfed5e2cdbe3",
+      "byte_length": 375
+    },
+    {
+      "path": "raw/web/query-17-hit-01.json",
+      "origin": "https://www.sec.gov/Archives/edgar/data/19617/000162828026048078/a2q26erfexhibit991narrative.htm",
+      "retrieved_at": "2026-09-16T15:45:03Z",
+      "content_type": "application/json",
+      "sha256": "817bc7a8da1e0b3c2594b6596e45eb4abf0d04a33531cb5a6234e77d27110fd4",
+      "byte_length": 409
+    },
+    {
+      "path": "raw/web/query-17-hit-02.json",
+      "origin": "https://www.wellsfargo.com/assets/pdf/about/investor-relations/earnings/second-quarter-2026-financial-results.pdf",
+      "retrieved_at": "2026-09-16T15:45:03Z",
+      "content_type": "application/json",
+      "sha256": "c37d1c15698c8518a1aa2839b09797354493c13cd5adef96b5f96acc1207acbd",
+      "byte_length": 440
+    },
+    {
+      "path": "raw/web/query-17-hit-03.json",
+      "origin": "https://www.tipranks.com/news/jpm-vs-bac-vs-c-vs-wfc-vs-gs-bank-earnings-crush-estimates-as-jpmorgan-posts-record-profit",
+      "retrieved_at": "2026-09-16T15:45:03Z",
+      "content_type": "application/json",
+      "sha256": "860914e86a6be93eb606ea8e9f38c72b3b6c89333d117d98d74cdecf924f21d7",
+      "byte_length": 425
+    },
+    {
+      "path": "raw/web/query-17-hit-04.json",
+      "origin": "https://app.edgar.tools/filing/72971/0000072971-26-000288/wfc2qer07-14x26ex991xrelea.htm",
+      "retrieved_at": "2026-09-16T15:45:03Z",
+      "content_type": "application/json",
+      "sha256": "014cccd458acd7aa4029b5115c157bdd5501ee063f0c7642584ecbe64d36dc7f",
+      "byte_length": 401
+    },
+    {
+      "path": "raw/web/query-17-hit-05.json",
+      "origin": "https://www.wellsfargo.com/assets/pdf/about/investor-relations/earnings/second-quarter-2026-earnings-supplement.pdf",
+      "retrieved_at": "2026-09-16T15:45:03Z",
+      "content_type": "application/json",
+      "sha256": "96d5ab2660ded8693e88a2cc24086a0019d7e7d1eea20f7f42484e701874c277",
+      "byte_length": 445
+    },
+    {
+      "path": "raw/web/query-17-hit-06.json",
+      "origin": "https://www.sec.gov/Archives/edgar/data/72971/000007297126000288/ex993-wellsfargo2q26pres.htm",
+      "retrieved_at": "2026-09-16T15:45:03Z",
+      "content_type": "application/json",
+      "sha256": "2d68c96e7f6ecd8a1007f7dd7b14d347937e8f5e40505cbfc37f812a340c2fc9",
+      "byte_length": 422
+    },
+    {
+      "path": "raw/web/query-17-hit-07.json",
+      "origin": "https://app.edgar.tools/filing/19617/0001628280-26-048078/a2q26erfex992supplement.htm",
+      "retrieved_at": "2026-09-16T15:45:03Z",
+      "content_type": "application/json",
+      "sha256": "ae65d2de4f73e9426aa453e83809273a01f482da40c4420f40e353d425fba646",
+      "byte_length": 398
+    },
+    {
+      "path": "raw/web/query-17-hit-08.json",
+      "origin": "https://app.dealroom.co/news/feed/big-banks-beat-q2-2026-earnings-but-jpmorgan-and-bank-of-america-outpace-wells-fargo-on-margins",
+      "retrieved_at": "2026-09-16T15:45:03Z",
+      "content_type": "application/json",
+      "sha256": "37ba28a3f90aa3b70251c0b9e64be1c6a3cb274711924ff32a573c1935260cd3",
+      "byte_length": 544
+    },
+    {
+      "path": "raw/web/query-18-hit-01.json",
+      "origin": "https://www.wellsfargo.com/assets/pdf/about/investor-relations/earnings/second-quarter-2026-financial-results.pdf",
+      "retrieved_at": "2026-09-16T15:45:04Z",
+      "content_type": "application/json",
+      "sha256": "3319eda62882d3ed908b10458f3d4b18d726dea5214bc7e3b6bc60e5f62ce769",
+      "byte_length": 424
+    },
+    {
+      "path": "raw/web/query-18-hit-02.json",
+      "origin": "https://www.sec.gov/Archives/edgar/data/72971/000007297126000288/ex993-wellsfargo2q26pres.htm",
+      "retrieved_at": "2026-09-16T15:45:04Z",
+      "content_type": "application/json",
+      "sha256": "21bc858586d460d611f5cc35797272104c95c82e0147b997b12fc1a2b046489f",
+      "byte_length": 406
+    },
+    {
+      "path": "raw/web/query-18-hit-03.json",
+      "origin": "https://exa.ai/library/markets/stocks/WFC/earnings/FY2026/Q2/transcript",
+      "retrieved_at": "2026-09-16T15:45:04Z",
+      "content_type": "application/json",
+      "sha256": "26be7a60ca47c76cbf82127f4d09a7660aa39e3d98dea2a703153d005a8ab24d",
+      "byte_length": 434
+    },
+    {
+      "path": "raw/web/query-18-hit-04.json",
+      "origin": "https://www.americanbanker.com/news/the-san-francisco-based-banking-giant-remains-on-track-to-hit-its-50-billion-spread-income-target-for-all-of-2026-ceo-charlie-scharf-told-analysts",
+      "retrieved_at": "2026-09-16T15:45:04Z",
+      "content_type": "application/json",
+      "sha256": "e06f6f51c3c3f9c999be11fbb5ba5b4066eb58660a00f998182fad45fc02751a",
+      "byte_length": 662
+    },
+    {
+      "path": "raw/web/query-18-hit-05.json",
+      "origin": "https://www.theglobeandmail.com/investing/markets/stocks/WFC/pressreleases/3390829/wells-fargo-wfc-q2-2026-earnings-call-transcript/",
+      "retrieved_at": "2026-09-16T15:45:04Z",
+      "content_type": "application/json",
+      "sha256": "80c562729631d02398c593f2b523598f5293e62a0edd6c714617b15516e9b652",
+      "byte_length": 492
+    },
+    {
+      "path": "raw/web/query-18-hit-06.json",
+      "origin": "https://za.investing.com/news/transcripts/earnings-call-transcript-wells-fargo-tops-q2-2026-estimates-as-revenue-climbs-93CH-4368634",
+      "retrieved_at": "2026-09-16T15:45:04Z",
+      "content_type": "application/json",
+      "sha256": "c22f56ed8db375c0aeb50031ab8dde2c5d40032c3a737468625f68156f5d0a54",
+      "byte_length": 499
+    },
+    {
+      "path": "raw/web/query-18-hit-07.json",
+      "origin": "https://app.edgar.tools/filing/72971/0000072971-26-000288/wfc2qer07-14x26ex991xrelea.htm",
+      "retrieved_at": "2026-09-16T15:45:04Z",
+      "content_type": "application/json",
+      "sha256": "6f84d5b4452b142942e910044b25648c115c27926bc95fb9dcb6cddd29add818",
+      "byte_length": 385
+    },
+    {
+      "path": "raw/web/query-18-hit-08.json",
+      "origin": "https://www.sec.gov/Archives/edgar/data/72971/000007297126000288/wfc2qer07-14x26ex992xsuppl.htm",
+      "retrieved_at": "2026-09-16T15:45:04Z",
+      "content_type": "application/json",
+      "sha256": "094debf0272154f22262463f9d49d9beca41ce7b4817710f551474a507d8c2e5",
+      "byte_length": 392
+    },
+    {
+      "path": "raw/web/query-19-hit-01.json",
+      "origin": "https://www.wellsfargo.com/assets/pdf/about/investor-relations/earnings/second-quarter-2026-earnings.pdf",
+      "retrieved_at": "2026-09-16T15:45:07Z",
+      "content_type": "application/json",
+      "sha256": "029aab1b10d928c08fb1625a8a8c4a05eaa511ed34c034cf88e9675646b182a4",
+      "byte_length": 495
+    },
+    {
+      "path": "raw/web/query-19-hit-02.json",
+      "origin": "https://d2233.cms.socastsrm.com/2026/07/14/wells-fargo-profit-jumps-on-interest-income-boost/",
+      "retrieved_at": "2026-09-16T15:45:07Z",
+      "content_type": "application/json",
+      "sha256": "df7cd6f73b8ee7445d1b66d93f29c763a9d316f688db40478a8e0fa34c884cee",
+      "byte_length": 512
+    },
+    {
+      "path": "raw/web/query-19-hit-03.json",
+      "origin": "https://finance.yahoo.com/",
+      "retrieved_at": "2026-09-16T15:45:07Z",
+      "content_type": "application/json",
+      "sha256": "819385ed9e741b574150f18c1067bba1194ce7e5719186f1e301af1292c71edd",
+      "byte_length": 382
+    },
+    {
+      "path": "raw/web/query-19-hit-04.json",
+      "origin": "https://www.investing.com/",
+      "retrieved_at": "2026-09-16T15:45:07Z",
+      "content_type": "application/json",
+      "sha256": "9b5f3f6012bce97de4c23ec7b246d51e8f8a383ebbb6f6e3a819c756f002387d",
+      "byte_length": 377
+    },
+    {
+      "path": "raw/web/query-19-hit-05.json",
+      "origin": "https://www.wellsfargo.com/assets/pdf/about/investor-relations/earnings/second-quarter-2026-financial-results.pdf",
+      "retrieved_at": "2026-09-16T15:45:07Z",
+      "content_type": "application/json",
+      "sha256": "f667903327227607ac7649e374b558f30c701c7d0ddc988399931c47a0f8dbdc",
+      "byte_length": 432
+    },
+    {
+      "path": "raw/web/query-19-hit-06.json",
+      "origin": "https://www.techtimes.com/articles/320488/20260714/wells-fargo-q2-beat-proves-fee-transformation-works-one-year-after-cap-removal.htm",
+      "retrieved_at": "2026-09-16T15:45:07Z",
+      "content_type": "application/json",
+      "sha256": "00d157d2bfeeb7bf6cb16fe262b462ba626b5ebad4ddf0379d3694e8074fa11f",
+      "byte_length": 533
+    },
+    {
+      "path": "raw/web/query-19-hit-07.json",
+      "origin": "https://wtop.com/news/2026/07/wells-fargo-q2-earnings-snapshot/",
+      "retrieved_at": "2026-09-16T15:45:07Z",
+      "content_type": "application/json",
+      "sha256": "58fbbb7958ca495441f6c3f280047d4e263afa69692bd6ab4bb08357194664aa",
+      "byte_length": 434
+    },
+    {
+      "path": "raw/web/query-19-hit-08.json",
+      "origin": "https://www.marketbeat.com/earnings/reports/2026-7-14-wells-fargo-company-stock/",
+      "retrieved_at": "2026-09-16T15:45:07Z",
+      "content_type": "application/json",
+      "sha256": "d8c67fbd5d2ae534f51617ac06c102e4ee2c1118dfdfd4a67973ebcf85545a79",
+      "byte_length": 377
+    },
+    {
+      "path": "raw/web/query-20-hit-01.json",
+      "origin": "https://www.wellsfargo.com/assets/pdf/about/investor-relations/earnings/second-quarter-2026-financial-results.pdf",
+      "retrieved_at": "2026-09-16T15:45:08Z",
+      "content_type": "application/json",
+      "sha256": "2c5b60c7d484b555e1c440dd6810386bcead6a76fef9f7676628b13bf8a539e9",
+      "byte_length": 423
+    },
+    {
+      "path": "raw/web/query-20-hit-02.json",
+      "origin": "https://capedge.com/company/72971/transcripts/2026/q2",
+      "retrieved_at": "2026-09-16T15:45:08Z",
+      "content_type": "application/json",
+      "sha256": "9639bf9b6d3ae2aff26a6f7ac3ef1ad6ef61a8aaa7450ec982df44109bf1510c",
+      "byte_length": 411
+    },
+    {
+      "path": "raw/web/query-20-hit-03.json",
+      "origin": "https://exa.ai/library/markets/stocks/WFC/earnings/FY2026/Q2/transcript",
+      "retrieved_at": "2026-09-16T15:45:08Z",
+      "content_type": "application/json",
+      "sha256": "4b6bd0c0e0ef163ee925f2539667e0e9382d40ff5ca4d133a3d9ba66aaad84f2",
+      "byte_length": 433
+    },
+    {
+      "path": "raw/web/query-20-hit-04.json",
+      "origin": "https://www.investing.com/",
+      "retrieved_at": "2026-09-16T15:45:08Z",
+      "content_type": "application/json",
+      "sha256": "218e04f9c4a3e0e54126136ae6ed68b35c28ce35d21558cb474da37d9d93385c",
+      "byte_length": 368
+    },
+    {
+      "path": "raw/web/query-20-hit-05.json",
+      "origin": "https://www.tickerreport.com/banking-finance/13503582/wells-fargo-company-q2-earnings-call-highlights.html",
+      "retrieved_at": "2026-09-16T15:45:08Z",
+      "content_type": "application/json",
+      "sha256": "5a3c8063ec476358aa3d32c8af91d58fb9c6a0b048d87de57e0ab1a0fbd78be2",
+      "byte_length": 483
+    },
+    {
+      "path": "raw/web/query-20-hit-06.json",
+      "origin": "https://www.sec.gov/Archives/edgar/data/72971/000007297126000288/ex993-wellsfargo2q26pres.htm",
+      "retrieved_at": "2026-09-16T15:45:08Z",
+      "content_type": "application/json",
+      "sha256": "ca4d3f06723f0784d3d90cc771aa6d974b17d03f0ff1648463ebe91e29d3cc89",
+      "byte_length": 405
+    },
+    {
+      "path": "raw/web/query-20-hit-07.json",
+      "origin": "https://www.marketbeat.com/earnings/reports/2026-7-14-wells-fargo-company-stock/",
+      "retrieved_at": "2026-09-16T15:45:08Z",
+      "content_type": "application/json",
+      "sha256": "5d536f4ca0893d8ab28b077d9dcd686e2fe55fd48269e838241d2a510b0d757c",
+      "byte_length": 368
+    },
+    {
+      "path": "raw/web/query-20-hit-08.json",
+      "origin": "https://za.investing.com/news/transcripts/earnings-call-transcript-wells-fargo-tops-q2-2026-estimates-as-revenue-climbs-93CH-4368634",
+      "retrieved_at": "2026-09-16T15:45:08Z",
+      "content_type": "application/json",
+      "sha256": "c77a26254cd00ea78f958962e1ae77bfc400530dafbc0af303b5d0b4b30c0784",
+      "byte_length": 498
+    },
+    {
+      "path": "raw/web/query-21-hit-01.json",
+      "origin": "https://www.goldmansachs.com/pressroom/press-releases/2026/2026-07-14-q2-results",
+      "retrieved_at": "2026-09-16T15:45:14Z",
+      "content_type": "application/json",
+      "sha256": "48b2bdda623b13956282e2d63b33463ec519217aa273a491f6e5355ad54efa97",
+      "byte_length": 544
+    },
+    {
+      "path": "raw/web/query-21-hit-02.json",
+      "origin": "https://qz.com/goldman-sachs-q2-2026-earnings-record-equities-trading-071426",
+      "retrieved_at": "2026-09-16T15:45:14Z",
+      "content_type": "application/json",
+      "sha256": "22531a767416f0779bfb0e6f590060f7dd9c048cbf96965c95a893bf5d54472a",
+      "byte_length": 464
+    },
+    {
+      "path": "raw/web/query-21-hit-03.json",
+      "origin": "https://app.edgar.tools/filing/886982/0000886982-26-000294/a2q26gsearningsresults.htm",
+      "retrieved_at": "2026-09-16T15:45:14Z",
+      "content_type": "application/json",
+      "sha256": "bd34d1773f2a6d4b01342ca66f82747b7b1897042996c6e6e81502ed3c1c47e1",
+      "byte_length": 408
+    },
+    {
+      "path": "raw/web/query-21-hit-04.json",
+      "origin": "https://www.theglobeandmail.com/business/international-business/us-business/article-goldman-sachs-results-profit-second-quarter-2026/",
+      "retrieved_at": "2026-09-16T15:45:14Z",
+      "content_type": "application/json",
+      "sha256": "c1ba30bb6d2be4cb43d117a3096ba523148870eced92b6595c9b4e6f03d1bb1a",
+      "byte_length": 549
+    },
+    {
+      "path": "raw/web/query-21-hit-05.json",
+      "origin": "https://www.opencapital.sh/filings/0000886982-26-000294",
+      "retrieved_at": "2026-09-16T15:45:14Z",
+      "content_type": "application/json",
+      "sha256": "1fd5dc037063231f95019e5cd2776c43e0c0783ef7829b602e8a553ac4a99e7b",
+      "byte_length": 413
+    },
+    {
+      "path": "raw/web/query-21-hit-06.json",
+      "origin": "https://www.theglobeandmail.com/investing/markets/stocks/GS/pressreleases/3390838/goldman-sachs-gs-q2-2026-earnings-call-transcript/",
+      "retrieved_at": "2026-09-16T15:45:14Z",
+      "content_type": "application/json",
+      "sha256": "2621d6f5fa5a4806e6c677231dc2d3d46585bd7bdc8cae38bd48ac93153e57f2",
+      "byte_length": 503
+    },
+    {
+      "path": "raw/web/query-21-hit-07.json",
+      "origin": "https://247wallst.com/cards/goldman-sachs-q2-2026-earnings-gs-01kxg6hwy77gv9q5a8ks0rp5js",
+      "retrieved_at": "2026-09-16T15:45:14Z",
+      "content_type": "application/json",
+      "sha256": "1b73a131b027cde81095bb3a3a70a59428c261e70728326cb5bfc9e648070ab3",
+      "byte_length": 499
+    },
+    {
+      "path": "raw/web/query-21-hit-08.json",
+      "origin": "https://www.financialmarkets.com/article/gs-record-quarter-cyclical-priced-structural",
+      "retrieved_at": "2026-09-16T15:45:14Z",
+      "content_type": "application/json",
+      "sha256": "12def45fe915678135b984c127725fd2dea6269d96238c82bf0d2afbb61d3ace",
+      "byte_length": 505
+    },
+    {
+      "path": "raw/web/query-22-hit-01.json",
+      "origin": "https://www.cnbc.com/2026/07/14/goldman-sachs-and-jpmorgan-chase-are-emerging-as-ai-winners.html",
+      "retrieved_at": "2026-09-16T15:45:15Z",
+      "content_type": "application/json",
+      "sha256": "3df7c05e73fe1d269df9417f4b10745329ae7f17dd3ed9d1a5d297ccdfa5f405",
+      "byte_length": 488
+    },
+    {
+      "path": "raw/web/query-22-hit-02.json",
+      "origin": "https://www.investors.com/news/jpmorgan-chase-goldman-sachs-bank-earnings-q2-2026-dow-jones-jpm-stock-gs-stock/",
+      "retrieved_at": "2026-09-16T15:45:15Z",
+      "content_type": "application/json",
+      "sha256": "f6fa23353c7bb933f9c960355b8e0488d9f9391ef057e11c7801ecb63824ff10",
+      "byte_length": 546
+    },
+    {
+      "path": "raw/web/query-22-hit-03.json",
+      "origin": "https://www.sec.gov/Archives/edgar/data/19617/000162828026048078/a2q26erfexhibit991narrative.htm",
+      "retrieved_at": "2026-09-16T15:45:15Z",
+      "content_type": "application/json",
+      "sha256": "1a5bdc4ae38924513933c7bd2b96b891501d04f9739c4eb30b88d8291c6ef895",
+      "byte_length": 413
+    },
+    {
+      "path": "raw/web/query-22-hit-04.json",
+      "origin": "https://www.stocktitan.net/sec-filings/JPM/8-k-jpmorgan-chase-co-reports-material-event-1f2ddf4de037.html",
+      "retrieved_at": "2026-09-16T15:45:15Z",
+      "content_type": "application/json",
+      "sha256": "dd796057b54ac2a3dbec820720be273ee9b612ee371d38af350c365d0f4cb54c",
+      "byte_length": 500
+    },
+    {
+      "path": "raw/web/query-22-hit-05.json",
+      "origin": "https://www.tipranks.com/news/jpm-vs-bac-vs-c-vs-wfc-vs-gs-bank-earnings-crush-estimates-as-jpmorgan-posts-record-profit",
+      "retrieved_at": "2026-09-16T15:45:15Z",
+      "content_type": "application/json",
+      "sha256": "e0ff0a2d4003203977bec85d9350b9572f87a27d5b99ba7040febdee3997435d",
+      "byte_length": 429
+    },
+    {
+      "path": "raw/web/query-22-hit-06.json",
+      "origin": "https://app.edgar.tools/filing/19617/0001628280-26-048078/a2q26erfex992supplement.htm",
+      "retrieved_at": "2026-09-16T15:45:15Z",
+      "content_type": "application/json",
+      "sha256": "0b7f05c70b0ec91bbc06288dcd32a86f05237b6139a45b250d3a5c40409a1ae2",
+      "byte_length": 402
+    },
+    {
+      "path": "raw/web/query-22-hit-07.json",
+      "origin": "https://www.wealthenginepro.com/insights/battle-stocks-jpm-vs-gs-vs-ms",
+      "retrieved_at": "2026-09-16T15:45:15Z",
+      "content_type": "application/json",
+      "sha256": "7065a636ea5b8aaf467af1e70e3d805a9899561942dc04c23cec27e60cc18085",
+      "byte_length": 501
+    },
+    {
+      "path": "raw/web/query-22-hit-08.json",
+      "origin": "https://newstimeshd.com/the-ai-boom-just-found-two-new-winners-goldman-sachs-and-jpmorgan-chase/",
+      "retrieved_at": "2026-09-16T15:45:15Z",
+      "content_type": "application/json",
+      "sha256": "9bfb969ae6c2f348de3c7910076d19395c459c04eda606500702a6992b1cd2d5",
+      "byte_length": 517
+    },
+    {
+      "path": "raw/web/query-23-hit-01.json",
+      "origin": "https://www.goldmansachs.com/pressroom/press-releases/2026/2026-07-14-q2-results",
+      "retrieved_at": "2026-09-16T15:45:17Z",
+      "content_type": "application/json",
+      "sha256": "198b45c5ca85b03b41a85e34bfcf504808a4a05482ec464259160fab096acaa5",
+      "byte_length": 538
+    },
+    {
+      "path": "raw/web/query-23-hit-02.json",
+      "origin": "https://app.edgar.tools/filing/886982/0000886982-26-000294/a2q26gsearningsresults.htm",
+      "retrieved_at": "2026-09-16T15:45:17Z",
+      "content_type": "application/json",
+      "sha256": "682cfe564fdfcc72922e81b179b92fd4edccca797fa53925718fc83a91a52625",
+      "byte_length": 402
+    },
+    {
+      "path": "raw/web/query-23-hit-03.json",
+      "origin": "https://uk.finance.yahoo.com/news/gs-q2-earnings-call-highlights-140000810.html",
+      "retrieved_at": "2026-09-16T15:45:17Z",
+      "content_type": "application/json",
+      "sha256": "ce02259644505a7e0ea3ae33cb8823665b2552619992fc9484402be9a40eb729",
+      "byte_length": 433
+    },
+    {
+      "path": "raw/web/query-23-hit-04.json",
+      "origin": "https://www.roic.ai/quote/GS-PC/transcripts/2026-year/2-quarter",
+      "retrieved_at": "2026-09-16T15:45:17Z",
+      "content_type": "application/json",
+      "sha256": "0112b88faa99a13d3ab21915e99e7bc007343fa5eec322b6616e03beb6470bb9",
+      "byte_length": 491
+    },
+    {
+      "path": "raw/web/query-23-hit-05.json",
+      "origin": "https://quartr.com/companies/the-goldman-sachs-group-inc_4954",
+      "retrieved_at": "2026-09-16T15:45:17Z",
+      "content_type": "application/json",
+      "sha256": "a4b7b1fdb62264bd2181705136364be6eb6d5d6d5b21c324345a37cea790dd52",
+      "byte_length": 453
+    },
+    {
+      "path": "raw/web/query-23-hit-06.json",
+      "origin": "https://www.goldmansachs.com/",
+      "retrieved_at": "2026-09-16T15:45:17Z",
+      "content_type": "application/json",
+      "sha256": "cec92f201d57de1f3372197dcccb2fd43690305dcf382c3c8b6b62b9c9369e1a",
+      "byte_length": 376
+    },
+    {
+      "path": "raw/web/query-23-hit-07.json",
+      "origin": "https://earningscall.biz/e/nyse/s/gs/y/2026/q/q2",
+      "retrieved_at": "2026-09-16T15:45:17Z",
+      "content_type": "application/json",
+      "sha256": "3b07b3bb34a03fb0a4576b03905cbf51de80bb52c5e7a6395cd277fbc8449a17",
+      "byte_length": 371
+    },
+    {
+      "path": "raw/web/query-23-hit-08.json",
+      "origin": "https://www.investing.com/",
+      "retrieved_at": "2026-09-16T15:45:17Z",
+      "content_type": "application/json",
+      "sha256": "4e82fb739ceb3c5e3a3ebfcc53cb8afd565f48d3eb61a21c89156a54c1103ac7",
+      "byte_length": 378
+    },
+    {
+      "path": "raw/web/query-24-hit-01.json",
+      "origin": "https://www.reuters.com/",
+      "retrieved_at": "2026-09-16T15:45:18Z",
+      "content_type": "application/json",
+      "sha256": "8699105713638fccf3e70d04949dffea9617be6052b40d9e15f0b8e00abe1f0b",
+      "byte_length": 380
+    },
+    {
+      "path": "raw/web/query-24-hit-02.json",
+      "origin": "https://www.cnbc.com/2026/07/14/were-raising-our-price-target-on-goldman-sachs-after-a-blowout-quarter.html",
+      "retrieved_at": "2026-09-16T15:45:18Z",
+      "content_type": "application/json",
+      "sha256": "2be81dd787ea7d8a85876ab9a094e25fc121edc6fe845f8c37df73f59939930b",
+      "byte_length": 503
+    },
+    {
+      "path": "raw/web/query-24-hit-03.json",
+      "origin": "https://www.goldmansachs.com/pressroom/press-releases/2026/2026-07-14-q2-results",
+      "retrieved_at": "2026-09-16T15:45:18Z",
+      "content_type": "application/json",
+      "sha256": "7608bf4cf3c074b469f3cc77d243716243e168e3a81c055a36668a7b9dc7c2f4",
+      "byte_length": 546
+    },
+    {
+      "path": "raw/web/query-24-hit-04.json",
+      "origin": "https://www.proactiveinvestors.com/companies/news/1095421",
+      "retrieved_at": "2026-09-16T15:45:18Z",
+      "content_type": "application/json",
+      "sha256": "08ad47d70e0d31f63e1a7fe04a1c1ac95d8f2031642a77b0f53d29d1d80f8ccc",
+      "byte_length": 486
+    },
+    {
+      "path": "raw/web/query-24-hit-05.json",
+      "origin": "https://www.investing.com/",
+      "retrieved_at": "2026-09-16T15:45:18Z",
+      "content_type": "application/json",
+      "sha256": "104e6450705b13e55e5ff8e1fd501d8fb7d3df450e390111ed4ae43a2dd2d32b",
+      "byte_length": 386
+    },
+    {
+      "path": "raw/web/query-24-hit-06.json",
+      "origin": "https://www.financialmarkets.com/article/gs-record-quarter-cyclical-priced-structural",
+      "retrieved_at": "2026-09-16T15:45:18Z",
+      "content_type": "application/json",
+      "sha256": "bd6f855ee5d46fbfd290384bb115a0b94b115be9fe8b5141bba559659b217163",
+      "byte_length": 507
+    },
+    {
+      "path": "raw/web/query-24-hit-07.json",
+      "origin": "https://uk.finance.yahoo.com/news/gs-q2-earnings-call-highlights-140000810.html",
+      "retrieved_at": "2026-09-16T15:45:18Z",
+      "content_type": "application/json",
+      "sha256": "9a7ab75a0b93b36ce8a0dcc95ddd76075d226234639852026056a51332eea2ea",
+      "byte_length": 441
+    },
+    {
+      "path": "raw/web/query-24-hit-08.json",
+      "origin": "https://invezz.com/ca/news/2026/07/14/goldman-sachs-stock-soars-after-massive-earnings-beat-shocks-wall-street/",
+      "retrieved_at": "2026-09-16T15:45:18Z",
+      "content_type": "application/json",
+      "sha256": "cb2a742b6544e53bba23063daf659e97374dd4133bde5e21f4fa1bcdea8b108a",
+      "byte_length": 508
+    },
+    {
+      "path": "raw/web/query-25-hit-01.json",
+      "origin": "https://www.goldmansachs.com/pressroom/press-releases/2026/2026-07-14-q2-results",
+      "retrieved_at": "2026-09-16T15:45:20Z",
+      "content_type": "application/json",
+      "sha256": "8a3af7e94cb75171dee26f2d1f12b5e6d790c70d5b1a1fa76e03ca246606a1c8",
+      "byte_length": 537
+    },
+    {
+      "path": "raw/web/query-25-hit-02.json",
+      "origin": "https://capedge.com/company/886982/transcripts/2026/q2?sidebar=comments",
+      "retrieved_at": "2026-09-16T15:45:20Z",
+      "content_type": "application/json",
+      "sha256": "9c1c9442f14e383730ef454855d47f536045423b0d45915cc81df2ab9a7eea33",
+      "byte_length": 430
+    },
+    {
+      "path": "raw/web/query-25-hit-03.json",
+      "origin": "https://uk.finance.yahoo.com/news/gs-q2-earnings-call-highlights-140000810.html",
+      "retrieved_at": "2026-09-16T15:45:20Z",
+      "content_type": "application/json",
+      "sha256": "9f48ced868bfb5639431addc3feba570d08e10156c2748fd70208f64b6951bb6",
+      "byte_length": 432
+    },
+    {
+      "path": "raw/web/query-25-hit-04.json",
+      "origin": "https://www.goldmansachs.com/",
+      "retrieved_at": "2026-09-16T15:45:20Z",
+      "content_type": "application/json",
+      "sha256": "50d4400db08c39225050e453d2601a6c11ec66d982ae8dfdd05032afe7865e89",
+      "byte_length": 370
+    },
+    {
+      "path": "raw/web/query-25-hit-05.json",
+      "origin": "https://www.theglobeandmail.com/investing/markets/stocks/GS/pressreleases/3390838/goldman-sachs-gs-q2-2026-earnings-call-transcript/",
+      "retrieved_at": "2026-09-16T15:45:20Z",
+      "content_type": "application/json",
+      "sha256": "d0886d1658aa5a48759f6afa7d55463acf2a200b6a01ed68c3da13cf08ee3756",
+      "byte_length": 496
+    },
+    {
+      "path": "raw/web/query-25-hit-06.json",
+      "origin": "https://www.financialmarkets.com/article/gs-record-quarter-cyclical-priced-structural",
+      "retrieved_at": "2026-09-16T15:45:20Z",
+      "content_type": "application/json",
+      "sha256": "132b0dbcc73de643e8c1c37e8312c2d6643e6611bc5d5f41015fa76f7f072ac8",
+      "byte_length": 498
+    },
+    {
+      "path": "raw/web/query-25-hit-07.json",
+      "origin": "https://earningscall.biz/e/nyse/s/gs/y/2026/q/q2",
+      "retrieved_at": "2026-09-16T15:45:20Z",
+      "content_type": "application/json",
+      "sha256": "5f7e58bb4c04aa23df89b41c315da4034f15632344480ee1519e5068d5342e87",
+      "byte_length": 370
+    },
+    {
+      "path": "raw/web/query-25-hit-08.json",
+      "origin": "https://www.investing.com/",
+      "retrieved_at": "2026-09-16T15:45:20Z",
+      "content_type": "application/json",
+      "sha256": "235f21dec1e7168adadcd83813fb96623983787c65a0788fceb19eadec46718c",
+      "byte_length": 377
+    },
+    {
+      "path": "evidence/web/web-001.md",
+      "origin": "https://news.alphastreet.com/jpmorgan-chase-jpm-q2-2026-preview-eps-est-5-67-reports-july-14/",
+      "retrieved_at": "2026-09-16T15:45:20Z",
+      "content_type": "text/markdown",
+      "sha256": "f24d63088def795184fbb59393f53ccca758481576c6b618426b627d5ffb03aa",
+      "byte_length": 5017
+    },
+    {
+      "path": "evidence/web/web-002.md",
+      "origin": "https://investor.bankofamerica.com/regulatory-and-other-filings/select-sec-filings/content/0000070858-26-000353/bac06302026ex991.htm",
+      "retrieved_at": "2026-09-16T15:45:20Z",
+      "content_type": "text/markdown",
+      "sha256": "5775b329d12a0a29fda68612e025e47bd5fda0ffccb179757e27c5abd014d783",
+      "byte_length": 65054
+    },
+    {
+      "path": "evidence/web/web-003.md",
+      "origin": "https://www.citigroup.com/rcs/citigpa/storage/public/Earnings/Q22026/2026prqtr2rslt.pdf",
+      "retrieved_at": "2026-09-16T15:45:20Z",
+      "content_type": "text/markdown",
+      "sha256": "d965ecfc6e1e90ec4a7803a069cc4e43d47a21889b06a861825e1e84b33b40e8",
+      "byte_length": 36219
+    },
+    {
+      "path": "evidence/web/web-004.md",
+      "origin": "https://www.wellsfargo.com/assets/pdf/about/investor-relations/earnings/second-quarter-2026-financial-results.pdf",
+      "retrieved_at": "2026-09-16T15:45:21Z",
+      "content_type": "text/markdown",
+      "sha256": "a8d8ca261972bda3a8cf8f189cebd52f6eb3dc739570707c88301d085435f692",
+      "byte_length": 38830
+    },
+    {
+      "path": "evidence/web/web-005.md",
+      "origin": "https://www.goldmansachs.com/pressroom/press-releases/2026/2026-07-14-q2-results",
+      "retrieved_at": "2026-09-16T15:45:21Z",
+      "content_type": "text/markdown",
+      "sha256": "253f4fd9b5dc550516422daf4fe57b31b483b39d8302250a2f370ca2e30081f8",
+      "byte_length": 2508
+    },
+    {
+      "path": "evidence/web/web-006.md",
+      "origin": "https://sg.finance.yahoo.com/news/unveiling-jpmorgan-chase-co-jpm-131502438.html",
+      "retrieved_at": "2026-09-16T15:45:21Z",
+      "content_type": "text/markdown",
+      "sha256": "98c8cce9f1503034643e46fc6d2bcf392c4885cbc6445ebd407c18ee11d963b5",
+      "byte_length": 4517
+    },
+    {
+      "path": "evidence/web/web-007.md",
+      "origin": "https://investor.bankofamerica.com/regulatory-and-other-filings/select-sec-filings/content/0000070858-26-000394/bac-20260630.htm",
+      "retrieved_at": "2026-09-16T15:45:22Z",
+      "content_type": "text/markdown",
+      "sha256": "7f5f0371be6048f6565119891a27cc004cd39ba00fd94c4f1064e79e2b729f8a",
+      "byte_length": 519335
+    },
+    {
+      "path": "evidence/web/web-008.md",
+      "origin": "https://www.sec.gov/Archives/edgar/data/831001/000110465926083383/c-20260714xex99d1.htm",
+      "retrieved_at": "2026-09-16T15:45:22Z",
+      "content_type": "text/markdown",
+      "sha256": "bdd162eeb373758b5f7fe8ab8bac35d93579dbec5bbc638cd8b6a6874fab7ecb",
+      "byte_length": 36241
+    },
+    {
+      "path": "evidence/web/web-009.md",
+      "origin": "https://www.wellsfargo.com/",
+      "retrieved_at": "2026-09-16T15:45:22Z",
+      "content_type": "text/markdown",
+      "sha256": "01a24d833309b53f418be8db31ca4ecbe51cea89cf07ee4da570868e8cef651d",
+      "byte_length": 485
+    },
+    {
+      "path": "evidence/web/web-010.md",
+      "origin": "https://qz.com/goldman-sachs-q2-2026-earnings-record-equities-trading-071426",
+      "retrieved_at": "2026-09-16T15:45:22Z",
+      "content_type": "text/markdown",
+      "sha256": "aa57fdedd859f65495cfaca216f0c26287e1642b8aeffe2f5f867317b30a5cdd",
+      "byte_length": 3053
+    },
+    {
+      "path": "evidence/web/web-011.md",
+      "origin": "https://ca.finance.yahoo.com/quote/JPM/analysis/",
+      "retrieved_at": "2026-09-16T15:45:23Z",
+      "content_type": "text/markdown",
+      "sha256": "1048cdb13fe690cb0e4848c6cb54e5c0266ff4ff400bde85affd6aea0fd44bbf",
+      "byte_length": 2764
+    },
+    {
+      "path": "evidence/web/web-012.md",
+      "origin": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000353/bac06302026ex992.htm",
+      "retrieved_at": "2026-09-16T15:45:23Z",
+      "content_type": "text/markdown",
+      "sha256": "1c00e4ba38457b5b3fa0d08471296f4a37783d8d3edfe9191325806543981e25",
+      "byte_length": 61619
+    },
+    {
+      "path": "evidence/web/web-013.md",
+      "origin": "https://www.citigroup.com/rcs/citigpa/storage/public/Earnings/Q22026/2026presoqtr2rslt.pdf",
+      "retrieved_at": "2026-09-16T15:45:23Z",
+      "content_type": "text/markdown",
+      "sha256": "0dd9cd33a46fc1b12f6db301c260b7fa3d4e9575c84004746230bfb1b78d4f8d",
+      "byte_length": 59178
+    },
+    {
+      "path": "evidence/web/web-014.md",
+      "origin": "https://www.sec.gov/Archives/edgar/data/72971/000007297126000288/wfc2qer07-14x26ex992xsuppl.htm",
+      "retrieved_at": "2026-09-16T15:45:24Z",
+      "content_type": "text/markdown",
+      "sha256": "28c6762ad992caab909e4803ad18eae0331448780611fa4479fee52873070b93",
+      "byte_length": 91884
+    },
+    {
+      "path": "evidence/web/web-015.md",
+      "origin": "https://app.edgar.tools/filing/886982/0000886982-26-000294/a2q26gsearningsresults.htm",
+      "retrieved_at": "2026-09-16T15:45:24Z",
+      "content_type": "text/markdown",
+      "sha256": "9091d7a51853e10ba10c757fc47d329def604ed640e4a8c5217fa00a4f4db3dd",
+      "byte_length": 28494
+    }
+  ],
+  "notes": [
+    "Raw source archived verbatim before sanitisation.",
+    "Segmentation: 0 structural omission(s) recorded in segmentation-report.json.",
+    "Segmentation: no near-miss speaker-shaped lines flagged.",
+    "Prompt-injection scan: clean (no configured patterns matched).",
+    "SEC evidence: ok (CIK 0000019617)",
+    "Web search evidence (exa): ok (200 hit(s) from 25 queries)",
+    "Web evidence (extracted, citable): 15 source(s)"
+  ],
+  "queries": [
+    "JPMorgan Chase & Co. JPM 2026-q2 analyst consensus estimate revenue EPS",
+    "JPMorgan Chase & Co. JPM 2026-q2 earnings preview expectations forecast",
+    "JPMorgan Chase & Co. JPM Wall Street consensus estimates ahead of earnings",
+    "JPMorgan Chase & Co. JPM 2026-q2 earnings guidance outlook estimates",
+    "JPMorgan Chase & Co. JPM 2026-q2 analyst earnings reaction results",
+    "Bank of America 2026-q2 earnings results revenue growth",
+    "Bank of America quarterly results versus JPMorgan Chase & Co. JPM",
+    "Bank of America 2026-q2 earnings guidance outlook",
+    "Bank of America 2026-q2 analyst earnings reaction results",
+    "Bank of America earnings call key trends 2026-q2",
+    "Citigroup 2026-q2 earnings results revenue growth",
+    "Citigroup quarterly results versus JPMorgan Chase & Co. JPM",
+    "Citigroup 2026-q2 earnings guidance outlook",
+    "Citigroup 2026-q2 analyst earnings reaction results",
+    "Citigroup earnings call key trends 2026-q2",
+    "Wells Fargo 2026-q2 earnings results revenue growth",
+    "Wells Fargo quarterly results versus JPMorgan Chase & Co. JPM",
+    "Wells Fargo 2026-q2 earnings guidance outlook",
+    "Wells Fargo 2026-q2 analyst earnings reaction results",
+    "Wells Fargo earnings call key trends 2026-q2",
+    "Goldman Sachs 2026-q2 earnings results revenue growth",
+    "Goldman Sachs quarterly results versus JPMorgan Chase & Co. JPM",
+    "Goldman Sachs 2026-q2 earnings guidance outlook",
+    "Goldman Sachs 2026-q2 analyst earnings reaction results",
+    "Goldman Sachs earnings call key trends 2026-q2"
+  ]
+}

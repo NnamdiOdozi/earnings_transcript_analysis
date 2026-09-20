@@ -146,6 +146,16 @@ A table or list linking every conclusion above back to a claim id, e.g.:
 - Every claim id you write (in any section, in the form `claim-###`) must exist in
   `claims.json` — `earnings validate-outlook` fails the whole brief on the first
   unknown id.
+- **Honour the `caveats` on every claim you cite.** A caveat is a plain sentence
+  recorded at extraction saying a figure is qualified in a way no check can see --
+  most often that a number is a floor ("in excess of \$2 billion") or an
+  approximation, extracted into `values` as a bare number. Write "revenue of more
+  than \$2 billion", not "revenue of \$2 billion". `earnings validate-outlook`
+  grounds the figure either way and cannot tell the two sentences apart, so this is
+  yours to get right and the independent reviewer's to check. If the run has a
+  `claims/jev-triage.json`, read its `check` tier before you start: those are the
+  claims another model found ambiguous, and they are the ones most likely to harden
+  into something overstated in your prose.
 - No investment recommendations, price targets, or invented numerical forecasts.
   Scenarios are conditional interpretations of disclosed evidence, not predictions.
 - **Qualitative synthesis is free; new numbers are not.** `earnings validate-outlook`

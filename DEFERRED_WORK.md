@@ -8,6 +8,41 @@ was resolved); don't let finished work accumulate here as dead weight.
 
 ## Open
 
+### [2026-09-17] `src/earnings/` is 21 flat modules — group them into subpackages
+- **Scope:** `src/earnings/` currently holds 21 Python modules (5,393 lines) in a
+  single flat directory, with no grouping to tell the reader which ones are
+  workflow stages and which are shared plumbing. Introduce 2–3 subpackages so the
+  folder can be scanned rather than read. A plausible split, to be settled when the
+  work is actually taken up:
+  - **stages** — the one-module-per-workflow-stage files: `prepare.py`,
+    `analysis.py`, `outlook.py`, `review.py`, `audit.py`.
+  - **core / support** — the shared services those stages call: `paths.py`,
+    `provenance.py`, `config.py`, `models.py`, `runio.py`, `rendering.py`,
+    `validate.py`, `validation_history.py`, `calculations.py`.
+  - **io / ingest** — the outside-world adapters: `sources.py`, `research.py`,
+    `ingest.py`, `process.py`, `reformat.py`, `prices.py`.
+  `cli.py` and `__init__.py` stay at the package root as the entry points.
+- **Why:** navigability, not size. A newcomer (or an agent) opening the folder has
+  no signal about which of 21 similarly-named modules is a pipeline stage and which
+  is a helper, so finding the right file means opening several. Grouping also makes
+  the project's existing dependency rule visible in the tree itself: stages may
+  import support and io, support must not import stages, and domain logic must not
+  import CLI or rendering code.
+- **Ripple effects to plan for (this is why it is not a five-minute job):** every
+  intra-package import changes; the `earnings` console-script entry point and any
+  `python -m` invocation must still resolve; the test suite imports these modules by
+  path; and four documents name specific module paths and would go stale —
+  `CLAUDE.md`'s entry-points section, `AGENTS.md`, and the two agent skills
+  (`.agents/skills/build-earnings-source-pack/SKILL.md`,
+  `.agents/skills/produce-earnings-signal-card/SKILL.md`). The `paths.py` rule
+  survives unchanged: it stays the only place the run-directory layout is expressed,
+  wherever the file itself ends up.
+- **Status:** not started, 2026-09-17. Do it as a pure move — `git mv` plus import
+  rewrites plus the doc pointers, with `uv run pytest -q` green before and after and
+  no behavioural change in the same commit. Keep it separate from the
+  `prepare.py`/`review.py` decomposition entry further down this file, which *is* a behavioural
+  change; bundling the two would make either one unreviewable.
+
 ### [2026-09-11] Confidence labels for outlook-brief judgments
 - **Scope:** while the existing authoring agent writes `outlook-brief.md`, label
   each material judgment or reasoning proposition with `high`, `medium`, or

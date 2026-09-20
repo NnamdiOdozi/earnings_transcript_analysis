@@ -83,6 +83,7 @@ def cmd_validate_outlook(args: argparse.Namespace) -> int:
         outlook_brief_sha256=sha256_hex(outlook_path.read_bytes()),
         claims_sha256=sha256_hex(claims_path.read_bytes()),
         agent_provenance=AgentProvenance(
+            agent_name=args.author_agent,
             model=args.author_model,
             reasoning_effort=args.author_reasoning_effort,
         ),

@@ -1,0 +1,84 @@
+[
+  {
+    "name": "ROTCE",
+    "value": 23.0,
+    "unit": "%",
+    "period": "3 months to 30 Jun 2026",
+    "definition": "Return on tangible common equity as presented by management for the quarter, with the significant items noted in the presentation excluded.",
+    "source_claim_ids": [
+      "claim-001"
+    ]
+  },
+  {
+    "name": "Standardized CET1 ratio",
+    "value": 14.1,
+    "unit": "%",
+    "period": "as of 30 Jun 2026",
+    "definition": "The firm's standardized Common Equity Tier 1 capital ratio at the quarter end, as reported by the CFO.",
+    "source_claim_ids": [
+      "claim-005"
+    ]
+  },
+  {
+    "name": "NII ex. Markets outlook",
+    "value": 96.5,
+    "unit": "USD billions",
+    "period": "12 months to 31 Dec 2026",
+    "definition": "Management's full-year 2026 outlook for net interest income excluding Markets, revised up during this call from $95 billion.",
+    "source_claim_ids": [
+      "claim-024",
+      "claim-047"
+    ]
+  },
+  {
+    "name": "Adjusted expense outlook",
+    "value": 107.5,
+    "unit": "USD billions",
+    "period": "12 months to 31 Dec 2026",
+    "definition": "Management's new full-year 2026 adjusted expense outlook, $2.5 billion above the prior guide.",
+    "source_claim_ids": [
+      "claim-025",
+      "claim-086"
+    ]
+  },
+  {
+    "name": "Card net charge-off rate outlook",
+    "value": 3.2,
+    "unit": "%",
+    "period": "12 months to 31 Dec 2026",
+    "definition": "Management's full-year 2026 outlook for the Card net charge-off rate, lowered to reflect better-than-expected consumer credit performance.",
+    "source_claim_ids": [
+      "claim-026"
+    ]
+  },
+  {
+    "name": "AWM long-term net inflows",
+    "value": 50.0,
+    "unit": "USD billions",
+    "period": "3 months to 30 Jun 2026",
+    "definition": "Net inflows into long-term Asset & Wealth Management products in the quarter, as reported by the CFO.",
+    "source_claim_ids": [
+      "claim-021"
+    ]
+  },
+  {
+    "name": "Assets under management",
+    "value": 5.1,
+    "unit": "USD trillions",
+    "period": "as of 30 Jun 2026",
+    "definition": "Asset & Wealth Management assets under management at the quarter end, as reported by the CFO.",
+    "source_claim_ids": [
+      "claim-022"
+    ]
+  },
+  {
+    "name": "Capital deployment target return",
+    "value": 17.0,
+    "unit": "%",
+    "period": "not stated by management",
+    "definition": "The return at which the CEO said the firm aims to deploy its capital over time.",
+    "source_claim_ids": [
+      "claim-126"
+    ]
+  }
+]

@@ -30,12 +30,14 @@ def main(args: list[str]) -> int:
         if "--extractor-model" not in args:
             args = [
                 *args,
+                "--extractor-agent", "fixture-agent",
                 "--extractor-model", "fixture-extractor",
                 "--extractor-reasoning-effort", "medium",
             ]
     if args and args[0] == "validate-outlook" and "--author-model" not in args:
         args = [
             *args,
+            "--author-agent", "fixture-agent",
             "--author-model", "fixture-author",
             "--author-reasoning-effort", "high",
         ]
@@ -1912,8 +1914,16 @@ def test_check_review_writes_audit_record_on_pass(isolated_runs_dir):
     assert record["hashes"]["review_report_sha256"]
     assert record["reviewer_model"] == "opus"
     assert record["agent_provenance"] == {
-        "extractor": {"model": "fixture-extractor", "reasoning_effort": "medium"},
-        "outlook_author": {"model": "fixture-author", "reasoning_effort": "high"},
+        "extractor": {
+            "agent_name": "fixture-agent",
+            "model": "fixture-extractor",
+            "reasoning_effort": "medium",
+        },
+        "outlook_author": {
+            "agent_name": "fixture-agent",
+            "model": "fixture-author",
+            "reasoning_effort": "high",
+        },
         "reviewer": {"model": "opus", "reasoning_effort": "unknown"},
         "basis": "agent_declared",
     }

@@ -27,6 +27,7 @@ def main(args: list[str]) -> int:
         if "--extractor-model" not in args:
             args = [
                 *args,
+                "--extractor-agent", "fixture-agent",
                 "--extractor-model", "fixture-extractor",
                 "--extractor-reasoning-effort", "medium",
             ]
@@ -52,6 +53,7 @@ CASES = [
         "claim_text": "Annual recurring revenue was $85 million, up from $70 million.",
         "metric_name": "Annual recurring revenue",
         "metric_value": 85.0,
+        "values": {"arr_usd_million": 85, "prior_arr_usd_million": 70},
         "metric_unit": "USD millions",
         "sector_term": "Annual recurring revenue",
         "foreign_terms": ["Comparable sales", "combined ratio", "Gross written premiums"],
@@ -65,6 +67,7 @@ CASES = [
         "claim_text": "Comparable sales grew 6% and total revenue was $240 million.",
         "metric_name": "Comparable sales growth",
         "metric_value": 6.0,
+        "values": {"comparable_sales_growth_pct": 6, "revenue_usd_million": 240},
         "metric_unit": "%",
         "sector_term": "Comparable sales",
         "foreign_terms": ["Annual recurring revenue", "combined ratio", "Gross written premiums"],
@@ -78,6 +81,7 @@ CASES = [
         "claim_text": "Gross written premiums were $410 million with a combined ratio of 96%.",
         "metric_name": "Combined ratio",
         "metric_value": 96.0,
+        "values": {"gross_written_premiums_usd_million": 410, "combined_ratio_pct": 96},
         "metric_unit": "%",
         "sector_term": "Gross written premiums",
         "foreign_terms": ["Annual recurring revenue", "Comparable sales"],
@@ -106,7 +110,7 @@ def test_pipeline_discovers_company_specific_metrics_generically(isolated_runs_d
             "segment_id": segment["id"],
             "speaker": segment["speaker"],
             "status": "reported",
-            "values": {},
+            "values": case["values"],
             "confidence": 0.9,
         }
     ]
@@ -157,7 +161,7 @@ def test_metric_with_no_source_claim_ids_fails_validation(isolated_runs_dir):
             "quote": case["quote"],
             "segment_id": segment["id"],
             "status": "reported",
-            "values": {},
+            "values": case["values"],
             "confidence": 0.9,
         }
     ]

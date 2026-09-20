@@ -94,6 +94,11 @@ def build_parser() -> argparse.ArgumentParser:
     analyze = sub.add_parser("analyze", help="Validate claims.json and produce signal-card.md")
     analyze.add_argument("--ticker", required=True)
     analyze.add_argument("--event-id", required=True)
+    analyze.add_argument(
+        "--extractor-agent",
+        required=True,
+        help="Name of the agent/harness that wrote claims.json (e.g. 'Claude Code'); 'unknown' if unsure",
+    )
     analyze.add_argument("--extractor-model", required=True)
     analyze.add_argument(
         "--extractor-reasoning-effort",
@@ -118,6 +123,11 @@ def build_parser() -> argparse.ArgumentParser:
     )
     validate_outlook.add_argument("--ticker", required=True)
     validate_outlook.add_argument("--event-id", required=True)
+    validate_outlook.add_argument(
+        "--author-agent",
+        required=True,
+        help="Name of the agent/harness that wrote outlook-brief.md; 'unknown' if unsure",
+    )
     validate_outlook.add_argument("--author-model", required=True)
     validate_outlook.add_argument(
         "--author-reasoning-effort",

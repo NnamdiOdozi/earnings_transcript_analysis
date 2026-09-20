@@ -1,0 +1,18 @@
+{
+  "generated_at": "2026-09-20T12:00:20Z",
+  "check_mode": "coverage",
+  "model": "typesafe/jev-1.13",
+  "thresholds": {
+    "auto_accept": 0.7,
+    "alternative_probability_floor": 0.2,
+    "choice_confidence_floor": 0.6,
+    "score_shortfall_margin": 0.35
+  },
+  "counts": {
+    "audited": 43,
+    "flagged": 0,
+    "defect": 0,
+    "check": 0
+  },
+  "items": []
+}

@@ -186,7 +186,38 @@ Things structurally outside what a deterministic check can evaluate:
     clean or all-false-positive scan explicitly in `process_findings` rather than
     silently skipping it.
 
-11. **Cross-sector appropriateness.** Read `signal-card.md` and `outlook-brief.md`
+11. **Unaccounted-for Jev findings, and unhonoured caveats.** If the run has a
+    `claims/jev-triage.json`, `claims/jev-coverage-triage.json` or
+    `outlook/jev-triage.json`, read it alongside the
+    matching `jev-dispositions.json`. Jev is a bounded-question model the extractor
+    may run against its own claims and the brief's citations; it gates nothing, and
+    its probabilities move between runs, so a low number is never a finding on its
+    own. What IS a finding is an item marked `defect` with no disposition recorded,
+    or one dismissed with `"action": "rejected"` and no reason that survives your own
+    reading of the claim. Go and look at the claim yourself before deciding -- you
+    are judging the extractor's handling of the flag, not the flag.
+
+    `claims/jev-coverage-triage.json` is the same machinery pointed at a different
+    question: it audits the segments `coverage-receipt.json` called
+    `deliberately_immaterial`. A `defect` there means Jev read a segment as carrying
+    something an analyst should record, and the extractor recorded nothing. Read the
+    segment in `normalized/transcript.jsonl` yourself. An undisposed defect here is a
+    gap in coverage, which is the one failure the deterministic validators are
+    structurally blind to -- they prove submitted claims are grounded, never that the
+    missing ones are absent for a reason.
+
+    Separately, check that every `caveats` entry on a claim the brief cites was
+    honoured in the prose. A caveat records a qualification the deterministic checks
+    cannot see, most often a figure that is a floor or an approximation ("in excess
+    of \$2 billion" extracted as `2.0`). A brief that writes the bare number as an
+    exact result has hardened it, and `validate-outlook` grounds it either way. This
+    is the only place in the pipeline where that gets caught.
+
+    This item exists because the failure is documented: JPM/2026-q2-rerun reached
+    review carrying thirteen miscitations Jev had already flagged, because nothing
+    read the log the flags were written to.
+
+12. **Cross-sector appropriateness.** Read `signal-card.md` and `outlook-brief.md`
     for any category or metric that reads like a template from a different
     industry than the one actually being covered (e.g. subscription/churn language
     applied to a company that never mentioned subscriptions) -- this project is
@@ -206,6 +237,9 @@ Given a run directory (e.g. `runs/MSFT/2026-q2/`), read:
   (their `issue_counts` are enough — no need to reopen each attempt's `claims.json`)
   — this is what "Proposed lessons" below draws its second source from
 - `claims/signal-card.md`, `outlook/outlook-brief.md`
+- `claims/jev-triage.json`, `claims/jev-coverage-triage.json` and
+  `claims/jev-dispositions.json`, plus the `outlook/` pair, if any exist (see judgment
+  item 11) — absent on runs where no Jev audit was run, which is not itself a finding
 - From round 2 on: `review/review-diff.json` and its sidecar
   `review/review-diff.sha256` (see "Diff-based re-review" below)
 

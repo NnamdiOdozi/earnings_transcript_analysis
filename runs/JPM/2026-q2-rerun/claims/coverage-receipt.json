@@ -1,0 +1,1026 @@
+{
+  "segments": [
+    {
+      "segment_id": "seg-0001",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Stray document header line carrying only the date of the call; no spoken content."
+    },
+    {
+      "segment_id": "seg-0002",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Operator's opening banner: welcome, recording notice, the pointer to the forward-looking-statements and non-GAAP disclosures, and the handover to management."
+    },
+    {
+      "segment_id": "seg-0003",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-001",
+        "claim-002",
+        "claim-003",
+        "claim-004",
+        "claim-005",
+        "claim-006",
+        "claim-007",
+        "claim-008",
+        "claim-009",
+        "claim-010",
+        "claim-011",
+        "claim-012",
+        "claim-013",
+        "claim-014",
+        "claim-015",
+        "claim-016",
+        "claim-017",
+        "claim-018",
+        "claim-019",
+        "claim-020",
+        "claim-021",
+        "claim-022",
+        "claim-023",
+        "claim-024",
+        "claim-025",
+        "claim-026",
+        "claim-192",
+        "claim-194",
+        "claim-195",
+        "claim-196"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0004",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Operator reading the queue instructions for analysts (press *1, one question and one follow-up) and naming the first questioner."
+    },
+    {
+      "segment_id": "seg-0005",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-027"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0006",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-028",
+        "claim-029"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0007",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-030"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0008",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-031",
+        "claim-032",
+        "claim-033",
+        "claim-034",
+        "claim-035",
+        "claim-197",
+        "claim-198"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0009",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Operator asking whether the analyst's question is complete."
+    },
+    {
+      "segment_id": "seg-0010",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Analyst confirming he is finished and thanking management."
+    },
+    {
+      "segment_id": "seg-0011",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Operator handing over to the next analyst."
+    },
+    {
+      "segment_id": "seg-0012",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-036"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0013",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-037",
+        "claim-038",
+        "claim-039",
+        "claim-040",
+        "claim-041"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0014",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-042",
+        "claim-043"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0015",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-044",
+        "claim-045"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0016",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Analyst's closing thanks."
+    },
+    {
+      "segment_id": "seg-0017",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Operator handing over to the next analyst."
+    },
+    {
+      "segment_id": "seg-0018",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-046"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0019",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-047",
+        "claim-048",
+        "claim-049",
+        "claim-050"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0020",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-051"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0021",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-052",
+        "claim-053",
+        "claim-054"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0022",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Analyst's closing thanks."
+    },
+    {
+      "segment_id": "seg-0023",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Operator handing over to the next analyst."
+    },
+    {
+      "segment_id": "seg-0024",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-055"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0025",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-056",
+        "claim-057",
+        "claim-058",
+        "claim-059"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0026",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-060",
+        "claim-061"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0027",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Analyst saying 'Okay' while waiting for management to finish the answer."
+    },
+    {
+      "segment_id": "seg-0028",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-062"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0029",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Analyst's closing thanks."
+    },
+    {
+      "segment_id": "seg-0030",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Operator handing over to the next analyst."
+    },
+    {
+      "segment_id": "seg-0031",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-063"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0032",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-064",
+        "claim-065",
+        "claim-066",
+        "claim-067"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0033",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-068"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0034",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-069",
+        "claim-070",
+        "claim-071"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0035",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-072",
+        "claim-073"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0036",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Analyst acknowledging the answer without adding a question or a new fact."
+    },
+    {
+      "segment_id": "seg-0037",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "CFO saying 'Thanks' to close the exchange."
+    },
+    {
+      "segment_id": "seg-0038",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Operator handing over to the next analyst."
+    },
+    {
+      "segment_id": "seg-0039",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-074"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0040",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-075",
+        "claim-076"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0041",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-077",
+        "claim-078"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0042",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-079"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0043",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-080"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0044",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Analyst's closing thanks."
+    },
+    {
+      "segment_id": "seg-0045",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Operator handing over to the next analyst."
+    },
+    {
+      "segment_id": "seg-0046",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-081"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0047",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-082"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0048",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "CFO acknowledging the analyst ('Yeah I hear you, Mike') while the CEO was mid-answer; no content of its own."
+    },
+    {
+      "segment_id": "seg-0049",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-083"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0050",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "CFO's interrupted half-sentence ('Let me...') before the CEO continued."
+    },
+    {
+      "segment_id": "seg-0051",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-084"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0052",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "CFO agreeing with the CEO ('Yeah, exactly. Exactly.') with no added content."
+    },
+    {
+      "segment_id": "seg-0053",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-085"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0054",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-086",
+        "claim-087",
+        "claim-088",
+        "claim-089",
+        "claim-090",
+        "claim-091",
+        "claim-092",
+        "claim-199"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0055",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Analyst saying 'Alright' while management continued."
+    },
+    {
+      "segment_id": "seg-0056",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-093"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0057",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-094"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0058",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "CEO saying he is making the same point the CFO just made; no added content."
+    },
+    {
+      "segment_id": "seg-0059",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "CFO agreeing; no added content."
+    },
+    {
+      "segment_id": "seg-0060",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-095"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0061",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-096"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0062",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-097",
+        "claim-098"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0063",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-099"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0064",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Analyst's closing thanks."
+    },
+    {
+      "segment_id": "seg-0065",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Operator handing over to the next analyst."
+    },
+    {
+      "segment_id": "seg-0066",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-100"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0067",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-101",
+        "claim-102",
+        "claim-103",
+        "claim-104",
+        "claim-105"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0068",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-106"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0069",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-107",
+        "claim-108"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0070",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-109"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0071",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Analyst's closing thanks."
+    },
+    {
+      "segment_id": "seg-0072",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "CFO thanking the analyst to close the exchange."
+    },
+    {
+      "segment_id": "seg-0073",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Operator handing over to the next analyst."
+    },
+    {
+      "segment_id": "seg-0074",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-110",
+        "claim-111"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0075",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-112",
+        "claim-113"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0076",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-114",
+        "claim-115",
+        "claim-116",
+        "claim-117",
+        "claim-118",
+        "claim-119"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0077",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-120"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0078",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "CEO's personal aside complimenting the analyst's weekend research notes before answering; the substantive answer is in seg-0079."
+    },
+    {
+      "segment_id": "seg-0079",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-121",
+        "claim-122",
+        "claim-123",
+        "claim-124",
+        "claim-125",
+        "claim-126",
+        "claim-127",
+        "claim-128",
+        "claim-129",
+        "claim-130"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0080",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Analyst's closing pleasantry about his parents."
+    },
+    {
+      "segment_id": "seg-0081",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "CEO's reply to that pleasantry."
+    },
+    {
+      "segment_id": "seg-0082",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-131"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0083",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-132"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0084",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-133"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0085",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-134"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0086",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-135"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0087",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-136",
+        "claim-137",
+        "claim-138",
+        "claim-139"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0088",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Operator handing over to the next analyst."
+    },
+    {
+      "segment_id": "seg-0089",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-140"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0090",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-141",
+        "claim-142",
+        "claim-143"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0091",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-144",
+        "claim-145"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0092",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-146"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0093",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Turn-taking only: the CFO starts, defers, and the CEO says 'Go ahead'; the substantive answer follows in seg-0094."
+    },
+    {
+      "segment_id": "seg-0094",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-147",
+        "claim-148"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0095",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-149",
+        "claim-150",
+        "claim-151"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0096",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Analyst agreeing with the CEO and inviting him to continue; no question and no new fact."
+    },
+    {
+      "segment_id": "seg-0097",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "CEO telling analysts they should be making regulatory recommendations themselves; an exhortation about advocacy rather than a statement about results, guidance, risk or the firm's own position."
+    },
+    {
+      "segment_id": "seg-0098",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Analyst's closing thanks, followed by the CFO's speaker banner."
+    },
+    {
+      "segment_id": "seg-0099",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Operator introducing the final questioner."
+    },
+    {
+      "segment_id": "seg-0100",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-152"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0101",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-153",
+        "claim-154",
+        "claim-155",
+        "claim-156"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0102",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-157"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0103",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-158",
+        "claim-159",
+        "claim-160",
+        "claim-161"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0104",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-162"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0105",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Analyst's closing thanks."
+    },
+    {
+      "segment_id": "seg-0106",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "CFO thanking the analyst to close the exchange."
+    },
+    {
+      "segment_id": "seg-0107",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Operator's truncated closing line."
+    },
+    {
+      "segment_id": "seg-0108",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "CEO's closing 'Thank you'."
+    },
+    {
+      "segment_id": "seg-0109",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Operator closing the call plus the standard Private Securities Litigation Reform Act forward-looking-statements disclaimer and SEC filing pointers."
+    }
+  ],
+  "web_evidence": [
+    {
+      "web_evidence_id": "web-001",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-163",
+        "claim-164",
+        "claim-165",
+        "claim-166",
+        "claim-193"
+      ],
+      "reason": null
+    },
+    {
+      "web_evidence_id": "web-002",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-178",
+        "claim-179",
+        "claim-180"
+      ],
+      "reason": null
+    },
+    {
+      "web_evidence_id": "web-003",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-183",
+        "claim-184",
+        "claim-185"
+      ],
+      "reason": null
+    },
+    {
+      "web_evidence_id": "web-004",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-188",
+        "claim-189",
+        "claim-190"
+      ],
+      "reason": null
+    },
+    {
+      "web_evidence_id": "web-005",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-170",
+        "claim-171"
+      ],
+      "reason": null
+    },
+    {
+      "web_evidence_id": "web-006",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-167",
+        "claim-168",
+        "claim-169"
+      ],
+      "reason": null
+    },
+    {
+      "web_evidence_id": "web-007",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Bank of America's Form 10-Q for the quarter, published 31 July 2026 - seventeen days after this call. Its second-quarter figures are the same ones already carried by Bank of America's 14 July results release (web-002 and web-012), and as a filing made after the event it was not information available at the call."
+    },
+    {
+      "web_evidence_id": "web-008",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Duplicate of web-003: the identical Citigroup 'Second Quarter 2026 Results and Key Metrics' press release text, captured from SEC EDGAR rather than citigroup.com. Every figure in it is already claimed from web-003."
+    },
+    {
+      "web_evidence_id": "web-009",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Extraction returned the Wells Fargo corporate homepage - marketing copy about serving customers and communities - not the second-quarter results page the search hit pointed at. It contains no financial figures at all."
+    },
+    {
+      "web_evidence_id": "web-010",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-172",
+        "claim-173",
+        "claim-174",
+        "claim-175"
+      ],
+      "reason": null
+    },
+    {
+      "web_evidence_id": "web-011",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Labelled pre_event by the provider, but the extracted page is a post-event Yahoo Finance analyst-estimates table that already shows 'EPS Actual 6.14' and a 5.86% surprise for the quarter ended 30 June 2026. Its 5.80 estimate column therefore cannot be cited as a pre-event expectation, and the actuals it carries are already claimed from the call itself. Pre-event consensus is taken from web-001 and web-006 instead."
+    },
+    {
+      "web_evidence_id": "web-012",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-181",
+        "claim-182"
+      ],
+      "reason": null
+    },
+    {
+      "web_evidence_id": "web-013",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-186",
+        "claim-187"
+      ],
+      "reason": null
+    },
+    {
+      "web_evidence_id": "web-014",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-191"
+      ],
+      "reason": null
+    },
+    {
+      "web_evidence_id": "web-015",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-176",
+        "claim-177"
+      ],
+      "reason": null
+    }
+  ]
+}

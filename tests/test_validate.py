@@ -15,6 +15,10 @@ from earnings.validate import (
     check_evidence_reference,
     check_exact_quote,
     check_numeric,
+    check_claim_text_quote_traceable,
+    check_universal_quantifier,
+    check_values_present,
+    jev_triage_warnings,
     check_outlook_brief_citations,
     check_outlook_brief_dollar_escaping,
     check_outlook_brief_numbers,
@@ -811,7 +815,7 @@ def test_warns_when_most_web_evidence_is_left_uncited(revenue_segment, financial
             quote="Analyst consensus was $105 million ahead of the print.",
             web_evidence_id="web-001",
             status="reported",
-            values={},
+            values={"consensus_usd_million": 105},
             confidence=0.9,
         ),
     ]
@@ -1419,3 +1423,231 @@ def test_receipt_not_required_when_run_has_no_web_evidence():
         {"segment_id": "seg-0002", "outcome": "deliberately_immaterial", "claim_ids": [], "reason": "x"},
     ]}
     assert validate_coverage_receipt(receipt, SEGS, set(), CIDS) == []
+
+
+# --- check_values_present -------------------------------------------------------
+# Guards the regression confirmed on JPM/2026-q2: all 110 claims carried an empty
+# `values`, so every numeric and calculation gate passed by inspecting nothing.
+
+
+def _values_claim(classification, claim_text, quote, values):
+    return Claim(
+        id="claim-test-200",
+        category="reported_financial_performance",
+        classification=classification,
+        claim_text=claim_text,
+        quote=quote,
+        segment_id="seg-0003",
+        status="reported" if classification == "reported_fact" else "forward_looking",
+        values=values,
+        confidence=0.9,
+    )
+
+
+@pytest.mark.parametrize(
+    "classification,quote",
+    [
+        ("reported_fact", "Revenue was $12.4 billion in the quarter."),
+        ("reported_fact", "Margin improved to 23%."),
+        ("management_guidance", "We expect costs of about £500 million next year."),
+        ("reported_fact", "CET1 fell 20 basis points."),
+    ],
+)
+def test_values_present_fails_when_a_stated_figure_is_not_captured(classification, quote):
+    claim = _values_claim(classification, quote, quote, {})
+    assert check_values_present(claim) is not None
+
+
+def test_values_present_passes_once_the_figure_is_captured():
+    quote = "Revenue was $12.4 billion in the quarter."
+    assert check_values_present(_values_claim("reported_fact", quote, quote, {"revenue_usd_billion": 12.4})) is None
+
+
+@pytest.mark.parametrize(
+    "classification",
+    ["management_opinion", "analyst_question", "analytical_inference"],
+)
+def test_values_present_ignores_non_factual_classifications(classification):
+    # Opinions and questions legitimately discuss figures without restating them.
+    quote = "Revenue was $12.4 billion in the quarter."
+    assert check_values_present(_values_claim(classification, quote, quote, {})) is None
+
+
+@pytest.mark.parametrize(
+    "quote",
+    [
+        "We opened 12 new stores and hired 500 colleagues.",  # bare counts, no financial unit
+        "Trading in the 16 weeks to 20 Jun 2026 was solid.",  # dates must not trigger it
+        "The board intends to keep investing in the business.",  # no figure at all
+    ],
+)
+def test_values_present_does_not_fire_on_non_financial_numbers(quote):
+    assert check_values_present(_values_claim("reported_fact", quote, quote, {})) is None
+
+
+# --- quote self-sufficiency and universal quantifiers --------------------------
+# Both guard defects the Opus reviewer found on JPM/2026-q2-rerun (2026-09-19) that
+# every deterministic gate had passed.
+
+
+def _traceable_claim(claim_text, quote, values=None):
+    return Claim(
+        id="claim-test-300", category="reported_financial_performance",
+        classification="reported_fact", claim_text=claim_text, quote=quote,
+        segment_id="seg-0003", status="reported", values=values or {}, confidence=0.9,
+    )
+
+
+def test_quote_traceable_fails_when_claim_text_number_is_not_in_its_own_quote():
+    # The real claim-177 shape: EPS asserted in prose, quote covers only revenue.
+    c = _traceable_claim(
+        "Net revenues were $37.57 billion and EPS was $38.51.",
+        "Net revenues were $37.57 billion for the first half of 2026.",
+        {"net_revenues_usd_billion": 37.57})
+    assert check_claim_text_quote_traceable(c) is not None
+
+
+def test_quote_traceable_passes_when_the_quote_carries_every_figure():
+    c = _traceable_claim(
+        "Net revenues were $37.57 billion.",
+        "Net revenues were $37.57 billion for the first half of 2026.",
+        {"net_revenues_usd_billion": 37.57})
+    assert check_claim_text_quote_traceable(c) is None
+
+
+def test_quote_traceable_accepts_a_figure_declared_in_values():
+    # values are separately grounded by check_numeric, so they count as a source.
+    c = _traceable_claim("Expenses were $27.3 billion.", "Expenses rose sharply.",
+                         {"expenses_usd_billion": 27.3})
+    assert check_claim_text_quote_traceable(c) is None
+
+
+def _inference(claim_text, inferred_from):
+    return Claim(
+        id="claim-test-301", category="reported_financial_performance",
+        classification="analytical_inference", claim_text=claim_text,
+        quote="Revenue was up 15% year-on-year.", segment_id="seg-0003",
+        status="reported", values={}, confidence=0.85, inferred_from=inferred_from,
+    )
+
+
+def test_universal_quantifier_fails_when_the_set_is_not_evidenced():
+    c = _inference("Every large-bank peer reported double-digit revenue growth.", ["claim-002"])
+    assert check_universal_quantifier(c) is not None
+
+
+def test_universal_quantifier_passes_when_each_member_is_cited():
+    c = _inference("Every large-bank peer reported double-digit revenue growth.",
+                   ["claim-170", "claim-180", "claim-183", "claim-190"])
+    assert check_universal_quantifier(c) is None
+
+
+@pytest.mark.parametrize("classification", ["reported_fact", "management_opinion"])
+def test_universal_quantifier_only_applies_to_inferences(classification):
+    # Management saying "every business grew" is a quoted statement, not the agent's
+    # own generalisation, so it is the reviewer's call rather than this check's.
+    c = Claim(
+        id="claim-test-302", category="reported_financial_performance",
+        classification=classification, claim_text="Every business segment grew.",
+        quote="Every business segment delivered growth.", segment_id="seg-0003",
+        status="reported", values={}, confidence=0.9,
+    )
+    assert check_universal_quantifier(c) is None
+
+
+# --- Jev triage advisory ------------------------------------------------------------
+#
+# The behaviour under test is deliberately a WARNING, not a failure: Jev is a
+# probabilistic third-party opinion and must never gate the pipeline. What these tests
+# pin down is that an unaccounted-for finding cannot pass silently, which is the failure
+# that actually happened on JPM/2026-q2-rerun.
+
+def _triage(tmp_path: Path, *items: dict) -> Path:
+    path = tmp_path / "jev-triage.json"
+    path.write_text(json.dumps({"items": list(items)}))
+    return path
+
+
+def _item(key: str, severity: str) -> dict:
+    return {"key": key, "claim_id": key.split("::")[0], "question": key.split("::")[1],
+            "severity": severity, "why": "because"}
+
+
+def test_jev_triage_silent_when_no_check_was_run(tmp_path):
+    assert jev_triage_warnings(tmp_path / "absent.json", tmp_path / "d.json") == []
+
+
+def test_jev_triage_silent_when_nothing_was_flagged(tmp_path):
+    assert jev_triage_warnings(_triage(tmp_path), tmp_path / "d.json") == []
+
+
+def test_jev_triage_warns_on_a_defect_with_no_disposition(tmp_path):
+    warnings = jev_triage_warnings(
+        _triage(tmp_path, _item("claim-010::citation_supports_passage", "defect")),
+        tmp_path / "jev-dispositions.json")
+    assert len(warnings) == 1
+    assert "claim-010/citation_supports_passage" in warnings[0]
+
+
+def test_jev_triage_accepts_a_recorded_disposition(tmp_path):
+    (tmp_path / "jev-dispositions.json").write_text(json.dumps(
+        {"dispositions": [{"key": "claim-010::citation_supports_passage",
+                           "action": "rejected", "note": "Jev misread the period"}]}))
+    assert jev_triage_warnings(
+        _triage(tmp_path, _item("claim-010::citation_supports_passage", "defect")),
+        tmp_path / "jev-dispositions.json") == []
+
+
+def test_jev_triage_ignores_a_disposition_with_no_action(tmp_path):
+    """A key with no action is a placeholder, not a decision."""
+    (tmp_path / "jev-dispositions.json").write_text(json.dumps(
+        {"dispositions": [{"key": "claim-010::citation_supports_passage", "note": "todo"}]}))
+    assert jev_triage_warnings(
+        _triage(tmp_path, _item("claim-010::citation_supports_passage", "defect")),
+        tmp_path / "jev-dispositions.json") != []
+
+
+def test_jev_triage_reports_check_tier_as_a_count_not_per_item(tmp_path):
+    warnings = jev_triage_warnings(
+        _triage(tmp_path, *(_item(f"claim-{i:03d}::q", "check") for i in range(4))),
+        tmp_path / "jev-dispositions.json")
+    assert len(warnings) == 1
+    assert "4 further Jev answer(s)" in warnings[0]
+
+
+def test_jev_triage_warns_rather_than_crashing_on_an_unreadable_file(tmp_path):
+    path = tmp_path / "jev-triage.json"
+    path.write_text("{not json")
+    assert len(jev_triage_warnings(path, tmp_path / "d.json")) == 1
+
+
+def test_claim_accepts_caveats_and_defaults_to_none(base_claim_kwargs=None):
+    """The caveat carries a qualification no deterministic check can see."""
+    claim = Claim(id="claim-001", category="reported_financial_performance",
+                  classification="reported_fact", claim_text="Revenue exceeded $2bn",
+                  quote="revenue in excess of $2 billion", segment_id="seg-0001",
+                  status="reported", values={"revenue_usd_billion": 2.0}, confidence=0.9,
+                  caveats=["the quote says 'in excess of' -- 2.0 is a floor"])
+    assert claim.caveats == ["the quote says 'in excess of' -- 2.0 is a floor"]
+    assert Claim(**{**claim.model_dump(), "caveats": []}).caveats == []
+
+
+def test_jev_triage_check_tier_is_closed_by_one_group_disposition(tmp_path):
+    """Read as a group, closed as a group -- otherwise the advisory never goes away."""
+    (tmp_path / "jev-dispositions.json").write_text(json.dumps({"dispositions": [
+        {"key": "check-tier", "action": "reviewed",
+         "note": "all 62 are says_nothing holding 0.10-0.20 on multi-citation paragraphs"}]}))
+    assert jev_triage_warnings(
+        _triage(tmp_path, _item("claim-001::q", "check"), _item("claim-002::q", "check")),
+        tmp_path / "jev-dispositions.json") == []
+
+
+def test_signal_card_renders_a_claims_caveat():
+    from earnings.rendering import _render_signal_card
+    claim = Claim(id="claim-001", category="reported_financial_performance",
+                  classification="reported_fact", claim_text="Revenue exceeded $2bn",
+                  quote="revenue in excess of $2 billion", segment_id="seg-0001",
+                  status="reported", values={"revenue_usd_billion": 2.0}, confidence=0.9,
+                  caveats=["the quote says 'in excess of' -- 2.0 is a floor"])
+    card = _render_signal_card("JPM", "2026-q2", [claim], {})
+    assert "caveat:" in card and "is a floor" in card

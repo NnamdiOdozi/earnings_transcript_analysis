@@ -5,7 +5,9 @@ financials evidence) so it is trivially unit-testable without touching disk or n
 """
 from __future__ import annotations
 
+import json
 import re
+from pathlib import Path
 from typing import Any
 
 from .calculations import recompute
@@ -202,6 +204,96 @@ def check_claim_text_numbers(claim: Claim, text: str, location: str, financials:
                 f"Number {value!r} in claim_text not found in {location}, "
                 f"financials evidence, or claim.values"
             )
+    return None
+
+
+_MAGNITUDE_WORD = r"thousand|million|billion|trillion|bps|basis\s+points"
+
+# A figure is "financial" when it carries a currency symbol, a percent sign, or a
+# magnitude word -- not a bare digit, which matches dates, counts and claim ids.
+_FINANCIAL_FIGURE_RE = re.compile(
+    rf"[$€£]\s?\d|\d\s?%|\bper\s+cent\b|\d[\d,]*(?:\.\d+)?\s*(?:{_MAGNITUDE_WORD})\b",
+    re.IGNORECASE,
+)
+# Only factual/guidance claims are held to this. Opinions, analyst questions and
+# analytical inferences legitimately discuss figures without restating them.
+_VALUES_REQUIRED_CLASSIFICATIONS = frozenset({"reported_fact", "management_guidance"})
+
+
+def check_values_present(claim: Claim) -> str | None:
+    """A reported-fact or guidance claim whose quote/claim_text states a financial
+    figure must put that figure in `values`.
+
+    Without this, leaving `values` empty is the risk-free choice for an extracting
+    agent: nothing requires it, check_numeric only runs over values that exist and can
+    only fail, and check_claim_text_numbers grounds prose figures independently. So the
+    numeric-grounding and calculation-recompute checks pass by examining nothing.
+    See docs/REFERENCE.md "Known limitations" -> empty `values`.
+    """
+    if claim.classification not in _VALUES_REQUIRED_CLASSIFICATIONS or claim.values:
+        return None
+    if not _FINANCIAL_FIGURE_RE.search(f"{claim.quote} {claim.claim_text}"):
+        return None
+    return (
+        "claim states a financial figure but 'values' is empty -- put each figure in "
+        "values as a flat key -> number so it can be grounded and recomputed"
+    )
+
+
+# "every", "all", "none" and friends assert something about a whole set. Python cannot
+# verify the set is complete, but it can insist the claim shows its working.
+_UNIVERSAL_QUANTIFIER_RE = re.compile(
+    r"\b(every|all (?:four|three|of the)|none of|no (?:peer|bank|competitor)s?|each of the)\b", re.IGNORECASE)
+
+
+def check_claim_text_quote_traceable(claim: Claim) -> str | None:
+    """Every number in claim_text must appear in the claim's OWN quote or its values.
+
+    check_claim_text_numbers already grounds prose figures, but against the whole cited
+    source document. That is why a claim could assert Goldman's half-year EPS while
+    quoting only its revenue sentence: the figure was elsewhere in the same filing, so
+    the number was "grounded" while the quote trail was broken. signal-card.md renders
+    claim_text beside the quote, so a reader sees a figure with nothing behind it.
+
+    Accurate-but-untraceable is the failure mode here, not fabrication.
+    See docs/REFERENCE.md "Known limitations" -> quote self-sufficiency.
+    """
+    text = _PERIOD_TOKEN_RE.sub(" ", _CLAIM_ID_RE.sub(" ", claim.claim_text))
+    allowed = extract_numbers(claim.quote) | _claim_declared_numbers(claim)
+    for match in _find_number_tokens(text):
+        value = _clean_number_token(match)
+        if value is None or _is_grounded(value, allowed):
+            continue
+        if "%" in match and _is_grounded(value / 100, allowed):
+            continue
+        return (
+            f"Number {value!r} in claim_text does not appear in this claim's own quote "
+            f"or values -- extend the quote to cover it, or drop the assertion"
+        )
+    return None
+
+
+def check_universal_quantifier(claim: Claim) -> str | None:
+    """A claim asserting something about a whole set must cite one source per member.
+
+    Confirmed live (JPM/2026-q2-rerun, 2026-09-19): claim-197 asserted that *every*
+    large-bank peer grew revenue double digits. One of the four had not, and the claim's
+    own inferred_from cited a net-income figure in place of the missing revenue one. It
+    passed every deterministic gate because it carried no values at all, and reached the
+    published signal card. This cannot prove the set is complete -- only a human or the
+    reviewer can -- so it fails only the case Python is certain about: a universal
+    assertion with no supporting claims cited.
+    """
+    if claim.classification != "analytical_inference":
+        return None
+    if not _UNIVERSAL_QUANTIFIER_RE.search(claim.claim_text):
+        return None
+    if len(claim.inferred_from) < 2:
+        return (
+            "claim_text asserts something about a whole set ('every'/'all'/'none') but "
+            "cites fewer than two supporting claims -- cite one per member of the set, "
+            "each measuring the metric the sentence actually asserts"
+        )
     return None
 
 
@@ -457,7 +549,6 @@ def check_outlook_brief_dollar_escaping(outlook_text: str) -> list[str]:
 # phrasing). Those would otherwise make check_outlook_brief_numbers reject every real
 # brief on sight. A bare magnitude count with no unit word ("15 seats") is out of scope
 # for this first pass -- see reference/outlook-brief-template.md.
-_MAGNITUDE_WORD = r"thousand|million|billion|trillion|bps|basis\s+points"
 _MATERIAL_SUFFIX_RE = re.compile(rf"^(?:x\b|\s*(?:{_MAGNITUDE_WORD})\b)", re.IGNORECASE)
 _LIST_ITEM_RE = re.compile(r"^\s*(?:[-*+]|\d+\.)\s+")
 _HEADING_RE = re.compile(r"^\s*#+\s")
@@ -656,6 +747,18 @@ def validate_claims(
         if text_number_error:
             issues.append(ValidationIssue(claim_index=idx, check="claim_text_numeric", message=text_number_error))
 
+        traceable_error = check_claim_text_quote_traceable(claim)
+        if traceable_error:
+            issues.append(ValidationIssue(claim_index=idx, check="claim_text_quote_traceable", message=traceable_error))
+
+        universal_error = check_universal_quantifier(claim)
+        if universal_error:
+            issues.append(ValidationIssue(claim_index=idx, check="universal_quantifier", message=universal_error))
+
+        values_error = check_values_present(claim)
+        if values_error:
+            issues.append(ValidationIssue(claim_index=idx, check="values_present", message=values_error))
+
         calc_error = check_calculations(claim)
         if calc_error:
             issues.append(ValidationIssue(claim_index=idx, check="calculation", message=calc_error))
@@ -784,3 +887,66 @@ def validate_review_report(report: ReviewReport, claim_ids: set[str]) -> list[Va
                 )
             )
     return issues
+
+
+CHECK_TIER_DISPOSITION_KEY = "check-tier"
+
+
+def jev_triage_warnings(triage_path: Path, dispositions_path: Path) -> list[str]:
+    """Advisory: a Jev check flagged answers and nobody said what was done about them.
+
+    Jev is never a gate -- it is a probabilistic third-party opinion, and making the
+    pipeline depend on it would be wrong. But the failure this guards against already
+    happened on this project: a JPM run reached the independent reviewer carrying
+    thirteen miscitations that Jev had flagged, because the flags lived in a log file
+    nobody read. A warning makes ignoring them visible in the run output.
+
+    Only `defect` items (Jev's best reading disagrees with the record) must be answered
+    one by one. `check` items (the right answer won, but weakly) are reported as a count.
+    """
+    if not triage_path.exists():
+        return []
+    try:
+        triage = json.loads(triage_path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError) as exc:
+        return [f"{triage_path.name} exists but could not be read ({exc}); Jev findings are unaccounted for."]
+
+    items = triage.get("items") or []
+    defects = [i for i in items if i.get("severity") == "defect"]
+    checks = [i for i in items if i.get("severity") == "check"]
+    if not items:
+        return []
+
+    disposed: set[str] = set()
+    if dispositions_path.exists():
+        try:
+            raw = json.loads(dispositions_path.read_text(encoding="utf-8"))
+            entries = raw.get("dispositions", raw) if isinstance(raw, dict) else raw
+            disposed = {e["key"] for e in entries if isinstance(e, dict) and e.get("key") and e.get("action")}
+        except (json.JSONDecodeError, OSError, TypeError):
+            return [f"{dispositions_path.name} exists but could not be read; Jev findings are unaccounted for."]
+
+    open_defects = [i for i in defects if i.get("key") not in disposed]
+    warnings: list[str] = []
+    if open_defects:
+        listed = ", ".join(f"{i['claim_id']}/{i['question']}" for i in open_defects[:5])
+        more = f" and {len(open_defects) - 5} more" if len(open_defects) > 5 else ""
+        warnings.append(
+            f"{len(open_defects)} of {len(defects)} Jev defect finding(s) have no entry in "
+            f"{dispositions_path.name}: {listed}{more}. Each needs a recorded action (fix the claim, "
+            "add a caveat, or reject the flag with a reason) before this run goes to review."
+        )
+    # The check tier is read as a group, so it is closed as a group: one entry keyed
+    # CHECK_TIER_DISPOSITION_KEY. Without this the advisory could never be answered and
+    # would decay into noise everyone learns to scroll past.
+    open_checks = [] if CHECK_TIER_DISPOSITION_KEY in disposed else [
+        i for i in checks if i.get("key") not in disposed]
+    if open_checks:
+        warnings.append(
+            f"{len(open_checks)} further Jev answer(s) were weak rather than wrong (see "
+            f"{triage_path.name}); read them before writing the outlook brief -- a losing option "
+            "holding real probability is often a lost qualifier such as 'over' or 'approximately'. "
+            f"Close this with one {CHECK_TIER_DISPOSITION_KEY!r} entry in {dispositions_path.name} "
+            "saying what you found when you read them."
+        )
+    return warnings

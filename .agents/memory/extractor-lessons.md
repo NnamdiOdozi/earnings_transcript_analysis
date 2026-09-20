@@ -13,3 +13,5 @@ Process guidance only, proposed by the outlook-reviewer and persisted by `earnin
 - Every claim id cited in the brief body must also have its own entry in the evidence appendix, so no conclusion is left without a quote trail.
 - For every derived claim, verify that each calculation operand has the same metric, scope, unit, basis, and intended period role before accepting mathematically valid arithmetic.
 - Give a period only to claims whose quote actually fixes one; a comparison against historical standards or a general characterisation should carry no period rather than inherit the reporting quarter's.
+- Before asserting that every entity in a comparison set shares a characteristic, confirm the stated metric for each entity individually rather than inferring it from a related metric on the same entity.
+- When the brief states how many people raised a point, count distinct speakers across the cited claims rather than counting the citations themselves.

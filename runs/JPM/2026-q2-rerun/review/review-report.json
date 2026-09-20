@@ -1,0 +1,113 @@
+{
+  "verdict": "fail",
+  "review_mode": "full",
+  "reviewed_at": "2026-09-19T18:20:00Z",
+  "model": "claude-opus-5",
+  "reasoning_effort": "not_applicable",
+  "claims_sha256": "9e03298b45a4acc08cb03bb627e31cd5962040f66b2d9498513f7bb3fe358918",
+  "outlook_brief_sha256": "56c03bc019e6df1bd47e282d6e5c7eb1589113480d3173ecc23ac6f7ba8d8e8c",
+  "review_diff_sha256": null,
+  "source_checks": [
+    {
+      "severity": "info",
+      "artifact": "evidence/web/web-009.md",
+      "passage": "Wells Fargo Bank | Financial Services & Online Banking ## Serving our customers and communities",
+      "evidence": "Opened the file in full. It is the Wells Fargo corporate marketing homepage, not the second-quarter results page its search hit pointed at, and it contains no financial figures. claims/coverage-receipt.json marks web-009 'deliberately_immaterial' for exactly this reason, and the description there matches the bytes on disk. No claim cites it.",
+      "recommendation": "None. The mis-extraction was correctly identified and excluded."
+    },
+    {
+      "severity": "info",
+      "artifact": "evidence/web/web-004.md",
+      "passage": "Net income of $6.4 billion, or $2.00 per diluted share included $132 million of discrete tax benefits, or $0.04 per share",
+      "evidence": "Verified this is the genuine Wells Fargo 2Q26 Financial Results deck. Every figure asserted by claim-188, claim-189 and claim-190 is present in the document, including the CET1 ratio of 10.3% and the efficiency ratio of 60% that sit in claim_text but not in the quoted excerpts. Same check done on web-013 (Citigroup CET1 12.8% present) and web-015 (Goldman Sachs first-half EPS $38.51 against $25.07 present).",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "evidence/web-evidence.jsonl",
+      "passage": "\"id\":\"web-007\" ... \"title\":\"July 31, 2026 - 10-Q: Quarterly report\"",
+      "evidence": "Temporal integrity check. The earnings event is dated 2026-07-14 in manifest.json. Two evidence items carry post-event content and both were excluded rather than cited: web-007 is a Bank of America 10-Q filed 31 July 2026, and web-011 is a Yahoo Finance estimates table that already shows the actual result for the quarter. Every web item a claim does rest on (web-001, 002, 003, 004, 005, 006, 010, 012, 013, 014, 015) is a pre-event preview or a same-day 14 July results release. I did not rely on temporal_status alone; I read the content of web-004, web-009, web-013 and web-015 and spot-read web-001 and web-002 content through the quotes reproduced in claims.json.",
+      "recommendation": "None."
+    }
+  ],
+  "claim_findings": [
+    {
+      "severity": "high",
+      "artifact": "claims.json#claim-197",
+      "passage": "Every large-bank peer captured in this run reported double-digit revenue growth and sharply higher markets revenue for the same quarter, so the firm's result reflects an industry-wide capital markets upswing rather than a purely company-specific outcome.",
+      "evidence": "The 'every peer' part is false, and the contradicting evidence is inside this run's own source pack. Wells Fargo's results deck at evidence/web/web-004.md states 'Revenue of $22.6 billion, up 9%' and its earnings table shows total revenue of $22,622 million against $20,822 million a year earlier, which is 8.6% growth - single digit, not double digit. The claim's own inferred_from list makes the error visible: for Wells Fargo it cites claim-191, which is net income growth of 17%, not revenue growth. Goldman Sachs (claim-176, 39%), Bank of America (claim-180, 15%) and Citigroup (claim-183, $24.8bn against $21.7bn) do clear the double-digit bar, so three of four peers support the wording and the fourth does not. The narrower 'sharply higher markets revenue' half of the claim is sound for all four, including Wells Fargo (claim-190, Markets revenue up 24%), so the underlying conclusion of an industry-wide capital markets upswing survives. This matters because claim-197 is published verbatim in claims/signal-card.md and is the sole citation behind the outlook brief's opening thesis sentence, 'in conditions every peer in this run shared [claim-197]'. A deterministic check cannot catch it: claim-197 carries no values, so there was no number for check_numeric to ground.",
+      "recommendation": "Revise claim-197's claim_text to drop the universal quantifier on revenue growth - state that three of the four peers captured here grew revenue double digits and that all four reported sharply higher markets revenue - and add claim-190 to inferred_from in place of, or alongside, claim-191, which measures net income rather than revenue. Then re-check the outlook brief's section 1 wording so it claims only what the corrected claim supports."
+    },
+    {
+      "severity": "medium",
+      "artifact": "claims.json#claim-189",
+      "passage": "Wells Fargo reported a return on equity of 15.0%, a return on average tangible common equity of 17.7%, an efficiency ratio of 60% and a CET1 ratio of 10.3%.",
+      "evidence": "A recurring traceability defect rather than a factual error. claim_text asserts figures and qualifiers that appear nowhere in the claim's own quote. Here the quote is only 'Financial Results ROE: 15.0% ROTCE: 17.7% Efficiency ratio: 60%' - the CET1 ratio of 10.3% is absent from it. The same pattern appears in at least seven other claims: claim-187 asserts a CET1 ratio of 12.8% absent from its quote; claim-177 asserts EPS of $38.51 against $25.07 absent from its quote; claim-172 asserts 'its third consecutive record quarter'; claim-069 asserts 'four changes'; claim-050 asserts rates being higher at both ends of the curve; claim-136 asserts the business was 'started four or five years ago'; claim-149 asserts the Bowman and Warsh review. I checked every one of these against the surrounding source context and all are accurate, so nothing is fabricated. The harm is verifiability: claims/signal-card.md renders only claim_text plus the quote, so a reader of the card sees numbers and qualifiers with no quote trail behind them. This exact rule is already written down in .agents/memory/extractor-lessons.md ('Keep each claim's quote self-sufficient'), so the guidance existed and did not hold.",
+      "recommendation": "Extend each affected claim's quote to include the sentence or table line that carries the asserted figure or qualifier, or remove the unsupported assertion from claim_text. Treat the numeric cases (claim-189, claim-187, claim-177) as the priority, since an unsourced number is worse than an unsourced adjective."
+    },
+    {
+      "severity": "low",
+      "artifact": "claims.json#claim-192",
+      "passage": "Reported EPS for the quarter came in above both pre-event consensus estimates captured in this run's web evidence, so the quarter was an earnings beat against the Street.",
+      "evidence": "The claim calls $6.14 'Reported EPS', but claim-001, which it lists in inferred_from, states that the $6.14 figure is struck excluding the significant items management noted. The comparison itself is probably sound, because sell-side consensus for a bank is normally an adjusted-basis number and the excluded Yahoo Finance page (web-011) independently shows 6.14 as the actual against a 5.80 estimate. The wording is nevertheless a basis mislabel: nothing in this run establishes that $6.14 is the reported, all-in diluted figure, and evidence/financials.json (half-year net income of $37.649 billion, half-year diluted EPS of $13.63) is not granular enough to settle it either way. The outlook brief handles this better than the claim does, saying 'excluding the significant items management noted' before asserting the beat.",
+      "recommendation": "Change 'Reported EPS' to 'EPS excluding significant items' in claim-192's claim_text, and note in the claim that the consensus figures it is compared against are on an analyst-adjusted basis."
+    },
+    {
+      "severity": "low",
+      "artifact": "claims.json#claim-175",
+      "passage": "Goldman Sachs' operating expenses rose 26% to $11.67 billion on higher compensation and transaction costs, while its first-half efficiency ratio improved to 58.8% from 62.0%.",
+      "evidence": "Period-labelling gap. This single claim carries a three-month expense figure and a six-month efficiency ratio, and sets period to null, so nothing in the record tells a downstream reader which value belongs to which basis. The same shape appears in claim-191 (a quarterly net income figure and a first-half net income figure, period null), claim-187 (capital returned in the quarter and in the first half, period null) and claim-182 (a point-in-time CET1 ratio with year-on-year deposit and loan growth, period null). None of these is cited in the outlook brief, and all the figures are accurate against their sources, so the exposure is limited. The remit calls out quarter-versus-year-to-date confusion specifically because Python cannot adjudicate it.",
+      "recommendation": "Split each mixed-basis claim into one claim per period basis, each with an explicit period such as '3 months to 30 Jun 2026' or '6 months to 30 Jun 2026', rather than leaving period null to cover both."
+    }
+  ],
+  "outlook_findings": [
+    {
+      "severity": "medium",
+      "artifact": "outlook-brief.md",
+      "passage": "the precise point three analysts pressed [claim-063][claim-081][claim-095] and which management answered in dollar rather than percentage terms [claim-082][claim-084]",
+      "evidence": "Two problems in one sentence, both about who said what. First, the count is wrong: the three cited claims come from two analysts, not three. claim-063 is Jim Mitchell and both claim-081 and claim-095 are Mike Mayo. The brief's own cited claim-196 states the correct figure, saying the framing is the one 'two analysts pressed management on', so the brief contradicts the claim it is built from. Second, claim-095 is the wrong claim for this sentence. It is Mayo's separate question about a 77% marginal margin calculated off first-half figures and why that is 'as good as it gets' - topically adjacent to the operating-leverage exchange but not the percentage-versus-dollar operating-leverage point the sentence is about. The brief itself treats claim-095 correctly elsewhere, describing it in section 9 as an analyst's marginal-margin calculation. The effect is to make the bear argument in the base-case section look as though it drew broader analyst support than the transcript shows.",
+      "recommendation": "Change 'three analysts' to 'two analysts' and drop [claim-095] from this citation set, leaving [claim-063][claim-081]. If the marginal-margin exchange is wanted here, introduce it as a separate point rather than folding it into the operating-leverage count."
+    }
+  ],
+  "process_findings": [
+    {
+      "severity": "info",
+      "artifact": "claims/validation.json",
+      "passage": "n/a",
+      "evidence": "Deterministic validation is present and passed: validation.json.ok == true, 199 claims checked, zero issues and zero warnings, validated 2026-09-19T17:14:22Z. Confirmed present, not re-derived - I did not recompute any quote match, numeric grounding or calculation. claims/history/ holds a single attempt (attempt-0001) whose receipt.json records outcome 'passed', exit_code 0 and an empty issue_counts, so there was no repeated-then-fixed mechanical failure in this run for a history-sourced lesson to draw on.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "outlook/outlook-validation.json",
+      "passage": "n/a",
+      "evidence": "The hash-binding gate is present and passed: outlook-validation.json.ok == true with an empty errors list, carrying claims_sha256 9e03298b... and outlook_brief_sha256 56c03bc0..., both of which I copied into this report rather than computing. outlook/outlook-brief.md exists and carries a full evidence appendix covering every claim id cited in its body. manifest.json declares layout_version 2 and an event_date of 2026-07-14, and hashes every source file. All 199 claims in claims.json carry a non-empty id.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "injection-scan.json",
+      "passage": "\"pattern_count\": 25, \"finding_count\": 0, \"findings\": []",
+      "evidence": "The prompt-injection scan ran against 25 patterns and returned zero hits, so there was nothing for me to adjudicate as genuine hijack attempt versus innocent phrasing. Recording it explicitly rather than skipping it silently.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "claims/coverage-receipt.json",
+      "passage": "n/a",
+      "evidence": "The coverage receipt accounts for all 109 transcript segments and all 15 web-evidence items, with a written reason for each item marked deliberately_immaterial. I read the exclusion reasons for web-007, web-008, web-009 and web-011 and each is substantive and specific rather than boilerplate; I independently verified the web-009 reason against the file itself. Cross-sector appropriateness was also checked: signal-card.md and outlook-brief.md use banking vocabulary throughout - net interest income, CET1, charge-off rates, deposit betas, risk-weighted assets - with no metric or category imported from an unrelated industry.",
+      "recommendation": "None."
+    }
+  ],
+  "unverified_items": [
+    "The full text of web-007 (Bank of America 10-Q), web-008 (duplicate Citigroup release) and web-011 (Yahoo Finance estimates table) was not read end to end. All three are excluded from claim extraction by the coverage receipt and no claim cites them, so I checked only that the exclusion reasons were coherent with their titles, URLs and publication dates.",
+    "Claim support under remit item 2 was sampled, not exhaustive. I read the full surrounding context for the claims cited in the outlook brief plus roughly thirty others, concentrating on segments seg-0003, seg-0013, seg-0019, seg-0021, seg-0034, seg-0046 to seg-0060 and seg-0090 to seg-0103. I did not open the transcript context for every one of the 199 claims.",
+    "Period agreement against SEC-derived data could not be tested. evidence/financials.json contains only two half-year facts for the group (net income of $37.649 billion and diluted EPS of $13.63, both period_type half_year), and no claim grounds against either, so there was no structured fact to check any quarterly claim's period label against.",
+    "Whether the reported, all-in diluted EPS for the quarter differs from the $6.14 excluding-significant-items figure cannot be settled from this bundle. claim-023 records Corporate net income of $4.2 billion including significant items, which implies the all-in group figure is higher, but no source in the run states it."
+  ],
+  "summary": "One high-severity finding blocks this run. claim-197 asserts that every large-bank peer captured here reported double-digit revenue growth, and Wells Fargo did not - its own results deck in this run's evidence folder says revenue was up 9%. The claim's supporting list quietly substitutes Wells Fargo's 17% net income growth for the revenue growth it actually needs. The claim is published verbatim in the signal card and is the only citation behind the outlook brief's opening thesis sentence about shared peer conditions. The wider conclusion it draws, that this was an industry-wide capital markets upswing, does survive the correction, because all four peers did report sharply higher markets revenue. Separately, the brief's base-case section says three analysts pressed the operating-leverage point when the cited claims come from two, and one of the three citations is Mayo's marginal-margin question rather than the operating-leverage exchange. A medium traceability defect runs through at least eight claims whose claim_text asserts figures or qualifiers absent from the claim's own quote - all accurate against the wider source documents, but unverifiable from the signal card alone, and already covered by an existing extractor lesson. Everything else is in good order: deterministic validation passed first time with zero issues, the hash-binding gate passed, the injection scan is clean, the coverage receipt accounts for every segment and every web item with specific reasons, post-event evidence was correctly excluded, and the brief is genuinely balanced - its base-case section leads with the strongest argument against itself and its uncertainties section is candid about the operating-leverage disagreement, the mixed peer reporting bases and the fact that no Markets guidance was given.",
+  "proposed_lessons": [
+    "Before asserting that every entity in a comparison set shares a characteristic, confirm the stated metric for each entity individually rather than inferring it from a related metric on the same entity.",
+    "When the brief states how many people raised a point, count distinct speakers across the cited claims rather than counting the citations themselves."
+  ]
+}

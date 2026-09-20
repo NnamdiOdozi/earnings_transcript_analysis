@@ -102,6 +102,28 @@ material omitted.
    snapshots this round under `review/history/round-<N>/` for any future
    diff-review.
 
+   **If you already edited claims.json or outlook-brief.md before running this,**
+   you are deadlocked: `analyze` refuses because `review-report.json` was never
+   closed, and `check-review` refuses because its inputs changed. Nothing is lost.
+   Recover by restoring both files to the state the reviewer actually saw, closing
+   the round, then re-applying your corrections:
+
+   1. Park your corrected files somewhere outside the run directory.
+   2. Find the reviewed versions by hash, not by guesswork — `review-report.json`
+      records `claims_sha256` and `outlook_brief_sha256`. The matching copies are
+      under `claims/history/attempt-NNNN_*/` and `outlook/history/attempt-NNNN_*/`.
+      Note the latest attempt folder is *not* necessarily the right one: a blocked
+      `analyze` still writes an attempt containing your edits.
+   3. Copy those two files back, confirm both hashes now match the report, and run
+      `check-review`.
+   4. Copy your corrected files back in and re-run `analyze`, then
+      `validate-outlook`.
+
+   Confirmed live (JPM/2026-q2-rerun, 2026-09-19), by an agent that dispatched the
+   reviewer with the `Agent` tool directly instead of working through this skill,
+   and so never saw step 5 at all. Dispatching the subagent without reading this
+   file skips the ordering rule; the gate then catches it one edit too late.
+
 6. **Report the verdict to the user.**
    - Exit 0 (`pass`): report clean, no action needed.
    - Exit 1 (`pass_with_warnings`): report the warnings from `review-report.md`

@@ -15,8 +15,13 @@ ReasoningEffort = Literal[
 
 
 class AgentProvenance(BaseModel):
-    """Agent identity declared when an agent-authored stage is validated."""
+    """Agent identity declared when an agent-authored stage is validated.
 
+    `agent_name` is the harness/agent that ran the stage (e.g. "Claude Code",
+    "Codex"), distinct from `model`. Agent-declared, never machine-verified.
+    """
+
+    agent_name: str = "unknown"
     model: str
     reasoning_effort: ReasoningEffort
 
@@ -142,6 +147,15 @@ class Claim(BaseModel):
     # when the transcript genuinely doesn't make the period clear; a missing period
     # is honest, a wrong one is not. See extraction-instructions.md.
     period: Optional[str] = None
+    # Qualifications on this claim's figures that no deterministic check can see.
+    # The case that motivated the field: a quote saying "in excess of $2 billion"
+    # extracted as values["revenue_usd_billion"] = 2.0. Every numeric check passes --
+    # 2.0 genuinely appears -- but the figure is a floor, not an exact result, and a
+    # brief that writes "revenue of $2bn" has quietly hardened it. Each entry is one
+    # plain sentence, written by the extractor, usually after a Jev triage item
+    # (see docs/JEV_CHECKS.md). Honouring a caveat is an instruction to the brief
+    # author and a check for the reviewer; Python cannot verify that it was honoured.
+    caveats: list[str] = Field(default_factory=list)
 
 
 class Metric(BaseModel):

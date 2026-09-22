@@ -222,3 +222,12 @@ choice_confidence_floor = 0.60    # a winning option whose distribution is this 
                                    # a coin toss dressed as a verdict
 score_shortfall_margin = 0.35     # how far below the top rung of a score ladder still counts
                                    # as clean (2.98 of 3 is fine; 2.4 is not)
+
+# Replay: what each logged call must carry to be reconstructible later. Small volatile
+# inputs (the claim record, a brief passage) are copied into the log verbatim. Large
+# immutable evidence (transcript segments, web documents) is referenced, never copied.
+# See docs/JEV_CHECKS.md "Replay".
+web_evidence_chars = 12000        # how much web-evidence content reaches Jev. Windowed
+                                   # around the quote, not the head of the file: a quote
+                                   # past this offset used to be invisible to Jev while
+                                   # Python validated it against the full document

@@ -559,3 +559,75 @@ The TypeSafe docs put it plainly: typed output guarantees the interface, not the
   at the live docs, which are the source of truth for primitives, limits and SDKs.
 - `docs/REFERENCE.md` "Known limitations" — what the Python gates do and do not prove.
 - `scratch/jev/jpm-rerun-scores.csv` — 660 probabilities from the JPM audit, worst first.
+
+## Replay: rebuilding a logged call
+
+A Jev answer is only evidence if you can still say what was asked and what was sent.
+The log stores a sha256 of the state, not the state itself — the run directory is the
+system of record and nothing copies the segment text out of it.
+
+The split is by volatility, not by size alone. `claims.json` and `outlook-brief.md` are
+small and get REWRITTEN by a later stage, so the log copies the claim record and the
+cited passage verbatim; they are the half that makes a mismatch legible. Transcript
+segments and web documents are large and never change once normalised, so the log
+references them. An earlier version of this stored a character window around the quote
+instead — which landed inside the segment text, duplicating the one artifact that was
+already immutable while leaving the claim record unpreserved.
+
+What the log adds is enough to rebuild:
+
+| Field | What it is for |
+|---|---|
+| `request.questions` | The question payload verbatim. Question ids are labels and are never sent to the model, so ids alone record the meaningless half |
+| `request.state_ref` | Run directory, mode, subject, claim id, segment or web-evidence id, call context — the recipe |
+| `request.state_inputs` | The volatile inputs copied verbatim: the claim record, plus the brief passage for citations. Coverage carries none |
+| `request.state_sha256` | Integrity check on the exact bytes sent |
+| `request.evidence_note` | Present when web evidence had to be windowed: full length, bytes sent, quote offset |
+| `code_version` | `git_commit` plus `builders_sha256`, a hash of the `build_state` and `build_questions` source |
+
+To see the row a run WOULD write, without calling Jev or touching the run:
+
+```sh
+uv run python scripts/jev_check.py runs/JPM/2026-q2-rerun --mode claims --dry-run
+```
+
+It needs no API key, writes no call log, no index and no triage, and builds the same
+row object the live path writes — a dry run that built a different row would prove
+nothing. Auditing a run must not alter that run's record.
+
+Rebuild and verify a written log with:
+
+```sh
+uv run python scripts/jev_replay.py runs/JPM/2026-q2-rerun
+uv run python scripts/jev_replay.py runs/JPM/2026-q2-rerun --subject claim-001 -v
+```
+
+It exits non-zero if any row fails to reproduce.
+
+### Why `builders_sha256` and not just the git commit
+
+Replaying the original 485-row log found 220 coverage rows that no longer reproduce.
+All came from passes run between 11:55 and 12:00 on 2026-09-20, while
+`build_coverage_payload` was still being edited; the commit that finally captured that
+work (`d91991f`) landed at 13:16. Every one of those rows would have carried the same
+git commit as the rows that do reproduce, so a commit stamp could not have separated
+them. Hashing the builder source can. The replay tool reports those rows as
+unattributable rather than pretending to diagnose them.
+
+### One owner per artefact
+
+`runs/<ticker>/<event>/jev_checks.jsonl` owns the call rows.
+`logs/jev_checks.jsonl` is an index: one line per run, carrying the run tag, mode, call
+count, cost, how many calls had evidence windowed, and the path to the real log. The
+two files were previously byte-identical duplicates of 390 KB.
+
+### Web evidence is windowed on the quote, not sliced from the head
+
+`[jev] web_evidence_chars` bounds how much of a web document reaches Jev. That budget
+is now centred on the quote's actual offset. Previously it was the first N characters,
+which meant `check_exact_quote` validated a claim against the whole document while Jev
+saw only the opening — so Jev could be asked whether evidence it had never seen
+supported the claim, and `says_nothing` looked like a defect in the claim. Two claims
+in `runs/JPM/2026-q2-rerun` (claim-191 and claim-201, both citing `web-014`) had quotes
+at offset 12,763 against a 12,000-character budget. Neither was ever sent, so no
+recorded answer was affected.

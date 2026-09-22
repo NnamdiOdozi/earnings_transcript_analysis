@@ -219,6 +219,7 @@ JEV_REQUEST_PAUSE_SECONDS = float(_get("jev", "request_pause_seconds", 0.15))
 JEV_ALTERNATIVE_PROBABILITY_FLOOR = float(_get("jev", "alternative_probability_floor", 0.10))
 JEV_CHOICE_CONFIDENCE_FLOOR = float(_get("jev", "choice_confidence_floor", 0.70))
 JEV_SCORE_SHORTFALL_MARGIN = float(_get("jev", "score_shortfall_margin", 0.35))
+JEV_WEB_EVIDENCE_CHARS = int(_get("jev", "web_evidence_chars", 12000))
 
 # --- Research toggles (config.toml [research]) ---
 RESEARCH_SEC_ENABLED = bool(_get("research", "sec_enabled", True))

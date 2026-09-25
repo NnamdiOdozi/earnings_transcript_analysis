@@ -89,7 +89,10 @@ commit is slightly harder to read than two commits would have been.
 
 ## 4. [2026-09-25] This stricter review could stop runs from ever finishing, if we also make "medium" problems blocking
 
-**This is the entry worth your attention.** The other three are housekeeping.
+**Downgraded the same day.** The user confirmed the medium-problems-block-runs idea is
+something they are toying with rather than committed to. So this is a note to read before
+that idea is ever picked up, not an open worry about the current pipeline. Nothing to act
+on now.
 
 **The situation.** The reviewer used to check a sample of claims for whether the written
 claim fairly represented the source. It now checks every single one. On a 200-claim run

@@ -150,6 +150,11 @@ was resolved); don't let finished work accumulate here as dead weight.
   rather than trusting the flag blindly.
 
 ### [2026-09-09] Tighten review-pass threshold: no `medium`+ findings should be accepted
+- **Not committed to — the user confirmed on 2026-09-25 that this is an idea they are
+  toying with, not a decision.** Do not implement it without asking again. If it is ever
+  picked up, read `DOUBTS.md` entry 4 first: the reviewer's claim check became exhaustive
+  on 2026-09-25, so this change would now block on many more findings than it would have
+  when it was first written.
 - **Scope:** `validate_review_report` (`src/earnings/validate.py:646-657`)
   currently allows `pass_with_warnings` with `medium`-severity findings
   present (it only blocks `high`/`critical`). `cmd_check_review`

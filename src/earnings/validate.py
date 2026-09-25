@@ -799,6 +799,16 @@ def validate_claims(
     return ValidationResult(ok=not issues, checked_claims=len(claims), issues=issues, warnings=warnings)
 
 
+def _sample_ids(ids: list[str], limit: int = 10) -> str:
+    """Render an id list for a human reading a terminal: the first `limit` ids, then a
+    count of the rest. A 203-claim run can put 90 ids in one error line, which buries the
+    message it was meant to deliver.
+    """
+    if len(ids) <= limit:
+        return repr(ids)
+    return f"{ids[:limit]!r} and {len(ids) - limit} more"
+
+
 def check_review_claim_coverage(report: ReviewReport, claim_ids: set[str]) -> list[ValidationIssue]:
     """Account for every claim in the reviewer's exhaustive claim-semantic pass.
 
@@ -843,7 +853,7 @@ def check_review_claim_coverage(report: ReviewReport, claim_ids: set[str]) -> li
             ValidationIssue(
                 claim_index=-1,
                 check="claim_review_receipt",
-                message=f"claim_review_receipt does not account for {len(missing)} claim(s): {missing!r}",
+                message=f"claim_review_receipt does not account for {len(missing)} claim(s): {_sample_ids(missing)}",
             )
         )
     unknown = sorted(listed_set - claim_ids)
@@ -852,7 +862,7 @@ def check_review_claim_coverage(report: ReviewReport, claim_ids: set[str]) -> li
             ValidationIssue(
                 claim_index=-1,
                 check="claim_review_receipt",
-                message=f"claim_review_receipt names claim id(s) absent from claims.json: {unknown!r}",
+                message=f"claim_review_receipt names claim id(s) absent from claims.json: {_sample_ids(unknown)}",
             )
         )
     duplicated = sorted({cid for cid in listed if listed.count(cid) > 1})
@@ -861,7 +871,7 @@ def check_review_claim_coverage(report: ReviewReport, claim_ids: set[str]) -> li
             ValidationIssue(
                 claim_index=-1,
                 check="claim_review_receipt",
-                message=f"claim_review_receipt lists the same claim id in more than one bucket: {duplicated!r}",
+                message=f"claim_review_receipt lists the same claim id in more than one bucket: {_sample_ids(duplicated)}",
             )
         )
 

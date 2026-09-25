@@ -11,7 +11,7 @@ from pydantic import ValidationError
 
 from . import config
 from .audit import _build_audit_record
-from .models import OutlookValidation, ReviewDiff, ReviewReport, ValidationResult
+from .models import Manifest, OutlookValidation, ReviewDiff, ReviewReport, ValidationResult
 from .paths import RunPaths
 from .process import sha256_hex
 from .provenance import _hash_gate_ok, _load_validated_json, _validation_inputs_current
@@ -426,6 +426,20 @@ def cmd_check_review(args: argparse.Namespace) -> int:
             file=sys.stderr,
         )
         return 4
+
+    # The run folder must be the run you named. `analyze` has always checked this
+    # (analysis.py's "belongs to a different ticker or event"); this command never did, so
+    # a renamed or mis-copied run folder could have a full verdict and an accepted
+    # audit-record.json written against it under the wrong name. Found live during a
+    # stage-3 test, 2026-09-25: a folder named "2026-q2-rr" whose manifest said
+    # "2026-q2-rerun" was accepted here without complaint, while analyze refused it.
+    manifest = _load_validated_json(paths.manifest, Manifest)
+    if manifest is None or manifest.ticker != args.ticker.upper() or manifest.event_id != args.event_id:
+        print(
+            f"error: {paths.manifest} is missing, invalid, or belongs to a different ticker or event.",
+            file=sys.stderr,
+        )
+        return 2
 
     validation_path = paths.validation
     outlook_path = paths.outlook_brief

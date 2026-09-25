@@ -1560,6 +1560,20 @@ def test_check_review_requires_diff_and_current_bundle_receipt_after_round_one(i
     assert (RunPaths.at(run_dir).review_round(2)).exists()
 
 
+def test_check_review_refuses_a_run_folder_whose_manifest_names_another_run(isolated_runs_dir):
+    """A renamed or mis-copied run folder must not get a verdict recorded against it under
+    the wrong name. analyze has always refused this; check-review used to accept it, so a
+    full verdict and an accepted audit-record.json could be written for a run whose own
+    manifest disagreed (found live in a stage-3 test, 2026-09-25)."""
+    run_dir = _seed_reviewed_run(isolated_runs_dir)
+    manifest_path = RunPaths.at(run_dir).manifest
+    manifest = json.loads(manifest_path.read_text())
+    manifest["event_id"] = manifest["event_id"] + "-copy"
+    manifest_path.write_text(json.dumps(manifest))
+    # Same accepted bundle, same command, only the manifest's own identity now disagrees.
+    assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 2
+
+
 def test_check_review_rejects_a_review_that_skipped_a_claim(isolated_runs_dir):
     """The claim-review receipt is the only thing standing between an exhaustive
     claim-semantic pass and a silently sampled one: a report accounting for some but

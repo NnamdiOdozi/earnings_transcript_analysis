@@ -799,7 +799,138 @@ def validate_claims(
     return ValidationResult(ok=not issues, checked_claims=len(claims), issues=issues, warnings=warnings)
 
 
-def validate_review_report(report: ReviewReport, claim_ids: set[str]) -> list[ValidationIssue]:
+def check_review_claim_coverage(report: ReviewReport, claim_ids: set[str]) -> list[ValidationIssue]:
+    """Account for every claim in the reviewer's exhaustive claim-semantic pass.
+
+    Pure set arithmetic on identifiers -- deliberately NOT semantic. Python cannot judge
+    whether `claim_text` fairly represents its cited context (that is the reviewer's
+    judgment item 2); what it can do is refuse a report that never says what it did with
+    each claim. Four failure modes:
+
+    1. A claim in claims.json appears in no bucket -- the review silently skipped it.
+    2. A bucket names an id that isn't in claims.json -- a transcription slip, or a
+       receipt copied from another run/round.
+    3. An id appears in two buckets -- the report contradicts itself about that claim.
+    4. The receipt and the findings disagree: a claim declared `with_findings` that no
+       finding actually raises, a claim declared `unverifiable` with nothing in
+       `unverified_items` to explain it, or a substantive (above-`info`) finding against
+       a claim the receipt declared sound.
+
+    None of this proves the claims were read. It proves the report accounts for all of
+    them, which is what stops "exhaustive" from being an unfalsifiable word in a prose
+    contract. See models.ClaimReviewReceipt.
+    """
+    receipt = report.claim_review_receipt
+    if receipt is None:
+        return [
+            ValidationIssue(
+                claim_index=-1,
+                check="claim_review_receipt",
+                message=(
+                    "claim_review_receipt is missing; judgment item 2 is exhaustive over every "
+                    "claim, so the report must account for each claim id in claims.json"
+                ),
+            )
+        ]
+
+    issues: list[ValidationIssue] = []
+    listed = receipt.all_ids()
+    listed_set = set(listed)
+
+    missing = sorted(claim_ids - listed_set)
+    if missing:
+        issues.append(
+            ValidationIssue(
+                claim_index=-1,
+                check="claim_review_receipt",
+                message=f"claim_review_receipt does not account for {len(missing)} claim(s): {missing!r}",
+            )
+        )
+    unknown = sorted(listed_set - claim_ids)
+    if unknown:
+        issues.append(
+            ValidationIssue(
+                claim_index=-1,
+                check="claim_review_receipt",
+                message=f"claim_review_receipt names claim id(s) absent from claims.json: {unknown!r}",
+            )
+        )
+    duplicated = sorted({cid for cid in listed if listed.count(cid) > 1})
+    if duplicated:
+        issues.append(
+            ValidationIssue(
+                claim_index=-1,
+                check="claim_review_receipt",
+                message=f"claim_review_receipt lists the same claim id in more than one bucket: {duplicated!r}",
+            )
+        )
+
+    if receipt.carried_forward and report.review_mode != "diff":
+        issues.append(
+            ValidationIssue(
+                claim_index=-1,
+                check="claim_review_receipt",
+                message=(
+                    f"claim_review_receipt.carried_forward names {len(receipt.carried_forward)} claim(s) "
+                    "but review_mode is 'full' -- a full review re-reads every claim, so nothing "
+                    "can be carried forward from an earlier round"
+                ),
+            )
+        )
+
+    # Findings-bucket consistency. Only `claim_findings` is consulted: a claim mentioned
+    # in an outlook or process finding is being discussed as the brief's use of it, not
+    # as a defect in the claim itself.
+    cited_by_severity: dict[str, set[str]] = {}
+    for finding in report.claim_findings:
+        haystack = " ".join([finding.artifact, finding.passage, finding.evidence, finding.recommendation])
+        cited_by_severity.setdefault(finding.severity, set()).update(_CLAIM_ID_RE.findall(haystack))
+    all_cited = set().union(*cited_by_severity.values()) if cited_by_severity else set()
+    substantive_cited = set().union(
+        *(ids for sev, ids in cited_by_severity.items() if sev != "info")
+    ) if any(sev != "info" for sev in cited_by_severity) else set()
+
+    undocumented = sorted(set(receipt.with_findings) - all_cited)
+    if undocumented:
+        issues.append(
+            ValidationIssue(
+                claim_index=-1,
+                check="claim_review_receipt",
+                message=(
+                    f"claim_review_receipt.with_findings names {undocumented!r} but no entry in "
+                    "claim_findings raises a finding against them"
+                ),
+            )
+        )
+    unrecorded = sorted(substantive_cited & set(receipt.reviewed_ok))
+    if unrecorded:
+        issues.append(
+            ValidationIssue(
+                claim_index=-1,
+                check="claim_review_receipt",
+                message=(
+                    f"claim_findings raises a finding above 'info' against {unrecorded!r}, but the "
+                    "receipt lists them as reviewed_ok -- move them to with_findings"
+                ),
+            )
+        )
+    if receipt.unverifiable and not report.unverified_items:
+        issues.append(
+            ValidationIssue(
+                claim_index=-1,
+                check="claim_review_receipt",
+                message=(
+                    f"claim_review_receipt.unverifiable names {sorted(receipt.unverifiable)!r} but "
+                    "unverified_items is empty -- say what could not be verified and why"
+                ),
+            )
+        )
+    return issues
+
+
+def validate_review_report(
+    report: ReviewReport, claim_ids: set[str], *, require_claim_receipt: bool = True
+) -> list[ValidationIssue]:
     """The reviewer's judgment (which findings to raise, what severity to assign) is
     not re-derived or graded here. Two things ARE mechanically re-checked against
     Outlook_Reviewer's own output: (1) every claim-### id it cites in a finding's
@@ -809,8 +940,16 @@ def validate_review_report(report: ReviewReport, claim_ids: set[str]) -> list[Va
     with the severities the reviewer itself assigned to its own findings -- e.g.
     verdict="pass" while a finding is severity="critical" is an arithmetic
     inconsistency in already-structured JSON, not a judgment call.
+
+    `require_claim_receipt` adds a third: every claim in claims.json must be accounted
+    for in `claim_review_receipt` (see check_review_claim_coverage). It is a parameter
+    rather than an unconditional check because a review round accepted before the
+    receipt existed must stay re-confirmable -- cmd_check_review passes False only on
+    that path, never for a new round.
     """
     issues: list[ValidationIssue] = []
+    if require_claim_receipt:
+        issues.extend(check_review_claim_coverage(report, claim_ids))
     all_findings = (
         report.source_checks + report.claim_findings + report.outlook_findings + report.process_findings
     )

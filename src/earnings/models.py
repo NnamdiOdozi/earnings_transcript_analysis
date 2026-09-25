@@ -256,6 +256,35 @@ class ReviewFinding(BaseModel):
     recommendation: str
 
 
+class ClaimReviewReceipt(BaseModel):
+    """Per-claim accounting for the reviewer's exhaustive claim-semantic pass.
+
+    Four disjoint buckets whose union must be exactly the id set in claims.json (see
+    validate.check_review_claim_coverage). The reviewer has no execution tool, so these
+    are hand-written id lists read straight off claims.json -- never computed, never a
+    range or pattern.
+
+    This proves ACCOUNTING, not comprehension: a claim listed in `reviewed_ok` was
+    declared inspected and sound, which is not the same as having been read. What the
+    receipt does buy is that silently reviewing 20 of 203 claims stops being invisible
+    -- previously nothing in the pipeline could distinguish a sampled review from an
+    exhaustive one, even though the remit called item 4 exhaustive for weeks.
+    """
+
+    reviewed_ok: list[str] = Field(default_factory=list)
+    with_findings: list[str] = Field(default_factory=list)
+    unverifiable: list[str] = Field(default_factory=list)
+    # Only legal on a diff round, and only for claims review-diff.json shows unchanged
+    # since the last round (cross-checked in review.cmd_check_review, which is where
+    # the diff is actually loaded). Without this bucket an exhaustive claim-semantic
+    # remit would force a full re-read of every claim on every round, leaving
+    # review_mode="diff" bounding nothing but the brief's prose.
+    carried_forward: list[str] = Field(default_factory=list)
+
+    def all_ids(self) -> list[str]:
+        return self.reviewed_ok + self.with_findings + self.unverifiable + self.carried_forward
+
+
 class ReviewReport(BaseModel):
     """Agent-authored (Outlook_Reviewer writes this JSON only, never the .md --
     see cli.cmd_check_review, which renders review-report.md deterministically from
@@ -272,6 +301,10 @@ class ReviewReport(BaseModel):
     claims_sha256: str
     outlook_brief_sha256: str
     review_diff_sha256: Optional[str] = None
+    # Receipt for the exhaustive claim-semantic pass (judgment item 2). Optional in the
+    # schema so a review round already accepted before this field existed stays
+    # re-confirmable; cmd_check_review requires it for every NEW round.
+    claim_review_receipt: ClaimReviewReceipt | None = None
     source_checks: list[ReviewFinding] = Field(default_factory=list)
     claim_findings: list[ReviewFinding] = Field(default_factory=list)
     outlook_findings: list[ReviewFinding] = Field(default_factory=list)

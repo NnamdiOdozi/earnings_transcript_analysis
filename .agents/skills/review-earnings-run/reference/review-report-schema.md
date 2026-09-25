@@ -18,6 +18,12 @@ why that matters).
   "claims_sha256": "<64 lowercase hexadecimal characters>",
   "outlook_brief_sha256": "<64 lowercase hexadecimal characters>",
   "review_diff_sha256": null,
+  "claim_review_receipt": {
+    "reviewed_ok": ["claim-001", "claim-002", "claim-003"],
+    "with_findings": ["claim-009"],
+    "unverifiable": ["claim-011"],
+    "carried_forward": []
+  },
   "source_checks": [
     {
       "severity": "info",
@@ -77,6 +83,19 @@ why that matters).
   `max`, `ultra`, `adaptive`, `not_applicable`, or `unknown`. Record the dispatched
   value when known. Use `unknown` rather than guessing. Both identity fields are
   agent-declared unless the host provides a separate attestation.
+- `claim_review_receipt`: per-claim accounting for the exhaustive claim-semantic pass
+  (judgment item 2). Four lists of claim ids -- `reviewed_ok`, `with_findings`,
+  `unverifiable`, `carried_forward` -- whose union must be exactly the id set in
+  `claims.json`, with no id in two lists. `check-review` also cross-checks the buckets
+  against the report's own content: a `with_findings` id must be cited by some
+  `claim_findings` entry, an `unverifiable` id needs a matching `unverified_items` line,
+  and a finding above `info` cannot be raised against an id listed `reviewed_ok`.
+  `carried_forward` is legal only on a `"diff"` round and only for claims
+  `review-diff.json` reports as unchanged. You have no execution tool: read the ids off
+  `claims.json` and type them: never a range or a pattern. Like the hashes, this is a
+  receipt of *accounting*, not of comprehension -- it proves the report says what it did
+  with every claim, not that every claim was read. See
+  `reviewer-judgment-remit.md`'s judgment item 2 and "Output" section.
 - `severity`: `"info"` | `"low"` | `"medium"` | `"high"` | `"critical"`. Use `info`
   for confirmations (e.g. "process compliance: validation.json.ok == true"), not
   just problems — a review with zero `source_checks`/`process_findings` entries

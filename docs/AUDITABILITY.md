@@ -215,6 +215,20 @@ was cited selectively — the favourable numbers made the brief, several unfavou
 pressure, a segment miss, a flagged pricing risk) did not. All were corrected before the run was
 accepted, across two further, narrower re-reviews rather than starting over each time.
 
+That review reaches back past the brief to the claims themselves. Passing the machine gate
+means a claim's quote is exact and its numbers are grounded; it says nothing about whether the
+written claim is a truthful reading of the source. A claim saying "demand deteriorated sharply",
+quoting a speaker who said "we saw some moderation in demand", passes every machine check there
+is — and a brief built on it then looks perfectly well supported. So the reviewer judges the
+meaning of every claim, and `review-report.json` carries a `claim_review_receipt` that accounts
+for each one by id.
+
+Be precise about what that receipt is worth, because the temptation is to read it as more. It
+is the same kind of evidence as the hashes elsewhere in this document: it proves the report
+*accounts for* every claim, so a review that quietly inspected twenty of two hundred can no
+longer look identical to one that inspected them all. It cannot prove any claim was read. We
+claim exactly that much, no more.
+
 ## 8b. Re-reviews are targeted, not free — and capped
 
 A correction after a failed review doesn't need the reviewer to re-read everything

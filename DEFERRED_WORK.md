@@ -8,6 +8,63 @@ was resolved); don't let finished work accumulate here as dead weight.
 
 ## Open
 
+### [2026-09-25] Stage-local semantic critics, for when we adopt an agent framework
+- **Scope:** three semantic control points instead of today's one, once the project
+  moves off "Claude Code sessions driving skills by hand" and onto a real agent
+  framework. Today the only semantic check is the final `outlook-reviewer`, which sees
+  the finished run. The proposal adds two stage-local critics that catch errors close to
+  where they are introduced:
+  1. **Pre-Gate-1 critic (omissions + claim semantics).** Runs after extraction, before
+     `earnings analyze`. Two questions: is every extracted claim faithful to its source
+     (the chain `source context → quote → claim_text → values`), and is anything material
+     in the source pack *missing* from the claims? The second is the one the deterministic
+     validators are structurally blind to -- they prove submitted claims are grounded,
+     never that the absent ones are absent for a reason.
+  2. **Pre-Gate-2 critic (outlook semantics).** Runs after the brief is drafted, before
+     `earnings validate-outlook`. Python can check that cited claim ids resolve and that
+     material numbers are grounded; this critic would judge whether the prose actually
+     follows from the cited claims, whether uncertainty is being hardened, and whether the
+     selected evidence fairly supports the narrative and the scenarios.
+  3. **Keep the existing final reviewer** as the broad, fresh-context whole-run audit.
+- **The design principle worth preserving verbatim:** *narrow responsibility, broad
+  evidence access*. A stage-local critic must have a local task, not a local information
+  horizon. The pre-Gate-1 critic needs the whole source pack, or it cannot answer the
+  completeness question at all and can only validate one derived artifact against
+  another. The pre-Gate-2 critic needs the original evidence too, because sometimes the
+  defect is not "the brief misrepresents claim-017" but "claim-017 was itself weak" or
+  "the brief ignored stronger contradictory evidence elsewhere". What stays narrow is the
+  scope of *judgment*, not the scope of *reading* -- the analogy is an external auditor
+  examining revenue recognition specifically, who still needs the ledger, the contracts
+  and the financial statements. Avoid the term "local context checker"; it names the wrong
+  thing.
+- **Give each critic this instruction explicitly:** do not assume any upstream semantic
+  artifact is correct merely because it passed deterministic validation; you may rely on
+  Python-established mechanical facts, but verify semantic claims against primary
+  evidence yourself.
+- **Also proposed, lower priority:** a parser/segmentation anomaly critic earlier in the
+  pipeline (missed transcript blocks, speaker misattribution, partial segmentation
+  failure, odd PDF parsing). That is source-pack integrity rather than analytical
+  semantics, so treat it as optional infrastructure, not one of the two core additions.
+  Overlaps the deferred layout-aware PDF extraction entry further down this file.
+- **Open design question, not yet settled:** whether these are two separate agents or one
+  reusable semantic verifier given different instructions per stage. Also unsettled: how
+  to stop three semantic passes duplicating each other's work, since each has global
+  evidence access.
+- **Why deferred:** there is no agent framework here yet. Everything runs as Claude Code
+  or Codex sessions invoking skills in order, with no scheduler, no inter-agent contract
+  and no way to make a critic a blocking step in a pipeline the user isn't personally
+  driving. Building these as extra skills the operator must remember to invoke would add
+  two more manual steps and two more chances to skip one.
+- **Related, already partly done:** the exhaustive claim-semantic pass and its
+  `claim_review_receipt` (landed 2026-09-25) put item 1's *faithfulness* half into the
+  final reviewer's remit, exhaustively. The *completeness* half is partly covered by
+  `jev-coverage-triage.json` plus judgment item 11, which audit the coverage receipt's
+  `deliberately_immaterial` calls. What remains genuinely missing is doing either of them
+  before Gate 1, where a correction is cheap. See also the [2026-09-16] coverage-receipt
+  entry below, whose "semantic half" is the same idea reached from the other direction.
+- **Status:** idea only, not started, 2026-09-25. Revisit when an agent framework is
+  actually adopted -- not before, and not as a pile of extra optional skills.
+
 ### [2026-09-17] `src/earnings/` is 21 flat modules — group them into subpackages
 - **Scope:** `src/earnings/` currently holds 21 Python modules (5,393 lines) in a
   single flat directory, with no grouping to tell the reader which ones are
@@ -147,12 +204,15 @@ was resolved); don't let finished work accumulate here as dead weight.
   fail too, but cannot yet: runs prepared before the receipt was specified have none,
   and failing them would make an old run unre-analysable for a rule it predates.
   Promote to a failure once every live run produces one.
-- **Also still open — the semantic half.** No deterministic check can tell a correct
-  `deliberately_immaterial` from a wrong one. A receipt can pass every structural check
-  and still hide a material segment behind a plausible reason. That belongs in the
-  `outlook-reviewer`'s remit: give it the receipt and have it sample the segments and
-  web sources marked immaterial. Not started, and it is a judgement even then, not a
-  proof.
+- **The semantic half is now partly covered, and what's left is its timing.** No
+  deterministic check can tell a correct `deliberately_immaterial` from a wrong one: a
+  receipt can pass every structural check and still hide a material segment behind a
+  plausible reason. The `outlook-reviewer` does now audit this — judgment item 11 sends
+  it to `jev-coverage-triage.json` and the segments behind it — so the check exists, and
+  it is a judgement rather than a proof, as expected. What remains open is that it
+  happens at the *end* of the run, where a coverage gap means re-extracting, rather than
+  before Gate 1 where it would be cheap. See the [2026-09-25] stage-local critics entry
+  above.
 - **Why:** confirmed live twice. JPM/2026-q2 (2026-09-16) produced a structurally
   perfect receipt over all 109 transcript segments and cited 2 of 15 web sources, all
   four peers unused; the new check fails that run on the missing `web_evidence` array.

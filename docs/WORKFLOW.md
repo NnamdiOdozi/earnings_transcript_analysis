@@ -207,6 +207,19 @@ agent runs the review itself as a deliberate final pass
 (`.agents/skills/review-earnings-run-codex/SKILL.md`). Either way, the reviewer
 writes `review-report.json`.
 
+The reviewer starts one layer earlier than the brief. Passing `analyze` proves a
+claim's quote is exact, its numbers appear in valid evidence and its citations
+resolve; it proves nothing about whether the agent-written `claim_text` is a truthful
+reading of the source it quotes. So the reviewer judges
+`cited context → quote → claim_text → values` for **every** claim before assessing what
+the signal card and brief do with them — otherwise a brief can be exhaustively checked
+against a claim whose meaning drifted, and pass. That pass is accounted for in
+`review-report.json`'s `claim_review_receipt`, four lists of claim ids that must
+together cover every claim in `claims.json`; `check-review` rejects a report that
+leaves a claim unaccounted for, names an id that isn't in the run, or contradicts its
+own findings. Note what the receipt does and doesn't buy: it makes a silently sampled
+review detectable, and it cannot prove any claim was actually read.
+
 ```bash
 uv run earnings check-review --ticker ACME --event-id 2026-q2
 ```

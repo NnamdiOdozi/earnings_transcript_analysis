@@ -1237,7 +1237,28 @@ def _write_review_report(run_dir, report, review_mode="full"):
         report["source_checks"] = [_finding("info", "manifest.json")]
     if not report.get("process_findings"):
         report["process_findings"] = [_finding("info", "validation.json")]
+    if "claim_review_receipt" not in report:
+        report["claim_review_receipt"] = _claim_review_receipt_for(run_dir, report)
     (RunPaths.at(run_dir).review_report_json).write_text(json.dumps(report))
+
+
+def _claim_review_receipt_for(run_dir, report):
+    """Account for every claim in the run, splitting on whether a substantive
+    (above-`info`) claim finding was raised against it -- the same consistency rule
+    validate.check_review_claim_coverage enforces, so the helper can't generate a
+    receipt that contradicts the findings a test just supplied.
+    """
+    claim_ids = [c["id"] for c in json.loads((RunPaths.at(run_dir).claims).read_text()) if c.get("id")]
+    flagged = set()
+    for finding in report.get("claim_findings", []):
+        if finding.get("severity") == "info":
+            continue
+        text = " ".join(str(finding.get(k, "")) for k in ("artifact", "passage", "evidence", "recommendation"))
+        flagged |= {cid for cid in claim_ids if cid in text}
+    return {
+        "reviewed_ok": [cid for cid in claim_ids if cid not in flagged],
+        "with_findings": [cid for cid in claim_ids if cid in flagged],
+    }
 
 
 def _seed_reviewed_run(isolated_runs_dir, ticker="ACME", event="2026-q2", verdict="pass", escalate=False):
@@ -1537,6 +1558,82 @@ def test_check_review_requires_diff_and_current_bundle_receipt_after_round_one(i
     _write_review_report(run_dir, copied_verdict, review_mode="full")
     assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
     assert (RunPaths.at(run_dir).review_round(2)).exists()
+
+
+def test_check_review_rejects_a_review_that_skipped_a_claim(isolated_runs_dir):
+    """The claim-review receipt is the only thing standing between an exhaustive
+    claim-semantic pass and a silently sampled one: a report accounting for some but
+    not all claims must be refused, and must not consume a review round."""
+    run_dir = _seed_validated_run(isolated_runs_dir)
+    (RunPaths.at(run_dir).outlook_brief).write_text(
+        "# Outlook Brief\n\n## 1. Outlook in brief\n\nRevenue grew [claim-001].\n"
+    )
+    assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
+    claim_ids = [c["id"] for c in json.loads((RunPaths.at(run_dir).claims).read_text()) if c.get("id")]
+    _write_review_report(run_dir, {
+        "verdict": "pass", "reviewed_at": "2026-08-27T00:00:00Z", "model": "opus",
+        "source_checks": [], "claim_findings": [], "outlook_findings": [], "process_findings": [],
+        "unverified_items": [], "summary": "Sampled, not exhaustive.", "escalate_full_review": False,
+        # A receipt that names no claim at all -- the degenerate case of the same rule
+        # that catches accounting for 20 of 203.
+        "claim_review_receipt": {"reviewed_ok": []},
+    })
+    assert claim_ids, "fixture must contain at least one claim for the receipt to omit"
+    assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 2
+    assert not (RunPaths.at(run_dir).review_round(1)).exists()
+    assert not (RunPaths.at(run_dir).review_report_md).exists()
+
+
+def test_check_review_rejects_carrying_forward_a_changed_claim(isolated_runs_dir):
+    """carried_forward exists so a diff round need not re-read untouched claims. Using
+    it for a claim the diff reports as changed would skip exactly the claim that was
+    just rewritten, so review-diff.json (Python-generated, hash-bound) vetoes it."""
+    run_dir = _seed_reviewed_run(isolated_runs_dir)
+    claims = json.loads((RunPaths.at(run_dir).claims).read_text())
+    claims[0]["claim_text"] = claims[0]["claim_text"] + " Restated after review."
+    (RunPaths.at(run_dir).claims).write_text(json.dumps(claims))
+    assert main(["analyze", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
+    assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
+    assert main(["review-diff", "--ticker", "ACME", "--event-id", "2026-q2"]) in (0, 3)
+    all_ids = [c["id"] for c in claims if c.get("id")]
+    base = {
+        "verdict": "pass", "reviewed_at": "2026-08-27T00:00:00Z", "model": "opus",
+        "source_checks": [], "claim_findings": [], "outlook_findings": [], "process_findings": [],
+        "unverified_items": [], "summary": "Round 2.", "escalate_full_review": False,
+    }
+    _write_review_report(run_dir, dict(base, claim_review_receipt={"carried_forward": all_ids}),
+                         review_mode="diff")
+    assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 2
+    assert not (RunPaths.at(run_dir).review_round(2)).exists()
+
+    # Re-reviewing the changed claim, and carrying the rest forward, is accepted.
+    _write_review_report(run_dir, dict(base, claim_review_receipt={
+        "reviewed_ok": [all_ids[0]], "carried_forward": all_ids[1:],
+    }), review_mode="diff")
+    assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
+    assert (RunPaths.at(run_dir).review_round(2)).exists()
+
+
+def test_check_review_reconfirms_a_round_accepted_before_the_receipt_existed(isolated_runs_dir):
+    """A round already accepted may carry no receipt at all -- its reviewer predates the
+    field. Re-confirming that unchanged bundle must still work, or an approved run
+    becomes un-re-confirmable for a rule it predates."""
+    run_dir = _seed_reviewed_run(isolated_runs_dir)
+    report_path = RunPaths.at(run_dir).review_report_json
+    report = json.loads(report_path.read_text())
+    del report["claim_review_receipt"]
+    report_path.write_text(json.dumps(report))
+    snapshot = RunPaths.at(run_dir).review_round(1) / "review-report.json"
+    snapshot.write_text(json.dumps(report))
+    assert main(["check-review", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
+
+
+def test_review_report_md_shows_claim_coverage_counts(isolated_runs_dir):
+    run_dir = _seed_reviewed_run(isolated_runs_dir)
+    rendered = (RunPaths.at(run_dir).review_report_md).read_text()
+    claim_count = len([c for c in json.loads((RunPaths.at(run_dir).claims).read_text()) if c.get("id")])
+    assert "## Claim review coverage" in rendered
+    assert f"Claims accounted for: {claim_count}" in rendered
 
 
 def test_validate_outlook_blocks_when_an_archived_source_changed_after_analyze(isolated_runs_dir):

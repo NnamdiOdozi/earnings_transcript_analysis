@@ -48,6 +48,20 @@ def _render_review_report(ticker: str, event_id: str, report: ReviewReport) -> s
         _escape_currency(report.summary),
         "",
     ]
+    # Claim-coverage counts, so a human can see at a glance that the claim-semantic pass
+    # accounted for every claim -- and how. Counts only: the receipt proves the report
+    # accounts for each claim, never that each claim was read (see models.ClaimReviewReceipt).
+    receipt = report.claim_review_receipt
+    if receipt is not None:
+        lines += [
+            "## Claim review coverage",
+            f"- Claims accounted for: {len(receipt.all_ids())}",
+            f"- Reviewed, no finding: {len(receipt.reviewed_ok)}",
+            f"- Finding raised: {len(receipt.with_findings)}",
+            f"- Could not verify: {len(receipt.unverifiable)}",
+            f"- Carried forward unchanged from the previous round: {len(receipt.carried_forward)}",
+            "",
+        ]
     sections = [
         ("Source checks", report.source_checks),
         ("Claim findings", report.claim_findings),

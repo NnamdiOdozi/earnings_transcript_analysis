@@ -333,6 +333,63 @@ def _persist_extractor_lessons(proposed_lessons: list[str]) -> None:
         f.write("\n".join(new_lines) + "\n")
 
 
+def _check_diff_round_bindings(
+    paths: RunPaths,
+    round_number: int,
+    report: ReviewReport,
+    claims_path: Path,
+    outlook_path: Path,
+) -> int:
+    """Every review round after the first must pass through the deterministic
+    `review-diff` command, even when that command decides the semantic work must be a
+    full review. Returns 0 when the round's diff receipt binds correctly, 2 otherwise
+    (printing the reason), matching cmd_check_review's own exit codes.
+
+    Extracted from cmd_check_review purely to keep that function's branch count from
+    growing when the carried-forward check below was added; the checks themselves are
+    unchanged in order and effect.
+    """
+    diff_path = paths.review_diff
+    review_diff = _load_validated_json(diff_path, ReviewDiff)
+    if review_diff is None:
+        print(f"Review blocked: run `earnings review-diff` before round {round_number}.")
+        return 2
+    if review_diff.round_number != round_number or review_diff.since_round != round_number - 1:
+        print(f"Review blocked: {config.REVIEW_DIFF_FILENAME} belongs to a different review round.")
+        return 2
+    if not _hash_gate_ok(review_diff.claims_sha256, claims_path) or not _hash_gate_ok(
+        review_diff.outlook_brief_sha256, outlook_path
+    ):
+        print(f"Review blocked: {config.REVIEW_DIFF_FILENAME} is stale. Re-run `earnings review-diff`.")
+        return 2
+    if not _hash_gate_ok(report.review_diff_sha256, diff_path):
+        print(f"Review blocked: report is not bound to the current {config.REVIEW_DIFF_FILENAME}.")
+        return 2
+    if review_diff.auto_escalated and report.review_mode != "full":
+        print("Review blocked: review-diff auto-escalated this round to a full review.")
+        return 2
+    if report.escalate_full_review and report.review_mode != "diff":
+        print("Review blocked: only a diff review may request escalation to a full review.")
+        return 2
+    # A claim may only be carried forward from the previous round's claim-semantic
+    # review if it hasn't moved since. review-diff.json is Python-generated and
+    # hash-bound to the current claims.json, so this is checkable rather than trusted --
+    # without it, carried_forward would be a way to skip re-reading exactly the claims
+    # that were just rewritten.
+    receipt = report.claim_review_receipt
+    wrongly_carried = sorted(
+        {entry.claim_id for entry in review_diff.claims_changed} & set(receipt.carried_forward)
+    ) if receipt else []
+    if wrongly_carried:
+        print(
+            "Review blocked: claim_review_receipt.carried_forward names claim(s) that "
+            f"{config.REVIEW_DIFF_FILENAME} reports as added or changed this round: "
+            f"{wrongly_carried!r}. A changed claim must be re-reviewed, not carried forward."
+        )
+        return 2
+    return 0
+
+
 def cmd_check_review(args: argparse.Namespace) -> int:
     """Gate the Outlook_Reviewer subagent's review-report.json: it must exist
     (written by the subagent, never by this command -- semantic judgment isn't
@@ -447,35 +504,17 @@ def cmd_check_review(args: argparse.Namespace) -> int:
         if report.review_mode != "full" or report.review_diff_sha256 is not None:
             print("Review blocked: round 1 requires review_mode='full' and no review_diff_sha256.")
             return 2
-    else:
-        # Every later round must pass through the deterministic diff command, even
-        # when that command decides the semantic work must be a full review.
-        diff_path = paths.review_diff
-        review_diff = _load_validated_json(diff_path, ReviewDiff)
-        if review_diff is None:
-            print(f"Review blocked: run `earnings review-diff` before round {round_number}.")
-            return 2
-        if review_diff.round_number != round_number or review_diff.since_round != round_number - 1:
-            print(f"Review blocked: {config.REVIEW_DIFF_FILENAME} belongs to a different review round.")
-            return 2
-        if not _hash_gate_ok(review_diff.claims_sha256, claims_path) or not _hash_gate_ok(
-            review_diff.outlook_brief_sha256, outlook_path
-        ):
-            print(f"Review blocked: {config.REVIEW_DIFF_FILENAME} is stale. Re-run `earnings review-diff`.")
-            return 2
-        if not _hash_gate_ok(report.review_diff_sha256, diff_path):
-            print(f"Review blocked: report is not bound to the current {config.REVIEW_DIFF_FILENAME}.")
-            return 2
-        if review_diff.auto_escalated and report.review_mode != "full":
-            print("Review blocked: review-diff auto-escalated this round to a full review.")
-            return 2
-        if report.escalate_full_review and report.review_mode != "diff":
-            print("Review blocked: only a diff review may request escalation to a full review.")
-            return 2
+    elif _check_diff_round_bindings(paths, round_number, report, claims_path, outlook_path) != 0:
+        return 2
 
     raw_claims = json.loads(claims_path.read_text(encoding="utf-8"))
     claim_ids = {c.get("id") for c in raw_claims if c.get("id")}
-    issues = validate_review_report(report, claim_ids)
+    # The per-claim review receipt is required for every NEW round. It is waived only
+    # when re-confirming a round that was already accepted, which is the one case where
+    # the report on disk may predate the receipt's existence -- failing those would make
+    # an already-approved run un-re-confirmable for a rule it predates, the same
+    # backward-compatibility reasoning applied to the extraction coverage receipt.
+    issues = validate_review_report(report, claim_ids, require_claim_receipt=not repeated_accepted_bundle)
     if issues:
         print(f"Review validation FAILED: {len(issues)} issue(s).")
         for issue in issues:

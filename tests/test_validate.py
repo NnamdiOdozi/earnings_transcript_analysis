@@ -5,7 +5,7 @@ import pytest
 
 from pydantic import ValidationError
 
-from earnings.models import Claim, ReviewFinding, ReviewReport, Segment
+from earnings.models import Claim, ClaimReviewReceipt, ReviewFinding, ReviewReport, Segment
 from earnings.process import normalize_whitespace
 from earnings.validate import (
     validate_coverage_receipt,
@@ -24,6 +24,7 @@ from earnings.validate import (
     check_outlook_brief_numbers,
     extract_numbers,
     validate_claims,
+    check_review_claim_coverage,
     validate_review_report,
 )
 
@@ -1068,8 +1069,18 @@ def _review_report(**overrides) -> ReviewReport:
     return ReviewReport(**values)
 
 
+def _receipt_report(claim_ids, **overrides) -> ReviewReport:
+    """A report whose claim-review receipt accounts for exactly `claim_ids` as sound,
+    unless an override supplies its own receipt. Most receipt tests differ from the
+    happy path by one bucket, so the default keeps them readable.
+    """
+    overrides.setdefault("claim_review_receipt", ClaimReviewReceipt(reviewed_ok=sorted(claim_ids)))
+    return _review_report(**overrides)
+
+
 def test_validate_review_report_passes_with_real_claim_citations():
-    report = _review_report(
+    report = _receipt_report(
+        {"claim-001", "claim-002"},
         claim_findings=[_finding("claims.json#claim-001")],
     )
     issues = validate_review_report(report, claim_ids={"claim-001", "claim-002"})
@@ -1079,8 +1090,10 @@ def test_validate_review_report_passes_with_real_claim_citations():
 def test_validate_review_report_fails_for_fabricated_claim_citation():
     report = _review_report(
         verdict="fail",
+        claim_review_receipt=ClaimReviewReceipt(with_findings=["claim-001"]),
         claim_findings=[ReviewFinding(
-            severity="high", artifact="claims.json#claim-999", passage="claim-999 does not exist",
+            severity="high", artifact="claims.json#claim-001",
+            passage="claim-999 does not exist",
             evidence="e", recommendation="r",
         )],
         summary="Fabricated citation.",
@@ -1318,7 +1331,8 @@ def test_outlook_numbers_percent_leniency_is_not_bidirectional_by_design():
 
 
 def test_validate_review_report_ignores_hyphenated_prose_in_finding_text():
-    report = _review_report(
+    report = _receipt_report(
+        {"claim-001"},
         claim_findings=[_finding("claims.json#claim-001", "a claim-based, claim-level assessment")],
     )
     issues = validate_review_report(report, claim_ids={"claim-001"})
@@ -1329,7 +1343,8 @@ def test_validate_review_report_catches_fabricated_id_in_evidence_and_recommenda
     # (#15) The citation scan must cover all four ReviewFinding text fields, not just
     # artifact/passage -- a fabricated claim id hidden in evidence or recommendation
     # must still be caught.
-    report = _review_report(
+    report = _receipt_report(
+        {"claim-001"},
         claim_findings=[
             ReviewFinding(
                 severity="info",
@@ -1651,3 +1666,116 @@ def test_signal_card_renders_a_claims_caveat():
                   caveats=["the quote says 'in excess of' -- 2.0 is a floor"])
     card = _render_signal_card("JPM", "2026-q2", [claim], {})
     assert "caveat:" in card and "is a floor" in card
+
+
+# --- claim-review receipt (exhaustive claim-semantic pass, judgment item 2) ----------
+# The receipt is pure id accounting: it proves the report says what it did with every
+# claim, never that any claim was actually read. See models.ClaimReviewReceipt.
+
+
+def test_claim_review_receipt_accounts_for_every_claim():
+    report = _receipt_report({"claim-001", "claim-002"})
+    assert check_review_claim_coverage(report, {"claim-001", "claim-002"}) == []
+
+
+def test_claim_review_receipt_missing_is_rejected():
+    # The default None -- a report written as if item 2 were still sampled.
+    issues = check_review_claim_coverage(_review_report(), {"claim-001"})
+    assert [i.check for i in issues] == ["claim_review_receipt"]
+    assert "missing" in issues[0].message
+
+
+def test_claim_review_receipt_rejects_unaccounted_claim():
+    # The whole point: reviewing 1 of 2 claims must stop being invisible.
+    report = _receipt_report({"claim-001"})
+    issues = check_review_claim_coverage(report, {"claim-001", "claim-002"})
+    assert len(issues) == 1
+    assert "does not account for 1 claim" in issues[0].message
+    assert "claim-002" in issues[0].message
+
+
+def test_claim_review_receipt_rejects_unknown_claim_id():
+    # A transcription slip, or a receipt copied from another run/round.
+    report = _receipt_report({"claim-001", "claim-999"})
+    issues = check_review_claim_coverage(report, {"claim-001"})
+    assert any("absent from claims.json" in i.message and "claim-999" in i.message for i in issues)
+
+
+def test_claim_review_receipt_rejects_claim_in_two_buckets():
+    report = _review_report(
+        claim_review_receipt=ClaimReviewReceipt(reviewed_ok=["claim-001"], unverifiable=["claim-001"]),
+        unverified_items=["claim-001 context was ambiguous"],
+    )
+    issues = check_review_claim_coverage(report, {"claim-001"})
+    assert any("more than one bucket" in i.message for i in issues)
+
+
+def test_claim_review_receipt_rejects_carried_forward_on_full_review():
+    # carried_forward only means anything relative to a previous round's receipt.
+    report = _review_report(
+        review_mode="full",
+        claim_review_receipt=ClaimReviewReceipt(carried_forward=["claim-001"]),
+    )
+    issues = check_review_claim_coverage(report, {"claim-001"})
+    assert any("review_mode is 'full'" in i.message for i in issues)
+
+
+def test_claim_review_receipt_allows_carried_forward_on_diff_review():
+    report = _review_report(
+        review_mode="diff",
+        review_diff_sha256="c" * 64,
+        claim_review_receipt=ClaimReviewReceipt(reviewed_ok=["claim-002"], carried_forward=["claim-001"]),
+    )
+    assert check_review_claim_coverage(report, {"claim-001", "claim-002"}) == []
+
+
+def test_claim_review_receipt_rejects_with_findings_that_raises_no_finding():
+    report = _review_report(
+        claim_review_receipt=ClaimReviewReceipt(with_findings=["claim-001"]),
+    )
+    issues = check_review_claim_coverage(report, {"claim-001"})
+    assert any("no entry in claim_findings" in i.message for i in issues)
+
+
+def test_claim_review_receipt_rejects_finding_against_a_claim_declared_sound():
+    report = _review_report(
+        verdict="fail",
+        claim_review_receipt=ClaimReviewReceipt(reviewed_ok=["claim-001"]),
+        claim_findings=[ReviewFinding(
+            severity="high", artifact="claims.json#claim-001",
+            passage="Demand deteriorated sharply.",
+            evidence="Segment says 'some moderation in demand'.",
+            recommendation="Revise claim_text.",
+        )],
+        summary="Contradictory receipt.",
+    )
+    issues = check_review_claim_coverage(report, {"claim-001"})
+    assert any("lists them as reviewed_ok" in i.message for i in issues)
+
+
+def test_claim_review_receipt_tolerates_info_finding_on_a_sound_claim():
+    # An `info` entry confirming a claim reads fairly is not a defect, so it must not
+    # force the claim out of reviewed_ok -- otherwise the reviewer is discouraged from
+    # recording positive coverage evidence at all.
+    report = _review_report(
+        claim_review_receipt=ClaimReviewReceipt(reviewed_ok=["claim-001"]),
+        claim_findings=[_finding("claims.json#claim-001")],
+    )
+    assert check_review_claim_coverage(report, {"claim-001"}) == []
+
+
+def test_claim_review_receipt_rejects_unverifiable_without_explanation():
+    report = _review_report(
+        claim_review_receipt=ClaimReviewReceipt(unverifiable=["claim-001"]),
+        unverified_items=[],
+    )
+    issues = check_review_claim_coverage(report, {"claim-001"})
+    assert any("unverified_items is empty" in i.message for i in issues)
+
+
+def test_validate_review_report_can_waive_the_receipt_for_an_accepted_round():
+    # cmd_check_review waives it only when re-confirming an already-accepted round,
+    # whose report may predate the field entirely.
+    report = _review_report(claim_findings=[_finding("claims.json#claim-001")])
+    assert validate_review_report(report, {"claim-001"}, require_claim_receipt=False) == []
+    assert validate_review_report(report, {"claim-001"}) != []

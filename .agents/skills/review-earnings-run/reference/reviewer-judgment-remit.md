@@ -50,6 +50,37 @@ must have already passed before you begin. Verify that `validation.json` and
 state *that* these steps ran and produced the expected artifacts -- cite the fact
 that `validation.json.ok == true`, not redo the arithmetic behind it.
 
+## The trust boundary: validated is not verified
+
+The gates that ran before you prove provenance and mechanical correctness. They prove
+nothing whatsoever about meaning. `validation.json.ok == true` establishes that each
+quote really appears in the cited source, that each number really appears somewhere
+valid, that calculations recompute, and that every cited id resolves. It does not
+establish that `claim_text` is a truthful reading of the source it quotes.
+
+So do not treat any upstream artifact as semantically correct merely because it passed
+deterministic validation. Rely on the mechanical facts Python established; verify the
+meaning yourself, against primary evidence.
+
+This matters because the alternative is a carefully-reviewed brief built on a
+foundation nobody checked. Consider a transcript segment reading "we saw some
+moderation in demand", quoted verbatim, turned into the claim "demand deteriorated
+sharply", with no `values` at all. Every deterministic check passes: the quote is
+exact, there is no number to ground, the id resolves. If you then take that claim as
+authoritative, a brief sentence reading "demand deteriorated sharply during the quarter
+[claim-017]" looks perfectly supported too — and you will pass a run whose central
+error entered one stage earlier than anything you examined.
+
+For the same reason, `claims.json` and not `signal-card.md` is the canonical object of
+your claims review. `signal-card.md` is rendered from the validated claims by Python
+(`rendering._render_signal_card`), so it introduces no interpretation of its own and
+contains no information the claims do not already carry. Judge the claims; the card
+follows.
+
+Work in that order. Establish `cited context → quote → claim_text → values` for every
+claim first, and only then judge what the signal card and the outlook brief do with
+them.
+
 ## What you ARE here to judge
 
 Things structurally outside what a deterministic check can evaluate:
@@ -61,22 +92,85 @@ Things structurally outside what a deterministic check can evaluate:
    article, not the company's earnings release, despite a plausible-looking
    filename/URL.
 
-2. **Claim support (fair reading, not just presence).** For a sample of claims in
-   `claims.json`, read the claim's `quote` in its full surrounding context (the
-   whole transcript segment or web-evidence file, not just the quoted substring)
-   and judge whether `claim_text` is a *fair characterization* of what that context
-   actually says -- not cherry-picked, not overstated, not missing an important
-   qualifier the speaker attached in the same breath.
+2. **Claim support: does `claim_text` follow from the cited context? Exhaustive over
+   every claim.** For **every** claim in `claims.json` — transcript-backed and
+   web-evidence-backed alike, with numbers or without — read the claim's `quote` in its
+   full surrounding context (the whole transcript segment, or the whole
+   `evidence/web/*.md` file, not just the quoted substring) and judge whether
+   `claim_text` is a fair characterization of what that context actually says.
+
+   Not sampled. Sampling is the right control for item 1, where one repeated mechanism
+   (a web fetch) either worked or didn't, so a few checks tell you about the rest. It is
+   the wrong control here: every `claim_text` is a separately generated paraphrase, so
+   there is no population rate to estimate and each claim is its own independent chance
+   for meaning to drift. This is the semantic counterpart to Python's
+   `check_exact_quote`, which is likewise applied to every claim, not a sample.
+
+   Judge two links, not one. The quote must be supported by the full context, and
+   `claim_text` must be supported by the quote-in-context — because a quote can be
+   genuine and exact while the sentence around it changes what it meant.
+
+   ```text
+   full cited segment / web-evidence file
+             ↕
+           quote
+             ↕
+        claim_text
+   ```
+
+   The named failure modes, which are the ones that actually occur:
+   - **Strengthened or weakened wording** — "some moderation" becomes "deteriorated
+     sharply", or a blunt warning becomes a mild one.
+   - **Possibility turned into certainty** — "we may see some improvement" becomes
+     "management expects improvement". Watch the modal verbs specifically: may, could,
+     should, expect, will.
+   - **Dropped qualifiers** — "approximately", "more than", "in excess of", "around",
+     "at least", or a conditional the speaker attached in the same breath ("assuming
+     input costs stabilize").
+   - **Shifted scope** — a different entity, segment, geography, period, or comparison
+     basis than the source actually described.
+   - **Invented causality** — see the worked example below; this is the one reviewers
+     most often miss.
+   - **Opinion presented as reported fact** — management's or an analyst's judgment
+     written as though it were a reported result. Check `classification` agrees with how
+     `claim_text` reads.
+   - **An added proposition** — any substantive statement in `claim_text` that the cited
+     context simply does not contain.
+
+   The added-proposition and invented-causality failures deserve the worked example,
+   because a reviewer scanning for contradiction will not catch them — nothing in the
+   claim contradicts the source:
+
+   ```text
+   Source:  "Demand softened somewhat during June."
+
+   Claim:   "Demand softened somewhat during June because customers were delaying
+             purchases amid macroeconomic uncertainty."
+   ```
+
+   Everything before "because" is supported. The causal clause was invented, and the
+   claim must be flagged even though the sentence is mostly accurate.
+
+   One thing that is **not** a finding on its own: a quote being a fragment rather than
+   a whole paragraph. The extractor is supposed to quote a substring. The test is
+   whether the surrounding text that was left out changes what a reader would conclude
+   from this claim — if it doesn't, there is nothing to flag, however partial the quote.
+   Applying a vaguer "is this representative?" standard across a couple of hundred
+   claims generates a cloud of arguable medium-severity findings and buries the real
+   ones.
+
+   **Record the result for every claim** in `claim_review_receipt` (see "Output"
+   below). Python checks that the receipt accounts for every claim id in `claims.json`,
+   which is what makes "exhaustive" a checkable statement rather than an adjective.
 
 3. **Narrative support.** For every material statement in `outlook-brief.md`, check
    it against the claims it cites: does the brief's characterization match what
    those claims actually establish, or does it go further than the evidence
    supports?
 
-   This check is **exhaustive over the brief, not sampled**: `outlook-brief.md`
-   is a bounded document (unlike the full `claims.json`, where a representative
-   sample is acceptable per item 2), so every `claim-###` citation in it gets
-   opened and read, every time, every round. Specifically check for a citation
+   This check is **exhaustive over the brief**, like items 2 and 4 before it: every
+   `claim-###` citation in it gets opened and read, every time, every round. Nothing in
+   this remit is sampled except item 1. Specifically check for a citation
    that *resolves* to a real claim but is the **wrong** claim for that sentence
    — topically adjacent, or correct for a nearby sentence but not this one
    (e.g. citing the claim for 2027 cost-growth guidance under a sentence about
@@ -90,10 +184,18 @@ Things structurally outside what a deterministic check can evaluate:
 
 4. **Numerical correctness (exhaustive semantic review, not recomputation).**
    Inspect **every claim containing a numeric entry in `values`**, including every
-   operand and result inside a `calculation` block. This is not part of the sampled
-   claim review in item 2. Python already checked that the numbers exist and that
-   calculations recompute correctly. You must check what Python cannot: does each
-   number actually represent the quantity and operand role assigned to it?
+   operand and result inside a `calculation` block.
+
+   Items 2 and 4 both cover every numeric claim, so the boundary between them is *what*
+   each judges, not which claims each looks at. Item 2 judges the words: does the prose
+   of `claim_text` follow from the cited context? Item 4 judges the figures: does each
+   number represent the quantity, and play the operand role, that has been assigned to
+   it? A claim can pass one and fail the other in either direction, so both passes are
+   required over the same claim.
+
+   Python already checked that the numbers exist and that calculations recompute
+   correctly. You must check what Python cannot: does each number actually represent the
+   quantity and operand role assigned to it?
 
    For each numeric value, verify its metric, unit/basis, period/comparison basis,
    entity, segment and scope against the cited evidence in full context. For a
@@ -213,6 +315,13 @@ Things structurally outside what a deterministic check can evaluate:
     exact result has hardened it, and `validate-outlook` grounds it either way. This
     is the only place in the pipeline where that gets caught.
 
+    This is a different check from item 2's dropped-qualifier failure mode, and the two
+    must not be merged. Item 2 catches a qualifier the extractor **lost** — it is in the
+    source and not in `claim_text`. This catches a qualifier the extractor **recorded**,
+    as a `caveats` entry, which the brief then wrote around as though it weren't there.
+    One is an extraction defect, the other a drafting defect, and they are found by
+    reading different files.
+
     This item exists because the failure is documented: JPM/2026-q2-rerun reached
     review carrying thirteen miscitations Jev had already flagged, because nothing
     read the log the flags were written to.
@@ -225,6 +334,15 @@ Things structurally outside what a deterministic check can evaluate:
     prose actually stayed that way, not just the schema.
 
 ## Run bundle to read
+
+**Two run layouts exist, and you must read whichever one is actually on disk.** The
+paths below are the staged layout, which a run declares as `"layout_version": 2` in its
+`manifest.json`: a shared source pack at the root, then `claims/`, `outlook/` and
+`review/`, each holding its own artifacts and its own `history/`. A run prepared before
+that change declares no `layout_version` and keeps every artifact flat at the run root,
+with `_validation_history/`, `_outlook_validation_history/` and `_review_history/`
+beside them. Older runs are deliberately never migrated, so both shapes are valid. Check
+the manifest, or simply list the directory, before concluding a file is missing.
 
 Given a run directory (e.g. `runs/MSFT/2026-q2/`), read:
 
@@ -242,16 +360,6 @@ Given a run directory (e.g. `runs/MSFT/2026-q2/`), read:
   item 11) — absent on runs where no Jev audit was run, which is not itself a finding
 - From round 2 on: `review/review-diff.json` and its sidecar
   `review/review-diff.sha256` (see "Diff-based re-review" below)
-
-**Two run layouts exist, and you must read whichever one is actually on disk.** The
-paths above are the staged layout, which a run declares as `"layout_version": 2` in
-its `manifest.json`: a shared source pack at the root, then `claims/`, `outlook/` and
-`review/`, each holding its own artifacts and its own `history/`. A run prepared
-before that change declares no `layout_version` and keeps every artifact flat at the
-run root, with `_validation_history/`, `_outlook_validation_history/` and
-`_review_history/` beside them. Older runs are deliberately never migrated, so both
-shapes are valid. Check the manifest, or simply list the directory, before concluding
-a file is missing.
 - `config.toml` at the repo root (for context on what checks/thresholds applied)
 - `.agents/memory/extractor-lessons.md` at the repo root, if present (so you don't
   propose a lesson that's already there — see "Proposed lessons" below)
@@ -270,10 +378,29 @@ a file is missing.
 - For each changed/added claim, re-apply the FULL judgment remit above (source
   correctness, fair reading, numerical correctness, temporal integrity, etc.) --
   the diff tells you WHERE to look, it doesn't replace the judgment itself.
+- **Use the diff's mechanical content; ignore its account of the last round.**
+  `review-diff.json` carries two very different kinds of information. Its change list
+  and its hashes are Python-generated facts about the current bytes — use them freely,
+  that is what the file is for. Its `previous_verdict`, `previous_summary` and
+  `previous_finding_count` fields are there so the round can be accounted for, and they
+  are exactly the prior-round narrative the preamble above tells you to disregard, just
+  arriving in a file instead of a prompt. Read them for round accounting; do not let
+  them decide where you look. The LLOY/2026-h1 failure was attention pulled toward
+  confirming a narrated fix, and it does not matter whether the narration came from a
+  dispatching agent or from a JSON field.
 - Item 4's numeric semantic review remains exhaustive on **every** review round,
   including a diff review: inspect every claim containing numeric `values`, not
   only changed or added claims. This prevents a semantically wrong but grounded
   operand accepted in an earlier round from remaining outside the diff scope.
+- **Item 2's claim-semantic review must still account for every claim, but a diff round
+  need not re-read the ones that did not move.** Put each unchanged claim in
+  `claim_review_receipt.carried_forward`, which declares that the previous round's
+  judgment on that claim stands. Re-read, and report normally, every claim the diff lists
+  as added or changed. `check-review` cross-checks this against `review-diff.json`, so a
+  claim the diff reports as changed cannot be carried forward — the point of the bucket
+  is to skip untouched claims, never the ones just rewritten. `carried_forward` is
+  illegal on a full review, including an auto-escalated one: a full review re-reads
+  everything.
 - You may still read any other file in the run bundle if something in the diff
   looks ambiguous or if you suspect the change has knock-on effects the diff
   doesn't show (e.g. a claim removed from one section but a stale reference to it
@@ -347,6 +474,31 @@ Include at least one substantive `source_checks` entry and one
 `process_findings` entry. These are content-dependent coverage evidence. They do
 not independently prove comprehension, so describe what was actually checked
 rather than inserting a generic placeholder.
+
+**Account for every claim in `claim_review_receipt`.** Item 2 is exhaustive, and this is
+where you show it. The field holds four lists of claim ids, and every id in
+`claims.json` must appear in exactly one of them:
+
+- `reviewed_ok` — read in full context, no finding.
+- `with_findings` — a finding is raised against it. Every id here must actually be cited
+  by an entry in `claim_findings`.
+- `unverifiable` — you could not judge it (the evidence file was empty, the context was
+  genuinely ambiguous). Every id here needs a matching line in `unverified_items` saying
+  why.
+- `carried_forward` — diff rounds only, and only for claims `review-diff.json` shows
+  unchanged. See "Diff-based re-review" above.
+
+You have no execution tool, so type these ids out by reading them off `claims.json`.
+Do not invent an id, a range, or a pattern. `check-review` verifies that the four lists
+together are exactly the claim id set, that no id appears twice, and that the buckets
+agree with your own findings and `unverified_items`; it rejects the report otherwise.
+A rejection here costs you a re-write, not a review round — nothing is snapshotted until
+the report validates — so get the accounting right rather than approximating it.
+
+Be clear-eyed about what this receipt is. It proves the report *accounts for* every
+claim. It cannot prove any claim was read. What it removes is the situation this project
+was in until now, where a review that silently inspected twenty of two hundred claims
+was indistinguishable from one that inspected them all.
 
 Set `verdict`:
 - `"pass"` -- no findings above `low` severity.

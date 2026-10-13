@@ -1,0 +1,53 @@
+{
+  "generated_at": "2026-10-13T22:29:46Z",
+  "check_mode": "coverage",
+  "model": "typesafe/jev-1.13",
+  "thresholds": {
+    "auto_accept": 0.7,
+    "alternative_probability_floor": 0.2,
+    "choice_confidence_floor": 0.6,
+    "score_shortfall_margin": 0.35
+  },
+  "counts": {
+    "audited": 45,
+    "flagged": 2,
+    "defect": 0,
+    "check": 2
+  },
+  "items": [
+    {
+      "key": "seg-0049::segment_materiality",
+      "subject": "seg-0049",
+      "claim_id": "seg-0049",
+      "generation_id": "gen-dec-1791930574-66rXqrapOj22UCvDZjfO",
+      "question": "segment_materiality",
+      "primitive": "choice",
+      "asked": "Judge only the SEGMENT UNDER REVIEW, reading the preceding turns for context. Does that segment contribute anything an equity analyst should record as a claim about the business? An answer that only makes sense beside the question before it is still material if the answer itself carries the content.",
+      "reading": "immaterial",
+      "probabilities": {
+        "material": 0.36,
+        "immaterial": 0.64
+      },
+      "confidence": 0.28,
+      "severity": "check",
+      "why": "Jev settled on 'immaterial' at 64% but still put 36% on 'material'."
+    },
+    {
+      "key": "seg-0084::segment_materiality",
+      "subject": "seg-0084",
+      "claim_id": "seg-0084",
+      "generation_id": "gen-dec-1791930580-P0mwaZrpygr13rHYGNgD",
+      "question": "segment_materiality",
+      "primitive": "choice",
+      "asked": "Judge only the SEGMENT UNDER REVIEW, reading the preceding turns for context. Does that segment contribute anything an equity analyst should record as a claim about the business? An answer that only makes sense beside the question before it is still material if the answer itself carries the content.",
+      "reading": "immaterial",
+      "probabilities": {
+        "material": 0.34,
+        "immaterial": 0.66
+      },
+      "confidence": 0.32,
+      "severity": "check",
+      "why": "Jev settled on 'immaterial' at 66% but still put 34% on 'material'."
+    }
+  ]
+}

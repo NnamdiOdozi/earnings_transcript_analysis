@@ -181,6 +181,9 @@ guaranteed before proceeding.
    uv run python scripts/jev_check.py runs/<TICKER>/<EVENT_ID> --mode coverage
    ```
 
+   Do not add `--all-claims` on a normal run: on figure-less and inference claims its
+   questions are ill-posed (JPM/2026-q2: ~115 of 135 defects were artefacts).
+
    Jev is a fast model that returns a probability for a bounded question rather than
    prose. It is **never a gate** — it blocks nothing, and its numbers move a little
    between runs. What it is good at is spotting the kind of defect a deterministic
@@ -356,7 +359,9 @@ Only start this stage once Stage 1's `earnings analyze` has passed.
     ```
 
     Optional on the same terms as step 7: no OpenRouter key means skip it, say so,
-    and continue.
+    and continue. Run it once after fixing what it finds, then dispose: re-runs move
+    the count without adding signal. In a paragraph citing several claims, expect
+    `quoted_text_belongs_to_claim` flags on every claim but the one holding the quote.
 
     This writes `outlook/jev-triage.json` and takes dispositions in
     `outlook/jev-dispositions.json`, same two tiers and same rules as step 7.

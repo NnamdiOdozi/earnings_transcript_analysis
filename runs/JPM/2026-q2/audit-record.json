@@ -3,20 +3,20 @@
   "ticker": "JPM",
   "event_id": "2026-q2",
   "status": "accepted",
-  "final_review_round": 2,
-  "generated_at": "2026-09-16T22:23:14Z",
+  "final_review_round": 1,
+  "generated_at": "2026-10-13T22:50:00Z",
   "decision": {
-    "verdict": "pass",
-    "summary": "Full round-2 review passed. The three changed claims resolve the prior semantic warnings, and every citation in the unchanged brief remains fair against the current claims and source context. The brief is balanced, distinguishes exceptional trading conditions from repeatable franchise drivers, and presents evidence-linked base, upside and downside cases without unjustified confidence. One low-severity source-hygiene issue remains: an unused Wells Fargo artifact is a generic homepage rather than the results page suggested by its title. It does not affect any claim or conclusion.",
+    "verdict": "pass_with_warnings",
+    "summary": "The run is well grounded. Its sources are genuine, its temporal handling is careful (post-event pages are labelled, and a living pre_event-dated page showing actual results was correctly excluded), and every Jev flag was dispositioned. I found no high-severity issue. The main warning is in the brief's Business drivers section: it reads JPM's equal expense and revenue growth as JPM 'reinvesting more' than its peers. That ignores management's evidence that the expense growth was largely revenue-linked pay, that margins rose, and that dollar operating leverage was positive, and it drops claim-163's caveat that the expense and revenue growth rates may not share a basis. One claim (claim-035) lost its 'Wholesale' scope when it was trimmed to its quote, so it now reads as firm-wide deposit outperformance. Smaller issues: the brief overstates Equities' share of the revenue spike, says underwriting deterioration was 'across the market' when Dimon said it was not across the board, and cites regulation only as an upside. claim-116 drops a hedge, and a labour-market conditioning statement on consumer credit was never extracted.",
     "finding_counts": {
       "critical": 0,
       "high": 0,
-      "medium": 0,
-      "low": 1,
-      "info": 12
+      "medium": 2,
+      "low": 5,
+      "info": 10
     }
   },
-  "trace_summary": "Analysis drew on 216 recorded source(s) (transcript, SEC/web evidence). 3 claim-validation attempt(s) were made, 1 with issues, before passing. 2 outlook-validation attempt(s) were made before passing. Review ran 2 round(s): round 1 pass_with_warnings with 3 medium, 1 low, 6 info finding(s); round 2 pass with 1 low, 12 info finding(s).",
+  "trace_summary": "Analysis drew on 216 recorded source(s) (transcript, SEC/web evidence). 3 claim-validation attempt(s) were made, 1 with issues, before passing. 1 outlook-validation attempt(s) were made before passing. Review ran 1 round(s): round 1 pass_with_warnings with 2 medium, 5 low, 10 info finding(s).",
   "workflow_trace": [
     {
       "stage": "claim_validation",
@@ -25,35 +25,30 @@
     },
     {
       "stage": "outlook_validation",
-      "attempts": 2,
+      "attempts": 1,
       "status": "passed"
     },
     {
       "stage": "review",
       "round": 1,
       "status": "pass_with_warnings"
-    },
-    {
-      "stage": "review",
-      "round": 2,
-      "status": "pass"
     }
   ],
   "review_history_summary": {
-    "review_rounds": 2,
+    "review_rounds": 1,
     "failed_review_rounds": 0,
     "historical_findings": {
       "critical": 0,
       "high": 0,
-      "medium": 3,
-      "low": 2,
-      "info": 18
+      "medium": 2,
+      "low": 5,
+      "info": 10
     }
   },
   "guardrail_summary": {
     "validation_retries": 2,
     "validation_rejections": 1,
-    "outlook_validation_retries": 1,
+    "outlook_validation_retries": 0,
     "outlook_validation_rejections": 0,
     "review_rejections": 0,
     "escalations": 0
@@ -61,18 +56,35 @@
   "tool_decisions": {
     "price_lookup": {
       "decision": "not_used",
-      "reason": "The transcript, SEC evidence and archived pre-event consensus sources were sufficient; no market-price claim was needed."
+      "reason": "No price series needed: results, guidance, consensus and peer figures all come from the transcript and extracted web evidence."
     }
   },
   "hashes": {
     "transcript_sha256": "fd0d2a77bdd6f2de88a65d0ace5edc9c8a085da3982781c26938b354d4f61fca",
-    "manifest_sha256": "86189fc60d157b8780c93edc424832316e61b2ce5f25575289f4d104b864a43e",
-    "claims_sha256": "cf1933c5fffb4fc73ef593da511720e509cb2f6e995ea6bc4b06756df43643f1",
-    "outlook_brief_sha256": "ea8ae2ad2dff7d815eda518d78acf8e9cd57509acef5ae58c2414f7b4f3d32a7",
-    "review_report_sha256": "5a94af21389619609d312c85e8d161ee4b31c10b5e0cf18285d0fd07de7cbfb2"
+    "manifest_sha256": "2f3b7085752245345d4ee82092c1eca4e8f7b3424e5c81237a536d09cb70d08f",
+    "claims_sha256": "a618b84d2943b8b30d4de5970da025a61b5e1307e94ef2956bc8b75bb356bed4",
+    "outlook_brief_sha256": "65b2369b55928442d47cf72a5ce006e15a583358ebf2fd565df9168d3d22979f",
+    "review_report_sha256": "e16098c95e2421608f3176631ea4d1f5f7b5413b9d97b4248c28fc3848cd6183"
   },
   "evidence_summary": {
     "source_count": 216
   },
-  "reviewer_model": "gpt-5"
+  "reviewer_model": "claude-opus-5-5",
+  "agent_provenance": {
+    "extractor": {
+      "agent_name": "Claude Code",
+      "model": "claude-opus-5-5",
+      "reasoning_effort": "unknown"
+    },
+    "outlook_author": {
+      "agent_name": "Claude Code",
+      "model": "claude-opus-5-5",
+      "reasoning_effort": "unknown"
+    },
+    "reviewer": {
+      "model": "claude-opus-5-5",
+      "reasoning_effort": "not_applicable"
+    },
+    "basis": "agent_declared"
+  }
 }

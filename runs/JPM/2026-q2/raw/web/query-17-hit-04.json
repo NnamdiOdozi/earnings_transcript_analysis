@@ -1,6 +1,6 @@
 {
-  "url": "https://app.edgar.tools/filing/72971/0000072971-26-000288/wfc2qer07-14x26ex991xrelea.htm",
-  "title": "Document",
+  "url": "https://www.wellsfargo.com/assets/pdf/about/investor-relations/earnings/third-quarter-2026-earnings.pdf",
+  "title": "WFC.3Q.ER.10-13-26 EX99.1 - Release",
   "score": null,
   "published_date": null,
   "_class": "peer",
@@ -8,5 +8,5 @@
   "_temporal_status": "undated",
   "_provider": "exa",
   "_query": "Wells Fargo quarterly results versus JPMorgan Chase & Co. JPM",
-  "_retrieved_at": "2026-09-16T15:45:03Z"
+  "_retrieved_at": "2026-10-13T22:13:02Z"
 }

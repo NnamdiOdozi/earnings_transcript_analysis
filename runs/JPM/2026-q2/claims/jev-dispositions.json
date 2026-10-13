@@ -1,0 +1,684 @@
+{
+ "dispositions": [
+  {
+   "key": "claim-007::values_capture",
+   "action": "rejected",
+   "note": "The quote carries one figure, the $1.65 dividend, and values records it; 'third quarter' is a timing word, not a missing figure."
+  },
+  {
+   "key": "claim-009::values_capture",
+   "action": "rejected",
+   "note": "The quote states no financial figure (only words, or for claim-012/claim-056 a time span or years), so an empty values is correct."
+  },
+  {
+   "key": "claim-012::values_capture",
+   "action": "rejected",
+   "note": "The quote states no financial figure (only words, or for claim-012/claim-056 a time span or years), so an empty values is correct."
+  },
+  {
+   "key": "claim-015::values_capture",
+   "action": "rejected",
+   "note": "The quote states no financial figure (only words, or for claim-012/claim-056 a time span or years), so an empty values is correct."
+  },
+  {
+   "key": "claim-016::values_capture",
+   "action": "rejected",
+   "note": "The quote states no financial figure (only words, or for claim-012/claim-056 a time span or years), so an empty values is correct."
+  },
+  {
+   "key": "claim-025::claim_text_traceable",
+   "action": "rejected",
+   "note": "claim_text restates the quote; its only additions are the speaker's name (from the segment's speaker field) or the referent of a pronoun such as 'that', which the quote cannot show by itself. Read against the full segment, the claim is accurate."
+  },
+  {
+   "key": "claim-026::claim_text_traceable",
+   "action": "fixed",
+   "note": "claim_text rewritten to state only what the quote carries; content drawn from elsewhere in the turn was removed."
+  },
+  {
+   "key": "claim-026::values_capture",
+   "action": "rejected",
+   "note": "The quote states no financial figure (only words, or for claim-012/claim-056 a time span or years), so an empty values is correct."
+  },
+  {
+   "key": "claim-027::claim_text_traceable",
+   "action": "fixed",
+   "note": "claim_text rewritten to state only what the quote carries; content drawn from elsewhere in the turn was removed."
+  },
+  {
+   "key": "claim-027::values_capture",
+   "action": "rejected",
+   "note": "The quote states no financial figure (only words, or for claim-012/claim-056 a time span or years), so an empty values is correct."
+  },
+  {
+   "key": "claim-028::claim_text_traceable",
+   "action": "fixed",
+   "note": "claim_text rewritten to state only what the quote carries; content drawn from elsewhere in the turn was removed."
+  },
+  {
+   "key": "claim-029::values_capture",
+   "action": "rejected",
+   "note": "The quote states no financial figure (only words, or for claim-012/claim-056 a time span or years), so an empty values is correct."
+  },
+  {
+   "key": "claim-030::values_capture",
+   "action": "rejected",
+   "note": "The quote states no financial figure (only words, or for claim-012/claim-056 a time span or years), so an empty values is correct."
+  },
+  {
+   "key": "claim-035::claim_text_traceable",
+   "action": "fixed",
+   "note": "claim_text rewritten to state only what the quote carries; content drawn from elsewhere in the turn was removed."
+  },
+  {
+   "key": "claim-035::values_capture",
+   "action": "rejected",
+   "note": "The quote states no financial figure (only words, or for claim-012/claim-056 a time span or years), so an empty values is correct."
+  },
+  {
+   "key": "claim-036::claim_text_traceable",
+   "action": "rejected",
+   "note": "claim_text restates the quote; its only additions are the speaker's name (from the segment's speaker field) or the referent of a pronoun such as 'that', which the quote cannot show by itself. Read against the full segment, the claim is accurate."
+  },
+  {
+   "key": "claim-036::values_capture",
+   "action": "rejected",
+   "note": "The quote states no financial figure (only words, or for claim-012/claim-056 a time span or years), so an empty values is correct."
+  },
+  {
+   "key": "claim-037::claim_text_traceable",
+   "action": "rejected",
+   "note": "claim_text restates the quote; its only additions are the speaker's name (from the segment's speaker field) or the referent of a pronoun such as 'that', which the quote cannot show by itself. Read against the full segment, the claim is accurate."
+  },
+  {
+   "key": "claim-038::claim_text_traceable",
+   "action": "rejected",
+   "note": "claim_text restates the quote; its only additions are the speaker's name (from the segment's speaker field) or the referent of a pronoun such as 'that', which the quote cannot show by itself. Read against the full segment, the claim is accurate."
+  },
+  {
+   "key": "claim-039::claim_text_traceable",
+   "action": "fixed",
+   "note": "claim_text rewritten to state only what the quote carries; content drawn from elsewhere in the turn was removed."
+  },
+  {
+   "key": "claim-040::classification",
+   "action": "fixed",
+   "note": "Accepted: forward-looking statement about the firm's own spending, reclassified management_guidance with status forward_looking."
+  },
+  {
+   "key": "claim-041::values_capture",
+   "action": "rejected",
+   "note": "The quote states no financial figure (only words, or for claim-012/claim-056 a time span or years), so an empty values is correct."
+  },
+  {
+   "key": "claim-042::claim_text_traceable",
+   "action": "fixed",
+   "note": "claim_text rewritten to state only what the quote carries; content drawn from elsewhere in the turn was removed."
+  },
+  {
+   "key": "claim-043::claim_text_traceable",
+   "action": "caveat_added",
+   "note": "The answer does not name the metric; it is NII ex-Markets per the question in seg-0018 and the prepared remarks. Caveat added to claim-043 saying so."
+  },
+  {
+   "key": "claim-044::values_capture",
+   "action": "rejected",
+   "note": "The quote states no financial figure (only words, or for claim-012/claim-056 a time span or years), so an empty values is correct."
+  },
+  {
+   "key": "claim-045::claim_text_traceable",
+   "action": "fixed",
+   "note": "claim_text rewritten to state only what the quote carries; content drawn from elsewhere in the turn was removed."
+  },
+  {
+   "key": "claim-045::values_capture",
+   "action": "rejected",
+   "note": "The quote states no financial figure (only words, or for claim-012/claim-056 a time span or years), so an empty values is correct."
+  },
+  {
+   "key": "claim-046::values_capture",
+   "action": "rejected",
+   "note": "The quote states no financial figure (only words, or for claim-012/claim-056 a time span or years), so an empty values is correct."
+  },
+  {
+   "key": "claim-047::claim_text_traceable",
+   "action": "rejected",
+   "note": "claim_text restates the quote; its only additions are the speaker's name (from the segment's speaker field) or the referent of a pronoun such as 'that', which the quote cannot show by itself. Read against the full segment, the claim is accurate."
+  },
+  {
+   "key": "claim-047::values_capture",
+   "action": "rejected",
+   "note": "The quote states no financial figure (only words, or for claim-012/claim-056 a time span or years), so an empty values is correct."
+  },
+  {
+   "key": "claim-048::claim_text_traceable",
+   "action": "fixed",
+   "note": "claim_text rewritten to state only what the quote carries; content drawn from elsewhere in the turn was removed."
+  },
+  {
+   "key": "claim-048::values_capture",
+   "action": "rejected",
+   "note": "The quote states no financial figure (only words, or for claim-012/claim-056 a time span or years), so an empty values is correct."
+  },
+  {
+   "key": "claim-050::claim_text_traceable",
+   "action": "fixed",
+   "note": "claim_text rewritten to state only what the quote carries; content drawn from elsewhere in the turn was removed."
+  },
+  {
+   "key": "claim-051::claim_text_traceable",
+   "action": "fixed",
+   "note": "claim_text rewritten to state only what the quote carries; content drawn from elsewhere in the turn was removed."
+  },
+  {
+   "key": "claim-051::values_capture",
+   "action": "rejected",
+   "note": "The quote states no financial figure (only words, or for claim-012/claim-056 a time span or years), so an empty values is correct."
+  },
+  {
+   "key": "claim-053::values_capture",
+   "action": "rejected",
+   "note": "The quote states no financial figure (only words, or for claim-012/claim-056 a time span or years), so an empty values is correct."
+  },
+  {
+   "key": "claim-054::claim_text_traceable",
+   "action": "fixed",
+   "note": "claim_text rewritten to state only what the quote carries; content drawn from elsewhere in the turn was removed."
+  },
+  {
+   "key": "claim-054::values_capture",
+   "action": "rejected",
+   "note": "The quote states no financial figure (only words, or for claim-012/claim-056 a time span or years), so an empty values is correct."
+  },
+  {
+   "key": "claim-055::values_capture",
+   "action": "rejected",
+   "note": "The quote states no financial figure (only words, or for claim-012/claim-056 a time span or years), so an empty values is correct."
+  },
+  {
+   "key": "claim-056::claim_text_traceable",
+   "action": "fixed",
+   "note": "claim_text rewritten to state only what the quote carries; content drawn from elsewhere in the turn was removed."
+  },
+  {
+   "key": "claim-056::values_capture",
+   "action": "rejected",
+   "note": "The quote states no financial figure (only words, or for claim-012/claim-056 a time span or years), so an empty values is correct."
+  },
+  {
+   "key": "claim-057::claim_text_traceable",
+   "action": "fixed",
+   "note": "claim_text rewritten to state only what the quote carries; content drawn from elsewhere in the turn was removed."
+  },
+  {
+   "key": "claim-059::claim_text_traceable",
+   "action": "fixed",
+   "note": "claim_text rewritten to state only what the quote carries; content drawn from elsewhere in the turn was removed."
+  },
+  {
+   "key": "claim-059::values_capture",
+   "action": "rejected",
+   "note": "The quote states no financial figure (only words, or for claim-012/claim-056 a time span or years), so an empty values is correct."
+  },
+  {
+   "key": "claim-062::claim_text_traceable",
+   "action": "fixed",
+   "note": "claim_text rewritten to state only what the quote carries; content drawn from elsewhere in the turn was removed."
+  },
+  {
+   "key": "claim-063::claim_text_traceable",
+   "action": "rejected",
+   "note": "claim_text restates the quote; its only additions are the speaker's name (from the segment's speaker field) or the referent of a pronoun such as 'that', which the quote cannot show by itself. Read against the full segment, the claim is accurate."
+  },
+  {
+   "key": "claim-065::claim_text_traceable",
+   "action": "rejected",
+   "note": "claim_text restates the quote; its only additions are the speaker's name (from the segment's speaker field) or the referent of a pronoun such as 'that', which the quote cannot show by itself. Read against the full segment, the claim is accurate."
+  },
+  {
+   "key": "claim-066::claim_text_traceable",
+   "action": "rejected",
+   "note": "claim_text restates the quote; its only additions are the speaker's name (from the segment's speaker field) or the referent of a pronoun such as 'that', which the quote cannot show by itself. Read against the full segment, the claim is accurate."
+  },
+  {
+   "key": "claim-067::claim_text_traceable",
+   "action": "fixed",
+   "note": "claim_text rewritten to state only what the quote carries; content drawn from elsewhere in the turn was removed."
+  },
+  {
+   "key": "claim-068::claim_text_traceable",
+   "action": "rejected",
+   "note": "claim_text restates the quote; its only additions are the speaker's name (from the segment's speaker field) or the referent of a pronoun such as 'that', which the quote cannot show by itself. Read against the full segment, the claim is accurate."
+  },
+  {
+   "key": "claim-069::claim_text_traceable",
+   "action": "rejected",
+   "note": "claim_text restates the quote; its only additions are the speaker's name (from the segment's speaker field) or the referent of a pronoun such as 'that', which the quote cannot show by itself. Read against the full segment, the claim is accurate."
+  },
+  {
+   "key": "claim-071::claim_text_traceable",
+   "action": "rejected",
+   "note": "claim_text restates the quote; its only additions are the speaker's name (from the segment's speaker field) or the referent of a pronoun such as 'that', which the quote cannot show by itself. Read against the full segment, the claim is accurate."
+  },
+  {
+   "key": "claim-073::claim_text_traceable",
+   "action": "rejected",
+   "note": "claim_text restates the quote; its only additions are the speaker's name (from the segment's speaker field) or the referent of a pronoun such as 'that', which the quote cannot show by itself. Read against the full segment, the claim is accurate."
+  },
+  {
+   "key": "claim-073::values_capture",
+   "action": "rejected",
+   "note": "The quote states no financial figure (only words, or for claim-012/claim-056 a time span or years), so an empty values is correct."
+  },
+  {
+   "key": "claim-074::values_capture",
+   "action": "rejected",
+   "note": "The quote states no financial figure (only words, or for claim-012/claim-056 a time span or years), so an empty values is correct."
+  },
+  {
+   "key": "claim-077::claim_text_traceable",
+   "action": "rejected",
+   "note": "claim_text restates the quote; its only additions are the speaker's name (from the segment's speaker field) or the referent of a pronoun such as 'that', which the quote cannot show by itself. Read against the full segment, the claim is accurate."
+  },
+  {
+   "key": "claim-077::values_capture",
+   "action": "rejected",
+   "note": "The quote states no financial figure (only words, or for claim-012/claim-056 a time span or years), so an empty values is correct."
+  },
+  {
+   "key": "claim-078::claim_text_traceable",
+   "action": "rejected",
+   "note": "claim_text restates the quote; its only additions are the speaker's name (from the segment's speaker field) or the referent of a pronoun such as 'that', which the quote cannot show by itself. Read against the full segment, the claim is accurate."
+  },
+  {
+   "key": "claim-078::values_capture",
+   "action": "rejected",
+   "note": "The quote states no financial figure (only words, or for claim-012/claim-056 a time span or years), so an empty values is correct."
+  },
+  {
+   "key": "claim-079::claim_text_traceable",
+   "action": "rejected",
+   "note": "claim_text restates the quote; its only additions are the speaker's name (from the segment's speaker field) or the referent of a pronoun such as 'that', which the quote cannot show by itself. Read against the full segment, the claim is accurate."
+  },
+  {
+   "key": "claim-081::values_capture",
+   "action": "rejected",
+   "note": "The quote states no financial figure (only words, or for claim-012/claim-056 a time span or years), so an empty values is correct."
+  },
+  {
+   "key": "claim-083::claim_text_traceable",
+   "action": "fixed",
+   "note": "claim_text rewritten to state only what the quote carries; content drawn from elsewhere in the turn was removed."
+  },
+  {
+   "key": "claim-084::claim_text_traceable",
+   "action": "rejected",
+   "note": "claim_text restates the quote; its only additions are the speaker's name (from the segment's speaker field) or the referent of a pronoun such as 'that', which the quote cannot show by itself. Read against the full segment, the claim is accurate."
+  },
+  {
+   "key": "claim-088::values_capture",
+   "action": "rejected",
+   "note": "The quote states no financial figure (only words, or for claim-012/claim-056 a time span or years), so an empty values is correct."
+  },
+  {
+   "key": "claim-089::claim_text_traceable",
+   "action": "fixed",
+   "note": "claim_text rewritten to state only what the quote carries; content drawn from elsewhere in the turn was removed."
+  },
+  {
+   "key": "claim-090::claim_text_traceable",
+   "action": "fixed",
+   "note": "claim_text rewritten to state only what the quote carries; content drawn from elsewhere in the turn was removed."
+  },
+  {
+   "key": "claim-090::values_capture",
+   "action": "rejected",
+   "note": "The quote states no financial figure (only words, or for claim-012/claim-056 a time span or years), so an empty values is correct."
+  },
+  {
+   "key": "claim-091::claim_text_traceable",
+   "action": "rejected",
+   "note": "claim_text restates the quote; its only additions are the speaker's name (from the segment's speaker field) or the referent of a pronoun such as 'that', which the quote cannot show by itself. Read against the full segment, the claim is accurate."
+  },
+  {
+   "key": "claim-092::claim_text_traceable",
+   "action": "fixed",
+   "note": "claim_text rewritten to state only what the quote carries; content drawn from elsewhere in the turn was removed."
+  },
+  {
+   "key": "claim-092::values_capture",
+   "action": "rejected",
+   "note": "The quote states no financial figure (only words, or for claim-012/claim-056 a time span or years), so an empty values is correct."
+  },
+  {
+   "key": "claim-093::claim_text_traceable",
+   "action": "fixed",
+   "note": "claim_text rewritten to state only what the quote carries; content drawn from elsewhere in the turn was removed."
+  },
+  {
+   "key": "claim-094::values_capture",
+   "action": "rejected",
+   "note": "The quote states no financial figure (only words, or for claim-012/claim-056 a time span or years), so an empty values is correct."
+  },
+  {
+   "key": "claim-095::value__ai_capex_next_year_usd_trillion_min",
+   "action": "caveat_added",
+   "note": "The quote says 'a little over $1 trillion', so 1 is a floor; the key is named _min and the claim already carries a caveat that these are approximate estimates."
+  },
+  {
+   "key": "claim-096::claim_text_traceable",
+   "action": "fixed",
+   "note": "claim_text rewritten to state only what the quote carries; content drawn from elsewhere in the turn was removed."
+  },
+  {
+   "key": "claim-096::values_capture",
+   "action": "rejected",
+   "note": "The quote states no financial figure (only words, or for claim-012/claim-056 a time span or years), so an empty values is correct."
+  },
+  {
+   "key": "claim-097::claim_text_traceable",
+   "action": "rejected",
+   "note": "claim_text restates the quote; its only additions are the speaker's name (from the segment's speaker field) or the referent of a pronoun such as 'that', which the quote cannot show by itself. Read against the full segment, the claim is accurate."
+  },
+  {
+   "key": "claim-098::claim_text_traceable",
+   "action": "fixed",
+   "note": "claim_text rewritten to state only what the quote carries; content drawn from elsewhere in the turn was removed."
+  },
+  {
+   "key": "claim-098::values_capture",
+   "action": "rejected",
+   "note": "The quote states no financial figure (only words, or for claim-012/claim-056 a time span or years), so an empty values is correct."
+  },
+  {
+   "key": "claim-101::claim_text_traceable",
+   "action": "fixed",
+   "note": "claim_text rewritten to state only what the quote carries; content drawn from elsewhere in the turn was removed."
+  },
+  {
+   "key": "claim-104::claim_text_traceable",
+   "action": "fixed",
+   "note": "claim_text rewritten to state only what the quote carries; content drawn from elsewhere in the turn was removed."
+  },
+  {
+   "key": "claim-104::values_capture",
+   "action": "rejected",
+   "note": "The quote states no financial figure (only words, or for claim-012/claim-056 a time span or years), so an empty values is correct."
+  },
+  {
+   "key": "claim-105::values_capture",
+   "action": "rejected",
+   "note": "The quote states no financial figure (only words, or for claim-012/claim-056 a time span or years), so an empty values is correct."
+  },
+  {
+   "key": "claim-107::claim_text_traceable",
+   "action": "fixed",
+   "note": "claim_text rewritten to state only what the quote carries; content drawn from elsewhere in the turn was removed."
+  },
+  {
+   "key": "claim-108::claim_text_traceable",
+   "action": "fixed",
+   "note": "claim_text rewritten to state only what the quote carries; content drawn from elsewhere in the turn was removed."
+  },
+  {
+   "key": "claim-109::claim_text_traceable",
+   "action": "rejected",
+   "note": "claim_text restates the quote; its only additions are the speaker's name (from the segment's speaker field) or the referent of a pronoun such as 'that', which the quote cannot show by itself. Read against the full segment, the claim is accurate."
+  },
+  {
+   "key": "claim-110::claim_text_traceable",
+   "action": "rejected",
+   "note": "claim_text restates the quote; its only additions are the speaker's name (from the segment's speaker field) or the referent of a pronoun such as 'that', which the quote cannot show by itself. Read against the full segment, the claim is accurate."
+  },
+  {
+   "key": "claim-112::claim_text_traceable",
+   "action": "fixed",
+   "note": "claim_text rewritten to state only what the quote carries; content drawn from elsewhere in the turn was removed."
+  },
+  {
+   "key": "claim-114::claim_text_traceable",
+   "action": "fixed",
+   "note": "claim_text rewritten to state only what the quote carries; content drawn from elsewhere in the turn was removed."
+  },
+  {
+   "key": "claim-115::claim_text_traceable",
+   "action": "fixed",
+   "note": "claim_text rewritten to state only what the quote carries; content drawn from elsewhere in the turn was removed."
+  },
+  {
+   "key": "claim-115::values_capture",
+   "action": "rejected",
+   "note": "The quote states no financial figure (only words, or for claim-012/claim-056 a time span or years), so an empty values is correct."
+  },
+  {
+   "key": "claim-116::claim_text_traceable",
+   "action": "fixed",
+   "note": "claim_text rewritten to state only what the quote carries; content drawn from elsewhere in the turn was removed."
+  },
+  {
+   "key": "claim-117::claim_text_traceable",
+   "action": "rejected",
+   "note": "claim_text restates the quote; its only additions are the speaker's name (from the segment's speaker field) or the referent of a pronoun such as 'that', which the quote cannot show by itself. Read against the full segment, the claim is accurate."
+  },
+  {
+   "key": "claim-118::claim_text_traceable",
+   "action": "fixed",
+   "note": "claim_text rewritten to state only what the quote carries; content drawn from elsewhere in the turn was removed."
+  },
+  {
+   "key": "claim-119::claim_text_traceable",
+   "action": "fixed",
+   "note": "claim_text rewritten to state only what the quote carries; content drawn from elsewhere in the turn was removed."
+  },
+  {
+   "key": "claim-119::values_capture",
+   "action": "rejected",
+   "note": "The quote states no financial figure (only words, or for claim-012/claim-056 a time span or years), so an empty values is correct."
+  },
+  {
+   "key": "claim-122::claim_text_traceable",
+   "action": "fixed",
+   "note": "claim_text rewritten to state only what the quote carries; content drawn from elsewhere in the turn was removed."
+  },
+  {
+   "key": "claim-122::classification",
+   "action": "fixed",
+   "note": "Accepted: forward-looking statement about the firm's own spending, reclassified management_guidance with status forward_looking."
+  },
+  {
+   "key": "claim-122::values_capture",
+   "action": "rejected",
+   "note": "The quote states no financial figure (only words, or for claim-012/claim-056 a time span or years), so an empty values is correct."
+  },
+  {
+   "key": "claim-123::claim_text_traceable",
+   "action": "fixed",
+   "note": "claim_text rewritten to state only what the quote carries; content drawn from elsewhere in the turn was removed."
+  },
+  {
+   "key": "claim-124::claim_text_traceable",
+   "action": "fixed",
+   "note": "claim_text rewritten to state only what the quote carries; content drawn from elsewhere in the turn was removed."
+  },
+  {
+   "key": "claim-125::claim_text_traceable",
+   "action": "fixed",
+   "note": "claim_text rewritten to state only what the quote carries; content drawn from elsewhere in the turn was removed."
+  },
+  {
+   "key": "claim-127::claim_text_traceable",
+   "action": "fixed",
+   "note": "claim_text rewritten to state only what the quote carries; content drawn from elsewhere in the turn was removed."
+  },
+  {
+   "key": "claim-127::values_capture",
+   "action": "rejected",
+   "note": "The quote states no financial figure (only words, or for claim-012/claim-056 a time span or years), so an empty values is correct."
+  },
+  {
+   "key": "claim-130::claim_text_traceable",
+   "action": "rejected",
+   "note": "claim_text restates the quote; its only additions are the speaker's name (from the segment's speaker field) or the referent of a pronoun such as 'that', which the quote cannot show by itself. Read against the full segment, the claim is accurate."
+  },
+  {
+   "key": "claim-133::classification",
+   "action": "rejected",
+   "note": "The claim records, as a fact, what a third-party preview asserted; it is not this extractor's inference. Its caveat already says the figures are the preview's characterisation, not JPM's."
+  },
+  {
+   "key": "claim-134::claim_text_traceable",
+   "action": "fixed",
+   "note": "Quote widened to the full estimates table including its header row, so the Q2 column mapping of 7.70 and 5.59 is visible in the quote."
+  },
+  {
+   "key": "claim-159::claim_text_traceable",
+   "action": "rejected",
+   "note": "Ill-posed for an analytical_inference: the conclusion rests on the claims in inferred_from (each Jev-audited on its own figures); the anchor quote only locates it, so it cannot carry the cross-source comparison or need its own values."
+  },
+  {
+   "key": "claim-159::claim_vs_evidence",
+   "action": "rejected",
+   "note": "Ill-posed for an analytical_inference: the conclusion rests on the claims in inferred_from (each Jev-audited on its own figures); the anchor quote only locates it, so it cannot carry the cross-source comparison or need its own values."
+  },
+  {
+   "key": "claim-159::values_capture",
+   "action": "rejected",
+   "note": "Ill-posed for an analytical_inference: the conclusion rests on the claims in inferred_from (each Jev-audited on its own figures); the anchor quote only locates it, so it cannot carry the cross-source comparison or need its own values."
+  },
+  {
+   "key": "claim-160::claim_text_traceable",
+   "action": "rejected",
+   "note": "Ill-posed for an analytical_inference: the conclusion rests on the claims in inferred_from (each Jev-audited on its own figures); the anchor quote only locates it, so it cannot carry the cross-source comparison or need its own values."
+  },
+  {
+   "key": "claim-160::claim_vs_evidence",
+   "action": "rejected",
+   "note": "Ill-posed for an analytical_inference: the conclusion rests on the claims in inferred_from (each Jev-audited on its own figures); the anchor quote only locates it, so it cannot carry the cross-source comparison or need its own values."
+  },
+  {
+   "key": "claim-160::values_capture",
+   "action": "rejected",
+   "note": "Ill-posed for an analytical_inference: the conclusion rests on the claims in inferred_from (each Jev-audited on its own figures); the anchor quote only locates it, so it cannot carry the cross-source comparison or need its own values."
+  },
+  {
+   "key": "claim-161::claim_text_traceable",
+   "action": "rejected",
+   "note": "Ill-posed for an analytical_inference: the conclusion rests on the claims in inferred_from (each Jev-audited on its own figures); the anchor quote only locates it, so it cannot carry the cross-source comparison or need its own values."
+  },
+  {
+   "key": "claim-161::claim_vs_evidence",
+   "action": "rejected",
+   "note": "Ill-posed for an analytical_inference: the conclusion rests on the claims in inferred_from (each Jev-audited on its own figures); the anchor quote only locates it, so it cannot carry the cross-source comparison or need its own values."
+  },
+  {
+   "key": "claim-161::values_capture",
+   "action": "rejected",
+   "note": "Ill-posed for an analytical_inference: the conclusion rests on the claims in inferred_from (each Jev-audited on its own figures); the anchor quote only locates it, so it cannot carry the cross-source comparison or need its own values."
+  },
+  {
+   "key": "claim-162::claim_text_traceable",
+   "action": "rejected",
+   "note": "Ill-posed for an analytical_inference: the conclusion rests on the claims in inferred_from (each Jev-audited on its own figures); the anchor quote only locates it, so it cannot carry the cross-source comparison or need its own values."
+  },
+  {
+   "key": "claim-162::claim_vs_evidence",
+   "action": "rejected",
+   "note": "Ill-posed for an analytical_inference: the conclusion rests on the claims in inferred_from (each Jev-audited on its own figures); the anchor quote only locates it, so it cannot carry the cross-source comparison or need its own values."
+  },
+  {
+   "key": "claim-162::values_capture",
+   "action": "rejected",
+   "note": "Ill-posed for an analytical_inference: the conclusion rests on the claims in inferred_from (each Jev-audited on its own figures); the anchor quote only locates it, so it cannot carry the cross-source comparison or need its own values."
+  },
+  {
+   "key": "claim-163::claim_text_traceable",
+   "action": "rejected",
+   "note": "Ill-posed for an analytical_inference: the conclusion rests on the claims in inferred_from (each Jev-audited on its own figures); the anchor quote only locates it, so it cannot carry the cross-source comparison or need its own values."
+  },
+  {
+   "key": "claim-163::claim_vs_evidence",
+   "action": "rejected",
+   "note": "Ill-posed for an analytical_inference: the conclusion rests on the claims in inferred_from (each Jev-audited on its own figures); the anchor quote only locates it, so it cannot carry the cross-source comparison or need its own values."
+  },
+  {
+   "key": "claim-163::values_capture",
+   "action": "rejected",
+   "note": "Ill-posed for an analytical_inference: the conclusion rests on the claims in inferred_from (each Jev-audited on its own figures); the anchor quote only locates it, so it cannot carry the cross-source comparison or need its own values."
+  },
+  {
+   "key": "claim-164::claim_text_traceable",
+   "action": "rejected",
+   "note": "Ill-posed for an analytical_inference: the conclusion rests on the claims in inferred_from (each Jev-audited on its own figures); the anchor quote only locates it, so it cannot carry the cross-source comparison or need its own values."
+  },
+  {
+   "key": "claim-164::claim_vs_evidence",
+   "action": "rejected",
+   "note": "Ill-posed for an analytical_inference: the conclusion rests on the claims in inferred_from (each Jev-audited on its own figures); the anchor quote only locates it, so it cannot carry the cross-source comparison or need its own values."
+  },
+  {
+   "key": "claim-164::values_capture",
+   "action": "rejected",
+   "note": "Ill-posed for an analytical_inference: the conclusion rests on the claims in inferred_from (each Jev-audited on its own figures); the anchor quote only locates it, so it cannot carry the cross-source comparison or need its own values."
+  },
+  {
+   "key": "claim-165::claim_text_traceable",
+   "action": "rejected",
+   "note": "Ill-posed for an analytical_inference: the conclusion rests on the claims in inferred_from (each Jev-audited on its own figures); the anchor quote only locates it, so it cannot carry the cross-source comparison or need its own values."
+  },
+  {
+   "key": "claim-165::claim_vs_evidence",
+   "action": "rejected",
+   "note": "Ill-posed for an analytical_inference: the conclusion rests on the claims in inferred_from (each Jev-audited on its own figures); the anchor quote only locates it, so it cannot carry the cross-source comparison or need its own values."
+  },
+  {
+   "key": "claim-165::values_capture",
+   "action": "rejected",
+   "note": "Ill-posed for an analytical_inference: the conclusion rests on the claims in inferred_from (each Jev-audited on its own figures); the anchor quote only locates it, so it cannot carry the cross-source comparison or need its own values."
+  },
+  {
+   "key": "claim-166::claim_text_traceable",
+   "action": "rejected",
+   "note": "Ill-posed for an analytical_inference: the conclusion rests on the claims in inferred_from (each Jev-audited on its own figures); the anchor quote only locates it, so it cannot carry the cross-source comparison or need its own values."
+  },
+  {
+   "key": "claim-166::claim_vs_evidence",
+   "action": "rejected",
+   "note": "Ill-posed for an analytical_inference: the conclusion rests on the claims in inferred_from (each Jev-audited on its own figures); the anchor quote only locates it, so it cannot carry the cross-source comparison or need its own values."
+  },
+  {
+   "key": "claim-166::values_capture",
+   "action": "rejected",
+   "note": "Ill-posed for an analytical_inference: the conclusion rests on the claims in inferred_from (each Jev-audited on its own figures); the anchor quote only locates it, so it cannot carry the cross-source comparison or need its own values."
+  },
+  {
+   "key": "claim-040::claim_text_traceable",
+   "action": "rejected",
+   "note": "claim_text restates the quote ('a complete continuation of what we've been doing for years ... you shouldn't really expect any change'); 'investment spending' only names what 'it' refers to, from the question in the same segment."
+  },
+  {
+   "key": "claim-088::claim_text_traceable",
+   "action": "fixed",
+   "note": "Removed 'AI benefits will accrue to customers', which is elsewhere in the turn; claim_text now states only the Fiserv/FIS point in the quote."
+  },
+  {
+   "key": "claim-129::values_capture",
+   "action": "rejected",
+   "note": "The only numbers in the quote not in values are the clock times '7 a.m.' and '8:30 a.m.', which are not financial figures."
+  },
+  {
+   "key": "claim-130::classification",
+   "action": "rejected",
+   "note": "The claim records the consensus range a source stated; it is not this extractor's inference."
+  },
+  {
+   "key": "claim-152::claim_text_traceable",
+   "action": "caveat_added",
+   "note": "The year-earlier 11.1% comes from the table's Jun 30, 2025 column, which the quote cannot show; the claim's caveat says so."
+  },
+  {
+   "key": "check-tier",
+   "action": "fixed",
+   "note": "Second, full audit (--all-claims, 166 claims): 83 check items read as a group. About 45 are values_capture on claims whose quotes hold no figure (correctly empty); the rest are weak traceability or classification answers on near-verbatim or qualified claims, already caveated where a figure is approximate. One earlier action stands from the first pass: claim-020 lost its period and claim-152 gained a caveat. Coverage checks seg-0049 and seg-0084 were re-read; both immaterial calls stand."
+  }
+ ]
+}

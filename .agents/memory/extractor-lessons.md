@@ -15,3 +15,4 @@ Process guidance only, proposed by the outlook-reviewer and persisted by `earnin
 - Give a period only to claims whose quote actually fixes one; a comparison against historical standards or a general characterisation should carry no period rather than inherit the reporting quarter's.
 - Before asserting that every entity in a comparison set shares a characteristic, confirm the stated metric for each entity individually rather than inferring it from a related metric on the same entity.
 - When the brief states how many people raised a point, count distinct speakers across the cited claims rather than counting the citations themselves.
+- When narrowing claim_text to what its quote supports, keep any scope-setting referent (business line, entity, customer segment) or speaker hedge that changes the meaning, by widening the quote to include it rather than deleting it from claim_text.

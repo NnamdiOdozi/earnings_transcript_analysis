@@ -1,12 +1,12 @@
 {
-  "url": "https://tradingwhisperer.com/investing-news/bank-earnings-update-jpm-bofa-citi/",
-  "title": "Bank Earnings Update: JPM, BofA, Citi - Trading Whisperer",
+  "url": "https://www.indmoney.com/blog/us-stocks/us-bank-earnings-q2-jpm-bac-gs-wfc-citi-stock-earnings",
+  "title": "JPMorgan, BofA, Goldman, Wells Fargo & Citi Q2 Earnings ...",
   "score": null,
-  "published_date": "2026-07-14T00:00:00.000Z",
+  "published_date": null,
   "_class": "peer",
   "_select_key": "peer:Bank of America",
-  "_temporal_status": "pre_event",
+  "_temporal_status": "undated",
   "_provider": "exa",
   "_query": "Bank of America quarterly results versus JPMorgan Chase & Co. JPM",
-  "_retrieved_at": "2026-09-16T15:44:46Z"
+  "_retrieved_at": "2026-10-13T22:12:43Z"
 }

@@ -1,113 +1,168 @@
 {
-  "verdict": "pass",
+  "verdict": "pass_with_warnings",
   "review_mode": "full",
-  "reviewed_at": "2026-09-16T22:21:22Z",
-  "model": "gpt-5",
-  "claims_sha256": "cf1933c5fffb4fc73ef593da511720e509cb2f6e995ea6bc4b06756df43643f1",
-  "outlook_brief_sha256": "ea8ae2ad2dff7d815eda518d78acf8e9cd57509acef5ae58c2414f7b4f3d32a7",
-  "review_diff_sha256": "3dc11019afebcf3ac853a7d3927e01083ae9288b84244a7a685e4d347c021fa4",
+  "reviewed_at": "2026-10-13T23:30:00Z",
+  "model": "claude-opus-5-5",
+  "reasoning_effort": "not_applicable",
+  "claims_sha256": "a618b84d2943b8b30d4de5970da025a61b5e1307e94ef2956bc8b75bb356bed4",
+  "outlook_brief_sha256": "65b2369b55928442d47cf72a5ce006e15a583358ebf2fd565df9168d3d22979f",
+  "review_diff_sha256": null,
+  "claim_review_receipt": {
+    "reviewed_ok": [
+      "claim-001", "claim-002", "claim-003", "claim-004", "claim-005", "claim-006", "claim-007", "claim-008", "claim-009", "claim-010",
+      "claim-011", "claim-012", "claim-013", "claim-014", "claim-015", "claim-016", "claim-017", "claim-018", "claim-019", "claim-020",
+      "claim-021", "claim-022", "claim-023", "claim-024", "claim-025", "claim-026", "claim-027", "claim-028", "claim-029", "claim-030",
+      "claim-031", "claim-032", "claim-033", "claim-034", "claim-036", "claim-037", "claim-038", "claim-039", "claim-040",
+      "claim-041", "claim-042", "claim-043", "claim-044", "claim-045", "claim-046", "claim-047", "claim-048", "claim-049", "claim-050",
+      "claim-051", "claim-052", "claim-053", "claim-054", "claim-055", "claim-056", "claim-057", "claim-058", "claim-059", "claim-060",
+      "claim-061", "claim-062", "claim-063", "claim-064", "claim-065", "claim-066", "claim-067", "claim-068", "claim-069", "claim-070",
+      "claim-071", "claim-072", "claim-073", "claim-074", "claim-075", "claim-076", "claim-077", "claim-078", "claim-079", "claim-080",
+      "claim-081", "claim-082", "claim-083", "claim-084", "claim-085", "claim-086", "claim-087", "claim-088", "claim-089", "claim-090",
+      "claim-091", "claim-092", "claim-093", "claim-094", "claim-095", "claim-096", "claim-097", "claim-098", "claim-099", "claim-100",
+      "claim-101", "claim-102", "claim-103", "claim-104", "claim-105", "claim-106", "claim-107", "claim-108", "claim-109", "claim-110",
+      "claim-111", "claim-112", "claim-113", "claim-114", "claim-115", "claim-117", "claim-118", "claim-119", "claim-120",
+      "claim-121", "claim-122", "claim-123", "claim-124", "claim-125", "claim-126", "claim-127", "claim-128", "claim-129", "claim-130",
+      "claim-131", "claim-132", "claim-133", "claim-134", "claim-135", "claim-136", "claim-137", "claim-138", "claim-139", "claim-140",
+      "claim-141", "claim-142", "claim-143", "claim-144", "claim-145", "claim-146", "claim-147", "claim-148", "claim-149", "claim-150",
+      "claim-151", "claim-152", "claim-153", "claim-154", "claim-155", "claim-156", "claim-157", "claim-158", "claim-159", "claim-160",
+      "claim-161", "claim-162", "claim-163", "claim-164", "claim-165", "claim-166"
+    ],
+    "with_findings": ["claim-035", "claim-116"],
+    "unverifiable": [],
+    "carried_forward": []
+  },
   "source_checks": [
     {
       "severity": "info",
-      "artifact": "raw/transcript.txt",
-      "passage": "JPMorganChase's Second Quarter 2026 Earnings Call",
-      "evidence": "The complete transcript was reread for this full round. Its company, event date, prepared remarks and Q&A context agree with the claims and outlook. The important qualifications around investment-banking conversion, exceptional Equities activity, deposit-rate repricing, consumer-credit dependence on employment and underwriting weakness are preserved in the finished brief.",
+      "artifact": "normalized/transcript.jsonl",
+      "passage": "n/a",
+      "evidence": "All 109 segments read in full. The transcript is a genuine JPMorganChase 2Q26 call dated 14 Jul 2026, matching manifest event_date 2026-07-14. Segmentation merges some speaker turns into one segment (seg-0014, seg-0026, seg-0040, seg-0062, seg-0074 each carry both the analyst and the answering executive), but every claim drawn from those segments names the speaker who actually said the quoted words.",
+      "recommendation": "None for this run; the merged turns are a segmentation limitation that the extractor handled correctly."
+    },
+    {
+      "severity": "info",
+      "artifact": "evidence/web/web-006.md",
+      "passage": "Jul 14, 2026 12:00 PM",
+      "evidence": "A genuine TradingKey preview of JPM's Q2 2026 results. The timestamp is after JPM's 7 a.m. release, but the content is entirely pre-release (it discusses what to watch and states no actual results). The extractor recorded that timing caveat on every claim drawn from this page, and the brief repeats it.",
       "recommendation": "None."
     },
     {
       "severity": "info",
       "artifact": "evidence/web/web-001.md",
-      "passage": "July 9, 2026",
-      "evidence": "The archived page is a pre-event JPMorgan second-quarter preview. Its date precedes the 14 July 2026 event, and its consensus EPS and revenue figures match the claim that cites it.",
+      "passage": "| Actual 5.07 4.85 | Actual 4.63 4.85 | Actual 5.94 5.47 | Actual 7.70 5.59 |",
+      "evidence": "A live WSJ estimates page captured on 13 Oct 2026, three months after the event. It is used only to report what the reported EPS turned out to be, and both the claim and the brief label it as post-event. The 7.70 figure is independently consistent with evidence/financials.json: the SEC half-year diluted EPS of 13.63 less Q1's 5.94 gives 7.69.",
       "recommendation": "None."
     },
     {
-      "severity": "low",
-      "artifact": "evidence/web/web-009.md",
-      "passage": "Wells Fargo Bank | Financial Services & Online Banking",
-      "evidence": "The archived body remains a generic Wells Fargo homepage rather than the second-quarter results page suggested by its evidence title. No claim or outlook conclusion cites this artifact, and other archived Wells Fargo results evidence is available, so this does not affect the analysis.",
-      "recommendation": "Mark this evidence item unusable or reject generic landing pages during extraction selection."
+      "severity": "info",
+      "artifact": "evidence/web/web-011.md",
+      "passage": "EPS BEAT 5.59 6.14 +9.84%",
+      "evidence": "web-evidence.jsonl marks this page temporal_status 'pre_event', yet its content already shows the actual results. It is a living page that was updated after the call, and its revenue 'actual' of 82.46B is plainly wrong. No claim cites it, and the brief's uncertainty section correctly says a second aggregator page showing actual results was excluded as an expectation source.",
+      "recommendation": "None for this run. It is a live example of why a pre_event date label cannot be trusted on its own."
     },
     {
       "severity": "info",
-      "artifact": "evidence/financials.json",
-      "passage": "period_type: half_year",
-      "evidence": "The SEC evidence contains half-year net-income and diluted-EPS facts filed after the call. The claims and brief do not misuse those cumulative facts as quarterly figures or as pre-event evidence.",
+      "artifact": "evidence/web/web-012.md",
+      "passage": "n/a",
+      "evidence": "The peer sources are genuine company releases or slide decks dated 14 Jul 2026: Bank of America (web-012 press release, web-007 slides), Citi (web-003 release, web-013 slides), Wells Fargo (web-004), and Goldman Sachs (web-005, web-010). Every peer quote in claim-135 to claim-158 was found in its file, and the surrounding context matches the claim, including entity, quarter and growth basis. For example, Bank of America's 11.2% CET1 is the Standardized ratio, the same basis as JPM's 14.1%.",
       "recommendation": "None."
     }
   ],
   "claim_findings": [
     {
-      "severity": "info",
-      "artifact": "claims.json#claim-018",
-      "passage": "Long-term net inflows were $50 billion; assets under management reached $5.1 trillion, up 18%, and client assets reached $7.7 trillion, up 19% year on year.",
-      "evidence": "The claim no longer assigns one as-of period to both the flow and point-in-time balances. Its text and quote remain faithful to the prepared remarks. The brief uses it only for asset inflows, client inflows and net inflows, without adding an unsupported period label.",
-      "recommendation": "None."
+      "severity": "medium",
+      "artifact": "claims.json#claim-035",
+      "passage": "Barnum said first-half deposit growth outperformed expectations, reflecting franchise strength and share gains and partly the lending environment, particularly NBFI and data-centre lending.",
+      "evidence": "Shifted scope. In seg-0013 Barnum opens with 'let me actually start with Wholesale. So, Wholesale deposit growth was quite strong this quarter actually and has been for the first half of the year', and only then says 'the first half of the year has outperformed our expectations'. The outperformance he describes is Wholesale deposits only. He then turns to Consumer separately, where growth is merely 'in line with our expectations' and yield-seeking outflows remain a risk. Because claim_text drops 'Wholesale', it reads as a firm-wide statement that deposit growth beat expectations, which the segment does not say. The Jev disposition marked this claim 'fixed' by removing content outside the quote, and that trimming is what removed the scope word. The brief itself correctly writes 'Wholesale deposit growth', so the brief is unaffected, but the signal card shows the claim without that scope.",
+      "recommendation": "Widen the quote to include 'Wholesale deposit growth was quite strong this quarter actually and has been for the first half of the year', and restore 'Wholesale' in claim_text."
     },
     {
-      "severity": "info",
-      "artifact": "claims.json#claim-062",
-      "passage": "The Smart Cash product remained a test focused on a narrow account segment, with customer tests planned.",
-      "evidence": "Every element of the revised claim now appears in its own quote. The separate 2026 timing statement remains correctly captured by claim-099 rather than being imported into this claim.",
-      "recommendation": "None."
+      "severity": "low",
+      "artifact": "claims.json#claim-116",
+      "passage": "Dimon said performance will not follow a bell curve and there will be outliers, as in the Great Financial Crisis.",
+      "evidence": "Possibility turned into certainty, with a dropped condition. The full sentence in seg-0091 is 'when there's a credit cycle, and there will be a credit cycle, how will everybody perform. And I don't think it's going to be like a bell curve of performance. I think there'll be some outliers'. claim_text drops both the hedge ('I don't think', 'I think') and the condition that this refers to how lenders would perform when the credit cycle turns. As written, it reads as an unconditional prediction. The brief restores the condition ('when credit turns'), so the problem is confined to the claim and the signal card.",
+      "recommendation": "Rewrite as 'Dimon said he does not think performance will follow a bell curve when the credit cycle turns, expecting some outliers as in the Great Financial Crisis', and widen the quote to include the credit-cycle clause."
     },
     {
-      "severity": "info",
-      "artifact": "claims.json#claim-066",
-      "passage": "Management observed mild weakening in underwriting through aggressive revenue assumptions, expense add-backs, payment-in-kind structures, covenants and rollover risk, and expects performance to diverge in a future credit cycle.",
-      "evidence": "The expanded quote now contains the revenue assumptions, expense add-backs, payment-in-kind structures, weaker covenants, rollover risk, mild-weakening qualification and future-cycle consequence asserted by the claim. The brief's use of this claim is fair and does not overstate management's caution.",
-      "recommendation": "None."
-    },
-    {
-      "severity": "info",
-      "artifact": "claims.json#claim-076",
-      "passage": "Reported EPS exceeded both cited pre-event consensus estimates.",
-      "evidence": "The only analytical-inference claim identifies claim-001, claim-074 and claim-075 as inputs. The reported $6.14 EPS is above both archived pre-event estimates, and the outlook characterizes only that comparison rather than inferring a broader earnings beat.",
-      "recommendation": "None."
+      "severity": "low",
+      "artifact": "claims.json",
+      "passage": "But as I always say, when it comes to Consumer credit performance, it's just about the labor market. And so, you're not going to hear anything from me that's new or differentiated about the labor market. Like we all see the same numbers, and it's been surprisingly resilient. So, for now, that's the narrative.",
+      "evidence": "Coverage gap in seg-0076. This is the CFO's own statement of the single driver of consumer credit performance, with a 'for now' qualifier, and no claim records it. That segment yielded claims on spend, delinquencies, the K-shaped narrative and the real-wage watch area, but not this conditioning statement. As a result the brief's 'Consumer credit is benign' paragraph could not state the condition management attached to that view.",
+      "recommendation": "Extract a management_opinion claim for this sentence. The brief's consumer credit paragraph can then say that the benign view is explicitly conditional on the labour market."
     }
   ],
-  "outlook_findings": [],
+  "outlook_findings": [
+    {
+      "severity": "medium",
+      "artifact": "outlook-brief.md",
+      "passage": "Expenses rose 15%, matching adjusted revenue growth [claim-003][claim-002][claim-163]. ... Our reading is that JPM is reinvesting more of its revenue growth than its peers, which are, for now, converting more of theirs into earnings.",
+      "evidence": "There are three problems with this passage. First, it is an unsupported inferential leap. The brief's own cited evidence attributes the expense growth largely to volume- and revenue-related expense (claim-003). It also shows that $1.5 billion of expense was booked against $6.5 billion of capital-markets outperformance (claim-075), which is revenue-linked pay rather than reinvestment. Second, it ignores counterevidence. Dimon said margins 'actually went up this quarter, not down' (claim-055), yet the brief cites that claim only for 'a crazy notion'. Dimon also said operating leverage was 'definitely positive' in dollar terms (claim-069), and the brief omits this. Equal 15% growth on a revenue base far larger than the expense base means JPM did convert revenue growth into earnings. Third, a caveat is not honoured: claim-163 records that JPM's revenue growth is ex-significant items while the expense growth basis is not stated, but the brief writes 'matching' as though the two were measured on the same basis.",
+      "recommendation": "Replace the 'reinvesting more' reading. State that JPM's percentage operating leverage was roughly flat while peers' was positive, but that management attributes most of the expense growth to revenue-linked costs and says margins rose and dollar operating leverage was positive (cite claim-055 and claim-069). Carry claim-163's basis caveat in the sentence."
+    },
+    {
+      "severity": "low",
+      "artifact": "outlook-brief.md",
+      "passage": "The revenue spike, by contrast, rests largely on an Equities result management itself called hard to repeat [claim-018][claim-031].",
+      "evidence": "claim-002 lists four drivers of the 15% adjusted revenue growth: Markets revenue, higher asset management fees, higher Investment Banking revenue, and higher deposit and loan balances. Equities is only one part of Markets. Nothing in the run gives a dollar split showing that Equities accounts for most of the increase, so 'rests largely on' goes further than the evidence. Section 7 makes the more accurate point, that 'part of this quarter's 15% adjusted revenue growth may simply not recur'.",
+      "recommendation": "Write 'rests in part on Markets, especially an Equities result management itself called hard to repeat', or cite evidence of Equities' share of the increase."
+    },
+    {
+      "severity": "low",
+      "artifact": "outlook-brief.md",
+      "passage": "He also described a mild deterioration in credit underwriting across the market, including more PIK and weaker covenants",
+      "evidence": "The quote behind claim-115 says explicitly 'this is not across the board, by the way. It's more some players than others.' claim_text itself says the deterioration varies by player. 'Across the market' reverses that scope qualifier.",
+      "recommendation": "Write 'a mild deterioration in credit underwriting among some lenders, not across the board'."
+    },
+    {
+      "severity": "low",
+      "artifact": "outlook-brief.md",
+      "passage": "Regulatory relief is a third possible lever: Dimon set out specific changes he wants to capital rules [claim-059], but nothing in this run's evidence shows they will happen.",
+      "evidence": "The brief treats regulation only as a possible upside. Management's own statement that the short-term wholesale funding change to the GSIB score 'disproportionately' increases the burden on banks like JPM (claim-061) is not cited anywhere in the brief. The preview's roughly $20 billion G-SIB capital hit (claim-133) appears only in the uncertainties section, as a third-party figure. A brief that cites only the favourable side of a two-sided regulatory picture is a mild case of selective citation, especially next to the brief's 'Capital is ample' and buyback/deployment upside.",
+      "recommendation": "Add the GSIB/short-term wholesale funding headwind (claim-061) to the capital paragraph or the downside case, alongside the relief scenario."
+    }
+  ],
   "process_findings": [
     {
       "severity": "info",
-      "artifact": "review/review-diff.json",
-      "passage": "auto_escalated: true",
-      "evidence": "Python identified three changed claims and forced a full review because a changed claim's period metadata affected conclusion-bearing brief sections. This report follows that full-review scope and is bound to the current diff sidecar hash.",
-      "recommendation": "None."
-    },
-    {
-      "severity": "info",
       "artifact": "claims/validation.json",
-      "passage": "ok: true",
-      "evidence": "The current claims validation artifact exists and records a passing result. The staged manifest contains 216 hashed sources, all 110 claims have non-empty ids, and the regenerated signal card is present. These confirmations establish process completion, not semantic correctness.",
-      "recommendation": "None."
-    },
-    {
-      "severity": "info",
-      "artifact": "outlook/outlook-validation.json",
-      "passage": "ok: true",
-      "evidence": "The current hash-binding outlook validation exists and records a passing result for the exact claims and brief hashes in this report. All 51 distinct claim ids cited in the unchanged brief were reopened and checked against the current claim text, quote and transcript or web context.",
+      "passage": "n/a",
+      "evidence": "Confirmed present, not re-derived. validation.json.ok == true, with 166 claims checked and 0 issues. outlook/outlook-validation.json.ok == true, with 0 errors and 0 warnings, and it records claims_sha256 and outlook_brief_sha256, which were copied into this report. manifest.json declares layout_version 2 and lists hashed sources. Every claim has a non-empty id, and outlook/outlook-brief.md exists. claims.json has no calculation blocks, so item 4 was a semantic check of each value's metric, unit, entity, scope and period against its source. That check found no misassigned figure and no period label that conflicts with evidence/financials.json, whose only facts are half-year figures that no claim labels as quarterly.",
       "recommendation": "None."
     },
     {
       "severity": "info",
       "artifact": "injection-scan.json",
-      "passage": "finding_count: 0",
-      "evidence": "The configured transcript scan reported no flagged prompt-injection phrases, leaving no hits requiring contextual classification.",
+      "passage": "n/a",
+      "evidence": "Clean scan: 25 patterns, 0 findings. A read of all 109 segments and the cited web files also found no text addressed to an agent.",
       "recommendation": "None."
     },
     {
       "severity": "info",
-      "artifact": "claims/coverage-receipt.json",
-      "passage": "109 segment receipts",
-      "evidence": "The receipt accounts for every normalized transcript segment exactly once, with no missing or invented segment ids or claim ids. The 45 deliberately immaterial segments remain operator instructions, acknowledgements, handovers, pleasantries, a minor biographical correction or the standard disclaimer. This reviewer inspection does not replace the deferred deterministic enforcement of the receipt.",
-      "recommendation": "Implement the already-deferred structural validator so future runs do not rely on reviewer inspection for basic receipt completeness."
+      "artifact": "claims/jev-dispositions.json",
+      "passage": "n/a",
+      "evidence": "Every Jev defect has a recorded disposition. Claims triage: 135 defects and 83 checks. Coverage triage: 0 defects and 2 checks (seg-0049 and seg-0084), which I re-read and agree are immaterial. Outlook triage: 22 defects and 36 checks. I spot-read the 'rejected' dispositions against the claims and the brief, and their reasons survive. Two of the 'fixed' dispositions (claim-035 and claim-116) are the edits that introduced or left the defects raised in claim_findings above: trimming claim_text to the quote removed a scope word in one claim and a hedge and condition in the other. Every caveat on a cited claim was checked against the brief's prose. All are honoured (approximations written as 'about' or 'approximately', floors as 'more than', the adjusted basis flagged) except claim-163's expense-basis caveat, which is raised in outlook_findings.",
+      "recommendation": "When a Jev 'claim_text_traceable' flag is fixed by trimming claim_text, check that the trim did not drop a scope or hedge word. Where it would, widen the quote instead."
+    },
+    {
+      "severity": "info",
+      "artifact": "claims/history/attempt-0001_20261013T223240Z/receipt.json",
+      "passage": "n/a",
+      "evidence": "There were three extraction attempts. Attempt 1 failed with a single claim_text_quote_traceable issue. Attempts 2 and 3 passed with no issues. No check type failed in two or more attempts, so the history yields no lesson.",
+      "recommendation": "None."
+    },
+    {
+      "severity": "info",
+      "artifact": "outlook-brief.md",
+      "passage": "n/a",
+      "evidence": "Cross-sector appropriateness check: the signal card and brief use banking-appropriate metrics throughout (NII, CET1, RWA, ROTCE, net charge-offs, deposit betas, IB fees). No template language from another industry appears.",
+      "recommendation": "None."
     }
   ],
   "unverified_items": [
-    "The exact publication timestamp of evidence/web/web-006.md is absent from the archived metadata. Its text is unambiguously framed as a forecast for an upcoming earnings release, so it supports a pre-release expectation, but not a precise as-of time."
+    "JPM's own earnings release and financial supplement were not archived as web evidence. The search hits for them are in raw/web but were never extracted. As a result I could not check whether the $27.3 billion expense figure in claim-003 is reported or adjusted, nor the size of the significant items that separate the adjusted $6.14 EPS from the reported 7.70. The brief correctly flags both as open."
   ],
-  "summary": "Full round-2 review passed. The three changed claims resolve the prior semantic warnings, and every citation in the unchanged brief remains fair against the current claims and source context. The brief is balanced, distinguishes exceptional trading conditions from repeatable franchise drivers, and presents evidence-linked base, upside and downside cases without unjustified confidence. One low-severity source-hygiene issue remains: an unused Wells Fargo artifact is a generic homepage rather than the results page suggested by its title. It does not affect any claim or conclusion.",
-  "escalate_full_review": false,
-  "proposed_lessons": []
+  "summary": "The run is well grounded. Its sources are genuine, its temporal handling is careful (post-event pages are labelled, and a living pre_event-dated page showing actual results was correctly excluded), and every Jev flag was dispositioned. I found no high-severity issue. The main warning is in the brief's Business drivers section: it reads JPM's equal expense and revenue growth as JPM 'reinvesting more' than its peers. That ignores management's evidence that the expense growth was largely revenue-linked pay, that margins rose, and that dollar operating leverage was positive, and it drops claim-163's caveat that the expense and revenue growth rates may not share a basis. One claim (claim-035) lost its 'Wholesale' scope when it was trimmed to its quote, so it now reads as firm-wide deposit outperformance. Smaller issues: the brief overstates Equities' share of the revenue spike, says underwriting deterioration was 'across the market' when Dimon said it was not across the board, and cites regulation only as an upside. claim-116 drops a hedge, and a labour-market conditioning statement on consumer credit was never extracted.",
+  "proposed_lessons": [
+    "When narrowing claim_text to what its quote supports, keep any scope-setting referent (business line, entity, customer segment) or speaker hedge that changes the meaning, by widening the quote to include it rather than deleting it from claim_text."
+  ]
 }

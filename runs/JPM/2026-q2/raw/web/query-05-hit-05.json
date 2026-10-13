@@ -1,12 +1,12 @@
 {
-  "url": "https://www.chartmill.com/news/JPM/Chartmill-50943-JPMorgan-Chase-NYSEJPM-Falls-on-Earnings-Beat-as-Market-Eyes-One-Time-Gains",
-  "title": "JPMorgan Chase (NYSE:JPM) Falls on Earnings Beat as Market Eyes One-Time Gains | ChartMill.com",
+  "url": "https://www.jpmorganchase.com/ir/quarterly-earnings",
+  "title": "Quarterly Earnings",
   "score": null,
-  "published_date": "2026-07-14T00:00:00.000Z",
+  "published_date": null,
   "_class": "consensus",
   "_select_key": "consensus",
-  "_temporal_status": "pre_event",
+  "_temporal_status": "undated",
   "_provider": "exa",
   "_query": "JPMorgan Chase & Co. JPM 2026-q2 analyst earnings reaction results",
-  "_retrieved_at": "2026-09-16T15:44:43Z"
+  "_retrieved_at": "2026-10-13T22:12:39Z"
 }

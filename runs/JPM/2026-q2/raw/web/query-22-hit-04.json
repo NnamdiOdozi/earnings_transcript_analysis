@@ -1,12 +1,12 @@
 {
-  "url": "https://www.stocktitan.net/sec-filings/JPM/8-k-jpmorgan-chase-co-reports-material-event-1f2ddf4de037.html",
-  "title": "JPMorgan Chase posts $21.2B profit in Q2 2026 | JPM 8-K Filing",
+  "url": "https://www.reuters.com/business/finance/jpmorgan-profit-rises-investment-banking-boom-2026-07-14/",
+  "title": "JPMorgan posts highest quarterly profit ever by a U.S. bank ...",
   "score": null,
-  "published_date": "2026-07-14T00:00:00.000Z",
+  "published_date": null,
   "_class": "peer",
   "_select_key": "peer:Goldman Sachs",
-  "_temporal_status": "pre_event",
+  "_temporal_status": "undated",
   "_provider": "exa",
   "_query": "Goldman Sachs quarterly results versus JPMorgan Chase & Co. JPM",
-  "_retrieved_at": "2026-09-16T15:45:15Z"
+  "_retrieved_at": "2026-10-13T22:13:11Z"
 }

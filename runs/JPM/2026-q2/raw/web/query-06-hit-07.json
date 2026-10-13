@@ -1,12 +1,12 @@
 {
-  "url": "https://www.marketscreener.com/news/bank-of-america-presentation-q2-2026-ce7f5edcd18bf52d",
-  "title": "Bank of America : Presentation Q2 2026 | MarketScreener",
+  "url": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000353/bac06302026ex991.htm",
+  "title": "bac06302026ex991",
   "score": null,
-  "published_date": "2026-07-14T00:00:00.000Z",
+  "published_date": null,
   "_class": "peer",
   "_select_key": "peer:Bank of America",
-  "_temporal_status": "pre_event",
+  "_temporal_status": "undated",
   "_provider": "exa",
   "_query": "Bank of America 2026-q2 earnings results revenue growth",
-  "_retrieved_at": "2026-09-16T15:44:45Z"
+  "_retrieved_at": "2026-10-13T22:12:41Z"
 }

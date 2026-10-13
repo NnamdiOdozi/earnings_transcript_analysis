@@ -1,0 +1,119 @@
+{
+ "dispositions": [
+  {
+   "key": "claim-002@1aa9b232::citation_supports_passage",
+   "action": "rejected",
+   "note": "Cited for 'matching adjusted revenue growth': claim-002 is the 15% adjusted revenue growth that the 15% expense growth matches. Multi-citation paragraph: this claim is cited for one specific sentence, which it supports when read on its own; Jev judged it against the paragraph's other sentences."
+  },
+  {
+   "key": "claim-002@0b984c57::citation_supports_passage",
+   "action": "rejected",
+   "note": "Cited for the '15% adjusted revenue growth' figure that the sentence says may partly not recur; claim-002 carries that figure."
+  },
+  {
+   "key": "claim-002@1aa9b232::quoted_text_belongs_to_claim",
+   "action": "rejected",
+   "note": "The quoted phrase in this paragraph ('a crazy notion' / 'Including' '[Excluding]') belongs to a different claim cited in the same paragraph (claim-055 / claim-001), which is where the brief attributes it; this claim is cited for its own figure, not the quotation."
+  },
+  {
+   "key": "claim-003@1aa9b232::quoted_text_belongs_to_claim",
+   "action": "rejected",
+   "note": "The quoted phrase in this paragraph ('a crazy notion' / 'Including' '[Excluding]') belongs to a different claim cited in the same paragraph (claim-055 / claim-001), which is where the brief attributes it; this claim is cited for its own figure, not the quotation."
+  },
+  {
+   "key": "claim-006@ad5ad47e::citation_supports_passage",
+   "action": "rejected",
+   "note": "Monitoring bullet: claim-006 is cited to identify the RWA growth being monitored (approximately $103 billion this quarter), not to assert that it will continue."
+  },
+  {
+   "key": "claim-014@b7da0a29::citation_supports_passage",
+   "action": "rejected",
+   "note": "Cited for 'JPM's fees rose 30%, with equity underwriting leading', which claim-014 states directly. Multi-citation paragraph: this claim is cited for one specific sentence, which it supports when read on its own; Jev judged it against the paragraph's other sentences."
+  },
+  {
+   "key": "claim-018@901fffd4::citation_supports_passage",
+   "action": "rejected",
+   "note": "Cited for the Equities result itself (86% growth); claim-031, cited beside it, carries 'hard to repeat'. Multi-citation paragraph: this claim is cited for one specific sentence, which it supports when read on its own; Jev judged it against the paragraph's other sentences."
+  },
+  {
+   "key": "claim-023@52bd755a::citation_supports_passage",
+   "action": "rejected",
+   "note": "Conditional downside scenario: claim-023 identifies the raised NII guide the scenario says could be missed; the shortfall is framed as a scenario, not a fact."
+  },
+  {
+   "key": "claim-029@b7da0a29::citation_supports_passage",
+   "action": "rejected",
+   "note": "Cited for 'fees had not been at peak levels by historical standards, so they had room to rise', which is claim-029's own content. Multi-citation paragraph: this claim is cited for one specific sentence, which it supports when read on its own; Jev judged it against the paragraph's other sentences."
+  },
+  {
+   "key": "claim-030@b7da0a29::citation_supports_passage",
+   "action": "rejected",
+   "note": "Cited for 'some pull-forward and a meaningful contribution from large deals ... pipeline as robust', which claim-030 states. Multi-citation paragraph: this claim is cited for one specific sentence, which it supports when read on its own; Jev judged it against the paragraph's other sentences."
+  },
+  {
+   "key": "claim-036@1b9f2e09::citation_supports_passage",
+   "action": "rejected",
+   "note": "Monitoring bullet: claim-036 identifies the low-to-mid single-digit consumer deposit guide being monitored."
+  },
+  {
+   "key": "claim-045@b2df8cce::citation_supports_passage",
+   "action": "rejected",
+   "note": "Base-case condition: claim-045 shows the NII raise rests mostly on balances, which is why 'if deposit balances hold' is the condition."
+  },
+  {
+   "key": "claim-065@1b9f2e09::citation_supports_passage",
+   "action": "rejected",
+   "note": "Monitoring bullet: claim-065 is the deposit-repricing risk that 'accelerating deposit rates paid' watches for."
+  },
+  {
+   "key": "claim-074@1aa9b232::quoted_text_belongs_to_claim",
+   "action": "rejected",
+   "note": "The quoted phrase in this paragraph ('a crazy notion' / 'Including' '[Excluding]') belongs to a different claim cited in the same paragraph (claim-055 / claim-001), which is where the brief attributes it; this claim is cited for its own figure, not the quotation."
+  },
+  {
+   "key": "claim-129@6cf3da0b::citation_supports_passage",
+   "action": "rejected",
+   "note": "The sentence is about the source's timing; claim-129's caveat records that the preview is timestamped after the 7 a.m. release while its content is a pre-release preview."
+  },
+  {
+   "key": "claim-134@17761525::citation_supports_passage",
+   "action": "rejected",
+   "note": "Cited for 'reported EPS of 7.70 against the adjusted \\$6.14'; claim-134 carries the 7.70 and claim-001 the 6.14."
+  },
+  {
+   "key": "claim-134@3354182c::quoted_text_belongs_to_claim",
+   "action": "rejected",
+   "note": "The quoted phrase in this paragraph ('a crazy notion' / 'Including' '[Excluding]') belongs to a different claim cited in the same paragraph (claim-055 / claim-001), which is where the brief attributes it; this claim is cited for its own figure, not the quotation."
+  },
+  {
+   "key": "claim-137@1aa9b232::quoted_text_belongs_to_claim",
+   "action": "rejected",
+   "note": "The quoted phrase in this paragraph ('a crazy notion' / 'Including' '[Excluding]') belongs to a different claim cited in the same paragraph (claim-055 / claim-001), which is where the brief attributes it; this claim is cited for its own figure, not the quotation."
+  },
+  {
+   "key": "claim-148@1aa9b232::quoted_text_belongs_to_claim",
+   "action": "rejected",
+   "note": "The quoted phrase in this paragraph ('a crazy notion' / 'Including' '[Excluding]') belongs to a different claim cited in the same paragraph (claim-055 / claim-001), which is where the brief attributes it; this claim is cited for its own figure, not the quotation."
+  },
+  {
+   "key": "claim-163@1aa9b232::quoted_text_belongs_to_claim",
+   "action": "rejected",
+   "note": "The quoted phrase in this paragraph ('a crazy notion' / 'Including' '[Excluding]') belongs to a different claim cited in the same paragraph (claim-055 / claim-001), which is where the brief attributes it; this claim is cited for its own figure, not the quotation."
+  },
+  {
+   "key": "claim-164@d249ead2::citation_supports_passage",
+   "action": "rejected",
+   "note": "Uncertainty bullet: claim-164 is the CET1 comparison whose differing bases the bullet warns about; its caveat states the same limitation."
+  },
+  {
+   "key": "claim-165@d249ead2::citation_supports_passage",
+   "action": "rejected",
+   "note": "Uncertainty bullet: claim-165 is the ROTCE comparison that excludes Goldman Sachs because it reports ROE; its caveat states the same limitation."
+  },
+  {
+   "key": "check-tier",
+   "action": "fixed",
+   "note": "Three earlier citation audits led to six brief corrections: unsupported 'not yet seen', 'declined to guide' and 'least certainty' wording; the revenue comparison (wrongly called untestable; consensus implied 12%-13% growth vs 15% adjusted); an IB monitoring bullet that contradicted claim-016; and 'lower-income consumers' where claim-098 is about negative real wage growth. The 36 check items in the final run are the same multi-citation and monitoring-bullet patterns at weaker probabilities; none reads as contradicts."
+  }
+ ]
+}

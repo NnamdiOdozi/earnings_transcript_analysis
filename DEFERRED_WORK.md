@@ -8,6 +8,14 @@ was resolved); don't let finished work accumulate here as dead weight.
 
 ## Open
 
+### [2026-10-13] `jev_check.py` asks ill-posed questions of some claims
+- **Scope:** skip `values_capture` when the quote holds no financial figure, and skip
+  `claim_text_traceable`/`claim_vs_evidence` for `analytical_inference` claims, whose
+  support is `inferred_from`, not the anchor quote.
+- **Why:** JPM/2026-q2 `--all-claims` gave 135 defects, ~115 of them these artefacts;
+  disposing of them cost the run time, and a hurried trim introduced a reviewer finding.
+- **Status:** not started. Skill step 7 now says not to use `--all-claims` meanwhile.
+
 ### [2026-09-25] Stage-local semantic critics, for when we adopt an agent framework
 - **Scope:** three semantic control points instead of today's one, once the project
   moves off "Claude Code sessions driving skills by hand" and onto a real agent

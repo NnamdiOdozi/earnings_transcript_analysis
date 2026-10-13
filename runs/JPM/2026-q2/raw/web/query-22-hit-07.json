@@ -1,12 +1,12 @@
 {
-  "url": "https://www.wealthenginepro.com/insights/battle-stocks-jpm-vs-gs-vs-ms",
-  "title": "Battle Stocks: JPMorgan vs Goldman Sachs vs Morgan Stanley | Wealth Engine Pro | Wealth Engine Pro",
+  "url": "https://au.finance.yahoo.com/news/jpmorgan-goldman-posted-record-quarters-135016772.html",
+  "title": "JPMorgan and Goldman Posted Record Quarters \u2014 Their Own CEOs Aren\u2019t Sure It Lasts",
   "score": null,
-  "published_date": "2026-06-22T00:00:00.000Z",
+  "published_date": null,
   "_class": "peer",
   "_select_key": "peer:Goldman Sachs",
-  "_temporal_status": "pre_event",
+  "_temporal_status": "undated",
   "_provider": "exa",
   "_query": "Goldman Sachs quarterly results versus JPMorgan Chase & Co. JPM",
-  "_retrieved_at": "2026-09-16T15:45:15Z"
+  "_retrieved_at": "2026-10-13T22:13:11Z"
 }

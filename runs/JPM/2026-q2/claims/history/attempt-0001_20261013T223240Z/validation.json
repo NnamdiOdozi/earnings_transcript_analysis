@@ -1,0 +1,31 @@
+{
+  "ok": false,
+  "checked_claims": 166,
+  "issues": [
+    {
+      "claim_index": 84,
+      "check": "claim_text_quote_traceable",
+      "message": "Number 40.0 in claim_text does not appear in this claim's own quote or values -- extend the quote to cover it, or drop the assertion"
+    }
+  ],
+  "warnings": [],
+  "validated_at": "2026-10-13T22:32:41Z",
+  "tool_decisions": {
+    "price_lookup": {
+      "decision": "not_used",
+      "reason": "No price series needed: results, guidance, consensus and peer figures all come from the transcript and extracted web evidence."
+    }
+  },
+  "agent_provenance": {
+    "agent_name": "Claude Code",
+    "model": "claude-opus-5-5",
+    "reasoning_effort": "unknown"
+  },
+  "input_hashes": {
+    "claims.json": "a7b335a501948c4ae53fcb5101fd9d3c781eecb45ecf1236de0e708e893f0046",
+    "transcript.jsonl": "cdd9a8e9664d532fa2fb819f58736b258aa444064f91facb1fb1c9b050edecc8",
+    "financials.json": "417117037bd5843f2deed1d23e78ecbc45c7ac3265d98beb2b0e584eaf9ddd08",
+    "manifest.json": "2f3b7085752245345d4ee82092c1eca4e8f7b3424e5c81237a536d09cb70d08f",
+    "evidence/web-evidence.jsonl": "5611f09274aca21a0063f10053f958a7e3b2af28490cc4bac6f65fc6c77574f8"
+  }
+}

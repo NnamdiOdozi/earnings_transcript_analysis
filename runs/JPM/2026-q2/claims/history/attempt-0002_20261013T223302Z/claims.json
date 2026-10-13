@@ -1,0 +1,2699 @@
+[
+  {
+    "id": "claim-001",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Excluding significant items, JPMorganChase reported quarterly net income of $16.9 billion, EPS of $6.14 and ROTCE of 23%.",
+    "quote": "Including (sic) [Excluding] the significant items noted on the page, the Firm delivered net income of $16.9 billion, EPS of $6.14 and an ROTCE of 23%",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {
+      "net_income_ex_significant_items_usd_billion": 16.9,
+      "eps_ex_significant_items_usd": 6.14,
+      "rotce_ex_significant_items_pct": 23
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [
+      "These figures exclude the quarter's significant items (the transcript reads 'Including (sic) [Excluding]'); they are adjusted, not reported GAAP figures."
+    ],
+    "segment_id": "seg-0003",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-002",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Excluding significant items, firm revenue rose 15% year-on-year, driven mainly by Markets, higher asset management fees, higher Investment Banking revenue and higher deposit and loan balances, partly offset by lower rates.",
+    "quote": "Excluding the significant items, revenue was up 15% year-on-year, predominantly driven by Markets revenue, higher asset management fees in AWM and CCB, higher Investment Banking revenue, and higher deposit and loan balances, partially offset by the impact of lower rates.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {
+      "revenue_ex_significant_items_growth_yoy_pct": 15
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [
+      "Growth rate is on an ex-significant-items basis; the dollar revenue total was not stated on the call."
+    ],
+    "segment_id": "seg-0003",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-003",
+    "category": "costs_margins_efficiency",
+    "classification": "reported_fact",
+    "claim_text": "Expenses were $27.3 billion, up 15% year-on-year, driven largely by volume- and revenue-related expense, front-office hiring and labour inflation.",
+    "quote": "Expenses of $27.3 billion were up 15% year-on-year, largely driven by volume and revenue-related expense, as well as growth in front office hiring and labor inflation.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {
+      "expenses_usd_billion": 27.3,
+      "expense_growth_yoy_pct": 15
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0003",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-004",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Credit costs were $2.5 billion, comprising $2.4 billion of net charge-offs and a $149 million net reserve build.",
+    "quote": "credit costs were $2.5 billion, with net charge-offs of $2.4 billion and a net reserve build of $149 million",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {
+      "credit_costs_usd_billion": 2.5,
+      "net_charge_offs_usd_billion": 2.4,
+      "net_reserve_build_usd_million": 149
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0003",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-005",
+    "category": "balance_sheet_solvency",
+    "classification": "reported_fact",
+    "claim_text": "The standardized CET1 ratio ended the quarter at 14.1%, down 20 basis points from the prior quarter, as net income was more than offset by higher RWA and capital distributions.",
+    "quote": "we ended the quarter with a standardized CET1 ratio of 14.1%, down 20 basis points versus the prior quarter, as net income was more than offset by higher RWA and capital distributions",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {
+      "cet1_standardized_pct": 14.1,
+      "cet1_decline_qoq_bps": 20
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0003",
+    "period": "as of 30 Jun 2026"
+  },
+  {
+    "id": "claim-006",
+    "category": "balance_sheet_solvency",
+    "classification": "reported_fact",
+    "claim_text": "Standardized RWA rose by approximately $103 billion in the quarter, driven largely by Markets financing and growth in traditional lending.",
+    "quote": "This quarter's standardized RWA increase of approximately $103 billion is largely driven by increases in financing across our Markets business, as well as growth in traditional lending.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {
+      "rwa_increase_usd_billion": 103
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [
+      "Management said 'approximately $103 billion'; the figure is rounded, not exact."
+    ],
+    "segment_id": "seg-0003",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-007",
+    "category": "cash_flow_capital_allocation",
+    "classification": "management_guidance",
+    "claim_text": "The Board intends to raise the quarterly dividend to $1.65 per share effective in the third quarter.",
+    "quote": "the Board intends to increase the quarterly dividend to $1.65 per share effective in the third quarter",
+    "speaker": "Jeremy Barnum",
+    "status": "forward_looking",
+    "values": {
+      "quarterly_dividend_usd": 1.65
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0003"
+  },
+  {
+    "id": "claim-008",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Consumer & Community Banking earned $5.3 billion on revenue of $20.3 billion, up 8% year-on-year, mainly on higher Card NII from higher revolving balances.",
+    "quote": "CCB reported net income of $5.3 billion. Revenue of $20.3 billion was up 8% year-on-year, predominantly driven by higher Card NII, largely on higher revolving balances",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {
+      "ccb_net_income_usd_billion": 5.3,
+      "ccb_revenue_usd_billion": 20.3,
+      "ccb_revenue_growth_yoy_pct": 8
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0003",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-009",
+    "category": "demand_activity",
+    "classification": "management_opinion",
+    "claim_text": "Management said consumers and small businesses remained resilient despite elevated gas prices and inflation, with tax refunds and a solid labour market supporting strong spend growth.",
+    "quote": "Consumers and small businesses continue to show resilience despite elevated gas prices and inflation, with higher tax refunds and a solid labor market contributing to strong spend growth.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0003"
+  },
+  {
+    "id": "claim-010",
+    "category": "operational_performance",
+    "classification": "reported_fact",
+    "claim_text": "Banking & Wealth Management average deposits rose 3% year-on-year and 2% quarter-on-quarter, helped by net new checking account growth of more than 500,000 accounts.",
+    "quote": "In Banking & Wealth Management, average deposits were up 3% year-on-year and 2% quarter-on-quarter, driven by strong net new checking account growth of over 500,000 accounts this quarter.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {
+      "bwm_avg_deposit_growth_yoy_pct": 3,
+      "bwm_avg_deposit_growth_qoq_pct": 2,
+      "net_new_checking_accounts_min": 500000
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [
+      "The quote says 'over 500,000' accounts; 500,000 is a floor, not an exact count."
+    ],
+    "segment_id": "seg-0003",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-011",
+    "category": "operational_performance",
+    "classification": "reported_fact",
+    "claim_text": "Client investment assets rose 21% year-on-year on market performance and strong flows.",
+    "quote": "Client investment assets were up 21% year-on-year, driven by market performance, along with strong flows.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {
+      "client_investment_assets_growth_yoy_pct": 21
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0003",
+    "period": "as of 30 Jun 2026"
+  },
+  {
+    "id": "claim-012",
+    "category": "operational_performance",
+    "classification": "reported_fact",
+    "claim_text": "Card Services refreshed the Sapphire Preferred card in June, following refreshes of several other products over the previous year.",
+    "quote": "In Card Services, we refreshed the Sapphire Preferred Card in June, following the successful refresh of several other products over the last 12 months.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0003"
+  },
+  {
+    "id": "claim-013",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "The Commercial & Investment Bank earned $9.7 billion on revenue of $24.9 billion, up 27% year-on-year.",
+    "quote": "the CIB reported net income of $9.7 billion. Revenue of $24.9 billion was up 27% year-on-year, driven by strong performance across the businesses.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {
+      "cib_net_income_usd_billion": 9.7,
+      "cib_revenue_usd_billion": 24.9,
+      "cib_revenue_growth_yoy_pct": 27
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0003",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-014",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Investment banking fees rose 30% year-on-year, with double-digit growth across all products and particular strength in equity underwriting.",
+    "quote": "IB fees were up 30% year-on-year, reflecting double-digit growth across all products, with particularly strong performance in equity underwriting.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {
+      "ib_fees_growth_yoy_pct": 30
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0003",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-015",
+    "category": "management_explanation",
+    "classification": "management_opinion",
+    "claim_text": "Management attributed part of the quarter's investment banking strength to some large equity capital markets deals and the accelerated closing of some M&A transactions.",
+    "quote": "While this quarter's performance was supported by both some large ECM deals and the acceleration of the closure of some M&A transactions",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0003"
+  },
+  {
+    "id": "claim-016",
+    "category": "demand_activity",
+    "classification": "management_guidance",
+    "claim_text": "Management said the investment banking pipeline remains robust and expects activity levels to stay healthy, while noting conversion depends on market conditions.",
+    "quote": "the pipeline remains quite robust and the current activity levels seem to be encouraging more activity. As a result, while conversion will obviously be dependent on market conditions, we expect activity levels to remain healthy.",
+    "speaker": "Jeremy Barnum",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0003"
+  },
+  {
+    "id": "claim-017",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Fixed Income Markets revenue rose 6% year-on-year, with strength in Credit, Currencies and Emerging Markets and Rates partly offset by lower Commodities revenue.",
+    "quote": "In Markets, Fixed Income was up 6% year-on-year, with solid performance in Credit, Currencies and Emerging Markets, and Rates, partially offset by lower revenue in Commodities.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {
+      "fixed_income_markets_growth_yoy_pct": 6
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0003",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-018",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Equities revenue rose 86% year-on-year in an exceptionally strong quarter reflecting highly dynamic market conditions.",
+    "quote": "The equities business delivered an exceptionally strong quarter, with revenue up 86% year-on-year, reflecting the highly dynamic market conditions.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {
+      "equities_markets_revenue_growth_yoy_pct": 86
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0003",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-019",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Asset & Wealth Management earned $2 billion at a 38% pre-tax margin, on revenue of $6.9 billion, up 19% year-on-year.",
+    "quote": "AWM reported net income of $2 billion, with pre-tax margin of 38%. Revenue of $6.9 billion was up 19% year-on-year",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {
+      "awm_net_income_usd_billion": 2,
+      "awm_pretax_margin_pct": 38,
+      "awm_revenue_usd_billion": 6.9,
+      "awm_revenue_growth_yoy_pct": 19
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0003",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-020",
+    "category": "operational_performance",
+    "classification": "reported_fact",
+    "claim_text": "AWM long-term net inflows were $50 billion, with strength across Fixed Income and Equity.",
+    "quote": "Long-term net inflows were $50 billion, with continued strength across Fixed Income and Equity.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {
+      "awm_long_term_net_inflows_usd_billion": 50
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0003"
+  },
+  {
+    "id": "claim-021",
+    "category": "operational_performance",
+    "classification": "reported_fact",
+    "claim_text": "AUM was $5.1 trillion, up 18% year-on-year, and client assets were $7.7 trillion, up 19%, on higher markets and continued net inflows.",
+    "quote": "AUM of $5.1 trillion was up 18% year-on-year and client assets of $7.7 trillion were up 19% year-on-year, driven by higher market levels and continued net inflows.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {
+      "aum_usd_trillion": 5.1,
+      "aum_growth_yoy_pct": 18,
+      "client_assets_usd_trillion": 7.7,
+      "client_assets_growth_yoy_pct": 19
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0003",
+    "period": "as of 30 Jun 2026"
+  },
+  {
+    "id": "claim-022",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Corporate reported net income of $4.2 billion on revenue of $6 billion, figures that include the quarter's significant items.",
+    "quote": "Corporate reported net income of $4.2 billion on revenue of $6 billion, which includes the significant items noted in the presentation.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {
+      "corporate_net_income_usd_billion": 4.2,
+      "corporate_revenue_usd_billion": 6
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0003",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-023",
+    "category": "current_guidance",
+    "classification": "management_guidance",
+    "claim_text": "Full-year 2026 guidance is now about $96.5 billion of NII excluding Markets and approximately $105.5 billion of total NII, with Markets NII rising to about $9 billion.",
+    "quote": "we now expect NII ex. Markets to be about $96.5 billion and total NII to be approximately $105.5 billion as a function of Markets NII increasing to about $9 billion",
+    "speaker": "Jeremy Barnum",
+    "status": "forward_looking",
+    "values": {
+      "nii_ex_markets_fy_guidance_usd_billion": 96.5,
+      "total_nii_fy_guidance_usd_billion": 105.5,
+      "markets_nii_fy_guidance_usd_billion": 9
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [
+      "All three figures are approximations ('about', 'approximately'), not point guidance."
+    ],
+    "segment_id": "seg-0003",
+    "period": "12 months to 31 Dec 2026"
+  },
+  {
+    "id": "claim-024",
+    "category": "current_guidance",
+    "classification": "management_guidance",
+    "claim_text": "The full-year adjusted expense outlook is now about $107.5 billion, raised mainly for volume- and revenue-related expense tied to revenue outperformance.",
+    "quote": "the new adjusted expense outlook is about $107.5 billion, with the increase Jeremy Barnum Chief Financial Officer, JPMorganChase primarily due to higher volume- and revenue-related expenses, driven by the activity levels and associated revenue outperformance",
+    "speaker": "Jeremy Barnum",
+    "status": "forward_looking",
+    "values": {
+      "adjusted_expense_fy_guidance_usd_billion": 107.5
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [
+      "The guide is 'about' $107.5 billion, an approximation."
+    ],
+    "segment_id": "seg-0003",
+    "period": "12 months to 31 Dec 2026"
+  },
+  {
+    "id": "claim-025",
+    "category": "current_guidance",
+    "classification": "management_guidance",
+    "claim_text": "Management now expects the full-year Card net charge-off rate to be approximately 3.2%, citing better-than-expected consumer credit.",
+    "quote": "we now expect Card net charge-off rate to be approximately 3.2%, reflecting better-than-expected consumer credit performance.",
+    "speaker": "Jeremy Barnum",
+    "status": "forward_looking",
+    "values": {
+      "card_nco_rate_fy_guidance_pct": 3.2
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [
+      "'Approximately 3.2%' is an approximation."
+    ],
+    "segment_id": "seg-0003",
+    "period": "12 months to 31 Dec 2026"
+  },
+  {
+    "id": "claim-026",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An analyst asked about the elevation of two Co-Presidents and what it means for the CEO's tenure.",
+    "quote": "the recent management changes and elevation of Doug and Troy to Co-Presidents",
+    "speaker": "Ken Usdin",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0005"
+  },
+  {
+    "id": "claim-027",
+    "category": "qa_insight",
+    "classification": "management_opinion",
+    "claim_text": "Dimon said naming two Co-Presidents had not changed the succession timetable, and that Marianne chose to retire rather than stay once she knew of the plan.",
+    "quote": "the Board made a decision to go ahead with making two Co-Presidents, which will be preparing them to do far more at the company and be prepared, hasn't changed the timetable or anything",
+    "speaker": "Jamie Dimon",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0006"
+  },
+  {
+    "id": "claim-028",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An analyst asked how management judges the sustainability of the unusually high Investment Banking and Markets activity.",
+    "quote": "How do you judge the sustainability and how do you judge just how risk-on are we across the various businesses?",
+    "speaker": "Ken Usdin",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0007"
+  },
+  {
+    "id": "claim-029",
+    "category": "qa_insight",
+    "classification": "management_opinion",
+    "claim_text": "Barnum said investment banking fees had been fine but not at peak levels by historical standards, so had room to rise.",
+    "quote": "by historical standards, investment banking fees were fine, but they weren't at sort of super peak levels. So, they had some room to come up a little bit.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0008"
+  },
+  {
+    "id": "claim-030",
+    "category": "management_explanation",
+    "classification": "management_opinion",
+    "claim_text": "Barnum acknowledged some pull-forward of deals and that large deals contributed meaningfully to the quarter, but said the pipeline is quite robust.",
+    "quote": "clearly, there was some pull forward, and clearly, the large deals contributed meaningfully to this quarter's results. But at the same time, the pipeline is actually quite robust",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0008"
+  },
+  {
+    "id": "claim-031",
+    "category": "risk",
+    "classification": "management_opinion",
+    "claim_text": "Barnum said the particular combination of events behind this quarter's Equities result is hard to imagine repeating, though the background environment is supportive.",
+    "quote": "I think the particular set of things that happened in Equities this quarter, it's a little bit hard to imagine that being repeated, but the background environment is quite supportive.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0008"
+  },
+  {
+    "id": "claim-032",
+    "category": "management_explanation",
+    "classification": "management_opinion",
+    "claim_text": "Barnum said elevated Markets revenue has come with much more financial resource deployment in support of clients.",
+    "quote": "Markets revenues in general have been quite elevated and strong for some time, although as we pointed out, that also is associated with much more financial resource deployment in support of our clients.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0008"
+  },
+  {
+    "id": "claim-033",
+    "category": "risk",
+    "classification": "management_opinion",
+    "claim_text": "Barnum described the market as extremely risk-on and said the firm is balancing client support against caution in a complicated environment.",
+    "quote": "So, the market is clearly extremely risk-on, and we're kind of takers of that. And we're trying to strike the right balance between supporting all our clients and being appropriately cautious in an environment that has some complicated dynamics in it",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0008"
+  },
+  {
+    "id": "claim-034",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An analyst asked about progress towards the 15% retail deposit market-share goal and how higher-for-longer rates affect it.",
+    "quote": "Interested in kind of the progression towards that 15% retail market share that you've talked about in the past and really how higher-for-longer may impact the pace of market share gains over time.",
+    "speaker": "Christopher McGratty",
+    "status": "reported",
+    "values": {
+      "retail_deposit_share_goal_pct": 15
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0012"
+  },
+  {
+    "id": "claim-035",
+    "category": "demand_activity",
+    "classification": "management_opinion",
+    "claim_text": "Barnum said Wholesale deposit growth was strong and the first half outperformed expectations, helped partly by lending (including NBFI and data-centre lending) creating deposits.",
+    "quote": "And so far, the first half of the year has outperformed our expectations. Obviously, a lot of that is the strength of the franchise and winning deals and taking share, but some of it is also the kind of lending environment, particularly the sort of NBFI space and a lot of the data center stuff.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0013",
+    "period": "6 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-036",
+    "category": "current_guidance",
+    "classification": "management_guidance",
+    "claim_text": "Barnum reaffirmed the expectation for low-to-mid single-digit consumer deposit growth this year as unchanged.",
+    "quote": "On Consumer, we talked about expecting low (sic) [low-to-mid-] single digit growth this year, and that expectation is still in effect, it's unchanged",
+    "speaker": "Jeremy Barnum",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [
+      "The transcript corrects 'low' to 'low-to-mid-' in brackets; the guidance is qualitative with no figure."
+    ],
+    "segment_id": "seg-0013",
+    "period": "12 months to 31 Dec 2026"
+  },
+  {
+    "id": "claim-037",
+    "category": "risk",
+    "classification": "management_opinion",
+    "claim_text": "Barnum said that with a more hawkish rate environment, yield-seeking deposit outflows remain a factor and a modest risk.",
+    "quote": "in light of the fact that the rate environment is a little bit more hawkish, yield-seeking flows are still a factor and probably a little bit of a risk.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0013"
+  },
+  {
+    "id": "claim-038",
+    "category": "qa_insight",
+    "classification": "management_opinion",
+    "claim_text": "Barnum said there is no change to the 15% retail deposit share aspiration, which he framed as a natural long-term consequence of executing the strategy.",
+    "quote": "there's no change to that sort of hope or aspiration. But I would think about that as a kind of natural long-term consequence of executing the strategy that we believe in",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {
+      "retail_deposit_share_goal_pct": 15
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0013"
+  },
+  {
+    "id": "claim-039",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An analyst asked where the firm is in its investment cycle (branches, AI, bankers) and what it means for medium-term operating leverage.",
+    "quote": "Ultimately, I guess the question is where are we in the investment cycle and really how does it play into the operating leverage outlook over the medium-term?",
+    "speaker": "Christopher McGratty",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0014"
+  },
+  {
+    "id": "claim-040",
+    "category": "costs_margins_efficiency",
+    "classification": "management_opinion",
+    "claim_text": "Dimon said investment spending is a continuation of what the firm has done for years and no change should be expected.",
+    "quote": "I would just say it's a complete continuation of what we've been doing for years. So, you shouldn't really expect any change.",
+    "speaker": "Jamie Dimon",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0014"
+  },
+  {
+    "id": "claim-041",
+    "category": "costs_margins_efficiency",
+    "classification": "management_opinion",
+    "claim_text": "Barnum said the franchise can invest aggressively for future returns while still delivering exceptional current returns.",
+    "quote": "we are able to aggressively invest for the future for the sake of generating future returns and to solidify the competitive position of the franchise, while still delivering exceptional current returns.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0015"
+  },
+  {
+    "id": "claim-042",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An analyst asked for the drivers of the upward revision to NII excluding Markets and the second-half cadence.",
+    "quote": "I was wondering if you could talk a little bit about the drivers of the upward revision to the ex. Markets NII",
+    "speaker": "John McDonald",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0018"
+  },
+  {
+    "id": "claim-043",
+    "category": "guidance_change",
+    "classification": "management_guidance",
+    "claim_text": "Full-year NII excluding Markets guidance was raised from $95 billion to $96.5 billion.",
+    "quote": "revising up from $95 billion to $96.5 billion for the full year",
+    "speaker": "Jeremy Barnum",
+    "status": "forward_looking",
+    "values": {
+      "nii_ex_markets_prior_guidance_usd_billion": 95,
+      "nii_ex_markets_new_guidance_usd_billion": 96.5
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [
+      "The quote does not name the metric; it is NII excluding Markets, as asked in seg-0018 and matching the prepared remarks' guide of about $96.5 billion ex-Markets."
+    ],
+    "segment_id": "seg-0019",
+    "period": "12 months to 31 Dec 2026"
+  },
+  {
+    "id": "claim-044",
+    "category": "current_guidance",
+    "classification": "management_guidance",
+    "claim_text": "Barnum said the revised guidance implies a higher NII exit run rate in the central case, assuming forward rates and deposit drivers play out as expected.",
+    "quote": "it does suggest a higher exit run rate, which in the central case, assuming the yield curve plays out as the forwards currently forecast and the deposit and other drivers are in line with our current expectations, that's what we would expect.",
+    "speaker": "Jeremy Barnum",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0019"
+  },
+  {
+    "id": "claim-045",
+    "category": "management_explanation",
+    "classification": "management_opinion",
+    "claim_text": "Barnum said deposit balances and mix were the biggest driver of the NII revision, with somewhat higher rates a smaller contributor.",
+    "quote": "So, when you assemble that together, you have a little bit of the increase as a function of higher rates, but most of it is balances overall.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0019"
+  },
+  {
+    "id": "claim-046",
+    "category": "balance_sheet_solvency",
+    "classification": "management_opinion",
+    "claim_text": "Barnum said actual rate sensitivity is probably somewhat higher than the reported earnings-at-risk figure because consumer deposit betas have outperformed the model.",
+    "quote": "probably our actual sensitivity is a little bit more than the EaR suggests right now because of the outperformance of the consumer betas relative to the model",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0019"
+  },
+  {
+    "id": "claim-047",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An analyst asked why Markets NII guidance rose even though the rate outlook is higher.",
+    "quote": "the Markets NII is guided a bit higher, even though the outlook for rates is also a little bit higher.",
+    "speaker": "John McDonald",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0020"
+  },
+  {
+    "id": "claim-048",
+    "category": "management_explanation",
+    "classification": "management_opinion",
+    "claim_text": "Barnum said Markets NII is forecast up, despite being liability-sensitive, because of expected lower financed non-interest-bearing assets in the second half.",
+    "quote": "And the difference is changes in balance sheet composition, essentially expecting lower amounts of financed non-interest bearing assets on the balance sheet",
+    "speaker": "Jeremy Barnum",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0021"
+  },
+  {
+    "id": "claim-049",
+    "category": "balance_sheet_solvency",
+    "classification": "reported_fact",
+    "claim_text": "The firm increased its equity allocation to the CIB this quarter, moving roughly $150 million of NII from NII ex-Markets into Markets NII that is not expected to be offset in the bottom line.",
+    "quote": "you will have noted that we actually increased the equity allocation to the CIB this quarter for reasons that I think are pretty obvious in light of the amount of growth of supporting clients that we've done and the way that's playing through RWA. And the consequence of that is to move some equity essentially out of Corporate into the CIB, and a lot of that is Markets. That obviously comes with a little bit of NII. And so, that NII is moving out of NII ex. into Markets NII. And so, it's sort of a rare exception to the rule that changes in Markets NII are offset in the bottom line. This piece, which to be fair is quite small, it's probably like $150 million, is a part of the increase that we would not expect to be offset in the bottom line, all else equal.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {
+      "nii_reallocated_to_markets_usd_million": 150
+    },
+    "confidence": 0.8,
+    "inferred_from": [],
+    "caveats": [
+      "Management said 'probably like $150 million'; this is a rough estimate."
+    ],
+    "segment_id": "seg-0021"
+  },
+  {
+    "id": "claim-050",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An analyst asked what qualities the Board seeks in the next CEO and whether Dimon's remaining tenure should be seen as fixed or rolling.",
+    "quote": "And I'm wondering if we should think about your remaining tenure as more fixed or if investors are still thinking about a more rolling type of retirement date and a longer stay as Executive Chair?",
+    "speaker": "Erika Najarian",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0024"
+  },
+  {
+    "id": "claim-051",
+    "category": "qa_insight",
+    "classification": "management_opinion",
+    "claim_text": "Dimon said the succession timing is essentially unchanged and up to the Board, and listed the qualities sought in a future leader.",
+    "quote": "And so, the question to that is though the timing is essentially the same. Obviously, completely up to the Board, but it hasn't changed.",
+    "speaker": "Jamie Dimon",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0025"
+  },
+  {
+    "id": "claim-052",
+    "category": "qa_insight",
+    "classification": "management_opinion",
+    "claim_text": "Pressed on what 'no change in timing' meant, Dimon said the timetable is essentially the same as previously stated.",
+    "quote": "Exactly what we said last time. Whatever I said last time, the timetable is essentially the same.",
+    "speaker": "Jamie Dimon",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0026"
+  },
+  {
+    "id": "claim-053",
+    "category": "qa_insight",
+    "classification": "management_opinion",
+    "claim_text": "Dimon said his remaining tenure is several years, plus or minus, and up to the Board.",
+    "quote": "Several years. You can use a few years. You can use plus or minus. Obviously, it's totally up to the Board, not up to me.",
+    "speaker": "Jamie Dimon",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0028"
+  },
+  {
+    "id": "claim-054",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An analyst noted adjusted operating leverage was negative year-to-date and asked when expense growth might slow.",
+    "quote": "if we look at year-to-date results, it's been a strong revenue environment, but I think operating leverage on an adjusted basis was negative.",
+    "speaker": "Jim Mitchell",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0031"
+  },
+  {
+    "id": "claim-055",
+    "category": "costs_margins_efficiency",
+    "classification": "management_opinion",
+    "claim_text": "Dimon said margins went up this quarter and that expecting perpetual operating leverage is 'a crazy notion'.",
+    "quote": "when you have great returns and very good margins, which actually went up this quarter, not down, the notion that somehow you can forever increase your operating leverage is a crazy notion.",
+    "speaker": "Jamie Dimon",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0032"
+  },
+  {
+    "id": "claim-056",
+    "category": "costs_margins_efficiency",
+    "classification": "management_opinion",
+    "claim_text": "Dimon said expense growth might slow in 2027 or 2028, while declining to project.",
+    "quote": "I do think you might actually see a slowdown in growth, maybe a slowdown in 2027 or 2028.",
+    "speaker": "Jamie Dimon",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.75,
+    "inferred_from": [],
+    "caveats": [
+      "Hedged ('might', 'maybe'); this is an opinion, not guidance."
+    ],
+    "segment_id": "seg-0032"
+  },
+  {
+    "id": "claim-057",
+    "category": "costs_margins_efficiency",
+    "classification": "management_opinion",
+    "claim_text": "Dimon said the ultimate beneficiary of AI will be customers, so it should not be assumed to lift the firm's margins permanently.",
+    "quote": "The ultimate beneficiary of AI will be our customers.",
+    "speaker": "Jamie Dimon",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0032"
+  },
+  {
+    "id": "claim-058",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An analyst asked for any update on potential adjustments to regulatory proposals, including the GSIB surcharge and Basel III.",
+    "quote": "Is there any update on the thoughts on potential for adjustments to the regulatory proposals, since I know you and your peers have been particularly vocal around the GSIB surcharge and some elements of Basel III?",
+    "speaker": "Jim Mitchell",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0033"
+  },
+  {
+    "id": "claim-059",
+    "category": "regulatory_legal_macro",
+    "classification": "management_opinion",
+    "claim_text": "Dimon listed changes he wants in capital rules: remove double counting in operational and market risk capital, adjust the GSIB surcharge, and change the short-term wholesale funding treatment.",
+    "quote": "They should get rid of the double count in operating risk capital. They should get rid of the double count in market risk capital.",
+    "speaker": "Jamie Dimon",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0034"
+  },
+  {
+    "id": "claim-060",
+    "category": "regulatory_legal_macro",
+    "classification": "reported_fact",
+    "claim_text": "Dimon said the firm holds $80 billion or more of market risk capital, against a largest-ever quarterly loss of $1.4 billion.",
+    "quote": "We have $80 billion or more now of market risk capital, and the biggest quarterly loss we ever had was $1.4 billion.",
+    "speaker": "Jamie Dimon",
+    "status": "reported",
+    "values": {
+      "market_risk_capital_usd_billion_min": 80,
+      "largest_quarterly_loss_usd_billion": 1.4
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [
+      "'$80 billion or more' is a floor."
+    ],
+    "segment_id": "seg-0034"
+  },
+  {
+    "id": "claim-061",
+    "category": "regulatory_legal_macro",
+    "classification": "management_opinion",
+    "claim_text": "Barnum said the short-term wholesale funding change in the GSIB score disproportionately raises the burden on universal banks such as JPMorgan and Bank of America relative to former investment bank competitors.",
+    "quote": "essentially increase the burden on banks like us and Bank of America that have both markets and banking businesses, as well as traditional consumer businesses disproportionately relative to our former investment bank competitors who have different business mix.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0035"
+  },
+  {
+    "id": "claim-062",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An analyst asked whether conditions are as good as it gets or whether the cycle is earlier than it looks.",
+    "quote": "Is this as good as it gets or",
+    "speaker": "Matt O'Connor",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0039"
+  },
+  {
+    "id": "claim-063",
+    "category": "risk",
+    "classification": "management_opinion",
+    "claim_text": "Dimon said conditions are close to as good as it gets and that he does not know how long they will last.",
+    "quote": "It's getting close to as good as it gets. We just don't know how long it's going to last.",
+    "speaker": "Jamie Dimon",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0040"
+  },
+  {
+    "id": "claim-064",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An analyst asked whether there is a rate tipping point at which deposit volumes and betas change meaningfully.",
+    "quote": "But is there a tipping point where the deposit behavior changes both from a volume perspective and then betas",
+    "speaker": "Matt O'Connor",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0040"
+  },
+  {
+    "id": "claim-065",
+    "category": "risk",
+    "classification": "management_opinion",
+    "claim_text": "Barnum warned that a 7% rate environment would not be good if it required a massive repricing of the deposit franchise to protect it.",
+    "quote": "you could convince yourself that a 7% rate environment is great. And obviously, that wouldn't be true if you had to do a massive reprice of the deposit franchise in order to protect it essentially.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {
+      "stress_rate_environment_pct": 7
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0041"
+  },
+  {
+    "id": "claim-066",
+    "category": "risk",
+    "classification": "management_opinion",
+    "claim_text": "Dimon said the firm does assume some of that deposit-repricing effect.",
+    "quote": "So, we do assume some of that.",
+    "speaker": "Jamie Dimon",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0042"
+  },
+  {
+    "id": "claim-067",
+    "category": "risk",
+    "classification": "management_opinion",
+    "claim_text": "Barnum said deposit-repricing risk is in the models and that the open question is timing and the deposit franchise's competitive dynamics.",
+    "quote": "It's in the models. It's very much like part of the discipline. But the question is when",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0043"
+  },
+  {
+    "id": "claim-068",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An analyst asked whether negative percentage operating leverage is the right lens, noting that with core revenue up 15% it was negative in percentage terms but, in his view, positive in dollars.",
+    "quote": "you were asked about operating negative as negative, and you gave the reasons for that. But is operating negative the way you look at things? I mean, when you grow revenues 15% core year-over-year, percentage-wise, it's negative. But dollar-wise, I think it's positive",
+    "speaker": "Mike Mayo",
+    "status": "reported",
+    "values": {
+      "core_revenue_growth_yoy_pct": 15
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0046"
+  },
+  {
+    "id": "claim-069",
+    "category": "costs_margins_efficiency",
+    "classification": "management_opinion",
+    "claim_text": "Dimon agreed that operating leverage was definitely positive in dollar terms.",
+    "quote": "It’s definitely positive.",
+    "speaker": "Jamie Dimon",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0047"
+  },
+  {
+    "id": "claim-070",
+    "category": "costs_margins_efficiency",
+    "classification": "management_opinion",
+    "claim_text": "Dimon said that if the overall margin is 25%, the marginal return on a 10% revenue increase is a lot more than 25% because all the overhead is not being added.",
+    "quote": "if your margin overall is 25%, when revenues go up 10%, the marginal return on that, since you're not adding all the overhead, is going to be a lot more than 25%.",
+    "speaker": "Jamie Dimon",
+    "status": "reported",
+    "values": {
+      "illustrative_margin_pct": 25,
+      "illustrative_revenue_growth_pct": 10
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [
+      "These are illustrative numbers, not reported figures."
+    ],
+    "segment_id": "seg-0051"
+  },
+  {
+    "id": "claim-071",
+    "category": "costs_margins_efficiency",
+    "classification": "management_opinion",
+    "claim_text": "Dimon said a rapid increase in revenue drives a big increase in operating leverage.",
+    "quote": "Because obviously, a rapid increase in revenue drives a big increase in operating leverage.",
+    "speaker": "Jamie Dimon",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0053"
+  },
+  {
+    "id": "claim-072",
+    "category": "guidance_change",
+    "classification": "management_guidance",
+    "claim_text": "Full-year expense guidance was raised by $2.5 billion.",
+    "quote": "we did revise up this year's expense guidance by $2.5 billion, which is not a trivial number.",
+    "speaker": "Jeremy Barnum",
+    "status": "forward_looking",
+    "values": {
+      "expense_guidance_increase_usd_billion": 2.5
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0054",
+    "period": "12 months to 31 Dec 2026"
+  },
+  {
+    "id": "claim-073",
+    "category": "qa_insight",
+    "classification": "management_opinion",
+    "claim_text": "Barnum said that on the original full-year guidance, consensus had expected meaningful negative operating leverage this year.",
+    "quote": "I'm sure that the consensus was for meaningful negative operating leverage in this year's numbers, however defined.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.8,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0054"
+  },
+  {
+    "id": "claim-074",
+    "category": "management_explanation",
+    "classification": "management_opinion",
+    "claim_text": "Barnum said the variable part of the expense base is disproportionately tied to the capital markets complex.",
+    "quote": "there's a fixed expense base and there's a variable expense base. The variable expense base is disproportionately associated with the kind of capital markets complex, broadly defined.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0054"
+  },
+  {
+    "id": "claim-075",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "In the first half, capital-markets-related revenue beat the firm's original expectations by $6.5 billion, and $1.5 billion of associated additional expense was booked.",
+    "quote": "in the first half of this year, the capital markets complex has outperformed our then expectations by $6.5 billion, and we have booked in the first half of the year $1.5 billion of additional expenses associated with that.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {
+      "capital_markets_outperformance_h1_usd_billion": 6.5,
+      "associated_additional_expense_h1_usd_billion": 1.5
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0054",
+    "period": "6 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-076",
+    "category": "current_guidance",
+    "classification": "management_guidance",
+    "claim_text": "Of the $2.5 billion expense guidance increase, $1.5 billion is already booked and about $1 billion is implicitly added for the second half.",
+    "quote": "of the $2.5 billion that we increased guidance, $1.5 billion is essentially already booked and a direct sort of happy consequence of the exceptionally strong performance. And then, yeah, we've implicitly added $1 billion for the second half of the year",
+    "speaker": "Jeremy Barnum",
+    "status": "forward_looking",
+    "values": {
+      "expense_guidance_increase_usd_billion": 2.5,
+      "already_booked_usd_billion": 1.5,
+      "implied_h2_addition_usd_billion": 1
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0054",
+    "period": "12 months to 31 Dec 2026"
+  },
+  {
+    "id": "claim-077",
+    "category": "qa_insight",
+    "classification": "management_opinion",
+    "claim_text": "Barnum cautioned against reading the implied second-half expense addition as a signal about the revenue environment.",
+    "quote": "I wouldn't draw too many conclusions from that in terms of our expectations about the revenue environment, because there are some other factors and there's some timing or whatever.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0054"
+  },
+  {
+    "id": "claim-078",
+    "category": "management_explanation",
+    "classification": "management_opinion",
+    "claim_text": "Dimon said the revenue-linked expense effect also appears in Asset & Wealth Management, credit card spend and other businesses.",
+    "quote": "a little bit of that in Asset & Wealth Management, a little bit of that in credit card spend, a little bit of that in other parts of the business.",
+    "speaker": "Jamie Dimon",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0056"
+  },
+  {
+    "id": "claim-079",
+    "category": "management_explanation",
+    "classification": "management_opinion",
+    "claim_text": "Barnum said the 'capital markets complex' effectively spans the whole company.",
+    "quote": "that's why I say the capital markets complex, it’s really the whole company.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0057"
+  },
+  {
+    "id": "claim-080",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An analyst computed a 77% marginal margin from the figures given and asked why that is as good as it gets.",
+    "quote": "So, your marginal margin based on the number you just gave is 77% on that. And so, why is that as good as it gets?",
+    "speaker": "Mike Mayo",
+    "status": "reported",
+    "values": {
+      "analyst_marginal_margin_pct": 77
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0060"
+  },
+  {
+    "id": "claim-081",
+    "category": "risk",
+    "classification": "management_opinion",
+    "claim_text": "Dimon described a very healthy, active and exuberant market with very high prices and volumes that benefits the firm, adding he does not know how long it will continue.",
+    "quote": "I just think we're in a very healthy, active, exuberant market with very high prices and very high volumes, and we benefit from that. We just don't know how long it will continue.",
+    "speaker": "Jamie Dimon",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0061"
+  },
+  {
+    "id": "claim-082",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An analyst asked what gives confidence that Troy, without consumer experience, is right to run the Consumer business.",
+    "quote": "But what gives you confidence that Troy is the right person to run the Consumer business when he doesn't have that experience in the past?",
+    "speaker": "Mike Mayo",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0062"
+  },
+  {
+    "id": "claim-083",
+    "category": "qa_insight",
+    "classification": "management_opinion",
+    "claim_text": "Dimon said the firm is completely comfortable with Troy running Consumer, citing his operations and technology record in Markets and Investment Banking and the value of cross-company experience.",
+    "quote": "Remember, even the IB is an extensive operations function and back-office function, technology function, where he's exhibited great expertise. So, we're completely comfortable with that.",
+    "speaker": "Jamie Dimon",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0062"
+  },
+  {
+    "id": "claim-084",
+    "category": "qa_insight",
+    "classification": "reported_fact",
+    "claim_text": "Barnum corrected the record that Troy was an options trader, not a foreign exchange spot trader.",
+    "quote": "Troy was actually an options trader, which is also where I started.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0063"
+  },
+  {
+    "id": "claim-085",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An analyst asked whether AI efficiency benefits are being vastly underestimated, citing Block's 40% workforce cut.",
+    "quote": "is there an argument that we're vastly underestimating the potential benefits to efficiency and the impacts on how companies can run their businesses? I know Block is a really different animal than you are on a lot of levels. But they argued, when they cut 40% of their workforce",
+    "speaker": "Saul Martinez",
+    "status": "reported",
+    "values": {
+      "block_workforce_cut_pct": 40
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0066"
+  },
+  {
+    "id": "claim-086",
+    "category": "operational_performance",
+    "classification": "management_opinion",
+    "claim_text": "Dimon said the firm has almost 1,000 AI use cases, of which about 50 are really important.",
+    "quote": "I think there's almost 1,000 use cases today, though I would say that the really important ones are 50",
+    "speaker": "Jamie Dimon",
+    "status": "reported",
+    "values": {
+      "ai_use_cases_approx": 1000,
+      "important_ai_use_cases_approx": 50
+    },
+    "confidence": 0.85,
+    "inferred_from": [],
+    "caveats": [
+      "'Almost 1,000' and 'probably 50' are approximations."
+    ],
+    "segment_id": "seg-0067"
+  },
+  {
+    "id": "claim-087",
+    "category": "costs_margins_efficiency",
+    "classification": "reported_fact",
+    "claim_text": "Dimon said some discrete areas have reduced jobs by 30% or 40%, with most of those people offered jobs elsewhere.",
+    "quote": "we have had discrete areas where we did reduce jobs by 30% or 40%. And most of those people were offered jobs elsewhere.",
+    "speaker": "Jamie Dimon",
+    "status": "reported",
+    "values": {
+      "job_reduction_low_pct": 30,
+      "job_reduction_high_pct": 40
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0067"
+  },
+  {
+    "id": "claim-088",
+    "category": "risk",
+    "classification": "management_opinion",
+    "claim_text": "Dimon said AI tools will also reach smaller competitors through vendors such as Fiserv and FIS, and that AI benefits will accrue to customers rather than lifting returns indefinitely.",
+    "quote": "this will be offered to smaller competitors too through Fiserv and FIS and other fintech-kind companies.",
+    "speaker": "Jamie Dimon",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0067"
+  },
+  {
+    "id": "claim-089",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An analyst asked what was most exceptional in Equities this quarter and hard to sustain.",
+    "quote": "is there any areas or products or geographies that were particularly noteworthy in terms of the strength this quarter that may be difficult to sustain going forward?",
+    "speaker": "Saul Martinez",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0068"
+  },
+  {
+    "id": "claim-090",
+    "category": "management_explanation",
+    "classification": "management_opinion",
+    "claim_text": "Barnum attributed Equities strength to major IPOs, major index rebalancing, complicated dynamics in the Korean equity market, heavy Asia activity and very active clients.",
+    "quote": "we had some major IPOs. We had some major index rebalancing. We had some very complicated dynamics in the Korean equity market. There's been a lot of activity in Asia.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0069"
+  },
+  {
+    "id": "claim-091",
+    "category": "risk",
+    "classification": "management_opinion",
+    "claim_text": "Barnum said it seems statistically improbable that this particular combination of Equities drivers repeats, though it could.",
+    "quote": "But I just think like statistically, it seems improbable that that particular combination of effects could repeat itself. But it obviously could.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0069"
+  },
+  {
+    "id": "claim-092",
+    "category": "management_explanation",
+    "classification": "management_opinion",
+    "claim_text": "Dimon said the quarter's market activity was visible in real time through exchange, hedge fund and margin-loan volumes.",
+    "quote": "you can see most of this on a daily basis through volumes in the New York Stock Exchange, the CME, volumes through hedge funds",
+    "speaker": "Jamie Dimon",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0070"
+  },
+  {
+    "id": "claim-093",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An analyst asked about consumer resilience if rates rise and whether capex is broadening beyond AI.",
+    "quote": "And are you seeing any broadening in CapEx beyond AI or is it very AI-centric in terms of what you're seeing on even commercial lending activity?",
+    "speaker": "Ebrahim H. Poonawala",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0074"
+  },
+  {
+    "id": "claim-094",
+    "category": "demand_activity",
+    "classification": "management_opinion",
+    "claim_text": "Barnum said the firm sees decent capex-related loan growth, some apparently not AI-related, but was reluctant to conclude that because AI demand spreads into non-obvious places.",
+    "quote": "We do see some decent kind of CapEx and associated loan growth across the franchise, and at least on the surface, some of that does not appear to be AI-related. However, I would be a little reluctant to draw that conclusion too strongly",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0074"
+  },
+  {
+    "id": "claim-095",
+    "category": "regulatory_legal_macro",
+    "classification": "management_opinion",
+    "claim_text": "Dimon said total capex is about $4 trillion a year and AI capex rose from $400 billion last year to $700 billion this year, projected at a little over $1 trillion next year.",
+    "quote": "I think CapEx is about $4 trillion a year, and AI went from $400 billion last year to $700 billion this year. People project, so do our people, it'll be like a little over $1 trillion next year",
+    "speaker": "Jamie Dimon",
+    "status": "reported",
+    "values": {
+      "total_capex_usd_trillion_approx": 4,
+      "ai_capex_prior_year_usd_billion": 400,
+      "ai_capex_current_year_usd_billion": 700,
+      "ai_capex_next_year_usd_trillion_min": 1
+    },
+    "confidence": 0.8,
+    "inferred_from": [],
+    "caveats": [
+      "These are Dimon's approximate macro estimates ('about', 'a little over $1 trillion'), not firm data."
+    ],
+    "segment_id": "seg-0075"
+  },
+  {
+    "id": "claim-096",
+    "category": "demand_activity",
+    "classification": "management_opinion",
+    "claim_text": "Barnum said consumer spend is robust across income segments, helped by tax refunds, and delinquencies are a little lower than expected across FICO bands.",
+    "quote": "spend is kind of fine, robust and across income segments. Seems like a bit of a tailwind there from tax refunds. Delinquencies are a little lower than we expected",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0076"
+  },
+  {
+    "id": "claim-097",
+    "category": "demand_activity",
+    "classification": "management_opinion",
+    "claim_text": "Barnum said the firm's data give little support to a K-shaped consumer narrative.",
+    "quote": "there's not like that much there in terms to support the K-shaped narrative.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0076"
+  },
+  {
+    "id": "claim-098",
+    "category": "risk",
+    "classification": "management_opinion",
+    "claim_text": "Barnum flagged consumers experiencing negative real wage growth as a watch area and said consumer credit ultimately depends on the labour market.",
+    "quote": "a cohort of consumers who are experiencing negative real wage growth and that potentially creating some distress for those folks. Now, some of that statistically is kind of always going to be true in any moment in time in any cohort. But that's probably a watch area.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0076"
+  },
+  {
+    "id": "claim-099",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An analyst asked why the firm buys back stock at 3 times tangible book when things are so good and bad things could happen.",
+    "quote": "why buy back stock here at 3 times tangible book when things are so good, bad things could happen?",
+    "speaker": "Ebrahim H. Poonawala",
+    "status": "reported",
+    "values": {
+      "price_to_tangible_book_multiple": 3
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0077"
+  },
+  {
+    "id": "claim-100",
+    "category": "cash_flow_capital_allocation",
+    "classification": "management_opinion",
+    "claim_text": "Dimon said the firm wants to buy back less stock as the price rises, still sees roughly $40 billion of excess capital, and now thinks it could deploy it over time.",
+    "quote": "we've always said we want to buy back less stock as the price goes up and more stock as the price goes down. We had a lot of excess capital. And so, we were struggling with that if you're talking about two years ago. We still think the number – use just approximately $40 billion, and I think we now think we could actually deploy that over time.",
+    "speaker": "Jamie Dimon",
+    "status": "forward_looking",
+    "values": {
+      "excess_capital_usd_billion_approx": 40
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [
+      "'Approximately $40 billion' is an approximation."
+    ],
+    "segment_id": "seg-0079"
+  },
+  {
+    "id": "claim-101",
+    "category": "cash_flow_capital_allocation",
+    "classification": "management_opinion",
+    "claim_text": "Dimon said buying back stock is an investment decision, not a return of money to shareholders, and wants that label removed from the firm's reports.",
+    "quote": "buying back stock is not returning money to shareholders. You're making an investment decision.",
+    "speaker": "Jamie Dimon",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0079"
+  },
+  {
+    "id": "claim-102",
+    "category": "cash_flow_capital_allocation",
+    "classification": "management_opinion",
+    "claim_text": "Dimon said mentioning $20 billion previously was a mistake and the firm could deploy far more than that or nothing at all.",
+    "quote": "I made a mistake last time mentioning $20 billion. We could obviously do far more than that or nothing at all.",
+    "speaker": "Jamie Dimon",
+    "status": "reported",
+    "values": {
+      "previously_mentioned_amount_usd_billion": 20
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0079"
+  },
+  {
+    "id": "claim-103",
+    "category": "cash_flow_capital_allocation",
+    "classification": "management_guidance",
+    "claim_text": "Dimon said the goal is to deploy capital at a 17% return over time.",
+    "quote": "the goal is to deploy our capital at a 17% return. That is the goal, which we think we can do over time.",
+    "speaker": "Jamie Dimon",
+    "status": "forward_looking",
+    "values": {
+      "target_return_on_deployed_capital_pct": 17
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0079"
+  },
+  {
+    "id": "claim-104",
+    "category": "risk",
+    "classification": "management_opinion",
+    "claim_text": "Dimon named strong competition from Goldman Sachs and from fintechs including Stripe, PayPal, Cash, Block, Chime, SoFi and Revolut, requiring investment to keep up.",
+    "quote": "not just Goldman Sachs, who's doing a great job, if you didn't read their numbers this morning, because I did. But you got Stripe and PayPal and Cash and Block and Chime and SoFi and Revolut, and they're good.",
+    "speaker": "Jamie Dimon",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0079"
+  },
+  {
+    "id": "claim-105",
+    "category": "cash_flow_capital_allocation",
+    "classification": "management_opinion",
+    "claim_text": "Dimon said the firm is open-minded on inorganic opportunities, noting most of this year's deals were good and a couple were not.",
+    "quote": "And we've done a bunch of deals this year, as you know. Most were good. A couple weren't particularly good. And we're going to be looking, and we're open-minded.",
+    "speaker": "Jamie Dimon",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0079"
+  },
+  {
+    "id": "claim-106",
+    "category": "regulatory_legal_macro",
+    "classification": "management_opinion",
+    "claim_text": "Dimon said global deficits of almost 4.5% or 5% are a very big number competing for the same capital.",
+    "quote": "global deficits are almost 4.5% or 5%, which is a very big number competing for the same capital.",
+    "speaker": "Jamie Dimon",
+    "status": "reported",
+    "values": {
+      "global_deficit_low_pct": 4.5,
+      "global_deficit_high_pct": 5
+    },
+    "confidence": 0.8,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0079"
+  },
+  {
+    "id": "claim-107",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An analyst asked for the status and rollout timing of the Smart Cash tool and the comment about paying more for money over time.",
+    "quote": "So, curious, status of the tool, when you might roll it out and to who",
+    "speaker": "Glenn Schorr",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0082"
+  },
+  {
+    "id": "claim-108",
+    "category": "operational_performance",
+    "classification": "management_opinion",
+    "claim_text": "Dimon said Smart Cash is still a test case aimed at a narrow segment of accounts where the firm competes for investment and deposit business.",
+    "quote": "So, this is still a test case.",
+    "speaker": "Jamie Dimon",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0083"
+  },
+  {
+    "id": "claim-109",
+    "category": "operational_performance",
+    "classification": "management_guidance",
+    "claim_text": "Dimon said something on Smart Cash will be seen this year.",
+    "quote": "Yes. You'll see something this year.",
+    "speaker": "Jamie Dimon",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0085"
+  },
+  {
+    "id": "claim-110",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An analyst asked what the firm aims to be as a consumer bank across major European markets.",
+    "quote": "what are you trying to be as a consumer bank across the major markets in Europe.",
+    "speaker": "Glenn Schorr",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0086"
+  },
+  {
+    "id": "claim-111",
+    "category": "operational_performance",
+    "classification": "reported_fact",
+    "claim_text": "Dimon said Chase UK has roughly 2.5 to 3 million customers and the German launch has done better than expected but is not yet profitable.",
+    "quote": "But we have, I think, almost 3 million or 2.5 million customers in the UK. We've opened up in Berlin. We've actually done much better in Germany than we thought we were going to do, though it's not quite profitable yet.",
+    "speaker": "Jamie Dimon",
+    "status": "reported",
+    "values": {
+      "chase_uk_customers_million_low": 2.5,
+      "chase_uk_customers_million_high": 3
+    },
+    "confidence": 0.75,
+    "inferred_from": [],
+    "caveats": [
+      "Dimon gave the UK customer count loosely ('almost 3 million or 2.5 million')."
+    ],
+    "segment_id": "seg-0087"
+  },
+  {
+    "id": "claim-112",
+    "category": "operational_performance",
+    "classification": "management_opinion",
+    "claim_text": "Dimon said the aspiration is a successful pan-European digital bank, adding investment products and probably credit cards beyond the UK.",
+    "quote": "hopefully, the dream would be that it'd be a pan-European successful digital bank, building off of JPMorganChase's strengths.",
+    "speaker": "Jamie Dimon",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0087"
+  },
+  {
+    "id": "claim-113",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An analyst asked whether competitors' credit underwriting is getting looser.",
+    "quote": "What are you guys seeing in credit underwriting from your competitors? Is it getting crazier or no, it's still pretty good?",
+    "speaker": "Gerard Cassidy",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0089"
+  },
+  {
+    "id": "claim-114",
+    "category": "risk",
+    "classification": "management_opinion",
+    "claim_text": "Barnum said the firm passed on some data-centre deals that fell outside its risk framework, describing the market as competitive with normal pressures.",
+    "quote": "And we saw some deals come through, where we were just like, yeah, we're not doing that. So, it's normal, I guess. It's competitive and people are eager to be involved.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0090"
+  },
+  {
+    "id": "claim-115",
+    "category": "risk",
+    "classification": "management_opinion",
+    "claim_text": "Dimon described a mild deterioration in credit underwriting across several dimensions (revenue assumptions, expense add-backs, more PIK, weaker covenants, more rollover risk) and expects outliers when the credit cycle comes.",
+    "quote": "I think we talked about it as a very mild one, but it's across several spectrum, which is people – assumptions on revenue growth or add-back of expenses, more PIK, some weaker – and this is not across the board, by the way.",
+    "speaker": "Jamie Dimon",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0091"
+  },
+  {
+    "id": "claim-116",
+    "category": "risk",
+    "classification": "management_opinion",
+    "claim_text": "Dimon said there will be a credit cycle and performance will not be a bell curve, with outliers as in the Great Financial Crisis.",
+    "quote": "And I don't think it's going to be like a bell curve of performance. I think there'll be some outliers out there, just like there were, by the way, in the Great Financial Crisis.",
+    "speaker": "Jamie Dimon",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0091"
+  },
+  {
+    "id": "claim-117",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An analyst asked whether a period of regulatory stability could enhance bank valuations.",
+    "quote": "Could we enter a period where we have a stability in the regulatory environment, which could enhance valuations possibly for bank stocks?",
+    "speaker": "Gerard Cassidy",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0092"
+  },
+  {
+    "id": "claim-118",
+    "category": "regulatory_legal_macro",
+    "classification": "management_opinion",
+    "claim_text": "Barnum said regulatory stability is desirable and getting closer, but was not convinced regulation is a major valuation drag for banks like JPMorgan.",
+    "quote": "But at least I think for banks like us, I'm not convinced that's a major drag right now, to be honest, or that it has been in the recent past.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0094"
+  },
+  {
+    "id": "claim-119",
+    "category": "regulatory_legal_macro",
+    "classification": "management_opinion",
+    "claim_text": "Dimon welcomed regulators Bowman and Warsh stepping back to review two decades of rule changes and said resolution and recovery planning does not work.",
+    "quote": "I really like the fact that Miki Bowman and Kevin Warsh are taking a step back and looking at the broad range of changes",
+    "speaker": "Jamie Dimon",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0095"
+  },
+  {
+    "id": "claim-120",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An analyst asked whether the expense guide increase includes pulling forward tech or marketing spend.",
+    "quote": "But are you also bringing up some of the other categories, maybe pulling forward any tech or marketing spend, given the environment?",
+    "speaker": "Manan Gosalia",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0100"
+  },
+  {
+    "id": "claim-121",
+    "category": "qa_insight",
+    "classification": "management_opinion",
+    "claim_text": "Barnum said some expense movements relate to marketing strategy that he does not want to disclose.",
+    "quote": "some of which relates to things like our marketing strategy, which I probably don't particularly want to disclose.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0101"
+  },
+  {
+    "id": "claim-122",
+    "category": "costs_margins_efficiency",
+    "classification": "management_opinion",
+    "claim_text": "Barnum said AI token expense was trivial in the first half, is forecast to accelerate meaningfully in the second half, but remains trivial for the full year and is not a driver of the revised outlook.",
+    "quote": "it is a trivial number for the first half of the year. We are forecasting some meaningful acceleration in that number for the second half of the year. But still nonetheless, the full year contribution of that is still trivial",
+    "speaker": "Jeremy Barnum",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0101"
+  },
+  {
+    "id": "claim-123",
+    "category": "costs_margins_efficiency",
+    "classification": "management_opinion",
+    "claim_text": "Barnum said the firm aims to use the right AI model for each purpose, including open source where appropriate, to control token costs.",
+    "quote": "So, the idea is use the right model for the right purpose, be smart about open source where appropriate, and ensure that you're getting value out of it ultimately in the end.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0101"
+  },
+  {
+    "id": "claim-124",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An analyst asked whether CIB capital allocation is at a peak or has room to grow.",
+    "quote": "Do you think we're at peak allocation here? Are there any internal limits that you might be rubbing up against?",
+    "speaker": "Manan Gosalia",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0102"
+  },
+  {
+    "id": "claim-125",
+    "category": "qa_insight",
+    "classification": "management_opinion",
+    "claim_text": "Barnum declined to discuss internal limit management, saying CIB capital use responds to client demand plus passive effects from volatility and equity prices.",
+    "quote": "I mean, I'm definitely not going to get into discussions with you about like internal limit management.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0103"
+  },
+  {
+    "id": "claim-126",
+    "category": "balance_sheet_solvency",
+    "classification": "management_opinion",
+    "claim_text": "Barnum said higher volatility passively raises market risk capital and rising equity markets raise RWA in businesses such as prime.",
+    "quote": "obviously when volatility is higher, market risk capital goes up passively and simply the appreciation of global equity markets increases the RWA associated with things like the prime business.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0103"
+  },
+  {
+    "id": "claim-127",
+    "category": "regulatory_legal_macro",
+    "classification": "management_opinion",
+    "claim_text": "Barnum said the system is flush with capital but less flush with liquidity at the margin, and that liquidity regulation adjustment is next on the agenda.",
+    "quote": "the system is currently quite flush with capital, but at the margin, less flush with liquidity.",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0103"
+  },
+  {
+    "id": "claim-128",
+    "category": "risk",
+    "classification": "management_opinion",
+    "claim_text": "Dimon said the firm's risk standards have not changed, and it is fine if some clients choose other lenders as a result.",
+    "quote": "But our risk standards haven't changed. So, it's possible some of these things change because people self-select and pick somebody else, and that would be fine with us.",
+    "speaker": "Jamie Dimon",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0104"
+  },
+  {
+    "id": "claim-129",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Pre-event consensus EPS for the quarter was $5.50 to $5.59.",
+    "quote": "kicks off its Q2 2026 earnings on July 14, 2026, reporting ahead of the open at 7 a.m. ET and hosting its earnings call at 8:30 a.m. ET. The consensus estimate before earnings release is EPS of $5.50 to $5.59",
+    "speaker": null,
+    "status": "forward_looking",
+    "values": {
+      "consensus_eps_low_usd": 5.5,
+      "consensus_eps_high_usd": 5.59
+    },
+    "confidence": 0.8,
+    "inferred_from": [],
+    "caveats": [
+      "The preview is timestamped 12:00 PM on 14 Jul 2026, after JPM's 7 a.m. release, but its content is a pre-release preview and states no actual results."
+    ],
+    "web_evidence_id": "web-006",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-130",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Pre-event consensus revenue was $49.16 billion to $51.09 billion, a 12% to 13% increase on Q2 2025.",
+    "quote": "with revenue of $49.16 billion to $51.09 billion, representing a 12% to 13% increase from Q2 2025",
+    "speaker": null,
+    "status": "forward_looking",
+    "values": {
+      "consensus_revenue_low_usd_billion": 49.16,
+      "consensus_revenue_high_usd_billion": 51.09,
+      "consensus_revenue_growth_low_pct": 12,
+      "consensus_revenue_growth_high_pct": 13
+    },
+    "confidence": 0.8,
+    "inferred_from": [],
+    "caveats": [
+      "The preview is timestamped 12:00 PM on 14 Jul 2026, after JPM's 7 a.m. release, but its content is a pre-release preview and states no actual results.",
+      "The call gave revenue growth only ex-significant items and no dollar revenue total, so the actual cannot be compared to this range from this run's evidence."
+    ],
+    "web_evidence_id": "web-006",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-131",
+    "category": "guidance_change",
+    "classification": "management_guidance",
+    "claim_text": "A pre-event preview stated management's full-year 2026 NII guidance as $103 billion, or $95 billion excluding Markets.",
+    "quote": "Management guidance is $103B for full year 2026, or $95B ex markets",
+    "speaker": null,
+    "status": "forward_looking",
+    "values": {
+      "prior_total_nii_guidance_usd_billion": 103,
+      "prior_nii_ex_markets_guidance_usd_billion": 95
+    },
+    "confidence": 0.85,
+    "inferred_from": [],
+    "caveats": [
+      "The preview is timestamped 12:00 PM on 14 Jul 2026, after JPM's 7 a.m. release, but its content is a pre-release preview and states no actual results."
+    ],
+    "web_evidence_id": "web-006",
+    "period": "12 months to 31 Dec 2026"
+  },
+  {
+    "id": "claim-132",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "In Q1 2026 JPM reported EPS of $5.94 against a $5.50 consensus, on revenue of $50.54 billion.",
+    "quote": "the last of which came in Q1 2026 when the company posted EPS of $5.94, compared to a consensus of $5.50, on revenue of $50.54 billion",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "q1_eps_usd": 5.94,
+      "q1_consensus_eps_usd": 5.5,
+      "q1_revenue_usd_billion": 50.54
+    },
+    "confidence": 0.8,
+    "inferred_from": [],
+    "caveats": [],
+    "web_evidence_id": "web-006",
+    "period": "3 months to 31 Mar 2026"
+  },
+  {
+    "id": "claim-133",
+    "category": "regulatory_legal_macro",
+    "classification": "reported_fact",
+    "claim_text": "A pre-event preview asserted that JPM's G-SIB capital requirement will be 5.2% by 2028 from 4.5%, calling it an approximately $20 billion hit to its capacity for buybacks and dividends.",
+    "quote": "The bank is disclosing in Q1 2026 that its new G-SIB (global systemically important bank) capital requirement will be 5.2% by 2028, from the existing 4.5%. That is an approximately $20B hit to JPM's ability to repurchase shares and pay dividends",
+    "speaker": null,
+    "status": "forward_looking",
+    "values": {
+      "preview_gsib_requirement_2028_pct": 5.2,
+      "preview_gsib_requirement_current_pct": 4.5,
+      "preview_capital_impact_usd_billion_approx": 20
+    },
+    "confidence": 0.6,
+    "inferred_from": [],
+    "caveats": [
+      "This is a third-party preview's characterisation, not a figure JPM stated in this run's evidence; the 5.2%/4.5% surcharge figures are in a different sentence of the same page."
+    ],
+    "web_evidence_id": "web-006"
+  },
+  {
+    "id": "claim-134",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "A WSJ estimates table shows, in its Q2 column, actual EPS of 7.70 against a consensus of 5.59.",
+    "quote": "| Actual 5.07 4.85 | Actual 4.63 4.85 | Actual 5.94 5.47 | Actual 7.70 5.59 | 5.93 | 5.97 | | --- | --- | --- | --- | --- | --- | | Q3 2025 | Q4 | Q1 2026 | Q2 | Q3 | Q4 |",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "reported_eps_usd": 7.7,
+      "consensus_eps_usd": 5.59
+    },
+    "confidence": 0.7,
+    "inferred_from": [],
+    "caveats": [
+      "Page captured 13 Oct 2026, after the event. 7.70 appears to be reported EPS including significant items, unlike the $6.14 adjusted figure on the call; the SEC half-year diluted EPS in financials.json less Q1's 5.94 is consistent with it."
+    ],
+    "web_evidence_id": "web-001"
+  },
+  {
+    "id": "claim-135",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Bank of America reported Q2 2026 net income of $9.1 billion and EPS of $1.21, up 34% year-on-year.",
+    "quote": "Bank of America Reports 2Q26 Net Income of $9.1 Billion; EPS of $1.21, Up 34% YoY",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "bac_net_income_usd_billion": 9.1,
+      "bac_eps_usd": 1.21,
+      "bac_eps_growth_yoy_pct": 34
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "web_evidence_id": "web-012",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-136",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Bank of America revenue rose 15% year-on-year to $31.6 billion and NII rose 9% to $16.0 billion.",
+    "quote": "2Q26 Revenue Up 15% YoY to $31.6 Billion,1 Net Interest Income Up 9% YoY to $16.0 Billion",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "bac_revenue_growth_yoy_pct": 15,
+      "bac_revenue_usd_billion": 31.6,
+      "bac_nii_growth_yoy_pct": 9,
+      "bac_nii_usd_billion": 16.0
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "web_evidence_id": "web-012",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-137",
+    "category": "costs_margins_efficiency",
+    "classification": "reported_fact",
+    "claim_text": "Bank of America reported 6.6% operating leverage.",
+    "quote": "helped drive 6.6% operating leverage",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "bac_operating_leverage_pct": 6.6
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "web_evidence_id": "web-012"
+  },
+  {
+    "id": "claim-138",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Bank of America investment banking fees rose 50% year-on-year.",
+    "quote": "investment banking fees up 50% year-over-year",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "bac_ib_fees_growth_yoy_pct": 50
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "web_evidence_id": "web-012"
+  },
+  {
+    "id": "claim-139",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Bank of America equities revenue rose 70% to $3.6 billion and FICC rose 9% to $3.5 billion.",
+    "quote": "Equities revenue up 70% to $3.6 billion, incl. and excl. net DVA(E) – Fixed Income, Currencies and Commodities (FICC) revenue up 9% to $3.5 billion",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "bac_equities_growth_yoy_pct": 70,
+      "bac_equities_revenue_usd_billion": 3.6,
+      "bac_ficc_growth_yoy_pct": 9,
+      "bac_ficc_revenue_usd_billion": 3.5
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "web_evidence_id": "web-012"
+  },
+  {
+    "id": "claim-140",
+    "category": "balance_sheet_solvency",
+    "classification": "reported_fact",
+    "claim_text": "Bank of America reported a CET1 ratio of 11.2%.",
+    "quote": "CET1 11.2%5",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "bac_cet1_pct": 11.2
+    },
+    "confidence": 0.8,
+    "inferred_from": [],
+    "caveats": [
+      "Extracted from a slide table; the trailing '5' is a footnote marker."
+    ],
+    "web_evidence_id": "web-007"
+  },
+  {
+    "id": "claim-141",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Bank of America reported ROTCE of 17.0%, up 342 basis points year-on-year.",
+    "quote": "17.0% +342 bps YoY | ROTCE7",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "bac_rotce_pct": 17.0,
+      "bac_rotce_change_bps": 342
+    },
+    "confidence": 0.75,
+    "inferred_from": [],
+    "caveats": [
+      "Extracted from a slide table where labels follow their values; the trailing '7' is a footnote marker."
+    ],
+    "web_evidence_id": "web-007"
+  },
+  {
+    "id": "claim-142",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Citi revenue was $24.8 billion, up 14% year-on-year.",
+    "quote": "Citigroup revenues of $24.8 billion in the second quarter 2026 increased 14%",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "c_revenue_usd_billion": 24.8,
+      "c_revenue_growth_yoy_pct": 14
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "web_evidence_id": "web-003",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-143",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Citi net income was $5.8 billion, or $3.15 per diluted share.",
+    "quote": "reported net income for the second quarter 2026 of $5.8 billion, or $3.15 per diluted share, on revenues of $24.8 billion",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "c_net_income_usd_billion": 5.8,
+      "c_eps_usd": 3.15,
+      "c_revenue_usd_billion": 24.8
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "web_evidence_id": "web-003",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-144",
+    "category": "costs_margins_efficiency",
+    "classification": "reported_fact",
+    "claim_text": "Citi operating expenses were $14.2 billion, up 5%.",
+    "quote": "Citigroup operating expenses of $14.2 billion were up 5%",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "c_expenses_usd_billion": 14.2,
+      "c_expense_growth_yoy_pct": 5
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "web_evidence_id": "web-003"
+  },
+  {
+    "id": "claim-145",
+    "category": "balance_sheet_solvency",
+    "classification": "reported_fact",
+    "claim_text": "Citi reported a CET1 ratio of 12.8%.",
+    "quote": "COMMON EQUITY TIER 1 CAPITAL RATIO OF 12.8%",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "c_cet1_pct": 12.8
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "web_evidence_id": "web-003"
+  },
+  {
+    "id": "claim-146",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Citi Markets revenue was $7.0 billion, up 17%.",
+    "quote": "Markets revenues of $7.0 billion increased 17%",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "c_markets_revenue_usd_billion": 7.0,
+      "c_markets_growth_yoy_pct": 17
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "web_evidence_id": "web-003"
+  },
+  {
+    "id": "claim-147",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Citi's CEO said Equities revenues rose 45% and Banking revenues rose 34%.",
+    "quote": "Equities showed continued momentum with revenues up 45%. Banking revenues climbed 34%",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "c_equities_growth_yoy_pct": 45,
+      "c_banking_revenue_growth_yoy_pct": 34
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "web_evidence_id": "web-003"
+  },
+  {
+    "id": "claim-148",
+    "category": "costs_margins_efficiency",
+    "classification": "reported_fact",
+    "claim_text": "Citi reported positive operating leverage, an efficiency ratio of about 57% improved by about 530 basis points, and RoTCE of 13.0%.",
+    "quote": "2Q26 expenses of $14.2 billion, efficiency ratio of ~57% improved by ~530 bps YoY • 2Q26 RoTCE of 13.0%, up ~430 bps YoY(b) • EPS of $3.15, up 61% YoY • Positive operating leverage",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "c_expenses_usd_billion": 14.2,
+      "c_efficiency_ratio_pct_approx": 57,
+      "c_efficiency_improvement_bps_approx": 530,
+      "c_rotce_pct": 13.0,
+      "c_eps_growth_yoy_pct": 61
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "web_evidence_id": "web-013",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-149",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Wells Fargo reported diluted EPS of $2.00, up 25% year-on-year, and revenue up 9%.",
+    "quote": "We generated strong second quarter results with diluted earnings per share growing to $2.00, up 25% from a year ago. Revenue increased 9% from a year ago",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "wfc_eps_usd": 2.0,
+      "wfc_eps_growth_yoy_pct": 25,
+      "wfc_revenue_growth_yoy_pct": 9
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "web_evidence_id": "web-004",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-150",
+    "category": "costs_margins_efficiency",
+    "classification": "reported_fact",
+    "claim_text": "Wells Fargo expenses rose 2% and the bank reported positive operating leverage.",
+    "quote": "Continued expense discipline drove positive operating leverage. Total expenses were up 2% from a year ago",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "wfc_expense_growth_yoy_pct": 2
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "web_evidence_id": "web-004"
+  },
+  {
+    "id": "claim-151",
+    "category": "balance_sheet_solvency",
+    "classification": "reported_fact",
+    "claim_text": "Wells Fargo's ROTCE rose to 17.7% from 15.2% a year earlier.",
+    "quote": "ROTCE 4 increased from 15.2% a year ago to 17.7% in the second quarter",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "wfc_rotce_prior_pct": 15.2,
+      "wfc_rotce_pct": 17.7
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "web_evidence_id": "web-004",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-152",
+    "category": "balance_sheet_solvency",
+    "classification": "reported_fact",
+    "claim_text": "Wells Fargo's CET1 ratio was 10.3%, down from 11.1% a year earlier.",
+    "quote": "CET1 2 10.3% 11.1",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "wfc_cet1_pct": 10.3,
+      "wfc_cet1_prior_pct": 11.1
+    },
+    "confidence": 0.8,
+    "inferred_from": [],
+    "caveats": [
+      "Read from a summary table; the '2' after CET1 is a footnote marker, and the 11.1 sits in the table's Jun 30, 2025 column, which the quote itself does not show."
+    ],
+    "web_evidence_id": "web-004"
+  },
+  {
+    "id": "claim-153",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Wells Fargo's Corporate and Investment Banking Markets revenue rose 24% and Banking revenue rose 20%.",
+    "quote": "In Corporate and Investment Banking we had strong results with Banking revenue increasing 20% and Markets revenue up 24% from a year ago",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "wfc_banking_revenue_growth_yoy_pct": 20,
+      "wfc_markets_revenue_growth_yoy_pct": 24
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "web_evidence_id": "web-004"
+  },
+  {
+    "id": "claim-154",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Goldman Sachs reported Q2 2026 net revenues of $20.34 billion, net earnings of $6.63 billion, EPS of $20.98 and an annualised ROE of 23.5%.",
+    "quote": "today reported net revenues of $20.34 billion and net earnings of $6.63 billion for the second quarter ended June 30, 2026. Diluted earnings per common share (EPS) was $20.98 and annualized return on average common shareholders’ equity (ROE) was 23.5%",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "gs_net_revenues_usd_billion": 20.34,
+      "gs_net_earnings_usd_billion": 6.63,
+      "gs_eps_usd": 20.98,
+      "gs_roe_pct": 23.5
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "web_evidence_id": "web-005",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-155",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Goldman Sachs net revenues rose 39% year-on-year.",
+    "quote": "Net revenues were $20.34 billion for the second quarter of 2026, 39% higher than the second quarter of 2025",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "gs_net_revenues_usd_billion": 20.34,
+      "gs_revenue_growth_yoy_pct": 39
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "web_evidence_id": "web-010",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-156",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Goldman Sachs investment banking fees were $3.40 billion, up 55% year-on-year.",
+    "quote": "Investment banking fees were $3.40 billion, 55% higher than the second quarter of 2025",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "gs_ib_fees_usd_billion": 3.4,
+      "gs_ib_fees_growth_yoy_pct": 55
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "web_evidence_id": "web-010",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-157",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Goldman Sachs Equities net revenues were $7.42 billion, up 72% year-on-year.",
+    "quote": "Net revenues in Equities were $7.42 billion, 72% higher than the second quarter of 2025",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "gs_equities_revenue_usd_billion": 7.42,
+      "gs_equities_growth_yoy_pct": 72
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "web_evidence_id": "web-010",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-158",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Goldman Sachs FICC net revenues were $4.59 billion, up 32% year-on-year.",
+    "quote": "Net revenues in Fixed Income, Currency and Commodities (FICC) were $4.59 billion, 32% higher than the second quarter of 2025",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "gs_ficc_revenue_usd_billion": 4.59,
+      "gs_ficc_growth_yoy_pct": 32
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "web_evidence_id": "web-010",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-159",
+    "category": "reported_financial_performance",
+    "classification": "analytical_inference",
+    "claim_text": "JPM's adjusted EPS came in above the whole pre-event consensus range.",
+    "quote": "EPS of $6.14",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [
+      "claim-001",
+      "claim-129"
+    ],
+    "caveats": [
+      "The beat compares an ex-significant-items EPS with a consensus whose basis the preview does not state."
+    ],
+    "segment_id": "seg-0003",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-160",
+    "category": "guidance_change",
+    "classification": "analytical_inference",
+    "claim_text": "Total NII guidance was raised above the level that stood before the call, with most of the increase in NII excluding Markets.",
+    "quote": "total NII to be approximately $105.5 billion",
+    "speaker": "Jeremy Barnum",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [
+      "claim-023",
+      "claim-131",
+      "claim-043"
+    ],
+    "caveats": [],
+    "segment_id": "seg-0003",
+    "period": "12 months to 31 Dec 2026"
+  },
+  {
+    "id": "claim-161",
+    "category": "reported_financial_performance",
+    "classification": "analytical_inference",
+    "claim_text": "JPM's Equities revenue growth was higher than that of each of the three peers that disclosed equities growth (Bank of America, Goldman Sachs and Citi).",
+    "quote": "with revenue up 86% year-on-year",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [
+      "claim-018",
+      "claim-139",
+      "claim-157",
+      "claim-147"
+    ],
+    "caveats": [
+      "Wells Fargo did not disclose a separate equities figure in this run's evidence, so it is not in the comparison."
+    ],
+    "segment_id": "seg-0003",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-162",
+    "category": "reported_financial_performance",
+    "classification": "analytical_inference",
+    "claim_text": "JPM's investment banking fee growth trailed that of Bank of America and Goldman Sachs, the two peers that disclosed investment banking fees on the same basis.",
+    "quote": "IB fees were up 30% year-on-year",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [
+      "claim-014",
+      "claim-138",
+      "claim-156"
+    ],
+    "caveats": [
+      "Citi and Wells Fargo disclosed 'Banking revenue' growth, a different metric from investment banking fees, so they are excluded."
+    ],
+    "segment_id": "seg-0003",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-163",
+    "category": "costs_margins_efficiency",
+    "classification": "analytical_inference",
+    "claim_text": "JPM's expense growth matched its adjusted revenue growth this quarter, whereas Bank of America, Citi and Wells Fargo each reported positive operating leverage.",
+    "quote": "Expenses of $27.3 billion were up 15% year-on-year",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [
+      "claim-003",
+      "claim-002",
+      "claim-137",
+      "claim-148",
+      "claim-150"
+    ],
+    "caveats": [
+      "JPM's revenue growth is ex-significant items while its expense growth basis is not stated; peers report on their own bases."
+    ],
+    "segment_id": "seg-0003",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-164",
+    "category": "balance_sheet_solvency",
+    "classification": "analytical_inference",
+    "claim_text": "JPM's CET1 ratio was higher than those reported by Bank of America, Citi and Wells Fargo.",
+    "quote": "standardized CET1 ratio of 14.1%",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [
+      "claim-005",
+      "claim-140",
+      "claim-145",
+      "claim-152"
+    ],
+    "caveats": [
+      "Goldman Sachs' CET1 ratio is not in this run's extracted evidence; ratios may be on different (standardized vs advanced) bases."
+    ],
+    "segment_id": "seg-0003",
+    "period": "as of 30 Jun 2026"
+  },
+  {
+    "id": "claim-165",
+    "category": "reported_financial_performance",
+    "classification": "analytical_inference",
+    "claim_text": "JPM's adjusted ROTCE was higher than the ROTCE reported by Bank of America, Citi and Wells Fargo.",
+    "quote": "an ROTCE of 23%",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [
+      "claim-001",
+      "claim-141",
+      "claim-148",
+      "claim-151"
+    ],
+    "caveats": [
+      "JPM's ROTCE excludes significant items; Goldman Sachs reports ROE, not ROTCE, so it is excluded."
+    ],
+    "segment_id": "seg-0003",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-166",
+    "category": "reported_financial_performance",
+    "classification": "analytical_inference",
+    "claim_text": "JPM's adjusted revenue growth was in line with Bank of America and Citi, ahead of Wells Fargo and well behind Goldman Sachs.",
+    "quote": "revenue was up 15% year-on-year",
+    "speaker": "Jeremy Barnum",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [
+      "claim-002",
+      "claim-136",
+      "claim-142",
+      "claim-149",
+      "claim-155"
+    ],
+    "caveats": [
+      "JPM's growth is ex-significant items; peers' growth is as reported."
+    ],
+    "segment_id": "seg-0003",
+    "period": "3 months to 30 Jun 2026"
+  }
+]

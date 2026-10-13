@@ -1,12 +1,12 @@
 {
-  "url": "https://www.stocktitan.net/sec-filings/JPM/8-k-jpmorgan-chase-co-reports-material-event-1f2ddf4de037.html",
-  "title": "JPMorgan Chase posts $21.2B profit in Q2 2026 | JPM 8-K Filing",
+  "url": "https://www.jpmorganchase.com/content/dam/jpmc/jpmorgan-chase-and-co/investor-relations/documents/quarterly-earnings/2026/2nd-quarter/c9c097af-34e9-4aae-92d2-909a2ab7c083.pdf",
+  "title": "EARNINGS RELEASE FINANCIAL SUPPLEMENT SECOND QUARTER 2026",
   "score": null,
-  "published_date": "2026-07-14T00:00:00.000Z",
+  "published_date": null,
   "_class": "consensus",
   "_select_key": "consensus",
-  "_temporal_status": "pre_event",
+  "_temporal_status": "undated",
   "_provider": "exa",
   "_query": "JPMorgan Chase & Co. JPM 2026-q2 earnings guidance outlook estimates",
-  "_retrieved_at": "2026-09-16T15:44:41Z"
+  "_retrieved_at": "2026-10-13T22:12:38Z"
 }

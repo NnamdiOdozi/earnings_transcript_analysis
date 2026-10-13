@@ -171,7 +171,10 @@ guaranteed before proceeding.
 
 7. **Audit the claims with Jev, then account for every finding.** Optional, and it
    needs an OpenRouter key, but skipping it means the only reading of your claims
-   before validation is your own. Run:
+   before validation is your own. Jev is a third-party service, so a clone of this
+   repo may not have access: if the script exits saying `OPENROUTER_API_KEY` is
+   unset, skip this step, say so in your summary, and carry on — the run is still
+   valid without it and no later stage fails for the absence. Run:
 
    ```bash
    uv run python scripts/jev_check.py runs/<TICKER>/<EVENT_ID>
@@ -352,8 +355,13 @@ Only start this stage once Stage 1's `earnings analyze` has passed.
     uv run python scripts/jev_check.py runs/<TICKER>/<EVENT_ID> --mode citations
     ```
 
+    Optional on the same terms as step 7: no OpenRouter key means skip it, say so,
+    and continue.
+
     This writes `outlook/jev-triage.json` and takes dispositions in
-    `outlook/jev-dispositions.json`, same two tiers and same rules as step 7. A
+    `outlook/jev-dispositions.json`, same two tiers and same rules as step 7.
+    `validate-outlook` warns (never fails) about any `defect` left undisposed, and
+    records the warning in `outlook-validation.json`. A
     `defect` here means Jev read the cited claim and found it says nothing about the
     point your sentence uses it for. Measured on JPM/2026-q2-rerun: of 150 citations,
     thirteen came back that way, and the one an independent reviewer later flagged by

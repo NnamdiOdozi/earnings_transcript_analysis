@@ -929,6 +929,39 @@ def test_validate_outlook_passes_with_real_citation(isolated_runs_dir):
     assert outlook_validation["errors"] == []
 
 
+def test_validate_outlook_warns_on_undisposed_jev_citation_defect(isolated_runs_dir):
+    """A flagged citation defect nobody answered must be visible, but must not block.
+
+    The claims stage has warned about this for a while; the citations stage did not,
+    which is how a run once reached the reviewer carrying flagged miscitations.
+    """
+    run_dir = _seed_validated_run(isolated_runs_dir)
+    paths = RunPaths.at(run_dir)
+    paths.outlook_brief.write_text("# Outlook Brief\n\nRevenue growth looks strong [claim-001].\n")
+    paths.outlook_jev_triage.parent.mkdir(parents=True, exist_ok=True)
+    paths.outlook_jev_triage.write_text(json.dumps({
+        "items": [{"key": "claim-001__says_nothing", "severity": "defect",  # gitleaks:allow (triage key, not a secret)
+                   "claim_id": "claim-001", "question": "says_nothing",
+                   "summary": "cited claim says nothing about the point"}],
+    }))
+
+    assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
+
+    record = json.loads(paths.outlook_validation.read_text())
+    assert record["ok"] is True                      # advisory, never a gate
+    assert len(record["warnings"]) == 1
+    assert "claim-001/says_nothing" in record["warnings"][0]
+
+
+def test_validate_outlook_records_no_warning_when_jev_never_ran(isolated_runs_dir):
+    """No triage file means no Jev; a clone without an OpenRouter key must pass clean."""
+    run_dir = _seed_validated_run(isolated_runs_dir)
+    paths = RunPaths.at(run_dir)
+    paths.outlook_brief.write_text("# Outlook Brief\n\nRevenue growth looks strong [claim-001].\n")
+    assert main(["validate-outlook", "--ticker", "ACME", "--event-id", "2026-q2"]) == 0
+    assert json.loads(paths.outlook_validation.read_text())["warnings"] == []
+
+
 def test_validate_outlook_history_records_failed_then_passed_attempts(isolated_runs_dir):
     """Preserve each submitted brief and its own result when the top-level result changes."""
     run_dir = _seed_validated_run(isolated_runs_dir)

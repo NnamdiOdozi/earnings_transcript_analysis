@@ -492,7 +492,11 @@ that, the advisory could never be answered and would decay into a line everyone
 learns to scroll past.
 
 `earnings analyze` warns — never fails — when defect items have no matching
-disposition (`validate.jev_triage_warnings`). Making it fail would put a
+disposition (`validate.jev_triage_warnings`), and `earnings validate-outlook` runs the
+same check over `outlook/jev-triage.json`, recording the warning in
+`outlook-validation.json`. The citations stage had no such warning until 2026-09-27,
+which is how a run once reached the independent reviewer carrying thirteen flagged
+miscitations. Making it fail would put a
 probabilistic third-party API on the pipeline's critical path, which contradicts the
 rule this whole document opens with. The warning makes ignoring a finding visible
 without making the run depend on the finding.

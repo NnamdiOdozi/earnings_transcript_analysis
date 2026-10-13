@@ -15,6 +15,7 @@ from .validate import (
     check_outlook_brief_citations,
     check_outlook_brief_dollar_escaping,
     check_outlook_brief_numbers,
+    jev_triage_warnings,
 )
 from .validation_history import _OutlookValidationAttempt
 
@@ -74,12 +75,17 @@ def cmd_validate_outlook(args: argparse.Namespace) -> int:
     errors = check_outlook_brief_citations(outlook_text, claim_ids)
     errors += check_outlook_brief_dollar_escaping(outlook_text)
     errors += check_outlook_brief_numbers(outlook_text, claims_by_id)
+    # Citation-stage Jev findings nobody accounted for. Advisory, never a gate -- the
+    # claims stage has had this since a run reached the reviewer carrying flagged
+    # miscitations; this stage is where that actually happened.
+    warnings = jev_triage_warnings(paths.outlook_jev_triage, paths.outlook_jev_dispositions)
     # Bind this record to the exact brief + claims bytes so `check-review` can prove the
     # brief it reviews is still the one that passed here.
     outlook_validation = OutlookValidation(
         ok=not errors,
         validated_at=_now_iso(),
         errors=errors,
+        warnings=warnings,
         outlook_brief_sha256=sha256_hex(outlook_path.read_bytes()),
         claims_sha256=sha256_hex(claims_path.read_bytes()),
         agent_provenance=AgentProvenance(
@@ -89,6 +95,8 @@ def cmd_validate_outlook(args: argparse.Namespace) -> int:
         ),
     )
     _write_json(paths.outlook_validation, outlook_validation.model_dump())
+    for warning in warnings:
+        print(f"warning: {warning}")
     if errors:
         attempt.finish(
             "failed", 1, outlook_validation, validation_path=paths.outlook_validation

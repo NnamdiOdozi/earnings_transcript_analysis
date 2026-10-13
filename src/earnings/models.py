@@ -231,6 +231,8 @@ class OutlookValidation(BaseModel):
     ok: bool
     validated_at: str  # ISO 8601 UTC timestamp
     errors: list[str] = Field(default_factory=list)
+    # Advisory only, never affects `ok`: currently unanswered Jev citation findings.
+    warnings: list[str] = Field(default_factory=list)
     # SHA-256 of the exact bytes validated, so `check-review` can prove the brief it is
     # about to review is still the one that passed here (not edited since). claims_sha256
     # pins the claims the brief was validated against.

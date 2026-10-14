@@ -142,8 +142,11 @@ guaranteed before proceeding.
      rule as extraction-instructions.md's period section, called out here because
      it's exactly the kind of thing this self-check pass exists to catch before
      Python ever sees it — Python cannot check period accuracy at all);
-   - claims whose `claim_text` doesn't actually match what its cited `quote` says
-     in context, not just that the quote text exists.
+   - claims whose `claim_text` asserts anything its own `quote` does not carry —
+     a figure, qualifier, scope word or clause from elsewhere in the turn. Do this
+     before Jev: on LLOY/2026-h1 it removed most of the defects Jev would have
+     raised. Fix by widening the quote, not by deleting a scope word or hedge.
+     Write numbers the quote spells out in words ("five billion") in words too.
 
    Fix anything you find yourself; Python's validators below check groundedness,
    not these judgment errors.
@@ -154,15 +157,9 @@ guaranteed before proceeding.
    count of how many instances it changed. A multi-instance replace can silently
    miss an occurrence that differs only in whitespace or line-formatting, leaving
    the original problem in place under an untouched claim while you move on
-   believing it's fixed. Confirmed live (SBRY/q1-2627, 2026-09-04): a guessed
-   `period` value was intentionally removed from three claims via a scripted
-   string replace; the tool reported two replacements, that count was trusted at
-   face value, and the third instance (`claim-009`, differently formatted) kept
-   its guessed period all the way to `signal-card.md` -- caught only by the
-   independent reviewer in round 1, not by this self-check step, which is
-   supposed to be exactly where it gets caught. This is a general discipline, not
-   a period-specific one: it applies to any fix made during this step, not only
-   period corrections.
+   believing it's fixed (SBRY/q1-2627: a replace reported two of three fixes and
+   the third reached the signal card). Edit claims in place rather than deleting
+   them once Jev has run: claim ids are positional and triage keys depend on them.
 
    Decide whether the discretionary price tool was `used`, `not_used`, or
    `attempted_failed`. Give one concise reason. This is an operational receipt,
@@ -329,7 +326,9 @@ Only start this stage once Stage 1's `earnings analyze` has passed.
 12. **Self-check the brief before validating.** `earnings validate-outlook` (next
     step) only confirms a cited claim id *resolves* — it cannot tell a correct
     citation from a plausible-looking wrong one, and neither can you rely on it to
-    catch an overstated factual claim. Before running it, reread every `[claim-###]`
+    catch an overstated factual claim. Never type claim ids from memory: draft
+    against claim text or stable keys and resolve ids from `claims.json` (on
+    LLOY/2026-h1 remembered ids were off by one). Then reread every `[claim-###]`
     citation in the brief against the claim it actually points to:
     - Does the claim you cited actually say what the surrounding sentence
       attributes to it? A citation that resolves but doesn't support the specific

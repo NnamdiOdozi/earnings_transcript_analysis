@@ -1,12 +1,12 @@
 {
-  "url": "https://www.tipranks.com/stocks/gb:lloy/earnings",
-  "title": "",
+  "url": "https://app.dealroom.co/news/feed/lloyds-banking-group-q1-2026-earnings-preview-analysts-expect-5b-revenue-0-02-per-share",
+  "title": "Lloyds Banking Group Q1 2026 earnings preview: analysts expect $5B revenue, $0.02 per share | Dealroom.co",
   "score": null,
   "published_date": null,
   "_class": "consensus",
   "_select_key": "consensus",
-  "_temporal_status": "unchecked",
+  "_temporal_status": "undated",
   "_provider": "exa",
   "_query": "Lloyds Banking Group plc LLOY 2026-h1 earnings preview expectations forecast",
-  "_retrieved_at": "2026-09-01T22:03:47Z"
+  "_retrieved_at": "2026-10-14T06:35:29Z"
 }

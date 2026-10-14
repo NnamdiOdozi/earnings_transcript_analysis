@@ -1,0 +1,28 @@
+{
+  "ok": true,
+  "checked_claims": 175,
+  "issues": [],
+  "warnings": [
+    "35 of 35 Jev defect finding(s) have no entry in jev-dispositions.json: claim-006/classification, claim-009/claim_text_traceable, claim-009/values_capture, claim-010/claim_text_traceable, claim-033/claim_text_traceable and 30 more. Each needs a recorded action (fix the claim, add a caveat, or reject the flag with a reason) before this run goes to review.",
+    "37 further Jev answer(s) were weak rather than wrong (see jev-triage.json); read them before writing the outlook brief -- a losing option holding real probability is often a lost qualifier such as 'over' or 'approximately'. Close this with one 'check-tier' entry in jev-dispositions.json saying what you found when you read them."
+  ],
+  "validated_at": "2026-10-14T06:45:12Z",
+  "tool_decisions": {
+    "price_lookup": {
+      "decision": "not_used",
+      "reason": "No price series needed: results, guidance, consensus and peer figures come from the transcript and extracted web evidence."
+    }
+  },
+  "agent_provenance": {
+    "agent_name": "Claude Code",
+    "model": "claude-opus-5-5",
+    "reasoning_effort": "unknown"
+  },
+  "input_hashes": {
+    "claims.json": "8837ec1aef2dbf2d8758f24fc0a1a819faf5639c566c892e40663192bb52022d",
+    "transcript.jsonl": "62a655e8214f0a92b525c08dbca06532b93139450dd4cadf3dc057f483e2a4f5",
+    "financials.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "manifest.json": "20772de9119e33d3fef2c0f2764251767afef42f3e1ccd31e36836b8d841754d",
+    "evidence/web-evidence.jsonl": "ffaf6774faa3a1d4873a56629d6f6494e58c4b68cdcaa4f48c549db7f3a8442b"
+  }
+}

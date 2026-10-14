@@ -1,12 +1,12 @@
 {
-  "url": "https://www.investegate.co.uk/announcement/rns/lloyds-bank-plc--88cs/2026-half-year-results/9696393",
-  "title": "2026 half year results | Company Announcement | Investegate",
+  "url": "https://data.fca.org.uk/artefacts/NSM/RNS/188e2a15-73e8-4aa9-a16f-91c5f248ac12.html",
+  "title": "National  Storage Mechanism | Additional information",
   "score": null,
-  "published_date": "2026-07-30T00:00:00.000Z",
+  "published_date": null,
   "_class": "consensus",
   "_select_key": "consensus",
-  "_temporal_status": "unchecked",
+  "_temporal_status": "undated",
   "_provider": "exa",
   "_query": "Lloyds Banking Group plc LLOY 2026-h1 earnings guidance outlook estimates",
-  "_retrieved_at": "2026-09-01T22:03:50Z"
+  "_retrieved_at": "2026-10-14T06:35:30Z"
 }

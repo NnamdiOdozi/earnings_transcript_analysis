@@ -1,12 +1,12 @@
 {
-  "url": "https://nz.finance.yahoo.com/quote/LLOY.L/analysis/",
-  "title": "Lloyds Banking Group plc (LLOY.L) analyst ratings, estimates and forecasts \u2013 Yahoo Finance",
+  "url": "https://business-news-today.com/lloyds-banking-group-lse-lloy-q1-2026-profit-jumps-33-to-2bn-as-nim-hits-3-17-and-guidance-raised/",
+  "title": "Lloyds Banking Group (LSE: LLOY) Q1 2026 profit jumps 33% to \u00a32bn as NIM",
   "score": null,
-  "published_date": null,
+  "published_date": "2026-04-29T00:00:00.000Z",
   "_class": "consensus",
   "_select_key": "consensus",
-  "_temporal_status": "unchecked",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
   "_query": "Lloyds Banking Group plc LLOY 2026-h1 analyst consensus estimate revenue EPS",
-  "_retrieved_at": "2026-09-01T22:03:46Z"
+  "_retrieved_at": "2026-10-14T06:35:29Z"
 }

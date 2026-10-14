@@ -1,0 +1,104 @@
+{
+ "dispositions": [
+  {
+   "key": "claim-011@e56a49ed::citation_supports_passage",
+   "action": "rejected",
+   "note": "Multi-citation paragraph: the claim supports the specific clause it is cited for when read on its own; Jev judged it against the paragraph's other sentences."
+  },
+  {
+   "key": "claim-014@39e773c4::citation_supports_passage",
+   "action": "rejected",
+   "note": "The sentence restates claim-014 nearly word for word (£617 million, 25 basis points); 'benign' is the paragraph's interpretive heading."
+  },
+  {
+   "key": "claim-015@e56a49ed::citation_supports_passage",
+   "action": "rejected",
+   "note": "Multi-citation paragraph: the claim supports the specific clause it is cited for when read on its own; Jev judged it against the paragraph's other sentences."
+  },
+  {
+   "key": "claim-019@295667cf::citation_supports_passage",
+   "action": "fixed",
+   "note": "The indicator now states that margins rose slightly in Q2 and that a turn down is what to watch, rather than describing them as falling."
+  },
+  {
+   "key": "claim-028@5c9fdce3::citation_supports_passage",
+   "action": "rejected",
+   "note": "Base-case indicator: claim-028 is the NII guide (above £14.9 billion) the indicator says to check against."
+  },
+  {
+   "key": "claim-029@52cb3cc4::citation_supports_passage",
+   "action": "rejected",
+   "note": "Multi-citation paragraph: the claim supports the specific clause it is cited for when read on its own; Jev judged it against the paragraph's other sentences."
+  },
+  {
+   "key": "claim-034@e56a49ed::citation_supports_passage",
+   "action": "rejected",
+   "note": "Multi-citation paragraph: the claim supports the specific clause it is cited for when read on its own; Jev judged it against the paragraph's other sentences."
+  },
+  {
+   "key": "claim-075@ebe3462d::citation_supports_passage",
+   "action": "rejected",
+   "note": "The bullet says growth is higher than mid-single digits in 2027, which is exactly what claim-075 states; no contradiction."
+  },
+  {
+   "key": "claim-075@5c9fdce3::citation_supports_passage",
+   "action": "rejected",
+   "note": "'A stronger 2027' restates claim-075's expectation of higher-than-mid-single-digit growth in 2027; no contradiction."
+  },
+  {
+   "key": "claim-077@295667cf::citation_supports_passage",
+   "action": "rejected",
+   "note": "Downside condition: claim-077 is management's own statement that tighter asset and liability margins may offset hedge income, which is the mechanism the scenario names."
+  },
+  {
+   "key": "claim-110@71c95645::citation_supports_passage",
+   "action": "fixed",
+   "note": "The indicator now states the guided path (about 2.8% in Q2 rising to around 2.9% by year end) that the upside would run above."
+  },
+  {
+   "key": "claim-117@52cb3cc4::citation_supports_passage",
+   "action": "rejected",
+   "note": "Multi-citation paragraph: the claim supports the specific clause it is cited for when read on its own; Jev judged it against the paragraph's other sentences."
+  },
+  {
+   "key": "claim-125@295667cf::citation_supports_passage",
+   "action": "rejected",
+   "note": "Downside condition: claim-125's slower deposit growth expectation supports intensifying competition for deposits as a scenario premise."
+  },
+  {
+   "key": "claim-143@5c9fdce3::citation_supports_passage",
+   "action": "rejected",
+   "note": "Base-case condition: claim-143 (PCA deposits flat over the cycle) is the deposit assumption the scenario depends on."
+  },
+  {
+   "key": "claim-153@9ca60c37::citation_supports_passage",
+   "action": "rejected",
+   "note": "Uncertainty bullet: claim-153 carries the caveat that NatWest reported the day after Lloyds' event, which is the point the bullet makes."
+  },
+  {
+   "key": "claim-158@e56a49ed::citation_supports_passage",
+   "action": "rejected",
+   "note": "Multi-citation paragraph: the claim supports the specific clause it is cited for when read on its own; Jev judged it against the paragraph's other sentences."
+  },
+  {
+   "key": "claim-167@e56a49ed::citation_supports_passage",
+   "action": "rejected",
+   "note": "Multi-citation paragraph: the claim supports the specific clause it is cited for when read on its own; Jev judged it against the paragraph's other sentences."
+  },
+  {
+   "key": "claim-169@e56a49ed::citation_supports_passage",
+   "action": "rejected",
+   "note": "Multi-citation paragraph: the claim supports the specific clause it is cited for when read on its own; Jev judged it against the paragraph's other sentences."
+  },
+  {
+   "key": "claim-172@9ca60c37::citation_supports_passage",
+   "action": "rejected",
+   "note": "Uncertainty bullet: claim-172's caveat states that peer cost measures are defined differently, which is the point the bullet makes."
+  },
+  {
+   "key": "check-tier",
+   "action": "fixed",
+   "note": "Read the 19 check items: multi-citation peer paragraphs and monitoring bullets at weaker probabilities; no further edits. The audit also surfaced five peer claim texts garbled by a mechanical 'H1' rewrite, which were fixed."
+  }
+ ]
+}

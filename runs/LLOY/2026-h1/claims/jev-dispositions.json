@@ -1,0 +1,194 @@
+{
+ "dispositions": [
+  {
+   "key": "claim-006::classification",
+   "action": "fixed",
+   "note": "Accepted: 'on track to deliver ... by the end of 2026' is forward-looking; reclassified management_guidance, status forward_looking."
+  },
+  {
+   "key": "claim-009::claim_text_traceable",
+   "action": "rejected",
+   "note": "claim_text restates its own quote; the only additions are the speaker's name or a period/scope label the quote states in different words (e.g. 'end-2026' for 'by the end of 2026'), so the claim is accurate."
+  },
+  {
+   "key": "claim-009::values_capture",
+   "action": "rejected",
+   "note": "The quote's figures are £17 billion and 25%, both in values; 'more than doubled' and '2021' are not figures to record."
+  },
+  {
+   "key": "claim-010::claim_text_traceable",
+   "action": "rejected",
+   "note": "claim_text restates its own quote; the only additions are the speaker's name or a period/scope label the quote states in different words (e.g. 'end-2026' for 'by the end of 2026'), so the claim is accurate."
+  },
+  {
+   "key": "claim-033::claim_text_traceable",
+   "action": "caveat_added",
+   "note": "The transcript says 'appreciation' where the context (a charge for used-car price adversity, and seg-0034) means depreciation; the claim's caveat says so."
+  },
+  {
+   "key": "claim-035::claim_text_traceable",
+   "action": "rejected",
+   "note": "claim_text restates its own quote; the only additions are the speaker's name or a period/scope label the quote states in different words (e.g. 'end-2026' for 'by the end of 2026'), so the claim is accurate."
+  },
+  {
+   "key": "claim-039::claim_text_traceable",
+   "action": "fixed",
+   "note": "Removed 'material TNAV growth', which is in a different sentence of the segment; claim_text now matches the quote."
+  },
+  {
+   "key": "claim-048::claim_text_traceable",
+   "action": "rejected",
+   "note": "claim_text restates its own quote; the only additions are the speaker's name or a period/scope label the quote states in different words (e.g. 'end-2026' for 'by the end of 2026'), so the claim is accurate. 'By 2030' comes from the 2030 ambitions the sentence introduces."
+  },
+  {
+   "key": "claim-054::values_capture",
+   "action": "fixed",
+   "note": "Added the 50/50 BCB/CIB split to values alongside the circa £6 billion total."
+  },
+  {
+   "key": "claim-064::claim_text_traceable",
+   "action": "rejected",
+   "note": "claim_text restates its own quote; the only additions are the speaker's name or a period/scope label the quote states in different words (e.g. 'end-2026' for 'by the end of 2026'), so the claim is accurate."
+  },
+  {
+   "key": "claim-067::values_capture",
+   "action": "rejected",
+   "note": "Both stated figures (5.5% unemployment peak, 1% house price growth) are in values; the rest are dates."
+  },
+  {
+   "key": "claim-069::values_capture",
+   "action": "rejected",
+   "note": "The only figure is the 1% opex growth in 2026, which values holds; '22 to '25 are years."
+  },
+  {
+   "key": "claim-072::claim_text_traceable",
+   "action": "fixed",
+   "note": "Removed the 'low-risk balance sheet' framing; claim_text now states only the 46% LTV and around 90% secured SME book in the quote."
+  },
+  {
+   "key": "claim-074::claim_text_traceable",
+   "action": "fixed",
+   "note": "Removed 'assuming modest notional growth', stated elsewhere in the segment."
+  },
+  {
+   "key": "claim-081::claim_text_traceable",
+   "action": "fixed",
+   "note": "Removed 'on a growing RWA base', stated in the following sentence."
+  },
+  {
+   "key": "claim-083::claim_text_traceable",
+   "action": "rejected",
+   "note": "claim_text restates its own quote; the only additions are the speaker's name or a period/scope label the quote states in different words (e.g. 'end-2026' for 'by the end of 2026'), so the claim is accurate."
+  },
+  {
+   "key": "claim-087::claim_text_traceable",
+   "action": "rejected",
+   "note": "claim_text restates its own quote; the only additions are the speaker's name or a period/scope label the quote states in different words (e.g. 'end-2026' for 'by the end of 2026'), so the claim is accurate."
+  },
+  {
+   "key": "claim-091::classification",
+   "action": "fixed",
+   "note": "Accepted: the 3.7% refinancing rate is a plan assumption; reclassified management_guidance."
+  },
+  {
+   "key": "claim-102::claim_text_traceable",
+   "action": "rejected",
+   "note": "The analyst's 'I'm still getting a lot more' refers to his own modelling, which claim_text calls 'his own assumptions'; otherwise verbatim."
+  },
+  {
+   "key": "claim-112::classification",
+   "action": "fixed",
+   "note": "Accepted: an expectation that the reserve will come down; reclassified management_guidance, forward_looking."
+  },
+  {
+   "key": "claim-130::claim_text_traceable",
+   "action": "fixed",
+   "note": "Removed 'in November', 'strategic' and 'on a broader definition', which come from surrounding sentences."
+  },
+  {
+   "key": "claim-130::classification",
+   "action": "fixed",
+   "note": "Accepted: a statement of figures previously disclosed; reclassified reported_fact."
+  },
+  {
+   "key": "claim-131::value__management_buffer_min_pct",
+   "action": "caveat_added",
+   "note": "'Well over 1%': 1 is a floor, recorded under a _min key; caveat added saying so."
+  },
+  {
+   "key": "claim-132::claim_text_traceable",
+   "action": "rejected",
+   "note": "'The capital ratio' names what 'below 13%' refers to (CET1, per the question in seg-0046); otherwise verbatim."
+  },
+  {
+   "key": "claim-132::classification",
+   "action": "fixed",
+   "note": "Accepted: a statement of plans; reclassified management_guidance."
+  },
+  {
+   "key": "claim-142::values_capture",
+   "action": "rejected",
+   "note": "The Q2 increase is stated in words ('five basis points'), which numeric grounding cannot match, so it cannot be recorded as a value; the 13bp figure is held."
+  },
+  {
+   "key": "claim-148::classification",
+   "action": "fixed",
+   "note": "Accepted: a guidance change as reported by the article; reclassified management_guidance."
+  },
+  {
+   "key": "claim-151::values_capture",
+   "action": "rejected",
+   "note": "All four headline figures are in values; the $262.30 million is the arithmetic difference between two of them."
+  },
+  {
+   "key": "claim-152::claim_text_traceable",
+   "action": "rejected",
+   "note": "The quote is the table's 'No. of analysts' and 'Avg. Estimate' rows: the 6 and 21.83B sit in the current-year column. 'Pre-results' is supported by the caveat on the page's dating."
+  },
+  {
+   "key": "claim-152::classification",
+   "action": "rejected",
+   "note": "The claim records figures a source states; it is not this extractor's inference."
+  },
+  {
+   "key": "claim-152::values_capture",
+   "action": "rejected",
+   "note": "values holds every estimate in the quoted Avg. Estimate row; analyst counts are not financial figures."
+  },
+  {
+   "key": "claim-157::classification",
+   "action": "fixed",
+   "note": "Accepted: NatWest's guidance; reclassified management_guidance, forward_looking."
+  },
+  {
+   "key": "claim-160::classification",
+   "action": "fixed",
+   "note": "Accepted: Barclays' target; reclassified management_guidance, forward_looking."
+  },
+  {
+   "key": "claim-163::values_capture",
+   "action": "fixed",
+   "note": "Added the 0.8 percentage-point decrease to values."
+  },
+  {
+   "key": "claim-164::claim_text_traceable",
+   "action": "caveat_added",
+   "note": "The 46.2 is the first-half 2026 column of a two-column table row, which the quote alone does not label; caveat added."
+  },
+  {
+   "key": "seg-0027::segment_materiality",
+   "action": "fixed",
+   "note": "Accepted: Chalmers' framing of international ambition 'within the context of the existing UK premise' is extracted as claim-176."
+  },
+  {
+   "key": "seg-0040::segment_materiality",
+   "action": "fixed",
+   "note": "Accepted: Nunn's restatement that consensus RWA growth is below Lloyds' assumption is extracted as claim-177."
+  },
+  {
+   "key": "check-tier",
+   "action": "fixed",
+   "note": "Read the 37 claim check items and 1 coverage check as a group: mostly bounded or approximate figures ('greater than', 'circa', 'around') already caveated, and near-verbatim texts; no further edits. Before Jev ran, a step-6 self-check had already trimmed about 60 claim texts to their own quotes."
+  }
+ ]
+}

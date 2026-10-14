@@ -1,12 +1,12 @@
 {
-  "url": "https://www.about.hsbc.com.hk/investor-relations",
-  "title": "Investor relations - About HSBC | HSBC Hong Kong",
+  "url": "https://www.investegate.co.uk/announcement/rns/lloyds-banking-group--lloy/2026-half-year-results/9694683",
+  "title": "2026 half year results | Company Announcement | Investegate",
   "score": null,
-  "published_date": null,
+  "published_date": "2026-07-30T00:00:00.000Z",
   "_class": "peer",
-  "_select_key": "peer:HSBC Holdings",
-  "_temporal_status": "unchecked",
+  "_select_key": "peer:HSBC",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "HSBC Holdings quarterly results versus Lloyds Banking Group plc LLOY",
-  "_retrieved_at": "2026-09-01T22:04:08Z"
+  "_query": "HSBC quarterly results versus Lloyds Banking Group plc LLOY",
+  "_retrieved_at": "2026-10-14T06:35:32Z"
 }

@@ -1,12 +1,12 @@
 {
-  "url": "https://www.roic.ai/quote/RBS.SW/transcripts/2026-year/2-quarter",
-  "title": "NatWest Group plc (RBS.SW) Q2 FY2026 Earnings Call Transcript - July 31, 2026 | Roic AI",
+  "url": "https://investors.natwestgroup.com/~/media/Files/R/RBS-IR-V2/results-center/31072026/nwg-h1-2026-results.pdf",
+  "title": "NatWest Group Interim Results 2026",
   "score": null,
-  "published_date": "2026-07-31T00:00:00.000Z",
+  "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:NatWest Group",
-  "_temporal_status": "unchecked",
+  "_select_key": "peer:NatWest",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "NatWest Group earnings call key trends 2026-h1",
-  "_retrieved_at": "2026-09-01T22:03:55Z"
+  "_query": "NatWest earnings call key trends 2026-h1",
+  "_retrieved_at": "2026-10-14T06:35:31Z"
 }

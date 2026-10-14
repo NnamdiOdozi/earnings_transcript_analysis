@@ -1,12 +1,12 @@
 {
-  "url": "https://www.webdisclosure.com/press-release/lloyds-banking-group-lloy-2026-q1-interim-management-statement-NILvrr7gWtm",
+  "url": "https://www.webdisclosure.com/press-release/lloyds-banking-group-lloy-2026-half-year-results-X7v3G77uQjR",
   "title": "Lloyds Banking Group (LLOY) |",
   "score": null,
-  "published_date": "2026-04-29T00:00:00.000Z",
+  "published_date": "2026-07-30T00:00:00.000Z",
   "_class": "peer",
-  "_select_key": "peer:Standard Chartered",
-  "_temporal_status": "unchecked",
+  "_select_key": "peer:Santander",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "Standard Chartered quarterly results versus Lloyds Banking Group plc LLOY",
-  "_retrieved_at": "2026-09-01T22:04:13Z"
+  "_query": "Santander quarterly results versus Lloyds Banking Group plc LLOY",
+  "_retrieved_at": "2026-10-14T06:35:36Z"
 }

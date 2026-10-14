@@ -1,12 +1,12 @@
 {
-  "url": "https://www.sec.gov/Archives/edgar/data/1160106/000116010626000018/lbg6-kimsxq12026.htm",
-  "title": "LBG 6-K (IMS) - Q1 2026",
+  "url": "https://www.eqs-news.com/de/news/corporate-news/2026-half-year-results/b315bb26-93bc-43a1-afc5-232d658ce3dc",
+  "title": "2026 half year results | Corporate - EQS News",
   "score": null,
-  "published_date": null,
+  "published_date": "2026-07-30T00:00:00.000Z",
   "_class": "consensus",
   "_select_key": "consensus",
-  "_temporal_status": "unchecked",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
   "_query": "Lloyds Banking Group plc LLOY 2026-h1 earnings guidance outlook estimates",
-  "_retrieved_at": "2026-09-01T22:03:50Z"
+  "_retrieved_at": "2026-10-14T06:35:30Z"
 }

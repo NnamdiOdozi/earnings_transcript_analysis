@@ -1,0 +1,715 @@
+{
+  "segments": [
+    {
+      "segment_id": "seg-0001",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Document title banner with the event date and time; no content."
+    },
+    {
+      "segment_id": "seg-0002",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "List of the three presenting executives and their titles; no content."
+    },
+    {
+      "segment_id": "seg-0003",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-001",
+        "claim-002",
+        "claim-003",
+        "claim-004",
+        "claim-005",
+        "claim-006",
+        "claim-007",
+        "claim-008",
+        "claim-009",
+        "claim-010"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0004",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-011",
+        "claim-012",
+        "claim-013",
+        "claim-014",
+        "claim-015",
+        "claim-016",
+        "claim-017",
+        "claim-018",
+        "claim-019",
+        "claim-020",
+        "claim-021",
+        "claim-022",
+        "claim-023",
+        "claim-024",
+        "claim-025",
+        "claim-026",
+        "claim-027",
+        "claim-028",
+        "claim-029",
+        "claim-030",
+        "claim-031",
+        "claim-032",
+        "claim-033",
+        "claim-034",
+        "claim-035",
+        "claim-036",
+        "claim-037",
+        "claim-038",
+        "claim-039",
+        "claim-040",
+        "claim-041",
+        "claim-042",
+        "claim-043",
+        "claim-170",
+        "claim-171",
+        "claim-172",
+        "claim-173",
+        "claim-175"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0005",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-044",
+        "claim-045",
+        "claim-046",
+        "claim-047",
+        "claim-048",
+        "claim-049",
+        "claim-050",
+        "claim-051",
+        "claim-052",
+        "claim-053",
+        "claim-054",
+        "claim-055",
+        "claim-056",
+        "claim-057",
+        "claim-058",
+        "claim-059",
+        "claim-060",
+        "claim-061",
+        "claim-062",
+        "claim-063",
+        "claim-064"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0006",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-065",
+        "claim-066",
+        "claim-067",
+        "claim-068",
+        "claim-069",
+        "claim-070",
+        "claim-071",
+        "claim-072",
+        "claim-073",
+        "claim-074",
+        "claim-075",
+        "claim-076",
+        "claim-077",
+        "claim-078",
+        "claim-079",
+        "claim-080",
+        "claim-081",
+        "claim-082",
+        "claim-083"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0007",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-084"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0008",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Unattributed line during the break ('See you back here in five minutes')."
+    },
+    {
+      "segment_id": "seg-0009",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Moderator Douglas Radcliffe opening the Q&A and explaining logistics for room and online questions."
+    },
+    {
+      "segment_id": "seg-0010",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-086"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0011",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-087",
+        "claim-088"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0012",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-089"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0013",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-090",
+        "claim-174"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0014",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-091",
+        "claim-092",
+        "claim-093"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0015",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-094"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0016",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-095"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0017",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-096"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0018",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-097"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0019",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-098"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0020",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-099"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0021",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-100"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0022",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-101"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0023",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-102"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0024",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-103",
+        "claim-104"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0025",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-105"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0026",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-106",
+        "claim-107",
+        "claim-108"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0027",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-176"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0028",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Charlie Nunn saying 'Thanks.'"
+    },
+    {
+      "segment_id": "seg-0029",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-109"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0030",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-110",
+        "claim-111",
+        "claim-112"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0031",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-113"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0032",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-114"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0033",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-115"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0034",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-116",
+        "claim-117",
+        "claim-118"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0035",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-119"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0036",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-120"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0037",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Moderator saying 'Yes.' to confirm the online question."
+    },
+    {
+      "segment_id": "seg-0038",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-121"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0039",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Moderator relaying that the second online question was on tangible equity growth; the question itself is captured from seg-0035."
+    },
+    {
+      "segment_id": "seg-0040",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-177"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0041",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-122"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0042",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-123"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0043",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-124"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0044",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-125",
+        "claim-126"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0045",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-127",
+        "claim-128"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0046",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-129"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0047",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-130"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0048",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-131",
+        "claim-132"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0049",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-133"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0050",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-134",
+        "claim-135"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0051",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-136"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0052",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-137"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0053",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Moderator saying time is running out and calling the next questioner."
+    },
+    {
+      "segment_id": "seg-0054",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-138"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0055",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-139"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0056",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-140"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0057",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-141"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0058",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-142",
+        "claim-143"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0059",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Moderator announcing the final question."
+    },
+    {
+      "segment_id": "seg-0060",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-144"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0061",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-145"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0062",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-146"
+      ],
+      "reason": null
+    },
+    {
+      "segment_id": "seg-0063",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Moderator closing the Q&A and handing to Nunn."
+    },
+    {
+      "segment_id": "seg-0064",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-085"
+      ],
+      "reason": null
+    }
+  ],
+  "web_evidence": [
+    {
+      "web_evidence_id": "web-001",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-147",
+        "claim-148",
+        "claim-149",
+        "claim-150"
+      ],
+      "reason": null
+    },
+    {
+      "web_evidence_id": "web-002",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-153",
+        "claim-154",
+        "claim-155",
+        "claim-156",
+        "claim-157"
+      ],
+      "reason": null
+    },
+    {
+      "web_evidence_id": "web-003",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Barclays Form 6-K wrapper for the same interim results; the results announcement itself is web-013, which is cited instead."
+    },
+    {
+      "web_evidence_id": "web-004",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "HSBC full interim report (100k words) duplicating the headline figures in web-009 and web-014, which are cited instead."
+    },
+    {
+      "web_evidence_id": "web-005",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-165"
+      ],
+      "reason": null
+    },
+    {
+      "web_evidence_id": "web-006",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-151"
+      ],
+      "reason": null
+    },
+    {
+      "web_evidence_id": "web-007",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "NatWest results-centre page duplicating the H1 performance summary in web-002, which is cited instead."
+    },
+    {
+      "web_evidence_id": "web-008",
+      "outcome": "deliberately_immaterial",
+      "claim_ids": [],
+      "reason": "Barclays investor-relations index page listing document links, with no figures."
+    },
+    {
+      "web_evidence_id": "web-009",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-161",
+        "claim-162",
+        "claim-163"
+      ],
+      "reason": null
+    },
+    {
+      "web_evidence_id": "web-010",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-169"
+      ],
+      "reason": null
+    },
+    {
+      "web_evidence_id": "web-011",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-152"
+      ],
+      "reason": null
+    },
+    {
+      "web_evidence_id": "web-013",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-158",
+        "claim-159",
+        "claim-160"
+      ],
+      "reason": null
+    },
+    {
+      "web_evidence_id": "web-014",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-164"
+      ],
+      "reason": null
+    },
+    {
+      "web_evidence_id": "web-015",
+      "outcome": "claims_extracted",
+      "claim_ids": [
+        "claim-166",
+        "claim-167",
+        "claim-168"
+      ],
+      "reason": null
+    }
+  ]
+}

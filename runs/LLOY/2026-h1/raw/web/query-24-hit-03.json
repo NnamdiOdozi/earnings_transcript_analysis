@@ -1,12 +1,12 @@
 {
-  "url": "https://www.thestandard.com.hk/finance/article/338548/Standard-Chartereds-H1-2026-pretax-profit-up-9pc-announces-US1-bln-share-buyback",
-  "title": "Standard Chartered's H1 2026 pretax profit up 9pc, announces US$1 bln share buyback",
+  "url": "https://www.santander.com/en/press-room/press-releases/2026/07/q2-2026-santander-bank-results",
+  "title": "2Q 2026 financial results - Santander adds 12 million customers as underlying profit rises 15% to \u20ac7.3 billion in the first half",
   "score": null,
-  "published_date": "2026-07-29T00:00:00.000Z",
+  "published_date": "2026-07-22T00:00:00.000Z",
   "_class": "peer",
-  "_select_key": "peer:Standard Chartered",
-  "_temporal_status": "unchecked",
+  "_select_key": "peer:Santander",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "Standard Chartered 2026-h1 analyst earnings reaction results",
-  "_retrieved_at": "2026-09-01T22:04:15Z"
+  "_query": "Santander 2026-h1 analyst earnings reaction results",
+  "_retrieved_at": "2026-10-14T06:35:36Z"
 }

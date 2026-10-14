@@ -1,12 +1,12 @@
 {
-  "url": "https://market.news/hsbc-h1-profit-jumps-23-to-beat-estimates-1b-buyback-and-0-10-dividend-announced-on-wealth-management-strength",
-  "title": "HSBC H1 Profit Jumps 23% to Beat Estimates; $1B Buyback and $0.10 Dividend Announced on Wealth Management Strength",
+  "url": "https://in.investing.com/news/stock-market-news/earnings-call-transcript-hsbc-q1-2026-earnings-fall-short-stock-rises-93CH-5393473",
+  "title": "Earnings call transcript: HSBC Q1 2026 earnings fall short, stock rises By Investing.com",
   "score": null,
-  "published_date": "2026-08-05T00:00:00.000Z",
+  "published_date": "2026-05-10T14:10:08.000Z",
   "_class": "peer",
-  "_select_key": "peer:HSBC Holdings",
-  "_temporal_status": "unchecked",
+  "_select_key": "peer:HSBC",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "HSBC Holdings 2026-h1 analyst earnings reaction results",
-  "_retrieved_at": "2026-09-01T22:04:10Z"
+  "_query": "HSBC 2026-h1 analyst earnings reaction results",
+  "_retrieved_at": "2026-10-14T06:35:33Z"
 }

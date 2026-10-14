@@ -1,0 +1,2934 @@
+[
+  {
+    "id": "claim-001",
+    "category": "cash_flow_capital_allocation",
+    "classification": "reported_fact",
+    "claim_text": "Lloyds announced a 30% increase in the interim ordinary dividend alongside a £1 billion share buyback.",
+    "quote": "We are today announcing a significant step-up in our ordinary dividend with a 30% increase in the interim, alongside a share buyback of one billion pounds.",
+    "speaker": "Charlie Nunn",
+    "status": "reported",
+    "values": {
+      "interim_dividend_increase_pct": 30,
+      "share_buyback_gbp_billion": 1
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0003"
+  },
+  {
+    "id": "claim-002",
+    "category": "reported_financial_performance",
+    "classification": "management_guidance",
+    "claim_text": "Nunn said the group's revenue base is on course to reach circa £20 billion in 2026, with customer lending and deposits totalling nearly £1 trillion.",
+    "quote": "Our customer lending and deposit balances today total nearly £1 trillion, in addition to circa £250 b illion of open book AUA. These support a diversified revenue base that's on course to reach circa £20 billion in 2026.",
+    "speaker": "Charlie Nunn",
+    "status": "forward_looking",
+    "values": {
+      "revenue_2026_gbp_billion_approx": 20,
+      "customer_balances_gbp_trillion_approx": 1,
+      "open_book_aua_gbp_billion_approx": 250
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [
+      "'Circa £20 billion' and 'nearly £1 trillion' are approximations."
+    ],
+    "segment_id": "seg-0003"
+  },
+  {
+    "id": "claim-003",
+    "category": "current_guidance",
+    "classification": "management_guidance",
+    "claim_text": "Nunn said the group expects a return on tangible equity in excess of 16% this year and above that in following years.",
+    "quote": "And we expect to deliver a return on tangible equity in excess of 16% this year and above this in the years to come.",
+    "speaker": "Charlie Nunn",
+    "status": "forward_looking",
+    "values": {
+      "rote_2026_min_pct": 16
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [
+      "Greater-than guidance: the figure is a floor, not a point estimate."
+    ],
+    "segment_id": "seg-0003",
+    "period": "12 months to 31 Dec 2026"
+  },
+  {
+    "id": "claim-004",
+    "category": "reported_financial_performance",
+    "classification": "management_opinion",
+    "claim_text": "Nunn said the group is on course to deliver around five billion pounds of net income growth by the end of 2026.",
+    "quote": "we are on course to deliver around five billion pounds of net income growth by the end of 2026.",
+    "speaker": "Charlie Nunn",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [
+      "The figure is written in words ('around five billion pounds') and is approximate."
+    ],
+    "segment_id": "seg-0003"
+  },
+  {
+    "id": "claim-005",
+    "category": "operational_performance",
+    "classification": "reported_fact",
+    "claim_text": "Nunn said market share growth in key areas was up around three percentage points on average.",
+    "quote": "supported market share grow th in key areas up around three percentage points o n average.",
+    "speaker": "Charlie Nunn",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.8,
+    "inferred_from": [],
+    "caveats": [
+      "Figures are in words ('around three percentage points') and approximate."
+    ],
+    "segment_id": "seg-0003"
+  },
+  {
+    "id": "claim-006",
+    "category": "reported_financial_performance",
+    "classification": "management_guidance",
+    "claim_text": "Nunn said the group is on track to deliver circa £2 billion of strategic initiatives revenue by end-2026, above the original 2022 target.",
+    "quote": "on track to deliver circa £2 billion of strategic initiatives revenues by the end of 2026, higher than originally targeted in 2022.",
+    "speaker": "Charlie Nunn",
+    "status": "forward_looking",
+    "values": {
+      "strategic_initiative_revenue_gbp_billion_approx": 2
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0003"
+  },
+  {
+    "id": "claim-007",
+    "category": "costs_margins_efficiency",
+    "classification": "reported_fact",
+    "claim_text": "Nunn said the group has realised more than £2 billion of gross cost savings since 2021, surpassing its original targets.",
+    "quote": "We've no w realised more than £2 billion of gross cost savings since 2021, having surpassed our original targets.",
+    "speaker": "Charlie Nunn",
+    "status": "reported",
+    "values": {
+      "gross_cost_savings_since_2021_gbp_billion_min": 2
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [
+      "'More than £2 billion' is a floor."
+    ],
+    "segment_id": "seg-0003"
+  },
+  {
+    "id": "claim-008",
+    "category": "balance_sheet_solvency",
+    "classification": "reported_fact",
+    "claim_text": "Nunn said the group delivered £28 billion of RWA optimisation, offsetting regulatory headwinds.",
+    "quote": "we've delivered £28 billion of RWA optimisation, offsetting regulatory headwinds",
+    "speaker": "Charlie Nunn",
+    "status": "reported",
+    "values": {
+      "rwa_optimisation_gbp_billion": 28
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0003"
+  },
+  {
+    "id": "claim-009",
+    "category": "cash_flow_capital_allocation",
+    "classification": "reported_fact",
+    "claim_text": "Nunn said circa £17 billion of distributions have been announced over the plan period, around 25% of the current market cap, and the ordinary dividend has more than doubled versus 2021.",
+    "quote": "The ordinary dividend has more than doubled versus 2021. And we've now announced circa £17 billion of distributions in the period, equivalent to around 25% of our current market cap.",
+    "speaker": "Charlie Nunn",
+    "status": "reported",
+    "values": {
+      "distributions_announced_gbp_billion_approx": 17,
+      "distributions_pct_market_cap_approx": 25
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0003"
+  },
+  {
+    "id": "claim-010",
+    "category": "current_guidance",
+    "classification": "management_guidance",
+    "claim_text": "Nunn said by end-2026 the group will have delivered a cost:income ratio below 50%, RoTE above 16% and more than 200 basis points of capital generation.",
+    "quote": "By the end of 2026, we will have delivered a cost income ratio of less than 50%, a RoTE of greater than 16%, and more than 200 basis points of capital generatio n.",
+    "speaker": "Charlie Nunn",
+    "status": "forward_looking",
+    "values": {
+      "cost_income_2026_max_pct": 50,
+      "rote_2026_min_pct": 16,
+      "capital_generation_2026_min_bps": 200
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [
+      "All three are bounds (less than / greater than), not point estimates."
+    ],
+    "segment_id": "seg-0003",
+    "period": "12 months to 31 Dec 2026"
+  },
+  {
+    "id": "claim-011",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "first-half statutory profit after tax was £3.1 billion with a return on tangible equity of 17.1%.",
+    "quote": "Statutory profit after tax was £3.1 billion with a return on tangibl e equity of 17.1%.",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {
+      "statutory_pat_gbp_billion": 3.1,
+      "rote_pct": 17.1
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0004",
+    "period": "6 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-012",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "first-half net income was £9.7 billion, up 9% year-on-year, and Q2 net income was 4% higher than Q1.",
+    "quote": "we delivered net in come of £9.7 billion, up 9% on the previous year. Q2 net income was 4% higher than Q1.",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {
+      "net_income_gbp_billion": 9.7,
+      "net_income_growth_yoy_pct": 9,
+      "q2_vs_q1_net_income_growth_pct": 4
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0004",
+    "period": "6 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-013",
+    "category": "costs_margins_efficiency",
+    "classification": "reported_fact",
+    "claim_text": "first-half operating costs were £4.9 billion, flat year-on-year, and the Q2 cost:income ratio was 49%.",
+    "quote": "H-1 operating costs of £4.9 billion were flat year-on-year. No tably, the Q2 cost income ratio at 49% was in line with ou r guidance for less than 50% for the full year.",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {
+      "operating_costs_gbp_billion": 4.9,
+      "q2_cost_income_ratio_pct": 49
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0004",
+    "period": "6 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-014",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "The first-half impairment charge was £617 million, an asset quality ratio of 25 basis points.",
+    "quote": "The H1 impairment charge of £617 million equates to an asset quality ratio of 25 basis points.",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {
+      "impairment_gbp_million": 617,
+      "aqr_bps": 25
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0004",
+    "period": "6 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-015",
+    "category": "balance_sheet_solvency",
+    "classification": "reported_fact",
+    "claim_text": "Capital generation was 108 basis points in the first half and the pro forma CET1 ratio after distributions was 13.1%.",
+    "quote": "Our performance resulted in strong capital generation of 108 basis points in the first half and a pro forma CET1 ratio after distributions of 13.1%.",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {
+      "capital_generation_bps": 108,
+      "pro_forma_cet1_pct": 13.1
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0004",
+    "period": "6 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-016",
+    "category": "cash_flow_capital_allocation",
+    "classification": "reported_fact",
+    "claim_text": "The interim dividend rise and £1 billion buyback together represent over £1.9 billion of capital distributions for the half.",
+    "quote": "We'll also implement a £1 billion interim share buyback, and together this represents over £1.9 billion of capital distributions as at the half.",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {
+      "share_buyback_gbp_billion": 1,
+      "h1_distributions_gbp_billion_min": 1.9
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [
+      "'Over £1.9 billion' is a floor."
+    ],
+    "segment_id": "seg-0004",
+    "period": "6 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-017",
+    "category": "operational_performance",
+    "classification": "reported_fact",
+    "claim_text": "Group lending balances were £492 billion at Q2, up over £5 billion or 1% versus Q1.",
+    "quote": "group lending balances of £492 billion were up over £5 billion or 1% versus Q1.",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {
+      "lending_gbp_billion": 492,
+      "lending_growth_qoq_gbp_billion_min": 5,
+      "lending_growth_qoq_pct": 1
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0004",
+    "period": "as of 30 Jun 2026"
+  },
+  {
+    "id": "claim-018",
+    "category": "operational_performance",
+    "classification": "reported_fact",
+    "claim_text": "Mortgages rose £0.2 billion in Q2 after a £1.8 billion legacy securitisation; excluding it they grew £2 billion, with around 18% of net new lending.",
+    "quote": "Within retail, mortgages were up £0.2 billion in the quarter. This was net of a legacy mortgage book securitization of £1.8 billion. Excluding this, mortgages grew by £2 billion. And that reflects a positive tr ading performance and share of around 18% of net ne w lending.",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {
+      "mortgage_growth_gbp_billion": 0.2,
+      "securitisation_gbp_billion": 1.8,
+      "mortgage_growth_ex_securitisation_gbp_billion": 2,
+      "net_new_lending_share_pct_approx": 18
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0004",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-019",
+    "category": "pricing_volume_mix",
+    "classification": "reported_fact",
+    "claim_text": "Mortgage applications stayed strong though slightly below Q1 given higher rates, and completion margins rose slightly quarter on quarter, still rounding to 70 basis points.",
+    "quote": "Mortgage applications remained strong if slightly below the level seen in Q1 given the context of a higher rate environment. Pleasingly, completion margins were slightly higher quarter on quarter, albeit again rounding to 70 basis points.",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {
+      "mortgage_completion_margin_bps_approx": 70
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0004",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-020",
+    "category": "operational_performance",
+    "classification": "reported_fact",
+    "claim_text": "Commercial balances rose £3.1 billion in Q2, led by CIB securitised products and infrastructure.",
+    "quote": "Commercial balances meanwhile were up in the quarter by £3.1 billion. This reflects stron g growth in CIB, particularly in securitized produc ts and infrastructure.",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {
+      "commercial_balance_growth_gbp_billion": 3.1
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0004",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-021",
+    "category": "operational_performance",
+    "classification": "reported_fact",
+    "claim_text": "Deposits rose £5 billion or 1% in Q2 to over £0.5 trillion; retail deposits were flat as the bank kept price discipline in a competitive tax year end.",
+    "quote": "we saw a goo d performance in deposits up £5 billion or 1% in Q2 to now over £0.5 trillion. Retail deposits were flat as we maintained price discipline in the remainder of what was a competitive tax year end",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {
+      "deposit_growth_gbp_billion": 5,
+      "deposit_growth_qoq_pct": 1,
+      "deposits_gbp_trillion_min": 0.5
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0004",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-022",
+    "category": "operational_performance",
+    "classification": "reported_fact",
+    "claim_text": "PCA balances were stable in Q2, maintaining a market share above 24%, while commercial deposits rose £5.2 billion.",
+    "quote": "We were also happy to see PCA stability in the quarter, maintaining our greater than 24% market share of balances. Commercial deposits meanwhile were up £5.2 billion",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {
+      "pca_balance_share_min_pct": 24,
+      "commercial_deposit_growth_gbp_billion": 5.2
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0004",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-023",
+    "category": "operational_performance",
+    "classification": "reported_fact",
+    "claim_text": "Insurance, pensions and investments open book AUA grew around £25 billion in Q2 to £251 billion.",
+    "quote": "significant open book AUA growth of around £25 billion in the quarter to £251 billion.",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {
+      "aua_growth_gbp_billion_approx": 25,
+      "open_book_aua_gbp_billion": 251
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0004",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-024",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "first-half net interest income was up 9% year-on-year to £7.3 billion, including 4% growth in Q2 helped a little by day count.",
+    "quote": "H1-NI was up 9% year-on-year to £7.3 billion. This included a 4% growth in Q2, helped a little by day count.",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {
+      "nii_gbp_billion": 7.3,
+      "nii_growth_yoy_pct": 9,
+      "q2_nii_growth_pct": 4
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0004",
+    "period": "6 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-025",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "The first-half net interest margin was 319 basis points, including a Q2 margin of 322 basis points, up five basis points in the quarter.",
+    "quote": "In H1, the margin was 319 basis points, and this included a second quarter margin of 322 basis points up five basis points in the quarter.",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {
+      "h1_nim_bps": 319,
+      "q2_nim_bps": 322
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0004",
+    "period": "6 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-026",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Structural hedge earnings were £3.4 billion in the first half at an average yield of 2.7%, with a stable £246 billion notional and 3.75-year weighted average life.",
+    "quote": "Structural hedge earnings were £3.4 billion for the half with an average yield of 2.7%, still well below market refinancing rates. Within this, the no tional of £246 billion and the weighted average lif e of around 3.75 years was stable in the quarter.",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {
+      "hedge_earnings_gbp_billion": 3.4,
+      "hedge_yield_pct": 2.7,
+      "hedge_notional_gbp_billion": 246,
+      "hedge_wal_years_approx": 3.75
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0004",
+    "period": "6 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-027",
+    "category": "current_guidance",
+    "classification": "management_guidance",
+    "claim_text": "Management continues to expect structural hedge income above £7 billion in 2026 and above £8 billion in 2027.",
+    "quote": "We con tinue to expect hedge income to grow to greater tha n £7 billion in 2026 and greater than £8 billion in '27.",
+    "speaker": "William Chalmers",
+    "status": "forward_looking",
+    "values": {
+      "hedge_income_2026_min_gbp_billion": 7,
+      "hedge_income_2027_min_gbp_billion": 8
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [
+      "Greater-than guidance: the figure is a floor, not a point estimate."
+    ],
+    "segment_id": "seg-0004"
+  },
+  {
+    "id": "claim-028",
+    "category": "current_guidance",
+    "classification": "management_guidance",
+    "claim_text": "Management continues to expect 2026 net interest income above £14.9 billion.",
+    "quote": "we continue to expect net interest income for 2026 to be greater than £14.9 billion.",
+    "speaker": "William Chalmers",
+    "status": "forward_looking",
+    "values": {
+      "nii_2026_min_gbp_billion": 14.9
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [
+      "Greater-than guidance: the figure is a floor, not a point estimate."
+    ],
+    "segment_id": "seg-0004",
+    "period": "12 months to 31 Dec 2026"
+  },
+  {
+    "id": "claim-029",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Other income was £3.3 billion in the first half, up 11% year-on-year, with Q2 up 6% on Q1.",
+    "quote": "Other income was £3.3 billion in t he first half, up 11% on the prior year, with Q2 up 6% versus Q1.",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {
+      "other_income_gbp_billion": 3.3,
+      "other_income_growth_yoy_pct": 11,
+      "q2_other_income_growth_qoq_pct": 6
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0004",
+    "period": "6 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-030",
+    "category": "management_explanation",
+    "classification": "reported_fact",
+    "claim_text": "In Commercial, year-on-year fee growth in lending and transaction banking was more than offset by lower markets income amid market volatility.",
+    "quote": "In commercial, year-on-year growth in fees on lending activity and transaction banking was more than offset by lower markets income in the context of market vo latility.",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0004"
+  },
+  {
+    "id": "claim-031",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Insurance, pensions and investments grew 19% versus the first half of 2025.",
+    "quote": "Insurance pensions and investments continue to deliver a positive performance in the first half, up 19% versus H1 25.",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {
+      "ipi_growth_yoy_pct": 19
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0004",
+    "period": "6 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-032",
+    "category": "current_guidance",
+    "classification": "management_guidance",
+    "claim_text": "Chalmers said Q3 other income will not grow as fast as Q2, given the one-off securitisation benefit, but growth will continue.",
+    "quote": "Looking forward, while Q3 won't grow quite as fast as Q2, given the benefit of the securitization that I mentioned earlier on, growth in other income will continue.",
+    "speaker": "William Chalmers",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0004"
+  },
+  {
+    "id": "claim-033",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Operating lease depreciation was £452 million in Q2, up £63 million, including a £41 million charge for used car price adversity.",
+    "quote": "Operati ng lease appreciation was £452 million in Q2, up £63 million quarter on quarter. This was driven by fleet growth, but also by a £41 million charge for used car price adversity.",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {
+      "operating_lease_depreciation_gbp_million": 452,
+      "old_increase_qoq_gbp_million": 63,
+      "used_car_price_charge_gbp_million": 41
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [
+      "The transcript says 'appreciation', but the context (a charge, used-car price adversity) and seg-0034 make clear this is operating lease depreciation."
+    ],
+    "segment_id": "seg-0004",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-034",
+    "category": "costs_margins_efficiency",
+    "classification": "reported_fact",
+    "claim_text": "The first-half cost:income ratio was 50.4%, and 49% in Q2.",
+    "quote": "this has resulted in a cost to income rat io of 50.4% in H1. And again, notably a ratio of 49 % in Q2.",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {
+      "h1_cost_income_ratio_pct": 50.4,
+      "q2_cost_income_ratio_pct": 49
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0004",
+    "period": "6 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-035",
+    "category": "current_guidance",
+    "classification": "management_guidance",
+    "claim_text": "Chalmers said operating costs are in line with full-year expectations, reinforcing confidence in a 2026 cost:income ratio below 50%.",
+    "quote": "Overall, operating costs are in line with full year expectations, reinforcing our confidence in delivery of a cost income ratio of below 50% for 2026.",
+    "speaker": "William Chalmers",
+    "status": "forward_looking",
+    "values": {
+      "cost_income_2026_max_pct": 50
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0004",
+    "period": "12 months to 31 Dec 2026"
+  },
+  {
+    "id": "claim-036",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "The Q2 impairment charge was £322 million, with a pre-MES AQR of 28 basis points, higher than Q1 on model updates and non-repeat of releases.",
+    "quote": "The Q2 impairment charge was £322 million, including a pre-MES AQR of 28 basis points in the quarter. This was slightly higher than Q1 given model updates and the non-repeat of Q1 releases.",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {
+      "q2_impairment_gbp_million": 322,
+      "q2_pre_mes_aqr_bps": 28
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0004",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-037",
+    "category": "current_guidance",
+    "classification": "management_guidance",
+    "claim_text": "Management continues to expect a 2026 asset quality ratio of around 25 basis points.",
+    "quote": "we continue to expect a 2026 AQR of around 25 basis points.",
+    "speaker": "William Chalmers",
+    "status": "forward_looking",
+    "values": {
+      "aqr_2026_bps_approx": 25
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0004",
+    "period": "12 months to 31 Dec 2026"
+  },
+  {
+    "id": "claim-038",
+    "category": "balance_sheet_solvency",
+    "classification": "reported_fact",
+    "claim_text": "Tangible net asset value per share ended first-half at 57 pence, in line with FY2025, after a 0.9 pence decrease in Q2.",
+    "quote": "Tangible net ass et value per share ended the half of 57 pence in line with our full year 2025. This included a 0.9 pence decrease in Q2",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {
+      "tnav_per_share_pence": 57,
+      "q2_tnav_decrease_pence": 0.9
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0004",
+    "period": "as of 30 Jun 2026"
+  },
+  {
+    "id": "claim-039",
+    "category": "current_guidance",
+    "classification": "management_guidance",
+    "claim_text": "Management continues to expect a 2026 return on tangible equity of more than 16%.",
+    "quote": "We also continue to expect return on tangible equity to be more than 16% in 2026.",
+    "speaker": "William Chalmers",
+    "status": "forward_looking",
+    "values": {
+      "rote_2026_min_pct": 16
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [
+      "Greater-than guidance: the figure is a floor, not a point estimate."
+    ],
+    "segment_id": "seg-0004",
+    "period": "12 months to 31 Dec 2026"
+  },
+  {
+    "id": "claim-040",
+    "category": "balance_sheet_solvency",
+    "classification": "reported_fact",
+    "claim_text": "Total RWAs ended first-half at £242 billion, up £6.3 billion from the year end.",
+    "quote": "total RWAs ended H1 at 242 billion, up £6.3 billion from the year end.",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {
+      "rwa_gbp_billion": 242,
+      "rwa_increase_gbp_billion": 6.3
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0004",
+    "period": "as of 30 Jun 2026"
+  },
+  {
+    "id": "claim-041",
+    "category": "current_guidance",
+    "classification": "management_guidance",
+    "claim_text": "Management expects to pay down to a 13% CET1 ratio by year end and guides to 2026 capital generation above 200 basis points.",
+    "quote": "We continue to expect to pay down to a CET1 ratio of 13% by the end of the year. We also continue to guide to 2026 capital generation of more than 200 basis points.",
+    "speaker": "William Chalmers",
+    "status": "forward_looking",
+    "values": {
+      "cet1_target_pct": 13,
+      "capital_generation_2026_min_bps": 200
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0004",
+    "period": "12 months to 31 Dec 2026"
+  },
+  {
+    "id": "claim-042",
+    "category": "cash_flow_capital_allocation",
+    "classification": "reported_fact",
+    "claim_text": "The board announced an interim dividend of 1.58 pence per share, 30% higher than last year's interim.",
+    "quote": "Today, the board announces an increased interim dividend of 1.58 pen ce per share, 30% growth on last year's interim.",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {
+      "interim_dividend_pence": 1.58,
+      "interim_dividend_growth_pct": 30
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0004",
+    "period": "6 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-043",
+    "category": "cash_flow_capital_allocation",
+    "classification": "management_guidance",
+    "claim_text": "Beyond 2026 the group targets a progressive and sustainable dividend, with good growth likely more akin to recent periods.",
+    "quote": "And beyond 2026, we continue to target a progressive and sustainable dividend, expecting good growth in future years, albeit likely more akin to recent per iods.",
+    "speaker": "William Chalmers",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0004"
+  },
+  {
+    "id": "claim-044",
+    "category": "regulatory_legal_macro",
+    "classification": "management_opinion",
+    "claim_text": "Nunn said the base case for the UK economy is stability with resilient fundamentals, with opportunities for a higher growth trajectory.",
+    "quote": "Our base case outlook for the UK economy is one of stability with resilient fundamentals. At the same time, we see clear opportunities for the UK to move to a higher growth trajectory than is forecast today.",
+    "speaker": "Charlie Nunn",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0005"
+  },
+  {
+    "id": "claim-045",
+    "category": "current_guidance",
+    "classification": "management_guidance",
+    "claim_text": "Nunn said delivery of the innovate pillar will support a high single-digit OOI CAGR.",
+    "quote": "Our delivery here will support a high single digi t OOI CAGR.",
+    "speaker": "Charlie Nunn",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0005"
+  },
+  {
+    "id": "claim-046",
+    "category": "current_guidance",
+    "classification": "management_guidance",
+    "claim_text": "Accelerate 2030 targets mid-single-digit net income CAGR.",
+    "quote": "Growing b usiness momentum will support continued income growth with net income growing at mid-single digit CAGR.",
+    "speaker": "Charlie Nunn",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0005"
+  },
+  {
+    "id": "claim-047",
+    "category": "current_guidance",
+    "classification": "management_guidance",
+    "claim_text": "Accelerate 2030 targets a cost:income ratio below 45% in 2030 with yearly reductions, a RoTE of circa 20% and more than 225 basis points of capital generation in 2030.",
+    "quote": "We're targeting a cost income ratio of less than 45% in 2030 with year-on-year reductions. This will support stronger sustainable returns and growing capital generation. We're targeting a RoTE of circa 20% and more than 225 basis points of capital gener ation in 2030",
+    "speaker": "Charlie Nunn",
+    "status": "forward_looking",
+    "values": {
+      "cost_income_2030_max_pct": 45,
+      "rote_2030_pct_approx": 20,
+      "capital_generation_2030_min_bps": 225
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [
+      "'Less than 45%', 'circa 20%' and 'more than 225' are a cap, an approximation and a floor respectively."
+    ],
+    "segment_id": "seg-0005",
+    "period": "12 months to 31 Dec 2030"
+  },
+  {
+    "id": "claim-048",
+    "category": "operational_performance",
+    "classification": "management_guidance",
+    "claim_text": "Lloyds targets more than £45 billion of new finance to small businesses and more than £100 billion of sustainable and transition financing by 2030.",
+    "quote": "we're targeting mo re than £45 billion of new finance to small busines s customers and more than £100 billion of sustainable and transition financing.",
+    "speaker": "Charlie Nunn",
+    "status": "forward_looking",
+    "values": {
+      "sme_new_finance_min_gbp_billion": 45,
+      "sustainable_finance_min_gbp_billion": 100
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0005"
+  },
+  {
+    "id": "claim-049",
+    "category": "operational_performance",
+    "classification": "reported_fact",
+    "claim_text": "Lloyds announced moving Halifax customers under the Lloyds brand, alongside Bank of Scotland.",
+    "quote": "We recently announced the decision to move our Halifax customers under the Ll oyds brand, operating alongside our other relations hip brand, Bank of Scotland.",
+    "speaker": "Charlie Nunn",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0005"
+  },
+  {
+    "id": "claim-050",
+    "category": "current_guidance",
+    "classification": "management_guidance",
+    "claim_text": "Retail targets a mid-single-digit net income CAGR and cost:income reduction over the plan.",
+    "quote": "We're targeting a mid-single digit net income CAGR and CI R reduction over the plan.",
+    "speaker": "Charlie Nunn",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0005"
+  },
+  {
+    "id": "claim-051",
+    "category": "operational_performance",
+    "classification": "reported_fact",
+    "claim_text": "More than eight million customers have already used the relaunched rewards portal.",
+    "quote": "M ore than eight million of our customers have alread y used this and are benefiting from discounts and cashback offers",
+    "speaker": "Charlie Nunn",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.85,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0005"
+  },
+  {
+    "id": "claim-052",
+    "category": "operational_performance",
+    "classification": "reported_fact",
+    "claim_text": "Lloyds is the homes market leader with a 19% mortgage market share.",
+    "quote": "We are the market leader for homes today with a 19% mortgage market share.",
+    "speaker": "Charlie Nunn",
+    "status": "reported",
+    "values": {
+      "mortgage_market_share_pct": 19
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0005"
+  },
+  {
+    "id": "claim-053",
+    "category": "operational_performance",
+    "classification": "reported_fact",
+    "claim_text": "Lloyds is the UK's largest motor financing and leasing provider, financing or leasing more than one million vehicles through Black Horse, Lex and Tusker.",
+    "quote": "We're the UK's largest motor financing and leasing provider with significant scale. Through our Black Horse, Lex and Tusker brands, we finance or lease more tha n one million vehicles.",
+    "speaker": "Charlie Nunn",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0005"
+  },
+  {
+    "id": "claim-054",
+    "category": "current_guidance",
+    "classification": "management_guidance",
+    "claim_text": "Commercial (BCB and CIB, a roughly 50/50 split of circa £6 billion net income) targets mid-single-digit net income CAGR and a low single-digit cost:income reduction by 2030.",
+    "quote": "The two businesses have a broadly 50/50 net income cont ribution today of a circa £6 billion total. Combined, we're targeting a mid-single digit net income CAGR and a low single digit CIR reduction by 2030.",
+    "speaker": "Charlie Nunn",
+    "status": "forward_looking",
+    "values": {
+      "commercial_net_income_gbp_billion_approx": 6,
+      "bcb_share_pct": 50,
+      "cib_share_pct": 50
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0005"
+  },
+  {
+    "id": "claim-055",
+    "category": "operational_performance",
+    "classification": "management_opinion",
+    "claim_text": "Nunn said only fifteen per cent of CIB clients (the transcript prints '1 5%') have needs met across all three areas of cash, debt and risk management today.",
+    "quote": "However, only 1 5% of our clients have needs met across all three a reas today.",
+    "speaker": "Charlie Nunn",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0005"
+  },
+  {
+    "id": "claim-056",
+    "category": "current_guidance",
+    "classification": "management_guidance",
+    "claim_text": "IP&I initiatives will support a high single-digit net income CAGR and a high-teens CIR reduction.",
+    "quote": "These initiatives will support a high single dig it net income CAGR. At the same time, we're highly focused on driving productivity in this area to support a high teens CIR reduction.",
+    "speaker": "Charlie Nunn",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0005"
+  },
+  {
+    "id": "claim-057",
+    "category": "demand_activity",
+    "classification": "management_opinion",
+    "claim_text": "Nunn said over 20 million retail customers have no insurance relationship with Lloyds and 17 million insure their homes elsewhere.",
+    "quote": "over 20 million of our retail customers still do not have an insurance relationship with us, and 17 million have their home insurance needs met elsewhere.",
+    "speaker": "Charlie Nunn",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0005"
+  },
+  {
+    "id": "claim-058",
+    "category": "operational_performance",
+    "classification": "reported_fact",
+    "claim_text": "The group operates a full-service wealth offering with around £110 billion of open book AUA.",
+    "quote": "The group operates a full-service wealth offering t oday with around £110 billion of open book AUA.",
+    "speaker": "Charlie Nunn",
+    "status": "reported",
+    "values": {
+      "wealth_aua_gbp_billion_approx": 110
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0005"
+  },
+  {
+    "id": "claim-059",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Equity Investments represented more than 10% of OOI in the first half of 2026, with a RoTE above 20%.",
+    "quote": "Equity Investments is a growing contributor to the group representing more than 10% of OOI in the first half of 2026, with a RoTE in excess of 20%.",
+    "speaker": "Charlie Nunn",
+    "status": "reported",
+    "values": {
+      "equity_investments_ooi_share_min_pct": 10,
+      "equity_investments_rote_min_pct": 20
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0005",
+    "period": "6 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-060",
+    "category": "operational_performance",
+    "classification": "management_guidance",
+    "claim_text": "Lloyds Living aims to double its homes portfolio to more than 20,000 by end-2030.",
+    "quote": "doubling the home's portfolio to more than 20,000 by the end of 2030.",
+    "speaker": "Charlie Nunn",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0005"
+  },
+  {
+    "id": "claim-061",
+    "category": "operational_performance",
+    "classification": "reported_fact",
+    "claim_text": "Tusker's fleet grew from 23,000 in 2023 to more than 100,000 today.",
+    "quote": "we've grown Tusker from a fleet of 23,000 in 2023 to more than 100,000 today",
+    "speaker": "Charlie Nunn",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0005"
+  },
+  {
+    "id": "claim-062",
+    "category": "operational_performance",
+    "classification": "reported_fact",
+    "claim_text": "Lloyds opened the wait list for Lloyds Smart Wallet, built on Curve's capabilities.",
+    "quote": "we are today opening the wait list for Lloyds Smart Wallet, which builds on Curve's pioneering capabilities",
+    "speaker": "Charlie Nunn",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0005"
+  },
+  {
+    "id": "claim-063",
+    "category": "operational_performance",
+    "classification": "management_guidance",
+    "claim_text": "Initial digital asset propositions are to launch for commercial clients in the second half of this year.",
+    "quote": "with initial proposition launches to take place for our commercial clients during the second half of this year.",
+    "speaker": "Charlie Nunn",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0005"
+  },
+  {
+    "id": "claim-064",
+    "category": "costs_margins_efficiency",
+    "classification": "management_guidance",
+    "claim_text": "Nunn said the group is on course to deliver more than £100 million of value from generative and agentic AI in 2026.",
+    "quote": "We're on course to deliver more than £100 million of val ue from generative and agentic AI in 2026",
+    "speaker": "Charlie Nunn",
+    "status": "forward_looking",
+    "values": {
+      "ai_value_2026_min_gbp_million": 100
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [
+      "'More than £100 million' is a floor, on a narrow definition (generative and agentic AI only)."
+    ],
+    "segment_id": "seg-0005",
+    "period": "12 months to 31 Dec 2026"
+  },
+  {
+    "id": "claim-065",
+    "category": "regulatory_legal_macro",
+    "classification": "management_guidance",
+    "claim_text": "The plan assumes a stable UK economy with real GDP growth averaging 1.4%.",
+    "quote": "We assume a stable UK economic environment with real GDP growth averaging 1.4%.",
+    "speaker": "William Chalmers",
+    "status": "forward_looking",
+    "values": {
+      "real_gdp_growth_pct": 1.4
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0006"
+  },
+  {
+    "id": "claim-066",
+    "category": "regulatory_legal_macro",
+    "classification": "management_guidance",
+    "claim_text": "The plan assumes a 3.5% terminal base rate and a 3.7% average hedge reinvestment rate, about 50 basis points below current market-implied rates.",
+    "quote": "Turning to interest rates, we continue to assume a terminal base rate of 3.5%. Our expectations for th e reinvestment on our hedge are predicated upon this assumption and average around 3.7% over the period. Now clearly this is below current market implied rates, which are around 50 basis points higher.",
+    "speaker": "William Chalmers",
+    "status": "forward_looking",
+    "values": {
+      "terminal_base_rate_pct": 3.5,
+      "hedge_reinvestment_rate_pct": 3.7,
+      "market_implied_gap_bps_approx": 50
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0006"
+  },
+  {
+    "id": "claim-067",
+    "category": "risk",
+    "classification": "management_guidance",
+    "claim_text": "The plan assumes unemployment peaks around 5.5% in Q1 2027 and house price growth of around 1% in 2026 and 2027.",
+    "quote": "we expect unemployment to increase slightly before peaking in the first quarter of '27, around 5.5%. And for house prices, we assume growth of around 1% in '26 and '27",
+    "speaker": "William Chalmers",
+    "status": "forward_looking",
+    "values": {
+      "unemployment_peak_pct": 5.5,
+      "house_price_growth_pct": 1
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0006"
+  },
+  {
+    "id": "claim-068",
+    "category": "costs_margins_efficiency",
+    "classification": "management_guidance",
+    "claim_text": "Total cash investment will rise around 10-15% in 2027 versus 2026 before stabilising, and exceed £13 billion over the plan.",
+    "quote": "our total cash investment will increase by around 10 to 15% in '27 versus '26 before stabilising in the years thereafter. Cash investment will in total be in excess of £13 billion over the strategic period.",
+    "speaker": "William Chalmers",
+    "status": "forward_looking",
+    "values": {
+      "investment_increase_2027_low_pct": 10,
+      "investment_increase_2027_high_pct": 15,
+      "total_cash_investment_min_gbp_billion": 13
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0006"
+  },
+  {
+    "id": "claim-069",
+    "category": "costs_margins_efficiency",
+    "classification": "management_guidance",
+    "claim_text": "Opex will increase in 2027, growing at levels closer to the 2022 to 2025 period versus 1% growth in 2026.",
+    "quote": "Alongside, OpEx will increase in '27, growing at levels closer to the '22 to '25 period versus our 1% in '26.",
+    "speaker": "William Chalmers",
+    "status": "forward_looking",
+    "values": {
+      "opex_growth_2026_pct": 1
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0006"
+  },
+  {
+    "id": "claim-070",
+    "category": "costs_margins_efficiency",
+    "classification": "management_guidance",
+    "claim_text": "The plan targets around £2 billion of gross cost savings from 2027 to 2030.",
+    "quote": "This combination of new and existing levers will drive around £2 billion of gross cost savings from 2027 to 2030.",
+    "speaker": "William Chalmers",
+    "status": "forward_looking",
+    "values": {
+      "gross_cost_saves_2027_2030_gbp_billion": 2
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0006"
+  },
+  {
+    "id": "claim-071",
+    "category": "current_guidance",
+    "classification": "management_guidance",
+    "claim_text": "Management guides to an asset quality ratio of 25-30 basis points throughout the new plan.",
+    "quote": "we are guiding to an AQR of 25 to 30 basis points throughout the new plan.",
+    "speaker": "William Chalmers",
+    "status": "forward_looking",
+    "values": {
+      "aqr_plan_low_bps": 25,
+      "aqr_plan_high_bps": 30
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0006"
+  },
+  {
+    "id": "claim-072",
+    "category": "balance_sheet_solvency",
+    "classification": "reported_fact",
+    "claim_text": "Chalmers cited an average mortgage loan-to-value of 46% and an SME lending portfolio around 90% secured.",
+    "quote": "an average loan to value in mortga ges of 46%. An SME lending portfolio that is around 90% se cured.",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {
+      "mortgage_avg_ltv_pct": 46,
+      "sme_secured_pct_approx": 90
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0006",
+    "period": "as of 30 Jun 2026"
+  },
+  {
+    "id": "claim-073",
+    "category": "current_guidance",
+    "classification": "management_guidance",
+    "claim_text": "The structural hedge tailwind will grow by more than £2 billion from 2026 to 2030.",
+    "quote": "the structural hedge tailwind persists, growing by more than £2 billion from 2026 to 2030.",
+    "speaker": "William Chalmers",
+    "status": "forward_looking",
+    "values": {
+      "hedge_tailwind_growth_min_gbp_billion": 2
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [
+      "Greater-than guidance: the figure is a floor, not a point estimate."
+    ],
+    "segment_id": "seg-0006"
+  },
+  {
+    "id": "claim-074",
+    "category": "current_guidance",
+    "classification": "management_guidance",
+    "claim_text": "Management expects hedge income to grow to more than £9 billion in 2030.",
+    "quote": "we expect hedge income to grow to more than £9 billion in 2030.",
+    "speaker": "William Chalmers",
+    "status": "forward_looking",
+    "values": {
+      "hedge_income_2030_min_gbp_billion": 9
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [
+      "Greater-than guidance: the figure is a floor, not a point estimate."
+    ],
+    "segment_id": "seg-0006",
+    "period": "12 months to 31 Dec 2030"
+  },
+  {
+    "id": "claim-075",
+    "category": "current_guidance",
+    "classification": "management_guidance",
+    "claim_text": "Chalmers said net income growth is expected to be higher than mid-single digits in 2027.",
+    "quote": "it is im portant to highlight that we expect net income growth to be higher than this in 2027.",
+    "speaker": "William Chalmers",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0006"
+  },
+  {
+    "id": "claim-076",
+    "category": "regulatory_legal_macro",
+    "classification": "management_guidance",
+    "claim_text": "Chalmers said Basel 3.1 will drive an RWA reduction of around six to eight billion on 1 January 2027.",
+    "quote": "Basel 3.1 will drive a reduction of around six to eight billion on the 1st of January '27.",
+    "speaker": "William Chalmers",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [
+      "The amount is given in words ('around six to eight billion')."
+    ],
+    "segment_id": "seg-0006"
+  },
+  {
+    "id": "claim-077",
+    "category": "risk",
+    "classification": "management_opinion",
+    "claim_text": "Chalmers said higher sector hedge income may be partly offset by tighter asset and liability margins, which is built into the plan.",
+    "quote": "As we've seen over recent periods, higher hedge income for the sector may be partially offset by tighter asset and liability margins. Realistically, this is likely to continue and we have built it in.",
+    "speaker": "William Chalmers",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0006"
+  },
+  {
+    "id": "claim-078",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Group OOI has grown at an 8% CAGR since 2021.",
+    "quote": "Group OOI has grown at 8% CAGR since 2021",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {
+      "ooi_cagr_since_2021_pct": 8
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0006"
+  },
+  {
+    "id": "claim-079",
+    "category": "costs_margins_efficiency",
+    "classification": "management_guidance",
+    "claim_text": "The plan assumes remediation of around £200 million, at the lower end of the historical range.",
+    "quote": "our plan assumes remediation that is around £200 million, at the lower end of the ran ge that we've historically guided you towards.",
+    "speaker": "William Chalmers",
+    "status": "forward_looking",
+    "values": {
+      "remediation_assumption_gbp_million": 200
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0006"
+  },
+  {
+    "id": "claim-080",
+    "category": "current_guidance",
+    "classification": "management_guidance",
+    "claim_text": "The plan targets RoTE of more than 18% in 2028, rising to around 20% in 2030.",
+    "quote": "In 2028, we are targeting an ROTE of more than 18% before rising, as said, to around 20% in 2030.",
+    "speaker": "William Chalmers",
+    "status": "forward_looking",
+    "values": {
+      "rote_2028_min_pct": 18,
+      "rote_2030_pct_approx": 20
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0006"
+  },
+  {
+    "id": "claim-081",
+    "category": "current_guidance",
+    "classification": "management_guidance",
+    "claim_text": "Capital generation is targeted to rise from more than 200 basis points in 2026 to around 225 in 2028, and beyond that by 2030.",
+    "quote": "We're targeting capital generation that rises from greater than 200 basis points this year in 2026 to around 225 basis points in '28, before then rising to beyond this level by 2030.",
+    "speaker": "William Chalmers",
+    "status": "forward_looking",
+    "values": {
+      "capital_generation_2026_min_bps": 200,
+      "capital_generation_2028_bps_approx": 225
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0006"
+  },
+  {
+    "id": "claim-082",
+    "category": "cash_flow_capital_allocation",
+    "classification": "management_opinion",
+    "claim_text": "Chalmers said buybacks remain the preferred form of excess capital distribution because management sees a lot of value in the stock.",
+    "quote": "Currently, buybacks remain the preferred form of ex cess capital distribution as we see a lot of value in the stock.",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0006"
+  },
+  {
+    "id": "claim-083",
+    "category": "current_guidance",
+    "classification": "management_guidance",
+    "claim_text": "Given a stable 13% CET1 target, the plan creates capacity for material and growing capital distributions.",
+    "quote": "Given a stable CET1 target of 13%, this creates capacity for material and sustainably growing capital distributions.",
+    "speaker": "William Chalmers",
+    "status": "forward_looking",
+    "values": {
+      "cet1_target_pct": 13
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0006"
+  },
+  {
+    "id": "claim-084",
+    "category": "cash_flow_capital_allocation",
+    "classification": "management_opinion",
+    "claim_text": "Nunn said progress over the last strategic phase created the platform for the next level, and the group is committed to investing in the business to do so.",
+    "quote": "Our progress has created the platform from which we can take the group to the next level, and we're committed to investing in the business to do so.",
+    "speaker": "Charlie Nunn",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0007"
+  },
+  {
+    "id": "claim-085",
+    "category": "current_guidance",
+    "classification": "management_opinion",
+    "claim_text": "Nunn said management is committed to delivering 2026 first while mobilising for the new strategy.",
+    "quote": "We're committed to delivering 2026 first.",
+    "speaker": "Charlie Nunn",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0064"
+  },
+  {
+    "id": "claim-086",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An analyst asked whether cost growth will be highest in 2027, the year of the biggest income growth.",
+    "quote": "So is it right to think the cost and growth is going to be highest in that year of the plan, if you like?",
+    "speaker": "Guy Stebbings, BNP Paribas",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0010"
+  },
+  {
+    "id": "claim-087",
+    "category": "costs_margins_efficiency",
+    "classification": "management_guidance",
+    "claim_text": "Chalmers said cost growth was roughly 4% from 2022 to 2026 and should be a shade lower, around 3%, over the new plan.",
+    "quote": "Between '22 to '26, as you know, we had cost growth of roughly 4% during that period. I would expect us to be a shade lower than that over the course of this new plan. And probably around a 3% mark is what that translates as, around that level.",
+    "speaker": "William Chalmers",
+    "status": "forward_looking",
+    "values": {
+      "cost_growth_2022_2026_pct_approx": 4,
+      "cost_growth_plan_pct_approx": 3
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [
+      "Both rates are approximate ('roughly', 'around')."
+    ],
+    "segment_id": "seg-0011"
+  },
+  {
+    "id": "claim-088",
+    "category": "management_explanation",
+    "classification": "management_opinion",
+    "claim_text": "Chalmers said confidence in OOI growth rests on the track record and on many of the businesses being pretty predictable.",
+    "quote": "It's because A, we have the track record, number one. And B, because a lot of these businesses are pretty predictable.",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0011"
+  },
+  {
+    "id": "claim-089",
+    "category": "operational_performance",
+    "classification": "management_opinion",
+    "claim_text": "Nunn said Lloyds is the only fintech or bank with its InvestAI in the regulator's sandbox intending to use targeted advice in Q3 this year.",
+    "quote": "we're the only FinTech or bank that has got our invest AI in their sandbox that is actually intending to use targeted advice in Q3 this year.",
+    "speaker": "Charlie Nunn",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0012"
+  },
+  {
+    "id": "claim-090",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An analyst said the 2028 RoTE guidance of greater than 18% was a bit light versus consensus, while noting the greater-than sign.",
+    "quote": "The first one is on your RoTE guidance in '28, greater than 18%. It wa s a bit light versus consensus, though I appreciate there's a greater than symbol in front of it.",
+    "speaker": "Ben Toms, RBC",
+    "status": "reported",
+    "values": {
+      "rote_2028_min_pct": 18
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0013"
+  },
+  {
+    "id": "claim-091",
+    "category": "management_explanation",
+    "classification": "management_guidance",
+    "claim_text": "Chalmers said the plan uses a 3.7% hedge refinancing rate, with the market at least some 50 basis points ahead of that.",
+    "quote": "We've got a refinancing rate of 3.7%. The market at the moment is at least some 50 basis points ahead of that.",
+    "speaker": "William Chalmers",
+    "status": "forward_looking",
+    "values": {
+      "hedge_refinancing_rate_pct": 3.7,
+      "market_gap_min_bps": 50
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0014"
+  },
+  {
+    "id": "claim-092",
+    "category": "management_explanation",
+    "classification": "management_opinion",
+    "claim_text": "Chalmers said the 2028 RoTE target is underpinned by balance sheet growth and equity growth, so it is a higher RoTE on a higher equity base.",
+    "quote": "it is underpinned by meaningful balance sheet growth, which in turn leads to meaningful equity growth, and therefo re it is a higher RoTE, but on a higher equity base .",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0014"
+  },
+  {
+    "id": "claim-093",
+    "category": "qa_insight",
+    "classification": "management_opinion",
+    "claim_text": "Chalmers said growing the notional conservatively at market refinancing rates gives a number he suspects is not wildly different from the analyst's.",
+    "quote": "and you'll get t o a number that I suspect isn't wildly different to what you've just said.",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0014"
+  },
+  {
+    "id": "claim-094",
+    "category": "costs_margins_efficiency",
+    "classification": "management_opinion",
+    "claim_text": "Nunn said the cost:income target was left as less than 45% because management thinks it could out-execute in this period.",
+    "quote": "the reason we left the cost income ratio as less than 45% is we think we could out execute in this period.",
+    "speaker": "Charlie Nunn",
+    "status": "reported",
+    "values": {
+      "cost_income_2030_max_pct": 45
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0015"
+  },
+  {
+    "id": "claim-095",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An analyst asked whether the ROI of organic versus inorganic opportunities has changed in relative attractiveness.",
+    "quote": "Has that balance changed at all in terms of whether you're seeing the ROI of organic changing in terms of relative attractiveness versus inorganic?",
+    "speaker": "Ben Caven-Roberts, Goldman Sachs",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0016"
+  },
+  {
+    "id": "claim-096",
+    "category": "cash_flow_capital_allocation",
+    "classification": "management_opinion",
+    "claim_text": "Nunn said the plan will be primarily organic because that is what a plan can be based on.",
+    "quote": "our plan will be primarily an organic plan because that's what you can base your plan on.",
+    "speaker": "Charlie Nunn",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0017"
+  },
+  {
+    "id": "claim-097",
+    "category": "cash_flow_capital_allocation",
+    "classification": "management_opinion",
+    "claim_text": "Chalmers said the share price has changed, so the relative attractiveness of options may have changed a little.",
+    "quote": "what has ch anged is clearly the share price that we operate on has changed. So the relatives maybe have changed a little.",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0018"
+  },
+  {
+    "id": "claim-098",
+    "category": "risk",
+    "classification": "management_opinion",
+    "claim_text": "Nunn said customer adoption and regulatory approvals are the two things the bank cannot control in AI-driven revenue plans.",
+    "quote": "But the two things we can't control in that context is customer adoption and regulatory approvals.",
+    "speaker": "Charlie Nunn",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0019"
+  },
+  {
+    "id": "claim-099",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An analyst asked about the path of the £2 billion cost saves and whether recognition is linear.",
+    "quote": "If you could just advise us on the path of the £2 billion cost saves. Is that a linear recognition?",
+    "speaker": "Andrew Coombs, Citi",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0020"
+  },
+  {
+    "id": "claim-100",
+    "category": "costs_margins_efficiency",
+    "classification": "management_guidance",
+    "claim_text": "Chalmers said costs tick up in 2027 from 1% growth in 2026, to around the 3% mark.",
+    "quote": "a little bit of a tick up in '27 versus '26, i.e. 1% growth in '26. You should expect that to be a bit higher in the context of '27. I mentioned the sort of circa 3% mark as being about right in that respect.",
+    "speaker": "William Chalmers",
+    "status": "forward_looking",
+    "values": {
+      "cost_growth_2026_pct": 1,
+      "cost_growth_2027_pct_approx": 3
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0021"
+  },
+  {
+    "id": "claim-101",
+    "category": "operational_performance",
+    "classification": "management_opinion",
+    "claim_text": "Nunn said having one relationship brand for customers in England gives the opportunity to bring the group's full breadth to them.",
+    "quote": "And having one relationship bra nd for customers in England, we think really gives us that opportunity.",
+    "speaker": "Charlie Nunn",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0022"
+  },
+  {
+    "id": "claim-102",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An analyst said his own assumptions give a lot more than 225 basis points of capital generation.",
+    "quote": "I'm still getting a lot more than the 225 bps capital generation.",
+    "speaker": "Amit Goel, Mediobanca",
+    "status": "reported",
+    "values": {
+      "capital_generation_2030_min_bps": 225
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0023"
+  },
+  {
+    "id": "claim-103",
+    "category": "balance_sheet_solvency",
+    "classification": "management_opinion",
+    "claim_text": "Chalmers said each 1% of RoTE adds roughly 10-15 basis points of capital generation, so circa 18% RoTE implies about 230 and circa 20% about 260.",
+    "quote": "Every 1% increase in RoTE is somewhere between 10 to 15 basis points increase in capital generation. So a circa 18% RoTE is probably around 230. And then let's say circa 20% therefore is 260.",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {
+      "capgen_per_rote_pt_low_bps": 10,
+      "capgen_per_rote_pt_high_bps": 15,
+      "implied_capgen_at_18_rote_bps": 230,
+      "implied_capgen_at_20_rote_bps": 260
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [
+      "This is Chalmers' rough rule of thumb ('somewhere between', 'probably around'), not guidance; the guidance remains greater than 225 basis points."
+    ],
+    "segment_id": "seg-0024"
+  },
+  {
+    "id": "claim-104",
+    "category": "balance_sheet_solvency",
+    "classification": "management_guidance",
+    "claim_text": "Chalmers said a modest increase in RWA density is planned, no more than a couple of percentage points.",
+    "quote": "I mentioned in my comments earlier on a modest increase in RWA density. It's not mo re than a couple of percentage points or so.",
+    "speaker": "William Chalmers",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0024"
+  },
+  {
+    "id": "claim-105",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An analyst asked whether dropping the Halifax brand is an opportunity to close quite a few branches.",
+    "quote": "Is that a n opportunity to close quite a few branches?",
+    "speaker": "James Invine, Rothschild & Co Redburn",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0025"
+  },
+  {
+    "id": "claim-106",
+    "category": "operational_performance",
+    "classification": "management_opinion",
+    "claim_text": "Nunn said Lloyds has about 550 branches.",
+    "quote": "We have about 550 branches",
+    "speaker": "Charlie Nunn",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0026"
+  },
+  {
+    "id": "claim-107",
+    "category": "operational_performance",
+    "classification": "management_opinion",
+    "claim_text": "Nunn said branch consolidation is not specifically linked to the Halifax brand change.",
+    "quote": "So yes, that can continue, but that's not specifically linked to the Halifax brand.",
+    "speaker": "Charlie Nunn",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0026"
+  },
+  {
+    "id": "claim-108",
+    "category": "operational_performance",
+    "classification": "management_opinion",
+    "claim_text": "Nunn said neither international business is doing anything materially different from the last few years.",
+    "quote": "Neither of those businesses are doing anything materially different from the last few years.",
+    "speaker": "Charlie Nunn",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0026"
+  },
+  {
+    "id": "claim-109",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An analyst noted Lloyds' gross deposit margin was about 1.6% for the first half of 2026.",
+    "quote": "We're at 1.6% for the first half of '26, give or take.",
+    "speaker": "Christopher Cant, Autonomous",
+    "status": "reported",
+    "values": {
+      "gross_deposit_margin_pct": 1.6
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0029"
+  },
+  {
+    "id": "claim-110",
+    "category": "reported_financial_performance",
+    "classification": "management_guidance",
+    "claim_text": "Chalmers said the Q2 structural hedge yield was about 2.8%, rising to around 2.9% over the rest of the year.",
+    "quote": "we've got a Q2 yield on the structural hedge of about 2.8%. I think over the course of the remainder of this year, it goes up to around a 2.9% mark, something like that.",
+    "speaker": "William Chalmers",
+    "status": "forward_looking",
+    "values": {
+      "q2_hedge_yield_pct_approx": 2.8,
+      "ye_hedge_yield_pct_approx": 2.9
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0030"
+  },
+  {
+    "id": "claim-111",
+    "category": "pricing_volume_mix",
+    "classification": "management_opinion",
+    "claim_text": "Chalmers said the plan assumes a flat to modestly down margin picture on fixed-term deposits, not expecting to make money from that market.",
+    "quote": "we are assuming a pretty flat, i n some cases, modestly down overall margin picture. So we' re not expecting to make money out of the fixed ter m market in short.",
+    "speaker": "William Chalmers",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0030"
+  },
+  {
+    "id": "claim-112",
+    "category": "balance_sheet_solvency",
+    "classification": "management_guidance",
+    "claim_text": "Chalmers said the cashflow hedge reserve of about £2.5 billion need not play out to zero but should come down meaningfully.",
+    "quote": "I wouldn't say that necessarily you should expect the cashflow hedge reserve about £2.5 billion to play out to zero, but you should certainly expect it to come down meaningfully",
+    "speaker": "William Chalmers",
+    "status": "forward_looking",
+    "values": {
+      "cashflow_hedge_reserve_gbp_billion_approx": 2.5
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0030"
+  },
+  {
+    "id": "claim-113",
+    "category": "pricing_volume_mix",
+    "classification": "management_opinion",
+    "claim_text": "Nunn said the bank did not chase the market last quarter because it was not right for customers or shareholders.",
+    "quote": "you saw us not chasing the market because we though it wasn't the right thing either for our cus tomers or for our shareholders.",
+    "speaker": "Charlie Nunn",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0031"
+  },
+  {
+    "id": "claim-114",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An analyst asked whether OOI would still grow at a high single-digit CAGR if operating lease depreciation were netted against it.",
+    "quote": "If you put operating lease depreciation in OOI, would you still expect a high-single-digit CAGR?",
+    "speaker": "Perlie Mong, Bank of America",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0032"
+  },
+  {
+    "id": "claim-115",
+    "category": "risk",
+    "classification": "management_opinion",
+    "claim_text": "Nunn said he is not sure the market is more competitive than in recent years; the difference is that industry returns are strong.",
+    "quote": "Do I think it's more competitive than we've seen in the last few years? I'm not sure it is. I think the difference, as you say, is actually the returns in the industry are strong",
+    "speaker": "Charlie Nunn",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0033"
+  },
+  {
+    "id": "claim-116",
+    "category": "management_explanation",
+    "classification": "management_opinion",
+    "claim_text": "Chalmers noted that the bar in question is labelled income headwinds.",
+    "quote": "that bar, as you'll have seen, is labelled income headwinds.",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0034"
+  },
+  {
+    "id": "claim-117",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "£41 million of Q2's £63 million operating lease depreciation increase came from used car prices falling more than expected.",
+    "quote": "We had a £63 million increase in the course of quarter 2. £41 million of that £63 million increase was in respect of used car prices, which went down by more than we expected them to.",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {
+      "old_increase_gbp_million": 63,
+      "used_car_component_gbp_million": 41
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0034",
+    "period": "3 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-118",
+    "category": "operational_performance",
+    "classification": "management_guidance",
+    "claim_text": "Chalmers expects transport OOI growth to outpace growth in the operating lease depreciation charge.",
+    "quote": "That is to say we expect the OOI growth to go up more than the operating lease depreciation charge goes up.",
+    "speaker": "William Chalmers",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0034"
+  },
+  {
+    "id": "claim-119",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An online question from Jefferies said Lloyds appears to assume higher RWA growth than consensus and that the negative cashflow hedge reserve is still over 4p.",
+    "quote": "It seems you're looking at higher RWA growth than cons ensus has, the negative cashflow hedge reserve is s till over 4p.",
+    "speaker": "Douglas Radcliffe",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0035"
+  },
+  {
+    "id": "claim-120",
+    "category": "balance_sheet_solvency",
+    "classification": "management_opinion",
+    "claim_text": "Chalmers attributed the gap to RWA build, a modest increase in RWA density, and prudence in planning expectations.",
+    "quote": "in p art RWA build, number 1, in part a modest increase in RWA density, number 2, and in part a function of our prudence in our overall planning expectations, number 3.",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0036"
+  },
+  {
+    "id": "claim-121",
+    "category": "balance_sheet_solvency",
+    "classification": "reported_fact",
+    "claim_text": "Chalmers said intangibles are about eight and a half billion, of which about four and a half billion is capitalised software.",
+    "quote": "Right now we have intangibles of about 8 and a half billion on our balance sheet. Of that 8 and a half billion, about 4 and a half billion is capitalised software.",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.85,
+    "inferred_from": [],
+    "caveats": [
+      "Figures are stated in words ('8 and a half billion', '4 and a half billion') and are approximate."
+    ],
+    "segment_id": "seg-0038"
+  },
+  {
+    "id": "claim-122",
+    "category": "balance_sheet_solvency",
+    "classification": "management_opinion",
+    "claim_text": "Chalmers said consensus RWA growth quite possibly sits below the bank's plan, which he called ambitious but not unrealistic.",
+    "quote": "I think quite possibly. I mean, I think we have an ambitious growth agenda for the bank. It is not an unrealistic one.",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0041"
+  },
+  {
+    "id": "claim-123",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An online question from Deutsche Bank suggested about half the hedge benefit is given back as competitive margin pressure and optimisation.",
+    "quote": "It looks like about half the hedge benefit is given back as competitive margin pressure and optimisation.",
+    "speaker": "Douglas Radcliffe",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0042"
+  },
+  {
+    "id": "claim-124",
+    "category": "management_explanation",
+    "classification": "management_opinion",
+    "claim_text": "Chalmers said reading half the hedge benefit as lost to competition may overstate it, since the box bundles other headwinds.",
+    "quote": "that may be a bit of an overstatement if he's getting it from that box.",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0043"
+  },
+  {
+    "id": "claim-125",
+    "category": "risk",
+    "classification": "management_opinion",
+    "claim_text": "Nunn expects slightly slower deposit growth over the next four years than over the last five.",
+    "quote": "w e do expect slightly slower deposit growth over the next four years than we saw over the whole of the last five years",
+    "speaker": "Charlie Nunn",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0044"
+  },
+  {
+    "id": "claim-126",
+    "category": "operational_performance",
+    "classification": "reported_fact",
+    "claim_text": "Nunn said transport share rose from about 14% to over 17% and credit card spend share from 15% to 17.5%.",
+    "quote": "We've increased share of transport as we were just talking about from about 14% to over 17%. Something as simple as credit card spending, we've increased from 15% to 17.5%.",
+    "speaker": "Charlie Nunn",
+    "status": "reported",
+    "values": {
+      "transport_share_prior_pct": 14,
+      "transport_share_now_min_pct": 17,
+      "card_spend_share_prior_pct": 15,
+      "card_spend_share_now_pct": 17.5
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0044"
+  },
+  {
+    "id": "claim-127",
+    "category": "pricing_volume_mix",
+    "classification": "management_guidance",
+    "claim_text": "Chalmers said the plan's mortgage margin assumption comes down by a relatively modest amount over the plan.",
+    "quote": "our mortgage marg in assumption, just by way of illustration, comes down over the course of the plan by a relatively modest amount",
+    "speaker": "William Chalmers",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0045"
+  },
+  {
+    "id": "claim-128",
+    "category": "management_explanation",
+    "classification": "management_opinion",
+    "claim_text": "Chalmers said the circa 20% 2030 RoTE assumes none of the benefit of market refinancing rates above the plan's own assumption.",
+    "quote": "We're not assuming any of it in our plan when we get to circa 20%.",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0045"
+  },
+  {
+    "id": "claim-129",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An analyst asked whether Lloyds could quantify the revenue and cost benefits it expects from AI.",
+    "quote": "just wanted to know if you could actually quantify revenue benefits of AI as well as the cost benefit that you expect from AI.",
+    "speaker": "Nicolas Payen, Keppler Cheuvreux",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0046"
+  },
+  {
+    "id": "claim-130",
+    "category": "qa_insight",
+    "classification": "reported_fact",
+    "claim_text": "Nunn said Lloyds had previously given figures linking 70% of revenue and 60% of gross cost saves to digital and AI.",
+    "quote": "I know we did give you 70% of the revenue was linked to digital and AI, and 60% of our gross cost saves were linked to that.",
+    "speaker": "Charlie Nunn",
+    "status": "reported",
+    "values": {
+      "revenue_linked_digital_ai_pct": 70,
+      "cost_saves_linked_digital_ai_pct": 60
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0047"
+  },
+  {
+    "id": "claim-131",
+    "category": "balance_sheet_solvency",
+    "classification": "reported_fact",
+    "claim_text": "Chalmers said the management buffer over regulatory requirements is well over 1%, nigh on £2.5 billion.",
+    "quote": "At the moment, it's well over 1%. As you know, based upon our RWAs right now, that's nigh on £2.5 billion of just management buffer",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {
+      "management_buffer_min_pct": 1,
+      "management_buffer_gbp_billion_approx": 2.5
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [
+      "'Well over 1%' is a floor, and 'nigh on £2.5 billion' an approximation."
+    ],
+    "segment_id": "seg-0048"
+  },
+  {
+    "id": "claim-132",
+    "category": "regulatory_legal_macro",
+    "classification": "management_guidance",
+    "claim_text": "Chalmers said there are no plans to reduce the capital ratio below 13% right now.",
+    "quote": "we have no plans to reduce below 13% right now.",
+    "speaker": "William Chalmers",
+    "status": "forward_looking",
+    "values": {
+      "cet1_target_pct": 13
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0048"
+  },
+  {
+    "id": "claim-133",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An analyst asked what bancassurance penetration is baked into the plan and how high it can go.",
+    "quote": "Can you give us a flavour of what you've baked in, how much that penetration can go, how high it can go along the plan",
+    "speaker": "Alvaro Serrano, Morgan Stanley",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0049"
+  },
+  {
+    "id": "claim-134",
+    "category": "demand_activity",
+    "classification": "reported_fact",
+    "claim_text": "Nunn said Lloyds captured home insurance market share in the first half although the home insurance market was not growing in policies.",
+    "quote": "we've captured market share in home insurance, especially in periods, for example, like this first half of the year where the home insurance market hasn't really been growing in terms of policies",
+    "speaker": "Charlie Nunn",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0050",
+    "period": "6 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-135",
+    "category": "operational_performance",
+    "classification": "management_guidance",
+    "claim_text": "Nunn said re-platforming of the direct-to-consumer wealth businesses lands at the back end of this year and the first quarter of next.",
+    "quote": "So, that stuff's going to be landing back end of this year, first quarter of next.",
+    "speaker": "Charlie Nunn",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0050"
+  },
+  {
+    "id": "claim-136",
+    "category": "management_explanation",
+    "classification": "management_opinion",
+    "claim_text": "Chalmers said he expects the mortgage spread to be basically much the same with cross-sell.",
+    "quote": "The mortgage spread, I would expect to be basically much the same.",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0051"
+  },
+  {
+    "id": "claim-137",
+    "category": "demand_activity",
+    "classification": "management_opinion",
+    "claim_text": "Nunn said the bank is not looking to make massive incremental money from some of the ecosystem platforms.",
+    "quote": "We're not looking to make massive incremental marginal money from some of those platforms",
+    "speaker": "Charlie Nunn",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0052"
+  },
+  {
+    "id": "claim-138",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An analyst asked why, at 20% returns, Lloyds does not put as much capital to work as possible.",
+    "quote": "But in a w orld where you're making 20% returns, shouldn't you be looking to put as much of that capital to work as possible",
+    "speaker": "Ed Firth, KBW",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0054"
+  },
+  {
+    "id": "claim-139",
+    "category": "cash_flow_capital_allocation",
+    "classification": "management_opinion",
+    "claim_text": "Chalmers said investment is constrained by capacity rather than available cash.",
+    "quote": "We are rather constrained by capacity.",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0055"
+  },
+  {
+    "id": "claim-140",
+    "category": "operational_performance",
+    "classification": "reported_fact",
+    "claim_text": "Nunn said about 30% of legacy applications were decommissioned in the last phase.",
+    "quote": "we've demised about 30% of our legacy applications in this last phase",
+    "speaker": "Charlie Nunn",
+    "status": "reported",
+    "values": {
+      "legacy_apps_decommissioned_pct_approx": 30
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0056"
+  },
+  {
+    "id": "claim-141",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An online question asked about the long-term sustainability of banking NIM at current higher levels.",
+    "quote": "On NII, what is your view of the long-term sustainability of banking NIM at these higher levels?",
+    "speaker": "Douglas Radcliffe",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0057"
+  },
+  {
+    "id": "claim-142",
+    "category": "pricing_volume_mix",
+    "classification": "management_guidance",
+    "claim_text": "Chalmers said NIM is up 13 basis points in the first half and five in Q2, and is still expected to rise in every quarter of 2026.",
+    "quote": "As you know, we're up 13 basis points, I think it is in H1. We're up five basis points in Q2. We said at the be ginning of the year that we expect the NIM to tick up in every quarter of this year",
+    "speaker": "William Chalmers",
+    "status": "forward_looking",
+    "values": {
+      "h1_nim_increase_bps": 13
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0058"
+  },
+  {
+    "id": "claim-143",
+    "category": "pricing_volume_mix",
+    "classification": "management_guidance",
+    "claim_text": "Chalmers expects PCA deposits to be relatively flat over the cycle.",
+    "quote": "I mentioned earlier on that we're expecting PCA deposits to be relatively flattish over the course of the cycle.",
+    "speaker": "William Chalmers",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0058"
+  },
+  {
+    "id": "claim-144",
+    "category": "qa_insight",
+    "classification": "analyst_question",
+    "claim_text": "An analyst asked whether Lloyds has a single customer view across products and divisions.",
+    "quote": "do you at the moment have a single customer view in terms of the multi-products, the multi-divisions",
+    "speaker": "Sheel Shah, JP Morgan",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0060"
+  },
+  {
+    "id": "claim-145",
+    "category": "operational_performance",
+    "classification": "management_opinion",
+    "claim_text": "Nunn said the bank has the data it needs for today's cross-sell but its data platforms are not fully in target state.",
+    "quote": "The data and the platforms aren't ful ly complete in target state.",
+    "speaker": "Charlie Nunn",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0061"
+  },
+  {
+    "id": "claim-146",
+    "category": "pricing_volume_mix",
+    "classification": "management_opinion",
+    "claim_text": "Chalmers said other players dropping out of the transport market is helping Lloyds' pricing.",
+    "quote": "As we see other players drop out of the market, indeed that is what is helping our pricing positions",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0062"
+  },
+  {
+    "id": "claim-147",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Q1 2026 statutory profit before tax rose 33% to £2.03 billion, ahead of a £1.78 billion Bloomberg consensus.",
+    "quote": "reported a 33% rise in first-quarter statutory profit before tax to £2.03 billion for the three months to 31 March 2026, comfortably ahead of the £1.78 billion Bloomberg consensus",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "q1_pbt_gbp_billion": 2.03,
+      "q1_pbt_growth_pct": 33,
+      "q1_consensus_gbp_billion": 1.78
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "web_evidence_id": "web-001",
+    "period": "3 months to 31 Mar 2026"
+  },
+  {
+    "id": "claim-148",
+    "category": "guidance_change",
+    "classification": "management_guidance",
+    "claim_text": "At Q1 Lloyds raised 2026 NII guidance to greater than £14.9 billion from around £14.9 billion.",
+    "quote": "lifted its 2026 underlying net interest income guidance to greater than £14.9 billion, up from a previous “around £14.9 billion” anchor",
+    "speaker": null,
+    "status": "forward_looking",
+    "values": {
+      "nii_2026_min_gbp_billion": 14.9
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "web_evidence_id": "web-001"
+  },
+  {
+    "id": "claim-149",
+    "category": "regulatory_legal_macro",
+    "classification": "reported_fact",
+    "claim_text": "At Q1 Lloyds cut its UK GDP growth assumption to 0.5% from 1.2% and raised its unemployment forecast to 5.6% by Q4.",
+    "quote": "UK gross domestic product growth has been cut to 0.5% from 1.2%, consumer price inflation is now expected to peak around 3.5%, unemployment is forecast to reach 5.6% by the fourth quarter against 5.3% previously",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "gdp_growth_new_pct": 0.5,
+      "gdp_growth_prior_pct": 1.2,
+      "cpi_peak_pct_approx": 3.5,
+      "unemployment_forecast_pct": 5.6,
+      "unemployment_prior_pct": 5.3
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "web_evidence_id": "web-001"
+  },
+  {
+    "id": "claim-150",
+    "category": "regulatory_legal_macro",
+    "classification": "reported_fact",
+    "claim_text": "Lloyds made no change to its £1.95 billion motor finance commission provision after the FCA published final redress rules.",
+    "quote": "Lloyds Banking Group plc made no change to its £1.95 billion motor finance commission provision following the Financial Conduct Authority’s publication of final redress scheme rules.",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "motor_finance_provision_gbp_billion": 1.95
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "web_evidence_id": "web-001"
+  },
+  {
+    "id": "claim-151",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "For Q1 2026, Lloyds' ADR EPS of $0.13 beat a $0.11 consensus and revenue of $6.87 billion beat a $6.60 billion estimate.",
+    "quote": "The company reported EPS of $0.13 versus the $0.11 consensus estimate, while revenue of $6.87 billion topped the $6.60 billion estimate by $262.30 million.",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "q1_adr_eps_usd": 0.13,
+      "q1_consensus_eps_usd": 0.11,
+      "q1_revenue_usd_billion": 6.87,
+      "q1_revenue_estimate_usd_billion": 6.6
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [
+      "US ADR (NYSE: LYG) figures in dollars, not the London listing's sterling figures."
+    ],
+    "web_evidence_id": "web-006",
+    "period": "3 months to 31 Mar 2026"
+  },
+  {
+    "id": "claim-152",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Pre-results consensus for 2026 revenue averaged £21.83 billion, from 6 analysts.",
+    "quote": "| No. of analysts | 1 | 1 | 6 | 6 | | Avg. Estimate | 5.4B | 5.63B | 21.83B | 23.43B |",
+    "speaker": null,
+    "status": "forward_looking",
+    "values": {
+      "consensus_q2_revenue_gbp_billion": 5.4,
+      "consensus_fy26_revenue_gbp_billion": 21.83,
+      "consensus_fy27_revenue_gbp_billion": 23.43
+    },
+    "confidence": 0.65,
+    "inferred_from": [],
+    "caveats": [
+      "Yahoo Finance page; its 'current quarter' is June 2026 and its earnings history stops at 31 Mar 2026, so the snapshot predates the 30 Jul results, but the page is undated.",
+      "Yahoo's 'revenue' is a data-vendor definition that need not match Lloyds' net income measure (management guides to a revenue base of circa £20 billion for 2026), so the two should not be compared directly."
+    ],
+    "web_evidence_id": "web-011"
+  },
+  {
+    "id": "claim-153",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "NatWest reported attributable profit of £3.0 billion and a RoTE of 19.7% for the first half of 2026.",
+    "quote": "We delivered a strong financial performance in H1 2026, with attributable profit of £3.0 billion and Return on Tangible Equity (RoTE) of 19.7%.",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "nwg_attributable_profit_gbp_billion": 3.0,
+      "nwg_rote_pct": 19.7
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [
+      "NatWest reported on 31 Jul 2026, the day after Lloyds' event, so this was not known to Lloyds management on the call."
+    ],
+    "web_evidence_id": "web-002",
+    "period": "6 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-154",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "NatWest's total income excluding notable items rose 8.9% to £8,672 million in the first half.",
+    "quote": "Total income excluding notable items (1) £8,672m £7,962m 8.9%",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "nwg_income_gbp_million": 8672,
+      "nwg_income_prior_gbp_million": 7962,
+      "nwg_income_growth_pct": 8.9
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [
+      "Reported the day after Lloyds' event."
+    ],
+    "web_evidence_id": "web-002",
+    "period": "6 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-155",
+    "category": "costs_margins_efficiency",
+    "classification": "reported_fact",
+    "claim_text": "NatWest's first-half cost:income ratio excluding litigation and conduct was 46.0%.",
+    "quote": "Cost:income ratio (excl. litigation and conduct) (1) 46.0%",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "nwg_cost_income_pct": 46.0
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [
+      "Reported the day after Lloyds' event; excludes litigation and conduct costs."
+    ],
+    "web_evidence_id": "web-002",
+    "period": "6 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-156",
+    "category": "balance_sheet_solvency",
+    "classification": "reported_fact",
+    "claim_text": "NatWest's CET1 ratio was 13.2%, 110 basis points below the comparative 14.3%.",
+    "quote": "(CET1) ratio (6) 13.2% 14.3% (110bps)",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "nwg_cet1_pct": 13.2,
+      "nwg_cet1_prior_pct": 14.3
+    },
+    "confidence": 0.8,
+    "inferred_from": [],
+    "caveats": [
+      "Reported the day after Lloyds' event."
+    ],
+    "web_evidence_id": "web-002",
+    "period": "as of 30 Jun 2026"
+  },
+  {
+    "id": "claim-157",
+    "category": "current_guidance",
+    "classification": "management_guidance",
+    "claim_text": "NatWest guides to a 2026 RoTE greater than 19%.",
+    "quote": "• Return on Tangible Equity greater than 19%.",
+    "speaker": null,
+    "status": "forward_looking",
+    "values": {
+      "nwg_rote_2026_min_pct": 19
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [
+      "Reported the day after Lloyds' event."
+    ],
+    "web_evidence_id": "web-002"
+  },
+  {
+    "id": "claim-158",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Barclays reported a RoTE of 14.8% for the first half of 2026 and announced £2.3 billion of total capital distributions.",
+    "quote": "Barclays delivered a return on tangible equity (RoTE) of 14.8% in H126, announced £2.3bn total capital distributions",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "barc_rote_pct": 14.8,
+      "barc_distributions_gbp_billion": 2.3
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "web_evidence_id": "web-013",
+    "period": "6 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-159",
+    "category": "balance_sheet_solvency",
+    "classification": "reported_fact",
+    "claim_text": "Barclays' CET1 ratio was 14.3% and it announced a buyback of up to £1.0 billion.",
+    "quote": "Strong CET1 ratio of 14.3% and announced intention to initiate a share buyback of up to £1.0bn",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "barc_cet1_pct": 14.3,
+      "barc_buyback_gbp_billion": 1.0
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "web_evidence_id": "web-013",
+    "period": "as of 30 Jun 2026"
+  },
+  {
+    "id": "claim-160",
+    "category": "current_guidance",
+    "classification": "management_guidance",
+    "claim_text": "Barclays raised its 2026 group income target to circa £31.5 billion from circa £31 billion.",
+    "quote": "2026 Group income target increased to c.£31.5bn (from c.£31bn)",
+    "speaker": null,
+    "status": "forward_looking",
+    "values": {
+      "barc_income_target_gbp_billion": 31.5,
+      "barc_prior_target_gbp_billion": 31
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "web_evidence_id": "web-013"
+  },
+  {
+    "id": "claim-161",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "HSBC's profit before tax rose 23% to $19.5 billion in the first half of 2026.",
+    "quote": "Profit before tax increased by $3.7bn or 23% to $19.5bn compared with 1H25.",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "hsbc_pbt_usd_billion": 19.5,
+      "hsbc_pbt_growth_pct": 23
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [
+      "HSBC reported on 4 Aug 2026, after Lloyds' event."
+    ],
+    "web_evidence_id": "web-009",
+    "period": "6 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-162",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "HSBC revenue rose 11% to $37.7 billion in the first half of 2026.",
+    "quote": "Revenue increased by $3.6bn or 11% to $37.7bn compared with 1H25",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "hsbc_revenue_usd_billion": 37.7,
+      "hsbc_revenue_growth_pct": 11
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [
+      "Reported after Lloyds' event; includes notable items and FX effects."
+    ],
+    "web_evidence_id": "web-009",
+    "period": "6 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-163",
+    "category": "balance_sheet_solvency",
+    "classification": "reported_fact",
+    "claim_text": "HSBC's CET1 ratio was 14.1%, down 0.8 points since December 2025.",
+    "quote": "Common equity tier 1 (‘CET1’) capital ratio of 14.1% decreased by 0.8 percentage points compared with 31 December 2025",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "hsbc_cet1_pct": 14.1,
+      "hsbc_cet1_decrease_pts": 0.8
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [
+      "Reported after Lloyds' event."
+    ],
+    "web_evidence_id": "web-009",
+    "period": "as of 30 Jun 2026"
+  },
+  {
+    "id": "claim-164",
+    "category": "costs_margins_efficiency",
+    "classification": "reported_fact",
+    "claim_text": "HSBC's first-half cost efficiency ratio was 46.2%.",
+    "quote": "Cost efficiency ratio (%) | 46.2",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "hsbc_cost_efficiency_pct": 46.2
+    },
+    "confidence": 0.8,
+    "inferred_from": [],
+    "caveats": [
+      "Reported after Lloyds' event.",
+      "Read from a two-column table row; the 46.2 is the first-half 2026 column, which the quote alone does not label."
+    ],
+    "web_evidence_id": "web-014",
+    "period": "6 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-165",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Santander's revenue rose 6% to €30.8 billion in the first half of 2026.",
+    "quote": "Revenue rose 6% to €30.8 billion",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "san_revenue_eur_billion": 30.8,
+      "san_revenue_growth_pct": 6
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "web_evidence_id": "web-005",
+    "period": "6 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-166",
+    "category": "balance_sheet_solvency",
+    "classification": "reported_fact",
+    "claim_text": "Santander's CET1 ratio stood at 14.0% after completing the TSB acquisition.",
+    "quote": "CET1 ratio stood at 14.0% after completing the acquisition of TSB",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "san_cet1_pct": 14.0
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "web_evidence_id": "web-015",
+    "period": "as of 30 Jun 2026"
+  },
+  {
+    "id": "claim-167",
+    "category": "costs_margins_efficiency",
+    "classification": "reported_fact",
+    "claim_text": "Santander's efficiency ratio improved to 42.8%, 2.9 points better than a year ago.",
+    "quote": "the efficiency ratio improved to 42.8%, 2.9 percentage points better than a year ago.",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "san_efficiency_pct": 42.8,
+      "san_efficiency_improvement_pts": 2.9
+    },
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "web_evidence_id": "web-015",
+    "period": "6 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-168",
+    "category": "risk",
+    "classification": "reported_fact",
+    "claim_text": "Santander completed its TSB acquisition on 30 April, adding over four million UK customers.",
+    "quote": "Santander completed the acquisition of TSBon 30 April, strengthening its UK franchise with over four million customers",
+    "speaker": null,
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [
+      "Santander's UK consolidation adds a scaled competitor in Lloyds' core retail market."
+    ],
+    "web_evidence_id": "web-015"
+  },
+  {
+    "id": "claim-169",
+    "category": "reported_financial_performance",
+    "classification": "reported_fact",
+    "claim_text": "Santander's underlying RoTE was 15.6% in the first half of 2026.",
+    "quote": "Underlying RoTE 15.6% 14.9%",
+    "speaker": null,
+    "status": "reported",
+    "values": {
+      "san_rote_pct": 15.6,
+      "san_rote_prior_pct": 14.9
+    },
+    "confidence": 0.8,
+    "inferred_from": [],
+    "caveats": [],
+    "web_evidence_id": "web-010",
+    "period": "6 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-170",
+    "category": "reported_financial_performance",
+    "classification": "analytical_inference",
+    "claim_text": "Lloyds' first-half RoTE was above Barclays' and Santander's underlying RoTE but below NatWest's.",
+    "quote": "return on tangibl e equity of 17.1%",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [
+      "claim-011",
+      "claim-158",
+      "claim-169",
+      "claim-153"
+    ],
+    "caveats": [
+      "Santander's figure is underlying RoTE for a euro-based group; NatWest reported a day after Lloyds."
+    ],
+    "segment_id": "seg-0004",
+    "period": "6 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-171",
+    "category": "balance_sheet_solvency",
+    "classification": "analytical_inference",
+    "claim_text": "Lloyds' pro forma CET1 ratio was the lowest of the five banks compared, consistent with its stated plan to pay down to its CET1 target.",
+    "quote": "pro forma CET1 ratio after distributions of 13.1%",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [
+      "claim-015",
+      "claim-159",
+      "claim-156",
+      "claim-163",
+      "claim-166",
+      "claim-041"
+    ],
+    "caveats": [
+      "Lloyds' figure is pro forma after distributions; peers' targets and bases differ (HSBC 14-14.5%, Barclays 13-14%)."
+    ],
+    "segment_id": "seg-0004",
+    "period": "as of 30 Jun 2026"
+  },
+  {
+    "id": "claim-172",
+    "category": "costs_margins_efficiency",
+    "classification": "analytical_inference",
+    "claim_text": "Lloyds' first-half cost:income ratio was higher than NatWest's, HSBC's and Santander's.",
+    "quote": "a cost to income rat io of 50.4% in H1",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [
+      "claim-034",
+      "claim-155",
+      "claim-164",
+      "claim-167"
+    ],
+    "caveats": [
+      "Definitions differ: NatWest excludes litigation and conduct, HSBC and Santander report cost efficiency ratios on their own bases."
+    ],
+    "segment_id": "seg-0004",
+    "period": "6 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-173",
+    "category": "reported_financial_performance",
+    "classification": "analytical_inference",
+    "claim_text": "Lloyds' first-half net income growth was in line with NatWest's income growth, above Santander's and below HSBC's revenue growth.",
+    "quote": "up 9% on the previous year",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [
+      "claim-012",
+      "claim-154",
+      "claim-165",
+      "claim-162"
+    ],
+    "caveats": [
+      "Income measures differ by bank (net income, income ex notable items, revenue including notable items)."
+    ],
+    "segment_id": "seg-0004",
+    "period": "6 months to 30 Jun 2026"
+  },
+  {
+    "id": "claim-174",
+    "category": "current_guidance",
+    "classification": "analytical_inference",
+    "claim_text": "The 2028 RoTE target sat below analyst consensus, which management attributed to prudent assumptions and a larger equity base.",
+    "quote": "It wa s a bit light versus consensus",
+    "speaker": "Ben Toms, RBC",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [
+      "claim-090",
+      "claim-080",
+      "claim-091",
+      "claim-092"
+    ],
+    "caveats": [],
+    "segment_id": "seg-0013"
+  },
+  {
+    "id": "claim-175",
+    "category": "guidance_change",
+    "classification": "analytical_inference",
+    "claim_text": "The 2026 NII, RoTE and capital generation guidance set at Q1 was reiterated rather than raised at the half year.",
+    "quote": "we continue to expect net interest income for 2026 to be greater than £14.9 billion.",
+    "speaker": "William Chalmers",
+    "status": "forward_looking",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [
+      "claim-028",
+      "claim-148",
+      "claim-039",
+      "claim-041"
+    ],
+    "caveats": [],
+    "segment_id": "seg-0004",
+    "period": "12 months to 31 Dec 2026"
+  },
+  {
+    "id": "claim-176",
+    "category": "operational_performance",
+    "classification": "management_opinion",
+    "claim_text": "Chalmers said there is ambition in both international businesses but within the context of the existing UK premise of the franchise.",
+    "quote": "And we have ambition in both, but it is within the context of the existing UK premise of the overall franchise.",
+    "speaker": "William Chalmers",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0027"
+  },
+  {
+    "id": "claim-177",
+    "category": "qa_insight",
+    "classification": "management_opinion",
+    "claim_text": "Nunn restated the online question as consensus RWA growth seeming to be below what Lloyds assumes.",
+    "quote": "And the question is the RWA growth of consensus seems to be below where we are assuming.",
+    "speaker": "Charlie Nunn",
+    "status": "reported",
+    "values": {},
+    "confidence": 0.9,
+    "inferred_from": [],
+    "caveats": [],
+    "segment_id": "seg-0040"
+  }
+]

@@ -1,12 +1,12 @@
 {
-  "url": "https://www.sc.com/en/investors/financial-results/half-year/",
-  "title": "Half Year Results 2026 | Standard Chartered",
+  "url": "https://www.santander.com/content/dam/santander-com/en/documentos/informe-trimestral-accionistas/2026/ita-2nd-quarterly-2026-en.pdf",
+  "title": "Quarterly Shareholder Report H1\u201926",
   "score": null,
   "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:Standard Chartered",
-  "_temporal_status": "unchecked",
+  "_select_key": "peer:Santander",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "Standard Chartered 2026-h1 earnings results revenue growth",
-  "_retrieved_at": "2026-09-01T22:04:12Z"
+  "_query": "Santander 2026-h1 earnings results revenue growth",
+  "_retrieved_at": "2026-10-14T06:35:36Z"
 }

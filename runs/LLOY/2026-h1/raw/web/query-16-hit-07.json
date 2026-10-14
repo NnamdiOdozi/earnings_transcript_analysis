@@ -1,12 +1,12 @@
 {
-  "url": "https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2026/interim/pdfs/hsbc-holdings-plc/260804-hsbc-holdings-plc-interim-results-2026-presentation-to-investors-and-analysts.pdf",
-  "title": "Interim Results 2026 Presentation to Investors and Analysts",
+  "url": "https://content.bsx.com/CompanyDocuments/1077223879/04AUG26%20HSBC%20Holdings%202Q26%20Data%20Pack%20(FINAL%20RNS).pdf",
+  "title": "HSBC HOLDINGS PLC",
   "score": null,
   "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:HSBC Holdings",
-  "_temporal_status": "unchecked",
+  "_select_key": "peer:HSBC",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "HSBC Holdings 2026-h1 earnings results revenue growth",
-  "_retrieved_at": "2026-09-01T22:04:03Z"
+  "_query": "HSBC 2026-h1 earnings results revenue growth",
+  "_retrieved_at": "2026-10-14T06:35:32Z"
 }

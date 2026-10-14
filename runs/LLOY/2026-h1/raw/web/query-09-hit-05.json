@@ -1,12 +1,12 @@
 {
-  "url": "https://in.marketscreener.com/news/natwest-raises-guidance-and-brings-forward-share-buyback-plans-ce7f50dbdd8af12d",
-  "title": "NatWest Raises Guidance and Brings Forward Share-Buyback Plans | MarketScreener India",
+  "url": "https://au.investing.com/news/stock-market-news/earnings-call-transcript-natwest-groups-q1-2026-shows-strong-eps-revenue-miss-93CH-4399407",
+  "title": "Earnings call transcript: NatWest Group\u2019s Q1 2026 shows strong EPS, revenue miss By Investing.com",
   "score": null,
-  "published_date": "2026-07-31T00:00:00.000Z",
+  "published_date": "2026-05-01T00:00:00.000Z",
   "_class": "peer",
-  "_select_key": "peer:NatWest Group",
-  "_temporal_status": "unchecked",
+  "_select_key": "peer:NatWest",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "NatWest Group 2026-h1 analyst earnings reaction results",
-  "_retrieved_at": "2026-09-01T22:03:54Z"
+  "_query": "NatWest 2026-h1 analyst earnings reaction results",
+  "_retrieved_at": "2026-10-14T06:35:31Z"
 }

@@ -1,12 +1,12 @@
 {
-  "url": "https://www.sc.com/en/press-release/first-quarter-2026-results/",
-  "title": "First Quarter 2026 Results | Standard Chartered",
+  "url": "https://www.santander.com/content/dam/santander-com/en/documentos/resultados-trimestrales/2026/q2/rt-q2-2026-banco-santander-earnings-presentation-en.pdf",
+  "title": "H1'26 Earnings Presentation | Banco Santander",
   "score": null,
-  "published_date": "2026-04-30T00:00:00.000Z",
+  "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:Standard Chartered",
-  "_temporal_status": "unchecked",
+  "_select_key": "peer:Santander",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "Standard Chartered 2026-h1 earnings guidance outlook",
-  "_retrieved_at": "2026-09-01T22:04:14Z"
+  "_query": "Santander 2026-h1 earnings guidance outlook",
+  "_retrieved_at": "2026-10-14T06:35:36Z"
 }

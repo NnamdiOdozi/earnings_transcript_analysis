@@ -1,12 +1,12 @@
 {
-  "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-hsbc-beats-q2-2026-estimates-as-buybacks-resume-93CH-4834790",
-  "title": "Earnings call transcript: HSBC beats Q2 2026 estimates as ...",
+  "url": "https://everyticker.com/quote/HSBC/news/hsbc-reports-q1-2026-earnings-pretax-profit-slightly-below-estimates-credit-losses-rise",
+  "title": "HSBC Reports Q1\u202f2026 Earnings: Pre\u2011Tax Profit Slightly Below Estimates, Credit Losses Rise - HSBC News - EveryTicker",
   "score": null,
-  "published_date": "2026-08-04T00:00:00.000Z",
+  "published_date": "2026-05-05T00:00:00.000Z",
   "_class": "peer",
-  "_select_key": "peer:HSBC Holdings",
-  "_temporal_status": "unchecked",
+  "_select_key": "peer:HSBC",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "HSBC Holdings 2026-h1 analyst earnings reaction results",
-  "_retrieved_at": "2026-09-01T22:04:10Z"
+  "_query": "HSBC 2026-h1 analyst earnings reaction results",
+  "_retrieved_at": "2026-10-14T06:35:33Z"
 }

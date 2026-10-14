@@ -59,10 +59,17 @@ def _find_number_tokens(text: str) -> list[str]:
 # 4-digit year is only stripped when it carries no money cue: not preceded by a currency
 # symbol, and not followed by a magnitude unit (%, million/billion/thousand, m/bn/k).
 _MAGNITUDE_UNIT = r"%|million|billion|thousand|bps|units|m|bn|k"
+# Also strips half-year labels (H1, 2H26), year ranges ("2022-25", stripped whole -- if only
+# the first year went, the leftover "-25" read as a negative figure) and identifiers that
+# glue letters to a digit (CET1, D2C), except currency codes, so "GBP50m" still grounds.
+_CURRENCY_CODE = r"USD|GBP|EUR|JPY|CHF|CAD|AUD|CNY|HKD|SGD"
 _PERIOD_TOKEN_RE = re.compile(
     r"\bFY\s?20\d{2}\b"  # FY2027 / FY 2027
     r"|\bQ[1-4]\b"  # Q1..Q4
-    rf"|(?<![$€£])\b(?:19|20)\d{{2}}\b(?!\s*(?:{_MAGNITUDE_UNIT})\b)",  # bare year, no money cue
+    r"|\bH[12]\b|\b[12]H(?:\d{2})?\b"  # H1, H2, 1H26, 2H26
+    rf"|(?<![$€£])\b(?:19|20)\d{{2}}\s?[-–]\s?(?:(?:19|20)\d{{2}}|\d{{2}})\b(?!\s*(?:{_MAGNITUDE_UNIT})\b)"  # 2022-25
+    rf"|(?<![$€£])\b(?:19|20)\d{{2}}\b(?!\s*(?:{_MAGNITUDE_UNIT})\b)"  # bare year, no money cue
+    rf"|\b(?!(?:{_CURRENCY_CODE})\d)[A-Z]+\d+[A-Z]*\b",  # CET1, D2C -- not GBP50m
     re.IGNORECASE,
 )
 

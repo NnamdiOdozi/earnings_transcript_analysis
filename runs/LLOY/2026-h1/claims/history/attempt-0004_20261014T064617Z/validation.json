@@ -1,0 +1,25 @@
+{
+  "ok": true,
+  "checked_claims": 177,
+  "issues": [],
+  "warnings": [],
+  "validated_at": "2026-10-14T06:46:17Z",
+  "tool_decisions": {
+    "price_lookup": {
+      "decision": "not_used",
+      "reason": "No price series needed: results, guidance, consensus and peer figures come from the transcript and extracted web evidence."
+    }
+  },
+  "agent_provenance": {
+    "agent_name": "Claude Code",
+    "model": "claude-opus-5-5",
+    "reasoning_effort": "unknown"
+  },
+  "input_hashes": {
+    "claims.json": "d482b5dbb20e48ffe6165e8830a5a905d2505800773f57a1d397feb8ae6a202e",
+    "transcript.jsonl": "62a655e8214f0a92b525c08dbca06532b93139450dd4cadf3dc057f483e2a4f5",
+    "financials.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "manifest.json": "20772de9119e33d3fef2c0f2764251767afef42f3e1ccd31e36836b8d841754d",
+    "evidence/web-evidence.jsonl": "ffaf6774faa3a1d4873a56629d6f6494e58c4b68cdcaa4f48c549db7f3a8442b"
+  }
+}

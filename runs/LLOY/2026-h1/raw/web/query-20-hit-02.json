@@ -1,12 +1,12 @@
 {
-  "url": "https://finance.yahoo.com/quote/HSBC/earnings/HSBC-Q2-2026-earnings_call-571717.html",
-  "title": "HSBC Holdings, plc. (HSBC) Q2 FY2026 earnings call transcript",
+  "url": "https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2026/1q/pdfs/hsbc-holdings-plc/250506-1q-2026-earnings-release-investors-and-analysts-call-transcript.pdf?download=1",
+  "title": "1Q 2026 Earnings Release Presentation to Investors and Analysts - Transcript",
   "score": null,
-  "published_date": "2026-08-04T00:00:00.000Z",
+  "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:HSBC Holdings",
-  "_temporal_status": "unchecked",
+  "_select_key": "peer:HSBC",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "HSBC Holdings earnings call key trends 2026-h1",
-  "_retrieved_at": "2026-09-01T22:04:11Z"
+  "_query": "HSBC earnings call key trends 2026-h1",
+  "_retrieved_at": "2026-10-14T06:35:33Z"
 }

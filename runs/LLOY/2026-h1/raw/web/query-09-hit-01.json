@@ -1,12 +1,12 @@
 {
-  "url": "https://www.lse.co.uk/news/natwest-lifts-2026-guidance-following-evelyn-deal-and-earnings-beat-ddzvdxmlfzk5srn.html",
-  "title": "NatWest lifts 2026 guidance following Evelyn deal and earnings beat | Financial News",
+  "url": "https://www.hl.co.uk/shares/share-research/natwest-q1-results-guidance-nudged-higher",
+  "title": "NatWest (Q1 Results): guidance nudged higher | HL",
   "score": null,
-  "published_date": "2026-07-31T00:00:00.000Z",
+  "published_date": "2026-05-01T00:00:00.000Z",
   "_class": "peer",
-  "_select_key": "peer:NatWest Group",
-  "_temporal_status": "unchecked",
+  "_select_key": "peer:NatWest",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "NatWest Group 2026-h1 analyst earnings reaction results",
-  "_retrieved_at": "2026-09-01T22:03:54Z"
+  "_query": "NatWest 2026-h1 analyst earnings reaction results",
+  "_retrieved_at": "2026-10-14T06:35:31Z"
 }

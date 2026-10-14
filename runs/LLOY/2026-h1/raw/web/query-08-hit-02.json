@@ -1,12 +1,12 @@
 {
-  "url": "https://www.stocktitan.net/sec-filings/NWG/6-k-nat-west-group-plc-current-report-foreign-issuer-66711cbd7661.html",
-  "title": "NatWest Group posts \u00a33.0bn profit in H1 2026 | NWG SEC Filing - Form 6-K",
+  "url": "https://www.natwestgroup.com/news-and-insights/latest-stories/financial-reporting/2026/may/q1-2026-natwest-group-results.html",
+  "title": "Q1 2026 NatWest Group Results | NatWest Group",
   "score": null,
-  "published_date": "2026-07-31T00:00:00.000Z",
+  "published_date": "2026-05-01T00:00:00.000Z",
   "_class": "peer",
-  "_select_key": "peer:NatWest Group",
-  "_temporal_status": "unchecked",
+  "_select_key": "peer:NatWest",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "NatWest Group 2026-h1 earnings guidance outlook",
-  "_retrieved_at": "2026-09-01T22:03:54Z"
+  "_query": "NatWest 2026-h1 earnings guidance outlook",
+  "_retrieved_at": "2026-10-14T06:35:31Z"
 }

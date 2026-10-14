@@ -1,12 +1,12 @@
 {
-  "url": "https://www.lloydsbankinggroup.com/investors.html",
-  "title": "Investors - Lloyds Banking Group plc",
+  "url": "https://www.sec.gov/Archives/edgar/data/1160106/000165495426006988/a4589o.htm",
+  "title": "Lloyds Banking Group plc Form 6-K filed July 30, 2026",
   "score": null,
-  "published_date": null,
+  "published_date": "2026-07-30T00:00:00.000Z",
   "_class": "peer",
-  "_select_key": "peer:HSBC Holdings",
-  "_temporal_status": "unchecked",
+  "_select_key": "peer:HSBC",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "HSBC Holdings quarterly results versus Lloyds Banking Group plc LLOY",
-  "_retrieved_at": "2026-09-01T22:04:08Z"
+  "_query": "HSBC quarterly results versus Lloyds Banking Group plc LLOY",
+  "_retrieved_at": "2026-10-14T06:35:32Z"
 }

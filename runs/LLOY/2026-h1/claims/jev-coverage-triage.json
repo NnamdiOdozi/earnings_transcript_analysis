@@ -1,0 +1,70 @@
+{
+  "generated_at": "2026-10-14T06:43:36Z",
+  "check_mode": "coverage",
+  "model": "typesafe/jev-1.13",
+  "thresholds": {
+    "auto_accept": 0.7,
+    "alternative_probability_floor": 0.2,
+    "choice_confidence_floor": 0.6,
+    "score_shortfall_margin": 0.35
+  },
+  "counts": {
+    "audited": 12,
+    "flagged": 3,
+    "defect": 2,
+    "check": 1
+  },
+  "items": [
+    {
+      "key": "seg-0027::segment_materiality",
+      "subject": "seg-0027",
+      "claim_id": "seg-0027",
+      "generation_id": "gen-dec-1791960214-yuTwLCJNNY7NHOkWBO4R",
+      "question": "segment_materiality",
+      "primitive": "choice",
+      "asked": "Judge only the SEGMENT UNDER REVIEW, reading the preceding turns for context. Does that segment contribute anything an equity analyst should record as a claim about the business? An answer that only makes sense beside the question before it is still material if the answer itself carries the content.",
+      "reading": "material",
+      "probabilities": {
+        "material": 0.61,
+        "immaterial": 0.39
+      },
+      "confidence": 0.22,
+      "severity": "defect",
+      "why": "Jev's best reading is 'material' at 61%, not the 'immaterial' the record implies."
+    },
+    {
+      "key": "seg-0040::segment_materiality",
+      "subject": "seg-0040",
+      "claim_id": "seg-0040",
+      "generation_id": "gen-dec-1791960216-qA12uLQMXimjwPBDBPka",
+      "question": "segment_materiality",
+      "primitive": "choice",
+      "asked": "Judge only the SEGMENT UNDER REVIEW, reading the preceding turns for context. Does that segment contribute anything an equity analyst should record as a claim about the business? An answer that only makes sense beside the question before it is still material if the answer itself carries the content.",
+      "reading": "material",
+      "probabilities": {
+        "material": 0.8,
+        "immaterial": 0.2
+      },
+      "confidence": 0.6,
+      "severity": "defect",
+      "why": "Jev's best reading is 'material' at 80%, not the 'immaterial' the record implies."
+    },
+    {
+      "key": "seg-0039::segment_materiality",
+      "subject": "seg-0039",
+      "claim_id": "seg-0039",
+      "generation_id": "gen-dec-1791960216-7bN1OimZNasFHcIV1Rpv",
+      "question": "segment_materiality",
+      "primitive": "choice",
+      "asked": "Judge only the SEGMENT UNDER REVIEW, reading the preceding turns for context. Does that segment contribute anything an equity analyst should record as a claim about the business? An answer that only makes sense beside the question before it is still material if the answer itself carries the content.",
+      "reading": "immaterial",
+      "probabilities": {
+        "material": 0.44,
+        "immaterial": 0.56
+      },
+      "confidence": 0.12,
+      "severity": "check",
+      "why": "Jev settled on 'immaterial' at 56% but still put 44% on 'material'."
+    }
+  ]
+}

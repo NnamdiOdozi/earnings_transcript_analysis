@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "validated_at": "2026-10-14T06:47:43Z",
+  "errors": [],
+  "warnings": [],
+  "outlook_brief_sha256": "98576e9bd0266d67606d2ff17f0c1be2de4450edc3ce55e4b9ab8c9b9d0ee238",
+  "claims_sha256": "d482b5dbb20e48ffe6165e8830a5a905d2505800773f57a1d397feb8ae6a202e",
+  "agent_provenance": {
+    "agent_name": "Claude Code",
+    "model": "claude-opus-5-5",
+    "reasoning_effort": "unknown"
+  }
+}

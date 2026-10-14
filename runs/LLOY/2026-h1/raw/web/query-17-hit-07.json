@@ -1,12 +1,12 @@
 {
-  "url": "https://markets.ft.com/data/announce/detail?dockey=600-202607300225DGAP____CORPNEWS_corporate_2374012_en-1",
-  "title": "EQS-News: 2026 half year results \u2013 Company Announcement - FT.com",
+  "url": "https://content.bsx.com/CompanyDocuments/1077223879/04AUG26%20HSBC%20Holdings%202Q26%20Data%20Pack%20(FINAL%20RNS).pdf",
+  "title": "HSBC HOLDINGS PLC",
   "score": null,
   "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:HSBC Holdings",
-  "_temporal_status": "unchecked",
+  "_select_key": "peer:HSBC",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "HSBC Holdings quarterly results versus Lloyds Banking Group plc LLOY",
-  "_retrieved_at": "2026-09-01T22:04:08Z"
+  "_query": "HSBC quarterly results versus Lloyds Banking Group plc LLOY",
+  "_retrieved_at": "2026-10-14T06:35:32Z"
 }

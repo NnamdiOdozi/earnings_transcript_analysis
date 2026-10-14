@@ -1,0 +1,703 @@
+{
+  "generated_at": "2026-10-14T06:48:40Z",
+  "check_mode": "citations",
+  "model": "typesafe/jev-1.13",
+  "thresholds": {
+    "auto_accept": 0.7,
+    "alternative_probability_floor": 0.2,
+    "choice_confidence_floor": 0.6,
+    "score_shortfall_margin": 0.35
+  },
+  "counts": {
+    "audited": 96,
+    "flagged": 38,
+    "defect": 19,
+    "check": 19
+  },
+  "items": [
+    {
+      "key": "claim-011@e56a49ed::citation_supports_passage",
+      "subject": "claim-011@e56a49ed",
+      "claim_id": "claim-011",
+      "generation_id": "gen-dec-1791960498-O1Gwy4aqm6i0lEUT8odI",
+      "question": "citation_supports_passage",
+      "primitive": "choice",
+      "asked": "The passage cites this claim. How does the claim relate to the specific point the passage uses it for?",
+      "reading": "says_nothing",
+      "probabilities": {
+        "supports": 0.21,
+        "contradicts": 0,
+        "says_nothing": 0.79
+      },
+      "confidence": 0.69,
+      "severity": "defect",
+      "why": "Jev's best reading is 'says_nothing' at 79%, not the 'supports' the record implies."
+    },
+    {
+      "key": "claim-014@39e773c4::citation_supports_passage",
+      "subject": "claim-014@39e773c4",
+      "claim_id": "claim-014",
+      "generation_id": "gen-dec-1791960497-sHriZl6mYzq6PtHsYi2g",
+      "question": "citation_supports_passage",
+      "primitive": "choice",
+      "asked": "The passage cites this claim. How does the claim relate to the specific point the passage uses it for?",
+      "reading": "says_nothing",
+      "probabilities": {
+        "supports": 0.45,
+        "contradicts": 0.01,
+        "says_nothing": 0.54
+      },
+      "confidence": 0.31,
+      "severity": "defect",
+      "why": "Jev's best reading is 'says_nothing' at 54%, not the 'supports' the record implies."
+    },
+    {
+      "key": "claim-015@e56a49ed::citation_supports_passage",
+      "subject": "claim-015@e56a49ed",
+      "claim_id": "claim-015",
+      "generation_id": "gen-dec-1791960503-WOf9nGsQgh1oRhdrWwSK",
+      "question": "citation_supports_passage",
+      "primitive": "choice",
+      "asked": "The passage cites this claim. How does the claim relate to the specific point the passage uses it for?",
+      "reading": "says_nothing",
+      "probabilities": {
+        "supports": 0.47,
+        "contradicts": 0.02,
+        "says_nothing": 0.51
+      },
+      "confidence": 0.27,
+      "severity": "defect",
+      "why": "Jev's best reading is 'says_nothing' at 51%, not the 'supports' the record implies."
+    },
+    {
+      "key": "claim-019@295667cf::citation_supports_passage",
+      "subject": "claim-019@295667cf",
+      "claim_id": "claim-019",
+      "generation_id": "gen-dec-1791960512-TPxK6ZL7oCGOhKgquUNO",
+      "question": "citation_supports_passage",
+      "primitive": "choice",
+      "asked": "The passage cites this claim. How does the claim relate to the specific point the passage uses it for?",
+      "reading": "contradicts",
+      "probabilities": {
+        "supports": 0.04,
+        "contradicts": 0.69,
+        "says_nothing": 0.27
+      },
+      "confidence": 0.53,
+      "severity": "defect",
+      "why": "Jev's best reading is 'contradicts' at 69%, not the 'supports' the record implies."
+    },
+    {
+      "key": "claim-028@5c9fdce3::citation_supports_passage",
+      "subject": "claim-028@5c9fdce3",
+      "claim_id": "claim-028",
+      "generation_id": "gen-dec-1791960506-tgDpqLZi4QwvQ5MF9jHV",
+      "question": "citation_supports_passage",
+      "primitive": "choice",
+      "asked": "The passage cites this claim. How does the claim relate to the specific point the passage uses it for?",
+      "reading": "says_nothing",
+      "probabilities": {
+        "supports": 0.43,
+        "contradicts": 0.07,
+        "says_nothing": 0.5
+      },
+      "confidence": 0.25,
+      "severity": "defect",
+      "why": "Jev's best reading is 'says_nothing' at 50%, not the 'supports' the record implies."
+    },
+    {
+      "key": "claim-029@52cb3cc4::citation_supports_passage",
+      "subject": "claim-029@52cb3cc4",
+      "claim_id": "claim-029",
+      "generation_id": "gen-dec-1791960494-h1nvn08hvRCCbE866bVp",
+      "question": "citation_supports_passage",
+      "primitive": "choice",
+      "asked": "The passage cites this claim. How does the claim relate to the specific point the passage uses it for?",
+      "reading": "says_nothing",
+      "probabilities": {
+        "supports": 0.36,
+        "contradicts": 0.01,
+        "says_nothing": 0.63
+      },
+      "confidence": 0.45,
+      "severity": "defect",
+      "why": "Jev's best reading is 'says_nothing' at 63%, not the 'supports' the record implies."
+    },
+    {
+      "key": "claim-034@e56a49ed::citation_supports_passage",
+      "subject": "claim-034@e56a49ed",
+      "claim_id": "claim-034",
+      "generation_id": "gen-dec-1791960500-SPnKNB2sQfSbp8IOd0oC",
+      "question": "citation_supports_passage",
+      "primitive": "choice",
+      "asked": "The passage cites this claim. How does the claim relate to the specific point the passage uses it for?",
+      "reading": "says_nothing",
+      "probabilities": {
+        "supports": 0.14,
+        "contradicts": 0,
+        "says_nothing": 0.86
+      },
+      "confidence": 0.79,
+      "severity": "defect",
+      "why": "Jev's best reading is 'says_nothing' at 86%, not the 'supports' the record implies."
+    },
+    {
+      "key": "claim-075@ebe3462d::citation_supports_passage",
+      "subject": "claim-075@ebe3462d",
+      "claim_id": "claim-075",
+      "generation_id": "gen-dec-1791960489-5dblEr2Xcf6m1gfb65f9",
+      "question": "citation_supports_passage",
+      "primitive": "choice",
+      "asked": "The passage cites this claim. How does the claim relate to the specific point the passage uses it for?",
+      "reading": "contradicts",
+      "probabilities": {
+        "supports": 0.27,
+        "contradicts": 0.69,
+        "says_nothing": 0.04
+      },
+      "confidence": 0.53,
+      "severity": "defect",
+      "why": "Jev's best reading is 'contradicts' at 69%, not the 'supports' the record implies."
+    },
+    {
+      "key": "claim-075@5c9fdce3::citation_supports_passage",
+      "subject": "claim-075@5c9fdce3",
+      "claim_id": "claim-075",
+      "generation_id": "gen-dec-1791960505-UqOz0IgBEtAmFiWwJ3FK",
+      "question": "citation_supports_passage",
+      "primitive": "choice",
+      "asked": "The passage cites this claim. How does the claim relate to the specific point the passage uses it for?",
+      "reading": "contradicts",
+      "probabilities": {
+        "supports": 0.27,
+        "contradicts": 0.71,
+        "says_nothing": 0.02
+      },
+      "confidence": 0.56,
+      "severity": "defect",
+      "why": "Jev's best reading is 'contradicts' at 71%, not the 'supports' the record implies."
+    },
+    {
+      "key": "claim-077@295667cf::citation_supports_passage",
+      "subject": "claim-077@295667cf",
+      "claim_id": "claim-077",
+      "generation_id": "gen-dec-1791960511-wfzzGnrbmdd03wPFmPxc",
+      "question": "citation_supports_passage",
+      "primitive": "choice",
+      "asked": "The passage cites this claim. How does the claim relate to the specific point the passage uses it for?",
+      "reading": "says_nothing",
+      "probabilities": {
+        "supports": 0.47,
+        "contradicts": 0.01,
+        "says_nothing": 0.52
+      },
+      "confidence": 0.28,
+      "severity": "defect",
+      "why": "Jev's best reading is 'says_nothing' at 52%, not the 'supports' the record implies."
+    },
+    {
+      "key": "claim-110@71c95645::citation_supports_passage",
+      "subject": "claim-110@71c95645",
+      "claim_id": "claim-110",
+      "generation_id": "gen-dec-1791960509-EwQfUJla8a1xMXbvB6n2",
+      "question": "citation_supports_passage",
+      "primitive": "choice",
+      "asked": "The passage cites this claim. How does the claim relate to the specific point the passage uses it for?",
+      "reading": "contradicts",
+      "probabilities": {
+        "supports": 0.32,
+        "contradicts": 0.54,
+        "says_nothing": 0.14
+      },
+      "confidence": 0.31,
+      "severity": "defect",
+      "why": "Jev's best reading is 'contradicts' at 54%, not the 'supports' the record implies."
+    },
+    {
+      "key": "claim-117@52cb3cc4::citation_supports_passage",
+      "subject": "claim-117@52cb3cc4",
+      "claim_id": "claim-117",
+      "generation_id": "gen-dec-1791960495-91NgTjDnsPuqDR8wcsht",
+      "question": "citation_supports_passage",
+      "primitive": "choice",
+      "asked": "The passage cites this claim. How does the claim relate to the specific point the passage uses it for?",
+      "reading": "says_nothing",
+      "probabilities": {
+        "supports": 0.25,
+        "contradicts": 0.22,
+        "says_nothing": 0.53
+      },
+      "confidence": 0.3,
+      "severity": "defect",
+      "why": "Jev's best reading is 'says_nothing' at 53%, not the 'supports' the record implies."
+    },
+    {
+      "key": "claim-125@295667cf::citation_supports_passage",
+      "subject": "claim-125@295667cf",
+      "claim_id": "claim-125",
+      "generation_id": "gen-dec-1791960511-zvYrUK6qA2vEhf9oYpUu",
+      "question": "citation_supports_passage",
+      "primitive": "choice",
+      "asked": "The passage cites this claim. How does the claim relate to the specific point the passage uses it for?",
+      "reading": "says_nothing",
+      "probabilities": {
+        "supports": 0,
+        "contradicts": 0.01,
+        "says_nothing": 0.99
+      },
+      "confidence": 0.98,
+      "severity": "defect",
+      "why": "Jev's best reading is 'says_nothing' at 99%, not the 'supports' the record implies."
+    },
+    {
+      "key": "claim-143@5c9fdce3::citation_supports_passage",
+      "subject": "claim-143@5c9fdce3",
+      "claim_id": "claim-143",
+      "generation_id": "gen-dec-1791960504-RhgxwEgmckTuoSARnAFJ",
+      "question": "citation_supports_passage",
+      "primitive": "choice",
+      "asked": "The passage cites this claim. How does the claim relate to the specific point the passage uses it for?",
+      "reading": "says_nothing",
+      "probabilities": {
+        "supports": 0.4,
+        "contradicts": 0.01,
+        "says_nothing": 0.59
+      },
+      "confidence": 0.38,
+      "severity": "defect",
+      "why": "Jev's best reading is 'says_nothing' at 59%, not the 'supports' the record implies."
+    },
+    {
+      "key": "claim-153@9ca60c37::citation_supports_passage",
+      "subject": "claim-153@9ca60c37",
+      "claim_id": "claim-153",
+      "generation_id": "gen-dec-1791960520-rbVjWAzNwtg4lhspg5sY",
+      "question": "citation_supports_passage",
+      "primitive": "choice",
+      "asked": "The passage cites this claim. How does the claim relate to the specific point the passage uses it for?",
+      "reading": "says_nothing",
+      "probabilities": {
+        "supports": 0.03,
+        "contradicts": 0,
+        "says_nothing": 0.97
+      },
+      "confidence": 0.95,
+      "severity": "defect",
+      "why": "Jev's best reading is 'says_nothing' at 97%, not the 'supports' the record implies."
+    },
+    {
+      "key": "claim-158@e56a49ed::citation_supports_passage",
+      "subject": "claim-158@e56a49ed",
+      "claim_id": "claim-158",
+      "generation_id": "gen-dec-1791960498-gUbwSNAh4CWYsI2KgcxL",
+      "question": "citation_supports_passage",
+      "primitive": "choice",
+      "asked": "The passage cites this claim. How does the claim relate to the specific point the passage uses it for?",
+      "reading": "says_nothing",
+      "probabilities": {
+        "supports": 0.37,
+        "contradicts": 0.05,
+        "says_nothing": 0.58
+      },
+      "confidence": 0.37,
+      "severity": "defect",
+      "why": "Jev's best reading is 'says_nothing' at 58%, not the 'supports' the record implies."
+    },
+    {
+      "key": "claim-167@e56a49ed::citation_supports_passage",
+      "subject": "claim-167@e56a49ed",
+      "claim_id": "claim-167",
+      "generation_id": "gen-dec-1791960502-bEI2kaQHLnf9Eja69YPD",
+      "question": "citation_supports_passage",
+      "primitive": "choice",
+      "asked": "The passage cites this claim. How does the claim relate to the specific point the passage uses it for?",
+      "reading": "says_nothing",
+      "probabilities": {
+        "supports": 0.23,
+        "contradicts": 0.01,
+        "says_nothing": 0.76
+      },
+      "confidence": 0.64,
+      "severity": "defect",
+      "why": "Jev's best reading is 'says_nothing' at 76%, not the 'supports' the record implies."
+    },
+    {
+      "key": "claim-169@e56a49ed::citation_supports_passage",
+      "subject": "claim-169@e56a49ed",
+      "claim_id": "claim-169",
+      "generation_id": "gen-dec-1791960499-Bn1HK1hC3b2aZIgQKh2A",
+      "question": "citation_supports_passage",
+      "primitive": "choice",
+      "asked": "The passage cites this claim. How does the claim relate to the specific point the passage uses it for?",
+      "reading": "says_nothing",
+      "probabilities": {
+        "supports": 0.41,
+        "contradicts": 0.06,
+        "says_nothing": 0.53
+      },
+      "confidence": 0.3,
+      "severity": "defect",
+      "why": "Jev's best reading is 'says_nothing' at 53%, not the 'supports' the record implies."
+    },
+    {
+      "key": "claim-172@9ca60c37::citation_supports_passage",
+      "subject": "claim-172@9ca60c37",
+      "claim_id": "claim-172",
+      "generation_id": "gen-dec-1791960520-ow5DH5kbitZEHNtppPvL",
+      "question": "citation_supports_passage",
+      "primitive": "choice",
+      "asked": "The passage cites this claim. How does the claim relate to the specific point the passage uses it for?",
+      "reading": "says_nothing",
+      "probabilities": {
+        "supports": 0.02,
+        "contradicts": 0.01,
+        "says_nothing": 0.97
+      },
+      "confidence": 0.95,
+      "severity": "defect",
+      "why": "Jev's best reading is 'says_nothing' at 97%, not the 'supports' the record implies."
+    },
+    {
+      "key": "claim-024@c2d4b610::citation_supports_passage",
+      "subject": "claim-024@c2d4b610",
+      "claim_id": "claim-024",
+      "generation_id": "gen-dec-1791960492-Q6BEiQD89uf0asaDWzvC",
+      "question": "citation_supports_passage",
+      "primitive": "choice",
+      "asked": "The passage cites this claim. How does the claim relate to the specific point the passage uses it for?",
+      "reading": "supports",
+      "probabilities": {
+        "supports": 0.76,
+        "contradicts": 0.01,
+        "says_nothing": 0.23
+      },
+      "confidence": 0.64,
+      "severity": "check",
+      "why": "Jev settled on 'supports' at 76% but still put 23% on 'says_nothing'."
+    },
+    {
+      "key": "claim-027@5c9fdce3::citation_supports_passage",
+      "subject": "claim-027@5c9fdce3",
+      "claim_id": "claim-027",
+      "generation_id": "gen-dec-1791960506-tbny1WUQ0SB5pdKACq0t",
+      "question": "citation_supports_passage",
+      "primitive": "choice",
+      "asked": "The passage cites this claim. How does the claim relate to the specific point the passage uses it for?",
+      "reading": "supports",
+      "probabilities": {
+        "supports": 0.59,
+        "contradicts": 0.1,
+        "says_nothing": 0.31
+      },
+      "confidence": 0.38,
+      "severity": "check",
+      "why": "Jev settled on 'supports' at 59% but still put 31% on 'says_nothing'."
+    },
+    {
+      "key": "claim-027@9665af79::citation_supports_passage",
+      "subject": "claim-027@9665af79",
+      "claim_id": "claim-027",
+      "generation_id": "gen-dec-1791960517-pslBaGp7NSUbvbd09E7K",
+      "question": "citation_supports_passage",
+      "primitive": "choice",
+      "asked": "The passage cites this claim. How does the claim relate to the specific point the passage uses it for?",
+      "reading": "supports",
+      "probabilities": {
+        "supports": 0.68,
+        "contradicts": 0.17,
+        "says_nothing": 0.15
+      },
+      "confidence": 0.52,
+      "severity": "check",
+      "why": "Jev picked 'supports' but spread its probability widely (confidence 0.52)."
+    },
+    {
+      "key": "claim-034@dee980ea::citation_supports_passage",
+      "subject": "claim-034@dee980ea",
+      "claim_id": "claim-034",
+      "generation_id": "gen-dec-1791960507-nKTVF39yT2gvlSB3GYgz",
+      "question": "citation_supports_passage",
+      "primitive": "choice",
+      "asked": "The passage cites this claim. How does the claim relate to the specific point the passage uses it for?",
+      "reading": "supports",
+      "probabilities": {
+        "supports": 0.57,
+        "contradicts": 0.13,
+        "says_nothing": 0.3
+      },
+      "confidence": 0.35,
+      "severity": "check",
+      "why": "Jev settled on 'supports' at 57% but still put 30% on 'says_nothing'."
+    },
+    {
+      "key": "claim-039@4435ba31::citation_supports_passage",
+      "subject": "claim-039@4435ba31",
+      "claim_id": "claim-039",
+      "generation_id": "gen-dec-1791960488-IX2GOWeNjxxGV9E3sNmZ",
+      "question": "citation_supports_passage",
+      "primitive": "choice",
+      "asked": "The passage cites this claim. How does the claim relate to the specific point the passage uses it for?",
+      "reading": "supports",
+      "probabilities": {
+        "supports": 0.69,
+        "contradicts": 0,
+        "says_nothing": 0.31
+      },
+      "confidence": 0.53,
+      "severity": "check",
+      "why": "Jev settled on 'supports' at 69% but still put 31% on 'says_nothing'."
+    },
+    {
+      "key": "claim-041@4435ba31::citation_supports_passage",
+      "subject": "claim-041@4435ba31",
+      "claim_id": "claim-041",
+      "generation_id": "gen-dec-1791960488-WwUMkEZzIPC0rvPb4e4S",
+      "question": "citation_supports_passage",
+      "primitive": "choice",
+      "asked": "The passage cites this claim. How does the claim relate to the specific point the passage uses it for?",
+      "reading": "supports",
+      "probabilities": {
+        "supports": 0.66,
+        "contradicts": 0.02,
+        "says_nothing": 0.32
+      },
+      "confidence": 0.49,
+      "severity": "check",
+      "why": "Jev settled on 'supports' at 66% but still put 32% on 'says_nothing'."
+    },
+    {
+      "key": "claim-041@e56a49ed::citation_supports_passage",
+      "subject": "claim-041@e56a49ed",
+      "claim_id": "claim-041",
+      "generation_id": "gen-dec-1791960503-iONuRKu75a8DepB5pdv3",
+      "question": "citation_supports_passage",
+      "primitive": "choice",
+      "asked": "The passage cites this claim. How does the claim relate to the specific point the passage uses it for?",
+      "reading": "supports",
+      "probabilities": {
+        "supports": 0.67,
+        "contradicts": 0.01,
+        "says_nothing": 0.32
+      },
+      "confidence": 0.51,
+      "severity": "check",
+      "why": "Jev settled on 'supports' at 67% but still put 32% on 'says_nothing'."
+    },
+    {
+      "key": "claim-046@ebe3462d::citation_supports_passage",
+      "subject": "claim-046@ebe3462d",
+      "claim_id": "claim-046",
+      "generation_id": "gen-dec-1791960488-tKCBiqFuaQ8qqTwPs1uu",
+      "question": "citation_supports_passage",
+      "primitive": "choice",
+      "asked": "The passage cites this claim. How does the claim relate to the specific point the passage uses it for?",
+      "reading": "supports",
+      "probabilities": {
+        "supports": 0.56,
+        "contradicts": 0.02,
+        "says_nothing": 0.42
+      },
+      "confidence": 0.34,
+      "severity": "check",
+      "why": "Jev settled on 'supports' at 56% but still put 42% on 'says_nothing'."
+    },
+    {
+      "key": "claim-066@c2d4b610::citation_supports_passage",
+      "subject": "claim-066@c2d4b610",
+      "claim_id": "claim-066",
+      "generation_id": "gen-dec-1791960494-Pwa3QFfGtXNyJKZtu6kV",
+      "question": "citation_supports_passage",
+      "primitive": "choice",
+      "asked": "The passage cites this claim. How does the claim relate to the specific point the passage uses it for?",
+      "reading": "supports",
+      "probabilities": {
+        "supports": 0.69,
+        "contradicts": 0.28,
+        "says_nothing": 0.03
+      },
+      "confidence": 0.53,
+      "severity": "check",
+      "why": "Jev settled on 'supports' at 69% but still put 28% on 'contradicts'."
+    },
+    {
+      "key": "claim-066@5c9fdce3::citation_supports_passage",
+      "subject": "claim-066@5c9fdce3",
+      "claim_id": "claim-066",
+      "generation_id": "gen-dec-1791960503-fqmTeKISFTkTFzf32ccA",
+      "question": "citation_supports_passage",
+      "primitive": "choice",
+      "asked": "The passage cites this claim. How does the claim relate to the specific point the passage uses it for?",
+      "reading": "supports",
+      "probabilities": {
+        "supports": 0.76,
+        "contradicts": 0.01,
+        "says_nothing": 0.23
+      },
+      "confidence": 0.64,
+      "severity": "check",
+      "why": "Jev settled on 'supports' at 76% but still put 23% on 'says_nothing'."
+    },
+    {
+      "key": "claim-071@b47a8719::citation_supports_passage",
+      "subject": "claim-071@b47a8719",
+      "claim_id": "claim-071",
+      "generation_id": "gen-dec-1791960513-IeV6SOgII69Yl622PUP4",
+      "question": "citation_supports_passage",
+      "primitive": "choice",
+      "asked": "The passage cites this claim. How does the claim relate to the specific point the passage uses it for?",
+      "reading": "supports",
+      "probabilities": {
+        "supports": 0.63,
+        "contradicts": 0.03,
+        "says_nothing": 0.34
+      },
+      "confidence": 0.45,
+      "severity": "check",
+      "why": "Jev settled on 'supports' at 63% but still put 34% on 'says_nothing'."
+    },
+    {
+      "key": "claim-074@c2d4b610::citation_supports_passage",
+      "subject": "claim-074@c2d4b610",
+      "claim_id": "claim-074",
+      "generation_id": "gen-dec-1791960494-AH6a1WMYOwGaS89cpOW0",
+      "question": "citation_supports_passage",
+      "primitive": "choice",
+      "asked": "The passage cites this claim. How does the claim relate to the specific point the passage uses it for?",
+      "reading": "supports",
+      "probabilities": {
+        "supports": 0.76,
+        "contradicts": 0.01,
+        "says_nothing": 0.23
+      },
+      "confidence": 0.64,
+      "severity": "check",
+      "why": "Jev settled on 'supports' at 76% but still put 23% on 'says_nothing'."
+    },
+    {
+      "key": "claim-087@19b26df8::citation_supports_passage",
+      "subject": "claim-087@19b26df8",
+      "claim_id": "claim-087",
+      "generation_id": "gen-dec-1791960497-SpSVEeoh1mMntHGWm7D5",
+      "question": "citation_supports_passage",
+      "primitive": "choice",
+      "asked": "The passage cites this claim. How does the claim relate to the specific point the passage uses it for?",
+      "reading": "supports",
+      "probabilities": {
+        "supports": 0.7,
+        "contradicts": 0.02,
+        "says_nothing": 0.28
+      },
+      "confidence": 0.55,
+      "severity": "check",
+      "why": "Jev settled on 'supports' at 70% but still put 28% on 'says_nothing'."
+    },
+    {
+      "key": "claim-130@27dea6ad::citation_supports_passage",
+      "subject": "claim-130@27dea6ad",
+      "claim_id": "claim-130",
+      "generation_id": "gen-dec-1791960521-EZYkRzB52eitqjZPRx51",
+      "question": "citation_supports_passage",
+      "primitive": "choice",
+      "asked": "The passage cites this claim. How does the claim relate to the specific point the passage uses it for?",
+      "reading": "supports",
+      "probabilities": {
+        "supports": 0.66,
+        "contradicts": 0.14,
+        "says_nothing": 0.2
+      },
+      "confidence": 0.49,
+      "severity": "check",
+      "why": "Jev settled on 'supports' at 66% but still put 20% on 'says_nothing'."
+    },
+    {
+      "key": "claim-149@b47a8719::citation_supports_passage",
+      "subject": "claim-149@b47a8719",
+      "claim_id": "claim-149",
+      "generation_id": "gen-dec-1791960513-3PVUeYziQbR2VtVsd0h7",
+      "question": "citation_supports_passage",
+      "primitive": "choice",
+      "asked": "The passage cites this claim. How does the claim relate to the specific point the passage uses it for?",
+      "reading": "supports",
+      "probabilities": {
+        "supports": 0.71,
+        "contradicts": 0.1,
+        "says_nothing": 0.19
+      },
+      "confidence": 0.56,
+      "severity": "check",
+      "why": "Jev picked 'supports' but spread its probability widely (confidence 0.56)."
+    },
+    {
+      "key": "claim-153@e56a49ed::citation_supports_passage",
+      "subject": "claim-153@e56a49ed",
+      "claim_id": "claim-153",
+      "generation_id": "gen-dec-1791960499-c4rW7vJroEohtbPVpWMa",
+      "question": "citation_supports_passage",
+      "primitive": "choice",
+      "asked": "The passage cites this claim. How does the claim relate to the specific point the passage uses it for?",
+      "reading": "supports",
+      "probabilities": {
+        "supports": 0.66,
+        "contradicts": 0.01,
+        "says_nothing": 0.33
+      },
+      "confidence": 0.49,
+      "severity": "check",
+      "why": "Jev settled on 'supports' at 66% but still put 33% on 'says_nothing'."
+    },
+    {
+      "key": "claim-155@e56a49ed::citation_supports_passage",
+      "subject": "claim-155@e56a49ed",
+      "claim_id": "claim-155",
+      "generation_id": "gen-dec-1791960501-lhRQeXmZseNHxEt9jl94",
+      "question": "citation_supports_passage",
+      "primitive": "choice",
+      "asked": "The passage cites this claim. How does the claim relate to the specific point the passage uses it for?",
+      "reading": "supports",
+      "probabilities": {
+        "supports": 0.54,
+        "contradicts": 0.01,
+        "says_nothing": 0.45
+      },
+      "confidence": 0.31,
+      "severity": "check",
+      "why": "Jev settled on 'supports' at 54% but still put 45% on 'says_nothing'."
+    },
+    {
+      "key": "claim-164@e56a49ed::citation_supports_passage",
+      "subject": "claim-164@e56a49ed",
+      "claim_id": "claim-164",
+      "generation_id": "gen-dec-1791960501-XJ0TT4PmtFA3P9uA0G2O",
+      "question": "citation_supports_passage",
+      "primitive": "choice",
+      "asked": "The passage cites this claim. How does the claim relate to the specific point the passage uses it for?",
+      "reading": "supports",
+      "probabilities": {
+        "supports": 0.61,
+        "contradicts": 0.02,
+        "says_nothing": 0.37
+      },
+      "confidence": 0.41,
+      "severity": "check",
+      "why": "Jev settled on 'supports' at 61% but still put 37% on 'says_nothing'."
+    },
+    {
+      "key": "claim-172@93dc195f::citation_supports_passage",
+      "subject": "claim-172@93dc195f",
+      "claim_id": "claim-172",
+      "generation_id": "gen-dec-1791960514-Cou4buMn4sBnBWlwjqpe",
+      "question": "citation_supports_passage",
+      "primitive": "choice",
+      "asked": "The passage cites this claim. How does the claim relate to the specific point the passage uses it for?",
+      "reading": "supports",
+      "probabilities": {
+        "supports": 0.5,
+        "contradicts": 0.15,
+        "says_nothing": 0.35
+      },
+      "confidence": 0.25,
+      "severity": "check",
+      "why": "Jev settled on 'supports' at 50% but still put 35% on 'says_nothing'."
+    }
+  ]
+}

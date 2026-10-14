@@ -1,12 +1,12 @@
 {
-  "url": "https://www.investegate.co.uk/announcement/rns/natwest-group--nwg/natwest-group-plc-interim-results-2026-part-2/9697136",
-  "title": "NatWest Group plc Interim Results 2026 - Part 2 | Company Announcement | Investegate",
+  "url": "https://investors.natwestgroup.com/results-centre",
+  "title": "NatWest Group \u2013  Results centre",
   "score": null,
-  "published_date": "2026-07-31T00:00:00.000Z",
+  "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:NatWest Group",
-  "_temporal_status": "unchecked",
+  "_select_key": "peer:NatWest",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "NatWest Group 2026-h1 earnings guidance outlook",
-  "_retrieved_at": "2026-09-01T22:03:54Z"
+  "_query": "NatWest 2026-h1 earnings guidance outlook",
+  "_retrieved_at": "2026-10-14T06:35:31Z"
 }

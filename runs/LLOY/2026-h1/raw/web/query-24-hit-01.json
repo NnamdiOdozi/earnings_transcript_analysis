@@ -1,12 +1,12 @@
 {
-  "url": "https://www.ii.co.uk/analysis-commentary/ii-view-standard-chartered-goes-strength-strength-ii540085",
-  "title": "ii view: Standard Chartered goes from strength to strength",
+  "url": "https://www.investing.com/news/earnings/banco-santander-posts-record-underlying-q2-profit-on-lending-growth-4804652",
+  "title": "Santander H1 shares gain as capital beat offsets higher impairments By Investing.com",
   "score": null,
-  "published_date": null,
+  "published_date": "2026-07-22T00:00:00.000Z",
   "_class": "peer",
-  "_select_key": "peer:Standard Chartered",
-  "_temporal_status": "unchecked",
+  "_select_key": "peer:Santander",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "Standard Chartered 2026-h1 analyst earnings reaction results",
-  "_retrieved_at": "2026-09-01T22:04:15Z"
+  "_query": "Santander 2026-h1 analyst earnings reaction results",
+  "_retrieved_at": "2026-10-14T06:35:36Z"
 }

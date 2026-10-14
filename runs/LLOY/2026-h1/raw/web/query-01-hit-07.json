@@ -1,12 +1,12 @@
 {
-  "url": "https://www.stockopedia.com/share-prices/lloyds-banking-LON:LLOY/",
-  "title": "Lloyds Banking Share Price, Forecast & Financials (LON:LLOY) | Stockopedia",
+  "url": "https://www.marketbeat.com/earnings/reports/2026-3-31-lloyds-banking-group-plc-stock/",
+  "title": "Lloyds Banking Group Q1 2026 Earnings Results & Report",
   "score": null,
-  "published_date": "2023-05-25T00:00:00.000Z",
+  "published_date": null,
   "_class": "consensus",
   "_select_key": "consensus",
-  "_temporal_status": "unchecked",
+  "_temporal_status": "undated",
   "_provider": "exa",
   "_query": "Lloyds Banking Group plc LLOY 2026-h1 analyst consensus estimate revenue EPS",
-  "_retrieved_at": "2026-09-01T22:03:46Z"
+  "_retrieved_at": "2026-10-14T06:35:29Z"
 }

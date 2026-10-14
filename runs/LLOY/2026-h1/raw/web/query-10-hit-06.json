@@ -1,12 +1,12 @@
 {
-  "url": "https://finance.yahoo.com/quote/RBSPF/earnings/RBSPF-Q2-2026-earnings_call-704612.html",
-  "title": "NatWest Group plc (RBSPF) Q2 FY2026 Fixed income ...",
+  "url": "https://financialfilings.com/filings/natwest-group-plc/call-meeting-transcript/2026/49989949/",
+  "title": "Natwest Group PLC \u2014 Call & Meeting Transcript 2026",
   "score": null,
-  "published_date": "2026-07-31T00:00:00.000Z",
+  "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:NatWest Group",
-  "_temporal_status": "unchecked",
+  "_select_key": "peer:NatWest",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "NatWest Group earnings call key trends 2026-h1",
-  "_retrieved_at": "2026-09-01T22:03:55Z"
+  "_query": "NatWest earnings call key trends 2026-h1",
+  "_retrieved_at": "2026-10-14T06:35:31Z"
 }

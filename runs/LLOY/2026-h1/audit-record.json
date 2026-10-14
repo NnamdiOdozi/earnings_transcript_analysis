@@ -1,0 +1,90 @@
+{
+  "run_id": "LLOY:2026-h1",
+  "ticker": "LLOY",
+  "event_id": "2026-h1",
+  "status": "accepted",
+  "final_review_round": 1,
+  "generated_at": "2026-10-14T06:56:14Z",
+  "decision": {
+    "verdict": "pass_with_warnings",
+    "summary": "The run passes with warnings: no high or critical findings, four medium. The claims are well grounded overall; reading all 177 against full context found one scope error (claim-130 now reads as 70% of all revenue when the figure applied to strategic-initiative revenue on a broad digital-and-AI definition), three low-severity wording issues, and a coverage gap: the NIM-plateau outlook, the Q2 macro-forecast improvement, the TNAV growth expectation and the operating-lease depreciation recovery were not extracted. In the brief, the downside case frames the economy using a superseded Q1 macro cut although management said forecasts improved modestly at H1, and the peer paragraph concludes that Lloyds depends more than its peers on efficiency gains with no peer-plan evidence. Lower-severity points: HSBC's post-event timing is undisclosed, one analyst's view is generalised to 'analysts', and the upside observable is weakly diagnostic. Deterministic gates, injection scan and Jev dispositions are all in order.",
+    "finding_counts": {
+      "critical": 0,
+      "high": 0,
+      "medium": 4,
+      "low": 10,
+      "info": 12
+    }
+  },
+  "trace_summary": "Analysis drew on 215 recorded source(s) (transcript, SEC/web evidence). 5 claim-validation attempt(s) were made, 2 with issues, before passing. 3 outlook-validation attempt(s) were made, 1 with issues or blocked, before passing. Review ran 1 round(s): round 1 pass_with_warnings with 4 medium, 10 low, 12 info finding(s).",
+  "workflow_trace": [
+    {
+      "stage": "claim_validation",
+      "attempts": 5,
+      "status": "passed"
+    },
+    {
+      "stage": "outlook_validation",
+      "attempts": 3,
+      "status": "passed"
+    },
+    {
+      "stage": "review",
+      "round": 1,
+      "status": "pass_with_warnings"
+    }
+  ],
+  "review_history_summary": {
+    "review_rounds": 1,
+    "failed_review_rounds": 0,
+    "historical_findings": {
+      "critical": 0,
+      "high": 0,
+      "medium": 4,
+      "low": 10,
+      "info": 12
+    }
+  },
+  "guardrail_summary": {
+    "validation_retries": 4,
+    "validation_rejections": 2,
+    "outlook_validation_retries": 2,
+    "outlook_validation_rejections": 1,
+    "review_rejections": 0,
+    "escalations": 0
+  },
+  "tool_decisions": {
+    "price_lookup": {
+      "decision": "not_used",
+      "reason": "No price series needed: results, guidance, consensus and peer figures come from the transcript and extracted web evidence."
+    }
+  },
+  "hashes": {
+    "transcript_sha256": "9b38777b0c85e797bfd1d8dc2582dc814f056878e49b7fef44b867c01b1f97f8",
+    "manifest_sha256": "20772de9119e33d3fef2c0f2764251767afef42f3e1ccd31e36836b8d841754d",
+    "claims_sha256": "b859620f1b8eab65502abca190e1326d66ca91e826b5addc695692a483e4ca5b",
+    "outlook_brief_sha256": "d7793358806d4bbcf0579be2b7b2c50f25dfe52e7dec7fbb5f2268da26b9b501",
+    "review_report_sha256": "9a4401ea8136c8d2b827ffbe76e1f974f3936f8c20ca29979ae5a66ff7bb5ff7"
+  },
+  "evidence_summary": {
+    "source_count": 215
+  },
+  "reviewer_model": "claude-opus-5-5",
+  "agent_provenance": {
+    "extractor": {
+      "agent_name": "Claude Code",
+      "model": "claude-opus-5-5",
+      "reasoning_effort": "unknown"
+    },
+    "outlook_author": {
+      "agent_name": "Claude Code",
+      "model": "claude-opus-5-5",
+      "reasoning_effort": "unknown"
+    },
+    "reviewer": {
+      "model": "claude-opus-5-5",
+      "reasoning_effort": "not_applicable"
+    },
+    "basis": "agent_declared"
+  }
+}

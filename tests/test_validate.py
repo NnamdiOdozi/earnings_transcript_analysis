@@ -1530,6 +1530,29 @@ def test_quote_traceable_passes_when_the_quote_carries_every_figure():
     assert check_claim_text_quote_traceable(c) is None
 
 
+@pytest.mark.parametrize("claim_text, quote", [
+    # Real LLOY/2026-h1 shapes: each label was read as a figure and failed the check.
+    ("The H1 cost:income ratio was 50.4%.", "a cost to income ratio of 50.4% in the half"),
+    ("Spending in 2H26 rose 4%.", "spending rose 4% in the second half"),
+    ("There are no plans to reduce CET1 below 13%.", "we have no plans to reduce below 13% right now."),
+    ("D2C wealth re-platforming lands this year.", "that stuff's going to be landing back end of this year"),
+    ("Opex grows closer to 2022-25 levels versus 1% in 2026.", "closer to the '22 to '25 period versus our 1% in '26."),
+])
+def test_quote_traceable_ignores_half_year_alphanumeric_and_year_range_labels(claim_text, quote):
+    assert check_claim_text_quote_traceable(_traceable_claim(claim_text, quote)) is None
+
+
+def test_quote_traceable_still_catches_a_real_figure_beside_a_half_year_label():
+    c = _traceable_claim("H1 revenue was $2 billion.", "Revenue grew in the half.")
+    assert check_claim_text_quote_traceable(c) is not None
+
+
+def test_quote_traceable_does_not_strip_a_currency_code_amount_as_a_label():
+    # "GBP50m" glues letters to digits like "CET1", but it is a figure and must ground.
+    c = _traceable_claim("A charge of GBP50m was booked.", "A charge was booked.")
+    assert check_claim_text_quote_traceable(c) is not None
+
+
 def test_quote_traceable_accepts_a_figure_declared_in_values():
     # values are separately grounded by check_numeric, so they count as a source.
     c = _traceable_claim("Expenses were $27.3 billion.", "Expenses rose sharply.",

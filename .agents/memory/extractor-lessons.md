@@ -16,3 +16,5 @@ Process guidance only, proposed by the outlook-reviewer and persisted by `earnin
 - Before asserting that every entity in a comparison set shares a characteristic, confirm the stated metric for each entity individually rather than inferring it from a related metric on the same entity.
 - When the brief states how many people raised a point, count distinct speakers across the cited claims rather than counting the citations themselves.
 - When narrowing claim_text to what its quote supports, keep any scope-setting referent (business line, entity, customer segment) or speaker hedge that changes the meaning, by widening the quote to include it rather than deleting it from claim_text.
+- Within a long management answer, extract every forward-looking statement that qualifies or reverses an earlier trajectory (for example a metric expected to rise near term but plateau or fall later in the plan), not only the near-term one.
+- When a brief cites an earlier-period forecast revision, check whether the current call updated that forecast and extract the latest direction before using the earlier revision to frame a scenario.

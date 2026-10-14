@@ -1,12 +1,12 @@
 {
-  "url": "https://www.eqs-news.com/de/news/corporate/2026-q1-interim-management-statement/f794c6d3-9cd9-407a-8d0e-16316ba3c961_en",
-  "title": "2026 Q1 Interim Management Statement | Corporate - EQS News",
+  "url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:913b4ca2-03ca-4757-a6cc-9e57639360a4/original/as/SantanderUKQ2-26QMS.pdf",
+  "title": "Santander UK Group Holdings plc",
   "score": null,
   "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:Standard Chartered",
-  "_temporal_status": "unchecked",
+  "_select_key": "peer:Santander",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "Standard Chartered quarterly results versus Lloyds Banking Group plc LLOY",
-  "_retrieved_at": "2026-09-01T22:04:13Z"
+  "_query": "Santander quarterly results versus Lloyds Banking Group plc LLOY",
+  "_retrieved_at": "2026-10-14T06:35:36Z"
 }

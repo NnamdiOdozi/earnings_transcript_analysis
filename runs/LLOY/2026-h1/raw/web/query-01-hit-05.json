@@ -1,12 +1,12 @@
 {
-  "url": "https://uk.marketscreener.com/quote/stock/LLOYDS-BANKING-GROUP-PLC-4000786/consensus/",
-  "title": "Consensus Lloyds Banking Group plc",
+  "url": "https://stockanalysis.com/quote/lon/LLOY/forecast/",
+  "title": "Lloyds Banking Group (LON:LLOY) Stock Forecast & Price Targets",
   "score": null,
   "published_date": null,
   "_class": "consensus",
   "_select_key": "consensus",
-  "_temporal_status": "unchecked",
+  "_temporal_status": "undated",
   "_provider": "exa",
   "_query": "Lloyds Banking Group plc LLOY 2026-h1 analyst consensus estimate revenue EPS",
-  "_retrieved_at": "2026-09-01T22:03:46Z"
+  "_retrieved_at": "2026-10-14T06:35:29Z"
 }

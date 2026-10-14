@@ -1,12 +1,12 @@
 {
-  "url": "https://global.morningstar.com/en-gb/stocks/standard-chartered-what-we-think-stock-after-earnings",
-  "title": "Standard Chartered: What We Think of the Stock After ...",
+  "url": "https://www.santander.com/content/dam/santander-com/en/documentos/informacion-privilegiada/2026/07/hr-2026-07-22-second-quarter-2026-results-press-release-en.pdf",
+  "title": "Santander adds 12 million customers as underlying profit rises 15% to \u20ac7.3 billion in the first half",
   "score": null,
-  "published_date": "2026-07-30T00:00:00.000Z",
+  "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:Standard Chartered",
-  "_temporal_status": "unchecked",
+  "_select_key": "peer:Santander",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "Standard Chartered 2026-h1 earnings guidance outlook",
-  "_retrieved_at": "2026-09-01T22:04:14Z"
+  "_query": "Santander 2026-h1 earnings guidance outlook",
+  "_retrieved_at": "2026-10-14T06:35:36Z"
 }

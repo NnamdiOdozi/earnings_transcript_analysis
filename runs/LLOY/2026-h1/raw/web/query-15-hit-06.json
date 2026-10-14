@@ -5,8 +5,8 @@
   "published_date": null,
   "_class": "peer",
   "_select_key": "peer:Barclays",
-  "_temporal_status": "unchecked",
+  "_temporal_status": "undated",
   "_provider": "exa",
   "_query": "Barclays earnings call key trends 2026-h1",
-  "_retrieved_at": "2026-09-01T22:04:01Z"
+  "_retrieved_at": "2026-10-14T06:35:32Z"
 }

@@ -1,12 +1,12 @@
 {
-  "url": "https://tradevae.com/news/stock-markets/natwest-shares-jump-after-strong-h1-2026-results-and-accelerated-capital-returns/",
-  "title": "NatWest Shares Jump After Strong H1 2026 Results and Accelerated Capital Returns",
+  "url": "https://6ix.com/news/natwest-post-results-consensus-natwest-group-post-q126-consensus",
+  "title": "Post Results Consensus (natwest group post q126\u2026 (LSE:NWG) | 6ix",
   "score": null,
-  "published_date": "2026-07-31T00:00:00.000Z",
+  "published_date": "2026-05-21T00:00:00.000Z",
   "_class": "peer",
-  "_select_key": "peer:NatWest Group",
-  "_temporal_status": "unchecked",
+  "_select_key": "peer:NatWest",
+  "_temporal_status": "pre_event",
   "_provider": "exa",
-  "_query": "NatWest Group 2026-h1 analyst earnings reaction results",
-  "_retrieved_at": "2026-09-01T22:03:54Z"
+  "_query": "NatWest 2026-h1 analyst earnings reaction results",
+  "_retrieved_at": "2026-10-14T06:35:31Z"
 }

@@ -4,9 +4,9 @@
   "score": null,
   "published_date": null,
   "_class": "peer",
-  "_select_key": "peer:HSBC Holdings",
-  "_temporal_status": "unchecked",
+  "_select_key": "peer:HSBC",
+  "_temporal_status": "undated",
   "_provider": "exa",
-  "_query": "HSBC Holdings earnings call key trends 2026-h1",
-  "_retrieved_at": "2026-09-01T22:04:11Z"
+  "_query": "HSBC earnings call key trends 2026-h1",
+  "_retrieved_at": "2026-10-14T06:35:33Z"
 }
